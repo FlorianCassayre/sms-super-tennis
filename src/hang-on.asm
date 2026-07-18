@@ -22,7 +22,6 @@ l0001h:
 	im 1		;0001
 l0003h:
 	ld sp,0dffeh		;0003
-l0006h:
 	jr init		;0006
 l0008h:
 	ei			;0008
@@ -31,13 +30,10 @@ l0009h:
 loop_splash:
 	ld a,(hl)			;000c
 	or a			;000d
-l000eh:
 	jr z,loop_splash		;000e
 l0010h:
 	xor a			;0010
-l0011h:
 	ld (hl),a			;0011
-l0012h:
 	ld (0c02dh),a		;0012
 	ret			;0015
 	ld c,b			;0016
@@ -45,7 +41,6 @@ l0012h:
 sub_0018h:
 	ld a,l			;0018
 	out (0bfh),a		;0019
-l001bh:
 	ld a,h			;001b
 	out (0bfh),a		;001c
 	ret			;001e
@@ -53,7 +48,6 @@ l001fh:
 	rst 38h			;001f
 l0020h:
 	ex de,hl			;0020
-sub_0021h:
 	rst 18h			;0021
 	ex (sp),hl			;0022
 	ex (sp),hl			;0023
@@ -174,7 +168,6 @@ l0100h:
 	call sub_067fh		;0100
 	call sub_09d5h		;0103
 	call 03532h		;0106
-l0109h:
 	xor a			;0109
 	call sub_3d77h		;010a
 l010dh:
@@ -322,7 +315,6 @@ l0211h:
 	dec (hl)			;0217
 	jr z,l021fh		;0218
 	ld a,028h		;021a
-sub_021ch:
 	ld (0c078h),a		;021c
 l021fh:
 	call sub_3e4bh		;021f
@@ -339,10 +331,8 @@ l0237h:
 	jr nz,l0245h		;0238
 	ld hl,l7c24h		;023a
 	rst 18h			;023d
-sub_023eh:
 	ld a,(0c4c0h)		;023e
 	add a,031h		;0241
-l0243h:
 	out (0beh),a		;0243
 l0245h:
 	call sub_0790h		;0245
@@ -381,9 +371,7 @@ sub_026dh:
 	ld bc,02bbeh		;027c
 l027fh:
 	outi		;027f
-l0281h:
 	inc hl			;0281
-l0282h:
 	inc hl			;0282
 	jp nz,l027fh		;0283
 	ld hl,l7faah		;0286
@@ -438,11 +426,9 @@ l02efh:
 	ld (hl),000h		;02f3
 	inc hl			;02f5
 	add a,010h		;02f6
-sub_02f8h:
 	djnz l02efh		;02f8
 	ld c,0f0h		;02fa
 	dec d			;02fc
-l02fdh:
 	jr nz,l02ebh		;02fd
 	call sub_073fh		;02ff
 l0302h:
@@ -459,7 +445,6 @@ l031ah:
 	inc hl			;031c
 	inc hl			;031d
 	jp nz,l031ah		;031e
-l0321h:
 	ld hl,l7f80h		;0321
 	call sub_0018h		;0324
 	ld hl,0c401h		;0327
@@ -513,9 +498,7 @@ l036fh:
 l037eh:
 	in a,(07eh)		;037e
 	cp 05fh		;0380
-l0382h:
 	jr c,l0393h		;0382
-l0384h:
 	ld (0c4dah),a		;0384
 	ld a,(0c500h)		;0387
 	out (0bfh),a		;038a
@@ -551,7 +534,6 @@ sub_03a8h:
 	call sub_080bh		;03c0
 	ld hl,0c000h		;03c3
 	ld a,(hl)			;03c6
-l03c7h:
 	bit 2,a		;03c7
 	jr z,l03ffh		;03c9
 	ld a,(0c015h)		;03cb
@@ -581,16 +563,13 @@ l03efh:
 	djnz l03efh		;03fd
 l03ffh:
 	ld hl,0c000h		;03ff
-l0402h:
 	xor a			;0402
-l0403h:
 	ld (hl),a			;0403
 	ld (0c015h),a		;0404
 	call sub_06cch		;0407
 	di			;040a
 	call sub_069ah		;040b
 	ld hl,l04d8h		;040e
-l0411h:
 	ld b,009h		;0411
 l0413h:
 	ld e,(hl)			;0413
@@ -648,7 +627,6 @@ l0468h:
 l047ch:
 	rst 8			;047c
 	ld hl,0c4c0h		;047d
-l0480h:
 	ld a,(0c001h)		;0480
 	cpl			;0483
 	and 033h		;0484
@@ -734,7 +712,7 @@ l04deh:
 l04fbh:
 	ld a,h			;04fb
 	add hl,bc			;04fc
-.DB $50 $55 $53 $48 $20 $53 $54 $41 $52 $54 $20 $42 $55 $54 $54 $4F $4E ; "PUSH START BUTTON"			;04fd
+	.DB $50 $55 $53 $48 $20 $53 $54 $41 $52 $54 $20 $42 $55 $54 $54 $4F $4E ; "PUSH START BUTTON"			;04fd
 	nop			;050e
 	add hl,bc			;050f
 	ld c,h			;0510
@@ -832,7 +810,6 @@ l0572h:
 	ld l,d			;057c
 l057dh:
 	jr nz,l059fh		;057d
-l057fh:
 	ld h,d			;057f
 l0580h:
 	ld h,(hl)			;0580
@@ -968,7 +945,6 @@ l05d0h:
 	jr nz,l058bh		;05f9
 	sub c			;05fb
 	jr nz,l0590h		;05fc
-sub_05feh:
 	sub e			;05fe
 	sub d			;05ff
 sub_0600h:
@@ -1083,7 +1059,6 @@ l0665h:
 l066fh:
 	call sub_064eh		;066f
 	ex de,hl			;0672
-l0673h:
 	call sub_0646h		;0673
 	ex de,hl			;0676
 	inc hl			;0677
@@ -1091,7 +1066,6 @@ l0673h:
 	dec bc			;0679
 	ld a,b			;067a
 	or c			;067b
-sub_067ch:
 	jr nz,l066fh		;067c
 	ret			;067e
 sub_067fh:
@@ -1190,7 +1164,6 @@ sub_06f3h:
 sub_06ffh:
 	ld b,020h		;06ff
 	rst 20h			;0701
-l0702h:
 	ld hl,04000h		;0702
 sub_0705h:
 	ld bc,04000h		;0705
@@ -1204,9 +1177,7 @@ sub_0705h:
 	ld de,l6a48h		;0718
 	ld hl,0c700h		;071b
 	ld a,0ffh		;071e
-l0720h:
 	ex af,af'			;0720
-l0721h:
 	call sub_080bh		;0721
 	call sub_0842h		;0724
 	ld hl,l03ffh+1		;0727
@@ -1239,7 +1210,6 @@ sub_073fh:
 	call sub_0654h		;0770
 	ld hl,0d8a0h		;0773
 	ld de,l4cc0h		;0776
-l0779h:
 	ld bc,sub_06ffh+1		;0779
 	call sub_0654h		;077c
 	call sub_067fh		;077f
@@ -1255,7 +1225,6 @@ l078ah:
 	ei			;078b
 	inc c			;078c
 	nop			;078d
-l078eh:
 	nop			;078e
 	rst 38h			;078f
 sub_0790h:
@@ -1328,10 +1297,8 @@ l0800h:
 	ld de,start		;0800
 l0803h:
 	dec de			;0803
-l0804h:
 	ld a,d			;0804
 	or e			;0805
-sub_0806h:
 	jr nz,l0803h		;0806
 	djnz l0800h		;0808
 	ret			;080a
@@ -1421,7 +1388,6 @@ l087ah:
 l087eh:
 	rrca			;087e
 	rl c		;087f
-l0881h:
 	djnz l087eh		;0881
 	ld (hl),c			;0883
 	pop bc			;0884
@@ -1474,7 +1440,6 @@ l08b9h:
 	nop			;08be
 	nop			;08bf
 	nop			;08c0
-l08c1h:
 	nop			;08c1
 	nop			;08c2
 	nop			;08c3
@@ -1718,7 +1683,6 @@ l09b2h:
 	add hl,bc			;09c6
 	jr nz,l09d2h		;09c7
 	jr nc,l09d4h		;09c9
-l09cbh:
 	jr nc,$+9		;09cb
 	jr nc,l09d8h		;09cd
 	jr nz,$+9		;09cf
@@ -1763,7 +1727,6 @@ l0a00h:
 l0a03h:
 	ld a,(de)			;0a03
 	out (0beh),a		;0a04
-l0a06h:
 	ex (sp),hl			;0a06
 	ex (sp),hl			;0a07
 	ld a,003h		;0a08
@@ -1778,7 +1741,6 @@ l0a0eh:
 	add hl,de			;0a15
 	pop de			;0a16
 	dec c			;0a17
-l0a18h:
 	jr nz,l0a00h		;0a18
 	ld hl,l0957h		;0a1a
 	ld de,l7802h		;0a1d
@@ -2015,7 +1977,6 @@ l0be7h:
 	dec b			;0bee
 l0befh:
 	ld a,b			;0bef
-sub_0bf0h:
 	ld (0c308h),a		;0bf0
 	ld hl,(0c31ah)		;0bf3
 	ld de,0fff6h		;0bf6
@@ -2095,7 +2056,6 @@ l0c7bh:
 	ld hl,(0c30eh)		;0c7b
 	add hl,de			;0c7e
 	ld (0c30eh),hl		;0c7f
-l0c82h:
 	jr l0cb2h		;0c82
 l0c84h:
 	or a			;0c84
@@ -2173,7 +2133,6 @@ l0ceah:
 l0cfeh:
 	ld hl,(0c319h)		;0cfe
 	add hl,de			;0d01
-sub_0d02h:
 	ld (0c319h),hl		;0d02
 	ld a,(0c31bh)		;0d05
 	adc a,0ffh		;0d08
@@ -2187,7 +2146,6 @@ l0d0fh:
 	jr l0d5dh		;0d1b
 l0d1dh:
 	ld a,(0c313h)		;0d1d
-l0d20h:
 	or a			;0d20
 	jr nz,l0d37h		;0d21
 	ld a,(0c302h)		;0d23
@@ -2524,7 +2482,7 @@ l0f82h:
 	ld a,(0c30dh)		;0f9d
 	dec a			;0fa0
 	jr z,l0fa6h		;0fa1
-.DB $01 $01 $05
+	.DB $01 $01 $05		;0fa3
 l0fa6h:
 	ld (ix+00ah),b		;0fa6
 	ld a,(0c314h)		;0fa9
@@ -2555,7 +2513,6 @@ l0fc9h:
 	cp 004h		;0fd8
 	jr z,l0ff2h		;0fda
 	ld de,0ff08h		;0fdc
-sub_0fdfh:
 	cp 006h		;0fdf
 	jr z,l0fe9h		;0fe1
 	dec a			;0fe3
@@ -2565,7 +2522,6 @@ l0fe9h:
 	ld hl,(0c31ah)		;0fe9
 	add hl,de			;0fec
 	jr nc,l0ff2h		;0fed
-sub_0fefh:
 	xor a			;0fef
 	jr l1000h		;0ff0
 l0ff2h:
@@ -2600,7 +2556,6 @@ l1014h:
 	inc bc			;101d
 	nop			;101e
 	nop			;101f
-l1020h:
 	nop			;1020
 	nop			;1021
 	nop			;1022
@@ -2731,7 +2686,6 @@ l108dh:
 	inc hl			;109d
 	inc hl			;109e
 	inc hl			;109f
-l10a0h:
 	inc hl			;10a0
 	ld b,d			;10a1
 	ld b,d			;10a2
@@ -2833,7 +2787,6 @@ sub_10f8h:
 	or e			;10ff
 	or e			;1100
 	or e			;1101
-l1102h:
 	or e			;1102
 	or e			;1103
 	or e			;1104
@@ -2852,7 +2805,6 @@ l1102h:
 	or e			;1111
 	or e			;1112
 	or e			;1113
-sub_1114h:
 	or e			;1114
 	or e			;1115
 	or e			;1116
@@ -2943,7 +2895,6 @@ sub_1114h:
 	ld c,00fh		;116f
 	rrca			;1171
 	djnz l1185h		;1172
-sub_1174h:
 	ld (de),a			;1174
 	inc de			;1175
 	inc d			;1176
@@ -3079,7 +3030,6 @@ l1211h:
 	add hl,hl			;1215
 	add hl,hl			;1216
 	add hl,hl			;1217
-l1218h:
 	ld hl,(l2b2ah)		;1218
 	dec hl			;121b
 	inc l			;121c
@@ -3155,7 +3105,6 @@ l1257h:
 	dec bc			;126d
 	inc c			;126e
 	inc c			;126f
-sub_1270h:
 	inc c			;1270
 	inc c			;1271
 	dec c			;1272
@@ -3179,7 +3128,6 @@ l1273h:
 	inc d			;1289
 	inc d			;128a
 	dec d			;128b
-l128ch:
 	dec d			;128c
 	dec d			;128d
 l128eh:
@@ -3456,7 +3404,6 @@ l13c7h:
 	ld e,014h		;13ff
 	ld e,014h		;1401
 	ld e,014h		;1403
-l1405h:
 	ld e,014h		;1405
 	bit 0,(ix+008h)		;1407
 	jr nz,l141eh		;140b
@@ -3599,7 +3546,6 @@ l14e6h:
 l1502h:
 	add hl,de			;1502
 	ld (0c2f5h),hl		;1503
-l1506h:
 	ret			;1506
 	call sub_1434h		;1507
 	ret z			;150a
@@ -3855,7 +3801,6 @@ l163eh:
 	dec bc			;1679
 	dec bc			;167a
 	ld a,(bc)			;167b
-sub_167ch:
 	add hl,bc			;167c
 	add hl,bc			;167d
 	ex af,af'			;167e
@@ -3995,7 +3940,6 @@ l16feh:
 	inc hl			;170d
 	ld (l2021h),hl		;170e
 	ld e,01dh		;1711
-l1713h:
 	inc e			;1713
 	dec de			;1714
 	ld a,(de)			;1715
@@ -4415,7 +4359,6 @@ l18a7h:
 	nop			;18fd
 	ld c,c			;18fe
 	nop			;18ff
-l1900h:
 	ld b,(hl)			;1900
 	nop			;1901
 	ld b,h			;1902
@@ -4639,7 +4582,6 @@ l19ffh:
 	inc b			;1a19
 	inc bc			;1a1a
 	ld (bc),a			;1a1b
-sub_1a1ch:
 	ld (bc),a			;1a1c
 	ld bc,l0100h+1		;1a1d
 	nop			;1a20
@@ -5166,7 +5108,6 @@ l1c77h:
 	add hl,hl			;1c98
 	daa			;1c99
 	ld h,024h		;1c9a
-sub_1c9ch:
 	inc hl			;1c9c
 	ld hl,l1e20h		;1c9d
 	dec e			;1ca0
@@ -5661,7 +5602,6 @@ l1f02h:
 	add hl,de			;1f02
 	jr l1f1ch		;1f03
 	ld d,015h		;1f05
-l1f07h:
 	dec d			;1f07
 	inc d			;1f08
 	inc de			;1f09
@@ -5713,7 +5653,6 @@ l1f21h:
 	nop			;1f3c
 	nop			;1f3d
 	nop			;1f3e
-sub_1f3fh:
 	nop			;1f3f
 	nop			;1f40
 	nop			;1f41
@@ -5924,7 +5863,6 @@ l2021h:
 	ld a,(bc)			;203c
 	add hl,bc			;203d
 	add hl,bc			;203e
-l203fh:
 	ex af,af'			;203f
 l2040h:
 	ex af,af'			;2040
@@ -5976,7 +5914,6 @@ l2047h:
 	inc sp			;2073
 	ld sp,l2e30h		;2074
 	inc l			;2077
-l2078h:
 	dec hl			;2078
 	add hl,hl			;2079
 	jr z,l20a3h		;207a
@@ -6099,27 +6036,18 @@ l2102h:
 	rlca			;2102
 	rlca			;2103
 	rlca			;2104
-l2105h:
 	ld b,006h		;2105
 	dec b			;2107
-l2108h:
 	dec b			;2108
 	dec b			;2109
-l210ah:
 	inc b			;210a
-l210bh:
 	inc b			;210b
-l210ch:
 	inc b			;210c
-l210dh:
 	inc bc			;210d
 	inc bc			;210e
-l210fh:
 	inc bc			;210f
-l2110h:
 	ld (bc),a			;2110
 	ld (bc),a			;2111
-l2112h:
 	ld (bc),a			;2112
 	ld (bc),a			;2113
 	ld bc,l0100h+1		;2114
@@ -6220,7 +6148,6 @@ l2186h:
 	ld e,e			;2188
 	ld d,(hl)			;2189
 	ld d,d			;218a
-l218bh:
 	ld c,a			;218b
 	ld c,e			;218c
 	ld c,b			;218d
@@ -6293,7 +6220,6 @@ l21c5h:
 	nop			;21e4
 	nop			;21e5
 	ld l,e			;21e6
-l21e7h:
 	ld h,h			;21e7
 	ld e,(hl)			;21e8
 	ld e,d			;21e9
@@ -6313,10 +6239,8 @@ l21e7h:
 	inc l			;21fc
 	dec hl			;21fd
 	add hl,hl			;21fe
-l21ffh:
 	jr z,l2227h		;21ff
 	dec h			;2201
-l2202h:
 	inc h			;2202
 sub_2203h:
 	ld (l2021h),hl		;2203
@@ -6647,7 +6571,6 @@ l234ah:
 	dec de			;238d
 	ld a,(de)			;238e
 	add hl,de			;238f
-l2390h:
 	jr l23a9h		;2390
 	ld d,015h		;2392
 	inc d			;2394
@@ -7506,7 +7429,6 @@ l2800h:
 	ld c,09ch		;280d
 	add a,b			;280f
 	add a,b			;2810
-l2811h:
 	ret p			;2811
 	cp 00eh		;2812
 	add a,b			;2814
@@ -7725,7 +7647,6 @@ l2978h:
 	cp 00eh		;297d
 	ret p			;297f
 	inc c			;2980
-l2981h:
 	ld c,080h		;2981
 	xor 005h		;2983
 	ld h,0eeh		;2985
@@ -8957,7 +8878,6 @@ l3017h:
 	push hl			;3017
 	ld hl,(0c06fh)		;3018
 	ld de,(0c31ah)		;301b
-l301fh:
 	add hl,de			;301f
 	ld a,h			;3020
 	sub 01bh		;3021
@@ -9043,14 +8963,12 @@ l305ah:
 	rst 38h			;307f
 	rst 38h			;3080
 	ld (bc),a			;3081
-l3082h:
 	ld a,b			;3082
 	ld a,b			;3083
 	ld a,b			;3084
 	ld a,b			;3085
 	ld a,b			;3086
 	ld a,b			;3087
-l3088h:
 	ld a,b			;3088
 	ld a,b			;3089
 	ld a,b			;308a
@@ -9314,7 +9232,6 @@ l31bbh:
 	call po,0207bh		;31c1
 	jp po,0207bh		;31c4
 	ret po			;31c7
-l31c8h:
 	ld a,e			;31c8
 	jr nz,l31a9h		;31c9
 l31cbh:
@@ -9358,7 +9275,6 @@ l31e4h:
 	dec c			;31ff
 	ret pe			;3200
 	ld a,e			;3201
-l3202h:
 	inc c			;3202
 	jp pe,l017bh		;3203
 	call pe,l017bh		;3206
@@ -10552,7 +10468,6 @@ l381eh:
 	inc hl			;382b
 	ld b,(hl)			;382c
 	ld hl,l5d40h		;382d
-l3830h:
 	add hl,de			;3830
 	ex de,hl			;3831
 	add hl,bc			;3832
@@ -10683,10 +10598,8 @@ l38e6h:
 	add a,d			;38fa
 	ld (0c053h),a		;38fb
 	ld hl,(0c051h)		;38fe
-l3901h:
 	ld d,h			;3901
 	ld e,l			;3902
-l3903h:
 	ld b,000h		;3903
 	bit 7,c		;3905
 	jr z,l390bh		;3907
@@ -10780,7 +10693,6 @@ l397bh:
 	ld c,a			;397e
 l397fh:
 	ld b,000h		;397f
-l3981h:
 	ld hl,(0c04dh)		;3981
 	add hl,bc			;3984
 	ex de,hl			;3985
@@ -11165,7 +11077,6 @@ l3b6bh:
 	jr nz,$-73		;3b71
 	cp d			;3b73
 	jr nz,$-72		;3b74
-sub_3b76h:
 	or e			;3b76
 	jr nz,l3b2dh		;3b77
 	cp e			;3b79
@@ -11289,7 +11200,6 @@ l3bfch:
 l3c16h:
 	push af			;3c16
 	ret p			;3c17
-l3c18h:
 	call p,0bff0h		;3c18
 	call p,0f0beh		;3c1b
 	ret p			;3c1e
@@ -11347,7 +11257,6 @@ l3c62h:
 l3c63h:
 	ret p			;3c63
 	jr nz,$-13		;3c64
-l3c66h:
 	call p,0f520h		;3c66
 	call p,sub_2020h		;3c69
 	cp l			;3c6c
@@ -12001,15 +11910,10 @@ sub_3f79h:
 	ld b,a			;3f7a
 	ld b,l			;3f7b
 	jr nz,$+59		;3f7c
-l3f7eh:
 	ld b,e			;3f7e
-l3f7fh:
 	ld c,c			;3f7f
-l3f80h:
 	ld d,d			;3f80
-sub_3f81h:
 	ld b,e			;3f81
-sub_3f82h:
 	ld d,l			;3f82
 l3f83h:
 	ld c,c			;3f83
@@ -12386,7 +12290,6 @@ l4230h:
 	ret			;4238
 sub_4239h:
 	ld a,(0c104h)		;4239
-sub_423ch:
 	inc a			;423c
 	ld (0c104h),a		;423d
 	ld a,(0c290h)		;4240
@@ -12572,7 +12475,6 @@ l4325h:
 l435fh:
 	ld bc,l010dh		;435f
 	add hl,bc			;4362
-l4363h:
 	ld bc,00104h		;4363
 	sbc a,a			;4366
 	nop			;4367
@@ -12601,9 +12503,7 @@ l4363h:
 	ld l,h			;437e
 	nop			;437f
 	ld l,b			;4380
-l4381h:
 	nop			;4381
-l4382h:
 	ld h,h			;4382
 	nop			;4383
 	ld h,c			;4384
@@ -13135,7 +13035,6 @@ l466fh:
 	xor e			;4680
 	nop			;4681
 	and c			;4682
-l4683h:
 	nop			;4683
 	sbc a,b			;4684
 	nop			;4685
@@ -13675,7 +13574,6 @@ l490dh:
 	ld b,(hl)			;4950
 	pop hl			;4951
 	ld bc,00e8dh		;4952
-l4955h:
 	rlca			;4955
 	rlca			;4956
 	rlca			;4957
@@ -14905,10307 +14803,12331 @@ l4fe3h:
 	add a,d			;4ffe
 l4fffh:
 	nop			;4fff
-	rst 38h			;5000
+	.DB $ff		;5000
 l5001h:
-	ld (bc),a			;5001
-	nop			;5002
-	add a,d			;5003
-	rst 38h			;5004
-	nop			;5005
-	ld (bc),a			;5006
-	rst 38h			;5007
-	add a,d			;5008
-	nop			;5009
-	ret m			;500a
-	ld (bc),a			;500b
-	nop			;500c
-	add a,e			;500d
-	ret po			;500e
-	nop			;500f
-	add a,b			;5010
-	ld b,000h		;5011
-	add a,l			;5013
-	ex af,af'			;5014
-	nop			;5015
-	ex af,af'			;5016
-	nop			;5017
-	ex af,af'			;5018
-	inc b			;5019
-	rst 38h			;501a
-	adc a,b			;501b
-	cp 0fch		;501c
-	ret m			;501e
-	rst 38h			;501f
-	ret p			;5020
-	ret po			;5021
-	ret nz			;5022
-	add a,b			;5023
-	inc bc			;5024
-	nop			;5025
-	adc a,c			;5026
-	add a,b			;5027
-	nop			;5028
-	ex af,af'			;5029
-	nop			;502a
-	ex af,af'			;502b
-	nop			;502c
-	ex af,af'			;502d
-	nop			;502e
-	ex af,af'			;502f
-	inc b			;5030
-	rst 38h			;5031
-	sub h			;5032
-	call m,0f0ffh		;5033
-	rst 38h			;5036
-	ret po			;5037
-	cp 000h		;5038
-	ret m			;503a
-	nop			;503b
-	ret po			;503c
-	nop			;503d
-	add a,b			;503e
-	nop			;503f
-	jr l5042h		;5040
-l5042h:
-	jr l5044h		;5042
-l5044h:
-	jr l5046h		;5044
-l5046h:
-	jr l504ah		;5046
-	rst 38h			;5048
-	add a,c			;5049
-l504ah:
-	cp 002h		;504a
-	rst 38h			;504c
-	add a,d			;504d
-	ret p			;504e
-	ret nz			;504f
-	ld (bc),a			;5050
-	rst 38h			;5051
-	ld (bc),a			;5052
-	nop			;5053
-	add a,d			;5054
-	ret m			;5055
-	ret p			;5056
-	ld (bc),a			;5057
-	nop			;5058
-	add a,d			;5059
-	add a,b			;505a
-	inc e			;505b
-	ld (bc),a			;505c
-	nop			;505d
-	ld (bc),a			;505e
-	inc e			;505f
-	ld (bc),a			;5060
-	nop			;5061
-	add a,h			;5062
-	inc e			;5063
-	rst 38h			;5064
-	cp 0fch		;5065
-	ld (bc),a			;5067
-	rst 38h			;5068
-	add a,h			;5069
-	ret nz			;506a
-	add a,b			;506b
-	nop			;506c
-	rst 38h			;506d
-	ld (bc),a			;506e
-	nop			;506f
-	add a,d			;5070
-	ret m			;5071
-	ret p			;5072
-	inc bc			;5073
-	nop			;5074
-	add a,c			;5075
-	inc e			;5076
-	ld (bc),a			;5077
-	nop			;5078
-	ld (bc),a			;5079
-	inc e			;507a
-	inc bc			;507b
-	nop			;507c
-	dec bc			;507d
-	rst 38h			;507e
-	add a,e			;507f
-	ret po			;5080
-	ret nz			;5081
-	add a,b			;5082
-	inc bc			;5083
-	rst 38h			;5084
-	add a,d			;5085
-	cp 0fch		;5086
-	inc bc			;5088
-	nop			;5089
-	add a,d			;508a
-	ret nz			;508b
-	add a,b			;508c
-	inc bc			;508d
-	inc a			;508e
-	inc bc			;508f
-	nop			;5090
-	ld (bc),a			;5091
-	inc a			;5092
-	add hl,bc			;5093
-	rst 38h			;5094
-	add a,h			;5095
-	ret p			;5096
-	ret po			;5097
-	ret nz			;5098
-	add a,b			;5099
-	inc b			;509a
-	rst 38h			;509b
-	inc b			;509c
-	nop			;509d
-	add a,h			;509e
-	ret po			;509f
-	ret nz			;50a0
-	add a,b			;50a1
-	inc a			;50a2
-	inc b			;50a3
-	nop			;50a4
-	inc bc			;50a5
-	inc a			;50a6
-	inc b			;50a7
-	rst 38h			;50a8
-	add a,c			;50a9
-	cp 004h		;50aa
-	rst 38h			;50ac
-	add a,h			;50ad
-	ret po			;50ae
-	ret nz			;50af
-	add a,b			;50b0
-	nop			;50b1
-	inc b			;50b2
-	rst 38h			;50b3
-	inc b			;50b4
-	nop			;50b5
-	add a,e			;50b6
-	ret po			;50b7
-	ret nz			;50b8
-	add a,b			;50b9
-	ex af,af'			;50ba
-	nop			;50bb
-	add a,c			;50bc
-	ld a,004h		;50bd
-	nop			;50bf
-	inc bc			;50c0
-	ld a,003h		;50c1
-	rst 38h			;50c3
-	add a,e			;50c4
-	cp 0fch		;50c5
-	ret m			;50c7
-	inc bc			;50c8
-	rst 38h			;50c9
-	add a,c			;50ca
-	ret nz			;50cb
-	inc b			;50cc
-	nop			;50cd
-	inc bc			;50ce
-	rst 38h			;50cf
-	dec b			;50d0
-	nop			;50d1
-	add a,e			;50d2
-	ret nz			;50d3
-	add a,b			;50d4
-	ld a,(hl)			;50d5
-	dec b			;50d6
-	nop			;50d7
-	ld (bc),a			;50d8
-	ld a,(hl)			;50d9
-	inc b			;50da
-	rst 38h			;50db
-	add a,h			;50dc
-	ret m			;50dd
-	ret p			;50de
-	ret nz			;50df
-	add a,b			;50e0
-	inc b			;50e1
-	rst 38h			;50e2
-	inc b			;50e3
-	nop			;50e4
-	add a,h			;50e5
-	rst 38h			;50e6
-	cp 0fch		;50e7
-	ret m			;50e9
-	inc b			;50ea
-	nop			;50eb
-	inc b			;50ec
-	ld a,(hl)			;50ed
-	inc b			;50ee
-	nop			;50ef
-	add a,d			;50f0
-	rst 38h			;50f1
-	cp 006h		;50f2
-	rst 38h			;50f4
-	ld (bc),a			;50f5
-	nop			;50f6
-	ld b,0ffh		;50f7
-	ld (bc),a			;50f9
-	nop			;50fa
-	add a,(hl)			;50fb
-	call m,0f0f8h		;50fc
-	ret po			;50ff
-	ret nz			;5100
-	add a,b			;5101
-	ld (bc),a			;5102
-	nop			;5103
-	ld b,07eh		;5104
-	ld a,a			;5106
-	nop			;5107
-	ld a,a			;5108
-	nop			;5109
-	ld a,a			;510a
-	nop			;510b
-	ld a,a			;510c
-	nop			;510d
-	dec d			;510e
-	nop			;510f
-	add a,c			;5110
-	inc a			;5111
-	ld (bc),a			;5112
-	ld a,d			;5113
-	add a,(hl)			;5114
-	inc a			;5115
-	nop			;5116
-	inc a			;5117
-	ld a,d			;5118
-	nop			;5119
-	inc a			;511a
-	ld (bc),a			;511b
-	ld a,d			;511c
-	add a,(hl)			;511d
-	inc a			;511e
-	nop			;511f
-	inc a			;5120
-	ld a,d			;5121
-	nop			;5122
-	inc a			;5123
-	ld (bc),a			;5124
-	ld a,d			;5125
-	add a,h			;5126
-	inc a			;5127
-	nop			;5128
-	inc a			;5129
-	ld a,d			;512a
-	ex af,af'			;512b
-	nop			;512c
-	inc bc			;512d
-	ret po			;512e
-	inc bc			;512f
-	rst 38h			;5130
-	add a,l			;5131
-	call m,007f8h		;5132
-	inc bc			;5135
-	ld bc,0f803h		;5136
-	add a,d			;5139
-	jr c,l5154h		;513a
-	ld b,0f0h		;513c
-	add a,d			;513e
-	ret m			;513f
-	call m,sub_0806h		;5140
-	sub d			;5143
-	jr l517eh		;5144
-	di			;5146
-	ret p			;5147
-	rst 30h			;5148
-	ret p			;5149
-	rst 30h			;514a
-	ret p			;514b
-	ei			;514c
-	call m,l08c8h		;514d
-	ret pe			;5150
-	ex af,af'			;5151
-	ret pe			;5152
-	ex af,af'			;5153
-l5154h:
-	ret c			;5154
-	jr c,l5159h		;5155
-	rst 38h			;5157
-	add a,d			;5158
-l5159h:
-	call m,004f8h		;5159
-	ret p			;515c
-	ld (bc),a			;515d
-	ret m			;515e
-	add a,d			;515f
-	jr c,l517ah		;5160
-	inc b			;5162
-	ex af,af'			;5163
-	ld (bc),a			;5164
-	ret p			;5165
-	add a,d			;5166
-	ret m			;5167
-	call m,0ff02h		;5168
-	add a,d			;516b
-	call m,sub_02f8h		;516c
-	ex af,af'			;516f
-	add a,d			;5170
-	jr $+56		;5171
-	ld (bc),a			;5173
-	ret m			;5174
-	add a,d			;5175
-	jr c,l5190h		;5176
-	ld (bc),a			;5178
-	rst 38h			;5179
-l517ah:
-	add a,(hl)			;517a
-	call m,0f3f8h		;517b
-l517eh:
-	ret p			;517e
-	rst 30h			;517f
-	ret p			;5180
-	ld (bc),a			;5181
-	ret m			;5182
-	adc a,d			;5183
-	jr c,l519eh		;5184
-	ret z			;5186
-	ex af,af'			;5187
-	ret pe			;5188
-	ex af,af'			;5189
-	rst 30h			;518a
-	ret p			;518b
-	ei			;518c
-	call m,0ff02h		;518d
-l5190h:
-	add a,(hl)			;5190
-	call m,0e8f8h		;5191
-	ex af,af'			;5194
-	ret c			;5195
-	jr c,l519ah		;5196
-	ret m			;5198
-	add a,l			;5199
-l519ah:
-	jr c,l51b4h		;519a
-	ret p			;519c
-	pop af			;519d
-l519eh:
-	di			;519e
-	inc bc			;519f
-	ret p			;51a0
-	adc a,d			;51a1
-	ret m			;51a2
-	call m,0c808h		;51a3
-	ret pe			;51a6
-	ld l,b			;51a7
-	jr z,l51b2h		;51a8
-	jr l51e4h		;51aa
-	dec b			;51ac
-	rst 38h			;51ad
-	add a,e			;51ae
-	rra			;51af
-	sbc a,a			;51b0
-	rst 18h			;51b1
-l51b2h:
-	dec b			;51b2
-	ret m			;51b3
-l51b4h:
-	ld b,0ffh		;51b4
-	add a,l			;51b6
-	rst 28h			;51b7
-	adc a,a			;51b8
-	rrca			;51b9
-	rlca			;51ba
-	ret nz			;51bb
-	inc b			;51bc
-	rst 8			;51bd
-	ld (bc),a			;51be
-	rst 0			;51bf
-l51c0h:
-	add a,d			;51c0
-	rst 8			;51c1
-	rra			;51c2
-	dec b			;51c3
-	nop			;51c4
-	adc a,b			;51c5
-	ld (bc),a			;51c6
-	rlca			;51c7
-	rrca			;51c8
-	nop			;51c9
-	inc bc			;51ca
-	ld b,008h		;51cb
-	djnz l51d1h		;51cd
-	nop			;51cf
-	add a,e			;51d0
-l51d1h:
-	ret nz			;51d1
-	nop			;51d2
-	add a,b			;51d3
-	add hl,bc			;51d4
-	nop			;51d5
-	add a,c			;51d6
-	inc c			;51d7
-	inc b			;51d8
-	inc bc			;51d9
-	dec b			;51da
-	nop			;51db
-	add a,l			;51dc
-	ld b,0feh		;51dd
-	call m,sub_1f3fh		;51df
-	ld (bc),a			;51e2
-	rlca			;51e3
-l51e4h:
-	inc b			;51e4
-	nop			;51e5
-	add a,e			;51e6
-	ret nz			;51e7
-	call m,l02fdh+1		;51e8
-	rst 38h			;51eb
-	add a,d			;51ec
-	ccf			;51ed
-	rrca			;51ee
-	ld (bc),a			;51ef
-	nop			;51f0
-	add a,e			;51f1
-	rrca			;51f2
-	ccf			;51f3
-	.DB 0fdh,002h,0e0h	;illegal sequence		;51f4
-	ld (bc),a			;51f7
-	nop			;51f8
-	add a,h			;51f9
-	rrca			;51fa
-	cp 0fch		;51fb
-	ret p			;51fd
-	dec bc			;51fe
-	nop			;51ff
-	add a,c			;5200
+	.DB $02		;5001
+	.DB $00		;5002
+	.DB $82		;5003
+	.DB $ff		;5004
+	.DB $00		;5005
+	.DB $02		;5006
+	.DB $ff		;5007
+	.DB $82		;5008
+	.DB $00		;5009
+	.DB $f8		;500a
+	.DB $02		;500b
+	.DB $00		;500c
+	.DB $83		;500d
+	.DB $e0		;500e
+	.DB $00		;500f
+	.DB $80		;5010
+	.DB $06		;5011
+	.DB $00		;5012
+	.DB $85		;5013
+	.DB $08		;5014
+	.DB $00		;5015
+	.DB $08		;5016
+	.DB $00		;5017
+	.DB $08		;5018
+	.DB $04		;5019
+	.DB $ff		;501a
+	.DB $88		;501b
+	.DB $fe		;501c
+	.DB $fc		;501d
+	.DB $f8		;501e
+	.DB $ff		;501f
+	.DB $f0		;5020
+	.DB $e0		;5021
+	.DB $c0		;5022
+	.DB $80		;5023
+	.DB $03		;5024
+	.DB $00		;5025
+	.DB $89		;5026
+	.DB $80		;5027
+	.DB $00		;5028
+	.DB $08		;5029
+	.DB $00		;502a
+	.DB $08		;502b
+	.DB $00		;502c
+	.DB $08		;502d
+	.DB $00		;502e
+	.DB $08		;502f
+	.DB $04		;5030
+	.DB $ff		;5031
+	.DB $94		;5032
+	.DB $fc		;5033
+	.DB $ff		;5034
+	.DB $f0		;5035
+	.DB $ff		;5036
+	.DB $e0		;5037
+	.DB $fe		;5038
+	.DB $00		;5039
+	.DB $f8		;503a
+	.DB $00		;503b
+	.DB $e0		;503c
+	.DB $00		;503d
+	.DB $80		;503e
+	.DB $00		;503f
+	.DB $18		;5040
+	.DB $00		;5041
+	.DB $18		;5042
+	.DB $00		;5043
+	.DB $18		;5044
+	.DB $00		;5045
+	.DB $18		;5046
+	.DB $02		;5047
+	.DB $ff		;5048
+	.DB $81		;5049
+	.DB $fe		;504a
+	.DB $02		;504b
+	.DB $ff		;504c
+	.DB $82		;504d
+	.DB $f0		;504e
+	.DB $c0		;504f
+	.DB $02		;5050
+	.DB $ff		;5051
+	.DB $02		;5052
+	.DB $00		;5053
+	.DB $82		;5054
+	.DB $f8		;5055
+	.DB $f0		;5056
+	.DB $02		;5057
+	.DB $00		;5058
+	.DB $82		;5059
+	.DB $80		;505a
+	.DB $1c		;505b
+	.DB $02		;505c
+	.DB $00		;505d
+	.DB $02		;505e
+	.DB $1c		;505f
+	.DB $02		;5060
+	.DB $00		;5061
+	.DB $84		;5062
+	.DB $1c		;5063
+	.DB $ff		;5064
+	.DB $fe		;5065
+	.DB $fc		;5066
+	.DB $02		;5067
+	.DB $ff		;5068
+	.DB $84		;5069
+	.DB $c0		;506a
+	.DB $80		;506b
+	.DB $00		;506c
+	.DB $ff		;506d
+	.DB $02		;506e
+	.DB $00		;506f
+	.DB $82		;5070
+	.DB $f8		;5071
+	.DB $f0		;5072
+	.DB $03		;5073
+	.DB $00		;5074
+	.DB $81		;5075
+	.DB $1c		;5076
+	.DB $02		;5077
+	.DB $00		;5078
+	.DB $02		;5079
+	.DB $1c		;507a
+	.DB $03		;507b
+	.DB $00		;507c
+	.DB $0b		;507d
+	.DB $ff		;507e
+	.DB $83		;507f
+	.DB $e0		;5080
+	.DB $c0		;5081
+	.DB $80		;5082
+	.DB $03		;5083
+	.DB $ff		;5084
+	.DB $82		;5085
+	.DB $fe		;5086
+	.DB $fc		;5087
+	.DB $03		;5088
+	.DB $00		;5089
+	.DB $82		;508a
+	.DB $c0		;508b
+	.DB $80		;508c
+	.DB $03		;508d
+	.DB $3c		;508e
+	.DB $03		;508f
+	.DB $00		;5090
+	.DB $02		;5091
+	.DB $3c		;5092
+	.DB $09		;5093
+	.DB $ff		;5094
+	.DB $84		;5095
+	.DB $f0		;5096
+	.DB $e0		;5097
+	.DB $c0		;5098
+	.DB $80		;5099
+	.DB $04		;509a
+	.DB $ff		;509b
+	.DB $04		;509c
+	.DB $00		;509d
+	.DB $84		;509e
+	.DB $e0		;509f
+	.DB $c0		;50a0
+	.DB $80		;50a1
+	.DB $3c		;50a2
+	.DB $04		;50a3
+	.DB $00		;50a4
+	.DB $03		;50a5
+	.DB $3c		;50a6
+	.DB $04		;50a7
+	.DB $ff		;50a8
+	.DB $81		;50a9
+	.DB $fe		;50aa
+	.DB $04		;50ab
+	.DB $ff		;50ac
+	.DB $84		;50ad
+	.DB $e0		;50ae
+	.DB $c0		;50af
+	.DB $80		;50b0
+	.DB $00		;50b1
+	.DB $04		;50b2
+	.DB $ff		;50b3
+	.DB $04		;50b4
+	.DB $00		;50b5
+	.DB $83		;50b6
+	.DB $e0		;50b7
+	.DB $c0		;50b8
+	.DB $80		;50b9
+	.DB $08		;50ba
+	.DB $00		;50bb
+	.DB $81		;50bc
+	.DB $3e		;50bd
+	.DB $04		;50be
+	.DB $00		;50bf
+	.DB $03		;50c0
+	.DB $3e		;50c1
+	.DB $03		;50c2
+	.DB $ff		;50c3
+	.DB $83		;50c4
+	.DB $fe		;50c5
+	.DB $fc		;50c6
+	.DB $f8		;50c7
+	.DB $03		;50c8
+	.DB $ff		;50c9
+	.DB $81		;50ca
+	.DB $c0		;50cb
+	.DB $04		;50cc
+	.DB $00		;50cd
+	.DB $03		;50ce
+	.DB $ff		;50cf
+	.DB $05		;50d0
+	.DB $00		;50d1
+	.DB $83		;50d2
+	.DB $c0		;50d3
+	.DB $80		;50d4
+	.DB $7e		;50d5
+	.DB $05		;50d6
+	.DB $00		;50d7
+	.DB $02		;50d8
+	.DB $7e		;50d9
+	.DB $04		;50da
+	.DB $ff		;50db
+	.DB $84		;50dc
+	.DB $f8		;50dd
+	.DB $f0		;50de
+	.DB $c0		;50df
+	.DB $80		;50e0
+	.DB $04		;50e1
+	.DB $ff		;50e2
+	.DB $04		;50e3
+	.DB $00		;50e4
+	.DB $84		;50e5
+	.DB $ff		;50e6
+	.DB $fe		;50e7
+	.DB $fc		;50e8
+	.DB $f8		;50e9
+	.DB $04		;50ea
+	.DB $00		;50eb
+	.DB $04		;50ec
+	.DB $7e		;50ed
+	.DB $04		;50ee
+	.DB $00		;50ef
+	.DB $82		;50f0
+	.DB $ff		;50f1
+	.DB $fe		;50f2
+	.DB $06		;50f3
+	.DB $ff		;50f4
+	.DB $02		;50f5
+	.DB $00		;50f6
+	.DB $06		;50f7
+	.DB $ff		;50f8
+	.DB $02		;50f9
+	.DB $00		;50fa
+	.DB $86		;50fb
+	.DB $fc		;50fc
+	.DB $f8		;50fd
+	.DB $f0		;50fe
+	.DB $e0		;50ff
+	.DB $c0		;5100
+	.DB $80		;5101
+	.DB $02		;5102
+	.DB $00		;5103
+	.DB $06		;5104
+	.DB $7e		;5105
+	.DB $7f		;5106
+	.DB $00		;5107
+	.DB $7f		;5108
+	.DB $00		;5109
+	.DB $7f		;510a
+	.DB $00		;510b
+	.DB $7f		;510c
+	.DB $00		;510d
+	.DB $15		;510e
+	.DB $00		;510f
+	.DB $81		;5110
+	.DB $3c		;5111
+	.DB $02		;5112
+	.DB $7a		;5113
+	.DB $86		;5114
+	.DB $3c		;5115
+	.DB $00		;5116
+	.DB $3c		;5117
+	.DB $7a		;5118
+	.DB $00		;5119
+	.DB $3c		;511a
+	.DB $02		;511b
+	.DB $7a		;511c
+	.DB $86		;511d
+	.DB $3c		;511e
+	.DB $00		;511f
+	.DB $3c		;5120
+	.DB $7a		;5121
+	.DB $00		;5122
+	.DB $3c		;5123
+	.DB $02		;5124
+	.DB $7a		;5125
+	.DB $84		;5126
+	.DB $3c		;5127
+	.DB $00		;5128
+	.DB $3c		;5129
+	.DB $7a		;512a
+	.DB $08		;512b
+	.DB $00		;512c
+	.DB $03		;512d
+	.DB $e0		;512e
+	.DB $03		;512f
+	.DB $ff		;5130
+	.DB $85		;5131
+	.DB $fc		;5132
+	.DB $f8		;5133
+	.DB $07		;5134
+	.DB $03		;5135
+	.DB $01		;5136
+	.DB $03		;5137
+	.DB $f8		;5138
+	.DB $82		;5139
+	.DB $38		;513a
+	.DB $18		;513b
+	.DB $06		;513c
+	.DB $f0		;513d
+	.DB $82		;513e
+	.DB $f8		;513f
+	.DB $fc		;5140
+	.DB $06		;5141
+	.DB $08		;5142
+	.DB $92		;5143
+	.DB $18		;5144
+	.DB $38		;5145
+	.DB $f3		;5146
+	.DB $f0		;5147
+	.DB $f7		;5148
+	.DB $f0		;5149
+	.DB $f7		;514a
+	.DB $f0		;514b
+	.DB $fb		;514c
+	.DB $fc		;514d
+	.DB $c8		;514e
+	.DB $08		;514f
+	.DB $e8		;5150
+	.DB $08		;5151
+	.DB $e8		;5152
+	.DB $08		;5153
+	.DB $d8		;5154
+	.DB $38		;5155
+	.DB $02		;5156
+	.DB $ff		;5157
+	.DB $82		;5158
+	.DB $fc		;5159
+	.DB $f8		;515a
+	.DB $04		;515b
+	.DB $f0		;515c
+	.DB $02		;515d
+	.DB $f8		;515e
+	.DB $82		;515f
+	.DB $38		;5160
+	.DB $18		;5161
+	.DB $04		;5162
+	.DB $08		;5163
+	.DB $02		;5164
+	.DB $f0		;5165
+	.DB $82		;5166
+	.DB $f8		;5167
+	.DB $fc		;5168
+	.DB $02		;5169
+	.DB $ff		;516a
+	.DB $82		;516b
+	.DB $fc		;516c
+	.DB $f8		;516d
+	.DB $02		;516e
+	.DB $08		;516f
+	.DB $82		;5170
+	.DB $18		;5171
+	.DB $38		;5172
+	.DB $02		;5173
+	.DB $f8		;5174
+	.DB $82		;5175
+	.DB $38		;5176
+	.DB $18		;5177
+	.DB $02		;5178
+	.DB $ff		;5179
+	.DB $86		;517a
+	.DB $fc		;517b
+	.DB $f8		;517c
+	.DB $f3		;517d
+	.DB $f0		;517e
+	.DB $f7		;517f
+	.DB $f0		;5180
+	.DB $02		;5181
+	.DB $f8		;5182
+	.DB $8a		;5183
+	.DB $38		;5184
+	.DB $18		;5185
+	.DB $c8		;5186
+	.DB $08		;5187
+	.DB $e8		;5188
+	.DB $08		;5189
+	.DB $f7		;518a
+	.DB $f0		;518b
+	.DB $fb		;518c
+	.DB $fc		;518d
+	.DB $02		;518e
+	.DB $ff		;518f
+	.DB $86		;5190
+	.DB $fc		;5191
+	.DB $f8		;5192
+	.DB $e8		;5193
+	.DB $08		;5194
+	.DB $d8		;5195
+	.DB $38		;5196
+	.DB $02		;5197
+	.DB $f8		;5198
+	.DB $85		;5199
+	.DB $38		;519a
+	.DB $18		;519b
+	.DB $f0		;519c
+	.DB $f1		;519d
+	.DB $f3		;519e
+	.DB $03		;519f
+	.DB $f0		;51a0
+	.DB $8a		;51a1
+	.DB $f8		;51a2
+	.DB $fc		;51a3
+	.DB $08		;51a4
+	.DB $c8		;51a5
+	.DB $e8		;51a6
+	.DB $68		;51a7
+	.DB $28		;51a8
+	.DB $08		;51a9
+	.DB $18		;51aa
+	.DB $38		;51ab
+	.DB $05		;51ac
+	.DB $ff		;51ad
+	.DB $83		;51ae
+	.DB $1f		;51af
+	.DB $9f		;51b0
+	.DB $df		;51b1
+	.DB $05		;51b2
+	.DB $f8		;51b3
+	.DB $06		;51b4
+	.DB $ff		;51b5
+	.DB $85		;51b6
+	.DB $ef		;51b7
+	.DB $8f		;51b8
+	.DB $0f		;51b9
+	.DB $07		;51ba
+	.DB $c0		;51bb
+	.DB $04		;51bc
+	.DB $cf		;51bd
+	.DB $02		;51be
+	.DB $c7		;51bf
+	.DB $82		;51c0
+	.DB $cf		;51c1
+	.DB $1f		;51c2
+	.DB $05		;51c3
+	.DB $00		;51c4
+	.DB $88		;51c5
+	.DB $02		;51c6
+	.DB $07		;51c7
+	.DB $0f		;51c8
+	.DB $00		;51c9
+	.DB $03		;51ca
+	.DB $06		;51cb
+	.DB $08		;51cc
+	.DB $10		;51cd
+	.DB $02		;51ce
+	.DB $00		;51cf
+	.DB $83		;51d0
+	.DB $c0		;51d1
+	.DB $00		;51d2
+	.DB $80		;51d3
+	.DB $09		;51d4
+	.DB $00		;51d5
+	.DB $81		;51d6
+	.DB $0c		;51d7
+	.DB $04		;51d8
+	.DB $03		;51d9
+	.DB $05		;51da
+	.DB $00		;51db
+	.DB $85		;51dc
+	.DB $06		;51dd
+	.DB $fe		;51de
+	.DB $fc		;51df
+	.DB $3f		;51e0
+	.DB $1f		;51e1
+	.DB $02		;51e2
+	.DB $07		;51e3
+	.DB $04		;51e4
+	.DB $00		;51e5
+	.DB $83		;51e6
+	.DB $c0		;51e7
+	.DB $fc		;51e8
+	.DB $fe		;51e9
+	.DB $02		;51ea
+	.DB $ff		;51eb
+	.DB $82		;51ec
+	.DB $3f		;51ed
+	.DB $0f		;51ee
+	.DB $02		;51ef
+	.DB $00		;51f0
+	.DB $83		;51f1
+	.DB $0f		;51f2
+	.DB $3f		;51f3
+	.DB $fd		;51f4
+	.DB $02		;51f5
+	.DB $e0		;51f6
+	.DB $02		;51f7
+	.DB $00		;51f8
+	.DB $84		;51f9
+	.DB $0f		;51fa
+	.DB $fe		;51fb
+	.DB $fc		;51fc
+	.DB $f0		;51fd
+	.DB $0b		;51fe
+	.DB $00		;51ff
+	.DB $81		;5200
 l5201h:
-	ld bc,l0006h		;5201
-	ld (bc),a			;5204
-	add a,b			;5205
-	ld (bc),a			;5206
-	nop			;5207
-	add a,c			;5208
-	inc bc			;5209
-	ex af,af'			;520a
-	nop			;520b
-	add a,l			;520c
-	add a,b			;520d
-	ret nz			;520e
-	ld b,b			;520f
-	add a,b			;5210
-	inc c			;5211
-	inc b			;5212
-	nop			;5213
-	add a,e			;5214
-	ld bc,l03ffh		;5215
-	dec b			;5218
-	nop			;5219
-	add a,h			;521a
-	ret nz			;521b
-	ret p			;521c
-	rst 38h			;521d
-	inc c			;521e
-	ld (bc),a			;521f
-	nop			;5220
-	add a,c			;5221
-	ld b,b			;5222
-	ld (bc),a			;5223
-	add a,b			;5224
-	add a,e			;5225
-	ld b,b			;5226
-	ret p			;5227
-	rra			;5228
-	inc b			;5229
-	nop			;522a
-	adc a,e			;522b
-	djnz $+56		;522c
-	rst 38h			;522e
-	rst 20h			;522f
-	nop			;5230
-	inc bc			;5231
-	ld e,038h		;5232
-	ld l,b			;5234
-	ret po			;5235
-	ret nz			;5236
-	ex af,af'			;5237
-	nop			;5238
-	add a,c			;5239
-	ld sp,hl			;523a
-	inc bc			;523b
-	nop			;523c
-	and e			;523d
-	inc bc			;523e
-	rra			;523f
-	ld a,c			;5240
-	and b			;5241
-	rst 20h			;5242
-	nop			;5243
-	rlca			;5244
-	rrca			;5245
-	ret m			;5246
-	rrca			;5247
-	cp 0f8h		;5248
-	ret p			;524a
-	adc a,d			;524b
-	djnz l5255h		;524c
-	ld (hl),a			;524e
-	di			;524f
-	adc a,a			;5250
-	jr $+96		;5251
-	inc c			;5253
-	ld a,b			;5254
-l5255h:
-	ld e,c			;5255
-	ei			;5256
-	and 08bh		;5257
-	.DB 0fdh,000h,00dh	;illegal sequence		;5259
-	ld a,a			;525c
-	.DB 0ddh,07fh,0fdh	;illegal sequence		;525d
-	jp po,l0202h		;5260
-	add a,a			;5263
-	jp 0cd0fh		;5264
-	ret c			;5267
-	sbc a,a			;5268
-	ld a,a			;5269
-	ld b,(hl)			;526a
-	rlca			;526b
-	nop			;526c
-	add a,d			;526d
-	inc bc			;526e
-	ld b,004h		;526f
-	nop			;5271
-	adc a,l			;5272
-	rrca			;5273
-	rst 38h			;5274
-	cp 000h		;5275
-	rrca			;5277
-	ei			;5278
-	ld a,(hl)			;5279
-	call c,0fc14h		;527a
-	ex de,hl			;527d
-	jp l027fh+1		;527e
-	ret nz			;5281
-	add a,l			;5282
-	ld l,b			;5283
-	scf			;5284
-	call c,sub_7cf7h		;5285
-	inc b			;5288
-	nop			;5289
-	add a,h			;528a
-	ret nz			;528b
-	rst 28h			;528c
-	pop de			;528d
-	ld a,(hl)			;528e
-	dec b			;528f
-	nop			;5290
-	add a,e			;5291
-	add a,b			;5292
-	adc a,07dh		;5293
-	ld b,000h		;5295
-	add a,d			;5297
-	inc b			;5298
-	add a,(hl)			;5299
-	rlca			;529a
-	nop			;529b
-	add a,c			;529c
-	rst 28h			;529d
-	inc bc			;529e
-	nop			;529f
-	add a,c			;52a0
-	ld (bc),a			;52a1
-	ld (bc),a			;52a2
-	ld bc,l0202h		;52a3
-	add a,d			;52a6
-	nop			;52a7
-	rst 38h			;52a8
-	inc bc			;52a9
-	add a,b			;52aa
-	add a,c			;52ab
-	adc a,(hl)			;52ac
-	ld (bc),a			;52ad
-	adc a,b			;52ae
-	add a,d			;52af
-	nop			;52b0
-	rst 38h			;52b1
-	ld b,010h		;52b2
-	dec bc			;52b4
-	nop			;52b5
-	add a,h			;52b6
-	ld bc,sub_3604h+2		;52b7
-	ld b,c			;52ba
-	inc b			;52bb
-l52bch:
-	nop			;52bc
-l52bdh:
-	add a,h			;52bd
-	add a,b			;52be
-	jr nz,l52bdh		;52bf
-	djnz l52c7h		;52c1
-	nop			;52c3
-	add a,h			;52c4
-	jr c,l532bh		;52c5
-l52c7h:
-	jp m,l0222h+2		;52c7
-	nop			;52ca
-	add a,(hl)			;52cb
-	dec bc			;52cc
-	dec e			;52cd
-	dec de			;52ce
-	add hl,sp			;52cf
-	ld a,a			;52d0
-	jr z,l52d5h		;52d1
-	nop			;52d3
-	add a,c			;52d4
-l52d5h:
-	ex af,af'			;52d5
-	ld (bc),a			;52d6
-	ld a,(bc)			;52d7
-	add a,d			;52d8
-	dec de			;52d9
-	ld a,l			;52da
-	rlca			;52db
-	nop			;52dc
-	sub c			;52dd
-	ld a,(bc)			;52de
-	ld h,048h		;52df
-	ld a,(bc)			;52e1
-	inc de			;52e2
-	ld de,02535h		;52e3
-	ld (de),a			;52e6
-	inc hl			;52e7
-	ld b,l			;52e8
-	nop			;52e9
-	jr nz,l52bch		;52ea
-	xor 0efh		;52ec
-	ld l,h			;52ee
-	ld (bc),a			;52ef
-	ld l,b			;52f0
-	dec b			;52f1
-	nop			;52f2
-l52f3h:
-	add a,l			;52f3
-	ld b,b			;52f4
-	jr l52feh		;52f5
-	ld l,a			;52f7
-	rst 28h			;52f8
-	inc b			;52f9
-	.DB 0edh;next byte illegal after ed		;52fa
-	add a,e			;52fb
-	xor 0d6h		;52fc
-l52feh:
-	ret pe			;52fe
-	rlca			;52ff
-	call pe,00104h		;5300
-	ld (bc),a			;5303
-	ld (bc),a			;5304
-	add a,e			;5305
-	ld b,005h		;5306
-	sub 003h		;5308
-	ld d,h			;530a
-	ld (bc),a			;530b
-	xor e			;530c
-	add a,d			;530d
-	out (0d7h),a		;530e
-	ld (bc),a			;5310
-	or d			;5311
-	ld (bc),a			;5312
-	sub d			;5313
-	add a,l			;5314
-	ld e,b			;5315
-	ld c,b			;5316
-	ld a,c			;5317
-	ld (hl),e			;5318
-	jp nz,0c402h		;5319
-	ld (bc),a			;531c
-	ld d,l			;531d
-	ld (bc),a			;531e
-	inc c			;531f
-	add a,(hl)			;5320
-	ld a,(de)			;5321
-	ld e,l			;5322
-	ld c,c			;5323
-	inc b			;5324
-	ld d,h			;5325
-	ld d,(hl)			;5326
-	ld (bc),a			;5327
-	xor e			;5328
-	add a,c			;5329
-	dec de			;532a
-l532bh:
-	ld b,000h		;532b
-	add a,c			;532d
-	jr nz,l5338h		;532e
-	nop			;5330
-	add a,a			;5331
-	add a,d			;5332
-	nop			;5333
-	jr l5336h		;5334
-l5336h:
-	inc b			;5336
-	nop			;5337
-l5338h:
-	jr nz,l533dh		;5338
-	nop			;533a
-	add a,c			;533b
-	ex af,af'			;533c
-l533dh:
-	inc bc			;533d
-	nop			;533e
-	add a,e			;533f
-	jr z,l5342h		;5340
-l5342h:
-	jr nc,l5346h		;5342
-	jr l52c7h		;5344
-l5346h:
-	nop			;5346
-	ld (bc),a			;5347
-	jr l534dh		;5348
-	nop			;534a
-	adc a,b			;534b
-	ld (hl),h			;534c
-l534dh:
-	ld b,h			;534d
-	inc a			;534e
-	jp z,088f6h		;534f
-	ld b,d			;5352
-	add a,d			;5353
-	inc bc			;5354
-	nop			;5355
-	add a,e			;5356
-	add a,d			;5357
-	nop			;5358
-	djnz $+3		;5359
-	nop			;535b
-	add a,a			;535c
-	jr nz,l535fh		;535d
-l535fh:
-	jr nz,l5361h		;535f
-l5361h:
-	inc b			;5361
-	nop			;5362
-	djnz l5368h		;5363
-	nop			;5365
-	add a,(hl)			;5366
-	add a,d			;5367
-l5368h:
-	nop			;5368
-	ex af,af'			;5369
-	nop			;536a
-	inc b			;536b
-	nop			;536c
-	inc bc			;536d
-	djnz l52f3h		;536e
-	nop			;5370
-	jr $+40		;5371
-	ld (bc),a			;5373
-	ex af,af'			;5374
-	add a,h			;5375
-	jr z,l5398h		;5376
-	jr z,l5382h		;5378
-	ld (bc),a			;537a
-	jr z,l52feh		;537b
-	ld c,h			;537d
-	nop			;537e
-	ex af,af'			;537f
-	rst 38h			;5380
-	inc bc			;5381
-l5382h:
-	nop			;5382
-	add a,d			;5383
-	rst 38h			;5384
-	nop			;5385
-	inc bc			;5386
-	rst 38h			;5387
-	inc bc			;5388
-	nop			;5389
-	add a,d			;538a
-	rst 38h			;538b
-	nop			;538c
-	inc bc			;538d
-	rst 38h			;538e
-	adc a,b			;538f
-	nop			;5390
-	ld (bc),a			;5391
-	nop			;5392
-	ret m			;5393
-	nop			;5394
-	ret po			;5395
-	nop			;5396
-	add a,b			;5397
-l5398h:
-	ex af,af'			;5398
-	nop			;5399
-	ld c,0ffh		;539a
-	adc a,d			;539c
-	call m,0f8ffh		;539d
-	cp 0e0h		;53a0
-	ret m			;53a2
-	add a,b			;53a3
-	ret po			;53a4
-	nop			;53a5
-	add a,b			;53a6
-	ex af,af'			;53a7
-	nop			;53a8
-	inc b			;53a9
-	rst 38h			;53aa
-	add a,e			;53ab
-	cp 0ffh		;53ac
-	ret m			;53ae
-	ld (bc),a			;53af
-	ret p			;53b0
-	add a,l			;53b1
-	cp 0c0h		;53b2
-	ret m			;53b4
-	nop			;53b5
-	ret po			;53b6
-	ld a,(bc)			;53b7
-	nop			;53b8
-	inc bc			;53b9
-	rst 38h			;53ba
-	add a,c			;53bb
-	cp 002h		;53bc
-	rst 38h			;53be
-	add a,h			;53bf
-	ret p			;53c0
-	ret po			;53c1
-	rst 38h			;53c2
-	cp 002h		;53c3
-	nop			;53c5
-	add a,d			;53c6
-	ret p			;53c7
-	ret po			;53c8
-	ld (bc),a			;53c9
-	nop			;53ca
-	ld (bc),a			;53cb
-	jr l53d0h		;53cc
-	nop			;53ce
-	ld (bc),a			;53cf
-l53d0h:
-	jr l53d4h		;53d0
-	nop			;53d2
-	dec b			;53d3
-l53d4h:
-	rst 38h			;53d4
-	add a,d			;53d5
-	ret p			;53d6
-	ret nz			;53d7
-	ld (bc),a			;53d8
-	add a,b			;53d9
-	add a,h			;53da
-	cp 0fch		;53db
-	ret m			;53dd
-	ret p			;53de
-	inc b			;53df
-	nop			;53e0
-	inc b			;53e1
-	inc e			;53e2
-	inc bc			;53e3
-	nop			;53e4
-	dec b			;53e5
-	rst 38h			;53e6
-	add a,d			;53e7
-	ret nz			;53e8
-	add a,b			;53e9
-	ld (bc),a			;53ea
-	nop			;53eb
-	add a,h			;53ec
-	cp 0fch		;53ed
-	ret m			;53ef
-	ret p			;53f0
-	inc b			;53f1
-	nop			;53f2
-	inc b			;53f3
-	inc e			;53f4
-	inc bc			;53f5
-	nop			;53f6
-	ex af,af'			;53f7
-	rst 38h			;53f8
-	add a,e			;53f9
-	cp 0fch		;53fa
-	ret p			;53fc
-	dec b			;53fd
-	rst 38h			;53fe
-	inc bc			;53ff
-	nop			;5400
-	add a,l			;5401
-	ret m			;5402
-	ret p			;5403
-	ret po			;5404
-	ret nz			;5405
-	add a,b			;5406
-	inc bc			;5407
-	nop			;5408
-	dec b			;5409
-	inc a			;540a
-	ld b,0ffh		;540b
-	add a,a			;540d
-	call m,0fff8h		;540e
-l5411h:
-	ret p			;5411
-	ret po			;5412
-	ret nz			;5413
-	add a,b			;5414
-	inc bc			;5415
-	nop			;5416
-	add a,c			;5417
-	rst 38h			;5418
-	rlca			;5419
-	nop			;541a
-	add a,c			;541b
-	inc a			;541c
-	rlca			;541d
-	nop			;541e
-	ex af,af'			;541f
-	rst 38h			;5420
-	add a,c			;5421
-	ret p			;5422
-	rlca			;5423
-	rst 38h			;5424
-	adc a,b			;5425
-	nop			;5426
-	cp 0fch		;5427
-	ret m			;5429
-	ret p			;542a
-	ret po			;542b
-	ret nz			;542c
-	add a,b			;542d
-	add hl,bc			;542e
-	nop			;542f
-l5430h:
-	rlca			;5430
-	ld a,003h		;5431
-	rst 38h			;5433
-	add a,a			;5434
-	cp 0fch		;5435
-	ret m			;5437
-	ret p			;5438
-	ret po			;5439
-	rst 38h			;543a
-	ret nz			;543b
-	ld b,000h		;543c
-	add a,c			;543e
-	rst 38h			;543f
-	rlca			;5440
-	nop			;5441
-	add a,c			;5442
-	ld a,(hl)			;5443
-	rlca			;5444
-	nop			;5445
-	ld (bc),a			;5446
-	rst 38h			;5447
-	add a,d			;5448
-	cp 0fch		;5449
-	inc b			;544b
-	rst 38h			;544c
-	add a,c			;544d
-	add a,b			;544e
-	inc bc			;544f
-	nop			;5450
-	inc b			;5451
-	rst 38h			;5452
-	inc b			;5453
-	nop			;5454
-	add a,h			;5455
-	ret p			;5456
-	ret po			;5457
-	ret nz			;5458
-	add a,b			;5459
-	inc b			;545a
-	nop			;545b
-	inc b			;545c
-	ld a,(hl)			;545d
-	ld de,087ffh		;545e
-	cp 0fch		;5461
-	ret m			;5463
-	ret p			;5464
-	ret po			;5465
-	ret nz			;5466
-	add a,b			;5467
-	ex af,af'			;5468
-	ld a,(hl)			;5469
-	djnz l546ch		;546a
-l546ch:
-	add a,d			;546c
-	jr c,l54bbh		;546d
-	inc bc			;546f
-	add a,085h		;5470
-	ld h,h			;5472
-	jr c,l5475h		;5473
-l5475h:
-	jr l54afh		;5475
-	inc b			;5477
-	jr l5411h		;5478
-	ld a,(hl)			;547a
-	nop			;547b
-	ld a,h			;547c
-	add a,00eh		;547d
-	inc a			;547f
-	ld a,b			;5480
-	ret po			;5481
-	cp 000h		;5482
-	ld a,(hl)			;5484
-	inc c			;5485
-	jr l54c4h		;5486
-	ld b,0c6h		;5488
-	ld a,h			;548a
-	nop			;548b
-	inc e			;548c
-	inc a			;548d
-	ld l,h			;548e
-	call z,l02fdh+1		;548f
-	inc c			;5492
-	add a,h			;5493
-	nop			;5494
-	call m,0fcc0h		;5495
-	ld (bc),a			;5498
-	ld b,087h		;5499
-	add a,07ch		;549b
-	nop			;549d
-	inc a			;549e
-	ld h,b			;549f
-	ret nz			;54a0
-	call m,0c602h		;54a1
-	add a,(hl)			;54a4
-	ld a,h			;54a5
-	nop			;54a6
-	cp 0c6h		;54a7
-	inc c			;54a9
-	jr l54afh		;54aa
-	jr nc,l5430h		;54ac
-	nop			;54ae
-l54afh:
-	ld a,h			;54af
-	ld (bc),a			;54b0
-	add a,081h		;54b1
-	ld a,h			;54b3
-	ld (bc),a			;54b4
-	add a,083h		;54b5
-	ld a,h			;54b7
-	nop			;54b8
-	ld a,h			;54b9
-	ld (bc),a			;54ba
-l54bbh:
-	add a,084h		;54bb
-	ld a,(hl)			;54bd
-	ld b,00ch		;54be
-	ld a,b			;54c0
-	ld (08100h),hl		;54c1
-l54c4h:
-	inc a			;54c4
-	dec b			;54c5
-	ld b,d			;54c6
-	add a,c			;54c7
-	nop			;54c8
-	ld b,042h		;54c9
-	add a,c			;54cb
-	inc a			;54cc
-	ld a,a			;54cd
-	nop			;54ce
-	rrca			;54cf
-	nop			;54d0
-	ld (bc),a			;54d1
-	jr l5546h		;54d2
-	nop			;54d4
-	ld b,002h		;54d5
-	add a,c			;54d7
-	nop			;54d8
-	rlca			;54d9
-	ld (bc),a			;54da
-	ld (bc),a			;54db
-	nop			;54dc
-	add a,c			;54dd
-	inc a			;54de
-	dec b			;54df
-	ld (bc),a			;54e0
-	add a,c			;54e1
-	inc a			;54e2
-	ld b,040h		;54e3
-	add a,d			;54e5
-	ld a,000h		;54e6
-	ld b,002h		;54e8
-	add a,c			;54ea
-	inc a			;54eb
-	ld (bc),a			;54ec
-	nop			;54ed
-	add a,c			;54ee
-	ld (bc),a			;54ef
-	dec b			;54f0
-	ld b,d			;54f1
-	add a,e			;54f2
-	inc a			;54f3
-	nop			;54f4
-	inc a			;54f5
-	dec b			;54f6
-	ld b,b			;54f7
-	add a,e			;54f8
-	inc a			;54f9
-	nop			;54fa
-	inc a			;54fb
-	dec b			;54fc
-	ld (bc),a			;54fd
-	ld (bc),a			;54fe
-	nop			;54ff
-	add a,c			;5500
-	inc a			;5501
-	dec b			;5502
-	ld b,d			;5503
-	add a,c			;5504
-	inc a			;5505
-	ld a,(l01ffh+1)		;5506
-	inc b			;5509
-	ld (bc),a			;550a
-	nop			;550b
-	add a,h			;550c
-	inc a			;550d
-	ld a,d			;550e
-	nop			;550f
-	inc a			;5510
-	ld (bc),a			;5511
-	ld a,d			;5512
-	add a,c			;5513
-	inc a			;5514
-	ld (bc),a			;5515
-	nop			;5516
-	add a,e			;5517
-	inc b			;5518
-	nop			;5519
-	inc a			;551a
-	ld (bc),a			;551b
-	ld a,d			;551c
-	add a,h			;551d
-	inc a			;551e
-	nop			;551f
-	inc a			;5520
-	ld a,d			;5521
-	ex af,af'			;5522
-	nop			;5523
-	rlca			;5524
-	rst 38h			;5525
-	add a,c			;5526
-	call m,0ff07h		;5527
-	add a,e			;552a
-	ccf			;552b
-	ei			;552c
-	rst 30h			;552d
-	ld b,0ffh		;552e
-	add a,d			;5530
-	rst 18h			;5531
-	rst 28h			;5532
-	ld b,0ffh		;5533
-	sub b			;5535
-	ei			;5536
-	ret p			;5537
-	rst 30h			;5538
-	ret p			;5539
-	rst 30h			;553a
-	ret p			;553b
-	ei			;553c
-	call m,sub_0fdfh		;553d
-	rst 28h			;5540
-	rrca			;5541
-	rst 28h			;5542
-	rrca			;5543
-	rst 18h			;5544
-	ccf			;5545
-l5546h:
-	inc bc			;5546
-	rst 38h			;5547
-	add a,e			;5548
-	call m,0f7fbh		;5549
-	dec b			;554c
-	rst 38h			;554d
-	add a,e			;554e
-	ccf			;554f
-	rst 18h			;5550
-	rst 28h			;5551
-	add hl,bc			;5552
-	rst 38h			;5553
-	add a,c			;5554
-	call m,0ff07h		;5555
-	add a,c			;5558
-	ccf			;5559
-	inc bc			;555a
-	rst 38h			;555b
-	add a,l			;555c
-	call m,0f0fbh		;555d
-	rst 30h			;5560
-	ret p			;5561
-	inc bc			;5562
-	rst 38h			;5563
-	adc a,c			;5564
-	ccf			;5565
-	rst 18h			;5566
-	rrca			;5567
-	rst 28h			;5568
-	rrca			;5569
-	rst 30h			;556a
-	ret p			;556b
-	ei			;556c
-	call m,0ff03h		;556d
-	add a,l			;5570
-	call m,sub_0fefh		;5571
-	rst 18h			;5574
-	ccf			;5575
-	inc bc			;5576
-	rst 38h			;5577
-	add a,e			;5578
-	ccf			;5579
-	ei			;557a
-	rst 30h			;557b
-	ld b,0ffh		;557c
-	add a,d			;557e
-	rst 18h			;557f
-	rst 28h			;5580
-	dec bc			;5581
-	rst 38h			;5582
-	add a,e			;5583
-	rra			;5584
-	sbc a,a			;5585
-	rst 18h			;5586
-	dec bc			;5587
-	rst 38h			;5588
-	add a,l			;5589
-	rst 28h			;558a
-	adc a,a			;558b
-	rrca			;558c
-	rlca			;558d
-	ret nz			;558e
-	inc b			;558f
-	rst 38h			;5590
-	ld (bc),a			;5591
-	rst 30h			;5592
-	add a,d			;5593
-	rst 28h			;5594
-	rra			;5595
-	inc bc			;5596
-	nop			;5597
-	add a,(hl)			;5598
-	ld bc,l0702h+1		;5599
-	rrca			;559c
-	ld a,a			;559d
-	rra			;559e
-	ld (bc),a			;559f
-	ld a,a			;55a0
-	dec b			;55a1
-	rst 38h			;55a2
-	add a,d			;55a3
-	add a,b			;55a4
-	rst 30h			;55a5
-	ld b,0ffh		;55a6
-	add a,d			;55a8
-	rrca			;55a9
-	ccf			;55aa
-	ld b,0ffh		;55ab
-	add a,h			;55ad
-	ret nz			;55ae
-	ret p			;55af
-	ret m			;55b0
-	call m,0fe03h		;55b1
-	add a,e			;55b4
-	call m,l1f7fh		;55b5
-	ld (bc),a			;55b8
-	rlca			;55b9
-	inc b			;55ba
-	nop			;55bb
-	dec b			;55bc
-	rst 38h			;55bd
-	add a,e			;55be
-	ccf			;55bf
-	rrca			;55c0
-	nop			;55c1
-	inc bc			;55c2
-	rst 38h			;55c3
-	add a,c			;55c4
-	.DB 0fdh,002h,0e0h	;illegal sequence		;55c5
-	ld (bc),a			;55c8
-	nop			;55c9
-	add a,h			;55ca
-	rst 38h			;55cb
-	cp 0fch		;55cc
-	ret p			;55ce
-	dec bc			;55cf
-	nop			;55d0
-	add a,c			;55d1
-	rrca			;55d2
-	inc bc			;55d3
-	nop			;55d4
-	add a,e			;55d5
-	ld bc,l7f3fh		;55d6
-	ld (bc),a			;55d9
-	rst 38h			;55da
-	ld (bc),a			;55db
-	nop			;55dc
-	add a,c			;55dd
-	ccf			;55de
-	dec b			;55df
-	rst 38h			;55e0
-	inc bc			;55e1
-	nop			;55e2
-	add a,l			;55e3
-	add a,b			;55e4
-	ret nz			;55e5
-	ret p			;55e6
-	ret m			;55e7
-	rst 38h			;55e8
-	ld (bc),a			;55e9
-	ccf			;55ea
-	inc bc			;55eb
-	ld a,a			;55ec
-	add a,e			;55ed
-	rst 38h			;55ee
-	inc bc			;55ef
-	nop			;55f0
-	rlca			;55f1
-	rst 38h			;55f2
-	add a,c			;55f3
-	inc c			;55f4
-	rlca			;55f5
-	rst 38h			;55f6
-	add a,c			;55f7
-	rra			;55f8
-	rlca			;55f9
-	rst 38h			;55fa
-	add a,h			;55fb
-	rst 20h			;55fc
-	ret po			;55fd
-	rst 38h			;55fe
-	cp 002h		;55ff
-	ret m			;5601
-	add a,d			;5602
-	ret po			;5603
-	ret nz			;5604
-	ex af,af'			;5605
-	nop			;5606
-	add a,c			;5607
-	ld sp,hl			;5608
-	inc bc			;5609
-	nop			;560a
-	adc a,a			;560b
-	ld (bc),a			;560c
-	ld e,078h		;560d
-	add a,b			;560f
-	rlca			;5610
-	nop			;5611
-	ld b,008h		;5612
-	jr l5625h		;5614
-	ld (hl),b			;5616
-	ret nz			;5617
-	add a,b			;5618
-	ex af,af'			;5619
-	djnz l561eh		;561a
-	nop			;561c
-	sub c			;561d
-l561eh:
-	inc bc			;561e
-	rrca			;561f
-	jr l5682h		;5620
-	inc c			;5622
-	ld a,b			;5623
-	ld b,c			;5624
-l5625h:
-	jp 08886h		;5625
-	call m,l0cfeh+2		;5628
-	ld a,a			;562b
-	ret nz			;562c
-	nop			;562d
-	ld bc,l0202h+1		;562e
-	add a,l			;5631
-	ret nz			;5632
-	nop			;5633
-	ld b,c			;5634
-	ret nz			;5635
-	add a,b			;5636
-	add hl,bc			;5637
-	nop			;5638
-l5639h:
-	add a,d			;5639
-l563ah:
-	inc bc			;563a
-	ld b,004h		;563b
-	nop			;563d
-	add a,e			;563e
-	rrca			;563f
-	call m,002c0h		;5640
-	nop			;5643
-	add a,a			;5644
-	ei			;5645
-	ld a,(hl)			;5646
-	inc e			;5647
-	djnz l563ah		;5648
-	ex (sp),hl			;564a
-	jp 08002h		;564b
-	add a,(hl)			;564e
-	ret nz			;564f
-	ld l,b			;5650
-	scf			;5651
-	ret nc			;5652
-	ld (hl),b			;5653
-	inc a			;5654
-	inc b			;5655
-	nop			;5656
-	add a,h			;5657
-	ret nz			;5658
-	ret po			;5659
-	djnz l56bah		;565a
-	ld b,000h		;565c
-	add a,d			;565e
-	ld c,001h		;565f
-	ld b,000h		;5661
-	add a,d			;5663
-	inc b			;5664
-	add a,(hl)			;5665
-	rlca			;5666
-	nop			;5667
-	add a,c			;5668
-	rst 28h			;5669
-	inc bc			;566a
-	nop			;566b
-	add a,c			;566c
-	ld (bc),a			;566d
-	ld (bc),a			;566e
-	ld bc,l0202h		;566f
-	add a,d			;5672
-	nop			;5673
-	rst 38h			;5674
-	inc bc			;5675
-	add a,b			;5676
-	add a,c			;5677
-	adc a,(hl)			;5678
-	ld (bc),a			;5679
-	adc a,b			;567a
-	add a,d			;567b
-	nop			;567c
-	rst 38h			;567d
-	ld b,010h		;567e
-	rlca			;5680
-	nop			;5681
-l5682h:
-	add a,c			;5682
-	rst 38h			;5683
-	inc bc			;5684
-	nop			;5685
-	add a,l			;5686
-	ld bc,sub_3604h+2		;5687
-	ei			;568a
-	rst 38h			;568b
-	inc bc			;568c
-	nop			;568d
-	add a,l			;568e
-	add a,b			;568f
-	nop			;5690
-	inc b			;5691
-	cp 0ffh		;5692
-	inc bc			;5694
-	nop			;5695
-	adc a,b			;5696
-	jr nz,$+96		;5697
-	ret c			;5699
-	ld a,a			;569a
-	rst 38h			;569b
-	nop			;569c
-	ld (bc),a			;569d
-	inc c			;569e
-	ld (bc),a			;569f
-	add hl,de			;56a0
-	add a,h			;56a1
-	ld a,a			;56a2
-	cp a			;56a3
-	rst 38h			;56a4
-	nop			;56a5
-	inc bc			;56a6
-	ex af,af'			;56a7
-	add a,h			;56a8
-	djnz l571bh		;56a9
-	xor 0ffh		;56ab
-	dec b			;56ad
-	nop			;56ae
-	add a,d			;56af
-	ld a,(bc)			;56b0
-	ld h,002h		;56b1
-	ex af,af'			;56b3
-	ld (bc),a			;56b4
-	djnz l5639h		;56b5
-	inc (hl)			;56b7
-	inc h			;56b8
-	inc de			;56b9
-l56bah:
-	nop			;56ba
-	add a,c			;56bb
-	ld l,l			;56bc
-	dec b			;56bd
-	.DB 0edh;next byte illegal after ed		;56be
-	add a,d			;56bf
-	xor 0d6h		;56c0
-	ex af,af'			;56c2
-	ret pe			;56c3
-	inc b			;56c4
-	ld bc,l0202h		;56c5
-	add a,e			;56c8
-	ld b,005h		;56c9
-	sub 003h		;56cb
-	ld d,h			;56cd
-	add a,h			;56ce
-	xor c			;56cf
-	add hl,hl			;56d0
-	sub c			;56d1
-	sub l			;56d2
-	inc b			;56d3
-	add a,b			;56d4
-	ld (bc),a			;56d5
-	ld b,b			;56d6
-	ld (bc),a			;56d7
-	ld h,b			;56d8
-	add a,c			;56d9
-	add a,b			;56da
-	ld (bc),a			;56db
-	ld b,b			;56dc
-	ld (bc),a			;56dd
-	ld d,c			;56de
-	ld b,000h		;56df
-	ld (bc),a			;56e1
-	ld d,b			;56e2
-	add hl,bc			;56e3
-	nop			;56e4
-	add a,c			;56e5
-	inc b			;56e6
-	ex af,af'			;56e7
-	nop			;56e8
-	sub c			;56e9
-	jr z,l56ech		;56ea
-l56ech:
-	ld d,h			;56ec
-	nop			;56ed
-	inc d			;56ee
-	nop			;56ef
-	ld b,b			;56f0
-	nop			;56f1
-	inc b			;56f2
-	nop			;56f3
-	ld c,b			;56f4
-	nop			;56f5
-	jr nz,l56f8h		;56f6
-l56f8h:
-	jr nz,l56fah		;56f8
-l56fah:
-	inc d			;56fa
-	rlca			;56fb
-	nop			;56fc
-	add a,c			;56fd
-	ld (l0001h+1),hl		;56fe
-	add a,d			;5701
-	ld b,b			;5702
-	ex af,af'			;5703
-	ld (bc),a			;5704
-	nop			;5705
-	add a,c			;5706
-	ld b,b			;5707
-	inc b			;5708
-	nop			;5709
-	adc a,l			;570a
-	jr z,l570dh		;570b
-l570dh:
-	ld d,b			;570d
-	nop			;570e
-	ld b,h			;570f
-	nop			;5710
-	djnz l5713h		;5711
-l5713h:
-	ld l,b			;5713
-	nop			;5714
-	ex af,af'			;5715
-	nop			;5716
-	ld d,h			;5717
-	inc bc			;5718
-	nop			;5719
-	add a,c			;571a
-l571bh:
-	jr z,$+3		;571b
-	nop			;571d
-	add a,d			;571e
-	jr nz,l5731h		;571f
-	ex af,af'			;5721
-	nop			;5722
-	add a,h			;5723
-	djnz l574eh		;5724
-	djnz l5748h		;5726
-	inc bc			;5728
-	nop			;5729
-	nop			;572a
-	rla			;572b
-	nop			;572c
-	ld (bc),a			;572d
-	ld bc,l028fh		;572e
-l5731h:
-	inc b			;5731
-	jr l5764h		;5732
-	ld h,b			;5734
-	ret nz			;5735
-	add a,b			;5736
-	nop			;5737
-	ex af,af'			;5738
-	nop			;5739
-	ex af,af'			;573a
-	nop			;573b
-	ex af,af'			;573c
-	nop			;573d
-	ex af,af'			;573e
-	ld c,000h		;573f
-	add a,c			;5741
-	inc bc			;5742
-	ld (bc),a			;5743
-	rlca			;5744
-	adc a,c			;5745
-	ld c,01ch		;5746
-l5748h:
-	jr c,l57bah		;5748
-	ret po			;574a
-	ret nz			;574b
-	add a,b			;574c
-	nop			;574d
-l574eh:
-	ex af,af'			;574e
-	ld (bc),a			;574f
-	nop			;5750
-	ld (bc),a			;5751
-	ex af,af'			;5752
-	ld b,000h		;5753
-	add a,e			;5755
-	ld bc,l0702h+1		;5756
-	ld (bc),a			;5759
-	rrca			;575a
-	add a,a			;575b
-	ld e,03ch		;575c
-	ld a,b			;575e
-	ret p			;575f
-	ret po			;5760
-	ret nz			;5761
-	add a,b			;5762
-	ld (bc),a			;5763
-l5764h:
-	ex af,af'			;5764
-	ld (bc),a			;5765
-	nop			;5766
-	ld (bc),a			;5767
-	ex af,af'			;5768
-	dec b			;5769
-	nop			;576a
-	add a,h			;576b
-	ld bc,l0702h+1		;576c
-	rrca			;576f
-	ld (bc),a			;5770
-	rra			;5771
-	add a,a			;5772
-	ld a,0fch		;5773
-	ret m			;5775
-	ret p			;5776
-	ret po			;5777
-	ret nz			;5778
-	add a,b			;5779
-	ld (bc),a			;577a
-	nop			;577b
-	inc b			;577c
-	jr $+4		;577d
-	nop			;577f
-	add a,l			;5780
-	ld bc,l0702h+1		;5781
-	rrca			;5784
-	ccf			;5785
-	ld (bc),a			;5786
-	ld a,a			;5787
-	add a,a			;5788
-	cp 0fch		;5789
-	ret m			;578b
-	ret p			;578c
-	ret po			;578d
-	ret nz			;578e
-	add a,b			;578f
-	dec b			;5790
-	nop			;5791
-	inc bc			;5792
-	inc e			;5793
-	add a,a			;5794
-	nop			;5795
-	ld bc,l0702h+1		;5796
-	rra			;5799
-	ccf			;579a
-	ld a,a			;579b
-	ld (bc),a			;579c
-	rst 38h			;579d
-	add a,a			;579e
-	cp 0fch		;579f
-	ret m			;57a1
-	ret p			;57a2
-	ret po			;57a3
-	ret nz			;57a4
-	add a,b			;57a5
-	dec b			;57a6
-	inc e			;57a7
-	ld a,(bc)			;57a8
-	nop			;57a9
-	ld (bc),a			;57aa
-	ld bc,l0384h+1		;57ab
-	rrca			;57ae
-	rra			;57af
-	ccf			;57b0
-	ld a,a			;57b1
-	inc bc			;57b2
-	rst 38h			;57b3
-	add a,a			;57b4
-	cp 0fch		;57b5
-	ret m			;57b7
-	ret p			;57b8
-	ret po			;57b9
-l57bah:
-	ret nz			;57ba
-	add a,b			;57bb
-	ld c,000h		;57bc
-	add a,c			;57be
-	inc bc			;57bf
-	ld (bc),a			;57c0
-	rlca			;57c1
-	add a,h			;57c2
-	rrca			;57c3
-	rra			;57c4
-	ccf			;57c5
-	ld a,a			;57c6
-	inc b			;57c7
-	rst 38h			;57c8
-	adc a,b			;57c9
-	cp 0fch		;57ca
-	ret m			;57cc
-	ret p			;57cd
-	ret po			;57ce
-	ret nz			;57cf
-	add a,b			;57d0
-	nop			;57d1
-	rlca			;57d2
-	inc a			;57d3
-	inc b			;57d4
-	nop			;57d5
-	add a,e			;57d6
-	ld bc,l0702h+1		;57d7
-	ld (bc),a			;57da
-	rrca			;57db
-	add a,e			;57dc
-	rra			;57dd
-	ccf			;57de
-	ld a,a			;57df
-	dec b			;57e0
-	rst 38h			;57e1
-	add a,a			;57e2
-	cp 0fch		;57e3
-	ret m			;57e5
-	ret p			;57e6
-	ret po			;57e7
-	ret nz			;57e8
-	add a,b			;57e9
-	ex af,af'			;57ea
-	nop			;57eb
-	ex af,af'			;57ec
-	ld a,003h		;57ed
-	nop			;57ef
-	add a,h			;57f0
-	ld bc,l0702h+1		;57f1
-	rrca			;57f4
-	ld (bc),a			;57f5
-	rra			;57f6
-	add a,c			;57f7
-	ccf			;57f8
-	rlca			;57f9
-	rst 38h			;57fa
-	adc a,b			;57fb
-	cp 0fch		;57fc
-	ret m			;57fe
-	ret p			;57ff
-	ret po			;5800
-	ret nz			;5801
-	add a,b			;5802
-	ld a,(hl)			;5803
-l5804h:
-	add hl,bc			;5804
-	nop			;5805
-	add a,l			;5806
-	ld bc,l0702h+1		;5807
-	rrca			;580a
-	ccf			;580b
-	ld (bc),a			;580c
-	ld a,a			;580d
-	ex af,af'			;580e
-	rst 38h			;580f
-	add a,a			;5810
-	cp 0fch		;5811
-	ret m			;5813
-	ret p			;5814
-	ret po			;5815
-	ret nz			;5816
-	add a,b			;5817
-	add hl,bc			;5818
-	nop			;5819
-	add a,(hl)			;581a
-	ld bc,l0702h+1		;581b
-	rra			;581e
-	ccf			;581f
-	ld a,a			;5820
-	ld a,(bc)			;5821
-	rst 38h			;5822
-	add a,a			;5823
-	cp 0fch		;5824
-	ret m			;5826
-	ret p			;5827
-	ret po			;5828
-	ret nz			;5829
-	add a,b			;582a
-	ex af,af'			;582b
-	nop			;582c
-	ld (bc),a			;582d
-	inc b			;582e
-	add a,c			;582f
-	inc h			;5830
-	inc bc			;5831
-	inc b			;5832
-	adc a,l			;5833
-	ld bc,l027fh		;5834
-	add hl,sp			;5837
-	pop hl			;5838
-	inc bc			;5839
-	ld b,01ch		;583a
-	ld bc,l3cfeh+1		;583c
-	ld a,(hl)			;583f
-	rst 28h			;5840
-	ld (bc),a			;5841
-	rst 20h			;5842
-	add a,h			;5843
-	rst 30h			;5844
-	ld a,(hl)			;5845
-	inc a			;5846
-	inc e			;5847
-	ld (bc),a			;5848
-	inc a			;5849
-	inc bc			;584a
-	inc e			;584b
-	ld (bc),a			;584c
-	ld a,a			;584d
-	add a,(hl)			;584e
-	ld a,(hl)			;584f
-	rst 38h			;5850
-	rst 28h			;5851
-	ccf			;5852
-	ld a,(hl)			;5853
-	call m,0ff02h		;5854
-	ld (bc),a			;5857
-	ld a,a			;5858
-	adc a,d			;5859
-	ld e,03eh		;585a
-	ccf			;585c
-	rst 20h			;585d
-	rst 38h			;585e
-	ld a,(hl)			;585f
-	ld e,03eh		;5860
-	ld a,(hl)			;5862
-	cp 002h		;5863
-	rst 38h			;5865
-	ld (bc),a			;5866
-	ld c,003h		;5867
-	cp 08dh		;5869
-	rst 38h			;586b
-	rlca			;586c
-	rst 20h			;586d
-	rst 38h			;586e
-	ld a,(hl)			;586f
-	ld a,07eh		;5870
-	ret p			;5872
-	cp 0ffh		;5873
-l5875h:
-	rst 20h			;5875
-	rst 38h			;5876
-	ld a,(hl)			;5877
-	ld (bc),a			;5878
-	rst 38h			;5879
-	add a,e			;587a
-	rst 28h			;587b
-	ld e,03ch		;587c
-	inc bc			;587e
-	jr c,l5804h		;587f
-	ld a,(hl)			;5881
-	rst 38h			;5882
-	rst 20h			;5883
-	ld (bc),a			;5884
-	rst 38h			;5885
-	add a,d			;5886
-	rst 20h			;5887
-	rst 38h			;5888
-	ld (bc),a			;5889
-	ld a,(hl)			;588a
-	adc a,b			;588b
-	rst 38h			;588c
-	rst 20h			;588d
-	rst 38h			;588e
-	ld a,a			;588f
-	rrca			;5890
-	ld a,(hl)			;5891
-	ld a,h			;5892
-	inc b			;5893
-	inc bc			;5894
-	ld (bc),a			;5895
-	add a,h			;5896
-	ld h,01ch		;5897
-	inc b			;5899
-	inc e			;589a
-	inc bc			;589b
-	nop			;589c
-	add a,d			;589d
-	ld (bc),a			;589e
-	ld a,(hl)			;589f
-	inc bc			;58a0
-	nop			;58a1
-	adc a,d			;58a2
-	ld bc,l0673h		;58a3
-	ld (bc),a			;58a6
-	add hl,sp			;58a7
-	ld hl,07e83h		;58a8
-	ld bc,l0603h		;58ab
-	rlca			;58ae
-	djnz $-1		;58af
-	ld (bc),a			;58b1
-	ld (bc),a			;58b2
-	sbc a,c			;58b3
-	ld (de),a			;58b4
-	ld (0f301h),a		;58b5
-	ld (bc),a			;58b8
-	ld c,004h		;58b9
-	ld (de),a			;58bb
-	add hl,sp			;58bc
-	ld hl,l3901h		;58bd
-	ld hl,002e7h		;58c0
-	add hl,sp			;58c3
-	ld hl,l3903h		;58c4
-	ld hl,0fe03h		;58c7
-	ld (bc),a			;58ca
-	add hl,de			;58cb
-	scf			;58cc
-	ld (bc),a			;58cd
-	jr nz,$-122		;58ce
-	sub c			;58d0
-	ld b,e			;58d1
-	ld a,004h		;58d2
-	ld (00229h),a		;58d4
-	ld hl,l2390h		;58d7
-	ld b,0fch		;58da
-	ld bc,l203fh		;58dc
-	inc b			;58df
-	inc a			;58e0
-	jr nz,l58e4h		;58e1
-	rst 38h			;58e3
-l58e4h:
-	ld bc,l203fh		;58e4
-	inc b			;58e7
-	inc a			;58e8
-	ld (bc),a			;58e9
-	jr nz,l5875h		;58ea
-	ret po			;58ec
-	ld bc,l301fh		;58ed
-	ld hl,09129h		;58f0
-	ld b,c			;58f3
-	ccf			;58f4
-	inc bc			;58f5
-	ld hl,l0182h		;58f6
-	add hl,sp			;58f9
-	ld (bc),a			;58fa
-	ld hl,0e783h		;58fb
-	ld bc,l0464h+3		;58fe
-	inc b			;5901
-	add a,d			;5902
-	ld bc,l057fh		;5903
-	ld bc,l218bh		;5906
-	add a,e			;5909
-	ld a,(hl)			;590a
-	ld hl,l2622h+1		;590b
-	inc c			;590e
-	inc b			;590f
-	ld (0ef31h),hl		;5910
-	ld b,020h		;5913
-	add a,h			;5915
-	ld bc,l21ffh		;5916
-	ld de,l0100h+2		;5919
-	adc a,(hl)			;591c
-	add hl,hl			;591d
-	add hl,sp			;591e
-	ld hl,l21e7h		;591f
-	ld de,l0109h		;5922
-	ld hl,02931h		;5925
-	rst 20h			;5928
-	ld (bc),a			;5929
-	add hl,sp			;592a
-l592bh:
-	inc b			;592b
-l592ch:
-	ld hl,08384h		;592c
-	ld a,(hl)			;592f
-	ld (bc),a			;5930
-l5931h:
-	add hl,sp			;5931
-	ld (bc),a			;5932
-	ld hl,l0384h		;5933
-	ld a,020h		;5936
-	ret po			;5938
-	dec b			;5939
-	nop			;593a
-	inc bc			;593b
-	inc e			;593c
-	add a,d			;593d
-	ld (bc),a			;593e
-	add hl,sp			;593f
-	ld (bc),a			;5940
-	ld hl,l078eh		;5941
-	ld (0ef31h),hl		;5944
-	inc b			;5947
-	ld (0822eh),a		;5948
-sub_594bh:
-	ld a,c			;594b
-	ld hl,07e83h		;594c
-	ld bc,00567h		;594f
-	inc b			;5952
-	add a,c			;5953
-	inc e			;5954
-	ld b,021h		;5955
-	add a,d			;5957
-	add a,e			;5958
-	ld a,(hl)			;5959
-	inc bc			;595a
-	ld hl,l1185h		;595b
-	add a,e			;595e
-	ld b,(hl)			;595f
-	inc l			;5960
-	jr $+2		;5961
-	ld hl,l2981h		;5963
-	ld (bc),a			;5966
-	ld bc,0938bh		;5967
-	ld a,(02166h)		;596a
-	ld de,l4683h		;596d
-	ld (bc),a			;5970
-	ld de,0e739h		;5971
-	inc bc			;5974
-	ld de,l4382h		;5975
-	ld h,002h		;5978
-	inc b			;597a
-	add a,c			;597b
-	inc e			;597c
-	ld (bc),a			;597d
-	nop			;597e
-	add a,(hl)			;597f
-	ld bc,0821fh		;5980
-	ld (hl),c			;5983
-	inc bc			;5984
-	cp 002h		;5985
-	ex af,af'			;5987
-	add a,d			;5988
-	ld (bc),a			;5989
-	adc a,002h		;598a
-	ex af,af'			;598c
-	add a,d			;598d
-	inc h			;598e
-	inc e			;598f
-	ld (bc),a			;5990
-	nop			;5991
-	add a,d			;5992
-	ld (bc),a			;5993
-	add hl,sp			;5994
-	inc bc			;5995
-	ld hl,0e781h		;5996
-	inc bc			;5999
-	ld bc,l3981h		;599a
-	ld (bc),a			;599d
-	ld hl,08182h		;599e
-	ld a,a			;59a1
-	ld (bc),a			;59a2
-	nop			;59a3
-	add a,e			;59a4
-	ld (bc),a			;59a5
-	add hl,sp			;59a6
-	daa			;59a7
-	ld (bc),a			;59a8
-	jr nz,l592ch		;59a9
-	ret po			;59ab
-	ld (bc),a			;59ac
-	jr nz,l5931h		;59ad
-	ld (bc),a			;59af
-	add hl,sp			;59b0
-	inc bc			;59b1
-	ld hl,0e781h		;59b2
-	ld c,b			;59b5
-	rst 38h			;59b6
-	adc a,b			;59b7
-	nop			;59b8
-	jr nz,$+36		;59b9
-	inc l			;59bb
-	add hl,de			;59bc
-	add hl,hl			;59bd
-	dec (hl)			;59be
-	ld l,a			;59bf
-	inc bc			;59c0
-	nop			;59c1
-	adc a,d			;59c2
-	jr nz,l5a16h		;59c3
-	ld d,e			;59c5
-	ld d,(hl)			;59c6
-	call m,l1000h		;59c7
-	ld d,b			;59ca
-	call nz,sub_029ah		;59cb
-	ld (de),a			;59ce
-	add a,h			;59cf
-	ld (hl),000h		;59d0
-	jr nz,$+35		;59d2
-	ld (bc),a			;59d4
-	ld (l0c82h),hl		;59d5
-	ld a,e			;59d8
-	ld (bc),a			;59d9
-	nop			;59da
-	add a,(hl)			;59db
-	sub c			;59dc
-	ld de,l4955h		;59dd
-	.DB 0ddh,0b3h,003h	;illegal sequence		;59e0
-	nop			;59e3
-	add a,d			;59e4
-	inc b			;59e5
-	.DB 0ddh,002h,011h	;illegal sequence		;59e6
-	add a,d			;59e9
-	ld (de),a			;59ea
-	ld sp,l0001h+1		;59eb
-	add a,a			;59ee
-	ld b,d			;59ef
-	xor l			;59f0
-	add hl,hl			;59f1
-	inc hl			;59f2
-	ld l,(hl)			;59f3
-	ret c			;59f4
-	ld a,(hl)			;59f5
-	ld b,0ffh		;59f6
-	add a,e			;59f8
-	ei			;59f9
-	ld a,(hl)			;59fa
-	rst 38h			;59fb
-	ld (bc),a			;59fc
-	ei			;59fd
-	inc b			;59fe
-	rst 38h			;59ff
-	add a,d			;5a00
-	ld a,(hl)			;5a01
-	rst 38h			;5a02
-	ld (bc),a			;5a03
-	ei			;5a04
-	inc bc			;5a05
-	rst 38h			;5a06
-	add a,c			;5a07
-	ei			;5a08
-	ex af,af'			;5a09
-	rst 38h			;5a0a
-	add a,d			;5a0b
-	ccf			;5a0c
-	ld a,a			;5a0d
-	ld b,0ffh		;5a0e
-	add a,e			;5a10
-	ret m			;5a11
-	call m,sub_65feh		;5a12
-	rst 38h			;5a15
-l5a16h:
-	add a,d			;5a16
-	call m,004f8h		;5a17
-	ret p			;5a1a
-	add a,h			;5a1b
-	ret m			;5a1c
-	call m,sub_1f3fh		;5a1d
-	inc b			;5a20
-	rrca			;5a21
-	add a,d			;5a22
-	rra			;5a23
-	ccf			;5a24
-	ld b,0ffh		;5a25
-	add a,d			;5a27
-	ld a,a			;5a28
-	ccf			;5a29
-	ld b,0ffh		;5a2a
-	add a,d			;5a2c
-	cp 0fch		;5a2d
-	inc bc			;5a2f
-	rrca			;5a30
-	add a,d			;5a31
-	rra			;5a32
-	ld a,a			;5a33
-	ld (bc),a			;5a34
-	rst 38h			;5a35
-	add a,c			;5a36
-	ccf			;5a37
-	inc b			;5a38
-	ret p			;5a39
-	ld (bc),a			;5a3a
-	ret m			;5a3b
-	add a,d			;5a3c
-	ret p			;5a3d
-	ret po			;5a3e
-	inc bc			;5a3f
-	nop			;5a40
-	add a,(hl)			;5a41
-	ld bc,l0702h+1		;5a42
-	rrca			;5a45
-	ld a,a			;5a46
-	rra			;5a47
-	ld (bc),a			;5a48
-	ld a,a			;5a49
-	dec b			;5a4a
-	rst 38h			;5a4b
-	add a,d			;5a4c
-	add a,b			;5a4d
-	rst 30h			;5a4e
-	ld b,0ffh		;5a4f
-	add a,d			;5a51
-	rrca			;5a52
-	ccf			;5a53
-	ld b,0ffh		;5a54
-	add a,h			;5a56
-	ret nz			;5a57
-	ret p			;5a58
-	ret m			;5a59
-	call m,0fe03h		;5a5a
-	add a,e			;5a5d
-	call m,l1f7fh		;5a5e
-	ld (bc),a			;5a61
-	rlca			;5a62
-	inc b			;5a63
-	nop			;5a64
-	dec b			;5a65
-	rst 38h			;5a66
-	add a,e			;5a67
-	ccf			;5a68
-	rrca			;5a69
-	nop			;5a6a
-	inc bc			;5a6b
-	rst 38h			;5a6c
-	add a,c			;5a6d
-	.DB 0fdh,002h,0e0h	;illegal sequence		;5a6e
-	ld (bc),a			;5a71
-	nop			;5a72
-	add a,h			;5a73
-	rst 38h			;5a74
-	cp 0fch		;5a75
-	ret p			;5a77
+	.DB $01		;5201
+	.DB $06		;5202
+	.DB $00		;5203
+	.DB $02		;5204
+	.DB $80		;5205
+	.DB $02		;5206
+	.DB $00		;5207
+	.DB $81		;5208
+	.DB $03		;5209
+	.DB $08		;520a
+	.DB $00		;520b
+	.DB $85		;520c
+	.DB $80		;520d
+	.DB $c0		;520e
+	.DB $40		;520f
+	.DB $80		;5210
+	.DB $0c		;5211
+	.DB $04		;5212
+	.DB $00		;5213
+	.DB $83		;5214
+	.DB $01		;5215
+	.DB $ff		;5216
+	.DB $03		;5217
+	.DB $05		;5218
+	.DB $00		;5219
+	.DB $84		;521a
+	.DB $c0		;521b
+	.DB $f0		;521c
+	.DB $ff		;521d
+	.DB $0c		;521e
+	.DB $02		;521f
+	.DB $00		;5220
+	.DB $81		;5221
+	.DB $40		;5222
+	.DB $02		;5223
+	.DB $80		;5224
+	.DB $83		;5225
+	.DB $40		;5226
+	.DB $f0		;5227
+	.DB $1f		;5228
+	.DB $04		;5229
+	.DB $00		;522a
+	.DB $8b		;522b
+	.DB $10		;522c
+	.DB $38		;522d
+	.DB $ff		;522e
+	.DB $e7		;522f
+	.DB $00		;5230
+	.DB $03		;5231
+	.DB $1e		;5232
+	.DB $38		;5233
+	.DB $68		;5234
+	.DB $e0		;5235
+	.DB $c0		;5236
+	.DB $08		;5237
+	.DB $00		;5238
+	.DB $81		;5239
+	.DB $f9		;523a
+	.DB $03		;523b
+	.DB $00		;523c
+	.DB $a3		;523d
+	.DB $03		;523e
+	.DB $1f		;523f
+	.DB $79		;5240
+	.DB $a0		;5241
+	.DB $e7		;5242
+	.DB $00		;5243
+	.DB $07		;5244
+	.DB $0f		;5245
+	.DB $f8		;5246
+	.DB $0f		;5247
+	.DB $fe		;5248
+	.DB $f8		;5249
+	.DB $f0		;524a
+	.DB $8a		;524b
+	.DB $10		;524c
+	.DB $07		;524d
+	.DB $77		;524e
+	.DB $f3		;524f
+	.DB $8f		;5250
+	.DB $18		;5251
+	.DB $60		;5252
+	.DB $0c		;5253
+	.DB $78		;5254
+	.DB $59		;5255
+	.DB $fb		;5256
+	.DB $e6		;5257
+	.DB $8b		;5258
+	.DB $fd		;5259
+	.DB $00		;525a
+	.DB $0d		;525b
+	.DB $7f		;525c
+	.DB $dd		;525d
+	.DB $7f		;525e
+	.DB $fd		;525f
+	.DB $e2		;5260
+	.DB $02		;5261
+	.DB $02		;5262
+	.DB $87		;5263
+	.DB $c3		;5264
+	.DB $0f		;5265
+	.DB $cd		;5266
+	.DB $d8		;5267
+	.DB $9f		;5268
+	.DB $7f		;5269
+	.DB $46		;526a
+	.DB $07		;526b
+	.DB $00		;526c
+	.DB $82		;526d
+	.DB $03		;526e
+	.DB $06		;526f
+	.DB $04		;5270
+	.DB $00		;5271
+	.DB $8d		;5272
+	.DB $0f		;5273
+	.DB $ff		;5274
+	.DB $fe		;5275
+	.DB $00		;5276
+	.DB $0f		;5277
+	.DB $fb		;5278
+	.DB $7e		;5279
+	.DB $dc		;527a
+	.DB $14		;527b
+	.DB $fc		;527c
+	.DB $eb		;527d
+	.DB $c3		;527e
+	.DB $80		;527f
+	.DB $02		;5280
+	.DB $c0		;5281
+	.DB $85		;5282
+	.DB $68		;5283
+	.DB $37		;5284
+	.DB $dc		;5285
+	.DB $f7		;5286
+	.DB $7c		;5287
+	.DB $04		;5288
+	.DB $00		;5289
+	.DB $84		;528a
+	.DB $c0		;528b
+	.DB $ef		;528c
+	.DB $d1		;528d
+	.DB $7e		;528e
+	.DB $05		;528f
+	.DB $00		;5290
+	.DB $83		;5291
+	.DB $80		;5292
+	.DB $ce		;5293
+	.DB $7d		;5294
+	.DB $06		;5295
+	.DB $00		;5296
+	.DB $82		;5297
+	.DB $04		;5298
+	.DB $86		;5299
+	.DB $07		;529a
+	.DB $00		;529b
+	.DB $81		;529c
+	.DB $ef		;529d
+	.DB $03		;529e
+	.DB $00		;529f
+	.DB $81		;52a0
+	.DB $02		;52a1
+	.DB $02		;52a2
+	.DB $01		;52a3
+	.DB $02		;52a4
+	.DB $02		;52a5
+	.DB $82		;52a6
+	.DB $00		;52a7
+	.DB $ff		;52a8
+	.DB $03		;52a9
+	.DB $80		;52aa
+	.DB $81		;52ab
+	.DB $8e		;52ac
+	.DB $02		;52ad
+	.DB $88		;52ae
+	.DB $82		;52af
+	.DB $00		;52b0
+	.DB $ff		;52b1
+	.DB $06		;52b2
+	.DB $10		;52b3
+	.DB $0b		;52b4
+	.DB $00		;52b5
+	.DB $84		;52b6
+	.DB $01		;52b7
+	.DB $06		;52b8
+	.DB $36		;52b9
+	.DB $41		;52ba
+	.DB $04		;52bb
+	.DB $00		;52bc
+	.DB $84		;52bd
+	.DB $80		;52be
+	.DB $20		;52bf
+	.DB $fc		;52c0
+	.DB $10		;52c1
+	.DB $04		;52c2
+	.DB $00		;52c3
+	.DB $84		;52c4
+	.DB $38		;52c5
+	.DB $64		;52c6
+	.DB $fa		;52c7
+	.DB $24		;52c8
+	.DB $02		;52c9
+	.DB $00		;52ca
+	.DB $86		;52cb
+	.DB $0b		;52cc
+	.DB $1d		;52cd
+	.DB $1b		;52ce
+	.DB $39		;52cf
+	.DB $7f		;52d0
+	.DB $28		;52d1
+	.DB $02		;52d2
+	.DB $00		;52d3
+	.DB $81		;52d4
+	.DB $08		;52d5
+	.DB $02		;52d6
+	.DB $0a		;52d7
+	.DB $82		;52d8
+	.DB $1b		;52d9
+	.DB $7d		;52da
+	.DB $07		;52db
+	.DB $00		;52dc
+	.DB $91		;52dd
+	.DB $0a		;52de
+	.DB $26		;52df
+	.DB $48		;52e0
+	.DB $0a		;52e1
+	.DB $13		;52e2
+	.DB $11		;52e3
+	.DB $35		;52e4
+	.DB $25		;52e5
+	.DB $12		;52e6
+	.DB $23		;52e7
+	.DB $45		;52e8
+	.DB $00		;52e9
+	.DB $20		;52ea
+	.DB $d0		;52eb
+	.DB $ee		;52ec
+	.DB $ef		;52ed
+	.DB $6c		;52ee
+	.DB $02		;52ef
+	.DB $68		;52f0
+	.DB $05		;52f1
+	.DB $00		;52f2
+	.DB $85		;52f3
+	.DB $40		;52f4
+	.DB $18		;52f5
+	.DB $07		;52f6
+	.DB $6f		;52f7
+	.DB $ef		;52f8
+	.DB $04		;52f9
+	.DB $ed		;52fa
+	.DB $83		;52fb
+	.DB $ee		;52fc
+	.DB $d6		;52fd
+	.DB $e8		;52fe
+	.DB $07		;52ff
+	.DB $ec		;5300
+	.DB $04		;5301
+	.DB $01		;5302
+	.DB $02		;5303
+	.DB $02		;5304
+	.DB $83		;5305
+	.DB $06		;5306
+	.DB $05		;5307
+	.DB $d6		;5308
+	.DB $03		;5309
+	.DB $54		;530a
+	.DB $02		;530b
+	.DB $ab		;530c
+	.DB $82		;530d
+	.DB $d3		;530e
+	.DB $d7		;530f
+	.DB $02		;5310
+	.DB $b2		;5311
+	.DB $02		;5312
+	.DB $92		;5313
+	.DB $85		;5314
+	.DB $58		;5315
+	.DB $48		;5316
+	.DB $79		;5317
+	.DB $73		;5318
+	.DB $c2		;5319
+	.DB $02		;531a
+	.DB $c4		;531b
+	.DB $02		;531c
+	.DB $55		;531d
+	.DB $02		;531e
+	.DB $0c		;531f
+	.DB $86		;5320
+	.DB $1a		;5321
+	.DB $5d		;5322
+	.DB $49		;5323
+	.DB $04		;5324
+	.DB $54		;5325
+	.DB $56		;5326
+	.DB $02		;5327
+	.DB $ab		;5328
+	.DB $81		;5329
+	.DB $1b		;532a
+	.DB $06		;532b
+	.DB $00		;532c
+	.DB $81		;532d
+	.DB $20		;532e
+	.DB $08		;532f
+	.DB $00		;5330
+	.DB $87		;5331
+	.DB $82		;5332
+	.DB $00		;5333
+	.DB $18		;5334
+	.DB $00		;5335
+	.DB $04		;5336
+	.DB $00		;5337
+	.DB $20		;5338
+	.DB $03		;5339
+	.DB $00		;533a
+	.DB $81		;533b
+	.DB $08		;533c
+	.DB $03		;533d
+	.DB $00		;533e
+	.DB $83		;533f
+	.DB $28		;5340
+	.DB $00		;5341
+	.DB $30		;5342
+	.DB $02		;5343
+	.DB $18		;5344
+	.DB $81		;5345
+	.DB $00		;5346
+	.DB $02		;5347
+	.DB $18		;5348
+	.DB $03		;5349
+	.DB $00		;534a
+	.DB $88		;534b
+	.DB $74		;534c
+	.DB $44		;534d
+	.DB $3c		;534e
+	.DB $ca		;534f
+	.DB $f6		;5350
+	.DB $88		;5351
+	.DB $42		;5352
+	.DB $82		;5353
+	.DB $03		;5354
+	.DB $00		;5355
+	.DB $83		;5356
+	.DB $82		;5357
+	.DB $00		;5358
+	.DB $10		;5359
+	.DB $03		;535a
+	.DB $00		;535b
+	.DB $87		;535c
+	.DB $20		;535d
+	.DB $00		;535e
+	.DB $20		;535f
+	.DB $00		;5360
+	.DB $04		;5361
+	.DB $00		;5362
+	.DB $10		;5363
+	.DB $03		;5364
+	.DB $00		;5365
+	.DB $86		;5366
+	.DB $82		;5367
+	.DB $00		;5368
+	.DB $08		;5369
+	.DB $00		;536a
+	.DB $04		;536b
+	.DB $00		;536c
+	.DB $03		;536d
+	.DB $10		;536e
+	.DB $83		;536f
+	.DB $00		;5370
+	.DB $18		;5371
+	.DB $28		;5372
+	.DB $02		;5373
+	.DB $08		;5374
+	.DB $84		;5375
+	.DB $28		;5376
+	.DB $20		;5377
+	.DB $28		;5378
+	.DB $08		;5379
+	.DB $02		;537a
+	.DB $28		;537b
+	.DB $81		;537c
+	.DB $4c		;537d
+	.DB $00		;537e
+	.DB $08		;537f
+	.DB $ff		;5380
+	.DB $03		;5381
+	.DB $00		;5382
+	.DB $82		;5383
+	.DB $ff		;5384
+	.DB $00		;5385
+	.DB $03		;5386
+	.DB $ff		;5387
+	.DB $03		;5388
+	.DB $00		;5389
+	.DB $82		;538a
+	.DB $ff		;538b
+	.DB $00		;538c
+	.DB $03		;538d
+	.DB $ff		;538e
+	.DB $88		;538f
+	.DB $00		;5390
+	.DB $02		;5391
+	.DB $00		;5392
+	.DB $f8		;5393
+	.DB $00		;5394
+	.DB $e0		;5395
+	.DB $00		;5396
+	.DB $80		;5397
+	.DB $08		;5398
+	.DB $00		;5399
+	.DB $0e		;539a
+	.DB $ff		;539b
+	.DB $8a		;539c
+	.DB $fc		;539d
+	.DB $ff		;539e
+	.DB $f8		;539f
+	.DB $fe		;53a0
+	.DB $e0		;53a1
+	.DB $f8		;53a2
+	.DB $80		;53a3
+	.DB $e0		;53a4
+	.DB $00		;53a5
+	.DB $80		;53a6
+	.DB $08		;53a7
+	.DB $00		;53a8
+	.DB $04		;53a9
+	.DB $ff		;53aa
+	.DB $83		;53ab
+	.DB $fe		;53ac
+	.DB $ff		;53ad
+	.DB $f8		;53ae
+	.DB $02		;53af
+	.DB $f0		;53b0
+	.DB $85		;53b1
+	.DB $fe		;53b2
+	.DB $c0		;53b3
+	.DB $f8		;53b4
+	.DB $00		;53b5
+	.DB $e0		;53b6
+	.DB $0a		;53b7
+	.DB $00		;53b8
+	.DB $03		;53b9
+	.DB $ff		;53ba
+	.DB $81		;53bb
+	.DB $fe		;53bc
+	.DB $02		;53bd
+	.DB $ff		;53be
+	.DB $84		;53bf
+	.DB $f0		;53c0
+	.DB $e0		;53c1
+	.DB $ff		;53c2
+	.DB $fe		;53c3
+	.DB $02		;53c4
+	.DB $00		;53c5
+	.DB $82		;53c6
+	.DB $f0		;53c7
+	.DB $e0		;53c8
+	.DB $02		;53c9
+	.DB $00		;53ca
+	.DB $02		;53cb
+	.DB $18		;53cc
+	.DB $02		;53cd
+	.DB $00		;53ce
+	.DB $02		;53cf
+	.DB $18		;53d0
+	.DB $02		;53d1
+	.DB $00		;53d2
+	.DB $05		;53d3
+	.DB $ff		;53d4
+	.DB $82		;53d5
+	.DB $f0		;53d6
+	.DB $c0		;53d7
+	.DB $02		;53d8
+	.DB $80		;53d9
+	.DB $84		;53da
+	.DB $fe		;53db
+	.DB $fc		;53dc
+	.DB $f8		;53dd
+	.DB $f0		;53de
+	.DB $04		;53df
+	.DB $00		;53e0
+	.DB $04		;53e1
+	.DB $1c		;53e2
+	.DB $03		;53e3
+	.DB $00		;53e4
+	.DB $05		;53e5
+	.DB $ff		;53e6
+	.DB $82		;53e7
+	.DB $c0		;53e8
+	.DB $80		;53e9
+	.DB $02		;53ea
+	.DB $00		;53eb
+	.DB $84		;53ec
+	.DB $fe		;53ed
+	.DB $fc		;53ee
+	.DB $f8		;53ef
+	.DB $f0		;53f0
+	.DB $04		;53f1
+	.DB $00		;53f2
+	.DB $04		;53f3
+	.DB $1c		;53f4
+	.DB $03		;53f5
+	.DB $00		;53f6
+	.DB $08		;53f7
+	.DB $ff		;53f8
+	.DB $83		;53f9
+	.DB $fe		;53fa
+	.DB $fc		;53fb
+	.DB $f0		;53fc
+	.DB $05		;53fd
+	.DB $ff		;53fe
+	.DB $03		;53ff
+	.DB $00		;5400
+	.DB $85		;5401
+	.DB $f8		;5402
+	.DB $f0		;5403
+	.DB $e0		;5404
+	.DB $c0		;5405
+	.DB $80		;5406
+	.DB $03		;5407
+	.DB $00		;5408
+	.DB $05		;5409
+	.DB $3c		;540a
+	.DB $06		;540b
+	.DB $ff		;540c
+	.DB $87		;540d
+	.DB $fc		;540e
+	.DB $f8		;540f
+	.DB $ff		;5410
+	.DB $f0		;5411
+	.DB $e0		;5412
+	.DB $c0		;5413
+	.DB $80		;5414
+	.DB $03		;5415
+	.DB $00		;5416
+	.DB $81		;5417
+	.DB $ff		;5418
+	.DB $07		;5419
+	.DB $00		;541a
+	.DB $81		;541b
+	.DB $3c		;541c
+	.DB $07		;541d
+	.DB $00		;541e
+	.DB $08		;541f
+	.DB $ff		;5420
+	.DB $81		;5421
+	.DB $f0		;5422
+	.DB $07		;5423
+	.DB $ff		;5424
+	.DB $88		;5425
+	.DB $00		;5426
+	.DB $fe		;5427
+	.DB $fc		;5428
+	.DB $f8		;5429
+	.DB $f0		;542a
+	.DB $e0		;542b
+	.DB $c0		;542c
+	.DB $80		;542d
+	.DB $09		;542e
+	.DB $00		;542f
+	.DB $07		;5430
+	.DB $3e		;5431
+	.DB $03		;5432
+	.DB $ff		;5433
+	.DB $87		;5434
+	.DB $fe		;5435
+	.DB $fc		;5436
+	.DB $f8		;5437
+	.DB $f0		;5438
+	.DB $e0		;5439
+	.DB $ff		;543a
+	.DB $c0		;543b
+	.DB $06		;543c
+	.DB $00		;543d
+	.DB $81		;543e
+	.DB $ff		;543f
+	.DB $07		;5440
+	.DB $00		;5441
+	.DB $81		;5442
+	.DB $7e		;5443
+	.DB $07		;5444
+	.DB $00		;5445
+	.DB $02		;5446
+	.DB $ff		;5447
+	.DB $82		;5448
+	.DB $fe		;5449
+	.DB $fc		;544a
+	.DB $04		;544b
+	.DB $ff		;544c
+	.DB $81		;544d
+	.DB $80		;544e
+	.DB $03		;544f
+	.DB $00		;5450
+	.DB $04		;5451
+	.DB $ff		;5452
+	.DB $04		;5453
+	.DB $00		;5454
+	.DB $84		;5455
+	.DB $f0		;5456
+	.DB $e0		;5457
+	.DB $c0		;5458
+	.DB $80		;5459
+	.DB $04		;545a
+	.DB $00		;545b
+	.DB $04		;545c
+	.DB $7e		;545d
+	.DB $11		;545e
+	.DB $ff		;545f
+	.DB $87		;5460
+	.DB $fe		;5461
+	.DB $fc		;5462
+	.DB $f8		;5463
+	.DB $f0		;5464
+	.DB $e0		;5465
+	.DB $c0		;5466
+	.DB $80		;5467
+	.DB $08		;5468
+	.DB $7e		;5469
+	.DB $10		;546a
+	.DB $00		;546b
+	.DB $82		;546c
+	.DB $38		;546d
+	.DB $4c		;546e
+	.DB $03		;546f
+	.DB $c6		;5470
+	.DB $85		;5471
+	.DB $64		;5472
+	.DB $38		;5473
+	.DB $00		;5474
+	.DB $18		;5475
+	.DB $38		;5476
+	.DB $04		;5477
+	.DB $18		;5478
+	.DB $97		;5479
+	.DB $7e		;547a
+	.DB $00		;547b
+	.DB $7c		;547c
+	.DB $c6		;547d
+	.DB $0e		;547e
+	.DB $3c		;547f
+	.DB $78		;5480
+	.DB $e0		;5481
+	.DB $fe		;5482
+	.DB $00		;5483
+	.DB $7e		;5484
+	.DB $0c		;5485
+	.DB $18		;5486
+	.DB $3c		;5487
+	.DB $06		;5488
+	.DB $c6		;5489
+	.DB $7c		;548a
+	.DB $00		;548b
+	.DB $1c		;548c
+	.DB $3c		;548d
+	.DB $6c		;548e
+	.DB $cc		;548f
+	.DB $fe		;5490
+	.DB $02		;5491
+	.DB $0c		;5492
+	.DB $84		;5493
+	.DB $00		;5494
+	.DB $fc		;5495
+	.DB $c0		;5496
+	.DB $fc		;5497
+	.DB $02		;5498
+	.DB $06		;5499
+	.DB $87		;549a
+	.DB $c6		;549b
+	.DB $7c		;549c
+	.DB $00		;549d
+	.DB $3c		;549e
+	.DB $60		;549f
+	.DB $c0		;54a0
+	.DB $fc		;54a1
+	.DB $02		;54a2
+	.DB $c6		;54a3
+	.DB $86		;54a4
+	.DB $7c		;54a5
+	.DB $00		;54a6
+	.DB $fe		;54a7
+	.DB $c6		;54a8
+	.DB $0c		;54a9
+	.DB $18		;54aa
+	.DB $03		;54ab
+	.DB $30		;54ac
+	.DB $82		;54ad
+	.DB $00		;54ae
+	.DB $7c		;54af
+	.DB $02		;54b0
+	.DB $c6		;54b1
+	.DB $81		;54b2
+	.DB $7c		;54b3
+	.DB $02		;54b4
+	.DB $c6		;54b5
+	.DB $83		;54b6
+	.DB $7c		;54b7
+	.DB $00		;54b8
+	.DB $7c		;54b9
+	.DB $02		;54ba
+	.DB $c6		;54bb
+	.DB $84		;54bc
+	.DB $7e		;54bd
+	.DB $06		;54be
+	.DB $0c		;54bf
+	.DB $78		;54c0
+	.DB $22		;54c1
+	.DB $00		;54c2
+	.DB $81		;54c3
+	.DB $3c		;54c4
+	.DB $05		;54c5
+	.DB $42		;54c6
+	.DB $81		;54c7
+	.DB $00		;54c8
+	.DB $06		;54c9
+	.DB $42		;54ca
+	.DB $81		;54cb
+	.DB $3c		;54cc
+	.DB $7f		;54cd
+	.DB $00		;54ce
+	.DB $0f		;54cf
+	.DB $00		;54d0
+	.DB $02		;54d1
+	.DB $18		;54d2
+	.DB $72		;54d3
+	.DB $00		;54d4
+	.DB $06		;54d5
+	.DB $02		;54d6
+	.DB $81		;54d7
+	.DB $00		;54d8
+	.DB $07		;54d9
+	.DB $02		;54da
+	.DB $02		;54db
+	.DB $00		;54dc
+	.DB $81		;54dd
+	.DB $3c		;54de
+	.DB $05		;54df
+	.DB $02		;54e0
+	.DB $81		;54e1
+	.DB $3c		;54e2
+	.DB $06		;54e3
+	.DB $40		;54e4
+	.DB $82		;54e5
+	.DB $3e		;54e6
+	.DB $00		;54e7
+	.DB $06		;54e8
+	.DB $02		;54e9
+	.DB $81		;54ea
+	.DB $3c		;54eb
+	.DB $02		;54ec
+	.DB $00		;54ed
+	.DB $81		;54ee
+	.DB $02		;54ef
+	.DB $05		;54f0
+	.DB $42		;54f1
+	.DB $83		;54f2
+	.DB $3c		;54f3
+	.DB $00		;54f4
+	.DB $3c		;54f5
+	.DB $05		;54f6
+	.DB $40		;54f7
+	.DB $83		;54f8
+	.DB $3c		;54f9
+	.DB $00		;54fa
+	.DB $3c		;54fb
+	.DB $05		;54fc
+	.DB $02		;54fd
+	.DB $02		;54fe
+	.DB $00		;54ff
+	.DB $81		;5500
+	.DB $3c		;5501
+	.DB $05		;5502
+	.DB $42		;5503
+	.DB $81		;5504
+	.DB $3c		;5505
+	.DB $3a		;5506
+	.DB $00		;5507
+	.DB $02		;5508
+	.DB $04		;5509
+	.DB $02		;550a
+	.DB $00		;550b
+	.DB $84		;550c
+	.DB $3c		;550d
+	.DB $7a		;550e
+	.DB $00		;550f
+	.DB $3c		;5510
+	.DB $02		;5511
+	.DB $7a		;5512
+	.DB $81		;5513
+	.DB $3c		;5514
+	.DB $02		;5515
+	.DB $00		;5516
+	.DB $83		;5517
+	.DB $04		;5518
+	.DB $00		;5519
+	.DB $3c		;551a
+	.DB $02		;551b
+	.DB $7a		;551c
+	.DB $84		;551d
+	.DB $3c		;551e
+	.DB $00		;551f
+	.DB $3c		;5520
+	.DB $7a		;5521
+	.DB $08		;5522
+	.DB $00		;5523
+	.DB $07		;5524
+	.DB $ff		;5525
+	.DB $81		;5526
+	.DB $fc		;5527
+	.DB $07		;5528
+	.DB $ff		;5529
+	.DB $83		;552a
+	.DB $3f		;552b
+	.DB $fb		;552c
+	.DB $f7		;552d
+	.DB $06		;552e
+	.DB $ff		;552f
+	.DB $82		;5530
+	.DB $df		;5531
+	.DB $ef		;5532
+	.DB $06		;5533
+	.DB $ff		;5534
+	.DB $90		;5535
+	.DB $fb		;5536
+	.DB $f0		;5537
+	.DB $f7		;5538
+	.DB $f0		;5539
+	.DB $f7		;553a
+	.DB $f0		;553b
+	.DB $fb		;553c
+	.DB $fc		;553d
+	.DB $df		;553e
+	.DB $0f		;553f
+	.DB $ef		;5540
+	.DB $0f		;5541
+	.DB $ef		;5542
+	.DB $0f		;5543
+	.DB $df		;5544
+	.DB $3f		;5545
+	.DB $03		;5546
+	.DB $ff		;5547
+	.DB $83		;5548
+	.DB $fc		;5549
+	.DB $fb		;554a
+	.DB $f7		;554b
+	.DB $05		;554c
+	.DB $ff		;554d
+	.DB $83		;554e
+	.DB $3f		;554f
+	.DB $df		;5550
+	.DB $ef		;5551
+	.DB $09		;5552
+	.DB $ff		;5553
+	.DB $81		;5554
+	.DB $fc		;5555
+	.DB $07		;5556
+	.DB $ff		;5557
+	.DB $81		;5558
+	.DB $3f		;5559
+	.DB $03		;555a
+	.DB $ff		;555b
+	.DB $85		;555c
+	.DB $fc		;555d
+	.DB $fb		;555e
+	.DB $f0		;555f
+	.DB $f7		;5560
+	.DB $f0		;5561
+	.DB $03		;5562
+	.DB $ff		;5563
+	.DB $89		;5564
+	.DB $3f		;5565
+	.DB $df		;5566
+	.DB $0f		;5567
+	.DB $ef		;5568
+	.DB $0f		;5569
+	.DB $f7		;556a
+	.DB $f0		;556b
+	.DB $fb		;556c
+	.DB $fc		;556d
+	.DB $03		;556e
+	.DB $ff		;556f
+	.DB $85		;5570
+	.DB $fc		;5571
+	.DB $ef		;5572
+	.DB $0f		;5573
+	.DB $df		;5574
+	.DB $3f		;5575
+	.DB $03		;5576
+	.DB $ff		;5577
+	.DB $83		;5578
+	.DB $3f		;5579
+	.DB $fb		;557a
+	.DB $f7		;557b
+	.DB $06		;557c
+	.DB $ff		;557d
+	.DB $82		;557e
+	.DB $df		;557f
+	.DB $ef		;5580
+	.DB $0b		;5581
+	.DB $ff		;5582
+	.DB $83		;5583
+	.DB $1f		;5584
+	.DB $9f		;5585
+	.DB $df		;5586
+	.DB $0b		;5587
+	.DB $ff		;5588
+	.DB $85		;5589
+	.DB $ef		;558a
+	.DB $8f		;558b
+	.DB $0f		;558c
+	.DB $07		;558d
+	.DB $c0		;558e
+	.DB $04		;558f
+	.DB $ff		;5590
+	.DB $02		;5591
+	.DB $f7		;5592
+	.DB $82		;5593
+	.DB $ef		;5594
+	.DB $1f		;5595
+	.DB $03		;5596
+	.DB $00		;5597
+	.DB $86		;5598
+	.DB $01		;5599
+	.DB $03		;559a
+	.DB $07		;559b
+	.DB $0f		;559c
+	.DB $7f		;559d
+	.DB $1f		;559e
+	.DB $02		;559f
+	.DB $7f		;55a0
+	.DB $05		;55a1
+	.DB $ff		;55a2
+	.DB $82		;55a3
+	.DB $80		;55a4
+	.DB $f7		;55a5
+	.DB $06		;55a6
+	.DB $ff		;55a7
+	.DB $82		;55a8
+	.DB $0f		;55a9
+	.DB $3f		;55aa
+	.DB $06		;55ab
+	.DB $ff		;55ac
+	.DB $84		;55ad
+	.DB $c0		;55ae
+	.DB $f0		;55af
+	.DB $f8		;55b0
+	.DB $fc		;55b1
+	.DB $03		;55b2
+	.DB $fe		;55b3
+	.DB $83		;55b4
+	.DB $fc		;55b5
+	.DB $7f		;55b6
+	.DB $1f		;55b7
+	.DB $02		;55b8
+	.DB $07		;55b9
+	.DB $04		;55ba
+	.DB $00		;55bb
+	.DB $05		;55bc
+	.DB $ff		;55bd
+	.DB $83		;55be
+	.DB $3f		;55bf
+	.DB $0f		;55c0
+	.DB $00		;55c1
+	.DB $03		;55c2
+	.DB $ff		;55c3
+	.DB $81		;55c4
+	.DB $fd		;55c5
+	.DB $02		;55c6
+	.DB $e0		;55c7
+	.DB $02		;55c8
+	.DB $00		;55c9
+	.DB $84		;55ca
+	.DB $ff		;55cb
+	.DB $fe		;55cc
+	.DB $fc		;55cd
+	.DB $f0		;55ce
+	.DB $0b		;55cf
+	.DB $00		;55d0
+	.DB $81		;55d1
+	.DB $0f		;55d2
+	.DB $03		;55d3
+	.DB $00		;55d4
+	.DB $83		;55d5
+	.DB $01		;55d6
+	.DB $3f		;55d7
+	.DB $7f		;55d8
+	.DB $02		;55d9
+	.DB $ff		;55da
+	.DB $02		;55db
+	.DB $00		;55dc
+	.DB $81		;55dd
+	.DB $3f		;55de
+	.DB $05		;55df
+	.DB $ff		;55e0
+	.DB $03		;55e1
+	.DB $00		;55e2
+	.DB $85		;55e3
+	.DB $80		;55e4
+	.DB $c0		;55e5
+	.DB $f0		;55e6
+	.DB $f8		;55e7
+	.DB $ff		;55e8
+	.DB $02		;55e9
+	.DB $3f		;55ea
+	.DB $03		;55eb
+	.DB $7f		;55ec
+	.DB $83		;55ed
+	.DB $ff		;55ee
+	.DB $03		;55ef
+	.DB $00		;55f0
+	.DB $07		;55f1
+	.DB $ff		;55f2
+	.DB $81		;55f3
+	.DB $0c		;55f4
+	.DB $07		;55f5
+	.DB $ff		;55f6
+	.DB $81		;55f7
+	.DB $1f		;55f8
+	.DB $07		;55f9
+	.DB $ff		;55fa
+	.DB $84		;55fb
+	.DB $e7		;55fc
+	.DB $e0		;55fd
+	.DB $ff		;55fe
+	.DB $fe		;55ff
+	.DB $02		;5600
+	.DB $f8		;5601
+	.DB $82		;5602
+	.DB $e0		;5603
+	.DB $c0		;5604
+	.DB $08		;5605
+	.DB $00		;5606
+	.DB $81		;5607
+	.DB $f9		;5608
+	.DB $03		;5609
+	.DB $00		;560a
+	.DB $8f		;560b
+	.DB $02		;560c
+	.DB $1e		;560d
+	.DB $78		;560e
+	.DB $80		;560f
+	.DB $07		;5610
+	.DB $00		;5611
+	.DB $06		;5612
+	.DB $08		;5613
+	.DB $18		;5614
+	.DB $0f		;5615
+	.DB $70		;5616
+	.DB $c0		;5617
+	.DB $80		;5618
+	.DB $08		;5619
+	.DB $10		;561a
+	.DB $02		;561b
+	.DB $00		;561c
+	.DB $91		;561d
+	.DB $03		;561e
+	.DB $0f		;561f
+	.DB $18		;5620
+	.DB $60		;5621
+	.DB $0c		;5622
+	.DB $78		;5623
+	.DB $41		;5624
+	.DB $c3		;5625
+	.DB $86		;5626
+	.DB $88		;5627
+	.DB $fc		;5628
+	.DB $00		;5629
+	.DB $0d		;562a
+	.DB $7f		;562b
+	.DB $c0		;562c
+	.DB $00		;562d
+	.DB $01		;562e
+	.DB $03		;562f
+	.DB $02		;5630
+	.DB $85		;5631
+	.DB $c0		;5632
+	.DB $00		;5633
+	.DB $41		;5634
+	.DB $c0		;5635
+	.DB $80		;5636
+	.DB $09		;5637
+	.DB $00		;5638
+	.DB $82		;5639
+	.DB $03		;563a
+	.DB $06		;563b
+	.DB $04		;563c
+	.DB $00		;563d
+	.DB $83		;563e
+	.DB $0f		;563f
+	.DB $fc		;5640
+	.DB $c0		;5641
+	.DB $02		;5642
+	.DB $00		;5643
+	.DB $87		;5644
+	.DB $fb		;5645
+	.DB $7e		;5646
+	.DB $1c		;5647
+	.DB $10		;5648
+	.DB $f0		;5649
+	.DB $e3		;564a
+	.DB $c3		;564b
+	.DB $02		;564c
+	.DB $80		;564d
+	.DB $86		;564e
+	.DB $c0		;564f
+	.DB $68		;5650
+	.DB $37		;5651
+	.DB $d0		;5652
+	.DB $70		;5653
+	.DB $3c		;5654
+	.DB $04		;5655
+	.DB $00		;5656
+	.DB $84		;5657
+	.DB $c0		;5658
+	.DB $e0		;5659
+	.DB $10		;565a
+	.DB $5e		;565b
+	.DB $06		;565c
+	.DB $00		;565d
+	.DB $82		;565e
+	.DB $0e		;565f
+	.DB $01		;5660
+	.DB $06		;5661
+	.DB $00		;5662
+	.DB $82		;5663
+	.DB $04		;5664
+	.DB $86		;5665
+	.DB $07		;5666
+	.DB $00		;5667
+	.DB $81		;5668
+	.DB $ef		;5669
+	.DB $03		;566a
+	.DB $00		;566b
+	.DB $81		;566c
+	.DB $02		;566d
+	.DB $02		;566e
+	.DB $01		;566f
+	.DB $02		;5670
+	.DB $02		;5671
+	.DB $82		;5672
+	.DB $00		;5673
+	.DB $ff		;5674
+	.DB $03		;5675
+	.DB $80		;5676
+	.DB $81		;5677
+	.DB $8e		;5678
+	.DB $02		;5679
+	.DB $88		;567a
+	.DB $82		;567b
+	.DB $00		;567c
+	.DB $ff		;567d
+	.DB $06		;567e
+	.DB $10		;567f
+	.DB $07		;5680
+	.DB $00		;5681
+	.DB $81		;5682
+	.DB $ff		;5683
+	.DB $03		;5684
+	.DB $00		;5685
+	.DB $85		;5686
+	.DB $01		;5687
+	.DB $06		;5688
+	.DB $36		;5689
+	.DB $fb		;568a
+	.DB $ff		;568b
+	.DB $03		;568c
+	.DB $00		;568d
+	.DB $85		;568e
+	.DB $80		;568f
+	.DB $00		;5690
+	.DB $04		;5691
+	.DB $fe		;5692
+	.DB $ff		;5693
+	.DB $03		;5694
+	.DB $00		;5695
+	.DB $88		;5696
+	.DB $20		;5697
+	.DB $60		;5698
+	.DB $d8		;5699
+	.DB $7f		;569a
+	.DB $ff		;569b
+	.DB $00		;569c
+	.DB $02		;569d
+	.DB $0c		;569e
+	.DB $02		;569f
+	.DB $19		;56a0
+	.DB $84		;56a1
+	.DB $7f		;56a2
+	.DB $bf		;56a3
+	.DB $ff		;56a4
+	.DB $00		;56a5
+	.DB $03		;56a6
+	.DB $08		;56a7
+	.DB $84		;56a8
+	.DB $10		;56a9
+	.DB $70		;56aa
+	.DB $ee		;56ab
+	.DB $ff		;56ac
+	.DB $05		;56ad
+	.DB $00		;56ae
+	.DB $82		;56af
+	.DB $0a		;56b0
+	.DB $26		;56b1
+	.DB $02		;56b2
+	.DB $08		;56b3
+	.DB $02		;56b4
+	.DB $10		;56b5
+	.DB $82		;56b6
+	.DB $34		;56b7
+	.DB $24		;56b8
+	.DB $13		;56b9
+	.DB $00		;56ba
+	.DB $81		;56bb
+	.DB $6d		;56bc
+	.DB $05		;56bd
+	.DB $ed		;56be
+	.DB $82		;56bf
+	.DB $ee		;56c0
+	.DB $d6		;56c1
+	.DB $08		;56c2
+	.DB $e8		;56c3
+	.DB $04		;56c4
+	.DB $01		;56c5
+	.DB $02		;56c6
+	.DB $02		;56c7
+	.DB $83		;56c8
+	.DB $06		;56c9
+	.DB $05		;56ca
+	.DB $d6		;56cb
+	.DB $03		;56cc
+	.DB $54		;56cd
+	.DB $84		;56ce
+	.DB $a9		;56cf
+	.DB $29		;56d0
+	.DB $91		;56d1
+	.DB $95		;56d2
+	.DB $04		;56d3
+	.DB $80		;56d4
+	.DB $02		;56d5
+	.DB $40		;56d6
+	.DB $02		;56d7
+	.DB $60		;56d8
+	.DB $81		;56d9
+	.DB $80		;56da
+	.DB $02		;56db
+	.DB $40		;56dc
+	.DB $02		;56dd
+	.DB $51		;56de
+	.DB $06		;56df
+	.DB $00		;56e0
+	.DB $02		;56e1
+	.DB $50		;56e2
+	.DB $09		;56e3
+	.DB $00		;56e4
+	.DB $81		;56e5
+	.DB $04		;56e6
+	.DB $08		;56e7
+	.DB $00		;56e8
+	.DB $91		;56e9
+	.DB $28		;56ea
+	.DB $00		;56eb
+	.DB $54		;56ec
+	.DB $00		;56ed
+	.DB $14		;56ee
+	.DB $00		;56ef
+	.DB $40		;56f0
+	.DB $00		;56f1
+	.DB $04		;56f2
+	.DB $00		;56f3
+	.DB $48		;56f4
+	.DB $00		;56f5
+	.DB $20		;56f6
+	.DB $00		;56f7
+	.DB $20		;56f8
+	.DB $00		;56f9
+	.DB $14		;56fa
+	.DB $07		;56fb
+	.DB $00		;56fc
+	.DB $81		;56fd
+	.DB $22		;56fe
+	.DB $02		;56ff
+	.DB $00		;5700
+	.DB $82		;5701
+	.DB $40		;5702
+	.DB $08		;5703
+	.DB $02		;5704
+	.DB $00		;5705
+	.DB $81		;5706
+	.DB $40		;5707
+	.DB $04		;5708
+	.DB $00		;5709
+	.DB $8d		;570a
+	.DB $28		;570b
+	.DB $00		;570c
+	.DB $50		;570d
+	.DB $00		;570e
+	.DB $44		;570f
+	.DB $00		;5710
+	.DB $10		;5711
+	.DB $00		;5712
+	.DB $68		;5713
+	.DB $00		;5714
+	.DB $08		;5715
+	.DB $00		;5716
+	.DB $54		;5717
+	.DB $03		;5718
+	.DB $00		;5719
+	.DB $81		;571a
+	.DB $28		;571b
+	.DB $03		;571c
+	.DB $00		;571d
+	.DB $82		;571e
+	.DB $20		;571f
+	.DB $10		;5720
+	.DB $08		;5721
+	.DB $00		;5722
+	.DB $84		;5723
+	.DB $10		;5724
+	.DB $28		;5725
+	.DB $10		;5726
+	.DB $20		;5727
+	.DB $03		;5728
+	.DB $00		;5729
+	.DB $00		;572a
+	.DB $17		;572b
+	.DB $00		;572c
+	.DB $02		;572d
+	.DB $01		;572e
+	.DB $8f		;572f
+	.DB $02		;5730
+	.DB $04		;5731
+	.DB $18		;5732
+	.DB $30		;5733
+	.DB $60		;5734
+	.DB $c0		;5735
+	.DB $80		;5736
+	.DB $00		;5737
+	.DB $08		;5738
+	.DB $00		;5739
+	.DB $08		;573a
+	.DB $00		;573b
+	.DB $08		;573c
+	.DB $00		;573d
+	.DB $08		;573e
+	.DB $0e		;573f
+	.DB $00		;5740
+	.DB $81		;5741
+	.DB $03		;5742
+	.DB $02		;5743
+	.DB $07		;5744
+	.DB $89		;5745
+	.DB $0e		;5746
+	.DB $1c		;5747
+	.DB $38		;5748
+	.DB $70		;5749
+	.DB $e0		;574a
+	.DB $c0		;574b
+	.DB $80		;574c
+	.DB $00		;574d
+	.DB $08		;574e
+	.DB $02		;574f
+	.DB $00		;5750
+	.DB $02		;5751
+	.DB $08		;5752
+	.DB $06		;5753
+	.DB $00		;5754
+	.DB $83		;5755
+	.DB $01		;5756
+	.DB $03		;5757
+	.DB $07		;5758
+	.DB $02		;5759
+	.DB $0f		;575a
+	.DB $87		;575b
+	.DB $1e		;575c
+	.DB $3c		;575d
+	.DB $78		;575e
+	.DB $f0		;575f
+	.DB $e0		;5760
+	.DB $c0		;5761
+	.DB $80		;5762
+	.DB $02		;5763
+	.DB $08		;5764
+	.DB $02		;5765
+	.DB $00		;5766
+	.DB $02		;5767
+	.DB $08		;5768
+	.DB $05		;5769
+	.DB $00		;576a
+	.DB $84		;576b
+	.DB $01		;576c
+	.DB $03		;576d
+	.DB $07		;576e
+	.DB $0f		;576f
+	.DB $02		;5770
+	.DB $1f		;5771
+	.DB $87		;5772
+	.DB $3e		;5773
+	.DB $fc		;5774
+	.DB $f8		;5775
+	.DB $f0		;5776
+	.DB $e0		;5777
+	.DB $c0		;5778
+	.DB $80		;5779
+	.DB $02		;577a
+	.DB $00		;577b
+	.DB $04		;577c
+	.DB $18		;577d
+	.DB $04		;577e
+	.DB $00		;577f
+	.DB $85		;5780
+	.DB $01		;5781
+	.DB $03		;5782
+	.DB $07		;5783
+	.DB $0f		;5784
+	.DB $3f		;5785
+	.DB $02		;5786
+	.DB $7f		;5787
+	.DB $87		;5788
+	.DB $fe		;5789
+	.DB $fc		;578a
+	.DB $f8		;578b
+	.DB $f0		;578c
+	.DB $e0		;578d
+	.DB $c0		;578e
+	.DB $80		;578f
+	.DB $05		;5790
+	.DB $00		;5791
+	.DB $03		;5792
+	.DB $1c		;5793
+	.DB $87		;5794
+	.DB $00		;5795
+	.DB $01		;5796
+	.DB $03		;5797
+	.DB $07		;5798
+	.DB $1f		;5799
+	.DB $3f		;579a
+	.DB $7f		;579b
+	.DB $02		;579c
+	.DB $ff		;579d
+	.DB $87		;579e
+	.DB $fe		;579f
+	.DB $fc		;57a0
+	.DB $f8		;57a1
+	.DB $f0		;57a2
+	.DB $e0		;57a3
+	.DB $c0		;57a4
+	.DB $80		;57a5
+	.DB $05		;57a6
+	.DB $1c		;57a7
+	.DB $0a		;57a8
+	.DB $00		;57a9
+	.DB $02		;57aa
+	.DB $01		;57ab
+	.DB $85		;57ac
+	.DB $03		;57ad
+	.DB $0f		;57ae
+	.DB $1f		;57af
+	.DB $3f		;57b0
+	.DB $7f		;57b1
+	.DB $03		;57b2
+	.DB $ff		;57b3
+	.DB $87		;57b4
+	.DB $fe		;57b5
+	.DB $fc		;57b6
+	.DB $f8		;57b7
+	.DB $f0		;57b8
+	.DB $e0		;57b9
+	.DB $c0		;57ba
+	.DB $80		;57bb
+	.DB $0e		;57bc
+	.DB $00		;57bd
+	.DB $81		;57be
+	.DB $03		;57bf
+	.DB $02		;57c0
+	.DB $07		;57c1
+	.DB $84		;57c2
+	.DB $0f		;57c3
+	.DB $1f		;57c4
+	.DB $3f		;57c5
+	.DB $7f		;57c6
+	.DB $04		;57c7
+	.DB $ff		;57c8
+	.DB $88		;57c9
+	.DB $fe		;57ca
+	.DB $fc		;57cb
+	.DB $f8		;57cc
+	.DB $f0		;57cd
+	.DB $e0		;57ce
+	.DB $c0		;57cf
+	.DB $80		;57d0
+	.DB $00		;57d1
+	.DB $07		;57d2
+	.DB $3c		;57d3
+	.DB $04		;57d4
+	.DB $00		;57d5
+	.DB $83		;57d6
+	.DB $01		;57d7
+	.DB $03		;57d8
+	.DB $07		;57d9
+	.DB $02		;57da
+	.DB $0f		;57db
+	.DB $83		;57dc
+	.DB $1f		;57dd
+	.DB $3f		;57de
+	.DB $7f		;57df
+	.DB $05		;57e0
+	.DB $ff		;57e1
+	.DB $87		;57e2
+	.DB $fe		;57e3
+	.DB $fc		;57e4
+	.DB $f8		;57e5
+	.DB $f0		;57e6
+	.DB $e0		;57e7
+	.DB $c0		;57e8
+	.DB $80		;57e9
+	.DB $08		;57ea
+	.DB $00		;57eb
+	.DB $08		;57ec
+	.DB $3e		;57ed
+	.DB $03		;57ee
+	.DB $00		;57ef
+	.DB $84		;57f0
+	.DB $01		;57f1
+	.DB $03		;57f2
+	.DB $07		;57f3
+	.DB $0f		;57f4
+	.DB $02		;57f5
+	.DB $1f		;57f6
+	.DB $81		;57f7
+	.DB $3f		;57f8
+	.DB $07		;57f9
+	.DB $ff		;57fa
+	.DB $88		;57fb
+	.DB $fe		;57fc
+	.DB $fc		;57fd
+	.DB $f8		;57fe
+	.DB $f0		;57ff
+	.DB $e0		;5800
+	.DB $c0		;5801
+	.DB $80		;5802
+	.DB $7e		;5803
+	.DB $09		;5804
+	.DB $00		;5805
+	.DB $85		;5806
+	.DB $01		;5807
+	.DB $03		;5808
+	.DB $07		;5809
+	.DB $0f		;580a
+	.DB $3f		;580b
+	.DB $02		;580c
+	.DB $7f		;580d
+	.DB $08		;580e
+	.DB $ff		;580f
+	.DB $87		;5810
+	.DB $fe		;5811
+	.DB $fc		;5812
+	.DB $f8		;5813
+	.DB $f0		;5814
+	.DB $e0		;5815
+	.DB $c0		;5816
+	.DB $80		;5817
+	.DB $09		;5818
+	.DB $00		;5819
+	.DB $86		;581a
+	.DB $01		;581b
+	.DB $03		;581c
+	.DB $07		;581d
+	.DB $1f		;581e
+	.DB $3f		;581f
+	.DB $7f		;5820
+	.DB $0a		;5821
+	.DB $ff		;5822
+	.DB $87		;5823
+	.DB $fe		;5824
+	.DB $fc		;5825
+	.DB $f8		;5826
+	.DB $f0		;5827
+	.DB $e0		;5828
+	.DB $c0		;5829
+	.DB $80		;582a
+	.DB $08		;582b
+	.DB $00		;582c
+	.DB $02		;582d
+	.DB $04		;582e
+	.DB $81		;582f
+	.DB $24		;5830
+	.DB $03		;5831
+	.DB $04		;5832
+	.DB $8d		;5833
+	.DB $01		;5834
+	.DB $7f		;5835
+	.DB $02		;5836
+	.DB $39		;5837
+	.DB $e1		;5838
+	.DB $03		;5839
+	.DB $06		;583a
+	.DB $1c		;583b
+	.DB $01		;583c
+	.DB $ff		;583d
+	.DB $3c		;583e
+	.DB $7e		;583f
+	.DB $ef		;5840
+	.DB $02		;5841
+	.DB $e7		;5842
+	.DB $84		;5843
+	.DB $f7		;5844
+	.DB $7e		;5845
+	.DB $3c		;5846
+	.DB $1c		;5847
+	.DB $02		;5848
+	.DB $3c		;5849
+	.DB $03		;584a
+	.DB $1c		;584b
+	.DB $02		;584c
+	.DB $7f		;584d
+	.DB $86		;584e
+	.DB $7e		;584f
+	.DB $ff		;5850
+	.DB $ef		;5851
+	.DB $3f		;5852
+	.DB $7e		;5853
+	.DB $fc		;5854
+	.DB $02		;5855
+	.DB $ff		;5856
+	.DB $02		;5857
+	.DB $7f		;5858
+	.DB $8a		;5859
+	.DB $1e		;585a
+	.DB $3e		;585b
+	.DB $3f		;585c
+	.DB $e7		;585d
+	.DB $ff		;585e
+	.DB $7e		;585f
+	.DB $1e		;5860
+	.DB $3e		;5861
+	.DB $7e		;5862
+	.DB $fe		;5863
+	.DB $02		;5864
+	.DB $ff		;5865
+	.DB $02		;5866
+	.DB $0e		;5867
+	.DB $03		;5868
+	.DB $fe		;5869
+	.DB $8d		;586a
+	.DB $ff		;586b
+	.DB $07		;586c
+	.DB $e7		;586d
+	.DB $ff		;586e
+	.DB $7e		;586f
+	.DB $3e		;5870
+	.DB $7e		;5871
+	.DB $f0		;5872
+	.DB $fe		;5873
+	.DB $ff		;5874
+	.DB $e7		;5875
+	.DB $ff		;5876
+	.DB $7e		;5877
+	.DB $02		;5878
+	.DB $ff		;5879
+	.DB $83		;587a
+	.DB $ef		;587b
+	.DB $1e		;587c
+	.DB $3c		;587d
+	.DB $03		;587e
+	.DB $38		;587f
+	.DB $83		;5880
+	.DB $7e		;5881
+	.DB $ff		;5882
+	.DB $e7		;5883
+	.DB $02		;5884
+	.DB $ff		;5885
+	.DB $82		;5886
+	.DB $e7		;5887
+	.DB $ff		;5888
+	.DB $02		;5889
+	.DB $7e		;588a
+	.DB $88		;588b
+	.DB $ff		;588c
+	.DB $e7		;588d
+	.DB $ff		;588e
+	.DB $7f		;588f
+	.DB $0f		;5890
+	.DB $7e		;5891
+	.DB $7c		;5892
+	.DB $04		;5893
+	.DB $03		;5894
+	.DB $02		;5895
+	.DB $84		;5896
+	.DB $26		;5897
+	.DB $1c		;5898
+	.DB $04		;5899
+	.DB $1c		;589a
+	.DB $03		;589b
+	.DB $00		;589c
+	.DB $82		;589d
+	.DB $02		;589e
+	.DB $7e		;589f
+	.DB $03		;58a0
+	.DB $00		;58a1
+	.DB $8a		;58a2
+	.DB $01		;58a3
+	.DB $73		;58a4
+	.DB $06		;58a5
+	.DB $02		;58a6
+	.DB $39		;58a7
+	.DB $21		;58a8
+	.DB $83		;58a9
+	.DB $7e		;58aa
+	.DB $01		;58ab
+	.DB $03		;58ac
+	.DB $06		;58ad
+	.DB $07		;58ae
+	.DB $10		;58af
+	.DB $ff		;58b0
+	.DB $02		;58b1
+	.DB $02		;58b2
+	.DB $99		;58b3
+	.DB $12		;58b4
+	.DB $32		;58b5
+	.DB $01		;58b6
+	.DB $f3		;58b7
+	.DB $02		;58b8
+	.DB $0e		;58b9
+	.DB $04		;58ba
+	.DB $12		;58bb
+	.DB $39		;58bc
+	.DB $21		;58bd
+	.DB $01		;58be
+	.DB $39		;58bf
+	.DB $21		;58c0
+	.DB $e7		;58c1
+	.DB $02		;58c2
+	.DB $39		;58c3
+	.DB $21		;58c4
+	.DB $03		;58c5
+	.DB $39		;58c6
+	.DB $21		;58c7
+	.DB $03		;58c8
+	.DB $fe		;58c9
+	.DB $02		;58ca
+	.DB $19		;58cb
+	.DB $37		;58cc
+	.DB $02		;58cd
+	.DB $20		;58ce
+	.DB $86		;58cf
+	.DB $91		;58d0
+	.DB $43		;58d1
+	.DB $3e		;58d2
+	.DB $04		;58d3
+	.DB $32		;58d4
+	.DB $29		;58d5
+	.DB $02		;58d6
+	.DB $21		;58d7
+	.DB $90		;58d8
+	.DB $23		;58d9
+	.DB $06		;58da
+	.DB $fc		;58db
+	.DB $01		;58dc
+	.DB $3f		;58dd
+	.DB $20		;58de
+	.DB $04		;58df
+	.DB $3c		;58e0
+	.DB $20		;58e1
+	.DB $01		;58e2
+	.DB $ff		;58e3
+	.DB $01		;58e4
+	.DB $3f		;58e5
+	.DB $20		;58e6
+	.DB $04		;58e7
+	.DB $3c		;58e8
+	.DB $02		;58e9
+	.DB $20		;58ea
+	.DB $89		;58eb
+	.DB $e0		;58ec
+	.DB $01		;58ed
+	.DB $1f		;58ee
+	.DB $30		;58ef
+	.DB $21		;58f0
+	.DB $29		;58f1
+	.DB $91		;58f2
+	.DB $41		;58f3
+	.DB $3f		;58f4
+	.DB $03		;58f5
+	.DB $21		;58f6
+	.DB $82		;58f7
+	.DB $01		;58f8
+	.DB $39		;58f9
+	.DB $02		;58fa
+	.DB $21		;58fb
+	.DB $83		;58fc
+	.DB $e7		;58fd
+	.DB $01		;58fe
+	.DB $67		;58ff
+	.DB $04		;5900
+	.DB $04		;5901
+	.DB $82		;5902
+	.DB $01		;5903
+	.DB $7f		;5904
+	.DB $05		;5905
+	.DB $01		;5906
+	.DB $8b		;5907
+	.DB $21		;5908
+	.DB $83		;5909
+	.DB $7e		;590a
+	.DB $21		;590b
+	.DB $23		;590c
+	.DB $26		;590d
+	.DB $0c		;590e
+	.DB $04		;590f
+	.DB $22		;5910
+	.DB $31		;5911
+	.DB $ef		;5912
+	.DB $06		;5913
+	.DB $20		;5914
+	.DB $84		;5915
+	.DB $01		;5916
+	.DB $ff		;5917
+	.DB $21		;5918
+	.DB $11		;5919
+	.DB $02		;591a
+	.DB $01		;591b
+	.DB $8e		;591c
+	.DB $29		;591d
+	.DB $39		;591e
+	.DB $21		;591f
+	.DB $e7		;5920
+	.DB $21		;5921
+	.DB $11		;5922
+	.DB $09		;5923
+	.DB $01		;5924
+	.DB $21		;5925
+	.DB $31		;5926
+	.DB $29		;5927
+	.DB $e7		;5928
+	.DB $02		;5929
+	.DB $39		;592a
+	.DB $04		;592b
+	.DB $21		;592c
+	.DB $84		;592d
+	.DB $83		;592e
+	.DB $7e		;592f
+	.DB $02		;5930
+	.DB $39		;5931
+	.DB $02		;5932
+	.DB $21		;5933
+	.DB $84		;5934
+	.DB $03		;5935
+	.DB $3e		;5936
+	.DB $20		;5937
+	.DB $e0		;5938
+	.DB $05		;5939
+	.DB $00		;593a
+	.DB $03		;593b
+	.DB $1c		;593c
+	.DB $82		;593d
+	.DB $02		;593e
+	.DB $39		;593f
+	.DB $02		;5940
+	.DB $21		;5941
+	.DB $8e		;5942
+	.DB $07		;5943
+	.DB $22		;5944
+	.DB $31		;5945
+	.DB $ef		;5946
+	.DB $04		;5947
+	.DB $32		;5948
+	.DB $2e		;5949
+	.DB $82		;594a
+	.DB $79		;594b
+	.DB $21		;594c
+	.DB $83		;594d
+	.DB $7e		;594e
+	.DB $01		;594f
+	.DB $67		;5950
+	.DB $05		;5951
+	.DB $04		;5952
+	.DB $81		;5953
+	.DB $1c		;5954
+	.DB $06		;5955
+	.DB $21		;5956
+	.DB $82		;5957
+	.DB $83		;5958
+	.DB $7e		;5959
+	.DB $03		;595a
+	.DB $21		;595b
+	.DB $85		;595c
+	.DB $11		;595d
+	.DB $83		;595e
+	.DB $46		;595f
+	.DB $2c		;5960
+	.DB $18		;5961
+	.DB $02		;5962
+	.DB $21		;5963
+	.DB $81		;5964
+	.DB $29		;5965
+	.DB $02		;5966
+	.DB $01		;5967
+	.DB $8b		;5968
+	.DB $93		;5969
+	.DB $3a		;596a
+	.DB $66		;596b
+	.DB $21		;596c
+	.DB $11		;596d
+	.DB $83		;596e
+	.DB $46		;596f
+	.DB $02		;5970
+	.DB $11		;5971
+	.DB $39		;5972
+	.DB $e7		;5973
+	.DB $03		;5974
+	.DB $11		;5975
+	.DB $82		;5976
+	.DB $43		;5977
+	.DB $26		;5978
+	.DB $02		;5979
+	.DB $04		;597a
+	.DB $81		;597b
+	.DB $1c		;597c
+	.DB $02		;597d
+	.DB $00		;597e
+	.DB $86		;597f
+	.DB $01		;5980
+	.DB $1f		;5981
+	.DB $82		;5982
+	.DB $71		;5983
+	.DB $03		;5984
+	.DB $fe		;5985
+	.DB $02		;5986
+	.DB $08		;5987
+	.DB $82		;5988
+	.DB $02		;5989
+	.DB $ce		;598a
+	.DB $02		;598b
+	.DB $08		;598c
+	.DB $82		;598d
+	.DB $24		;598e
+	.DB $1c		;598f
+	.DB $02		;5990
+	.DB $00		;5991
+	.DB $82		;5992
+	.DB $02		;5993
+	.DB $39		;5994
+	.DB $03		;5995
+	.DB $21		;5996
+	.DB $81		;5997
+	.DB $e7		;5998
+	.DB $03		;5999
+	.DB $01		;599a
+	.DB $81		;599b
+	.DB $39		;599c
+	.DB $02		;599d
+	.DB $21		;599e
+	.DB $82		;599f
+	.DB $81		;59a0
+	.DB $7f		;59a1
+	.DB $02		;59a2
+	.DB $00		;59a3
+	.DB $83		;59a4
+	.DB $02		;59a5
+	.DB $39		;59a6
+	.DB $27		;59a7
+	.DB $02		;59a8
+	.DB $20		;59a9
+	.DB $81		;59aa
+	.DB $e0		;59ab
+	.DB $02		;59ac
+	.DB $20		;59ad
+	.DB $82		;59ae
+	.DB $02		;59af
+	.DB $39		;59b0
+	.DB $03		;59b1
+	.DB $21		;59b2
+	.DB $81		;59b3
+	.DB $e7		;59b4
+	.DB $48		;59b5
+	.DB $ff		;59b6
+	.DB $88		;59b7
+	.DB $00		;59b8
+	.DB $20		;59b9
+	.DB $24		;59ba
+	.DB $2c		;59bb
+	.DB $19		;59bc
+	.DB $29		;59bd
+	.DB $35		;59be
+	.DB $6f		;59bf
+	.DB $03		;59c0
+	.DB $00		;59c1
+	.DB $8a		;59c2
+	.DB $20		;59c3
+	.DB $51		;59c4
+	.DB $53		;59c5
+	.DB $56		;59c6
+	.DB $fc		;59c7
+	.DB $00		;59c8
+	.DB $10		;59c9
+	.DB $50		;59ca
+	.DB $c4		;59cb
+	.DB $9a		;59cc
+	.DB $02		;59cd
+	.DB $12		;59ce
+	.DB $84		;59cf
+	.DB $36		;59d0
+	.DB $00		;59d1
+	.DB $20		;59d2
+	.DB $23		;59d3
+	.DB $02		;59d4
+	.DB $22		;59d5
+	.DB $82		;59d6
+	.DB $0c		;59d7
+	.DB $7b		;59d8
+	.DB $02		;59d9
+	.DB $00		;59da
+	.DB $86		;59db
+	.DB $91		;59dc
+	.DB $11		;59dd
+	.DB $55		;59de
+	.DB $49		;59df
+	.DB $dd		;59e0
+	.DB $b3		;59e1
+	.DB $03		;59e2
+	.DB $00		;59e3
+	.DB $82		;59e4
+	.DB $04		;59e5
+	.DB $dd		;59e6
+	.DB $02		;59e7
+	.DB $11		;59e8
+	.DB $82		;59e9
+	.DB $12		;59ea
+	.DB $31		;59eb
+	.DB $02		;59ec
+	.DB $00		;59ed
+	.DB $87		;59ee
+	.DB $42		;59ef
+	.DB $ad		;59f0
+	.DB $29		;59f1
+	.DB $23		;59f2
+	.DB $6e		;59f3
+	.DB $d8		;59f4
+	.DB $7e		;59f5
+	.DB $06		;59f6
+	.DB $ff		;59f7
+	.DB $83		;59f8
+	.DB $fb		;59f9
+	.DB $7e		;59fa
+	.DB $ff		;59fb
+	.DB $02		;59fc
+	.DB $fb		;59fd
+	.DB $04		;59fe
+	.DB $ff		;59ff
+	.DB $82		;5a00
+	.DB $7e		;5a01
+	.DB $ff		;5a02
+	.DB $02		;5a03
+	.DB $fb		;5a04
+	.DB $03		;5a05
+	.DB $ff		;5a06
+	.DB $81		;5a07
+	.DB $fb		;5a08
+	.DB $08		;5a09
+	.DB $ff		;5a0a
+	.DB $82		;5a0b
+	.DB $3f		;5a0c
+	.DB $7f		;5a0d
+	.DB $06		;5a0e
+	.DB $ff		;5a0f
+	.DB $83		;5a10
+	.DB $f8		;5a11
+	.DB $fc		;5a12
+	.DB $fe		;5a13
+	.DB $65		;5a14
+	.DB $ff		;5a15
+	.DB $82		;5a16
+	.DB $fc		;5a17
+	.DB $f8		;5a18
+	.DB $04		;5a19
+	.DB $f0		;5a1a
+	.DB $84		;5a1b
+	.DB $f8		;5a1c
+	.DB $fc		;5a1d
+	.DB $3f		;5a1e
+	.DB $1f		;5a1f
+	.DB $04		;5a20
+	.DB $0f		;5a21
+	.DB $82		;5a22
+	.DB $1f		;5a23
+	.DB $3f		;5a24
+	.DB $06		;5a25
+	.DB $ff		;5a26
+	.DB $82		;5a27
+	.DB $7f		;5a28
+	.DB $3f		;5a29
+	.DB $06		;5a2a
+	.DB $ff		;5a2b
+	.DB $82		;5a2c
+	.DB $fe		;5a2d
+	.DB $fc		;5a2e
+	.DB $03		;5a2f
+	.DB $0f		;5a30
+	.DB $82		;5a31
+	.DB $1f		;5a32
+	.DB $7f		;5a33
+	.DB $02		;5a34
+	.DB $ff		;5a35
+	.DB $81		;5a36
+	.DB $3f		;5a37
+	.DB $04		;5a38
+	.DB $f0		;5a39
+	.DB $02		;5a3a
+	.DB $f8		;5a3b
+	.DB $82		;5a3c
+	.DB $f0		;5a3d
+	.DB $e0		;5a3e
+	.DB $03		;5a3f
+	.DB $00		;5a40
+	.DB $86		;5a41
+	.DB $01		;5a42
+	.DB $03		;5a43
+	.DB $07		;5a44
+	.DB $0f		;5a45
+	.DB $7f		;5a46
+	.DB $1f		;5a47
+	.DB $02		;5a48
+	.DB $7f		;5a49
+	.DB $05		;5a4a
+	.DB $ff		;5a4b
+	.DB $82		;5a4c
+	.DB $80		;5a4d
+	.DB $f7		;5a4e
+	.DB $06		;5a4f
+	.DB $ff		;5a50
+	.DB $82		;5a51
+	.DB $0f		;5a52
+	.DB $3f		;5a53
+	.DB $06		;5a54
+	.DB $ff		;5a55
+	.DB $84		;5a56
+	.DB $c0		;5a57
+	.DB $f0		;5a58
+	.DB $f8		;5a59
+	.DB $fc		;5a5a
+	.DB $03		;5a5b
+	.DB $fe		;5a5c
+	.DB $83		;5a5d
+	.DB $fc		;5a5e
+	.DB $7f		;5a5f
+	.DB $1f		;5a60
+	.DB $02		;5a61
+	.DB $07		;5a62
+	.DB $04		;5a63
+	.DB $00		;5a64
+	.DB $05		;5a65
+	.DB $ff		;5a66
+	.DB $83		;5a67
+	.DB $3f		;5a68
+	.DB $0f		;5a69
+	.DB $00		;5a6a
+	.DB $03		;5a6b
+	.DB $ff		;5a6c
+	.DB $81		;5a6d
+	.DB $fd		;5a6e
+	.DB $02		;5a6f
+	.DB $e0		;5a70
+	.DB $02		;5a71
+	.DB $00		;5a72
+	.DB $84		;5a73
+	.DB $ff		;5a74
+	.DB $fe		;5a75
+	.DB $fc		;5a76
+	.DB $f0		;5a77
 l5a78h:
-	dec bc			;5a78
-	nop			;5a79
-	add a,c			;5a7a
-	rrca			;5a7b
-	inc bc			;5a7c
-	nop			;5a7d
-	add a,e			;5a7e
-	ld bc,l7f3fh		;5a7f
-	ld (bc),a			;5a82
-	rst 38h			;5a83
-	ld (bc),a			;5a84
-	nop			;5a85
-	add a,c			;5a86
-	ccf			;5a87
-	dec b			;5a88
-	rst 38h			;5a89
-	inc bc			;5a8a
-	nop			;5a8b
-	add a,l			;5a8c
-	add a,b			;5a8d
-	ret nz			;5a8e
-	ret p			;5a8f
-l5a90h:
-	ret m			;5a90
-	rst 38h			;5a91
-	ld (bc),a			;5a92
-	ccf			;5a93
-	inc bc			;5a94
-	ld a,a			;5a95
-	add a,e			;5a96
-	rst 38h			;5a97
-	inc bc			;5a98
-	nop			;5a99
-	rlca			;5a9a
-	rst 38h			;5a9b
-	add a,c			;5a9c
-	inc c			;5a9d
-	rlca			;5a9e
-	rst 38h			;5a9f
-	add a,c			;5aa0
-	rra			;5aa1
-	rlca			;5aa2
-	rst 38h			;5aa3
-	add a,h			;5aa4
-	rst 20h			;5aa5
-	ret po			;5aa6
-	rst 38h			;5aa7
-	cp 002h		;5aa8
-	ret m			;5aaa
-	add a,d			;5aab
-	ret po			;5aac
-	ret nz			;5aad
-	rlca			;5aae
-	nop			;5aaf
-	add a,d			;5ab0
-	rrca			;5ab1
-	ld b,003h		;5ab2
-	nop			;5ab4
-	adc a,a			;5ab5
-	ld bc,08721h		;5ab6
-	ld a,a			;5ab9
-	ret m			;5aba
-	nop			;5abb
-	add hl,bc			;5abc
-	ld (hl),a			;5abd
-	rst 20h			;5abe
-	ret p			;5abf
-	adc a,a			;5ac0
-	ccf			;5ac1
-	ld a,a			;5ac2
-	rst 30h			;5ac3
-	rst 28h			;5ac4
-	ld (bc),a			;5ac5
-	rst 38h			;5ac6
-	sub c			;5ac7
-	call m,0e7f0h		;5ac8
-	sbc a,a			;5acb
-	di			;5acc
-	add a,a			;5acd
-	cp (hl)			;5ace
-	inc a			;5acf
-	ld a,c			;5ad0
-	ld (hl),a			;5ad1
-	inc bc			;5ad2
-	rst 38h			;5ad3
-	jp p,l3f80h		;5ad4
-	rst 38h			;5ad7
-	cp 003h		;5ad8
-	.DB 0fdh,085h	;add a,iyl		;5ada
-	ccf			;5adc
-	rst 38h			;5add
-	cp (hl)			;5ade
-	ccf			;5adf
-	ld a,a			;5ae0
-	inc bc			;5ae1
-	rst 38h			;5ae2
-	dec b			;5ae3
-	nop			;5ae4
-	add a,e			;5ae5
-	ld bc,l390bh+1		;5ae6
-	inc b			;5ae9
-	nop			;5aea
-	sub h			;5aeb
-	djnz l5af1h		;5aec
-	ccf			;5aee
-	rst 38h			;5aef
-	rra			;5af0
-l5af1h:
-	inc b			;5af1
-	add a,c			;5af2
-	ex (sp),hl			;5af3
-	rst 28h			;5af4
-	rrca			;5af5
-	inc e			;5af6
-	inc a			;5af7
-	nop			;5af8
-	ld b,b			;5af9
-	jr nc,l5a90h		;5afa
-	ret z			;5afc
-	cpl			;5afd
-	adc a,a			;5afe
-	jp l0003h+1		;5aff
-	add a,h			;5b02
-	jr c,l5b24h		;5b03
-	rst 28h			;5b05
-	and c			;5b06
-	dec b			;5b07
-	nop			;5b08
-	add a,e			;5b09
-	ret nz			;5b0a
-	pop af			;5b0b
-	cp 006h		;5b0c
-	nop			;5b0e
-	add a,d			;5b0f
-	jp z,l0779h		;5b10
-	nop			;5b13
-	add a,c			;5b14
-	rst 28h			;5b15
-	inc bc			;5b16
-	nop			;5b17
-	add a,e			;5b18
-	ld (bc),a			;5b19
-	rrca			;5b1a
-	ld bc,l0202h		;5b1b
-	add a,d			;5b1e
-	nop			;5b1f
-	rst 38h			;5b20
-	inc bc			;5b21
-	add a,b			;5b22
-	add a,c			;5b23
-l5b24h:
-	adc a,(hl)			;5b24
-	ld (bc),a			;5b25
-	adc a,b			;5b26
-	add a,d			;5b27
-	nop			;5b28
-	rst 38h			;5b29
-	ld b,010h		;5b2a
-	inc c			;5b2c
-	nop			;5b2d
-	add a,e			;5b2e
-	ld bc,0fb4fh		;5b2f
-	dec b			;5b32
-	nop			;5b33
-	add a,e			;5b34
-	ret po			;5b35
-.DB $FC $FE $04
-	nop			;5b39
-	add a,h			;5b3a
-l5b3bh:
-	jr l5b59h		;5b3b
-	ld a,07fh		;5b3d
-	ld (bc),a			;5b3f
-	nop			;5b40
-	add a,(hl)			;5b41
-	dec c			;5b42
-	inc de			;5b43
-	ld b,026h		;5b44
-	ld a,a			;5b46
-	cp a			;5b47
-	ld (bc),a			;5b48
-	nop			;5b49
-	add a,(hl)			;5b4a
-	inc b			;5b4b
-	ld b,016h		;5b4c
-	cpl			;5b4e
-	rrca			;5b4f
-	xor 006h		;5b50
-	nop			;5b52
-	add a,h			;5b53
-	inc b			;5b54
-	add hl,de			;5b55
-	rst 30h			;5b56
-	rlca			;5b57
-	ld (bc),a			;5b58
-l5b59h:
-	rrca			;5b59
-	add a,e			;5b5a
-	dec bc			;5b5b
-l5b5ch:
-	dec de			;5b5c
-	ld a,a			;5b5d
-	ld (bc),a			;5b5e
-	rst 38h			;5b5f
-	add a,h			;5b60
-l5b61h:
-	add a,b			;5b61
-	ret po			;5b62
-	ret p			;5b63
-	cp 004h		;5b64
-	rst 38h			;5b66
-	dec b			;5b67
-	nop			;5b68
-	add a,e			;5b69
-	ret po			;5b6a
-	call m,sub_06ffh		;5b6b
-	ld (de),a			;5b6e
-	add a,e			;5b6f
-	ld de,l7029h		;5b70
-	rlca			;5b73
-	ld (hl),h			;5b74
-	inc b			;5b75
-	nop			;5b76
-	inc bc			;5b77
-	ld bc,l0282h		;5b78
-	add hl,hl			;5b7b
-	inc bc			;5b7c
-	xor e			;5b7d
-	add a,h			;5b7e
-	ld d,(hl)			;5b7f
-	sub 06eh		;5b80
-	ld l,d			;5b82
-	inc bc			;5b83
-	ld a,(hl)			;5b84
-	add a,c			;5b85
-	ld a,a			;5b86
-	ld (bc),a			;5b87
-	cp a			;5b88
-	ld (bc),a			;5b89
-	sbc a,a			;5b8a
-	add a,c			;5b8b
-	ld a,a			;5b8c
-	ld (bc),a			;5b8d
-	cp a			;5b8e
-	ld (bc),a			;5b8f
-	xor (hl)			;5b90
-	ld b,0ffh		;5b91
-	ld (bc),a			;5b93
-	xor a			;5b94
-	inc bc			;5b95
-	rst 38h			;5b96
-	ld b,000h		;5b97
-	add a,c			;5b99
-	inc h			;5b9a
-	ex af,af'			;5b9b
-	nop			;5b9c
-	sub c			;5b9d
-	xor d			;5b9e
-	cp 0ceh		;5b9f
-	cp 0fah		;5ba1
-	cp 0eah		;5ba3
-	cp 0d6h		;5ba5
-	cp 0e2h		;5ba7
-	cp 0eah		;5ba9
-	cp 08eh		;5bab
-	cp 0a6h		;5bad
-	rlca			;5baf
-	jr l5b3bh		;5bb0
-	ld a,(l747ch)		;5bb2
-	ld a,h			;5bb5
-	jp po,0eefeh		;5bb6
-	ld b,082h		;5bb9
-	inc bc			;5bbb
-	nop			;5bbc
-	adc a,l			;5bbd
-	xor d			;5bbe
-	cp 0e6h		;5bbf
-	cp 0eeh		;5bc1
-	cp 0fah		;5bc3
-	cp 0ceh		;5bc5
-	cp 0deh		;5bc7
-	cp 0ceh		;5bc9
-	inc bc			;5bcb
-	nop			;5bcc
-	add a,l			;5bcd
-	xor d			;5bce
-	cp 0aah		;5bcf
-	cp 0b6h		;5bd1
-	dec b			;5bd3
-	djnz l5b5ch		;5bd4
-	jr c,l5c00h		;5bd6
-	jr c,$+24		;5bd8
-	jr c,l5bf4h		;5bda
-	inc bc			;5bdc
-	jr c,l5b61h		;5bdd
-	jr z,l5c3dh		;5bdf
-	nop			;5be1
-	jr nz,l5be4h		;5be2
-l5be4h:
-	ex af,af'			;5be4
-	ex af,af'			;5be5
-	jr l5be8h		;5be6
-l5be8h:
-	ex af,af'			;5be8
-	ex af,af'			;5be9
-l5beah:
-	djnz l5bech		;5bea
-l5bech:
-	ex af,af'			;5bec
-	ex af,af'			;5bed
-	djnz l5bf0h		;5bee
-l5bf0h:
-	ex af,af'			;5bf0
-	jr $+16		;5bf1
-	nop			;5bf3
-l5bf4h:
-	ex af,af'			;5bf4
-	inc e			;5bf5
-	djnz l5bf8h		;5bf6
-l5bf8h:
-	ex af,af'			;5bf8
-	inc e			;5bf9
-	jr l5bfch		;5bfa
-l5bfch:
-	ex af,af'			;5bfc
-	inc a			;5bfd
-	jr l5c00h		;5bfe
-l5c00h:
-	ex af,af'			;5c00
-	inc a			;5c01
-	jr nz,l5c04h		;5c02
-l5c04h:
-	ex af,af'			;5c04
-	ld a,018h		;5c05
-	nop			;5c07
-	ex af,af'			;5c08
-	ld a,(hl)			;5c09
-	jr l5c0ch		;5c0a
-l5c0ch:
-	ex af,af'			;5c0c
-	ld a,(hl)			;5c0d
-	jr l5c10h		;5c0e
-l5c10h:
-	ex af,af'			;5c10
-	ld a,(hl)			;5c11
-	add a,c			;5c12
-	inc e			;5c13
-	ld (bc),a			;5c14
-	inc a			;5c15
-	inc bc			;5c16
-	inc e			;5c17
-	ld (bc),a			;5c18
-	ld a,a			;5c19
-	add a,(hl)			;5c1a
-	ld a,(hl)			;5c1b
-	rst 38h			;5c1c
-	rst 28h			;5c1d
-	ccf			;5c1e
-	ld a,(hl)			;5c1f
-	call m,0ff02h		;5c20
-	add a,e			;5c23
-	inc a			;5c24
-	ld a,(hl)			;5c25
-	rst 28h			;5c26
-	ld (bc),a			;5c27
-	rst 20h			;5c28
-	add a,h			;5c29
-	rst 30h			;5c2a
-	ld a,(hl)			;5c2b
-	inc a			;5c2c
-	inc e			;5c2d
-	ld (bc),a			;5c2e
-	inc a			;5c2f
-	inc bc			;5c30
-	inc e			;5c31
-	ld (bc),a			;5c32
-	ld a,a			;5c33
-	add a,(hl)			;5c34
-	ld a,(hl)			;5c35
-	rst 38h			;5c36
-	rst 28h			;5c37
-	ccf			;5c38
-	ld a,(hl)			;5c39
-	call m,0ff02h		;5c3a
-l5c3dh:
-	ld (bc),a			;5c3d
-	ld a,a			;5c3e
-	adc a,d			;5c3f
-	ld e,03eh		;5c40
-	ccf			;5c42
-	rst 20h			;5c43
-	rst 38h			;5c44
-	ld a,(hl)			;5c45
-	ld e,03eh		;5c46
-	ld a,(hl)			;5c48
-	cp 002h		;5c49
-	rst 38h			;5c4b
-	ld (bc),a			;5c4c
-	ld c,003h		;5c4d
-	cp 08dh		;5c4f
-	rst 38h			;5c51
-	rlca			;5c52
-	rst 20h			;5c53
-	rst 38h			;5c54
-	ld a,(hl)			;5c55
-	ld a,07eh		;5c56
-	ret p			;5c58
-	cp 0ffh		;5c59
-	rst 20h			;5c5b
-	rst 38h			;5c5c
-	ld a,(hl)			;5c5d
-	ld (bc),a			;5c5e
-	rst 38h			;5c5f
-	add a,e			;5c60
-	rst 28h			;5c61
-	ld e,03ch		;5c62
-	inc bc			;5c64
-	jr c,l5beah		;5c65
-	ld a,(hl)			;5c67
-	rst 38h			;5c68
-	rst 20h			;5c69
-	ld (bc),a			;5c6a
-	rst 38h			;5c6b
-	add a,d			;5c6c
-	rst 20h			;5c6d
-	rst 38h			;5c6e
-	ld (bc),a			;5c6f
-	ld a,(hl)			;5c70
-	adc a,b			;5c71
-	rst 38h			;5c72
-	rst 20h			;5c73
-	rst 38h			;5c74
-	ld a,a			;5c75
-	rrca			;5c76
-	ld a,(hl)			;5c77
-	ld a,h			;5c78
-	inc e			;5c79
-	inc b			;5c7a
-	ld a,003h		;5c7b
-	inc e			;5c7d
-	inc bc			;5c7e
-	nop			;5c7f
-	ld (bc),a			;5c80
-	ld a,(hl)			;5c81
-	inc bc			;5c82
-	nop			;5c83
-	ld (bc),a			;5c84
-	ld a,a			;5c85
-	adc a,b			;5c86
-	ld e,03eh		;5c87
-	ccf			;5c89
-	rst 20h			;5c8a
-	rst 38h			;5c8b
-	ld a,(hl)			;5c8c
-	ld bc,l0603h		;5c8d
-	rlca			;5c90
-	djnz $-1		;5c91
-	add a,h			;5c93
-	ld e,03eh		;5c94
-	ld a,(hl)			;5c96
-	cp 002h		;5c97
-	rst 38h			;5c99
-	ld (bc),a			;5c9a
-	ld c,084h		;5c9b
-	inc a			;5c9d
-	ld a,(hl)			;5c9e
-	rst 38h			;5c9f
-sub_5ca0h:
-	rst 20h			;5ca0
-	ld (bc),a			;5ca1
-	rst 38h			;5ca2
-	ld (bc),a			;5ca3
-	rst 20h			;5ca4
-	add a,e			;5ca5
-	cp 0ffh		;5ca6
-	rst 20h			;5ca8
-	ld (bc),a			;5ca9
-	rst 38h			;5caa
-	add a,(hl)			;5cab
-	rst 20h			;5cac
-	rst 38h			;5cad
-	cp 03eh		;5cae
-	ld a,a			;5cb0
-	rst 30h			;5cb1
-	ld (bc),a			;5cb2
-	ret po			;5cb3
-	add a,(hl)			;5cb4
-	rst 30h			;5cb5
-	ld a,a			;5cb6
-	ld a,0fch		;5cb7
-	cp 0efh		;5cb9
-	ld (bc),a			;5cbb
-	rst 20h			;5cbc
-	add a,e			;5cbd
-	rst 28h			;5cbe
-	cp 0fch		;5cbf
-	ld (bc),a			;5cc1
-	rst 38h			;5cc2
-	add a,c			;5cc3
-	ret po			;5cc4
-	ld (bc),a			;5cc5
-	call m,0e081h		;5cc6
-	inc b			;5cc9
-	rst 38h			;5cca
-	add a,c			;5ccb
-	ret po			;5ccc
-	ld (bc),a			;5ccd
-	call m,0e003h		;5cce
-	add a,e			;5cd1
-	ccf			;5cd2
-	ld a,a			;5cd3
-	ret p			;5cd4
-	ld (bc),a			;5cd5
-	rst 28h			;5cd6
-	add a,e			;5cd7
-	rst 30h			;5cd8
-	ld a,a			;5cd9
-	ccf			;5cda
-	inc bc			;5cdb
-	rst 20h			;5cdc
-	ld (bc),a			;5cdd
-	rst 38h			;5cde
-	inc bc			;5cdf
-	rst 20h			;5ce0
-	ld (bc),a			;5ce1
-	ld a,a			;5ce2
-	inc b			;5ce3
-	inc e			;5ce4
-	ld (bc),a			;5ce5
-l5ce6h:
-	ld a,a			;5ce6
-	dec b			;5ce7
-	rlca			;5ce8
-	add a,(hl)			;5ce9
-	rst 20h			;5cea
-	rst 38h			;5ceb
-	ld a,(hl)			;5cec
-	rst 20h			;5ced
-	rst 28h			;5cee
-	cp 002h		;5cef
-	call m,0fe83h		;5cf1
-	rst 38h			;5cf4
-	rst 28h			;5cf5
-	ld b,0e0h		;5cf6
-	ld (bc),a			;5cf8
-	rst 38h			;5cf9
-	add a,c			;5cfa
-	rst 20h			;5cfb
-	dec b			;5cfc
-	rst 38h			;5cfd
-	inc bc			;5cfe
-	rst 20h			;5cff
+	.DB $0b		;5a78
+	.DB $00		;5a79
+	.DB $81		;5a7a
+	.DB $0f		;5a7b
+	.DB $03		;5a7c
+	.DB $00		;5a7d
+	.DB $83		;5a7e
+	.DB $01		;5a7f
+	.DB $3f		;5a80
+	.DB $7f		;5a81
+	.DB $02		;5a82
+	.DB $ff		;5a83
+	.DB $02		;5a84
+	.DB $00		;5a85
+	.DB $81		;5a86
+	.DB $3f		;5a87
+	.DB $05		;5a88
+	.DB $ff		;5a89
+	.DB $03		;5a8a
+	.DB $00		;5a8b
+	.DB $85		;5a8c
+	.DB $80		;5a8d
+	.DB $c0		;5a8e
+	.DB $f0		;5a8f
+	.DB $f8		;5a90
+	.DB $ff		;5a91
+	.DB $02		;5a92
+	.DB $3f		;5a93
+	.DB $03		;5a94
+	.DB $7f		;5a95
+	.DB $83		;5a96
+	.DB $ff		;5a97
+	.DB $03		;5a98
+	.DB $00		;5a99
+	.DB $07		;5a9a
+	.DB $ff		;5a9b
+	.DB $81		;5a9c
+	.DB $0c		;5a9d
+	.DB $07		;5a9e
+	.DB $ff		;5a9f
+	.DB $81		;5aa0
+	.DB $1f		;5aa1
+	.DB $07		;5aa2
+	.DB $ff		;5aa3
+	.DB $84		;5aa4
+	.DB $e7		;5aa5
+	.DB $e0		;5aa6
+	.DB $ff		;5aa7
+	.DB $fe		;5aa8
+	.DB $02		;5aa9
+	.DB $f8		;5aaa
+	.DB $82		;5aab
+	.DB $e0		;5aac
+	.DB $c0		;5aad
+	.DB $07		;5aae
+	.DB $00		;5aaf
+	.DB $82		;5ab0
+	.DB $0f		;5ab1
+	.DB $06		;5ab2
+	.DB $03		;5ab3
+	.DB $00		;5ab4
+	.DB $8f		;5ab5
+	.DB $01		;5ab6
+	.DB $21		;5ab7
+	.DB $87		;5ab8
+	.DB $7f		;5ab9
+	.DB $f8		;5aba
+	.DB $00		;5abb
+	.DB $09		;5abc
+	.DB $77		;5abd
+	.DB $e7		;5abe
+	.DB $f0		;5abf
+	.DB $8f		;5ac0
+	.DB $3f		;5ac1
+	.DB $7f		;5ac2
+	.DB $f7		;5ac3
+	.DB $ef		;5ac4
+	.DB $02		;5ac5
+	.DB $ff		;5ac6
+	.DB $91		;5ac7
+	.DB $fc		;5ac8
+	.DB $f0		;5ac9
+	.DB $e7		;5aca
+	.DB $9f		;5acb
+	.DB $f3		;5acc
+	.DB $87		;5acd
+	.DB $be		;5ace
+	.DB $3c		;5acf
+	.DB $79		;5ad0
+	.DB $77		;5ad1
+	.DB $03		;5ad2
+	.DB $ff		;5ad3
+	.DB $f2		;5ad4
+	.DB $80		;5ad5
+	.DB $3f		;5ad6
+	.DB $ff		;5ad7
+	.DB $fe		;5ad8
+	.DB $03		;5ad9
+	.DB $fd		;5ada
+	.DB $85		;5adb
+	.DB $3f		;5adc
+	.DB $ff		;5add
+	.DB $be		;5ade
+	.DB $3f		;5adf
+	.DB $7f		;5ae0
+	.DB $03		;5ae1
+	.DB $ff		;5ae2
+	.DB $05		;5ae3
+	.DB $00		;5ae4
+	.DB $83		;5ae5
+	.DB $01		;5ae6
+	.DB $0c		;5ae7
+	.DB $39		;5ae8
+	.DB $04		;5ae9
+	.DB $00		;5aea
+	.DB $94		;5aeb
+	.DB $10		;5aec
+	.DB $03		;5aed
+	.DB $3f		;5aee
+	.DB $ff		;5aef
+	.DB $1f		;5af0
+	.DB $04		;5af1
+	.DB $81		;5af2
+	.DB $e3		;5af3
+	.DB $ef		;5af4
+	.DB $0f		;5af5
+	.DB $1c		;5af6
+	.DB $3c		;5af7
+	.DB $00		;5af8
+	.DB $40		;5af9
+	.DB $30		;5afa
+	.DB $94		;5afb
+	.DB $c8		;5afc
+	.DB $2f		;5afd
+	.DB $8f		;5afe
+	.DB $c3		;5aff
+	.DB $04		;5b00
+	.DB $00		;5b01
+	.DB $84		;5b02
+	.DB $38		;5b03
+	.DB $1f		;5b04
+	.DB $ef		;5b05
+	.DB $a1		;5b06
+	.DB $05		;5b07
+	.DB $00		;5b08
+	.DB $83		;5b09
+	.DB $c0		;5b0a
+	.DB $f1		;5b0b
+	.DB $fe		;5b0c
+	.DB $06		;5b0d
+	.DB $00		;5b0e
+	.DB $82		;5b0f
+	.DB $ca		;5b10
+	.DB $79		;5b11
+	.DB $07		;5b12
+	.DB $00		;5b13
+	.DB $81		;5b14
+	.DB $ef		;5b15
+	.DB $03		;5b16
+	.DB $00		;5b17
+	.DB $83		;5b18
+	.DB $02		;5b19
+	.DB $0f		;5b1a
+	.DB $01		;5b1b
+	.DB $02		;5b1c
+	.DB $02		;5b1d
+	.DB $82		;5b1e
+	.DB $00		;5b1f
+	.DB $ff		;5b20
+	.DB $03		;5b21
+	.DB $80		;5b22
+	.DB $81		;5b23
+	.DB $8e		;5b24
+	.DB $02		;5b25
+	.DB $88		;5b26
+	.DB $82		;5b27
+	.DB $00		;5b28
+	.DB $ff		;5b29
+	.DB $06		;5b2a
+	.DB $10		;5b2b
+	.DB $0c		;5b2c
+	.DB $00		;5b2d
+	.DB $83		;5b2e
+	.DB $01		;5b2f
+	.DB $4f		;5b30
+	.DB $fb		;5b31
+	.DB $05		;5b32
+	.DB $00		;5b33
+	.DB $83		;5b34
+	.DB $e0		;5b35
+	.DB $fc		;5b36
+	.DB $fe		;5b37
+	.DB $04		;5b38
+	.DB $00		;5b39
+	.DB $84		;5b3a
+	.DB $18		;5b3b
+	.DB $1c		;5b3c
+	.DB $3e		;5b3d
+	.DB $7f		;5b3e
+	.DB $02		;5b3f
+	.DB $00		;5b40
+	.DB $86		;5b41
+	.DB $0d		;5b42
+	.DB $13		;5b43
+	.DB $06		;5b44
+	.DB $26		;5b45
+	.DB $7f		;5b46
+	.DB $bf		;5b47
+	.DB $02		;5b48
+	.DB $00		;5b49
+	.DB $86		;5b4a
+	.DB $04		;5b4b
+	.DB $06		;5b4c
+	.DB $16		;5b4d
+	.DB $2f		;5b4e
+	.DB $0f		;5b4f
+	.DB $ee		;5b50
+	.DB $06		;5b51
+	.DB $00		;5b52
+	.DB $84		;5b53
+	.DB $04		;5b54
+	.DB $19		;5b55
+	.DB $f7		;5b56
+	.DB $07		;5b57
+	.DB $02		;5b58
+	.DB $0f		;5b59
+	.DB $83		;5b5a
+	.DB $0b		;5b5b
+	.DB $1b		;5b5c
+	.DB $7f		;5b5d
+	.DB $02		;5b5e
+	.DB $ff		;5b5f
+	.DB $84		;5b60
+	.DB $80		;5b61
+	.DB $e0		;5b62
+	.DB $f0		;5b63
+	.DB $fe		;5b64
+	.DB $04		;5b65
+	.DB $ff		;5b66
+	.DB $05		;5b67
+	.DB $00		;5b68
+	.DB $83		;5b69
+	.DB $e0		;5b6a
+	.DB $fc		;5b6b
+	.DB $ff		;5b6c
+	.DB $06		;5b6d
+	.DB $12		;5b6e
+	.DB $83		;5b6f
+	.DB $11		;5b70
+	.DB $29		;5b71
+	.DB $70		;5b72
+	.DB $07		;5b73
+	.DB $74		;5b74
+	.DB $04		;5b75
+	.DB $00		;5b76
+	.DB $03		;5b77
+	.DB $01		;5b78
+	.DB $82		;5b79
+	.DB $02		;5b7a
+	.DB $29		;5b7b
+	.DB $03		;5b7c
+	.DB $ab		;5b7d
+	.DB $84		;5b7e
+	.DB $56		;5b7f
+	.DB $d6		;5b80
+	.DB $6e		;5b81
+	.DB $6a		;5b82
+	.DB $03		;5b83
+	.DB $7e		;5b84
+	.DB $81		;5b85
+	.DB $7f		;5b86
+	.DB $02		;5b87
+	.DB $bf		;5b88
+	.DB $02		;5b89
+	.DB $9f		;5b8a
+	.DB $81		;5b8b
+	.DB $7f		;5b8c
+	.DB $02		;5b8d
+	.DB $bf		;5b8e
+	.DB $02		;5b8f
+	.DB $ae		;5b90
+	.DB $06		;5b91
+	.DB $ff		;5b92
+	.DB $02		;5b93
+	.DB $af		;5b94
+	.DB $03		;5b95
+	.DB $ff		;5b96
+	.DB $06		;5b97
+	.DB $00		;5b98
+	.DB $81		;5b99
+	.DB $24		;5b9a
+	.DB $08		;5b9b
+	.DB $00		;5b9c
+	.DB $91		;5b9d
+	.DB $aa		;5b9e
+	.DB $fe		;5b9f
+	.DB $ce		;5ba0
+	.DB $fe		;5ba1
+	.DB $fa		;5ba2
+	.DB $fe		;5ba3
+	.DB $ea		;5ba4
+	.DB $fe		;5ba5
+	.DB $d6		;5ba6
+	.DB $fe		;5ba7
+	.DB $e2		;5ba8
+	.DB $fe		;5ba9
+	.DB $ea		;5baa
+	.DB $fe		;5bab
+	.DB $8e		;5bac
+	.DB $fe		;5bad
+	.DB $a6		;5bae
+	.DB $07		;5baf
+	.DB $18		;5bb0
+	.DB $89		;5bb1
+	.DB $3a		;5bb2
+	.DB $7c		;5bb3
+	.DB $74		;5bb4
+	.DB $7c		;5bb5
+	.DB $e2		;5bb6
+	.DB $fe		;5bb7
+	.DB $ee		;5bb8
+	.DB $06		;5bb9
+	.DB $82		;5bba
+	.DB $03		;5bbb
+	.DB $00		;5bbc
+	.DB $8d		;5bbd
+	.DB $aa		;5bbe
+	.DB $fe		;5bbf
+	.DB $e6		;5bc0
+	.DB $fe		;5bc1
+	.DB $ee		;5bc2
+	.DB $fe		;5bc3
+	.DB $fa		;5bc4
+	.DB $fe		;5bc5
+	.DB $ce		;5bc6
+	.DB $fe		;5bc7
+	.DB $de		;5bc8
+	.DB $fe		;5bc9
+	.DB $ce		;5bca
+	.DB $03		;5bcb
+	.DB $00		;5bcc
+	.DB $85		;5bcd
+	.DB $aa		;5bce
+	.DB $fe		;5bcf
+	.DB $aa		;5bd0
+	.DB $fe		;5bd1
+	.DB $b6		;5bd2
+	.DB $05		;5bd3
+	.DB $10		;5bd4
+	.DB $86		;5bd5
+	.DB $38		;5bd6
+	.DB $28		;5bd7
+	.DB $38		;5bd8
+	.DB $18		;5bd9
+	.DB $38		;5bda
+	.DB $18		;5bdb
+	.DB $03		;5bdc
+	.DB $38		;5bdd
+	.DB $82		;5bde
+	.DB $28		;5bdf
+	.DB $5c		;5be0
+	.DB $00		;5be1
+	.DB $20		;5be2
+	.DB $00		;5be3
+	.DB $08		;5be4
+	.DB $08		;5be5
+	.DB $18		;5be6
+	.DB $00		;5be7
+	.DB $08		;5be8
+	.DB $08		;5be9
+	.DB $10		;5bea
+	.DB $00		;5beb
+	.DB $08		;5bec
+	.DB $08		;5bed
+	.DB $10		;5bee
+	.DB $00		;5bef
+	.DB $08		;5bf0
+	.DB $18		;5bf1
+	.DB $10		;5bf2
+	.DB $00		;5bf3
+	.DB $08		;5bf4
+	.DB $1c		;5bf5
+	.DB $10		;5bf6
+	.DB $00		;5bf7
+	.DB $08		;5bf8
+	.DB $1c		;5bf9
+	.DB $18		;5bfa
+	.DB $00		;5bfb
+	.DB $08		;5bfc
+	.DB $3c		;5bfd
+	.DB $18		;5bfe
+	.DB $00		;5bff
+	.DB $08		;5c00
+	.DB $3c		;5c01
+	.DB $20		;5c02
+	.DB $00		;5c03
+	.DB $08		;5c04
+	.DB $3e		;5c05
+	.DB $18		;5c06
+	.DB $00		;5c07
+	.DB $08		;5c08
+	.DB $7e		;5c09
+	.DB $18		;5c0a
+	.DB $00		;5c0b
+	.DB $08		;5c0c
+	.DB $7e		;5c0d
+	.DB $18		;5c0e
+	.DB $00		;5c0f
+	.DB $08		;5c10
+	.DB $7e		;5c11
+	.DB $81		;5c12
+	.DB $1c		;5c13
+	.DB $02		;5c14
+	.DB $3c		;5c15
+	.DB $03		;5c16
+	.DB $1c		;5c17
+	.DB $02		;5c18
+	.DB $7f		;5c19
+	.DB $86		;5c1a
+	.DB $7e		;5c1b
+	.DB $ff		;5c1c
+	.DB $ef		;5c1d
+	.DB $3f		;5c1e
+	.DB $7e		;5c1f
+	.DB $fc		;5c20
+	.DB $02		;5c21
+	.DB $ff		;5c22
+	.DB $83		;5c23
+	.DB $3c		;5c24
+	.DB $7e		;5c25
+	.DB $ef		;5c26
+	.DB $02		;5c27
+	.DB $e7		;5c28
+	.DB $84		;5c29
+	.DB $f7		;5c2a
+	.DB $7e		;5c2b
+	.DB $3c		;5c2c
+	.DB $1c		;5c2d
+	.DB $02		;5c2e
+	.DB $3c		;5c2f
+	.DB $03		;5c30
+	.DB $1c		;5c31
+	.DB $02		;5c32
+	.DB $7f		;5c33
+	.DB $86		;5c34
+	.DB $7e		;5c35
+	.DB $ff		;5c36
+	.DB $ef		;5c37
+	.DB $3f		;5c38
+	.DB $7e		;5c39
+	.DB $fc		;5c3a
+	.DB $02		;5c3b
+	.DB $ff		;5c3c
+	.DB $02		;5c3d
+	.DB $7f		;5c3e
+	.DB $8a		;5c3f
+	.DB $1e		;5c40
+	.DB $3e		;5c41
+	.DB $3f		;5c42
+	.DB $e7		;5c43
+	.DB $ff		;5c44
+	.DB $7e		;5c45
+	.DB $1e		;5c46
+	.DB $3e		;5c47
+	.DB $7e		;5c48
+	.DB $fe		;5c49
+	.DB $02		;5c4a
+	.DB $ff		;5c4b
+	.DB $02		;5c4c
+	.DB $0e		;5c4d
+	.DB $03		;5c4e
+	.DB $fe		;5c4f
+	.DB $8d		;5c50
+	.DB $ff		;5c51
+	.DB $07		;5c52
+	.DB $e7		;5c53
+	.DB $ff		;5c54
+	.DB $7e		;5c55
+	.DB $3e		;5c56
+	.DB $7e		;5c57
+	.DB $f0		;5c58
+	.DB $fe		;5c59
+	.DB $ff		;5c5a
+	.DB $e7		;5c5b
+	.DB $ff		;5c5c
+	.DB $7e		;5c5d
+	.DB $02		;5c5e
+	.DB $ff		;5c5f
+	.DB $83		;5c60
+	.DB $ef		;5c61
+	.DB $1e		;5c62
+	.DB $3c		;5c63
+	.DB $03		;5c64
+	.DB $38		;5c65
+	.DB $83		;5c66
+	.DB $7e		;5c67
+	.DB $ff		;5c68
+	.DB $e7		;5c69
+	.DB $02		;5c6a
+	.DB $ff		;5c6b
+	.DB $82		;5c6c
+	.DB $e7		;5c6d
+	.DB $ff		;5c6e
+	.DB $02		;5c6f
+	.DB $7e		;5c70
+	.DB $88		;5c71
+	.DB $ff		;5c72
+	.DB $e7		;5c73
+	.DB $ff		;5c74
+	.DB $7f		;5c75
+	.DB $0f		;5c76
+	.DB $7e		;5c77
+	.DB $7c		;5c78
+	.DB $1c		;5c79
+	.DB $04		;5c7a
+	.DB $3e		;5c7b
+	.DB $03		;5c7c
+	.DB $1c		;5c7d
+	.DB $03		;5c7e
+	.DB $00		;5c7f
+	.DB $02		;5c80
+	.DB $7e		;5c81
+	.DB $03		;5c82
+	.DB $00		;5c83
+	.DB $02		;5c84
+	.DB $7f		;5c85
+	.DB $88		;5c86
+	.DB $1e		;5c87
+	.DB $3e		;5c88
+	.DB $3f		;5c89
+	.DB $e7		;5c8a
+	.DB $ff		;5c8b
+	.DB $7e		;5c8c
+	.DB $01		;5c8d
+	.DB $03		;5c8e
+	.DB $06		;5c8f
+	.DB $07		;5c90
+	.DB $10		;5c91
+	.DB $ff		;5c92
+	.DB $84		;5c93
+	.DB $1e		;5c94
+	.DB $3e		;5c95
+	.DB $7e		;5c96
+	.DB $fe		;5c97
+	.DB $02		;5c98
+	.DB $ff		;5c99
+	.DB $02		;5c9a
+	.DB $0e		;5c9b
+	.DB $84		;5c9c
+	.DB $3c		;5c9d
+	.DB $7e		;5c9e
+	.DB $ff		;5c9f
+	.DB $e7		;5ca0
+	.DB $02		;5ca1
+	.DB $ff		;5ca2
+	.DB $02		;5ca3
+	.DB $e7		;5ca4
+	.DB $83		;5ca5
+	.DB $fe		;5ca6
+	.DB $ff		;5ca7
+	.DB $e7		;5ca8
+	.DB $02		;5ca9
+	.DB $ff		;5caa
+	.DB $86		;5cab
+	.DB $e7		;5cac
+	.DB $ff		;5cad
+	.DB $fe		;5cae
+	.DB $3e		;5caf
+	.DB $7f		;5cb0
+	.DB $f7		;5cb1
+	.DB $02		;5cb2
+	.DB $e0		;5cb3
+	.DB $86		;5cb4
+	.DB $f7		;5cb5
+	.DB $7f		;5cb6
+	.DB $3e		;5cb7
+	.DB $fc		;5cb8
+	.DB $fe		;5cb9
+	.DB $ef		;5cba
+	.DB $02		;5cbb
+	.DB $e7		;5cbc
+	.DB $83		;5cbd
+	.DB $ef		;5cbe
+	.DB $fe		;5cbf
+	.DB $fc		;5cc0
+	.DB $02		;5cc1
+	.DB $ff		;5cc2
+	.DB $81		;5cc3
+	.DB $e0		;5cc4
+	.DB $02		;5cc5
+	.DB $fc		;5cc6
+	.DB $81		;5cc7
+	.DB $e0		;5cc8
+	.DB $04		;5cc9
+	.DB $ff		;5cca
+	.DB $81		;5ccb
+	.DB $e0		;5ccc
+	.DB $02		;5ccd
+	.DB $fc		;5cce
+	.DB $03		;5ccf
+	.DB $e0		;5cd0
+	.DB $83		;5cd1
+	.DB $3f		;5cd2
+	.DB $7f		;5cd3
+	.DB $f0		;5cd4
+	.DB $02		;5cd5
+	.DB $ef		;5cd6
+	.DB $83		;5cd7
+	.DB $f7		;5cd8
+	.DB $7f		;5cd9
+	.DB $3f		;5cda
+	.DB $03		;5cdb
+	.DB $e7		;5cdc
+	.DB $02		;5cdd
+	.DB $ff		;5cde
+	.DB $03		;5cdf
+	.DB $e7		;5ce0
+	.DB $02		;5ce1
+	.DB $7f		;5ce2
+	.DB $04		;5ce3
+	.DB $1c		;5ce4
+	.DB $02		;5ce5
+	.DB $7f		;5ce6
+	.DB $05		;5ce7
+	.DB $07		;5ce8
+	.DB $86		;5ce9
+	.DB $e7		;5cea
+	.DB $ff		;5ceb
+	.DB $7e		;5cec
+	.DB $e7		;5ced
+	.DB $ef		;5cee
+	.DB $fe		;5cef
+	.DB $02		;5cf0
+	.DB $fc		;5cf1
+	.DB $83		;5cf2
+	.DB $fe		;5cf3
+	.DB $ff		;5cf4
+	.DB $ef		;5cf5
+	.DB $06		;5cf6
+	.DB $e0		;5cf7
+	.DB $02		;5cf8
+	.DB $ff		;5cf9
+	.DB $81		;5cfa
+	.DB $e7		;5cfb
+	.DB $05		;5cfc
+	.DB $ff		;5cfd
+	.DB $03		;5cfe
+	.DB $e7		;5cff
 l5d00h:
-	add a,c			;5d00
-	rst 30h			;5d01
-	inc b			;5d02
-	rst 38h			;5d03
-	add a,h			;5d04
-	rst 28h			;5d05
-	rst 20h			;5d06
-	ld a,(hl)			;5d07
-	rst 38h			;5d08
-	inc b			;5d09
-	rst 20h			;5d0a
-	add a,h			;5d0b
-	rst 38h			;5d0c
-	ld a,(hl)			;5d0d
-	cp 0ffh		;5d0e
-	ld (bc),a			;5d10
-	rst 20h			;5d11
-	add a,d			;5d12
-	rst 38h			;5d13
-	cp 002h		;5d14
-	ret po			;5d16
-	dec b			;5d17
-	nop			;5d18
-	inc bc			;5d19
-	inc e			;5d1a
-	sub b			;5d1b
-	cp 0ffh		;5d1c
-	rst 20h			;5d1e
-	rst 28h			;5d1f
-	rst 38h			;5d20
-	cp 0ffh		;5d21
-	rst 28h			;5d23
-	ld a,h			;5d24
-	cp 0eeh		;5d25
-	cp 07fh		;5d27
-	rst 20h			;5d29
-	rst 38h			;5d2a
-	ld a,(hl)			;5d2b
-	ld (bc),a			;5d2c
-	ld a,a			;5d2d
-	ld b,01ch		;5d2e
-	ld b,0e7h		;5d30
-	add a,d			;5d32
-	rst 38h			;5d33
-	ld a,(hl)			;5d34
-	inc bc			;5d35
-	rst 20h			;5d36
-	ld (bc),a			;5d37
-	rst 38h			;5d38
-	add a,e			;5d39
-	ld a,(hl)			;5d3a
-	inc a			;5d3b
-	jr l5d40h		;5d3c
-	rst 20h			;5d3e
-	inc b			;5d3f
+	.DB $81		;5d00
+	.DB $f7		;5d01
+	.DB $04		;5d02
+	.DB $ff		;5d03
+	.DB $84		;5d04
+	.DB $ef		;5d05
+	.DB $e7		;5d06
+	.DB $7e		;5d07
+	.DB $ff		;5d08
+	.DB $04		;5d09
+	.DB $e7		;5d0a
+	.DB $84		;5d0b
+	.DB $ff		;5d0c
+	.DB $7e		;5d0d
+	.DB $fe		;5d0e
+	.DB $ff		;5d0f
+	.DB $02		;5d10
+	.DB $e7		;5d11
+	.DB $82		;5d12
+	.DB $ff		;5d13
+	.DB $fe		;5d14
+	.DB $02		;5d15
+	.DB $e0		;5d16
+	.DB $05		;5d17
+	.DB $00		;5d18
+	.DB $03		;5d19
+	.DB $1c		;5d1a
+	.DB $90		;5d1b
+	.DB $fe		;5d1c
+	.DB $ff		;5d1d
+	.DB $e7		;5d1e
+	.DB $ef		;5d1f
+	.DB $ff		;5d20
+	.DB $fe		;5d21
+	.DB $ff		;5d22
+	.DB $ef		;5d23
+	.DB $7c		;5d24
+	.DB $fe		;5d25
+	.DB $ee		;5d26
+	.DB $fe		;5d27
+	.DB $7f		;5d28
+	.DB $e7		;5d29
+	.DB $ff		;5d2a
+	.DB $7e		;5d2b
+	.DB $02		;5d2c
+	.DB $7f		;5d2d
+	.DB $06		;5d2e
+	.DB $1c		;5d2f
+	.DB $06		;5d30
+	.DB $e7		;5d31
+	.DB $82		;5d32
+	.DB $ff		;5d33
+	.DB $7e		;5d34
+	.DB $03		;5d35
+	.DB $e7		;5d36
+	.DB $02		;5d37
+	.DB $ff		;5d38
+	.DB $83		;5d39
+	.DB $7e		;5d3a
+	.DB $3c		;5d3b
+	.DB $18		;5d3c
+	.DB $02		;5d3d
+	.DB $e7		;5d3e
+	.DB $04		;5d3f
 l5d40h:
-	rst 38h			;5d40
-	add a,e			;5d41
-	ld a,(hl)			;5d42
-	ld h,(hl)			;5d43
-	rst 20h			;5d44
-	ld (bc),a			;5d45
-	rst 38h			;5d46
-	ld (bc),a			;5d47
-	ld a,(hl)			;5d48
-	ld (bc),a			;5d49
-	rst 38h			;5d4a
-	add a,c			;5d4b
-	rst 20h			;5d4c
-	inc bc			;5d4d
-	ld (hl),a			;5d4e
-	add a,d			;5d4f
-	ld a,a			;5d50
-	ld a,003h		;5d51
-	inc e			;5d53
-	ld (bc),a			;5d54
-	nop			;5d55
-	add a,(hl)			;5d56
-	ld a,a			;5d57
-	rst 38h			;5d58
-	cp 07fh		;5d59
-	rst 38h			;5d5b
-	cp 002h		;5d5c
-	jr c,l5d62h		;5d5e
-	cp 002h		;5d60
-l5d62h:
-	jr c,l5ce6h		;5d62
-	inc a			;5d64
-	inc e			;5d65
-	ld (bc),a			;5d66
-	nop			;5d67
-	add a,d			;5d68
-	cp 0ffh		;5d69
-	inc b			;5d6b
-	rst 20h			;5d6c
-	ld (bc),a			;5d6d
-	rlca			;5d6e
-	add a,d			;5d6f
-	ld a,a			;5d70
-	rst 38h			;5d71
-	ld (bc),a			;5d72
-	rst 20h			;5d73
-	add a,d			;5d74
-	rst 38h			;5d75
-	ld a,a			;5d76
-	ld (bc),a			;5d77
-	nop			;5d78
-	add a,e			;5d79
-	cp 0ffh		;5d7a
-	rst 20h			;5d7c
-	dec b			;5d7d
-	ret po			;5d7e
-	add a,d			;5d7f
-	cp 0ffh		;5d80
-	inc b			;5d82
-	rst 20h			;5d83
-	ld c,b			;5d84
-	rst 38h			;5d85
-	add a,h			;5d86
-	nop			;5d87
-	ld h,b			;5d88
-	ld l,h			;5d89
-	ld a,a			;5d8a
-l5d8bh:
-	ld (bc),a			;5d8b
-	ld a,e			;5d8c
-	add a,d			;5d8d
-	ld a,a			;5d8e
-	ld l,a			;5d8f
-	inc bc			;5d90
-	nop			;5d91
-	adc a,d			;5d92
-	pop hl			;5d93
-	di			;5d94
-	rst 30h			;5d95
-	cp 0fch		;5d96
-	nop			;5d98
-	jr nc,l5d8bh		;5d99
-	call m,003beh		;5d9b
-	ld (hl),083h		;5d9e
-	nop			;5da0
-	ld h,e			;5da1
-	ld h,a			;5da2
-	ld (bc),a			;5da3
-	ld h,(hl)			;5da4
-	add a,d			;5da5
-	ld a,a			;5da6
-	ld a,e			;5da7
-	ld (bc),a			;5da8
-	nop			;5da9
-	ld (bc),a			;5daa
-	or e			;5dab
-	inc bc			;5dac
-	rst 38h			;5dad
-	add a,c			;5dae
-	or e			;5daf
-	inc bc			;5db0
-	nop			;5db1
-	add a,d			;5db2
-	.DB 0fdh,0ffh,003h	;illegal sequence		;5db3
-	inc sp			;5db6
-	add a,c			;5db7
-	ld sp,l0001h+1		;5db8
-	add a,a			;5dbb
-	sbc a,0ffh		;5dbc
-	ld a,e			;5dbe
-	ld a,a			;5dbf
-	cp 0d8h		;5dc0
-	ld a,(hl)			;5dc2
-	rlca			;5dc3
-	rst 38h			;5dc4
-	add a,c			;5dc5
-	ld a,(hl)			;5dc6
-	rlca			;5dc7
-	rst 38h			;5dc8
-	add a,c			;5dc9
-	ld a,(hl)			;5dca
-	rrca			;5dcb
-	rst 38h			;5dcc
-	inc bc			;5dcd
-	nop			;5dce
-	inc b			;5dcf
-	ret po			;5dd0
-	add a,c			;5dd1
-	ex (sp),hl			;5dd2
-	rlca			;5dd3
-	nop			;5dd4
-	add a,h			;5dd5
-	ret nz			;5dd6
-	rst 20h			;5dd7
-	xor 0ech		;5dd8
-	inc bc			;5dda
-	rst 28h			;5ddb
-	adc a,e			;5ddc
-	rst 20h			;5ddd
-	ex (sp),hl			;5dde
-	ret po			;5ddf
-	jr nc,l5df2h		;5de0
-	sub b			;5de2
-	ret nc			;5de3
-	ret p			;5de4
-	ret po			;5de5
-	ret nz			;5de6
-	rst 20h			;5de7
-	dec b			;5de8
-	rst 28h			;5de9
-	add a,e			;5dea
-	rst 20h			;5deb
-	ex (sp),hl			;5dec
-	ret po			;5ded
-	dec b			;5dee
-	ret p			;5def
-	add a,d			;5df0
-	ret po			;5df1
-l5df2h:
-	ret nz			;5df2
-	inc bc			;5df3
-	ret po			;5df4
-	add a,l			;5df5
-	ex (sp),hl			;5df6
-	rst 20h			;5df7
-	xor 0ech		;5df8
-	rst 28h			;5dfa
-	inc bc			;5dfb
-	nop			;5dfc
-	add a,l			;5dfd
-	ret nz			;5dfe
-	ret po			;5dff
-	jr nc,l5e12h		;5e00
-	sub b			;5e02
-	ld (bc),a			;5e03
-	rst 28h			;5e04
-	add a,d			;5e05
-	rst 20h			;5e06
+	.DB $ff		;5d40
+	.DB $83		;5d41
+	.DB $7e		;5d42
+	.DB $66		;5d43
+	.DB $e7		;5d44
+	.DB $02		;5d45
+	.DB $ff		;5d46
+	.DB $02		;5d47
+	.DB $7e		;5d48
+	.DB $02		;5d49
+	.DB $ff		;5d4a
+	.DB $81		;5d4b
+	.DB $e7		;5d4c
+	.DB $03		;5d4d
+	.DB $77		;5d4e
+	.DB $82		;5d4f
+	.DB $7f		;5d50
+	.DB $3e		;5d51
+	.DB $03		;5d52
+	.DB $1c		;5d53
+	.DB $02		;5d54
+	.DB $00		;5d55
+	.DB $86		;5d56
+	.DB $7f		;5d57
+	.DB $ff		;5d58
+	.DB $fe		;5d59
+	.DB $7f		;5d5a
+	.DB $ff		;5d5b
+	.DB $fe		;5d5c
+	.DB $02		;5d5d
+	.DB $38		;5d5e
+	.DB $02		;5d5f
+	.DB $fe		;5d60
+	.DB $02		;5d61
+	.DB $38		;5d62
+	.DB $82		;5d63
+	.DB $3c		;5d64
+	.DB $1c		;5d65
+	.DB $02		;5d66
+	.DB $00		;5d67
+	.DB $82		;5d68
+	.DB $fe		;5d69
+	.DB $ff		;5d6a
+	.DB $04		;5d6b
+	.DB $e7		;5d6c
+	.DB $02		;5d6d
+	.DB $07		;5d6e
+	.DB $82		;5d6f
+	.DB $7f		;5d70
+	.DB $ff		;5d71
+	.DB $02		;5d72
+	.DB $e7		;5d73
+	.DB $82		;5d74
+	.DB $ff		;5d75
+	.DB $7f		;5d76
+	.DB $02		;5d77
+	.DB $00		;5d78
+	.DB $83		;5d79
+	.DB $fe		;5d7a
+	.DB $ff		;5d7b
+	.DB $e7		;5d7c
+	.DB $05		;5d7d
+	.DB $e0		;5d7e
+	.DB $82		;5d7f
+	.DB $fe		;5d80
+	.DB $ff		;5d81
+	.DB $04		;5d82
+	.DB $e7		;5d83
+	.DB $48		;5d84
+	.DB $ff		;5d85
+	.DB $84		;5d86
+	.DB $00		;5d87
+	.DB $60		;5d88
+	.DB $6c		;5d89
+	.DB $7f		;5d8a
+	.DB $02		;5d8b
+	.DB $7b		;5d8c
+	.DB $82		;5d8d
+	.DB $7f		;5d8e
+	.DB $6f		;5d8f
+	.DB $03		;5d90
+	.DB $00		;5d91
+	.DB $8a		;5d92
+	.DB $e1		;5d93
+	.DB $f3		;5d94
+	.DB $f7		;5d95
+	.DB $fe		;5d96
+	.DB $fc		;5d97
+	.DB $00		;5d98
+	.DB $30		;5d99
+	.DB $f0		;5d9a
+	.DB $fc		;5d9b
+	.DB $be		;5d9c
+	.DB $03		;5d9d
+	.DB $36		;5d9e
+	.DB $83		;5d9f
+	.DB $00		;5da0
+	.DB $63		;5da1
+	.DB $67		;5da2
+	.DB $02		;5da3
+	.DB $66		;5da4
+	.DB $82		;5da5
+	.DB $7f		;5da6
+	.DB $7b		;5da7
+	.DB $02		;5da8
+	.DB $00		;5da9
+	.DB $02		;5daa
+	.DB $b3		;5dab
+	.DB $03		;5dac
+	.DB $ff		;5dad
+	.DB $81		;5dae
+	.DB $b3		;5daf
+	.DB $03		;5db0
+	.DB $00		;5db1
+	.DB $82		;5db2
+	.DB $fd		;5db3
+	.DB $ff		;5db4
+	.DB $03		;5db5
+	.DB $33		;5db6
+	.DB $81		;5db7
+	.DB $31		;5db8
+	.DB $02		;5db9
+	.DB $00		;5dba
+	.DB $87		;5dbb
+	.DB $de		;5dbc
+	.DB $ff		;5dbd
+	.DB $7b		;5dbe
+	.DB $7f		;5dbf
+	.DB $fe		;5dc0
+	.DB $d8		;5dc1
+	.DB $7e		;5dc2
+	.DB $07		;5dc3
+	.DB $ff		;5dc4
+	.DB $81		;5dc5
+	.DB $7e		;5dc6
+	.DB $07		;5dc7
+	.DB $ff		;5dc8
+	.DB $81		;5dc9
+	.DB $7e		;5dca
+	.DB $0f		;5dcb
+	.DB $ff		;5dcc
+	.DB $03		;5dcd
+	.DB $00		;5dce
+	.DB $04		;5dcf
+	.DB $e0		;5dd0
+	.DB $81		;5dd1
+	.DB $e3		;5dd2
+	.DB $07		;5dd3
+	.DB $00		;5dd4
+	.DB $84		;5dd5
+	.DB $c0		;5dd6
+	.DB $e7		;5dd7
+	.DB $ee		;5dd8
+	.DB $ec		;5dd9
+	.DB $03		;5dda
+	.DB $ef		;5ddb
+	.DB $8b		;5ddc
+	.DB $e7		;5ddd
+	.DB $e3		;5dde
+	.DB $e0		;5ddf
+	.DB $30		;5de0
+	.DB $10		;5de1
+	.DB $90		;5de2
+	.DB $d0		;5de3
+	.DB $f0		;5de4
+	.DB $e0		;5de5
+	.DB $c0		;5de6
+	.DB $e7		;5de7
+	.DB $05		;5de8
+	.DB $ef		;5de9
+	.DB $83		;5dea
+	.DB $e7		;5deb
+	.DB $e3		;5dec
+	.DB $e0		;5ded
+	.DB $05		;5dee
+	.DB $f0		;5def
+	.DB $82		;5df0
+	.DB $e0		;5df1
+	.DB $c0		;5df2
+	.DB $03		;5df3
+	.DB $e0		;5df4
+	.DB $85		;5df5
+	.DB $e3		;5df6
+	.DB $e7		;5df7
+	.DB $ee		;5df8
+	.DB $ec		;5df9
+	.DB $ef		;5dfa
+	.DB $03		;5dfb
+	.DB $00		;5dfc
+	.DB $85		;5dfd
+	.DB $c0		;5dfe
+	.DB $e0		;5dff
+	.DB $30		;5e00
+	.DB $10		;5e01
+	.DB $90		;5e02
+	.DB $02		;5e03
+	.DB $ef		;5e04
+	.DB $82		;5e05
+	.DB $e7		;5e06
 sub_5e07h:
-	ex (sp),hl			;5e07
-	inc bc			;5e08
-	ret po			;5e09
-	add a,l			;5e0a
-	ex (sp),hl			;5e0b
-	ret nc			;5e0c
-	ret p			;5e0d
-	ret po			;5e0e
-	ret nz			;5e0f
-	inc bc			;5e10
-	nop			;5e11
-l5e12h:
-	add a,c			;5e12
-	ret nz			;5e13
-	inc bc			;5e14
-	ret po			;5e15
-	add a,d			;5e16
-	ex (sp),hl			;5e17
-	rst 20h			;5e18
-	inc bc			;5e19
-	rst 28h			;5e1a
-	inc bc			;5e1b
-	nop			;5e1c
-	add a,d			;5e1d
-	ret nz			;5e1e
-	ret po			;5e1f
-	inc bc			;5e20
-	ret p			;5e21
-	ld (bc),a			;5e22
-	rst 28h			;5e23
-	add a,d			;5e24
-	rst 20h			;5e25
-	ex (sp),hl			;5e26
-	inc bc			;5e27
-	ret po			;5e28
-	add a,c			;5e29
-	ex (sp),hl			;5e2a
-	ld (bc),a			;5e2b
-	ret p			;5e2c
-	add a,d			;5e2d
-	ret po			;5e2e
-	ret nz			;5e2f
-	inc bc			;5e30
-	nop			;5e31
-	add a,d			;5e32
-	ret nz			;5e33
-	rst 20h			;5e34
-	dec b			;5e35
-	rst 28h			;5e36
-	add a,e			;5e37
-	rst 20h			;5e38
-	ex (sp),hl			;5e39
-l5e3ah:
-	ret po			;5e3a
-	dec b			;5e3b
-	ret p			;5e3c
-	add a,d			;5e3d
-	ret po			;5e3e
-	ret nz			;5e3f
-	dec b			;5e40
-	ret po			;5e41
-	add a,e			;5e42
-	rst 38h			;5e43
-	ld a,a			;5e44
-	ccf			;5e45
-	dec b			;5e46
-	nop			;5e47
-	inc bc			;5e48
-	ret m			;5e49
-	inc bc			;5e4a
-	inc c			;5e4b
-	add a,d			;5e4c
-	inc e			;5e4d
-	ld a,h			;5e4e
-	ld (bc),a			;5e4f
-	call m,sub_3f81h		;5e50
-	inc b			;5e53
-	nop			;5e54
-	ld (bc),a			;5e55
-	ex af,af'			;5e56
-	add a,d			;5e57
-	djnz l5e3ah		;5e58
-	ld a,a			;5e5a
-l5e5bh:
-	nop			;5e5b
-	ld a,a			;5e5c
-	nop			;5e5d
-	ld (bc),a			;5e5e
-	nop			;5e5f
-	ld (bc),a			;5e60
-	jr l5e67h		;5e61
-	djnz l5e67h		;5e63
-	rst 38h			;5e65
-	inc bc			;5e66
-l5e67h:
-	nop			;5e67
-	add a,c			;5e68
-	ld c,002h		;5e69
-	rra			;5e6b
-	ld (bc),a			;5e6c
-	ld c,002h		;5e6d
-	rst 38h			;5e6f
-	add a,c			;5e70
-	ret nz			;5e71
-	rlca			;5e72
-	rst 38h			;5e73
-	add a,c			;5e74
-	jr l5e7bh		;5e75
-	rst 38h			;5e77
-	add a,c			;5e78
-	scf			;5e79
-	rlca			;5e7a
-l5e7bh:
-	nop			;5e7b
-	add a,c			;5e7c
-	rst 38h			;5e7d
-	ld b,000h		;5e7e
-	add a,d			;5e80
-	cp (hl)			;5e81
-	rst 38h			;5e82
-	ld b,000h		;5e83
-	add a,d			;5e85
-	rst 28h			;5e86
-	rst 38h			;5e87
-	ld b,000h		;5e88
-	add a,d			;5e8a
-	in a,(0ffh)		;5e8b
-	ld b,000h		;5e8d
-	add a,d			;5e8f
-	rst 10h			;5e90
-	rst 38h			;5e91
-	ld b,000h		;5e92
-	ld (bc),a			;5e94
-	rst 38h			;5e95
-	djnz l5e98h		;5e96
-l5e98h:
-	add a,e			;5e98
-	add a,b			;5e99
-	ret nz			;5e9a
-	jr nz,l5e9fh		;5e9b
-	djnz l5ea2h		;5e9d
-l5e9fh:
-	sub b			;5e9f
-	djnz l5ea2h		;5ea0
-l5ea2h:
-	ex af,af'			;5ea2
-	djnz l5eb5h		;5ea3
-	nop			;5ea5
-	inc bc			;5ea6
-	ex af,af'			;5ea7
-	add a,c			;5ea8
-	add hl,bc			;5ea9
-	ld (bc),a			;5eaa
-l5eabh:
-	dec b			;5eab
-	ld (bc),a			;5eac
-	inc b			;5ead
-	rlca			;5eae
-	nop			;5eaf
-	add a,e			;5eb0
-	inc b			;5eb1
-	ld (bc),a			;5eb2
-	ld b,002h		;5eb3
-l5eb5h:
-	inc bc			;5eb5
-	add a,c			;5eb6
-	ld bc,l0009h		;5eb7
-	add a,c			;5eba
-l5ebbh:
-	and h			;5ebb
-	ex af,af'			;5ebc
-	nop			;5ebd
-	add a,l			;5ebe
-	xor d			;5ebf
-	cp 0eeh		;5ec0
-	cp 0dah		;5ec2
-	inc bc			;5ec4
-	cp 083h		;5ec5
-	cp (hl)			;5ec7
-	cp 0f6h		;5ec8
-	inc bc			;5eca
-	cp 083h		;5ecb
-	sbc a,0feh		;5ecd
-	xor 007h		;5ecf
-	jr l5e5bh		;5ed1
-	cp d			;5ed3
-	jr nz,l5edeh		;5ed4
-	ld d,b			;5ed6
-	inc d			;5ed7
-	ld b,h			;5ed8
-	nop			;5ed9
-	add a,b			;5eda
-	inc b			;5edb
-	nop			;5edc
-	adc a,c			;5edd
-l5edeh:
-	xor d			;5ede
-	cp 0eah		;5edf
-	cp 0deh		;5ee1
-	cp 0f6h		;5ee3
-	cp 0deh		;5ee5
-	inc bc			;5ee7
-	cp 081h		;5ee8
-	xor 003h		;5eea
-	nop			;5eec
-	add a,c			;5eed
-	xor d			;5eee
-	inc b			;5eef
-	cp 090h		;5ef0
-	djnz l5ef4h		;5ef2
-l5ef4h:
-	djnz l5ef6h		;5ef4
-l5ef6h:
-	jr z,$+8		;5ef6
-	djnz l5efah		;5ef8
-l5efah:
-	jr nz,$+16		;5efa
-	ex af,af'			;5efc
-	djnz l5f27h		;5efd
-	jr nz,l5f11h		;5eff
-	jr z,l5f03h		;5f01
+	.DB $e3		;5e07
+	.DB $03		;5e08
+	.DB $e0		;5e09
+	.DB $85		;5e0a
+	.DB $e3		;5e0b
+	.DB $d0		;5e0c
+	.DB $f0		;5e0d
+	.DB $e0		;5e0e
+	.DB $c0		;5e0f
+	.DB $03		;5e10
+	.DB $00		;5e11
+	.DB $81		;5e12
+	.DB $c0		;5e13
+	.DB $03		;5e14
+	.DB $e0		;5e15
+	.DB $82		;5e16
+	.DB $e3		;5e17
+	.DB $e7		;5e18
+	.DB $03		;5e19
+	.DB $ef		;5e1a
+	.DB $03		;5e1b
+	.DB $00		;5e1c
+	.DB $82		;5e1d
+	.DB $c0		;5e1e
+	.DB $e0		;5e1f
+	.DB $03		;5e20
+	.DB $f0		;5e21
+	.DB $02		;5e22
+	.DB $ef		;5e23
+	.DB $82		;5e24
+	.DB $e7		;5e25
+	.DB $e3		;5e26
+	.DB $03		;5e27
+	.DB $e0		;5e28
+	.DB $81		;5e29
+	.DB $e3		;5e2a
+	.DB $02		;5e2b
+	.DB $f0		;5e2c
+	.DB $82		;5e2d
+	.DB $e0		;5e2e
+	.DB $c0		;5e2f
+	.DB $03		;5e30
+	.DB $00		;5e31
+	.DB $82		;5e32
+	.DB $c0		;5e33
+	.DB $e7		;5e34
+	.DB $05		;5e35
+	.DB $ef		;5e36
+	.DB $83		;5e37
+	.DB $e7		;5e38
+	.DB $e3		;5e39
+	.DB $e0		;5e3a
+	.DB $05		;5e3b
+	.DB $f0		;5e3c
+	.DB $82		;5e3d
+	.DB $e0		;5e3e
+	.DB $c0		;5e3f
+	.DB $05		;5e40
+	.DB $e0		;5e41
+	.DB $83		;5e42
+	.DB $ff		;5e43
+	.DB $7f		;5e44
+	.DB $3f		;5e45
+	.DB $05		;5e46
+	.DB $00		;5e47
+	.DB $03		;5e48
+	.DB $f8		;5e49
+	.DB $03		;5e4a
+	.DB $0c		;5e4b
+	.DB $82		;5e4c
+	.DB $1c		;5e4d
+	.DB $7c		;5e4e
+	.DB $02		;5e4f
+	.DB $fc		;5e50
+	.DB $81		;5e51
+	.DB $3f		;5e52
+	.DB $04		;5e53
+	.DB $00		;5e54
+	.DB $02		;5e55
+	.DB $08		;5e56
+	.DB $82		;5e57
+	.DB $10		;5e58
+	.DB $e0		;5e59
+	.DB $7f		;5e5a
+	.DB $00		;5e5b
+	.DB $7f		;5e5c
+	.DB $00		;5e5d
+	.DB $02		;5e5e
+	.DB $00		;5e5f
+	.DB $02		;5e60
+	.DB $18		;5e61
+	.DB $04		;5e62
+	.DB $10		;5e63
+	.DB $02		;5e64
+	.DB $ff		;5e65
+	.DB $03		;5e66
+	.DB $00		;5e67
+	.DB $81		;5e68
+	.DB $0e		;5e69
+	.DB $02		;5e6a
+	.DB $1f		;5e6b
+	.DB $02		;5e6c
+	.DB $0e		;5e6d
+	.DB $02		;5e6e
+	.DB $ff		;5e6f
+	.DB $81		;5e70
+	.DB $c0		;5e71
+	.DB $07		;5e72
+	.DB $ff		;5e73
+	.DB $81		;5e74
+	.DB $18		;5e75
+	.DB $04		;5e76
+	.DB $ff		;5e77
+	.DB $81		;5e78
+	.DB $37		;5e79
+	.DB $07		;5e7a
+	.DB $00		;5e7b
+	.DB $81		;5e7c
+	.DB $ff		;5e7d
+	.DB $06		;5e7e
+	.DB $00		;5e7f
+	.DB $82		;5e80
+	.DB $be		;5e81
+	.DB $ff		;5e82
+	.DB $06		;5e83
+	.DB $00		;5e84
+	.DB $82		;5e85
+	.DB $ef		;5e86
+	.DB $ff		;5e87
+	.DB $06		;5e88
+	.DB $00		;5e89
+	.DB $82		;5e8a
+	.DB $db		;5e8b
+	.DB $ff		;5e8c
+	.DB $06		;5e8d
+	.DB $00		;5e8e
+	.DB $82		;5e8f
+	.DB $d7		;5e90
+	.DB $ff		;5e91
+	.DB $06		;5e92
+	.DB $00		;5e93
+	.DB $02		;5e94
+	.DB $ff		;5e95
+	.DB $10		;5e96
+	.DB $00		;5e97
+	.DB $83		;5e98
+	.DB $80		;5e99
+	.DB $c0		;5e9a
+	.DB $20		;5e9b
+	.DB $02		;5e9c
+	.DB $10		;5e9d
+	.DB $03		;5e9e
+	.DB $90		;5e9f
+	.DB $10		;5ea0
+	.DB $00		;5ea1
+	.DB $08		;5ea2
+	.DB $10		;5ea3
+	.DB $10		;5ea4
+	.DB $00		;5ea5
+	.DB $03		;5ea6
+	.DB $08		;5ea7
+	.DB $81		;5ea8
+	.DB $09		;5ea9
+	.DB $02		;5eaa
+	.DB $05		;5eab
+	.DB $02		;5eac
+	.DB $04		;5ead
+	.DB $07		;5eae
+	.DB $00		;5eaf
+	.DB $83		;5eb0
+	.DB $04		;5eb1
+	.DB $02		;5eb2
+	.DB $06		;5eb3
+	.DB $02		;5eb4
+	.DB $03		;5eb5
+	.DB $81		;5eb6
+	.DB $01		;5eb7
+	.DB $09		;5eb8
+	.DB $00		;5eb9
+	.DB $81		;5eba
+	.DB $a4		;5ebb
+	.DB $08		;5ebc
+	.DB $00		;5ebd
+	.DB $85		;5ebe
+	.DB $aa		;5ebf
+	.DB $fe		;5ec0
+	.DB $ee		;5ec1
+	.DB $fe		;5ec2
+	.DB $da		;5ec3
+	.DB $03		;5ec4
+	.DB $fe		;5ec5
+	.DB $83		;5ec6
+	.DB $be		;5ec7
+	.DB $fe		;5ec8
+	.DB $f6		;5ec9
+	.DB $03		;5eca
+	.DB $fe		;5ecb
+	.DB $83		;5ecc
+	.DB $de		;5ecd
+	.DB $fe		;5ece
+	.DB $ee		;5ecf
+	.DB $07		;5ed0
+	.DB $18		;5ed1
+	.DB $88		;5ed2
+	.DB $ba		;5ed3
+	.DB $20		;5ed4
+	.DB $08		;5ed5
+	.DB $50		;5ed6
+	.DB $14		;5ed7
+	.DB $44		;5ed8
+	.DB $00		;5ed9
+	.DB $80		;5eda
+	.DB $04		;5edb
+	.DB $00		;5edc
+	.DB $89		;5edd
+	.DB $aa		;5ede
+	.DB $fe		;5edf
+	.DB $ea		;5ee0
+	.DB $fe		;5ee1
+	.DB $de		;5ee2
+	.DB $fe		;5ee3
+	.DB $f6		;5ee4
+	.DB $fe		;5ee5
+	.DB $de		;5ee6
+	.DB $03		;5ee7
+	.DB $fe		;5ee8
+	.DB $81		;5ee9
+	.DB $ee		;5eea
+	.DB $03		;5eeb
+	.DB $00		;5eec
+	.DB $81		;5eed
+	.DB $aa		;5eee
+	.DB $04		;5eef
+	.DB $fe		;5ef0
+	.DB $90		;5ef1
+	.DB $10		;5ef2
+	.DB $00		;5ef3
+	.DB $10		;5ef4
+	.DB $00		;5ef5
+	.DB $28		;5ef6
+	.DB $08		;5ef7
+	.DB $10		;5ef8
+	.DB $00		;5ef9
+	.DB $20		;5efa
+	.DB $10		;5efb
+	.DB $08		;5efc
+	.DB $10		;5efd
+	.DB $28		;5efe
+	.DB $20		;5eff
+	.DB $10		;5f00
+	.DB $28		;5f01
+	.DB $00		;5f02
 l5f03h:
-	ld (de),a			;5f03
-	nop			;5f04
-	sub b			;5f05
-	inc a			;5f06
-l5f07h:
-	ld h,(hl)			;5f07
-	ld b,d			;5f08
-	nop			;5f09
-	add a,c			;5f0a
-	jp l3c66h		;5f0b
-	jr l5f10h		;5f0e
-l5f10h:
-	add a,c			;5f10
-l5f11h:
-	nop			;5f11
-	inc a			;5f12
-	rst 38h			;5f13
-	nop			;5f14
-	ld b,d			;5f15
-	ld c,000h		;5f16
-	add a,l			;5f18
-	inc a			;5f19
-	ld a,(hl)			;5f1a
-	rst 38h			;5f1b
-	rst 20h			;5f1c
-	jp l0003h+1		;5f1d
-	add a,e			;5f20
-	inc a			;5f21
-	jp l0480h+1		;5f22
-	nop			;5f25
-	ld (bc),a			;5f26
-l5f27h:
-	jr l5eabh		;5f27
-	nop			;5f29
-	inc a			;5f2a
-	dec c			;5f2b
-	nop			;5f2c
-	ld (bc),a			;5f2d
-	jr l5eb5h		;5f2e
-	nop			;5f30
-	inc h			;5f31
-	ld h,(hl)			;5f32
-	nop			;5f33
-	inc a			;5f34
-	ld (bc),a			;5f35
-	inc h			;5f36
-	ld (bc),a			;5f37
-	jr l5ebbh		;5f38
-	inc h			;5f3a
-	inc c			;5f3b
-	nop			;5f3c
-	add a,a			;5f3d
-	djnz l5f40h		;5f3e
-l5f40h:
-	jr z,l5f52h		;5f40
-	jr c,l5f6ch		;5f42
-	djnz l5f53h		;5f44
-	nop			;5f46
-	inc bc			;5f47
-	djnz l5fach		;5f48
-	nop			;5f4a
-	adc a,b			;5f4b
-	ld a,(hl)			;5f4c
-	rst 20h			;5f4d
-	ret po			;5f4e
-	rst 28h			;5f4f
-	rst 20h			;5f50
-	ld a,a			;5f51
-l5f52h:
-	nop			;5f52
-l5f53h:
-	ld a,(hl)			;5f53
-	inc b			;5f54
-	rst 20h			;5f55
-	add a,c			;5f56
-	ld a,(hl)			;5f57
-	dec bc			;5f58
-	nop			;5f59
-	adc a,h			;5f5a
-	ex af,af'			;5f5b
-	nop			;5f5c
-	ex af,af'			;5f5d
-	nop			;5f5e
-	ex af,af'			;5f5f
-	nop			;5f60
-	ld b,00eh		;5f61
-	inc c			;5f63
-	jr l5f76h		;5f64
-	nop			;5f66
-	ld (bc),a			;5f67
-	ld h,b			;5f68
-	add hl,bc			;5f69
-	nop			;5f6a
-	adc a,c			;5f6b
-l5f6ch:
-	ld a,060h		;5f6c
-	ld h,(hl)			;5f6e
-	ld a,000h		;5f6f
-	inc a			;5f71
-	ld h,(hl)			;5f72
-	inc a			;5f73
-	nop			;5f74
-	ld (bc),a			;5f75
-l5f76h:
-	inc b			;5f76
-	ld (bc),a			;5f77
-	ex af,af'			;5f78
-	add a,d			;5f79
-	nop			;5f7a
-	djnz l5f7fh		;5f7b
-	nop			;5f7d
-	add a,h			;5f7e
-l5f7fh:
-	jr l5f91h		;5f7f
-	jr l5f83h		;5f81
-l5f83h:
-	ld (bc),a			;5f83
-	jr l5f07h		;5f84
-	nop			;5f86
-	ld (bc),a			;5f87
-	ex af,af'			;5f88
-	add a,d			;5f89
-	nop			;5f8a
-	djnz l5f92h		;5f8b
-	nop			;5f8d
-	adc a,c			;5f8e
-	inc b			;5f8f
-	inc c			;5f90
-l5f91h:
-	inc e			;5f91
-l5f92h:
-	ccf			;5f92
-	ld a,a			;5f93
-l5f94h:
-	ccf			;5f94
-	inc e			;5f95
-	inc c			;5f96
-	inc b			;5f97
-	ld a,(bc)			;5f98
-	nop			;5f99
-	add a,c			;5f9a
-	ret po			;5f9b
-	ld (bc),a			;5f9c
-	ret m			;5f9d
-	add a,c			;5f9e
-	inc a			;5f9f
-	dec b			;5fa0
-	inc e			;5fa1
-	ld b,000h		;5fa2
-	add a,(hl)			;5fa4
-	jr nz,l6007h		;5fa5
-	call m,sub_67feh		;5fa7
-	inc hl			;5faa
-	ld (bc),a			;5fab
-l5fach:
-	inc bc			;5fac
-	ld a,(bc)			;5fad
-	nop			;5fae
-	add a,e			;5faf
-	jr nz,l602ah		;5fb0
-	inc h			;5fb2
-	ld (bc),a			;5fb3
-	inc b			;5fb4
-	ld (de),a			;5fb5
-	nop			;5fb6
-	add a,d			;5fb7
-	djnz $+8		;5fb8
-	dec bc			;5fba
-	nop			;5fbb
-	add a,c			;5fbc
-	ld bc,l0003h		;5fbd
-	add a,d			;5fc0
-	jr nz,l5fc8h		;5fc1
-	add hl,bc			;5fc3
-	nop			;5fc4
-	add a,c			;5fc5
-	jr nz,l5fcah		;5fc6
-l5fc8h:
-	nop			;5fc8
-	add a,h			;5fc9
-l5fcah:
-	ld a,d			;5fca
-	ex af,af'			;5fcb
-	ld (l0d20h),a		;5fcc
-	nop			;5fcf
-	ld (bc),a			;5fd0
-	ld (bc),a			;5fd1
-	adc a,b			;5fd2
-	dec b			;5fd3
-	nop			;5fd4
-	inc e			;5fd5
-	ld a,(hl)			;5fd6
-	ld a,a			;5fd7
-	di			;5fd8
-	ret nz			;5fd9
-	add a,b			;5fda
-	ld (bc),a			;5fdb
-	nop			;5fdc
-	add a,a			;5fdd
-	ld bc,l0202h+1		;5fde
-	ld a,(0c74ch)		;5fe1
-	add a,b			;5fe4
-	add hl,bc			;5fe5
-	nop			;5fe6
-	add a,l			;5fe7
-	add a,b			;5fe8
-	nop			;5fe9
-	ret po			;5fea
-	nop			;5feb
-	call m,l0202h		;5fec
-	add a,c			;5fef
-	ex af,af'			;5ff0
-	inc b			;5ff1
-	djnz l5f76h		;5ff2
-	jr nc,l6017h		;5ff4
-	ld (bc),a			;5ff6
-	inc hl			;5ff7
-	sub a			;5ff8
-	ld h,e			;5ff9
-	ld b,e			;5ffa
-	ld b,c			;5ffb
-	ld b,b			;5ffc
-	jr nz,l602fh		;5ffd
-	inc c			;5fff
+	.DB $12		;5f03
+	.DB $00		;5f04
+	.DB $90		;5f05
+	.DB $3c		;5f06
+	.DB $66		;5f07
+	.DB $42		;5f08
+	.DB $00		;5f09
+	.DB $81		;5f0a
+	.DB $c3		;5f0b
+	.DB $66		;5f0c
+	.DB $3c		;5f0d
+	.DB $18		;5f0e
+	.DB $00		;5f0f
+	.DB $81		;5f10
+	.DB $00		;5f11
+	.DB $3c		;5f12
+	.DB $ff		;5f13
+	.DB $00		;5f14
+	.DB $42		;5f15
+	.DB $0e		;5f16
+	.DB $00		;5f17
+	.DB $85		;5f18
+	.DB $3c		;5f19
+	.DB $7e		;5f1a
+	.DB $ff		;5f1b
+	.DB $e7		;5f1c
+	.DB $c3		;5f1d
+	.DB $04		;5f1e
+	.DB $00		;5f1f
+	.DB $83		;5f20
+	.DB $3c		;5f21
+	.DB $c3		;5f22
+	.DB $81		;5f23
+	.DB $04		;5f24
+	.DB $00		;5f25
+	.DB $02		;5f26
+	.DB $18		;5f27
+	.DB $82		;5f28
+	.DB $00		;5f29
+	.DB $3c		;5f2a
+	.DB $0d		;5f2b
+	.DB $00		;5f2c
+	.DB $02		;5f2d
+	.DB $18		;5f2e
+	.DB $85		;5f2f
+	.DB $00		;5f30
+	.DB $24		;5f31
+	.DB $66		;5f32
+	.DB $00		;5f33
+	.DB $3c		;5f34
+	.DB $02		;5f35
+	.DB $24		;5f36
+	.DB $02		;5f37
+	.DB $18		;5f38
+	.DB $81		;5f39
+	.DB $24		;5f3a
+	.DB $0c		;5f3b
+	.DB $00		;5f3c
+	.DB $87		;5f3d
+	.DB $10		;5f3e
+	.DB $00		;5f3f
+	.DB $28		;5f40
+	.DB $10		;5f41
+	.DB $38		;5f42
+	.DB $28		;5f43
+	.DB $10		;5f44
+	.DB $0d		;5f45
+	.DB $00		;5f46
+	.DB $03		;5f47
+	.DB $10		;5f48
+	.DB $62		;5f49
+	.DB $00		;5f4a
+	.DB $88		;5f4b
+	.DB $7e		;5f4c
+	.DB $e7		;5f4d
+	.DB $e0		;5f4e
+	.DB $ef		;5f4f
+	.DB $e7		;5f50
+	.DB $7f		;5f51
+	.DB $00		;5f52
+	.DB $7e		;5f53
+	.DB $04		;5f54
+	.DB $e7		;5f55
+	.DB $81		;5f56
+	.DB $7e		;5f57
+	.DB $0b		;5f58
+	.DB $00		;5f59
+	.DB $8c		;5f5a
+	.DB $08		;5f5b
+	.DB $00		;5f5c
+	.DB $08		;5f5d
+	.DB $00		;5f5e
+	.DB $08		;5f5f
+	.DB $00		;5f60
+	.DB $06		;5f61
+	.DB $0e		;5f62
+	.DB $0c		;5f63
+	.DB $18		;5f64
+	.DB $10		;5f65
+	.DB $00		;5f66
+	.DB $02		;5f67
+	.DB $60		;5f68
+	.DB $09		;5f69
+	.DB $00		;5f6a
+	.DB $89		;5f6b
+	.DB $3e		;5f6c
+	.DB $60		;5f6d
+	.DB $66		;5f6e
+	.DB $3e		;5f6f
+	.DB $00		;5f70
+	.DB $3c		;5f71
+	.DB $66		;5f72
+	.DB $3c		;5f73
+	.DB $00		;5f74
+	.DB $02		;5f75
+	.DB $04		;5f76
+	.DB $02		;5f77
+	.DB $08		;5f78
+	.DB $82		;5f79
+	.DB $00		;5f7a
+	.DB $10		;5f7b
+	.DB $02		;5f7c
+	.DB $00		;5f7d
+	.DB $84		;5f7e
+	.DB $18		;5f7f
+	.DB $10		;5f80
+	.DB $18		;5f81
+	.DB $00		;5f82
+	.DB $02		;5f83
+	.DB $18		;5f84
+	.DB $81		;5f85
+	.DB $00		;5f86
+	.DB $02		;5f87
+	.DB $08		;5f88
+	.DB $82		;5f89
+	.DB $00		;5f8a
+	.DB $10		;5f8b
+	.DB $05		;5f8c
+	.DB $00		;5f8d
+	.DB $89		;5f8e
+	.DB $04		;5f8f
+	.DB $0c		;5f90
+	.DB $1c		;5f91
+	.DB $3f		;5f92
+	.DB $7f		;5f93
+	.DB $3f		;5f94
+	.DB $1c		;5f95
+	.DB $0c		;5f96
+	.DB $04		;5f97
+	.DB $0a		;5f98
+	.DB $00		;5f99
+	.DB $81		;5f9a
+	.DB $e0		;5f9b
+	.DB $02		;5f9c
+	.DB $f8		;5f9d
+	.DB $81		;5f9e
+	.DB $3c		;5f9f
+	.DB $05		;5fa0
+	.DB $1c		;5fa1
+	.DB $06		;5fa2
+	.DB $00		;5fa3
+	.DB $86		;5fa4
+	.DB $20		;5fa5
+	.DB $60		;5fa6
+	.DB $fc		;5fa7
+	.DB $fe		;5fa8
+	.DB $67		;5fa9
+	.DB $23		;5faa
+	.DB $02		;5fab
+	.DB $03		;5fac
+	.DB $0a		;5fad
+	.DB $00		;5fae
+	.DB $83		;5faf
+	.DB $20		;5fb0
+	.DB $78		;5fb1
+	.DB $24		;5fb2
+	.DB $02		;5fb3
+	.DB $04		;5fb4
+	.DB $12		;5fb5
+	.DB $00		;5fb6
+	.DB $82		;5fb7
+	.DB $10		;5fb8
+	.DB $08		;5fb9
+	.DB $0b		;5fba
+	.DB $00		;5fbb
+	.DB $81		;5fbc
+	.DB $01		;5fbd
+	.DB $03		;5fbe
+	.DB $00		;5fbf
+	.DB $82		;5fc0
+	.DB $20		;5fc1
+	.DB $05		;5fc2
+	.DB $09		;5fc3
+	.DB $00		;5fc4
+	.DB $81		;5fc5
+	.DB $20		;5fc6
+	.DB $02		;5fc7
+	.DB $00		;5fc8
+	.DB $84		;5fc9
+	.DB $7a		;5fca
+	.DB $08		;5fcb
+	.DB $32		;5fcc
+	.DB $20		;5fcd
+	.DB $0d		;5fce
+	.DB $00		;5fcf
+	.DB $02		;5fd0
+	.DB $02		;5fd1
+	.DB $88		;5fd2
+	.DB $05		;5fd3
+	.DB $00		;5fd4
+	.DB $1c		;5fd5
+	.DB $7e		;5fd6
+	.DB $7f		;5fd7
+	.DB $f3		;5fd8
+	.DB $c0		;5fd9
+	.DB $80		;5fda
+	.DB $02		;5fdb
+	.DB $00		;5fdc
+	.DB $87		;5fdd
+	.DB $01		;5fde
+	.DB $03		;5fdf
+	.DB $02		;5fe0
+	.DB $3a		;5fe1
+	.DB $4c		;5fe2
+	.DB $c7		;5fe3
+	.DB $80		;5fe4
+	.DB $09		;5fe5
+	.DB $00		;5fe6
+	.DB $85		;5fe7
+	.DB $80		;5fe8
+	.DB $00		;5fe9
+	.DB $e0		;5fea
+	.DB $00		;5feb
+	.DB $fc		;5fec
+	.DB $02		;5fed
+	.DB $02		;5fee
+	.DB $81		;5fef
+	.DB $08		;5ff0
+	.DB $04		;5ff1
+	.DB $10		;5ff2
+	.DB $82		;5ff3
+	.DB $30		;5ff4
+	.DB $21		;5ff5
+	.DB $02		;5ff6
+	.DB $23		;5ff7
+	.DB $97		;5ff8
+	.DB $63		;5ff9
+	.DB $43		;5ffa
+	.DB $41		;5ffb
+	.DB $40		;5ffc
+	.DB $20		;5ffd
+	.DB $30		;5ffe
+	.DB $0c		;5fff
 l6000h:
-	nop			;6000
-	ld c,01fh		;6001
-	ld a,l			;6003
-	call m,0e3f7h		;6004
-l6007h:
-	rst 0			;6007
-	rst 28h			;6008
-	inc a			;6009
-	cp h			;600a
-	ret m			;600b
-	ld sp,hl			;600c
-	ld a,l			;600d
-	inc b			;600e
-	nop			;600f
-	ld (bc),a			;6010
-	djnz l5f94h		;6011
-	add a,b			;6013
-	ld (bc),a			;6014
-	ret nz			;6015
-	inc bc			;6016
-l6017h:
-	ret po			;6017
-	add a,c			;6018
-	jr nc,l601dh		;6019
-	nop			;601b
-	add a,(hl)			;601c
-l601dh:
-	and b			;601d
-	or b			;601e
-	add hl,sp			;601f
-	jp m,l2078h		;6020
-	rrca			;6023
-	nop			;6024
-	add a,c			;6025
-	inc bc			;6026
-	ld (bc),a			;6027
-	nop			;6028
-	add a,d			;6029
-l602ah:
-	inc c			;602a
-	ex af,af'			;602b
-	inc d			;602c
-	nop			;602d
-	ld (bc),a			;602e
-l602fh:
-	ld bc,l028fh		;602f
-	ld bc,sub_0806h+1		;6032
-	nop			;6035
-	rrca			;6036
-	rra			;6037
-	ld a,034h		;6038
-	ld (hl),03fh		;603a
-	ld e,01ch		;603c
-	dec bc			;603e
-	dec de			;603f
-	ld (bc),a			;6040
-	inc de			;6041
-	add a,h			;6042
-	ld bc,l1218h		;6043
-	ld bc,l0003h		;6046
-	add a,l			;6049
-	jr l6088h		;604a
-	ld a,(hl)			;604c
-	ld a,b			;604d
-	ld b,b			;604e
-	inc bc			;604f
-	nop			;6050
-	add a,l			;6051
-	ld bc,l0402h		;6052
-	inc d			;6055
-	ex af,af'			;6056
-l6057h:
-	add hl,bc			;6057
-	nop			;6058
-	add a,a			;6059
-	ld h,b			;605a
-	sbc a,b			;605b
-	nop			;605c
-	ret nz			;605d
-	ld a,h			;605e
-	ld bc,00338h		;605f
-	ld bc,l0202h+3		;6062
-	add a,c			;6065
-	ld bc,l0006h+1		;6066
-	adc a,e			;6069
-	rrca			;606a
-	ld e,03bh		;606b
-	ld (hl),e			;606d
-	ld a,(hl)			;606e
-	inc l			;606f
-	inc a			;6070
-	ld e,006h		;6071
-	add a,b			;6073
-	nop			;6074
-	ld (bc),a			;6075
-	ld bc,l0003h		;6076
-	add a,d			;6079
-	sub b			;607a
-	ret nc			;607b
-	ld (bc),a			;607c
-	ret nz			;607d
-	adc a,b			;607e
-	ld h,b			;607f
-	nop			;6080
-	ret nz			;6081
-l6082h:
-	ret po			;6082
-	ld l,h			;6083
-	ld d,b			;6084
-	jr c,l6057h		;6085
-	dec b			;6087
-l6088h:
-	nop			;6088
-	ld (bc),a			;6089
-	inc bc			;608a
-	add a,d			;608b
-	ld b,004h		;608c
-	inc bc			;608e
-	nop			;608f
-	add a,l			;6090
-	ld bc,00c12h		;6091
-	djnz l60b6h		;6094
-	ld (bc),a			;6096
-	rrca			;6097
-	add a,(hl)			;6098
-	ld e,01ah		;6099
-	rrca			;609b
-	ld c,006h		;609c
-	dec b			;609e
-	ld (bc),a			;609f
-	ld bc,l0480h+2		;60a0
-	ld bc,l0006h+1		;60a3
-	adc a,(hl)			;60a6
-	ld h,b			;60a7
-	ret p			;60a8
-	ret po			;60a9
-	add a,b			;60aa
-	nop			;60ab
-	rrca			;60ac
-	ex af,af'			;60ad
-	ld de,l1713h		;60ae
-	dec d			;60b1
-	inc de			;60b2
-.DB $01 $0C $05
-l60b6h:
-	nop			;60b6
-	adc a,c			;60b7
-	add a,b			;60b8
-	ld h,b			;60b9
-	ret po			;60ba
-	ld h,b			;60bb
-	ret po			;60bc
-	ld h,b			;60bd
-	sub b			;60be
-	cp h			;60bf
-	ld a,h			;60c0
-	ld (bc),a			;60c1
-	djnz $+4		;60c2
-	nop			;60c4
-	add a,e			;60c5
-	ld bc,l0202h+1		;60c6
-	inc bc			;60c9
-	nop			;60ca
-	adc a,b			;60cb
-	inc b			;60cc
-	add hl,bc			;60cd
-	ld b,01bh		;60ce
-	rla			;60d0
-	inc c			;60d1
-	rlca			;60d2
-	ld (bc),a			;60d3
-	ld (bc),a			;60d4
-	nop			;60d5
-	add a,d			;60d6
-l60d7h:
-	ld c,008h		;60d7
-	inc bc			;60d9
-	nop			;60da
-	add a,d			;60db
-	inc bc			;60dc
-	nop			;60dd
-	ld (bc),a			;60de
-	add hl,bc			;60df
-	ld (bc),a			;60e0
-	ex af,af'			;60e1
-	add a,c			;60e2
-	inc b			;60e3
-	rlca			;60e4
-	nop			;60e5
-	adc a,d			;60e6
-	ld b,b			;60e7
-	ld (hl),b			;60e8
-	ld l,b			;60e9
-	ret m			;60ea
-	or b			;60eb
-	ret nz			;60ec
-	call c,sub_1a1ch		;60ed
-	inc b			;60f0
-	dec bc			;60f1
-	nop			;60f2
-	add a,(hl)			;60f3
-	ld b,b			;60f4
-	djnz l612fh		;60f5
-	inc e			;60f7
-	ex af,af'			;60f8
-	ld (bc),a			;60f9
-	add hl,hl			;60fa
-	nop			;60fb
-	add a,d			;60fc
-	ld (bc),a			;60fd
-	inc bc			;60fe
-	ld (bc),a			;60ff
-	dec b			;6100
-	add a,c			;6101
-	ex af,af'			;6102
-	ld (bc),a			;6103
-	djnz l6109h		;6104
-	nop			;6106
-	add a,d			;6107
-	inc e			;6108
-l6109h:
-	ld (l4001h+1),a		;6109
-	adc a,b			;610c
-	ld bc,00c07h		;610d
-	ex af,af'			;6110
-	jr l6134h		;6111
-	add a,087h		;6113
-	ex af,af'			;6115
-	nop			;6116
-	and e			;6117
-	ret nz			;6118
-	jr c,l6127h		;6119
-	inc b			;611b
-	ret z			;611c
-	ld a,0c3h		;611d
-	dec e			;611f
-	ld (hl),l			;6120
-	nop			;6121
-	ret nz			;6122
-	jr nz,l6148h		;6123
-	daa			;6125
-	rlca			;6126
-l6127h:
-	ld c,(hl)			;6127
-	ld c,h			;6128
-	ld e,h			;6129
-	inc e			;612a
-	jr c,l615dh		;612b
-	ld l,05fh		;612d
-l612fh:
-	ld c,a			;612f
-	ld (0300eh),a		;6130
-	ld h,b			;6133
-l6134h:
-	add a,b			;6134
-	djnz l6137h		;6135
-l6137h:
-	ld b,b			;6137
-	ld (bc),a			;6138
-l6139h:
-	nop			;6139
-	ex af,af'			;613a
-	ld (bc),a			;613b
-	nop			;613c
-	ld (bc),a			;613d
-	ld bc,l6082h		;613e
-	ret m			;6141
-	ld (bc),a			;6142
-	ret po			;6143
-	add a,d			;6144
-	ld b,b			;6145
-	jr nc,l614ah		;6146
-l6148h:
-	djnz l614ch		;6148
-l614ah:
-	jr l60d7h		;614a
-l614ch:
-	ex af,af'			;614c
-	inc b			;614d
-	ld bc,0b0a0h		;614e
-	add hl,sp			;6151
-	jp m,0c078h		;6152
-	ld c,001h		;6155
-	dec c			;6157
-	nop			;6158
-	add a,l			;6159
-	add a,e			;615a
-	nop			;615b
-	ld b,b			;615c
-l615dh:
-	inc l			;615d
-	jr $+14		;615e
-	nop			;6160
-	add a,d			;6161
-	ld bc,l0302h		;6162
-	nop			;6165
-	adc a,b			;6166
-	ex af,af'			;6167
-	jr l6196h		;6168
-	ld h,a			;616a
-	add a,e			;616b
-	add a,b			;616c
-	djnz l6177h		;616d
-	ld (bc),a			;616f
-	nop			;6170
-	add a,d			;6171
-	ret po			;6172
-	djnz l6177h		;6173
-	nop			;6175
-	adc a,d			;6176
-l6177h:
-	inc c			;6177
-	dec de			;6178
-	ld sp,0c460h		;6179
-	add a,h			;617c
-	dec bc			;617d
-	nop			;617e
-	inc bc			;617f
-	ld a,b			;6180
-	ex af,af'			;6181
-	nop			;6182
-	ld (bc),a			;6183
-	add a,b			;6184
-	ld (bc),a			;6185
-	ld b,b			;6186
-	sub c			;6187
-	ret p			;6188
-	ex af,af'			;6189
-	call po,sub_1114h		;618a
-	inc de			;618d
-	daa			;618e
-	ld h,04eh		;618f
-	ld e,b			;6191
-	ld c,(hl)			;6192
-	ld h,h			;6193
-	inc sp			;6194
-	dec bc			;6195
-l6196h:
-	ld bc,l0100h+2		;6196
-	inc bc			;6199
-	nop			;619a
-	add a,e			;619b
-	ret nz			;619c
-	add a,d			;619d
-l619eh:
-	djnz l61a2h		;619e
-	nop			;61a0
-	add a,c			;61a1
-l61a2h:
-	add hl,bc			;61a2
-	inc bc			;61a3
-	nop			;61a4
-	add a,a			;61a5
-	add a,e			;61a6
-	jp l4363h		;61a7
-	ld bc,04000h		;61aa
-	ld (bc),a			;61ad
-	inc d			;61ae
-	add a,c			;61af
-	nop			;61b0
-	ld (bc),a			;61b1
-	jr l61b6h		;61b2
-	djnz l6139h		;61b4
-l61b6h:
-	ex af,af'			;61b6
-	ret z			;61b7
-	call po,0e002h		;61b8
-	add a,(hl)			;61bb
-	call nc,0f014h		;61bc
-	ret po			;61bf
-	jr z,$+28		;61c0
-	dec d			;61c2
-	nop			;61c3
-	sbc a,c			;61c4
-	inc bc			;61c5
-	ld b,00ch		;61c6
-	add hl,bc			;61c8
-	djnz $+1		;61c9
-	ld b,00ch		;61cb
-	ld bc,08270h		;61cd
-	ret nz			;61d0
-	nop			;61d1
-	ret nz			;61d2
-	ld b,d			;61d3
-	ld b,b			;61d4
-	jr nz,l620ah		;61d5
-	inc hl			;61d7
-	inc bc			;61d8
-	ld b,e			;61d9
-	ld b,c			;61da
-	ld e,b			;61db
-	ld (l0011h),a		;61dc
-	djnz l61e1h		;61df
-l61e1h:
-	adc a,c			;61e1
-	inc a			;61e2
-	ld b,d			;61e3
-	add a,c			;61e4
-	nop			;61e5
-	jr $-1		;61e6
-	ld a,(hl)			;61e8
-	inc a			;61e9
-	jr l61f3h		;61ea
-	nop			;61ec
-	add a,d			;61ed
-	add a,c			;61ee
-	jp l0012h		;61ef
-	add a,c			;61f2
-l61f3h:
-	jr l6200h		;61f3
-	rst 38h			;61f5
-	add a,c			;61f6
-	inc h			;61f7
-	ld (bc),a			;61f8
-	ld e,d			;61f9
-	add a,c			;61fa
-	ld a,(hl)			;61fb
-	rrca			;61fc
-	nop			;61fd
-	add a,d			;61fe
-	ld a,(hl)			;61ff
-l6200h:
-	rst 38h			;6200
-	ld (bc),a			;6201
-	ld a,(hl)			;6202
+	.DB $00		;6000
+	.DB $0e		;6001
+	.DB $1f		;6002
+	.DB $7d		;6003
+	.DB $fc		;6004
+	.DB $f7		;6005
+	.DB $e3		;6006
+	.DB $c7		;6007
+	.DB $ef		;6008
+	.DB $3c		;6009
+	.DB $bc		;600a
+	.DB $f8		;600b
+	.DB $f9		;600c
+	.DB $7d		;600d
+	.DB $04		;600e
+	.DB $00		;600f
+	.DB $02		;6010
+	.DB $10		;6011
+	.DB $81		;6012
+	.DB $80		;6013
+	.DB $02		;6014
+	.DB $c0		;6015
+	.DB $03		;6016
+	.DB $e0		;6017
+	.DB $81		;6018
+	.DB $30		;6019
+	.DB $02		;601a
+	.DB $00		;601b
+	.DB $86		;601c
+	.DB $a0		;601d
+	.DB $b0		;601e
+	.DB $39		;601f
+	.DB $fa		;6020
+	.DB $78		;6021
+	.DB $20		;6022
+	.DB $0f		;6023
+	.DB $00		;6024
+	.DB $81		;6025
+	.DB $03		;6026
+	.DB $02		;6027
+	.DB $00		;6028
+	.DB $82		;6029
+	.DB $0c		;602a
+	.DB $08		;602b
+	.DB $14		;602c
+	.DB $00		;602d
+	.DB $02		;602e
+	.DB $01		;602f
+	.DB $8f		;6030
+	.DB $02		;6031
+	.DB $01		;6032
+	.DB $07		;6033
+	.DB $08		;6034
+	.DB $00		;6035
+	.DB $0f		;6036
+	.DB $1f		;6037
+	.DB $3e		;6038
+	.DB $34		;6039
+	.DB $36		;603a
+	.DB $3f		;603b
+	.DB $1e		;603c
+	.DB $1c		;603d
+	.DB $0b		;603e
+	.DB $1b		;603f
+	.DB $02		;6040
+	.DB $13		;6041
+	.DB $84		;6042
+	.DB $01		;6043
+	.DB $18		;6044
+	.DB $12		;6045
+	.DB $01		;6046
+	.DB $03		;6047
+	.DB $00		;6048
+	.DB $85		;6049
+	.DB $18		;604a
+	.DB $3c		;604b
+	.DB $7e		;604c
+	.DB $78		;604d
+	.DB $40		;604e
+	.DB $03		;604f
+	.DB $00		;6050
+	.DB $85		;6051
+	.DB $01		;6052
+	.DB $02		;6053
+	.DB $04		;6054
+	.DB $14		;6055
+	.DB $08		;6056
+	.DB $09		;6057
+	.DB $00		;6058
+	.DB $87		;6059
+	.DB $60		;605a
+	.DB $98		;605b
+	.DB $00		;605c
+	.DB $c0		;605d
+	.DB $7c		;605e
+	.DB $01		;605f
+	.DB $38		;6060
+	.DB $03		;6061
+	.DB $01		;6062
+	.DB $05		;6063
+	.DB $02		;6064
+	.DB $81		;6065
+	.DB $01		;6066
+	.DB $07		;6067
+	.DB $00		;6068
+	.DB $8b		;6069
+	.DB $0f		;606a
+	.DB $1e		;606b
+	.DB $3b		;606c
+	.DB $73		;606d
+	.DB $7e		;606e
+	.DB $2c		;606f
+	.DB $3c		;6070
+	.DB $1e		;6071
+	.DB $06		;6072
+	.DB $80		;6073
+	.DB $00		;6074
+	.DB $02		;6075
+	.DB $01		;6076
+	.DB $03		;6077
+	.DB $00		;6078
+	.DB $82		;6079
+	.DB $90		;607a
+	.DB $d0		;607b
+	.DB $02		;607c
+	.DB $c0		;607d
+	.DB $88		;607e
+	.DB $60		;607f
+	.DB $00		;6080
+	.DB $c0		;6081
+	.DB $e0		;6082
+	.DB $6c		;6083
+	.DB $50		;6084
+	.DB $38		;6085
+	.DB $d0		;6086
+	.DB $05		;6087
+	.DB $00		;6088
+	.DB $02		;6089
+	.DB $03		;608a
+	.DB $82		;608b
+	.DB $06		;608c
+	.DB $04		;608d
+	.DB $03		;608e
+	.DB $00		;608f
+	.DB $85		;6090
+	.DB $01		;6091
+	.DB $12		;6092
+	.DB $0c		;6093
+	.DB $10		;6094
+	.DB $20		;6095
+	.DB $02		;6096
+	.DB $0f		;6097
+	.DB $86		;6098
+	.DB $1e		;6099
+	.DB $1a		;609a
+	.DB $0f		;609b
+	.DB $0e		;609c
+	.DB $06		;609d
+	.DB $05		;609e
+	.DB $02		;609f
+	.DB $01		;60a0
+	.DB $82		;60a1
+	.DB $04		;60a2
+	.DB $01		;60a3
+	.DB $07		;60a4
+	.DB $00		;60a5
+	.DB $8e		;60a6
+	.DB $60		;60a7
+	.DB $f0		;60a8
+	.DB $e0		;60a9
+	.DB $80		;60aa
+	.DB $00		;60ab
+	.DB $0f		;60ac
+	.DB $08		;60ad
+	.DB $11		;60ae
+	.DB $13		;60af
+	.DB $17		;60b0
+	.DB $15		;60b1
+	.DB $13		;60b2
+	.DB $01		;60b3
+	.DB $0c		;60b4
+	.DB $05		;60b5
+	.DB $00		;60b6
+	.DB $89		;60b7
+	.DB $80		;60b8
+	.DB $60		;60b9
+	.DB $e0		;60ba
+	.DB $60		;60bb
+	.DB $e0		;60bc
+	.DB $60		;60bd
+	.DB $90		;60be
+	.DB $bc		;60bf
+	.DB $7c		;60c0
+	.DB $02		;60c1
+	.DB $10		;60c2
+	.DB $04		;60c3
+	.DB $00		;60c4
+	.DB $83		;60c5
+	.DB $01		;60c6
+	.DB $03		;60c7
+	.DB $02		;60c8
+	.DB $03		;60c9
+	.DB $00		;60ca
+	.DB $88		;60cb
+	.DB $04		;60cc
+	.DB $09		;60cd
+	.DB $06		;60ce
+	.DB $1b		;60cf
+	.DB $17		;60d0
+	.DB $0c		;60d1
+	.DB $07		;60d2
+	.DB $02		;60d3
+	.DB $02		;60d4
+	.DB $00		;60d5
+	.DB $82		;60d6
+	.DB $0e		;60d7
+	.DB $08		;60d8
+	.DB $03		;60d9
+	.DB $00		;60da
+	.DB $82		;60db
+	.DB $03		;60dc
+	.DB $00		;60dd
+	.DB $02		;60de
+	.DB $09		;60df
+	.DB $02		;60e0
+	.DB $08		;60e1
+	.DB $81		;60e2
+	.DB $04		;60e3
+	.DB $07		;60e4
+	.DB $00		;60e5
+	.DB $8a		;60e6
+	.DB $40		;60e7
+	.DB $70		;60e8
+	.DB $68		;60e9
+	.DB $f8		;60ea
+	.DB $b0		;60eb
+	.DB $c0		;60ec
+	.DB $dc		;60ed
+	.DB $1c		;60ee
+	.DB $1a		;60ef
+	.DB $04		;60f0
+	.DB $0b		;60f1
+	.DB $00		;60f2
+	.DB $86		;60f3
+	.DB $40		;60f4
+	.DB $10		;60f5
+	.DB $38		;60f6
+	.DB $1c		;60f7
+	.DB $08		;60f8
+	.DB $02		;60f9
+	.DB $29		;60fa
+	.DB $00		;60fb
+	.DB $82		;60fc
+	.DB $02		;60fd
+	.DB $03		;60fe
+	.DB $02		;60ff
+	.DB $05		;6100
+	.DB $81		;6101
+	.DB $08		;6102
+	.DB $02		;6103
+	.DB $10		;6104
+	.DB $03		;6105
+	.DB $00		;6106
+	.DB $82		;6107
+	.DB $1c		;6108
+	.DB $32		;6109
+	.DB $02		;610a
+	.DB $40		;610b
+	.DB $88		;610c
+	.DB $01		;610d
+	.DB $07		;610e
+	.DB $0c		;610f
+	.DB $08		;6110
+	.DB $18		;6111
+	.DB $21		;6112
+	.DB $c6		;6113
+	.DB $87		;6114
+	.DB $08		;6115
+	.DB $00		;6116
+	.DB $a3		;6117
+	.DB $c0		;6118
+	.DB $38		;6119
+	.DB $0c		;611a
+	.DB $04		;611b
+	.DB $c8		;611c
+	.DB $3e		;611d
+	.DB $c3		;611e
+	.DB $1d		;611f
+	.DB $75		;6120
+	.DB $00		;6121
+	.DB $c0		;6122
+	.DB $20		;6123
+	.DB $23		;6124
+	.DB $27		;6125
+	.DB $07		;6126
+	.DB $4e		;6127
+	.DB $4c		;6128
+	.DB $5c		;6129
+	.DB $1c		;612a
+	.DB $38		;612b
+	.DB $30		;612c
+	.DB $2e		;612d
+	.DB $5f		;612e
+	.DB $4f		;612f
+	.DB $32		;6130
+	.DB $0e		;6131
+	.DB $30		;6132
+	.DB $60		;6133
+	.DB $80		;6134
+	.DB $10		;6135
+	.DB $00		;6136
+	.DB $40		;6137
+	.DB $02		;6138
+	.DB $00		;6139
+	.DB $08		;613a
+	.DB $02		;613b
+	.DB $00		;613c
+	.DB $02		;613d
+	.DB $01		;613e
+	.DB $82		;613f
+	.DB $60		;6140
+	.DB $f8		;6141
+	.DB $02		;6142
+	.DB $e0		;6143
+	.DB $82		;6144
+	.DB $40		;6145
+	.DB $30		;6146
+	.DB $02		;6147
+	.DB $10		;6148
+	.DB $02		;6149
+	.DB $18		;614a
+	.DB $8b		;614b
+	.DB $08		;614c
+	.DB $04		;614d
+	.DB $01		;614e
+	.DB $a0		;614f
+	.DB $b0		;6150
+	.DB $39		;6151
+	.DB $fa		;6152
+	.DB $78		;6153
+	.DB $c0		;6154
+	.DB $0e		;6155
+	.DB $01		;6156
+	.DB $0d		;6157
+	.DB $00		;6158
+	.DB $85		;6159
+	.DB $83		;615a
+	.DB $00		;615b
+	.DB $40		;615c
+	.DB $2c		;615d
+	.DB $18		;615e
+	.DB $0e		;615f
+	.DB $00		;6160
+	.DB $82		;6161
+	.DB $01		;6162
+	.DB $02		;6163
+	.DB $03		;6164
+	.DB $00		;6165
+	.DB $88		;6166
+	.DB $08		;6167
+	.DB $18		;6168
+	.DB $2c		;6169
+	.DB $67		;616a
+	.DB $83		;616b
+	.DB $80		;616c
+	.DB $10		;616d
+	.DB $08		;616e
+	.DB $02		;616f
+	.DB $00		;6170
+	.DB $82		;6171
+	.DB $e0		;6172
+	.DB $10		;6173
+	.DB $02		;6174
+	.DB $00		;6175
+	.DB $8a		;6176
+	.DB $0c		;6177
+	.DB $1b		;6178
+	.DB $31		;6179
+	.DB $60		;617a
+	.DB $c4		;617b
+	.DB $84		;617c
+	.DB $0b		;617d
+	.DB $00		;617e
+	.DB $03		;617f
+	.DB $78		;6180
+	.DB $08		;6181
+	.DB $00		;6182
+	.DB $02		;6183
+	.DB $80		;6184
+	.DB $02		;6185
+	.DB $40		;6186
+	.DB $91		;6187
+	.DB $f0		;6188
+	.DB $08		;6189
+	.DB $e4		;618a
+	.DB $14		;618b
+	.DB $11		;618c
+	.DB $13		;618d
+	.DB $27		;618e
+	.DB $26		;618f
+	.DB $4e		;6190
+	.DB $58		;6191
+	.DB $4e		;6192
+	.DB $64		;6193
+	.DB $33		;6194
+	.DB $0b		;6195
+	.DB $01		;6196
+	.DB $02		;6197
+	.DB $01		;6198
+	.DB $03		;6199
+	.DB $00		;619a
+	.DB $83		;619b
+	.DB $c0		;619c
+	.DB $82		;619d
+	.DB $10		;619e
+	.DB $02		;619f
+	.DB $00		;61a0
+	.DB $81		;61a1
+	.DB $09		;61a2
+	.DB $03		;61a3
+	.DB $00		;61a4
+	.DB $87		;61a5
+	.DB $83		;61a6
+	.DB $c3		;61a7
+	.DB $63		;61a8
+	.DB $43		;61a9
+	.DB $01		;61aa
+	.DB $00		;61ab
+	.DB $40		;61ac
+	.DB $02		;61ad
+	.DB $14		;61ae
+	.DB $81		;61af
+	.DB $00		;61b0
+	.DB $02		;61b1
+	.DB $18		;61b2
+	.DB $02		;61b3
+	.DB $10		;61b4
+	.DB $83		;61b5
+	.DB $08		;61b6
+	.DB $c8		;61b7
+	.DB $e4		;61b8
+	.DB $02		;61b9
+	.DB $e0		;61ba
+	.DB $86		;61bb
+	.DB $d4		;61bc
+	.DB $14		;61bd
+	.DB $f0		;61be
+	.DB $e0		;61bf
+	.DB $28		;61c0
+	.DB $1c		;61c1
+	.DB $15		;61c2
+	.DB $00		;61c3
+	.DB $99		;61c4
+	.DB $03		;61c5
+	.DB $06		;61c6
+	.DB $0c		;61c7
+	.DB $09		;61c8
+	.DB $10		;61c9
+	.DB $01		;61ca
+	.DB $06		;61cb
+	.DB $0c		;61cc
+	.DB $01		;61cd
+	.DB $70		;61ce
+	.DB $82		;61cf
+	.DB $c0		;61d0
+	.DB $00		;61d1
+	.DB $c0		;61d2
+	.DB $42		;61d3
+	.DB $40		;61d4
+	.DB $20		;61d5
+	.DB $33		;61d6
+	.DB $23		;61d7
+	.DB $03		;61d8
+	.DB $43		;61d9
+	.DB $41		;61da
+	.DB $58		;61db
+	.DB $32		;61dc
+	.DB $11		;61dd
+	.DB $00		;61de
+	.DB $10		;61df
+	.DB $00		;61e0
+	.DB $89		;61e1
+	.DB $3c		;61e2
+	.DB $42		;61e3
+	.DB $81		;61e4
+	.DB $00		;61e5
+	.DB $18		;61e6
+	.DB $ff		;61e7
+	.DB $7e		;61e8
+	.DB $3c		;61e9
+	.DB $18		;61ea
+	.DB $07		;61eb
+	.DB $00		;61ec
+	.DB $82		;61ed
+	.DB $81		;61ee
+	.DB $c3		;61ef
+	.DB $12		;61f0
+	.DB $00		;61f1
+	.DB $81		;61f2
+	.DB $18		;61f3
+	.DB $0b		;61f4
+	.DB $ff		;61f5
+	.DB $81		;61f6
+	.DB $24		;61f7
+	.DB $02		;61f8
+	.DB $5a		;61f9
+	.DB $81		;61fa
+	.DB $7e		;61fb
+	.DB $0f		;61fc
+	.DB $00		;61fd
+	.DB $82		;61fe
+	.DB $7e		;61ff
+	.DB $ff		;6200
+	.DB $02		;6201
+	.DB $7e		;6202
 l6203h:
-	add a,h			;6203
-	ld b,d			;6204
-	jr l6207h		;6205
-l6207h:
-	inc h			;6207
-	ld (bc),a			;6208
-	inc a			;6209
-l620ah:
-	dec c			;620a
-	nop			;620b
-	add a,l			;620c
-	jr c,l628bh		;620d
-	jr z,l6211h		;620f
-l6211h:
-	jr c,l6221h		;6211
-	nop			;6213
-	inc bc			;6214
-	djnz $+4		;6215
-l6217h:
-	nop			;6217
-	add a,a			;6218
-	inc d			;6219
-	jr nz,l622ch		;621a
-	jr l619eh		;621c
-	jr nc,l6220h		;621e
-l6220h:
-	ld (bc),a			;6220
-l6221h:
-	inc b			;6221
-	ld (bc),a			;6222
-	ld (bc),a			;6223
-	dec b			;6224
-l6225h:
-	nop			;6225
-	adc a,d			;6226
-	ld (l0804h),hl		;6227
-	rra			;622a
-	ld (bc),a			;622b
-l622ch:
-	jr c,$+24		;622c
-	inc c			;622e
-	inc b			;622f
-	ld (bc),a			;6230
-	ld a,a			;6231
-	nop			;6232
-	ld l,l			;6233
-	nop			;6234
-	add a,c			;6235
-	ld bc,l0003h		;6236
-	add a,d			;6239
-	jr nz,l6241h		;623a
-	add hl,bc			;623c
-	nop			;623d
-	add a,c			;623e
-	jr nz,l6243h		;623f
-l6241h:
-	nop			;6241
-	add a,h			;6242
-l6243h:
-	ld a,d			;6243
-	ex af,af'			;6244
-	ld (l0720h),a		;6245
-	nop			;6248
-	add a,d			;6249
-	ld bc,l0202h+1		;624a
-	rlca			;624d
-	ld (bc),a			;624e
-	rrca			;624f
-	ld (bc),a			;6250
-	rra			;6251
-	add a,c			;6252
-	dec e			;6253
-	dec b			;6254
-	nop			;6255
-	add a,d			;6256
-	rlca			;6257
-	ccf			;6258
-	ld b,0ffh		;6259
-	add a,c			;625b
-	cp 002h		;625c
-	rst 38h			;625e
-	ld b,000h		;625f
-	add a,e			;6261
-	ret nz			;6262
-	ret m			;6263
-	call m,0fe02h		;6264
-	add a,d			;6267
-	call m,sub_023eh		;6268
-	rst 38h			;626b
-	add a,e			;626c
-	rst 30h			;626d
-	rrca			;626e
-	rst 18h			;626f
-	inc bc			;6270
-	ccf			;6271
-	add a,d			;6272
-	ld a,a			;6273
-	ld a,(hl)			;6274
-	inc bc			;6275
-	ld a,h			;6276
-	add a,e			;6277
-	ld a,b			;6278
-	ld (hl),b			;6279
-	ld l,(hl)			;627a
-	ld (bc),a			;627b
-	ld a,a			;627c
-	add a,l			;627d
-	ld a,0feh		;627e
-	ret p			;6280
-	ret po			;6281
-	add a,b			;6282
-	ld (bc),a			;6283
-	nop			;6284
-	add a,d			;6285
-	ex af,af'			;6286
-	djnz $+4		;6287
-	nop			;6289
-	ld (bc),a			;628a
-l628bh:
-	ld bc,l6082h		;628b
-	ret m			;628e
-	ld (bc),a			;628f
-	ret p			;6290
-	add a,c			;6291
-	ld b,b			;6292
-	ld (bc),a			;6293
-	jr nc,l6217h		;6294
-l6296h:
-	djnz l629ah		;6296
-	jr l6225h		;6298
-l629ah:
-	ex af,af'			;629a
-	inc b			;629b
-	ld bc,0f0e0h		;629c
-	jp (hl)			;629f
-	ex de,hl			;62a0
-	ld c,b			;62a1
-	ret po			;62a2
-	ld c,001h		;62a3
-	dec c			;62a5
-	nop			;62a6
-	add a,(hl)			;62a7
-	add a,e			;62a8
-	nop			;62a9
-	ld b,b			;62aa
-	ld l,01fh		;62ab
-	ld bc,l000eh+1		;62ad
-	add a,h			;62b0
-	ld bc,l0702h+1		;62b1
-	rrca			;62b4
-	ld (bc),a			;62b5
-	rra			;62b6
-	add a,e			;62b7
-	ld a,01dh		;62b8
-	rra			;62ba
-	ld (bc),a			;62bb
-	rrca			;62bc
-	add a,h			;62bd
-	ld (hl),b			;62be
-	add a,b			;62bf
-	ret nz			;62c0
-l62c1h:
-	ld bc,l4001h+1		;62c1
-	adc a,d			;62c4
-	ld h,b			;62c5
-	jr nz,l62fbh		;62c6
-	ld hl,l41feh+2		;62c8
-	ld b,e			;62cb
-	ld e,e			;62cc
-	dec sp			;62cd
-	add hl,de			;62ce
-	ld b,000h		;62cf
-	add a,e			;62d1
-	ld bc,03f0fh		;62d2
-	inc bc			;62d5
-	ld a,a			;62d6
-	inc bc			;62d7
-	rst 38h			;62d8
-	add a,c			;62d9
-l62dah:
-	ld e,a			;62da
-	ld b,000h		;62db
-	adc a,d			;62dd
-	ret nz			;62de
-	ret p			;62df
-	ret m			;62e0
-	call m,0d8bch		;62e1
-	ret po			;62e4
-	call m,0c1ffh		;62e5
-	inc bc			;62e8
-	inc bc			;62e9
-	inc bc			;62ea
-	rlca			;62eb
-	add a,c			;62ec
-	ld b,002h		;62ed
-	rlca			;62ef
-	add a,c			;62f0
-	inc bc			;62f1
-	ld b,000h		;62f2
-	add a,l			;62f4
-	ret p			;62f5
-	ret po			;62f6
-	ret nz			;62f7
-	add a,h			;62f8
-	add a,b			;62f9
-	ld (bc),a			;62fa
-l62fbh:
-	nop			;62fb
-	add a,h			;62fc
-	ret nz			;62fd
-	ret nc			;62fe
-	adc a,(hl)			;62ff
-	or h			;6300
-	ld (bc),a			;6301
-	ld bc,l0281h		;6302
-	ld (bc),a			;6305
-	nop			;6306
-	add a,c			;6307
-	ld (hl),b			;6308
-	inc bc			;6309
-	djnz l6296h		;630a
-	nop			;630c
-	jr nc,$-60		;630d
-	ret nz			;630f
-	inc a			;6310
-	ld (hl),h			;6311
-	inc a			;6312
-	jp nc,l10a0h		;6313
-	ld b,000h		;6316
-	sub a			;6318
-	ld bc,l1f07h		;6319
-	ccf			;631c
-	ld a,a			;631d
-	ld (hl),a			;631e
-	ld a,a			;631f
-	rra			;6320
-	ccf			;6321
-	jr nc,$+16		;6322
-	jr nz,$+1		;6324
-	djnz l6348h		;6326
-	ex af,af'			;6328
-	ld de,00b02h		;6329
-	dec c			;632c
-	add hl,bc			;632d
-	ld b,002h		;632e
-	rlca			;6330
-	nop			;6331
-	add a,a			;6332
-	ld c,03fh		;6333
-	ld a,l			;6335
-	rst 38h			;6336
-	rst 18h			;6337
-	sbc a,01ch		;6338
-	inc bc			;633a
-	jr l62c1h		;633b
-	djnz l635dh		;633d
-	inc c			;633f
-	ld bc,l0003h		;6340
-	adc a,h			;6343
-	ret nz			;6344
-	ret po			;6345
-	jr nc,l6368h		;6346
-l6348h:
-	djnz l62dah		;6348
-	ex af,af'			;634a
-	jr nc,l6379h		;634b
-	sbc a,b			;634d
-	djnz l6370h		;634e
-	ld b,000h		;6350
-	add a,d			;6352
-	inc bc			;6353
-	rrca			;6354
-	ld (bc),a			;6355
-	rra			;6356
-	add a,a			;6357
-	dec de			;6358
-	rrca			;6359
-	inc e			;635a
-	djnz l6366h		;635b
-l635dh:
-	ex af,af'			;635d
-	inc b			;635e
-	inc bc			;635f
-	nop			;6360
-	add a,c			;6361
-	inc bc			;6362
-	ld (bc),a			;6363
-	rrca			;6364
-	adc a,b			;6365
-l6366h:
-	rla			;6366
-	rrca			;6367
-l6368h:
-	rlca			;6368
-	ld c,00ch		;6369
-	ex af,af'			;636b
-	dec c			;636c
-	inc b			;636d
-	dec b			;636e
-	nop			;636f
-l6370h:
-	adc a,h			;6370
-	add a,b			;6371
-	ret po			;6372
-	ld (hl),b			;6373
-	ret p			;6374
-	adc a,b			;6375
-	inc c			;6376
-	ld b,b			;6377
-	inc b			;6378
-l6379h:
-	rra			;6379
-	sub h			;637a
-	ld a,(de)			;637b
-	inc b			;637c
-	dec bc			;637d
-	nop			;637e
-	add a,(hl)			;637f
-	jr nc,l63fah		;6380
-	ld h,h			;6382
-	inc h			;6383
-	inc e			;6384
-	nop			;6385
-	ld (bc),a			;6386
-	ex af,af'			;6387
-	ld (bc),a			;6388
-	inc b			;6389
-	ld (bc),a			;638a
-	nop			;638b
-	add a,c			;638c
-	add a,b			;638d
-	inc c			;638e
-	nop			;638f
-	ld (bc),a			;6390
-	add a,b			;6391
-	ld (de),a			;6392
-	nop			;6393
-	add a,h			;6394
-.DB $01 $03 $05
-	inc b			;6398
-	ld (bc),a			;6399
-	ex af,af'			;639a
-	add a,c			;639b
-	djnz l63a1h		;639c
-	nop			;639e
-	adc a,b			;639f
-	inc e			;63a0
-l63a1h:
-	ld h,d			;63a1
-	add a,c			;63a2
-	add a,b			;63a3
-	rlca			;63a4
-	ccf			;63a5
-	cp 0f8h		;63a6
-	ld (bc),a			;63a8
-	ret p			;63a9
-	add a,d			;63aa
-	ret po			;63ab
-	ret nz			;63ac
-	add hl,bc			;63ad
-	nop			;63ae
-	add a,e			;63af
-	ret nz			;63b0
-	jr c,l63b7h		;63b1
-	ld (bc),a			;63b3
-	ld (bc),a			;63b4
-	add a,c			;63b5
-	inc b			;63b6
-l63b7h:
-	ld a,(bc)			;63b7
-	nop			;63b8
-	add a,d			;63b9
-	ld bc,l0202h+1		;63ba
-	ld (bc),a			;63bd
-	rlca			;63be
-	nop			;63bf
-	adc a,(hl)			;63c0
-	ld c,018h		;63c1
-	ld a,b			;63c3
-	ret p			;63c4
-	ret nz			;63c5
-	ret			;63c6
-l63c7h:
-	sub e			;63c7
-	inc bc			;63c8
-	inc c			;63c9
-	inc e			;63ca
-	jr l6406h		;63cb
-	ld a,l			;63cd
-	inc b			;63ce
-	inc b			;63cf
-	nop			;63d0
-	add a,e			;63d1
-	ex af,af'			;63d2
-	jr z,l643dh		;63d3
-	ld (bc),a			;63d5
-	call po,0348ah		;63d6
-	ld (bc),a			;63d9
-	nop			;63da
-	ret po			;63db
-	ret p			;63dc
-	jp (hl)			;63dd
-	ex de,hl			;63de
-	ld c,b			;63df
-	rrca			;63e0
-	ld de,l000eh		;63e1
-	add a,c			;63e4
-	inc bc			;63e5
-	ld (bc),a			;63e6
-	add a,b			;63e7
-	add a,e			;63e8
-	ld c,(hl)			;63e9
-	cpl			;63ea
-	ld bc,l0009h+1		;63eb
-	add a,d			;63ee
-	ld bc,l0202h		;63ef
-	inc b			;63f2
-	adc a,b			;63f3
-	nop			;63f4
-	inc bc			;63f5
-	rrca			;63f6
-	rra			;63f7
-	scf			;63f8
-	ld h,a			;63f9
-l63fah:
-	jp l0480h		;63fa
-	nop			;63fd
-	adc a,d			;63fe
-	ret po			;63ff
-	djnz l640ah		;6400
-	nop			;6402
-	ret p			;6403
-	cp 0f3h		;6404
-l6406h:
-	ret po			;6406
-	ret nz			;6407
-	add a,b			;6408
-	dec b			;6409
-l640ah:
-	nop			;640a
-	add a,c			;640b
-	rlca			;640c
-	rlca			;640d
-	nop			;640e
-	add a,c			;640f
-	add a,b			;6410
-	ld (bc),a			;6411
-	ld b,b			;6412
-	ld (bc),a			;6413
-	jr nz,l6419h		;6414
-	nop			;6416
-	add a,c			;6417
-	add a,b			;6418
-l6419h:
-	inc bc			;6419
-	nop			;641a
-	ld (bc),a			;641b
-	ld bc,l0003h+1		;641c
-	add a,e			;641f
-	inc b			;6420
-	ld b,001h		;6421
-	inc b			;6423
-	nop			;6424
-	sub b			;6425
-	ccf			;6426
-	ld (hl),d			;6427
-	ret p			;6428
-l6429h:
-	adc a,h			;6429
-	nop			;642a
-	add hl,bc			;642b
-	inc b			;642c
-	ex af,af'			;642d
-	jr $+123		;642e
-	dec sp			;6430
-	sbc a,d			;6431
-	adc a,e			;6432
-	pop bc			;6433
-	ld b,b			;6434
-	jr nz,l643ah		;6435
-	nop			;6437
-	ld (bc),a			;6438
-	inc b			;6439
-l643ah:
-	add a,a			;643a
-	ret pe			;643b
-	ld l,b			;643c
-l643dh:
-	inc (hl)			;643d
-	call nc,0b0e0h		;643e
-	jr z,$+2		;6441
-	call p,0f082h		;6443
-	call po,sub_0d02h		;6446
-	add a,d			;6449
-	inc bc			;644a
-	ld bc,l0012h		;644b
-	add a,l			;644e
-	inc bc			;644f
-	inc b			;6450
-	ex af,af'			;6451
-	nop			;6452
-	djnz l645ah		;6453
-	nop			;6455
-	adc a,l			;6456
-	rrca			;6457
-	ld e,020h		;6458
-l645ah:
-	ld bc,08600h		;645a
-	cp (hl)			;645d
-	call c,sub_594bh		;645e
-	ld d,b			;6461
-	ld (de),a			;6462
-	inc bc			;6463
-	ld (bc),a			;6464
-	dec de			;6465
-	add a,c			;6466
-	add hl,bc			;6467
-	nop			;6468
-	djnz $-1		;6469
-	ld (bc),a			;646b
-	nop			;646c
-	sub b			;646d
-	inc a			;646e
-	ld a,(hl)			;646f
-	ld h,(hl)			;6470
-	nop			;6471
-	add a,c			;6472
-	jp l3c66h		;6473
-	jr l6478h		;6476
-l6478h:
-	add a,c			;6478
-	nop			;6479
-	inc a			;647a
-	rst 38h			;647b
-	cp l			;647c
-	rst 38h			;647d
-	ld (bc),a			;647e
-	inc a			;647f
-	add a,c			;6480
-	ld a,(hl)			;6481
-	ld (bc),a			;6482
-	inc a			;6483
-	add a,c			;6484
-	jr l6490h		;6485
-	nop			;6487
-	add a,l			;6488
-	ld b,d			;6489
-	rst 20h			;648a
-	rst 38h			;648b
-	rst 20h			;648c
-	jr l6491h		;648d
-	rst 38h			;648f
-l6490h:
-	add a,c			;6490
-l6491h:
-	jp l0008h		;6491
-	add a,d			;6494
-	inc a			;6495
-	inc h			;6496
-	dec b			;6497
-	jr l64a4h		;6498
-	nop			;649a
-	add a,e			;649b
-	jr l64dah		;649c
-	ld h,(hl)			;649e
-	ld (bc),a			;649f
-	nop			;64a0
-	add a,e			;64a1
-	inc a			;64a2
-	ld e,d			;64a3
-l64a4h:
-	inc a			;64a4
-	ld (bc),a			;64a5
-	jr l6429h		;64a6
-	nop			;64a8
-	inc bc			;64a9
-	jr l64b5h		;64aa
-	nop			;64ac
-	add a,l			;64ad
-	djnz l64d8h		;64ae
-	ld l,h			;64b0
-	djnz l64dbh		;64b1
-	rrca			;64b3
-	nop			;64b4
-l64b5h:
-	inc bc			;64b5
-	jr $+4		;64b6
-	nop			;64b8
-	add a,a			;64b9
-	inc d			;64ba
-	jr nz,l64cdh		;64bb
-	jr $-128		;64bd
-	jr nc,l64c1h		;64bf
-l64c1h:
-	ld (bc),a			;64c1
-	inc b			;64c2
-	ld (bc),a			;64c3
-	ld (bc),a			;64c4
-	dec b			;64c5
-	nop			;64c6
-	adc a,d			;64c7
-	ld (l0804h),hl		;64c8
-	rra			;64cb
-	ld (bc),a			;64cc
-l64cdh:
-	jr c,l64e7h		;64cd
-	inc c			;64cf
-	inc b			;64d0
-	ld (bc),a			;64d1
-	ld b,h			;64d2
-	nop			;64d3
-	adc a,b			;64d4
-	ld a,(hl)			;64d5
-	rst 20h			;64d6
-	ret po			;64d7
-l64d8h:
-	rst 28h			;64d8
-	rst 20h			;64d9
-l64dah:
-	ld a,a			;64da
-l64dbh:
-	nop			;64db
-	ld a,(hl)			;64dc
-	inc b			;64dd
-	rst 20h			;64de
-	add a,c			;64df
-	ld a,(hl)			;64e0
-	dec bc			;64e1
-	nop			;64e2
-	adc a,h			;64e3
-	ex af,af'			;64e4
-	nop			;64e5
-	ex af,af'			;64e6
-l64e7h:
-	nop			;64e7
-	ex af,af'			;64e8
-	nop			;64e9
-	ld b,00eh		;64ea
-	inc c			;64ec
-	jr l64ffh		;64ed
-	nop			;64ef
-	ld (bc),a			;64f0
-	ld h,b			;64f1
-	add hl,bc			;64f2
-	nop			;64f3
-	adc a,c			;64f4
-	ld a,060h		;64f5
-	ld h,(hl)			;64f7
-	ld a,000h		;64f8
-	inc a			;64fa
-	ld h,(hl)			;64fb
-	inc a			;64fc
-	nop			;64fd
-	ld (bc),a			;64fe
-l64ffh:
-	inc b			;64ff
-	ld (bc),a			;6500
-	ex af,af'			;6501
-	add a,d			;6502
-	nop			;6503
+	.DB $84		;6203
+	.DB $42		;6204
+	.DB $18		;6205
+	.DB $00		;6206
+	.DB $24		;6207
+	.DB $02		;6208
+	.DB $3c		;6209
+	.DB $0d		;620a
+	.DB $00		;620b
+	.DB $85		;620c
+	.DB $38		;620d
+	.DB $7c		;620e
+	.DB $28		;620f
+	.DB $00		;6210
+	.DB $38		;6211
+	.DB $0e		;6212
+	.DB $00		;6213
+	.DB $03		;6214
+	.DB $10		;6215
+	.DB $04		;6216
+	.DB $00		;6217
+	.DB $87		;6218
+	.DB $14		;6219
+	.DB $20		;621a
+	.DB $10		;621b
+	.DB $18		;621c
+	.DB $80		;621d
+	.DB $30		;621e
+	.DB $00		;621f
+	.DB $02		;6220
+	.DB $04		;6221
+	.DB $02		;6222
+	.DB $02		;6223
+	.DB $05		;6224
+	.DB $00		;6225
+	.DB $8a		;6226
+	.DB $22		;6227
+	.DB $04		;6228
+	.DB $08		;6229
+	.DB $1f		;622a
+	.DB $02		;622b
+	.DB $38		;622c
+	.DB $18		;622d
+	.DB $0c		;622e
+	.DB $04		;622f
+	.DB $02		;6230
+	.DB $7f		;6231
+	.DB $00		;6232
+	.DB $6d		;6233
+	.DB $00		;6234
+	.DB $81		;6235
+	.DB $01		;6236
+	.DB $03		;6237
+	.DB $00		;6238
+	.DB $82		;6239
+	.DB $20		;623a
+	.DB $05		;623b
+	.DB $09		;623c
+	.DB $00		;623d
+	.DB $81		;623e
+	.DB $20		;623f
+	.DB $02		;6240
+	.DB $00		;6241
+	.DB $84		;6242
+	.DB $7a		;6243
+	.DB $08		;6244
+	.DB $32		;6245
+	.DB $20		;6246
+	.DB $07		;6247
+	.DB $00		;6248
+	.DB $82		;6249
+	.DB $01		;624a
+	.DB $03		;624b
+	.DB $02		;624c
+	.DB $07		;624d
+	.DB $02		;624e
+	.DB $0f		;624f
+	.DB $02		;6250
+	.DB $1f		;6251
+	.DB $81		;6252
+	.DB $1d		;6253
+	.DB $05		;6254
+	.DB $00		;6255
+	.DB $82		;6256
+	.DB $07		;6257
+	.DB $3f		;6258
+	.DB $06		;6259
+	.DB $ff		;625a
+	.DB $81		;625b
+	.DB $fe		;625c
+	.DB $02		;625d
+	.DB $ff		;625e
+	.DB $06		;625f
+	.DB $00		;6260
+	.DB $83		;6261
+	.DB $c0		;6262
+	.DB $f8		;6263
+	.DB $fc		;6264
+	.DB $02		;6265
+	.DB $fe		;6266
+	.DB $82		;6267
+	.DB $fc		;6268
+	.DB $3e		;6269
+	.DB $02		;626a
+	.DB $ff		;626b
+	.DB $83		;626c
+	.DB $f7		;626d
+	.DB $0f		;626e
+	.DB $df		;626f
+	.DB $03		;6270
+	.DB $3f		;6271
+	.DB $82		;6272
+	.DB $7f		;6273
+	.DB $7e		;6274
+	.DB $03		;6275
+	.DB $7c		;6276
+	.DB $83		;6277
+	.DB $78		;6278
+	.DB $70		;6279
+	.DB $6e		;627a
+	.DB $02		;627b
+	.DB $7f		;627c
+	.DB $85		;627d
+	.DB $3e		;627e
+	.DB $fe		;627f
+	.DB $f0		;6280
+	.DB $e0		;6281
+	.DB $80		;6282
+	.DB $02		;6283
+	.DB $00		;6284
+	.DB $82		;6285
+	.DB $08		;6286
+	.DB $10		;6287
+	.DB $04		;6288
+	.DB $00		;6289
+	.DB $02		;628a
+	.DB $01		;628b
+	.DB $82		;628c
+	.DB $60		;628d
+	.DB $f8		;628e
+	.DB $02		;628f
+	.DB $f0		;6290
+	.DB $81		;6291
+	.DB $40		;6292
+	.DB $02		;6293
+	.DB $30		;6294
+	.DB $81		;6295
+	.DB $10		;6296
+	.DB $02		;6297
+	.DB $18		;6298
+	.DB $8b		;6299
+	.DB $08		;629a
+	.DB $04		;629b
+	.DB $01		;629c
+	.DB $e0		;629d
+	.DB $f0		;629e
+	.DB $e9		;629f
+	.DB $eb		;62a0
+	.DB $48		;62a1
+	.DB $e0		;62a2
+	.DB $0e		;62a3
+	.DB $01		;62a4
+	.DB $0d		;62a5
+	.DB $00		;62a6
+	.DB $86		;62a7
+	.DB $83		;62a8
+	.DB $00		;62a9
+	.DB $40		;62aa
+	.DB $2e		;62ab
+	.DB $1f		;62ac
+	.DB $01		;62ad
+	.DB $0f		;62ae
+	.DB $00		;62af
+	.DB $84		;62b0
+	.DB $01		;62b1
+	.DB $03		;62b2
+	.DB $07		;62b3
+	.DB $0f		;62b4
+	.DB $02		;62b5
+	.DB $1f		;62b6
+	.DB $83		;62b7
+	.DB $3e		;62b8
+	.DB $1d		;62b9
+	.DB $1f		;62ba
+	.DB $02		;62bb
+	.DB $0f		;62bc
+	.DB $84		;62bd
+	.DB $70		;62be
+	.DB $80		;62bf
+	.DB $c0		;62c0
+	.DB $01		;62c1
+	.DB $02		;62c2
+	.DB $40		;62c3
+	.DB $8a		;62c4
+	.DB $60		;62c5
+	.DB $20		;62c6
+	.DB $33		;62c7
+	.DB $21		;62c8
+	.DB $00		;62c9
+	.DB $42		;62ca
+	.DB $43		;62cb
+	.DB $5b		;62cc
+	.DB $3b		;62cd
+	.DB $19		;62ce
+	.DB $06		;62cf
+	.DB $00		;62d0
+	.DB $83		;62d1
+	.DB $01		;62d2
+	.DB $0f		;62d3
+	.DB $3f		;62d4
+	.DB $03		;62d5
+	.DB $7f		;62d6
+	.DB $03		;62d7
+	.DB $ff		;62d8
+	.DB $81		;62d9
+	.DB $5f		;62da
+	.DB $06		;62db
+	.DB $00		;62dc
+	.DB $8a		;62dd
+	.DB $c0		;62de
+	.DB $f0		;62df
+	.DB $f8		;62e0
+	.DB $fc		;62e1
+	.DB $bc		;62e2
+	.DB $d8		;62e3
+	.DB $e0		;62e4
+	.DB $fc		;62e5
+	.DB $ff		;62e6
+	.DB $c1		;62e7
+	.DB $03		;62e8
+	.DB $03		;62e9
+	.DB $03		;62ea
+	.DB $07		;62eb
+	.DB $81		;62ec
+	.DB $06		;62ed
+	.DB $02		;62ee
+	.DB $07		;62ef
+	.DB $81		;62f0
+	.DB $03		;62f1
+	.DB $06		;62f2
+	.DB $00		;62f3
+	.DB $85		;62f4
+	.DB $f0		;62f5
+	.DB $e0		;62f6
+	.DB $c0		;62f7
+	.DB $84		;62f8
+	.DB $80		;62f9
+	.DB $02		;62fa
+	.DB $00		;62fb
+	.DB $84		;62fc
+	.DB $c0		;62fd
+	.DB $d0		;62fe
+	.DB $8e		;62ff
+	.DB $b4		;6300
+	.DB $02		;6301
+	.DB $01		;6302
+	.DB $81		;6303
+	.DB $02		;6304
+	.DB $02		;6305
+	.DB $00		;6306
+	.DB $81		;6307
+	.DB $70		;6308
+	.DB $03		;6309
+	.DB $10		;630a
+	.DB $8a		;630b
+	.DB $00		;630c
+	.DB $30		;630d
+	.DB $c4		;630e
+	.DB $c0		;630f
+	.DB $3c		;6310
+	.DB $74		;6311
+	.DB $3c		;6312
+	.DB $d2		;6313
+	.DB $a0		;6314
+	.DB $10		;6315
+	.DB $06		;6316
+	.DB $00		;6317
+	.DB $97		;6318
+	.DB $01		;6319
+	.DB $07		;631a
+	.DB $1f		;631b
+	.DB $3f		;631c
+	.DB $7f		;631d
+	.DB $77		;631e
+	.DB $7f		;631f
+	.DB $1f		;6320
+	.DB $3f		;6321
+	.DB $30		;6322
+	.DB $10		;6323
+	.DB $20		;6324
+	.DB $01		;6325
+	.DB $10		;6326
+	.DB $20		;6327
+	.DB $08		;6328
+	.DB $11		;6329
+	.DB $02		;632a
+	.DB $0b		;632b
+	.DB $0d		;632c
+	.DB $09		;632d
+	.DB $06		;632e
+	.DB $02		;632f
+	.DB $07		;6330
+	.DB $00		;6331
+	.DB $87		;6332
+	.DB $0e		;6333
+	.DB $3f		;6334
+	.DB $7d		;6335
+	.DB $ff		;6336
+	.DB $df		;6337
+	.DB $de		;6338
+	.DB $1c		;6339
+	.DB $03		;633a
+	.DB $18		;633b
+	.DB $84		;633c
+	.DB $10		;633d
+	.DB $1e		;633e
+	.DB $0c		;633f
+	.DB $01		;6340
+	.DB $03		;6341
+	.DB $00		;6342
+	.DB $8c		;6343
+	.DB $c0		;6344
+	.DB $e0		;6345
+	.DB $30		;6346
+	.DB $20		;6347
+	.DB $10		;6348
+	.DB $90		;6349
+	.DB $08		;634a
+	.DB $30		;634b
+	.DB $2c		;634c
+	.DB $98		;634d
+	.DB $10		;634e
+	.DB $20		;634f
+	.DB $06		;6350
+	.DB $00		;6351
+	.DB $82		;6352
+	.DB $03		;6353
+	.DB $0f		;6354
+	.DB $02		;6355
+	.DB $1f		;6356
+	.DB $87		;6357
+	.DB $1b		;6358
+	.DB $0f		;6359
+	.DB $1c		;635a
+	.DB $10		;635b
+	.DB $09		;635c
+	.DB $08		;635d
+	.DB $04		;635e
+	.DB $03		;635f
+	.DB $00		;6360
+	.DB $81		;6361
+	.DB $03		;6362
+	.DB $02		;6363
+	.DB $0f		;6364
+	.DB $88		;6365
+	.DB $17		;6366
+	.DB $0f		;6367
+	.DB $07		;6368
+	.DB $0e		;6369
+	.DB $0c		;636a
+	.DB $08		;636b
+	.DB $0d		;636c
+	.DB $04		;636d
+	.DB $05		;636e
+	.DB $00		;636f
+	.DB $8c		;6370
+	.DB $80		;6371
+	.DB $e0		;6372
+	.DB $70		;6373
+	.DB $f0		;6374
+	.DB $88		;6375
+	.DB $0c		;6376
+	.DB $40		;6377
+	.DB $04		;6378
+	.DB $1f		;6379
+	.DB $94		;637a
+	.DB $1a		;637b
+	.DB $04		;637c
+	.DB $0b		;637d
+	.DB $00		;637e
+	.DB $86		;637f
+	.DB $30		;6380
+	.DB $78		;6381
+	.DB $64		;6382
+	.DB $24		;6383
+	.DB $1c		;6384
+	.DB $00		;6385
+	.DB $02		;6386
+	.DB $08		;6387
+	.DB $02		;6388
+	.DB $04		;6389
+	.DB $02		;638a
+	.DB $00		;638b
+	.DB $81		;638c
+	.DB $80		;638d
+	.DB $0c		;638e
+	.DB $00		;638f
+	.DB $02		;6390
+	.DB $80		;6391
+	.DB $12		;6392
+	.DB $00		;6393
+	.DB $84		;6394
+	.DB $01		;6395
+	.DB $03		;6396
+	.DB $05		;6397
+	.DB $04		;6398
+	.DB $02		;6399
+	.DB $08		;639a
+	.DB $81		;639b
+	.DB $10		;639c
+	.DB $03		;639d
+	.DB $00		;639e
+	.DB $88		;639f
+	.DB $1c		;63a0
+	.DB $62		;63a1
+	.DB $81		;63a2
+	.DB $80		;63a3
+	.DB $07		;63a4
+	.DB $3f		;63a5
+	.DB $fe		;63a6
+	.DB $f8		;63a7
+	.DB $02		;63a8
+	.DB $f0		;63a9
+	.DB $82		;63aa
+	.DB $e0		;63ab
+	.DB $c0		;63ac
+	.DB $09		;63ad
+	.DB $00		;63ae
+	.DB $83		;63af
+	.DB $c0		;63b0
+	.DB $38		;63b1
+	.DB $04		;63b2
+	.DB $02		;63b3
+	.DB $02		;63b4
+	.DB $81		;63b5
+	.DB $04		;63b6
+	.DB $0a		;63b7
+	.DB $00		;63b8
+	.DB $82		;63b9
+	.DB $01		;63ba
+	.DB $03		;63bb
+	.DB $02		;63bc
+	.DB $02		;63bd
+	.DB $07		;63be
+	.DB $00		;63bf
+	.DB $8e		;63c0
+	.DB $0e		;63c1
+	.DB $18		;63c2
+	.DB $78		;63c3
+	.DB $f0		;63c4
+	.DB $c0		;63c5
+	.DB $c9		;63c6
+	.DB $93		;63c7
+	.DB $03		;63c8
+	.DB $0c		;63c9
+	.DB $1c		;63ca
+	.DB $18		;63cb
+	.DB $39		;63cc
+	.DB $7d		;63cd
+	.DB $04		;63ce
+	.DB $04		;63cf
+	.DB $00		;63d0
+	.DB $83		;63d1
+	.DB $08		;63d2
+	.DB $28		;63d3
+	.DB $68		;63d4
+	.DB $02		;63d5
+	.DB $e4		;63d6
+	.DB $8a		;63d7
+	.DB $34		;63d8
+	.DB $02		;63d9
+	.DB $00		;63da
+	.DB $e0		;63db
+	.DB $f0		;63dc
+	.DB $e9		;63dd
+	.DB $eb		;63de
+	.DB $48		;63df
+	.DB $0f		;63e0
+	.DB $11		;63e1
+	.DB $0e		;63e2
+	.DB $00		;63e3
+	.DB $81		;63e4
+	.DB $03		;63e5
+	.DB $02		;63e6
+	.DB $80		;63e7
+	.DB $83		;63e8
+	.DB $4e		;63e9
+	.DB $2f		;63ea
+	.DB $01		;63eb
+	.DB $0a		;63ec
+	.DB $00		;63ed
+	.DB $82		;63ee
+	.DB $01		;63ef
+	.DB $02		;63f0
+	.DB $02		;63f1
+	.DB $04		;63f2
+	.DB $88		;63f3
+	.DB $00		;63f4
+	.DB $03		;63f5
+	.DB $0f		;63f6
+	.DB $1f		;63f7
+	.DB $37		;63f8
+	.DB $67		;63f9
+	.DB $c3		;63fa
+	.DB $80		;63fb
+	.DB $04		;63fc
+	.DB $00		;63fd
+	.DB $8a		;63fe
+	.DB $e0		;63ff
+	.DB $10		;6400
+	.DB $08		;6401
+	.DB $00		;6402
+	.DB $f0		;6403
+	.DB $fe		;6404
+	.DB $f3		;6405
+	.DB $e0		;6406
+	.DB $c0		;6407
+	.DB $80		;6408
+	.DB $05		;6409
+	.DB $00		;640a
+	.DB $81		;640b
+	.DB $07		;640c
+	.DB $07		;640d
+	.DB $00		;640e
+	.DB $81		;640f
+	.DB $80		;6410
+	.DB $02		;6411
+	.DB $40		;6412
+	.DB $02		;6413
+	.DB $20		;6414
+	.DB $03		;6415
+	.DB $00		;6416
+	.DB $81		;6417
+	.DB $80		;6418
+	.DB $03		;6419
+	.DB $00		;641a
+	.DB $02		;641b
+	.DB $01		;641c
+	.DB $04		;641d
+	.DB $00		;641e
+	.DB $83		;641f
+	.DB $04		;6420
+	.DB $06		;6421
+	.DB $01		;6422
+	.DB $04		;6423
+	.DB $00		;6424
+	.DB $90		;6425
+	.DB $3f		;6426
+	.DB $72		;6427
+	.DB $f0		;6428
+	.DB $8c		;6429
+	.DB $00		;642a
+	.DB $09		;642b
+	.DB $04		;642c
+	.DB $08		;642d
+	.DB $18		;642e
+	.DB $7b		;642f
+	.DB $3b		;6430
+	.DB $9a		;6431
+	.DB $8b		;6432
+	.DB $c1		;6433
+	.DB $40		;6434
+	.DB $20		;6435
+	.DB $03		;6436
+	.DB $00		;6437
+	.DB $02		;6438
+	.DB $04		;6439
+	.DB $87		;643a
+	.DB $e8		;643b
+	.DB $68		;643c
+	.DB $34		;643d
+	.DB $d4		;643e
+	.DB $e0		;643f
+	.DB $b0		;6440
+	.DB $28		;6441
+	.DB $02		;6442
+	.DB $f4		;6443
+	.DB $82		;6444
+	.DB $f0		;6445
+	.DB $e4		;6446
+	.DB $02		;6447
+	.DB $0d		;6448
+	.DB $82		;6449
+	.DB $03		;644a
+	.DB $01		;644b
+	.DB $12		;644c
+	.DB $00		;644d
+	.DB $85		;644e
+	.DB $03		;644f
+	.DB $04		;6450
+	.DB $08		;6451
+	.DB $00		;6452
+	.DB $10		;6453
+	.DB $05		;6454
+	.DB $00		;6455
+	.DB $8d		;6456
+	.DB $0f		;6457
+	.DB $1e		;6458
+	.DB $20		;6459
+	.DB $01		;645a
+	.DB $00		;645b
+	.DB $86		;645c
+	.DB $be		;645d
+	.DB $dc		;645e
+	.DB $4b		;645f
+	.DB $59		;6460
+	.DB $50		;6461
+	.DB $12		;6462
+	.DB $03		;6463
+	.DB $02		;6464
+	.DB $1b		;6465
+	.DB $81		;6466
+	.DB $09		;6467
+	.DB $00		;6468
+	.DB $10		;6469
+	.DB $ff		;646a
+	.DB $02		;646b
+	.DB $00		;646c
+	.DB $90		;646d
+	.DB $3c		;646e
+	.DB $7e		;646f
+	.DB $66		;6470
+	.DB $00		;6471
+	.DB $81		;6472
+	.DB $c3		;6473
+	.DB $66		;6474
+	.DB $3c		;6475
+	.DB $18		;6476
+	.DB $00		;6477
+	.DB $81		;6478
+	.DB $00		;6479
+	.DB $3c		;647a
+	.DB $ff		;647b
+	.DB $bd		;647c
+	.DB $ff		;647d
+	.DB $02		;647e
+	.DB $3c		;647f
+	.DB $81		;6480
+	.DB $7e		;6481
+	.DB $02		;6482
+	.DB $3c		;6483
+	.DB $81		;6484
+	.DB $18		;6485
+	.DB $09		;6486
+	.DB $00		;6487
+	.DB $85		;6488
+	.DB $42		;6489
+	.DB $e7		;648a
+	.DB $ff		;648b
+	.DB $e7		;648c
+	.DB $18		;648d
+	.DB $02		;648e
+	.DB $ff		;648f
+	.DB $81		;6490
+	.DB $c3		;6491
+	.DB $08		;6492
+	.DB $00		;6493
+	.DB $82		;6494
+	.DB $3c		;6495
+	.DB $24		;6496
+	.DB $05		;6497
+	.DB $18		;6498
+	.DB $0a		;6499
+	.DB $00		;649a
+	.DB $83		;649b
+	.DB $18		;649c
+	.DB $3c		;649d
+	.DB $66		;649e
+	.DB $02		;649f
+	.DB $00		;64a0
+	.DB $83		;64a1
+	.DB $3c		;64a2
+	.DB $5a		;64a3
+	.DB $3c		;64a4
+	.DB $02		;64a5
+	.DB $18		;64a6
+	.DB $81		;64a7
+	.DB $00		;64a8
+	.DB $03		;64a9
+	.DB $18		;64aa
+	.DB $09		;64ab
+	.DB $00		;64ac
+	.DB $85		;64ad
+	.DB $10		;64ae
+	.DB $28		;64af
+	.DB $6c		;64b0
+	.DB $10		;64b1
+	.DB $28		;64b2
+	.DB $0f		;64b3
+	.DB $00		;64b4
+	.DB $03		;64b5
+	.DB $18		;64b6
+	.DB $04		;64b7
+	.DB $00		;64b8
+	.DB $87		;64b9
+	.DB $14		;64ba
+	.DB $20		;64bb
+	.DB $10		;64bc
+	.DB $18		;64bd
+	.DB $80		;64be
+	.DB $30		;64bf
+	.DB $00		;64c0
+	.DB $02		;64c1
+	.DB $04		;64c2
+	.DB $02		;64c3
+	.DB $02		;64c4
+	.DB $05		;64c5
+	.DB $00		;64c6
+	.DB $8a		;64c7
+	.DB $22		;64c8
+	.DB $04		;64c9
+	.DB $08		;64ca
+	.DB $1f		;64cb
+	.DB $02		;64cc
+	.DB $38		;64cd
+	.DB $18		;64ce
+	.DB $0c		;64cf
+	.DB $04		;64d0
+	.DB $02		;64d1
+	.DB $44		;64d2
+	.DB $00		;64d3
+	.DB $88		;64d4
+	.DB $7e		;64d5
+	.DB $e7		;64d6
+	.DB $e0		;64d7
+	.DB $ef		;64d8
+	.DB $e7		;64d9
+	.DB $7f		;64da
+	.DB $00		;64db
+	.DB $7e		;64dc
+	.DB $04		;64dd
+	.DB $e7		;64de
+	.DB $81		;64df
+	.DB $7e		;64e0
+	.DB $0b		;64e1
+	.DB $00		;64e2
+	.DB $8c		;64e3
+	.DB $08		;64e4
+	.DB $00		;64e5
+	.DB $08		;64e6
+	.DB $00		;64e7
+	.DB $08		;64e8
+	.DB $00		;64e9
+	.DB $06		;64ea
+	.DB $0e		;64eb
+	.DB $0c		;64ec
+	.DB $18		;64ed
+	.DB $10		;64ee
+	.DB $00		;64ef
+	.DB $02		;64f0
+	.DB $60		;64f1
+	.DB $09		;64f2
+	.DB $00		;64f3
+	.DB $89		;64f4
+	.DB $3e		;64f5
+	.DB $60		;64f6
+	.DB $66		;64f7
+	.DB $3e		;64f8
+	.DB $00		;64f9
+	.DB $3c		;64fa
+	.DB $66		;64fb
+	.DB $3c		;64fc
+	.DB $00		;64fd
+	.DB $02		;64fe
+	.DB $04		;64ff
+	.DB $02		;6500
+	.DB $08		;6501
+	.DB $82		;6502
+	.DB $00		;6503
 l6504h:
-	djnz l6508h		;6504
-	nop			;6506
-	add a,h			;6507
-l6508h:
-	jr l651ah		;6508
-	jr l650ch		;650a
-l650ch:
-	ld (bc),a			;650c
-	jr l6490h		;650d
-	nop			;650f
-	ld (bc),a			;6510
-	ex af,af'			;6511
-	add a,d			;6512
-	nop			;6513
-	djnz l651bh		;6514
-	nop			;6516
-	adc a,c			;6517
-	inc b			;6518
-	inc c			;6519
-l651ah:
-	inc e			;651a
-l651bh:
-	ccf			;651b
-	ld a,a			;651c
-	ccf			;651d
-	inc e			;651e
-	inc c			;651f
-	inc b			;6520
-	ld a,(bc)			;6521
-	nop			;6522
-	add a,c			;6523
-	ret po			;6524
-	ld (bc),a			;6525
-	ret m			;6526
-	add a,c			;6527
-	inc a			;6528
-	dec b			;6529
-	inc e			;652a
-	ld b,000h		;652b
-	add a,(hl)			;652d
-	jr nz,$+96		;652e
-	call m,sub_67feh		;6530
-	inc hl			;6533
-	ld (bc),a			;6534
-	inc bc			;6535
-	ld a,(bc)			;6536
-	nop			;6537
-	add a,e			;6538
-	jr nz,$+120		;6539
-	inc h			;653b
-	ld (bc),a			;653c
-	inc b			;653d
-	ld (de),a			;653e
-	nop			;653f
-	add a,d			;6540
-	djnz $+8		;6541
-	dec bc			;6543
-	nop			;6544
-	add a,c			;6545
-	ld bc,l0003h		;6546
-	add a,d			;6549
-	jr nz,l6551h		;654a
-	add hl,bc			;654c
-	nop			;654d
-	add a,c			;654e
-	jr nz,l6553h		;654f
-l6551h:
-	nop			;6551
-	add a,h			;6552
-l6553h:
-	ld a,d			;6553
-	ex af,af'			;6554
-	ld (l0820h),a		;6555
-	nop			;6558
-	add a,c			;6559
-	ld bc,l0302h		;655a
-	add a,l			;655d
-	rlca			;655e
-	dec b			;655f
-	ld a,(bc)			;6560
-	ld a,(de)			;6561
-	ld d,002h		;6562
-	nop			;6564
-	add a,(hl)			;6565
-	ld (bc),a			;6566
-	ld h,e			;6567
-	rst 38h			;6568
-	ret m			;6569
-	add a,03fh		;656a
-	inc bc			;656c
-	rst 38h			;656d
-	add a,e			;656e
-	add a,(hl)			;656f
-	ld (bc),a			;6570
-	ld bc,l0009h		;6571
-	add a,(hl)			;6574
-	add a,b			;6575
-	ret m			;6576
-	call m,0e81ch		;6577
-	ret nz			;657a
-	ld (bc),a			;657b
-	nop			;657c
-	add a,e			;657d
-	ex af,af'			;657e
-	nop			;657f
-	ret po			;6580
-	inc b			;6581
-	nop			;6582
-	add a,d			;6583
-	ld bc,l0302h+1		;6584
-	ld (bc),a			;6587
-	add a,d			;6588
-	ex af,af'			;6589
-	djnz l658eh		;658a
-	nop			;658c
-	ld (bc),a			;658d
-l658eh:
-	ld bc,00f8fh		;658e
-	jr l660dh		;6591
-	ex (sp),hl			;6593
-	ret z			;6594
-	sbc a,l			;6595
-	cp c			;6596
-	inc de			;6597
-	rst 0			;6598
-	ld e,a			;6599
-	rra			;659a
-	ccf			;659b
-	ld a,a			;659c
-	add a,a			;659d
-	ld b,002h		;659e
-	nop			;65a0
-	add a,c			;65a1
-	jr nc,l65a6h		;65a2
-	nop			;65a4
-	add a,c			;65a5
-l65a6h:
-	ld h,b			;65a6
-	ld (bc),a			;65a7
-	ret po			;65a8
-	adc a,h			;65a9
-	ret p			;65aa
-	ret m			;65ab
-	cp 0b7h		;65ac
-	cp e			;65ae
-	ld l,0ech		;65af
-	rst 8			;65b1
-	djnz l65b4h		;65b2
-l65b4h:
-	ld e,07fh		;65b4
-	ld (bc),a			;65b6
-	rst 38h			;65b7
-	add a,e			;65b8
-	ld a,a			;65b9
-	ccf			;65ba
-	inc bc			;65bb
-	rlca			;65bc
-	nop			;65bd
-	add a,(hl)			;65be
-	ld (hl),a			;65bf
-	ld (hl),e			;65c0
-	add hl,sp			;65c1
-	sub c			;65c2
-	jp l02fdh		;65c3
-	rst 38h			;65c6
-	add a,c			;65c7
-	cp 00eh		;65c8
-	nop			;65ca
-	add a,a			;65cb
-	inc bc			;65cc
-	inc b			;65cd
-	dec de			;65ce
-	rla			;65cf
-	cpl			;65d0
-	ld c,018h		;65d1
-	ld (bc),a			;65d3
-	nop			;65d4
-	add a,(hl)			;65d5
-	adc a,a			;65d6
-	ld a,h			;65d7
-	ld hl,l09cbh		;65d8
-	inc b			;65db
-	ld (bc),a			;65dc
-	rra			;65dd
-	adc a,b			;65de
-	rrca			;65df
-	add hl,de			;65e0
-	jr c,l661dh		;65e1
-	add hl,sp			;65e3
-	jr nz,l65e8h		;65e4
-	dec bc			;65e6
-	inc b			;65e7
-l65e8h:
-	nop			;65e8
-	adc a,c			;65e9
-	inc b			;65ea
-	ld b,(hl)			;65eb
-	ld l,(hl)			;65ec
-	ld (hl),c			;65ed
-	rlca			;65ee
-	rra			;65ef
-	inc a			;65f0
-	jr c,$+96		;65f1
-	ld (bc),a			;65f3
-	ld d,b			;65f4
-	ex af,af'			;65f5
-	nop			;65f6
-	add a,h			;65f7
-	ret nz			;65f8
-	ret p			;65f9
-	ret m			;65fa
-	ret c			;65fb
-	inc b			;65fc
-	nop			;65fd
-sub_65feh:
-	add a,c			;65fe
-	ld a,006h		;65ff
-	nop			;6601
-	add a,c			;6602
-	ld bc,l0003h+2		;6603
-	sub (hl)			;6606
-	ld bc,00107h		;6607
-	nop			;660a
-	inc c			;660b
-	add hl,de			;660c
-l660dh:
-	inc (hl)			;660d
-	ld l,l			;660e
-	ld b,e			;660f
-	rla			;6610
-	rrca			;6611
-	ld e,026h		;6612
-	ld b,c			;6614
-	ld b,e			;6615
-	ld a,(0fdfah)		;6616
-	rst 38h			;6619
-	rra			;661a
-	nop			;661b
-	ld h,b			;661c
-l661dh:
-	ld (bc),a			;661d
-	ret nz			;661e
-	adc a,h			;661f
-	ret po			;6620
-	add a,b			;6621
-	ret c			;6622
-	call z,sub_5ca0h		;6623
-	ld a,h			;6626
-	ld a,07eh		;6627
-	cp 0efh		;6629
-	add a,(hl)			;662b
-	ld (bc),a			;662c
-	nop			;662d
-	adc a,c			;662e
-	ld (bc),a			;662f
-	rlca			;6630
-	ld b,001h		;6631
-	rlca			;6633
-	ld l,054h		;6634
-	jr c,l6698h		;6636
-	ld (bc),a			;6638
-	nop			;6639
-	adc a,h			;663a
-	rrca			;663b
-	ld h,001h		;663c
-	dec h			;663e
-	ld (bc),a			;663f
-	rrca			;6640
-	dec b			;6641
-	rlca			;6642
-	inc b			;6643
-	rlca			;6644
-	nop			;6645
-	dec b			;6646
-l6647h:
-	ld (bc),a			;6647
-	inc bc			;6648
-	ld (bc),a			;6649
-	ld bc,l0302h		;664a
-	add a,(hl)			;664d
-	ld bc,l1020h		;664e
-	sub b			;6651
-	sbc a,033h		;6652
-	ld (bc),a			;6654
-	ld h,b			;6655
-	add a,d			;6656
-	and c			;6657
-	inc bc			;6658
-	ld (bc),a			;6659
-	ld b,084h		;665a
-	nop			;665c
-	add hl,bc			;665d
-	nop			;665e
-	ld (bc),a			;665f
-	ld b,000h		;6660
-	add a,h			;6662
-	add a,b			;6663
-	sub b			;6664
-	jr nz,l6647h		;6665
-	ld (bc),a			;6667
-	ret p			;6668
-	add a,l			;6669
-	ld l,b			;666a
-	ld (hl),h			;666b
-	ld l,047h		;666c
-	ei			;666e
-	inc bc			;666f
-	nop			;6670
-	adc a,l			;6671
-	ld (bc),a			;6672
-	inc bc			;6673
-	nop			;6674
-	inc bc			;6675
-	ld c,01ch		;6676
-	inc c			;6678
-	nop			;6679
-	inc bc			;667a
-	ld c,003h		;667b
-l667dh:
-	ld b,003h		;667d
-	ld (bc),a			;667f
-	nop			;6680
-	adc a,d			;6681
-	ld b,00ch		;6682
-	rlca			;6684
-	ld c,018h		;6685
-	ex af,af'			;6687
-	nop			;6688
-	ld bc,l03ffh+1		;6689
-	ld (bc),a			;668c
-	ld (bc),a			;668d
-	add a,d			;668e
-	nop			;668f
-	inc bc			;6690
-	inc b			;6691
-	nop			;6692
-	adc a,h			;6693
-	ret nz			;6694
-	ret po			;6695
-	nop			;6696
-	ld d,b			;6697
-l6698h:
-	ret nz			;6698
-	call c,0f830h		;6699
-	ld d,a			;669c
-	ld l,d			;669d
-	scf			;669e
-	ei			;669f
-	ld a,(bc)			;66a0
-	nop			;66a1
-	add a,h			;66a2
-	ld (hl),b			;66a3
-	ld d,b			;66a4
-	ld a,b			;66a5
-	djnz l66aah		;66a6
-	nop			;66a8
-	add a,d			;66a9
-l66aah:
-	ex af,af'			;66aa
-	ret m			;66ab
-	inc b			;66ac
-	call m,0fe83h		;66ad
-	ld a,(hl)			;66b0
-	sbc a,h			;66b1
-	rlca			;66b2
-	nop			;66b3
-	ld (bc),a			;66b4
-	ret m			;66b5
-	inc b			;66b6
-	call m,sub_7c82h		;66b7
-	jr c,l66cdh		;66ba
-	nop			;66bc
-	add a,d			;66bd
-	ld (bc),a			;66be
-	inc bc			;66bf
-	ld (bc),a			;66c0
-	dec b			;66c1
-	add a,e			;66c2
-	ex af,af'			;66c3
-	djnz l66d8h		;66c4
-	inc bc			;66c6
-	nop			;66c7
-	adc a,h			;66c8
-	inc e			;66c9
-	ld a,078h		;66ca
-	ld b,b			;66cc
-l66cdh:
-	ld bc,00c07h		;66cd
-	ex af,af'			;66d0
-	jr $+33		;66d1
-	rst 0			;66d3
-	add a,a			;66d4
-	ex af,af'			;66d5
-	nop			;66d6
-	sub e			;66d7
-l66d8h:
-	ret nz			;66d8
-	jr c,l66e7h		;66d9
-	inc b			;66db
-	ret z			;66dc
-	cp 0c3h		;66dd
-	dec e			;66df
-	ld a,l			;66e0
-	nop			;66e1
-	ret po			;66e2
-	jr nz,$+35		;66e3
-	daa			;66e5
-	rlca			;66e6
-l66e7h:
-	ld c,(hl)			;66e7
-	ld c,h			;66e8
-	ld e,h			;66e9
-	inc e			;66ea
-	ld (bc),a			;66eb
-	jr c,l667dh		;66ec
-	ld a,05fh		;66ee
-	ld c,a			;66f0
-	inc sp			;66f1
-	rrca			;66f2
-	ld sp,08260h		;66f3
-	inc bc			;66f6
-	ex af,af'			;66f7
-	inc e			;66f8
-	jr c,l670bh		;66f9
-	jp l0243h		;66fb
-	rlca			;66fe
-	add a,e			;66ff
-	inc bc			;6700
-	ex (sp),hl			;6701
-	cp 002h		;6702
-	ret po			;6704
-	add a,d			;6705
-	ld (hl),b			;6706
-	jr c,l670bh		;6707
-	jr l670dh		;6709
-l670bh:
-	inc e			;670b
-	adc a,c			;670c
-l670dh:
-	call z,0fffeh		;670d
-	or a			;6710
-	cp e			;6711
-	ld l,0ech		;6712
-	rst 8			;6714
-	rst 18h			;6715
-	ld (bc),a			;6716
-	rra			;6717
-	add a,c			;6718
-	ld a,a			;6719
-	ld (bc),a			;671a
-l671bh:
-	rst 38h			;671b
-	add a,e			;671c
-	ld a,a			;671d
-	ccf			;671e
-	inc bc			;671f
-	rlca			;6720
-	nop			;6721
-	add a,(hl)			;6722
-	rst 30h			;6723
-	di			;6724
-	ld sp,hl			;6725
-	pop af			;6726
-	di			;6727
-	.DB 0fdh,002h,0ffh	;illegal sequence		;6728
-	add a,c			;672b
-	cp 00ah		;672c
-	nop			;672e
-	add a,d			;672f
-	ld bc,l0302h+1		;6730
-	nop			;6733
-	adc a,b			;6734
-	ex af,af'			;6735
-	jr l6764h		;6736
-	ld h,a			;6738
-	add a,e			;6739
-	sub b			;673a
-	djnz l6745h		;673b
-	ld (bc),a			;673d
-	nop			;673e
-	add a,d			;673f
-	ret po			;6740
-	ret p			;6741
-	ld (bc),a			;6742
-	nop			;6743
-	adc a,d			;6744
-l6745h:
-	inc c			;6745
-	dec de			;6746
-	ld sp,0c460h		;6747
-	add a,(hl)			;674a
-	rrca			;674b
-	nop			;674c
-	inc bc			;674d
-	ld a,b			;674e
-	ex af,af'			;674f
-	nop			;6750
-	ld (bc),a			;6751
-l6752h:
-	add a,b			;6752
-	ld (bc),a			;6753
-	ld b,b			;6754
-	sub c			;6755
-	ret p			;6756
-	ex af,af'			;6757
-	call po,sub_1174h		;6758
-	inc de			;675b
-	daa			;675c
-	ld h,04eh		;675d
-	ld e,(hl)			;675f
-	ld c,(hl)			;6760
-	ld h,(hl)			;6761
-	scf			;6762
-l6763h:
-	rrca			;6763
-l6764h:
-	rlca			;6764
-	inc bc			;6765
-	ld bc,l0003h		;6766
-	add a,e			;6769
-	ret nz			;676a
-	add a,b			;676b
-	inc b			;676c
-	ld (bc),a			;676d
-	ld c,082h		;676e
-	ld b,b			;6770
-	ld h,e			;6771
-	ld (bc),a			;6772
-	rlca			;6773
-	sbc a,c			;6774
-	add a,a			;6775
-	rst 0			;6776
-	jp po,0f9f3h		;6777
-	ld a,c			;677a
-	ld a,a			;677b
-	inc (hl)			;677c
-	inc d			;677d
-	ret c			;677e
-l677fh:
-	ld e,h			;677f
-	inc e			;6780
-	jr l671bh		;6781
-	call z,0fcech		;6783
-	cp h			;6786
-	inc l			;6787
-	ret nc			;6788
-	djnz l677fh		;6789
-	call m,sub_7333h		;678b
-	inc b			;678e
-	rst 38h			;678f
-	add a,d			;6790
-	ld a,a			;6791
-	ld e,00fh		;6792
-	nop			;6794
-	sbc a,c			;6795
-	inc bc			;6796
-	ld b,00ch		;6797
-	add hl,bc			;6799
-	ld de,l0603h		;679a
-	inc c			;679d
-	ld bc,0e0f0h		;679e
-	pop bc			;67a1
-	set 1,c		;67a2
-	ret nz			;67a4
-	pop bc			;67a5
-	ex (sp),hl			;67a6
-	ld (hl),a			;67a7
-	ld h,c			;67a8
-	ld l,b			;67a9
-	ld l,d			;67aa
-	ld a,c			;67ab
-	ld h,b			;67ac
-	ld (l001bh),hl		;67ad
-	djnz $-1		;67b0
-	add a,d			;67b2
-	inc a			;67b3
-	ld a,(hl)			;67b4
-	djnz $-1		;67b5
-	inc bc			;67b7
-	ld a,(hl)			;67b8
-	ld (bc),a			;67b9
-	inc a			;67ba
-	add a,c			;67bb
-	jr l67c6h		;67bc
-	nop			;67be
-	add a,d			;67bf
-	inc a			;67c0
-	ld a,(hl)			;67c1
-	ld c,0ffh		;67c2
-	add a,h			;67c4
-	ld h,(hl)			;67c5
-l67c6h:
-	ld a,(hl)			;67c6
-	ld h,(hl)			;67c7
-	ld a,(hl)			;67c8
-	inc b			;67c9
-	jr l67d5h		;67ca
-	nop			;67cc
-	ld (bc),a			;67cd
-	jr l6752h		;67ce
-	ld a,(hl)			;67d0
-	rst 38h			;67d1
-	ld b,07eh		;67d2
-	add a,d			;67d4
-l67d5h:
-	inc a			;67d5
-	inc h			;67d6
-	inc bc			;67d7
-	jr $+9		;67d8
-	nop			;67da
-	add a,e			;67db
-	djnz l6816h		;67dc
-	ld a,h			;67de
-	ld (bc),a			;67df
-	jr c,l6763h		;67e0
-	jr z,l67f1h		;67e2
-	nop			;67e4
-	add a,c			;67e5
-	ex af,af'			;67e6
-	inc bc			;67e7
-	jr $+2		;67e8
-	ld bc,l0384h		;67ea
-	ld b,e			;67ed
-	scf			;67ee
-	ccf			;67ef
-	ld (bc),a			;67f0
-l67f1h:
-	rra			;67f1
-	sub c			;67f2
-	rst 38h			;67f3
-	ccf			;67f4
-	rra			;67f5
-	ccf			;67f6
-	ld h,a			;67f7
-	add a,e			;67f8
-	inc bc			;67f9
-	ld bc,08000h		;67fa
-	add a,c			;67fd
-sub_67feh:
-	add a,0feh		;67fe
-	call m,0fff8h		;6800
-	cp 002h		;6803
-	ret m			;6805
-	add a,l			;6806
-	call m,08ebch		;6807
-	ld (bc),a			;680a
-	nop			;680b
-	djnz $-1		;680c
-	add hl,bc			;680e
-	nop			;680f
-	rlca			;6810
-	ld a,h			;6811
-	inc b			;6812
-	nop			;6813
-	inc c			;6814
-	rst 38h			;6815
-l6816h:
-	ld c,000h		;6816
-	ld (bc),a			;6818
-	jr l682bh		;6819
-	rst 38h			;681b
-	add hl,bc			;681c
-	nop			;681d
-	rlca			;681e
-	ld a,00eh		;681f
-	rst 38h			;6821
-	ld (bc),a			;6822
-	nop			;6823
-	ld b,b			;6824
-	rst 38h			;6825
-	ld (bc),a			;6826
-	nop			;6827
-	inc c			;6828
-	rst 38h			;6829
-	rlca			;682a
-l682bh:
-	nop			;682b
-	rlca			;682c
-	rst 38h			;682d
-	djnz l6830h		;682e
-l6830h:
-	inc b			;6830
-	ld a,(hl)			;6831
-	ld a,(bc)			;6832
-	nop			;6833
-	add a,(hl)			;6834
-.DB $01 $00 $05
-	rlca			;6838
-	ld a,0d7h		;6839
-	ex af,af'			;683b
-	nop			;683c
-	adc a,b			;683d
-	ld c,b			;683e
-	jr nz,$+24		;683f
-	ld h,(hl)			;6841
-	ei			;6842
-	call c,0acf6h		;6843
-	rlca			;6846
-	nop			;6847
-	add a,d			;6848
-	ld bc,l0202h+1		;6849
-	rlca			;684c
-	ld (bc),a			;684d
-	rrca			;684e
-	inc bc			;684f
-	rra			;6850
-	add a,h			;6851
-	nop			;6852
-	inc e			;6853
-	ld a,(hl)			;6854
-	ld a,a			;6855
-	inc c			;6856
-	rst 38h			;6857
-	ld b,000h		;6858
-	add a,e			;685a
-	ret nz			;685b
-	ret m			;685c
-	call m,0fe02h		;685d
-	add a,d			;6860
-	call m,003feh		;6861
-	rst 38h			;6864
-	add a,d			;6865
-	rrca			;6866
-	rst 38h			;6867
-	inc bc			;6868
-	ccf			;6869
-	dec b			;686a
-	ld a,a			;686b
-	add a,e			;686c
-	ld a,e			;686d
-	ld a,c			;686e
-	ld a,(hl)			;686f
-	ld (bc),a			;6870
-	ld a,a			;6871
-	add a,c			;6872
-	ccf			;6873
-	dec c			;6874
-	rst 38h			;6875
-	add a,e			;6876
-	ld a,a			;6877
-	rst 20h			;6878
-	rst 38h			;6879
-	inc bc			;687a
-	ret p			;687b
-	inc bc			;687c
-	ret m			;687d
-	inc bc			;687e
-	call m,0fe82h		;687f
-	rst 38h			;6882
-	ld (bc),a			;6883
-	cp a			;6884
-	add a,h			;6885
-	cpl			;6886
-	rst 28h			;6887
-	rst 8			;6888
-	rst 38h			;6889
-	ld (bc),a			;688a
-	rra			;688b
-	add a,c			;688c
-	ld a,a			;688d
-	ld (bc),a			;688e
-	rst 38h			;688f
-	add a,e			;6890
-	ld a,a			;6891
-	ccf			;6892
-	inc bc			;6893
-	rlca			;6894
-	nop			;6895
-	dec b			;6896
-	rst 38h			;6897
-	add a,c			;6898
-	.DB 0fdh,002h,0ffh	;illegal sequence		;6899
-	add a,c			;689c
-	cp 00ch		;689d
-	nop			;689f
-	add a,h			;68a0
-	ld bc,l0702h+1		;68a1
-	rrca			;68a4
-	ld (bc),a			;68a5
-	rra			;68a6
-	add a,c			;68a7
-	ccf			;68a8
-	ld (bc),a			;68a9
-	rra			;68aa
-	ld (bc),a			;68ab
-	rrca			;68ac
-	ex af,af'			;68ad
-	rst 38h			;68ae
-	adc a,b			;68af
-	ld a,a			;68b0
-	ld a,l			;68b1
-	ld a,h			;68b2
-	ld a,(hl)			;68b3
-	ld a,l			;68b4
-	ld a,h			;68b5
-	ld a,01fh		;68b6
-	inc bc			;68b8
-	nop			;68b9
-	add a,e			;68ba
-	jr l68f9h		;68bb
-	ld a,(hl)			;68bd
-	ld (bc),a			;68be
-	ld a,a			;68bf
-	add a,c			;68c0
-	ccf			;68c1
-	inc bc			;68c2
-	ld a,a			;68c3
-	inc bc			;68c4
-	rst 38h			;68c5
-	add a,c			;68c6
-	ld e,a			;68c7
-	ld b,000h		;68c8
-	add a,e			;68ca
-	ret nz			;68cb
-	ret p			;68cc
-	ret m			;68cd
-	ld (bc),a			;68ce
-	call m,0d883h		;68cf
-	ret po			;68d2
-	call m,0ff02h		;68d3
-	inc bc			;68d6
-	inc bc			;68d7
-	ld b,007h		;68d8
-	add a,c			;68da
-	inc bc			;68db
-	ld (bc),a			;68dc
-	nop			;68dd
-	add a,h			;68de
-	ld bc,00107h		;68df
-	nop			;68e2
-	dec b			;68e3
-	rst 38h			;68e4
-	ld (bc),a			;68e5
-	ccf			;68e6
-	add a,d			;68e7
-	rst 18h			;68e8
-	rst 30h			;68e9
-	ld (bc),a			;68ea
-	rst 38h			;68eb
-	add a,c			;68ec
-	ccf			;68ed
-	inc bc			;68ee
-	rst 38h			;68ef
-	add a,c			;68f0
-	rra			;68f1
-	dec b			;68f2
-	ret p			;68f3
-	add a,(hl)			;68f4
-	ret m			;68f5
-	call m,0acdch		;68f6
-l68f9h:
-	call c,003fch		;68f9
-	cp 083h		;68fc
-	rst 28h			;68fe
-	add a,(hl)			;68ff
-	nop			;6900
-	ld (bc),a			;6901
-	inc bc			;6902
-	inc bc			;6903
-	rlca			;6904
-	add a,d			;6905
-	rra			;6906
-	ccf			;6907
-	inc bc			;6908
-	ld a,a			;6909
-	add a,c			;690a
-	rra			;690b
-	rlca			;690c
-	ccf			;690d
-	add a,a			;690e
-	dec e			;690f
-	rra			;6910
-	inc c			;6911
-	rrca			;6912
-	ld c,00fh		;6913
-	rlca			;6915
-	dec b			;6916
-	inc bc			;6917
-	add a,(hl)			;6918
-	ld bc,0f060h		;6919
-	cp 0ffh		;691c
-	ld a,a			;691e
-	inc bc			;691f
-	rst 38h			;6920
-	inc bc			;6921
-	rra			;6922
-	add a,l			;6923
-	dec de			;6924
-	add hl,de			;6925
-	ld e,00fh		;6926
-	ld bc,l0003h		;6928
-	add a,d			;692b
-	ret nz			;692c
-	ret po			;692d
-	inc b			;692e
-	ret p			;692f
-	add a,a			;6930
-	ret m			;6931
-	ret p			;6932
-	ld l,h			;6933
-	call p,sub_67feh		;6934
-	ei			;6937
-	ld (bc),a			;6938
-	nop			;6939
-	add a,c			;693a
-	ld bc,l0302h+1		;693b
-	add a,c			;693e
-	rrca			;693f
-	inc bc			;6940
-	rra			;6941
-	add a,c			;6942
-	rrca			;6943
-	ld (bc),a			;6944
-	rra			;6945
-	inc bc			;6946
-	rrca			;6947
-	ld (bc),a			;6948
-	nop			;6949
-	add a,c			;694a
-	ld c,003h		;694b
-	rrca			;694d
-	adc a,d			;694e
-	rra			;694f
-	rrca			;6950
-	rlca			;6951
-	rrca			;6952
-	dec c			;6953
-	inc c			;6954
-	rrca			;6955
-	rlca			;6956
-	nop			;6957
-	inc bc			;6958
-	inc bc			;6959
-	nop			;695a
-	add a,d			;695b
-	add a,b			;695c
-	ret po			;695d
-	ld (bc),a			;695e
-	ret p			;695f
-	add a,c			;6960
-	ret m			;6961
-	inc bc			;6962
-	call m,0ff85h		;6963
-	rst 10h			;6966
-	cp 077h		;6967
-	ei			;6969
-	ld a,(bc)			;696a
-	nop			;696b
-	adc a,b			;696c
-	ld (hl),b			;696d
-	ld a,b			;696e
-	ld a,h			;696f
-	inc a			;6970
-	jr l6973h		;6971
-l6973h:
-	ex af,af'			;6973
-	ret m			;6974
-	inc b			;6975
-	call m,0fe83h		;6976
-	ld a,(hl)			;6979
-	sbc a,h			;697a
-	rlca			;697b
-	nop			;697c
-	ld b,0fch		;697d
-	add a,d			;697f
-	ld a,h			;6980
-	jr c,l6992h		;6981
-	nop			;6983
-	add a,d			;6984
-	ld bc,l0202h+1		;6985
-	rlca			;6988
-	ld (bc),a			;6989
-	rrca			;698a
-	inc bc			;698b
-	rra			;698c
-	add a,e			;698d
-	nop			;698e
-	inc e			;698f
-	ld a,(hl)			;6990
-	dec c			;6991
-l6992h:
-	rst 38h			;6992
-	ld b,000h		;6993
-	add a,e			;6995
-	ret nz			;6996
-	ret m			;6997
-	call m,0fe02h		;6998
-	add a,d			;699b
-	call m,003feh		;699c
-	rst 38h			;699f
-	add a,d			;69a0
-	rrca			;69a1
-	rst 38h			;69a2
-	inc b			;69a3
-	ccf			;69a4
-	inc b			;69a5
-	ld a,a			;69a6
-	ld (bc),a			;69a7
-	ld a,c			;69a8
-	add a,c			;69a9
-	ld a,(hl)			;69aa
-	ld (bc),a			;69ab
-	ld a,a			;69ac
-	add a,c			;69ad
-	ccf			;69ae
-	dec c			;69af
-	rst 38h			;69b0
-	add a,e			;69b1
-	ld a,a			;69b2
-	rst 20h			;69b3
-	rst 38h			;69b4
-	inc bc			;69b5
-	ret p			;69b6
-	inc bc			;69b7
-	ret m			;69b8
-	inc bc			;69b9
-	call m,0fe82h		;69ba
-	rst 38h			;69bd
-	ld (bc),a			;69be
-	cp a			;69bf
-	add a,h			;69c0
-	cpl			;69c1
-	rst 28h			;69c2
-	rst 8			;69c3
-	rst 38h			;69c4
-	ld (bc),a			;69c5
-	rra			;69c6
-	add a,c			;69c7
-	ld a,a			;69c8
-	ld (bc),a			;69c9
-	rst 38h			;69ca
-	add a,e			;69cb
-	ld a,a			;69cc
-	ccf			;69cd
-	inc bc			;69ce
-	rlca			;69cf
-	nop			;69d0
-	dec b			;69d1
-	rst 38h			;69d2
-	add a,c			;69d3
-	.DB 0fdh,002h,0ffh	;illegal sequence		;69d4
-	add a,c			;69d7
-	cp 007h		;69d8
-	nop			;69da
-	add a,d			;69db
-	ld bc,l0403h		;69dc
-	rlca			;69df
-	add a,h			;69e0
-	rrca			;69e1
-	rra			;69e2
-	ccf			;69e3
-	ld a,a			;69e4
-	inc b			;69e5
-	rst 38h			;69e6
-	add a,h			;69e7
-	ld a,a			;69e8
-	rrca			;69e9
-	ret po			;69ea
-	ret p			;69eb
-	inc bc			;69ec
-	ret m			;69ed
-	add a,c			;69ee
-	cp 00ah		;69ef
-	rst 38h			;69f1
-	rlca			;69f2
-	nop			;69f3
-	add a,c			;69f4
-	add a,b			;69f5
-	ld (bc),a			;69f6
-	ret nz			;69f7
-	ld (bc),a			;69f8
-	ret po			;69f9
-	add a,d			;69fa
-	ret p			;69fb
-	ret m			;69fc
-	ld (bc),a			;69fd
-	call m,l1f02h		;69fe
-	ld (bc),a			;6a01
-	ccf			;6a02
-	inc b			;6a03
-	ld a,a			;6a04
-	add a,l			;6a05
-	ccf			;6a06
-	rrca			;6a07
-	rlca			;6a08
-	inc bc			;6a09
-	ld bc,l0003h		;6a0a
-	dec bc			;6a0d
-	rst 38h			;6a0e
-	add a,c			;6a0f
-	cp 002h		;6a10
-	rst 38h			;6a12
-	ld (bc),a			;6a13
-	ld a,a			;6a14
-	ld (bc),a			;6a15
-	call m,0f881h		;6a16
-	ld (bc),a			;6a19
-	call m,0f802h		;6a1a
-	inc bc			;6a1d
-	call m,0bc84h		;6a1e
-	inc a			;6a21
-	call c,sub_021ch		;6a22
-	call m,sub_3f82h		;6a25
-	ld a,a			;6a28
-	inc b			;6a29
-	rst 38h			;6a2a
-	add a,d			;6a2b
-	ld a,a			;6a2c
-	ld e,00eh		;6a2d
-	nop			;6a2f
-	add a,d			;6a30
-	inc bc			;6a31
-	rlca			;6a32
-	ld (bc),a			;6a33
-	rrca			;6a34
-	ld (bc),a			;6a35
-	rra			;6a36
-	add a,d			;6a37
-	rrca			;6a38
-l6a39h:
-	rlca			;6a39
-	ld (bc),a			;6a3a
-	rrca			;6a3b
-l6a3ch:
-	ex af,af'			;6a3c
-	rst 38h			;6a3d
-	adc a,b			;6a3e
-	ld a,a			;6a3f
-	ld a,l			;6a40
-	ld a,h			;6a41
-	ld a,(hl)			;6a42
-	ld a,l			;6a43
-	ld a,h			;6a44
-	ld a,01fh		;6a45
-	nop			;6a47
+	.DB $10		;6504
+	.DB $02		;6505
+	.DB $00		;6506
+	.DB $84		;6507
+	.DB $18		;6508
+	.DB $10		;6509
+	.DB $18		;650a
+	.DB $00		;650b
+	.DB $02		;650c
+	.DB $18		;650d
+	.DB $81		;650e
+	.DB $00		;650f
+	.DB $02		;6510
+	.DB $08		;6511
+	.DB $82		;6512
+	.DB $00		;6513
+	.DB $10		;6514
+	.DB $05		;6515
+	.DB $00		;6516
+	.DB $89		;6517
+	.DB $04		;6518
+	.DB $0c		;6519
+	.DB $1c		;651a
+	.DB $3f		;651b
+	.DB $7f		;651c
+	.DB $3f		;651d
+	.DB $1c		;651e
+	.DB $0c		;651f
+	.DB $04		;6520
+	.DB $0a		;6521
+	.DB $00		;6522
+	.DB $81		;6523
+	.DB $e0		;6524
+	.DB $02		;6525
+	.DB $f8		;6526
+	.DB $81		;6527
+	.DB $3c		;6528
+	.DB $05		;6529
+	.DB $1c		;652a
+	.DB $06		;652b
+	.DB $00		;652c
+	.DB $86		;652d
+	.DB $20		;652e
+	.DB $60		;652f
+	.DB $fc		;6530
+	.DB $fe		;6531
+	.DB $67		;6532
+	.DB $23		;6533
+	.DB $02		;6534
+	.DB $03		;6535
+	.DB $0a		;6536
+	.DB $00		;6537
+	.DB $83		;6538
+	.DB $20		;6539
+	.DB $78		;653a
+	.DB $24		;653b
+	.DB $02		;653c
+	.DB $04		;653d
+	.DB $12		;653e
+	.DB $00		;653f
+	.DB $82		;6540
+	.DB $10		;6541
+	.DB $08		;6542
+	.DB $0b		;6543
+	.DB $00		;6544
+	.DB $81		;6545
+	.DB $01		;6546
+	.DB $03		;6547
+	.DB $00		;6548
+	.DB $82		;6549
+	.DB $20		;654a
+	.DB $05		;654b
+	.DB $09		;654c
+	.DB $00		;654d
+	.DB $81		;654e
+	.DB $20		;654f
+	.DB $02		;6550
+	.DB $00		;6551
+	.DB $84		;6552
+	.DB $7a		;6553
+	.DB $08		;6554
+	.DB $32		;6555
+	.DB $20		;6556
+	.DB $08		;6557
+	.DB $00		;6558
+	.DB $81		;6559
+	.DB $01		;655a
+	.DB $02		;655b
+	.DB $03		;655c
+	.DB $85		;655d
+	.DB $07		;655e
+	.DB $05		;655f
+	.DB $0a		;6560
+	.DB $1a		;6561
+	.DB $16		;6562
+	.DB $02		;6563
+	.DB $00		;6564
+	.DB $86		;6565
+	.DB $02		;6566
+	.DB $63		;6567
+	.DB $ff		;6568
+	.DB $f8		;6569
+	.DB $c6		;656a
+	.DB $3f		;656b
+	.DB $03		;656c
+	.DB $ff		;656d
+	.DB $83		;656e
+	.DB $86		;656f
+	.DB $02		;6570
+	.DB $01		;6571
+	.DB $09		;6572
+	.DB $00		;6573
+	.DB $86		;6574
+	.DB $80		;6575
+	.DB $f8		;6576
+	.DB $fc		;6577
+	.DB $1c		;6578
+	.DB $e8		;6579
+	.DB $c0		;657a
+	.DB $02		;657b
+	.DB $00		;657c
+	.DB $83		;657d
+	.DB $08		;657e
+	.DB $00		;657f
+	.DB $e0		;6580
+	.DB $04		;6581
+	.DB $00		;6582
+	.DB $82		;6583
+	.DB $01		;6584
+	.DB $03		;6585
+	.DB $03		;6586
+	.DB $02		;6587
+	.DB $82		;6588
+	.DB $08		;6589
+	.DB $10		;658a
+	.DB $02		;658b
+	.DB $00		;658c
+	.DB $02		;658d
+	.DB $01		;658e
+	.DB $8f		;658f
+	.DB $0f		;6590
+	.DB $18		;6591
+	.DB $7a		;6592
+	.DB $e3		;6593
+	.DB $c8		;6594
+	.DB $9d		;6595
+	.DB $b9		;6596
+	.DB $13		;6597
+	.DB $c7		;6598
+	.DB $5f		;6599
+	.DB $1f		;659a
+	.DB $3f		;659b
+	.DB $7f		;659c
+	.DB $87		;659d
+	.DB $06		;659e
+	.DB $02		;659f
+	.DB $00		;65a0
+	.DB $81		;65a1
+	.DB $30		;65a2
+	.DB $02		;65a3
+	.DB $00		;65a4
+	.DB $81		;65a5
+	.DB $60		;65a6
+	.DB $02		;65a7
+	.DB $e0		;65a8
+	.DB $8c		;65a9
+	.DB $f0		;65aa
+	.DB $f8		;65ab
+	.DB $fe		;65ac
+	.DB $b7		;65ad
+	.DB $bb		;65ae
+	.DB $2e		;65af
+	.DB $ec		;65b0
+	.DB $cf		;65b1
+	.DB $10		;65b2
+	.DB $00		;65b3
+	.DB $1e		;65b4
+	.DB $7f		;65b5
+	.DB $02		;65b6
+	.DB $ff		;65b7
+	.DB $83		;65b8
+	.DB $7f		;65b9
+	.DB $3f		;65ba
+	.DB $03		;65bb
+	.DB $07		;65bc
+	.DB $00		;65bd
+	.DB $86		;65be
+	.DB $77		;65bf
+	.DB $73		;65c0
+	.DB $39		;65c1
+	.DB $91		;65c2
+	.DB $c3		;65c3
+	.DB $fd		;65c4
+	.DB $02		;65c5
+	.DB $ff		;65c6
+	.DB $81		;65c7
+	.DB $fe		;65c8
+	.DB $0e		;65c9
+	.DB $00		;65ca
+	.DB $87		;65cb
+	.DB $03		;65cc
+	.DB $04		;65cd
+	.DB $1b		;65ce
+	.DB $17		;65cf
+	.DB $2f		;65d0
+	.DB $0e		;65d1
+	.DB $18		;65d2
+	.DB $02		;65d3
+	.DB $00		;65d4
+	.DB $86		;65d5
+	.DB $8f		;65d6
+	.DB $7c		;65d7
+	.DB $21		;65d8
+	.DB $cb		;65d9
+	.DB $09		;65da
+	.DB $04		;65db
+	.DB $02		;65dc
+	.DB $1f		;65dd
+	.DB $88		;65de
+	.DB $0f		;65df
+	.DB $19		;65e0
+	.DB $38		;65e1
+	.DB $3a		;65e2
+	.DB $39		;65e3
+	.DB $20		;65e4
+	.DB $02		;65e5
+	.DB $0b		;65e6
+	.DB $04		;65e7
+	.DB $00		;65e8
+	.DB $89		;65e9
+	.DB $04		;65ea
+	.DB $46		;65eb
+	.DB $6e		;65ec
+	.DB $71		;65ed
+	.DB $07		;65ee
+	.DB $1f		;65ef
+	.DB $3c		;65f0
+	.DB $38		;65f1
+	.DB $60		;65f2
+	.DB $02		;65f3
+	.DB $50		;65f4
+	.DB $08		;65f5
+	.DB $00		;65f6
+	.DB $84		;65f7
+	.DB $c0		;65f8
+	.DB $f0		;65f9
+	.DB $f8		;65fa
+	.DB $d8		;65fb
+	.DB $04		;65fc
+	.DB $00		;65fd
+	.DB $81		;65fe
+	.DB $3e		;65ff
+	.DB $06		;6600
+	.DB $00		;6601
+	.DB $81		;6602
+	.DB $01		;6603
+	.DB $05		;6604
+	.DB $00		;6605
+	.DB $96		;6606
+	.DB $01		;6607
+	.DB $07		;6608
+	.DB $01		;6609
+	.DB $00		;660a
+	.DB $0c		;660b
+	.DB $19		;660c
+	.DB $34		;660d
+	.DB $6d		;660e
+	.DB $43		;660f
+	.DB $17		;6610
+	.DB $0f		;6611
+	.DB $1e		;6612
+	.DB $26		;6613
+	.DB $41		;6614
+	.DB $43		;6615
+	.DB $3a		;6616
+	.DB $fa		;6617
+	.DB $fd		;6618
+	.DB $ff		;6619
+	.DB $1f		;661a
+	.DB $00		;661b
+	.DB $60		;661c
+	.DB $02		;661d
+	.DB $c0		;661e
+	.DB $8c		;661f
+	.DB $e0		;6620
+	.DB $80		;6621
+	.DB $d8		;6622
+	.DB $cc		;6623
+	.DB $a0		;6624
+	.DB $5c		;6625
+	.DB $7c		;6626
+	.DB $3e		;6627
+	.DB $7e		;6628
+	.DB $fe		;6629
+	.DB $ef		;662a
+	.DB $86		;662b
+	.DB $02		;662c
+	.DB $00		;662d
+	.DB $89		;662e
+	.DB $02		;662f
+	.DB $07		;6630
+	.DB $06		;6631
+	.DB $01		;6632
+	.DB $07		;6633
+	.DB $2e		;6634
+	.DB $54		;6635
+	.DB $38		;6636
+	.DB $60		;6637
+	.DB $02		;6638
+	.DB $00		;6639
+	.DB $8c		;663a
+	.DB $0f		;663b
+	.DB $26		;663c
+	.DB $01		;663d
+	.DB $25		;663e
+	.DB $02		;663f
+	.DB $0f		;6640
+	.DB $05		;6641
+	.DB $07		;6642
+	.DB $04		;6643
+	.DB $07		;6644
+	.DB $00		;6645
+	.DB $05		;6646
+	.DB $02		;6647
+	.DB $03		;6648
+	.DB $02		;6649
+	.DB $01		;664a
+	.DB $02		;664b
+	.DB $03		;664c
+	.DB $86		;664d
+	.DB $01		;664e
+	.DB $20		;664f
+	.DB $10		;6650
+	.DB $90		;6651
+	.DB $de		;6652
+	.DB $33		;6653
+	.DB $02		;6654
+	.DB $60		;6655
+	.DB $82		;6656
+	.DB $a1		;6657
+	.DB $03		;6658
+	.DB $02		;6659
+	.DB $06		;665a
+	.DB $84		;665b
+	.DB $00		;665c
+	.DB $09		;665d
+	.DB $00		;665e
+	.DB $02		;665f
+	.DB $06		;6660
+	.DB $00		;6661
+	.DB $84		;6662
+	.DB $80		;6663
+	.DB $90		;6664
+	.DB $20		;6665
+	.DB $e0		;6666
+	.DB $02		;6667
+	.DB $f0		;6668
+	.DB $85		;6669
+	.DB $68		;666a
+	.DB $74		;666b
+	.DB $2e		;666c
+	.DB $47		;666d
+	.DB $fb		;666e
+	.DB $03		;666f
+	.DB $00		;6670
+	.DB $8d		;6671
+	.DB $02		;6672
+	.DB $03		;6673
+	.DB $00		;6674
+	.DB $03		;6675
+	.DB $0e		;6676
+	.DB $1c		;6677
+	.DB $0c		;6678
+	.DB $00		;6679
+	.DB $03		;667a
+	.DB $0e		;667b
+	.DB $03		;667c
+	.DB $06		;667d
+	.DB $03		;667e
+	.DB $02		;667f
+	.DB $00		;6680
+	.DB $8a		;6681
+	.DB $06		;6682
+	.DB $0c		;6683
+	.DB $07		;6684
+	.DB $0e		;6685
+	.DB $18		;6686
+	.DB $08		;6687
+	.DB $00		;6688
+	.DB $01		;6689
+	.DB $00		;668a
+	.DB $04		;668b
+	.DB $02		;668c
+	.DB $02		;668d
+	.DB $82		;668e
+	.DB $00		;668f
+	.DB $03		;6690
+	.DB $04		;6691
+	.DB $00		;6692
+	.DB $8c		;6693
+	.DB $c0		;6694
+	.DB $e0		;6695
+	.DB $00		;6696
+	.DB $50		;6697
+	.DB $c0		;6698
+	.DB $dc		;6699
+	.DB $30		;669a
+	.DB $f8		;669b
+	.DB $57		;669c
+	.DB $6a		;669d
+	.DB $37		;669e
+	.DB $fb		;669f
+	.DB $0a		;66a0
+	.DB $00		;66a1
+	.DB $84		;66a2
+	.DB $70		;66a3
+	.DB $50		;66a4
+	.DB $78		;66a5
+	.DB $10		;66a6
+	.DB $02		;66a7
+	.DB $00		;66a8
+	.DB $82		;66a9
+	.DB $08		;66aa
+	.DB $f8		;66ab
+	.DB $04		;66ac
+	.DB $fc		;66ad
+	.DB $83		;66ae
+	.DB $fe		;66af
+	.DB $7e		;66b0
+	.DB $9c		;66b1
+	.DB $07		;66b2
+	.DB $00		;66b3
+	.DB $02		;66b4
+	.DB $f8		;66b5
+	.DB $04		;66b6
+	.DB $fc		;66b7
+	.DB $82		;66b8
+	.DB $7c		;66b9
+	.DB $38		;66ba
+	.DB $11		;66bb
+	.DB $00		;66bc
+	.DB $82		;66bd
+	.DB $02		;66be
+	.DB $03		;66bf
+	.DB $02		;66c0
+	.DB $05		;66c1
+	.DB $83		;66c2
+	.DB $08		;66c3
+	.DB $10		;66c4
+	.DB $12		;66c5
+	.DB $03		;66c6
+	.DB $00		;66c7
+	.DB $8c		;66c8
+	.DB $1c		;66c9
+	.DB $3e		;66ca
+	.DB $78		;66cb
+	.DB $40		;66cc
+	.DB $01		;66cd
+	.DB $07		;66ce
+	.DB $0c		;66cf
+	.DB $08		;66d0
+	.DB $18		;66d1
+	.DB $21		;66d2
+	.DB $c7		;66d3
+	.DB $87		;66d4
+	.DB $08		;66d5
+	.DB $00		;66d6
+	.DB $93		;66d7
+	.DB $c0		;66d8
+	.DB $38		;66d9
+	.DB $0c		;66da
+	.DB $04		;66db
+	.DB $c8		;66dc
+	.DB $fe		;66dd
+	.DB $c3		;66de
+	.DB $1d		;66df
+	.DB $7d		;66e0
+	.DB $00		;66e1
+	.DB $e0		;66e2
+	.DB $20		;66e3
+	.DB $23		;66e4
+	.DB $27		;66e5
+	.DB $07		;66e6
+	.DB $4e		;66e7
+	.DB $4c		;66e8
+	.DB $5c		;66e9
+	.DB $1c		;66ea
+	.DB $02		;66eb
+	.DB $38		;66ec
+	.DB $8f		;66ed
+	.DB $3e		;66ee
+	.DB $5f		;66ef
+	.DB $4f		;66f0
+	.DB $33		;66f1
+	.DB $0f		;66f2
+	.DB $31		;66f3
+	.DB $60		;66f4
+	.DB $82		;66f5
+	.DB $03		;66f6
+	.DB $08		;66f7
+	.DB $1c		;66f8
+	.DB $38		;66f9
+	.DB $10		;66fa
+	.DB $c3		;66fb
+	.DB $43		;66fc
+	.DB $02		;66fd
+	.DB $07		;66fe
+	.DB $83		;66ff
+	.DB $03		;6700
+	.DB $e3		;6701
+	.DB $fe		;6702
+	.DB $02		;6703
+	.DB $e0		;6704
+	.DB $82		;6705
+	.DB $70		;6706
+	.DB $38		;6707
+	.DB $02		;6708
+	.DB $18		;6709
+	.DB $02		;670a
+	.DB $1c		;670b
+	.DB $89		;670c
+	.DB $cc		;670d
+	.DB $fe		;670e
+	.DB $ff		;670f
+	.DB $b7		;6710
+	.DB $bb		;6711
+	.DB $2e		;6712
+	.DB $ec		;6713
+	.DB $cf		;6714
+	.DB $df		;6715
+	.DB $02		;6716
+	.DB $1f		;6717
+	.DB $81		;6718
+	.DB $7f		;6719
+	.DB $02		;671a
+	.DB $ff		;671b
+	.DB $83		;671c
+	.DB $7f		;671d
+	.DB $3f		;671e
+	.DB $03		;671f
+	.DB $07		;6720
+	.DB $00		;6721
+	.DB $86		;6722
+	.DB $f7		;6723
+	.DB $f3		;6724
+	.DB $f9		;6725
+	.DB $f1		;6726
+	.DB $f3		;6727
+	.DB $fd		;6728
+	.DB $02		;6729
+	.DB $ff		;672a
+	.DB $81		;672b
+	.DB $fe		;672c
+	.DB $0a		;672d
+	.DB $00		;672e
+	.DB $82		;672f
+	.DB $01		;6730
+	.DB $03		;6731
+	.DB $03		;6732
+	.DB $00		;6733
+	.DB $88		;6734
+	.DB $08		;6735
+	.DB $18		;6736
+	.DB $2c		;6737
+	.DB $67		;6738
+	.DB $83		;6739
+	.DB $90		;673a
+	.DB $10		;673b
+	.DB $08		;673c
+	.DB $02		;673d
+	.DB $00		;673e
+	.DB $82		;673f
+	.DB $e0		;6740
+	.DB $f0		;6741
+	.DB $02		;6742
+	.DB $00		;6743
+	.DB $8a		;6744
+	.DB $0c		;6745
+	.DB $1b		;6746
+	.DB $31		;6747
+	.DB $60		;6748
+	.DB $c4		;6749
+	.DB $86		;674a
+	.DB $0f		;674b
+	.DB $00		;674c
+	.DB $03		;674d
+	.DB $78		;674e
+	.DB $08		;674f
+	.DB $00		;6750
+	.DB $02		;6751
+	.DB $80		;6752
+	.DB $02		;6753
+	.DB $40		;6754
+	.DB $91		;6755
+	.DB $f0		;6756
+	.DB $08		;6757
+	.DB $e4		;6758
+	.DB $74		;6759
+	.DB $11		;675a
+	.DB $13		;675b
+	.DB $27		;675c
+	.DB $26		;675d
+	.DB $4e		;675e
+	.DB $5e		;675f
+	.DB $4e		;6760
+	.DB $66		;6761
+	.DB $37		;6762
+	.DB $0f		;6763
+	.DB $07		;6764
+	.DB $03		;6765
+	.DB $01		;6766
+	.DB $03		;6767
+	.DB $00		;6768
+	.DB $83		;6769
+	.DB $c0		;676a
+	.DB $80		;676b
+	.DB $04		;676c
+	.DB $02		;676d
+	.DB $0e		;676e
+	.DB $82		;676f
+	.DB $40		;6770
+	.DB $63		;6771
+	.DB $02		;6772
+	.DB $07		;6773
+	.DB $99		;6774
+	.DB $87		;6775
+	.DB $c7		;6776
+	.DB $e2		;6777
+	.DB $f3		;6778
+	.DB $f9		;6779
+	.DB $79		;677a
+	.DB $7f		;677b
+	.DB $34		;677c
+	.DB $14		;677d
+	.DB $d8		;677e
+	.DB $5c		;677f
+	.DB $1c		;6780
+	.DB $18		;6781
+	.DB $98		;6782
+	.DB $cc		;6783
+	.DB $ec		;6784
+	.DB $fc		;6785
+	.DB $bc		;6786
+	.DB $2c		;6787
+	.DB $d0		;6788
+	.DB $10		;6789
+	.DB $f4		;678a
+	.DB $fc		;678b
+	.DB $33		;678c
+	.DB $73		;678d
+	.DB $04		;678e
+	.DB $ff		;678f
+	.DB $82		;6790
+	.DB $7f		;6791
+	.DB $1e		;6792
+	.DB $0f		;6793
+	.DB $00		;6794
+	.DB $99		;6795
+	.DB $03		;6796
+	.DB $06		;6797
+	.DB $0c		;6798
+	.DB $09		;6799
+	.DB $11		;679a
+	.DB $03		;679b
+	.DB $06		;679c
+	.DB $0c		;679d
+	.DB $01		;679e
+	.DB $f0		;679f
+	.DB $e0		;67a0
+	.DB $c1		;67a1
+	.DB $cb		;67a2
+	.DB $c9		;67a3
+	.DB $c0		;67a4
+	.DB $c1		;67a5
+	.DB $e3		;67a6
+	.DB $77		;67a7
+	.DB $61		;67a8
+	.DB $68		;67a9
+	.DB $6a		;67aa
+	.DB $79		;67ab
+	.DB $60		;67ac
+	.DB $22		;67ad
+	.DB $1b		;67ae
+	.DB $00		;67af
+	.DB $10		;67b0
+	.DB $ff		;67b1
+	.DB $82		;67b2
+	.DB $3c		;67b3
+	.DB $7e		;67b4
+	.DB $10		;67b5
+	.DB $ff		;67b6
+	.DB $03		;67b7
+	.DB $7e		;67b8
+	.DB $02		;67b9
+	.DB $3c		;67ba
+	.DB $81		;67bb
+	.DB $18		;67bc
+	.DB $08		;67bd
+	.DB $00		;67be
+	.DB $82		;67bf
+	.DB $3c		;67c0
+	.DB $7e		;67c1
+	.DB $0e		;67c2
+	.DB $ff		;67c3
+	.DB $84		;67c4
+	.DB $66		;67c5
+	.DB $7e		;67c6
+	.DB $66		;67c7
+	.DB $7e		;67c8
+	.DB $04		;67c9
+	.DB $18		;67ca
+	.DB $09		;67cb
+	.DB $00		;67cc
+	.DB $02		;67cd
+	.DB $18		;67ce
+	.DB $82		;67cf
+	.DB $7e		;67d0
+	.DB $ff		;67d1
+	.DB $06		;67d2
+	.DB $7e		;67d3
+	.DB $82		;67d4
+	.DB $3c		;67d5
+	.DB $24		;67d6
+	.DB $03		;67d7
+	.DB $18		;67d8
+	.DB $09		;67d9
+	.DB $00		;67da
+	.DB $83		;67db
+	.DB $10		;67dc
+	.DB $38		;67dd
+	.DB $7c		;67de
+	.DB $02		;67df
+	.DB $38		;67e0
+	.DB $81		;67e1
+	.DB $28		;67e2
+	.DB $0d		;67e3
+	.DB $00		;67e4
+	.DB $81		;67e5
+	.DB $08		;67e6
+	.DB $03		;67e7
+	.DB $18		;67e8
+	.DB $02		;67e9
+	.DB $01		;67ea
+	.DB $84		;67eb
+	.DB $03		;67ec
+	.DB $43		;67ed
+	.DB $37		;67ee
+	.DB $3f		;67ef
+	.DB $02		;67f0
+	.DB $1f		;67f1
+	.DB $91		;67f2
+	.DB $ff		;67f3
+	.DB $3f		;67f4
+	.DB $1f		;67f5
+	.DB $3f		;67f6
+	.DB $67		;67f7
+	.DB $83		;67f8
+	.DB $03		;67f9
+	.DB $01		;67fa
+	.DB $00		;67fb
+	.DB $80		;67fc
+	.DB $81		;67fd
+	.DB $c6		;67fe
+	.DB $fe		;67ff
+	.DB $fc		;6800
+	.DB $f8		;6801
+	.DB $ff		;6802
+	.DB $fe		;6803
+	.DB $02		;6804
+	.DB $f8		;6805
+	.DB $85		;6806
+	.DB $fc		;6807
+	.DB $bc		;6808
+	.DB $8e		;6809
+	.DB $02		;680a
+	.DB $00		;680b
+	.DB $10		;680c
+	.DB $ff		;680d
+	.DB $09		;680e
+	.DB $00		;680f
+	.DB $07		;6810
+	.DB $7c		;6811
+	.DB $04		;6812
+	.DB $00		;6813
+	.DB $0c		;6814
+	.DB $ff		;6815
+	.DB $0e		;6816
+	.DB $00		;6817
+	.DB $02		;6818
+	.DB $18		;6819
+	.DB $10		;681a
+	.DB $ff		;681b
+	.DB $09		;681c
+	.DB $00		;681d
+	.DB $07		;681e
+	.DB $3e		;681f
+	.DB $0e		;6820
+	.DB $ff		;6821
+	.DB $02		;6822
+	.DB $00		;6823
+	.DB $40		;6824
+	.DB $ff		;6825
+	.DB $02		;6826
+	.DB $00		;6827
+	.DB $0c		;6828
+	.DB $ff		;6829
+	.DB $07		;682a
+	.DB $00		;682b
+	.DB $07		;682c
+	.DB $ff		;682d
+	.DB $10		;682e
+	.DB $00		;682f
+	.DB $04		;6830
+	.DB $7e		;6831
+	.DB $0a		;6832
+	.DB $00		;6833
+	.DB $86		;6834
+	.DB $01		;6835
+	.DB $00		;6836
+	.DB $05		;6837
+	.DB $07		;6838
+	.DB $3e		;6839
+	.DB $d7		;683a
+	.DB $08		;683b
+	.DB $00		;683c
+	.DB $88		;683d
+	.DB $48		;683e
+	.DB $20		;683f
+	.DB $18		;6840
+	.DB $66		;6841
+	.DB $fb		;6842
+	.DB $dc		;6843
+	.DB $f6		;6844
+	.DB $ac		;6845
+	.DB $07		;6846
+	.DB $00		;6847
+	.DB $82		;6848
+	.DB $01		;6849
+	.DB $03		;684a
+	.DB $02		;684b
+	.DB $07		;684c
+	.DB $02		;684d
+	.DB $0f		;684e
+	.DB $03		;684f
+	.DB $1f		;6850
+	.DB $84		;6851
+	.DB $00		;6852
+	.DB $1c		;6853
+	.DB $7e		;6854
+	.DB $7f		;6855
+	.DB $0c		;6856
+	.DB $ff		;6857
+	.DB $06		;6858
+	.DB $00		;6859
+	.DB $83		;685a
+	.DB $c0		;685b
+	.DB $f8		;685c
+	.DB $fc		;685d
+	.DB $02		;685e
+	.DB $fe		;685f
+	.DB $82		;6860
+	.DB $fc		;6861
+	.DB $fe		;6862
+	.DB $03		;6863
+	.DB $ff		;6864
+	.DB $82		;6865
+	.DB $0f		;6866
+	.DB $ff		;6867
+	.DB $03		;6868
+	.DB $3f		;6869
+	.DB $05		;686a
+	.DB $7f		;686b
+	.DB $83		;686c
+	.DB $7b		;686d
+	.DB $79		;686e
+	.DB $7e		;686f
+	.DB $02		;6870
+	.DB $7f		;6871
+	.DB $81		;6872
+	.DB $3f		;6873
+	.DB $0d		;6874
+	.DB $ff		;6875
+	.DB $83		;6876
+	.DB $7f		;6877
+	.DB $e7		;6878
+	.DB $ff		;6879
+	.DB $03		;687a
+	.DB $f0		;687b
+	.DB $03		;687c
+	.DB $f8		;687d
+	.DB $03		;687e
+	.DB $fc		;687f
+	.DB $82		;6880
+	.DB $fe		;6881
+	.DB $ff		;6882
+	.DB $02		;6883
+	.DB $bf		;6884
+	.DB $84		;6885
+	.DB $2f		;6886
+	.DB $ef		;6887
+	.DB $cf		;6888
+	.DB $ff		;6889
+	.DB $02		;688a
+	.DB $1f		;688b
+	.DB $81		;688c
+	.DB $7f		;688d
+	.DB $02		;688e
+	.DB $ff		;688f
+	.DB $83		;6890
+	.DB $7f		;6891
+	.DB $3f		;6892
+	.DB $03		;6893
+	.DB $07		;6894
+	.DB $00		;6895
+	.DB $05		;6896
+	.DB $ff		;6897
+	.DB $81		;6898
+	.DB $fd		;6899
+	.DB $02		;689a
+	.DB $ff		;689b
+	.DB $81		;689c
+	.DB $fe		;689d
+	.DB $0c		;689e
+	.DB $00		;689f
+	.DB $84		;68a0
+	.DB $01		;68a1
+	.DB $03		;68a2
+	.DB $07		;68a3
+	.DB $0f		;68a4
+	.DB $02		;68a5
+	.DB $1f		;68a6
+	.DB $81		;68a7
+	.DB $3f		;68a8
+	.DB $02		;68a9
+	.DB $1f		;68aa
+	.DB $02		;68ab
+	.DB $0f		;68ac
+	.DB $08		;68ad
+	.DB $ff		;68ae
+	.DB $88		;68af
+	.DB $7f		;68b0
+	.DB $7d		;68b1
+	.DB $7c		;68b2
+	.DB $7e		;68b3
+	.DB $7d		;68b4
+	.DB $7c		;68b5
+	.DB $3e		;68b6
+	.DB $1f		;68b7
+	.DB $03		;68b8
+	.DB $00		;68b9
+	.DB $83		;68ba
+	.DB $18		;68bb
+	.DB $3c		;68bc
+	.DB $7e		;68bd
+	.DB $02		;68be
+	.DB $7f		;68bf
+	.DB $81		;68c0
+	.DB $3f		;68c1
+	.DB $03		;68c2
+	.DB $7f		;68c3
+	.DB $03		;68c4
+	.DB $ff		;68c5
+	.DB $81		;68c6
+	.DB $5f		;68c7
+	.DB $06		;68c8
+	.DB $00		;68c9
+	.DB $83		;68ca
+	.DB $c0		;68cb
+	.DB $f0		;68cc
+	.DB $f8		;68cd
+	.DB $02		;68ce
+	.DB $fc		;68cf
+	.DB $83		;68d0
+	.DB $d8		;68d1
+	.DB $e0		;68d2
+	.DB $fc		;68d3
+	.DB $02		;68d4
+	.DB $ff		;68d5
+	.DB $03		;68d6
+	.DB $03		;68d7
+	.DB $06		;68d8
+	.DB $07		;68d9
+	.DB $81		;68da
+	.DB $03		;68db
+	.DB $02		;68dc
+	.DB $00		;68dd
+	.DB $84		;68de
+	.DB $01		;68df
+	.DB $07		;68e0
+	.DB $01		;68e1
+	.DB $00		;68e2
+	.DB $05		;68e3
+	.DB $ff		;68e4
+	.DB $02		;68e5
+	.DB $3f		;68e6
+	.DB $82		;68e7
+	.DB $df		;68e8
+	.DB $f7		;68e9
+	.DB $02		;68ea
+	.DB $ff		;68eb
+	.DB $81		;68ec
+	.DB $3f		;68ed
+	.DB $03		;68ee
+	.DB $ff		;68ef
+	.DB $81		;68f0
+	.DB $1f		;68f1
+	.DB $05		;68f2
+	.DB $f0		;68f3
+	.DB $86		;68f4
+	.DB $f8		;68f5
+	.DB $fc		;68f6
+	.DB $dc		;68f7
+	.DB $ac		;68f8
+	.DB $dc		;68f9
+	.DB $fc		;68fa
+	.DB $03		;68fb
+	.DB $fe		;68fc
+	.DB $83		;68fd
+	.DB $ef		;68fe
+	.DB $86		;68ff
+	.DB $00		;6900
+	.DB $02		;6901
+	.DB $03		;6902
+	.DB $03		;6903
+	.DB $07		;6904
+	.DB $82		;6905
+	.DB $1f		;6906
+	.DB $3f		;6907
+	.DB $03		;6908
+	.DB $7f		;6909
+	.DB $81		;690a
+	.DB $1f		;690b
+	.DB $07		;690c
+	.DB $3f		;690d
+	.DB $87		;690e
+	.DB $1d		;690f
+	.DB $1f		;6910
+	.DB $0c		;6911
+	.DB $0f		;6912
+	.DB $0e		;6913
+	.DB $0f		;6914
+	.DB $07		;6915
+	.DB $05		;6916
+	.DB $03		;6917
+	.DB $86		;6918
+	.DB $01		;6919
+	.DB $60		;691a
+	.DB $f0		;691b
+	.DB $fe		;691c
+	.DB $ff		;691d
+	.DB $7f		;691e
+	.DB $03		;691f
+	.DB $ff		;6920
+	.DB $03		;6921
+	.DB $1f		;6922
+	.DB $85		;6923
+	.DB $1b		;6924
+	.DB $19		;6925
+	.DB $1e		;6926
+	.DB $0f		;6927
+	.DB $01		;6928
+	.DB $03		;6929
+	.DB $00		;692a
+	.DB $82		;692b
+	.DB $c0		;692c
+	.DB $e0		;692d
+	.DB $04		;692e
+	.DB $f0		;692f
+	.DB $87		;6930
+	.DB $f8		;6931
+	.DB $f0		;6932
+	.DB $6c		;6933
+	.DB $f4		;6934
+	.DB $fe		;6935
+	.DB $67		;6936
+	.DB $fb		;6937
+	.DB $02		;6938
+	.DB $00		;6939
+	.DB $81		;693a
+	.DB $01		;693b
+	.DB $03		;693c
+	.DB $03		;693d
+	.DB $81		;693e
+	.DB $0f		;693f
+	.DB $03		;6940
+	.DB $1f		;6941
+	.DB $81		;6942
+	.DB $0f		;6943
+	.DB $02		;6944
+	.DB $1f		;6945
+	.DB $03		;6946
+	.DB $0f		;6947
+	.DB $02		;6948
+	.DB $00		;6949
+	.DB $81		;694a
+	.DB $0e		;694b
+	.DB $03		;694c
+	.DB $0f		;694d
+	.DB $8a		;694e
+	.DB $1f		;694f
+	.DB $0f		;6950
+	.DB $07		;6951
+	.DB $0f		;6952
+	.DB $0d		;6953
+	.DB $0c		;6954
+	.DB $0f		;6955
+	.DB $07		;6956
+	.DB $00		;6957
+	.DB $03		;6958
+	.DB $03		;6959
+	.DB $00		;695a
+	.DB $82		;695b
+	.DB $80		;695c
+	.DB $e0		;695d
+	.DB $02		;695e
+	.DB $f0		;695f
+	.DB $81		;6960
+	.DB $f8		;6961
+	.DB $03		;6962
+	.DB $fc		;6963
+	.DB $85		;6964
+	.DB $ff		;6965
+	.DB $d7		;6966
+	.DB $fe		;6967
+	.DB $77		;6968
+	.DB $fb		;6969
+	.DB $0a		;696a
+	.DB $00		;696b
+	.DB $88		;696c
+	.DB $70		;696d
+	.DB $78		;696e
+	.DB $7c		;696f
+	.DB $3c		;6970
+	.DB $18		;6971
+	.DB $00		;6972
+	.DB $08		;6973
+	.DB $f8		;6974
+	.DB $04		;6975
+	.DB $fc		;6976
+	.DB $83		;6977
+	.DB $fe		;6978
+	.DB $7e		;6979
+	.DB $9c		;697a
+	.DB $07		;697b
+	.DB $00		;697c
+	.DB $06		;697d
+	.DB $fc		;697e
+	.DB $82		;697f
+	.DB $7c		;6980
+	.DB $38		;6981
+	.DB $0f		;6982
+	.DB $00		;6983
+	.DB $82		;6984
+	.DB $01		;6985
+	.DB $03		;6986
+	.DB $02		;6987
+	.DB $07		;6988
+	.DB $02		;6989
+	.DB $0f		;698a
+	.DB $03		;698b
+	.DB $1f		;698c
+	.DB $83		;698d
+	.DB $00		;698e
+	.DB $1c		;698f
+	.DB $7e		;6990
+	.DB $0d		;6991
+	.DB $ff		;6992
+	.DB $06		;6993
+	.DB $00		;6994
+	.DB $83		;6995
+	.DB $c0		;6996
+	.DB $f8		;6997
+	.DB $fc		;6998
+	.DB $02		;6999
+	.DB $fe		;699a
+	.DB $82		;699b
+	.DB $fc		;699c
+	.DB $fe		;699d
+	.DB $03		;699e
+	.DB $ff		;699f
+	.DB $82		;69a0
+	.DB $0f		;69a1
+	.DB $ff		;69a2
+	.DB $04		;69a3
+	.DB $3f		;69a4
+	.DB $04		;69a5
+	.DB $7f		;69a6
+	.DB $02		;69a7
+	.DB $79		;69a8
+	.DB $81		;69a9
+	.DB $7e		;69aa
+	.DB $02		;69ab
+	.DB $7f		;69ac
+	.DB $81		;69ad
+	.DB $3f		;69ae
+	.DB $0d		;69af
+	.DB $ff		;69b0
+	.DB $83		;69b1
+	.DB $7f		;69b2
+	.DB $e7		;69b3
+	.DB $ff		;69b4
+	.DB $03		;69b5
+	.DB $f0		;69b6
+	.DB $03		;69b7
+	.DB $f8		;69b8
+	.DB $03		;69b9
+	.DB $fc		;69ba
+	.DB $82		;69bb
+	.DB $fe		;69bc
+	.DB $ff		;69bd
+	.DB $02		;69be
+	.DB $bf		;69bf
+	.DB $84		;69c0
+	.DB $2f		;69c1
+	.DB $ef		;69c2
+	.DB $cf		;69c3
+	.DB $ff		;69c4
+	.DB $02		;69c5
+	.DB $1f		;69c6
+	.DB $81		;69c7
+	.DB $7f		;69c8
+	.DB $02		;69c9
+	.DB $ff		;69ca
+	.DB $83		;69cb
+	.DB $7f		;69cc
+	.DB $3f		;69cd
+	.DB $03		;69ce
+	.DB $07		;69cf
+	.DB $00		;69d0
+	.DB $05		;69d1
+	.DB $ff		;69d2
+	.DB $81		;69d3
+	.DB $fd		;69d4
+	.DB $02		;69d5
+	.DB $ff		;69d6
+	.DB $81		;69d7
+	.DB $fe		;69d8
+	.DB $07		;69d9
+	.DB $00		;69da
+	.DB $82		;69db
+	.DB $01		;69dc
+	.DB $03		;69dd
+	.DB $04		;69de
+	.DB $07		;69df
+	.DB $84		;69e0
+	.DB $0f		;69e1
+	.DB $1f		;69e2
+	.DB $3f		;69e3
+	.DB $7f		;69e4
+	.DB $04		;69e5
+	.DB $ff		;69e6
+	.DB $84		;69e7
+	.DB $7f		;69e8
+	.DB $0f		;69e9
+	.DB $e0		;69ea
+	.DB $f0		;69eb
+	.DB $03		;69ec
+	.DB $f8		;69ed
+	.DB $81		;69ee
+	.DB $fe		;69ef
+	.DB $0a		;69f0
+	.DB $ff		;69f1
+	.DB $07		;69f2
+	.DB $00		;69f3
+	.DB $81		;69f4
+	.DB $80		;69f5
+	.DB $02		;69f6
+	.DB $c0		;69f7
+	.DB $02		;69f8
+	.DB $e0		;69f9
+	.DB $82		;69fa
+	.DB $f0		;69fb
+	.DB $f8		;69fc
+	.DB $02		;69fd
+	.DB $fc		;69fe
+	.DB $02		;69ff
+	.DB $1f		;6a00
+	.DB $02		;6a01
+	.DB $3f		;6a02
+	.DB $04		;6a03
+	.DB $7f		;6a04
+	.DB $85		;6a05
+	.DB $3f		;6a06
+	.DB $0f		;6a07
+	.DB $07		;6a08
+	.DB $03		;6a09
+	.DB $01		;6a0a
+	.DB $03		;6a0b
+	.DB $00		;6a0c
+	.DB $0b		;6a0d
+	.DB $ff		;6a0e
+	.DB $81		;6a0f
+	.DB $fe		;6a10
+	.DB $02		;6a11
+	.DB $ff		;6a12
+	.DB $02		;6a13
+	.DB $7f		;6a14
+	.DB $02		;6a15
+	.DB $fc		;6a16
+	.DB $81		;6a17
+	.DB $f8		;6a18
+	.DB $02		;6a19
+	.DB $fc		;6a1a
+	.DB $02		;6a1b
+	.DB $f8		;6a1c
+	.DB $03		;6a1d
+	.DB $fc		;6a1e
+	.DB $84		;6a1f
+	.DB $bc		;6a20
+	.DB $3c		;6a21
+	.DB $dc		;6a22
+	.DB $1c		;6a23
+	.DB $02		;6a24
+	.DB $fc		;6a25
+	.DB $82		;6a26
+	.DB $3f		;6a27
+	.DB $7f		;6a28
+	.DB $04		;6a29
+	.DB $ff		;6a2a
+	.DB $82		;6a2b
+	.DB $7f		;6a2c
+	.DB $1e		;6a2d
+	.DB $0e		;6a2e
+	.DB $00		;6a2f
+	.DB $82		;6a30
+	.DB $03		;6a31
+	.DB $07		;6a32
+	.DB $02		;6a33
+	.DB $0f		;6a34
+	.DB $02		;6a35
+	.DB $1f		;6a36
+	.DB $82		;6a37
+	.DB $0f		;6a38
+	.DB $07		;6a39
+	.DB $02		;6a3a
+	.DB $0f		;6a3b
+	.DB $08		;6a3c
+	.DB $ff		;6a3d
+	.DB $88		;6a3e
+	.DB $7f		;6a3f
+	.DB $7d		;6a40
+	.DB $7c		;6a41
+	.DB $7e		;6a42
+	.DB $7d		;6a43
+	.DB $7c		;6a44
+	.DB $3e		;6a45
+	.DB $1f		;6a46
+	.DB $00		;6a47
 l6a48h:
-	ld a,(bc)			;6a48
-	nop			;6a49
-	ld b,008h		;6a4a
-	inc b			;6a4c
-	nop			;6a4d
-	add a,c			;6a4e
-	inc b			;6a4f
-	ld a,(bc)			;6a50
-	inc d			;6a51
-	add a,c			;6a52
-	djnz l6a63h		;6a53
-	ld (l3082h),a		;6a55
-	djnz $+13		;6a58
-	nop			;6a5a
-	add a,c			;6a5b
-	ld (l3202h),hl		;6a5c
-	ld c,063h		;6a5f
-	add a,e			;6a61
-	ld h,d			;6a62
-l6a63h:
-	jr nz,$+2		;6a63
-	ld (bc),a			;6a65
-	ld bc,l4381h		;6a66
-	inc c			;6a69
-	ld h,e			;6a6a
-	inc c			;6a6b
-	nop			;6a6c
-	add a,e			;6a6d
-	jr l6a84h		;6a6e
-	jr z,l6a7eh		;6a70
-	nop			;6a72
-	add a,h			;6a73
-	jr c,l6ad0h		;6a74
-	ld e,h			;6a76
-	inc l			;6a77
-l6a78h:
-	rlca			;6a78
-	nop			;6a79
-	add a,l			;6a7a
-	add a,b			;6a7b
-	nop			;6a7c
-	ret po			;6a7d
-l6a7eh:
-	ret nc			;6a7e
-	ret c			;6a7f
-	ld (bc),a			;6a80
-	ld (hl),b			;6a81
-	add a,e			;6a82
-	sub b			;6a83
-l6a84h:
-	ret po			;6a84
-	ld b,b			;6a85
-l6a86h:
-	ld b,000h		;6a86
-	adc a,c			;6a88
-	inc bc			;6a89
-	ld c,01dh		;6a8a
-	rrca			;6a8c
-	inc hl			;6a8d
-	rlca			;6a8e
-	dec de			;6a8f
-	dec bc			;6a90
-	dec b			;6a91
-	inc b			;6a92
-	nop			;6a93
-	adc a,l			;6a94
-	add a,b			;6a95
-	ret p			;6a96
-	jr nz,l6a39h		;6a97
-	inc b			;6a99
-	ret pe			;6a9a
-	sbc a,0ceh		;6a9b
-	halt			;6a9d
-	jr z,l6a3ch		;6a9e
-	ret nz			;6aa0
-	ld b,b			;6aa1
-	ld (bc),a			;6aa2
-	nop			;6aa3
-	add a,c			;6aa4
-	ld bc,l0702h		;6aa5
-	xor e			;6aa8
-	djnz l6b2ah		;6aa9
-	ld a,01dh		;6aab
-	ld l,a			;6aad
-	inc hl			;6aae
-	ld h,a			;6aaf
-	dec sp			;6ab0
-	dec bc			;6ab1
-	dec c			;6ab2
-	ex af,af'			;6ab3
-	nop			;6ab4
-	ld h,b			;6ab5
-	inc l			;6ab6
-	adc a,b			;6ab7
-	call m,0a026h		;6ab8
-	rlca			;6abb
-	ret pe			;6abc
-	rst 18h			;6abd
-	adc a,077h		;6abe
-	add hl,hl			;6ac0
-	sbc a,(hl)			;6ac1
-	ret nz			;6ac2
-	ld b,b			;6ac3
-	inc bc			;6ac4
-	add hl,de			;6ac5
-	dec a			;6ac6
-	ld d,a			;6ac7
-	ld h,a			;6ac8
-	ret nc			;6ac9
-	ld a,a			;6aca
-	ld a,09dh		;6acb
-	ld l,a			;6acd
-	inc hl			;6ace
-	rst 20h			;6acf
-l6ad0h:
-	dec sp			;6ad0
-	dec bc			;6ad1
-	dec c			;6ad2
-	ex af,af'			;6ad3
-	inc c			;6ad4
-	nop			;6ad5
-	add a,c			;6ad6
-	jr nc,l6adbh		;6ad7
-	jr $+9		;6ad9
-l6adbh:
-	nop			;6adb
-	add a,l			;6adc
-	ex af,af'			;6add
-	djnz l6a78h		;6ade
-	inc e			;6ae0
-	ld a,b			;6ae1
-	inc bc			;6ae2
-	jr $-126		;6ae3
-	add a,b			;6ae5
-	ld b,b			;6ae6
-	ld (bc),a			;6ae7
-	add a,b			;6ae8
-	adc a,b			;6ae9
-	ret nz			;6aea
-	adc a,b			;6aeb
-	ret z			;6aec
-	call z,0b8fch		;6aed
-	ret nz			;6af0
-	ld b,b			;6af1
-	inc bc			;6af2
-	ret nz			;6af3
-	inc b			;6af4
-	nop			;6af5
-	ld (bc),a			;6af6
-	ld bc,l1102h		;6af7
-	ld (bc),a			;6afa
-	add hl,de			;6afb
-	ld (bc),a			;6afc
-	rra			;6afd
-	inc b			;6afe
-	ld bc,0008eh		;6aff
-	ret nz			;6b02
-	ret po			;6b03
-	jr nz,l6a86h		;6b04
-	ret nz			;6b06
-	pop bc			;6b07
-	jp po,0e3c3h		;6b08
-	jp 0bfffh		;6b0b
-	sbc a,002h		;6b0e
-	ret po			;6b10
-	add a,d			;6b11
-	and b			;6b12
-	nop			;6b13
-	ld (bc),a			;6b14
-	ld bc,l0382h		;6b15
-	inc hl			;6b18
-	ld (bc),a			;6b19
-	ld b,e			;6b1a
-	dec b			;6b1b
-	ld h,e			;6b1c
-	inc bc			;6b1d
-	ld a,a			;6b1e
-	add a,d			;6b1f
-	inc bc			;6b20
-	inc a			;6b21
-	ld b,03eh		;6b22
-	add hl,bc			;6b24
-	nop			;6b25
-	add a,h			;6b26
-	inc e			;6b27
-	ld a,032h		;6b28
-l6b2ah:
-	ld a,c			;6b2a
-	ld (bc),a			;6b2b
-	ld a,l			;6b2c
-	add a,a			;6b2d
-	ld a,a			;6b2e
-	ld a,l			;6b2f
-	ld a,a			;6b30
-	ld a,l			;6b31
-	ld a,a			;6b32
-	ld a,e			;6b33
-	ld a,l			;6b34
-	ld (bc),a			;6b35
-	ld a,a			;6b36
-	add a,h			;6b37
-	ld a,e			;6b38
-	ld a,l			;6b39
-	ld a,a			;6b3a
-	cp 002h		;6b3b
-	rst 38h			;6b3d
-	adc a,b			;6b3e
-	.DB 0fdh,0ffh,07eh	;illegal sequence		;6b3f
-	ld a,a			;6b42
-	ld a,l			;6b43
-	ld a,a			;6b44
-	ld a,e			;6b45
-	ld a,l			;6b46
-	ld (bc),a			;6b47
-	ld a,a			;6b48
-	add a,e			;6b49
-	nop			;6b4a
-	jr nc,l6bb5h		;6b4b
-	ld (bc),a			;6b4d
-	ld (hl),b			;6b4e
-	add a,d			;6b4f
-	ld a,b			;6b50
-	ld l,b			;6b51
-	ld (bc),a			;6b52
-	ld a,b			;6b53
-	add a,e			;6b54
-	ld l,b			;6b55
-	ld a,h			;6b56
-	ld (hl),a			;6b57
-	inc bc			;6b58
-	ld a,a			;6b59
-	add a,c			;6b5a
-	rra			;6b5b
-	ld (bc),a			;6b5c
-	nop			;6b5d
-	add a,d			;6b5e
-	inc c			;6b5f
-	ld a,(de)			;6b60
-	ld (bc),a			;6b61
-	inc e			;6b62
-	add a,a			;6b63
-	ld e,01ah		;6b64
-	ld e,0fah		;6b66
-	cp 0fch		;6b68
-	ret p			;6b6a
-	dec a			;6b6b
-	nop			;6b6c
-	add a,a			;6b6d
-	inc b			;6b6e
-	ex af,af'			;6b6f
-	djnz l6b92h		;6b70
-	ld b,b			;6b72
-	nop			;6b73
-	ld b,b			;6b74
-	add hl,bc			;6b75
-	nop			;6b76
-	add a,a			;6b77
-	jr nz,l6b8ah		;6b78
-	ex af,af'			;6b7a
-	inc b			;6b7b
-l6b7ch:
-	ld (bc),a			;6b7c
-	nop			;6b7d
-	ld (bc),a			;6b7e
-	djnz l6b91h		;6b7f
-	rlca			;6b81
-	nop			;6b82
-	add a,a			;6b83
-	ld bc,l0402h		;6b84
-	ex af,af'			;6b87
-	djnz l6baah		;6b88
-l6b8ah:
-	nop			;6b8a
-	ld (bc),a			;6b8b
-	ld b,b			;6b8c
-	ld b,000h		;6b8d
-	add a,c			;6b8f
-	ld b,b			;6b90
-l6b91h:
-	rrca			;6b91
-l6b92h:
-	nop			;6b92
-	add a,c			;6b93
-	ld (bc),a			;6b94
-	djnz l6b97h		;6b95
-l6b97h:
-	add a,a			;6b97
-	add a,b			;6b98
-	ld b,b			;6b99
-	jr nz,l6bach		;6b9a
-	ex af,af'			;6b9c
-	inc b			;6b9d
-	nop			;6b9e
-	ld (bc),a			;6b9f
-	ld (bc),a			;6ba0
-	djnz l6bb7h		;6ba1
-	add a,l			;6ba3
-	nop			;6ba4
-	jp 0c07ch		;6ba5
-	add a,b			;6ba8
-	dec bc			;6ba9
-l6baah:
-	nop			;6baa
-	add a,(hl)			;6bab
-l6bach:
-	ld (hl),c			;6bac
-	ld l,c			;6bad
-	rst 38h			;6bae
-	rst 18h			;6baf
-	ld l,(hl)			;6bb0
-	add a,00ah		;6bb1
-	nop			;6bb3
-	add a,(hl)			;6bb4
-l6bb5h:
-	inc h			;6bb5
-	ex af,af'			;6bb6
-l6bb7h:
-	jr nc,l6b7ch		;6bb7
-	ld a,a			;6bb9
-	sub h			;6bba
-	ld a,(bc)			;6bbb
-	nop			;6bbc
-	add a,(hl)			;6bbd
-	add a,b			;6bbe
-	ret nz			;6bbf
-	ld (hl),b			;6bc0
-	ld bc,0dff3h		;6bc1
-	ld a,(bc)			;6bc4
-	nop			;6bc5
-	add a,(hl)			;6bc6
-	or b			;6bc7
-	jr nz,l6bfah		;6bc8
-	inc c			;6bca
-	ccf			;6bcb
-	ld a,e			;6bcc
-	ld a,(bc)			;6bcd
-	nop			;6bce
-	add a,l			;6bcf
-	rra			;6bd0
-	ccf			;6bd1
-	rlca			;6bd2
-	ld e,00eh		;6bd3
-	djnz l6bd7h		;6bd5
-l6bd7h:
-	add a,l			;6bd7
-	ret			;6bd8
-	ld h,h			;6bd9
-	jr nc,l6b7ch		;6bda
-	add a,b			;6bdc
-	ld (bc),a			;6bdd
-	nop			;6bde
-	add a,(hl)			;6bdf
-	ld h,b			;6be0
-	inc l			;6be1
-	and h			;6be2
-	nop			;6be3
-	ld (bc),a			;6be4
-	adc a,d			;6be5
-	ld (bc),a			;6be6
-	ret z			;6be7
-	add a,l			;6be8
-	ret pe			;6be9
-	ret p			;6bea
-	or 0ffh		;6beb
-	adc a,a			;6bed
-	ld (bc),a			;6bee
-	rst 0			;6bef
-	adc a,a			;6bf0
-	add a,04eh		;6bf1
-	ld e,a			;6bf3
-	ld (hl),e			;6bf4
-	ld a,(067cfh)		;6bf5
-	cpl			;6bf8
-	rst 38h			;6bf9
-l6bfah:
-	exx			;6bfa
-	call m,sub_167ch		;6bfb
-	dec bc			;6bfe
-	add hl,bc			;6bff
+	.DB $0a		;6a48
+	.DB $00		;6a49
+	.DB $06		;6a4a
+	.DB $08		;6a4b
+	.DB $04		;6a4c
+	.DB $00		;6a4d
+	.DB $81		;6a4e
+	.DB $04		;6a4f
+	.DB $0a		;6a50
+	.DB $14		;6a51
+	.DB $81		;6a52
+	.DB $10		;6a53
+	.DB $0e		;6a54
+	.DB $32		;6a55
+	.DB $82		;6a56
+	.DB $30		;6a57
+	.DB $10		;6a58
+	.DB $0d		;6a59
+	.DB $00		;6a5a
+	.DB $81		;6a5b
+	.DB $22		;6a5c
+	.DB $02		;6a5d
+	.DB $32		;6a5e
+	.DB $0e		;6a5f
+	.DB $63		;6a60
+	.DB $83		;6a61
+	.DB $62		;6a62
+	.DB $20		;6a63
+	.DB $02		;6a64
+	.DB $02		;6a65
+	.DB $01		;6a66
+	.DB $81		;6a67
+	.DB $43		;6a68
+	.DB $0c		;6a69
+	.DB $63		;6a6a
+	.DB $0c		;6a6b
+	.DB $00		;6a6c
+	.DB $83		;6a6d
+	.DB $18		;6a6e
+	.DB $14		;6a6f
+	.DB $28		;6a70
+	.DB $0c		;6a71
+	.DB $00		;6a72
+	.DB $84		;6a73
+	.DB $38		;6a74
+	.DB $5a		;6a75
+	.DB $5c		;6a76
+	.DB $2c		;6a77
+	.DB $07		;6a78
+	.DB $00		;6a79
+	.DB $85		;6a7a
+	.DB $80		;6a7b
+	.DB $00		;6a7c
+	.DB $e0		;6a7d
+	.DB $d0		;6a7e
+	.DB $d8		;6a7f
+	.DB $02		;6a80
+	.DB $70		;6a81
+	.DB $83		;6a82
+	.DB $90		;6a83
+	.DB $e0		;6a84
+	.DB $40		;6a85
+	.DB $06		;6a86
+	.DB $00		;6a87
+	.DB $89		;6a88
+	.DB $03		;6a89
+	.DB $0e		;6a8a
+	.DB $1d		;6a8b
+	.DB $0f		;6a8c
+	.DB $23		;6a8d
+	.DB $07		;6a8e
+	.DB $1b		;6a8f
+	.DB $0b		;6a90
+	.DB $05		;6a91
+	.DB $04		;6a92
+	.DB $00		;6a93
+	.DB $8d		;6a94
+	.DB $80		;6a95
+	.DB $f0		;6a96
+	.DB $20		;6a97
+	.DB $a0		;6a98
+	.DB $04		;6a99
+	.DB $e8		;6a9a
+	.DB $de		;6a9b
+	.DB $ce		;6a9c
+	.DB $76		;6a9d
+	.DB $28		;6a9e
+	.DB $9c		;6a9f
+	.DB $c0		;6aa0
+	.DB $40		;6aa1
+	.DB $02		;6aa2
+	.DB $00		;6aa3
+	.DB $81		;6aa4
+	.DB $01		;6aa5
+	.DB $02		;6aa6
+	.DB $07		;6aa7
+	.DB $ab		;6aa8
+	.DB $10		;6aa9
+	.DB $7f		;6aaa
+	.DB $3e		;6aab
+	.DB $1d		;6aac
+	.DB $6f		;6aad
+	.DB $23		;6aae
+	.DB $67		;6aaf
+	.DB $3b		;6ab0
+	.DB $0b		;6ab1
+	.DB $0d		;6ab2
+	.DB $08		;6ab3
+	.DB $00		;6ab4
+	.DB $60		;6ab5
+	.DB $2c		;6ab6
+	.DB $88		;6ab7
+	.DB $fc		;6ab8
+	.DB $26		;6ab9
+	.DB $a0		;6aba
+	.DB $07		;6abb
+	.DB $e8		;6abc
+	.DB $df		;6abd
+	.DB $ce		;6abe
+	.DB $77		;6abf
+	.DB $29		;6ac0
+	.DB $9e		;6ac1
+	.DB $c0		;6ac2
+	.DB $40		;6ac3
+	.DB $03		;6ac4
+	.DB $19		;6ac5
+	.DB $3d		;6ac6
+	.DB $57		;6ac7
+	.DB $67		;6ac8
+	.DB $d0		;6ac9
+	.DB $7f		;6aca
+	.DB $3e		;6acb
+	.DB $9d		;6acc
+	.DB $6f		;6acd
+	.DB $23		;6ace
+	.DB $e7		;6acf
+	.DB $3b		;6ad0
+	.DB $0b		;6ad1
+	.DB $0d		;6ad2
+	.DB $08		;6ad3
+	.DB $0c		;6ad4
+	.DB $00		;6ad5
+	.DB $81		;6ad6
+	.DB $30		;6ad7
+	.DB $02		;6ad8
+	.DB $18		;6ad9
+	.DB $09		;6ada
+	.DB $00		;6adb
+	.DB $85		;6adc
+	.DB $08		;6add
+	.DB $10		;6ade
+	.DB $98		;6adf
+	.DB $1c		;6ae0
+	.DB $78		;6ae1
+	.DB $03		;6ae2
+	.DB $18		;6ae3
+	.DB $82		;6ae4
+	.DB $80		;6ae5
+	.DB $40		;6ae6
+	.DB $02		;6ae7
+	.DB $80		;6ae8
+	.DB $88		;6ae9
+	.DB $c0		;6aea
+	.DB $88		;6aeb
+	.DB $c8		;6aec
+	.DB $cc		;6aed
+	.DB $fc		;6aee
+	.DB $b8		;6aef
+	.DB $c0		;6af0
+	.DB $40		;6af1
+	.DB $03		;6af2
+	.DB $c0		;6af3
+	.DB $04		;6af4
+	.DB $00		;6af5
+	.DB $02		;6af6
+	.DB $01		;6af7
+	.DB $02		;6af8
+	.DB $11		;6af9
+	.DB $02		;6afa
+	.DB $19		;6afb
+	.DB $02		;6afc
+	.DB $1f		;6afd
+	.DB $04		;6afe
+	.DB $01		;6aff
+	.DB $8e		;6b00
+	.DB $00		;6b01
+	.DB $c0		;6b02
+	.DB $e0		;6b03
+	.DB $20		;6b04
+	.DB $80		;6b05
+	.DB $c0		;6b06
+	.DB $c1		;6b07
+	.DB $e2		;6b08
+	.DB $c3		;6b09
+	.DB $e3		;6b0a
+	.DB $c3		;6b0b
+	.DB $ff		;6b0c
+	.DB $bf		;6b0d
+	.DB $de		;6b0e
+	.DB $02		;6b0f
+	.DB $e0		;6b10
+	.DB $82		;6b11
+	.DB $a0		;6b12
+	.DB $00		;6b13
+	.DB $02		;6b14
+	.DB $01		;6b15
+	.DB $82		;6b16
+	.DB $03		;6b17
+	.DB $23		;6b18
+	.DB $02		;6b19
+	.DB $43		;6b1a
+	.DB $05		;6b1b
+	.DB $63		;6b1c
+	.DB $03		;6b1d
+	.DB $7f		;6b1e
+	.DB $82		;6b1f
+	.DB $03		;6b20
+	.DB $3c		;6b21
+	.DB $06		;6b22
+	.DB $3e		;6b23
+	.DB $09		;6b24
+	.DB $00		;6b25
+	.DB $84		;6b26
+	.DB $1c		;6b27
+	.DB $3e		;6b28
+	.DB $32		;6b29
+	.DB $79		;6b2a
+	.DB $02		;6b2b
+	.DB $7d		;6b2c
+	.DB $87		;6b2d
+	.DB $7f		;6b2e
+	.DB $7d		;6b2f
+	.DB $7f		;6b30
+	.DB $7d		;6b31
+	.DB $7f		;6b32
+	.DB $7b		;6b33
+	.DB $7d		;6b34
+	.DB $02		;6b35
+	.DB $7f		;6b36
+	.DB $84		;6b37
+	.DB $7b		;6b38
+	.DB $7d		;6b39
+	.DB $7f		;6b3a
+	.DB $fe		;6b3b
+	.DB $02		;6b3c
+	.DB $ff		;6b3d
+	.DB $88		;6b3e
+	.DB $fd		;6b3f
+	.DB $ff		;6b40
+	.DB $7e		;6b41
+	.DB $7f		;6b42
+	.DB $7d		;6b43
+	.DB $7f		;6b44
+	.DB $7b		;6b45
+	.DB $7d		;6b46
+	.DB $02		;6b47
+	.DB $7f		;6b48
+	.DB $83		;6b49
+	.DB $00		;6b4a
+	.DB $30		;6b4b
+	.DB $68		;6b4c
+	.DB $02		;6b4d
+	.DB $70		;6b4e
+	.DB $82		;6b4f
+	.DB $78		;6b50
+	.DB $68		;6b51
+	.DB $02		;6b52
+	.DB $78		;6b53
+	.DB $83		;6b54
+	.DB $68		;6b55
+	.DB $7c		;6b56
+	.DB $77		;6b57
+	.DB $03		;6b58
+	.DB $7f		;6b59
+	.DB $81		;6b5a
+	.DB $1f		;6b5b
+	.DB $02		;6b5c
+	.DB $00		;6b5d
+	.DB $82		;6b5e
+	.DB $0c		;6b5f
+	.DB $1a		;6b60
+	.DB $02		;6b61
+	.DB $1c		;6b62
+	.DB $87		;6b63
+	.DB $1e		;6b64
+	.DB $1a		;6b65
+	.DB $1e		;6b66
+	.DB $fa		;6b67
+	.DB $fe		;6b68
+	.DB $fc		;6b69
+	.DB $f0		;6b6a
+	.DB $3d		;6b6b
+	.DB $00		;6b6c
+	.DB $87		;6b6d
+	.DB $04		;6b6e
+	.DB $08		;6b6f
+	.DB $10		;6b70
+	.DB $20		;6b71
+	.DB $40		;6b72
+	.DB $00		;6b73
+	.DB $40		;6b74
+	.DB $09		;6b75
+	.DB $00		;6b76
+	.DB $87		;6b77
+	.DB $20		;6b78
+	.DB $10		;6b79
+	.DB $08		;6b7a
+	.DB $04		;6b7b
+	.DB $02		;6b7c
+	.DB $00		;6b7d
+	.DB $02		;6b7e
+	.DB $10		;6b7f
+	.DB $10		;6b80
+	.DB $07		;6b81
+	.DB $00		;6b82
+	.DB $87		;6b83
+	.DB $01		;6b84
+	.DB $02		;6b85
+	.DB $04		;6b86
+	.DB $08		;6b87
+	.DB $10		;6b88
+	.DB $20		;6b89
+	.DB $00		;6b8a
+	.DB $02		;6b8b
+	.DB $40		;6b8c
+	.DB $06		;6b8d
+	.DB $00		;6b8e
+	.DB $81		;6b8f
+	.DB $40		;6b90
+	.DB $0f		;6b91
+	.DB $00		;6b92
+	.DB $81		;6b93
+	.DB $02		;6b94
+	.DB $10		;6b95
+	.DB $00		;6b96
+	.DB $87		;6b97
+	.DB $80		;6b98
+	.DB $40		;6b99
+	.DB $20		;6b9a
+	.DB $10		;6b9b
+	.DB $08		;6b9c
+	.DB $04		;6b9d
+	.DB $00		;6b9e
+	.DB $02		;6b9f
+	.DB $02		;6ba0
+	.DB $10		;6ba1
+	.DB $14		;6ba2
+	.DB $85		;6ba3
+	.DB $00		;6ba4
+	.DB $c3		;6ba5
+	.DB $7c		;6ba6
+	.DB $c0		;6ba7
+	.DB $80		;6ba8
+	.DB $0b		;6ba9
+	.DB $00		;6baa
+	.DB $86		;6bab
+	.DB $71		;6bac
+	.DB $69		;6bad
+	.DB $ff		;6bae
+	.DB $df		;6baf
+	.DB $6e		;6bb0
+	.DB $c6		;6bb1
+	.DB $0a		;6bb2
+	.DB $00		;6bb3
+	.DB $86		;6bb4
+	.DB $24		;6bb5
+	.DB $08		;6bb6
+	.DB $30		;6bb7
+	.DB $c3		;6bb8
+	.DB $7f		;6bb9
+	.DB $94		;6bba
+	.DB $0a		;6bbb
+	.DB $00		;6bbc
+	.DB $86		;6bbd
+	.DB $80		;6bbe
+	.DB $c0		;6bbf
+	.DB $70		;6bc0
+	.DB $01		;6bc1
+	.DB $f3		;6bc2
+	.DB $df		;6bc3
+	.DB $0a		;6bc4
+	.DB $00		;6bc5
+	.DB $86		;6bc6
+	.DB $b0		;6bc7
+	.DB $20		;6bc8
+	.DB $30		;6bc9
+	.DB $0c		;6bca
+	.DB $3f		;6bcb
+	.DB $7b		;6bcc
+	.DB $0a		;6bcd
+	.DB $00		;6bce
+	.DB $85		;6bcf
+	.DB $1f		;6bd0
+	.DB $3f		;6bd1
+	.DB $07		;6bd2
+	.DB $1e		;6bd3
+	.DB $0e		;6bd4
+	.DB $10		;6bd5
+	.DB $00		;6bd6
+	.DB $85		;6bd7
+	.DB $c9		;6bd8
+	.DB $64		;6bd9
+	.DB $30		;6bda
+	.DB $a0		;6bdb
+	.DB $80		;6bdc
+	.DB $02		;6bdd
+	.DB $00		;6bde
+	.DB $86		;6bdf
+	.DB $60		;6be0
+	.DB $2c		;6be1
+	.DB $a4		;6be2
+	.DB $00		;6be3
+	.DB $02		;6be4
+	.DB $8a		;6be5
+	.DB $02		;6be6
+	.DB $c8		;6be7
+	.DB $85		;6be8
+	.DB $e8		;6be9
+	.DB $f0		;6bea
+	.DB $f6		;6beb
+	.DB $ff		;6bec
+	.DB $8f		;6bed
+	.DB $02		;6bee
+	.DB $c7		;6bef
+	.DB $8f		;6bf0
+	.DB $c6		;6bf1
+	.DB $4e		;6bf2
+	.DB $5f		;6bf3
+	.DB $73		;6bf4
+	.DB $3a		;6bf5
+	.DB $cf		;6bf6
+	.DB $67		;6bf7
+	.DB $2f		;6bf8
+	.DB $ff		;6bf9
+	.DB $d9		;6bfa
+	.DB $fc		;6bfb
+	.DB $7c		;6bfc
+	.DB $16		;6bfd
+	.DB $0b		;6bfe
+	.DB $09		;6bff
 l6c00h:
-	ld (bc),a			;6c00
-	inc b			;6c01
-	ld (bc),a			;6c02
-	ld bc,l128ch		;6c03
-	ld d,001h		;6c06
-	adc a,(hl)			;6c08
-	ret po			;6c09
-	ret nz			;6c0a
-	rlca			;6c0b
-	rra			;6c0c
-	inc c			;6c0d
-	ld h,b			;6c0e
-l6c0fh:
-	ret nz			;6c0f
-	add a,b			;6c10
-l6c11h:
-	ld b,000h		;6c11
-	add a,d			;6c13
-	ret c			;6c14
-	cp b			;6c15
-	ld (bc),a			;6c16
-	ld a,a			;6c17
-	adc a,b			;6c18
-	add a,a			;6c19
-	ld e,03eh		;6c1a
-l6c1ch:
-	ld a,(hl)			;6c1c
-	call m,0c4f0h		;6c1d
-	call z,0c802h		;6c20
-	add a,e			;6c23
-	ex af,af'			;6c24
-	inc h			;6c25
-	inc c			;6c26
-	ld (bc),a			;6c27
-	ld b,08bh		;6c28
-	jr $+83		;6c2a
-	rst 30h			;6c2c
-	or 07eh		;6c2d
-	sbc a,(hl)			;6c2f
-l6c30h:
-	ld e,a			;6c30
-	ld c,c			;6c31
-	sbc a,a			;6c32
-	cp a			;6c33
-	adc a,d			;6c34
-	ld (bc),a			;6c35
-	rrca			;6c36
-	ld (bc),a			;6c37
-	nop			;6c38
-	add a,(hl)			;6c39
-	ld (bc),a			;6c3a
-	inc c			;6c3b
-	ld h,h			;6c3c
-	jr c,l6c0fh		;6c3d
-	ret po			;6c3f
-	ld (bc),a			;6c40
-	ld b,b			;6c41
-	ld (bc),a			;6c42
-	add a,b			;6c43
-	ld b,000h		;6c44
-	adc a,(hl)			;6c46
-	ld b,b			;6c47
-	ret nz			;6c48
-	and b			;6c49
-	ld e,b			;6c4a
-	sbc a,c			;6c4b
-	ld e,018h		;6c4c
-	rra			;6c4e
-	rlca			;6c4f
-	ld sp,03efdh		;6c50
-	sbc a,00eh		;6c53
-	inc b			;6c55
-	nop			;6c56
-	adc a,h			;6c57
-	ld bc,sub_0600h		;6c58
-	rlca			;6c5b
-	inc bc			;6c5c
-	add hl,bc			;6c5d
-	dec e			;6c5e
-	adc a,0c6h		;6c5f
-	ld d,(hl)			;6c61
-	daa			;6c62
-	dec e			;6c63
-	ld b,000h		;6c64
-	add a,d			;6c66
-	djnz $+32		;6c67
-	ld (bc),a			;6c69
-	ret nz			;6c6a
-	add a,l			;6c6b
-	add a,b			;6c6c
-	nop			;6c6d
-	jr nz,l6c30h		;6c6e
-	ld b,b			;6c70
-	inc b			;6c71
-	nop			;6c72
-	adc a,l			;6c73
-	add a,b			;6c74
-	nop			;6c75
-	jr c,l6cf4h		;6c76
-	call nz,09f87h		;6c78
-	ld (hl),c			;6c7b
-	ld h,d			;6c7c
-	ld h,e			;6c7d
-	ld h,03ch		;6c7e
-	ret c			;6c80
-	inc bc			;6c81
-	nop			;6c82
-	add a,a			;6c83
-	dec bc			;6c84
-	ld de,l1900h		;6c85
-	ld de,l3830h		;6c88
-	inc bc			;6c8b
-	jr nc,l6c11h		;6c8c
-	djnz l6c1ch		;6c8e
-	inc c			;6c90
-	inc h			;6c91
-	nop			;6c92
-	add a,d			;6c93
-	inc bc			;6c94
-	rlca			;6c95
-	ld (bc),a			;6c96
-	inc bc			;6c97
-	sub d			;6c98
-	rlca			;6c99
-	rrca			;6c9a
-	ld h,02ch		;6c9b
-	inc a			;6c9d
-	jr $+62		;6c9e
-	ld e,01fh		;6ca0
-	rrca			;6ca2
-	ld c,0f8h		;6ca3
-	jp p,0e2f0h		;6ca5
-	xor 0b0h		;6ca8
-	jr nz,l6cb1h		;6caa
-	nop			;6cac
-l6cadh:
-	add a,d			;6cad
-	add a,b			;6cae
-	ld b,b			;6caf
-	ld (bc),a			;6cb0
-l6cb1h:
-	ld h,b			;6cb1
-	add a,a			;6cb2
-	ld b,b			;6cb3
-	ccf			;6cb4
-	rra			;6cb5
-	inc b			;6cb6
-l6cb7h:
-	ld e,(hl)			;6cb7
-	ld b,a			;6cb8
-	ld bc,l0006h+1		;6cb9
-	sbc a,h			;6cbc
-	ld b,b			;6cbd
-	ld a,b			;6cbe
-	ret p			;6cbf
-	ret nz			;6cc0
-	or b			;6cc1
-	nop			;6cc2
-	ld c,b			;6cc3
-	call nz,07ff8h		;6cc4
-	rlca			;6cc7
-	add a,l			;6cc8
-	ld b,c			;6cc9
-	rrca			;6cca
-	inc bc			;6ccb
-	ld c,08fh		;6ccc
-	xor 0d0h		;6cce
-	ld de,l3f7eh		;6cd0
-	ld a,07eh		;6cd3
-	ld a,l			;6cd5
-	ld a,c			;6cd6
-	jr l6ce9h		;6cd7
-	ld (bc),a			;6cd9
-	inc bc			;6cda
-	add a,c			;6cdb
-	ld bc,l0003h+1		;6cdc
-	add a,c			;6cdf
-	ret nz			;6ce0
-	inc b			;6ce1
-	nop			;6ce2
-	add a,a			;6ce3
-	add a,b			;6ce4
-	ret po			;6ce5
-	ret nz			;6ce6
-	ld e,0e7h		;6ce7
-l6ce9h:
-	ret po			;6ce9
-	ld a,a			;6cea
-	dec bc			;6ceb
-	nop			;6cec
-	adc a,h			;6ced
-	ld b,004h		;6cee
-	nop			;6cf0
-	ld a,c			;6cf1
-	ret pe			;6cf2
-	ld b,a			;6cf3
-l6cf4h:
-	rra			;6cf4
-	ld e,a			;6cf5
-	dec e			;6cf6
-	inc hl			;6cf7
-	ld l,e			;6cf8
-	ld h,d			;6cf9
-	ld (bc),a			;6cfa
-	ld h,h			;6cfb
-	add a,d			;6cfc
-	adc a,b			;6cfd
-	ld e,h			;6cfe
-	ld (bc),a			;6cff
-	ld a,b			;6d00
-	add a,c			;6d01
-	or b			;6d02
-	ld (bc),a			;6d03
-	nop			;6d04
-	add a,c			;6d05
-	ld a,(hl)			;6d06
-	ld (bc),a			;6d07
-	rst 20h			;6d08
-	add a,c			;6d09
-	rst 38h			;6d0a
-	ld (bc),a			;6d0b
-	rst 20h			;6d0c
-	add a,c			;6d0d
-	nop			;6d0e
-	dec b			;6d0f
-	ret po			;6d10
-	add a,c			;6d11
-	rst 38h			;6d12
-	inc bc			;6d13
-	nop			;6d14
-	adc a,l			;6d15
-	ld a,060h		;6d16
-	ld h,(hl)			;6d18
-	ld a,000h		;6d19
-	inc a			;6d1b
-	ld h,(hl)			;6d1c
-	inc a			;6d1d
-	nop			;6d1e
-	inc a			;6d1f
-	ld a,(hl)			;6d20
-	ld h,(hl)			;6d21
-	nop			;6d22
-	ld (bc),a			;6d23
-	ld h,b			;6d24
-	add a,c			;6d25
-	ld a,(hl)			;6d26
-	ld (bc),a			;6d27
-	nop			;6d28
-	ld (bc),a			;6d29
-	jr l6cadh		;6d2a
-	nop			;6d2c
-	ld (bc),a			;6d2d
-	jr l6cb1h		;6d2e
-	nop			;6d30
-	ld (bc),a			;6d31
-	jr l6cb7h		;6d32
-	nop			;6d34
-	djnz l6d4fh		;6d35
-	inc bc			;6d37
-	nop			;6d38
-	nop			;6d39
-	ex af,af'			;6d3a
-	nop			;6d3b
-	ld (bc),a			;6d3c
-	jr l6d45h		;6d3d
-	ex af,af'			;6d3f
-	ld (bc),a			;6d40
-	nop			;6d41
-	add a,d			;6d42
-	jr l6d81h		;6d43
-l6d45h:
-	dec bc			;6d45
-	inc e			;6d46
-	add a,c			;6d47
-	jr l6d58h		;6d48
-	ld (hl),082h		;6d4a
-	inc (hl)			;6d4c
-	djnz l6d59h		;6d4d
-l6d4fh:
-	nop			;6d4f
-	add a,c			;6d50
-	inc e			;6d51
-	inc bc			;6d52
-	ld a,002h		;6d53
-	ld (hl),00eh		;6d55
-	ld h,a			;6d57
-l6d58h:
-	add a,e			;6d58
-l6d59h:
-	ld h,(hl)			;6d59
-	inc h			;6d5a
-	ld a,003h		;6d5b
-	ld a,a			;6d5d
-l6d5eh:
-	inc c			;6d5e
-	ld h,a			;6d5f
-	inc c			;6d60
-	nop			;6d61
-	add a,e			;6d62
-	jr l6d79h		;6d63
-	jr z,l6d72h		;6d65
-	nop			;6d67
-	add a,l			;6d68
-	ex af,af'			;6d69
-	jr c,l6dc6h		;6d6a
-	ld e,h			;6d6c
-	inc l			;6d6d
-	rlca			;6d6e
-	nop			;6d6f
-	add a,d			;6d70
-	add a,b			;6d71
-l6d72h:
-	and b			;6d72
-	ld (bc),a			;6d73
-	ret p			;6d74
-	add a,c			;6d75
-	ret c			;6d76
-	ld (bc),a			;6d77
-	ld (hl),b			;6d78
-l6d79h:
-	add a,e			;6d79
-	sub b			;6d7a
-	ret po			;6d7b
-	ld b,b			;6d7c
-	ld b,000h		;6d7d
-	adc a,c			;6d7f
-	inc bc			;6d80
-l6d81h:
-	rrca			;6d81
-	dec e			;6d82
-	rrca			;6d83
-	inc hl			;6d84
-	rlca			;6d85
-	dec de			;6d86
-	dec bc			;6d87
-	dec b			;6d88
-	inc b			;6d89
-	nop			;6d8a
-	adc a,l			;6d8b
-	and b			;6d8c
-	ret p			;6d8d
-	ld h,b			;6d8e
-	call p,0fcbch		;6d8f
-	cp 0ceh		;6d92
-	halt			;6d94
-	jr z,$-100		;6d95
-	ret nz			;6d97
-	ld b,b			;6d98
-	ld (bc),a			;6d99
-	nop			;6d9a
-	add a,c			;6d9b
-	ld bc,l0702h		;6d9c
-	xor e			;6d9f
-	ld de,l3f7fh		;6da0
-	dec e			;6da3
-	ld l,a			;6da4
-	inc hl			;6da5
-	ld h,a			;6da6
-	dec sp			;6da7
-	dec bc			;6da8
-	dec c			;6da9
-	ex af,af'			;6daa
-	nop			;6dab
-	ld h,b			;6dac
-	inc a			;6dad
-	cp b			;6dae
-	call m,0f466h		;6daf
-l6db2h:
-	cp a			;6db2
-	call m,0ceffh		;6db3
-	ld (hl),a			;6db6
-	add hl,hl			;6db7
-	sbc a,(hl)			;6db8
-	ret nz			;6db9
-	ld b,b			;6dba
-	inc bc			;6dbb
-	add hl,de			;6dbc
-	dec a			;6dbd
-	ld d,a			;6dbe
-	ld h,a			;6dbf
-	pop de			;6dc0
-	ld a,a			;6dc1
-	ccf			;6dc2
-	sbc a,l			;6dc3
-	ld l,a			;6dc4
-	inc hl			;6dc5
-l6dc6h:
-	rst 20h			;6dc6
-	dec sp			;6dc7
-	dec bc			;6dc8
-	dec c			;6dc9
-	ex af,af'			;6dca
-	dec bc			;6dcb
-	nop			;6dcc
-	add a,d			;6dcd
-	djnz l6e00h		;6dce
-	ld (bc),a			;6dd0
-	jr $+9		;6dd1
-	nop			;6dd3
-	add a,l			;6dd4
-	ex af,af'			;6dd5
-	jr l6db2h		;6dd6
-	inc e			;6dd8
-	ld a,b			;6dd9
-	inc bc			;6dda
-	jr l6d5eh		;6ddb
-	add a,b			;6ddd
-	inc bc			;6dde
-	ret nz			;6ddf
-	add a,c			;6de0
-	ret z			;6de1
-	inc bc			;6de2
-	call z,0fc82h		;6de3
-	ret m			;6de6
-	dec b			;6de7
-	ret nz			;6de8
-	inc b			;6de9
-	nop			;6dea
-	add a,d			;6deb
-	ld bc,l0411h		;6dec
-	add hl,de			;6def
-	ld (bc),a			;6df0
-	rra			;6df1
-	inc b			;6df2
-	ld bc,00082h		;6df3
-	ret nz			;6df6
-	inc b			;6df7
-	ret po			;6df8
-	dec b			;6df9
-	ex (sp),hl			;6dfa
-	ld (bc),a			;6dfb
-	rst 38h			;6dfc
-	add a,c			;6dfd
-	cp 003h		;6dfe
-l6e00h:
-	ret po			;6e00
-	add a,c			;6e01
-	nop			;6e02
-	ld (bc),a			;6e03
-	ld bc,00381h		;6e04
-	ex af,af'			;6e07
-	ld h,e			;6e08
-	inc bc			;6e09
-	ld a,a			;6e0a
-	add a,c			;6e0b
-	inc bc			;6e0c
-	rlca			;6e0d
-	ld a,009h		;6e0e
-	nop			;6e10
-	add a,c			;6e11
-	inc e			;6e12
-	ld (bc),a			;6e13
-	ld a,00fh		;6e14
-	ld a,a			;6e16
-	dec b			;6e17
-	rst 38h			;6e18
-	ex af,af'			;6e19
-	ld a,a			;6e1a
-	add a,d			;6e1b
-	nop			;6e1c
-	jr nc,l6e27h		;6e1d
-	ld a,b			;6e1f
-	add a,c			;6e20
-	ld a,h			;6e21
-	inc b			;6e22
-	ld a,a			;6e23
-	add a,c			;6e24
-	rra			;6e25
-l6e26h:
-	ld (bc),a			;6e26
-l6e27h:
-	nop			;6e27
-	add a,c			;6e28
-	inc c			;6e29
-	ld b,01eh		;6e2a
-	ld (bc),a			;6e2c
-	cp 082h		;6e2d
-	call m,00ef0h		;6e2f
-	nop			;6e32
-	add a,d			;6e33
-	jr l6e66h		;6e34
-	ld c,000h		;6e36
-	add a,d			;6e38
-	jr l6e47h		;6e39
-	dec e			;6e3b
-	nop			;6e3c
-	add a,a			;6e3d
-	inc b			;6e3e
-	ex af,af'			;6e3f
-	inc de			;6e40
-	ld h,04ch		;6e41
-	jr l6e95h		;6e43
-	add hl,bc			;6e45
-	nop			;6e46
-l6e47h:
-	add a,a			;6e47
-	jr nz,l6e5ah		;6e48
-	ret z			;6e4a
-	ld h,h			;6e4b
-	ld (l0a18h),a		;6e4c
-	djnz l6e61h		;6e4f
-	rlca			;6e51
-	nop			;6e52
-	adc a,c			;6e53
-	ld bc,l0402h		;6e54
-	add hl,bc			;6e57
-	inc de			;6e58
-	daa			;6e59
-l6e5ah:
-	ld c,048h		;6e5a
-	ld b,b			;6e5c
-	ld b,000h		;6e5d
-	add a,(hl)			;6e5f
-	ld b,b			;6e60
-l6e61h:
-	nop			;6e61
-	ld (hl),b			;6e62
-	ret po			;6e63
-	ret nz			;6e64
-	add a,b			;6e65
-l6e66h:
-	ld a,(bc)			;6e66
-	nop			;6e67
-	add a,(hl)			;6e68
-	ld (bc),a			;6e69
-	nop			;6e6a
-	ld c,007h		;6e6b
-	inc bc			;6e6d
-	ld bc,l0009h+2		;6e6e
-	adc a,c			;6e71
-	add a,b			;6e72
-	ld b,b			;6e73
-	jr nz,$-112		;6e74
-	ret z			;6e76
-	call po,sub_1270h		;6e77
-	ld (bc),a			;6e7a
-	djnz l6e91h		;6e7b
-	add a,l			;6e7d
-	ret m			;6e7e
-	inc a			;6e7f
-	ld b,b			;6e80
-	ret nz			;6e81
-	add a,b			;6e82
-	dec bc			;6e83
-	nop			;6e84
-	ld (bc),a			;6e85
-	cp (hl)			;6e86
-	add a,h			;6e87
-	ld l,(hl)			;6e88
-	pop de			;6e89
-	ld l,(hl)			;6e8a
-	add a,00ah		;6e8b
-	nop			;6e8d
-	add a,h			;6e8e
-	inc bc			;6e8f
-	ld d,a			;6e90
-l6e91h:
-	rrca			;6e91
-	inc a			;6e92
-	inc c			;6e93
-	nop			;6e94
-l6e95h:
-	add a,l			;6e95
-	inc c			;6e96
-	jr l6e26h		;6e97
-	cp 00ch		;6e99
-	dec bc			;6e9b
-	nop			;6e9c
-	add a,(hl)			;6e9d
-	rst 0			;6e9e
-	call nc,0f1cdh		;6e9f
-	ret po			;6ea2
-	ld (hl),b			;6ea3
-	ld a,(bc)			;6ea4
-	nop			;6ea5
-	add a,l			;6ea6
-	inc b			;6ea7
-	ld c,(hl)			;6ea8
-	ld a,a			;6ea9
-	ld bc,l0e0eh+1		;6eaa
-	nop			;6ead
-	add a,(hl)			;6eae
-	add a,b			;6eaf
-	call m,09a36h		;6eb0
-	ret z			;6eb3
-	ld b,b			;6eb4
-	inc bc			;6eb5
-	nop			;6eb6
-	adc a,l			;6eb7
-	ld h,b			;6eb8
-	inc l			;6eb9
-	inc h			;6eba
-	ret po			;6ebb
-	jp p,0f8fah		;6ebc
-	call m,sub_7fffh		;6ebf
-	add hl,sp			;6ec2
-	inc h			;6ec3
-	ld (hl),d			;6ec4
-	ld (bc),a			;6ec5
-	ld a,091h		;6ec6
-	inc a			;6ec8
-	cp d			;6ec9
-	inc hl			;6eca
-	adc a,h			;6ecb
-	push af			;6ecc
-	rst 0			;6ecd
-	pop hl			;6ece
-	ret p			;6ecf
-	ld sp,hl			;6ed0
-	ccf			;6ed1
-	rlca			;6ed2
-	add a,e			;6ed3
-	ld l,c			;6ed4
-	ld (hl),h			;6ed5
-	ld (hl),0f3h		;6ed6
-	inc sp			;6ed8
-	ld (bc),a			;6ed9
-	ld h,(hl)			;6eda
-	sbc a,(hl)			;6edb
-	dec b			;6edc
-	ld h,c			;6edd
-	ccf			;6ede
-	di			;6edf
-	rst 18h			;6ee0
-	ccf			;6ee1
-	ret m			;6ee2
-	ret po			;6ee3
-	di			;6ee4
-	add a,(hl)			;6ee5
-	nop			;6ee6
-l6ee7h:
-	inc e			;6ee7
-	ccf			;6ee8
-	inc a			;6ee9
-	jr c,l6efch		;6eea
-	ld a,024h		;6eec
-	rst 10h			;6eee
-l6eefh:
-	adc a,(hl)			;6eef
-	dec a			;6ef0
-	ld (hl),e			;6ef1
-	ld a,d			;6ef2
-	ei			;6ef3
-	pop iy		;6ef4
-	jp l63c7h		;6ef6
-	inc bc			;6ef9
-	ld (bc),a			;6efa
-	rlca			;6efb
-l6efch:
-	adc a,b			;6efc
-	add a,0c3h		;6efd
-	inc c			;6eff
-	ld b,01eh		;6f00
-	ccf			;6f02
-	ld a,04eh		;6f03
-	ld (bc),a			;6f05
-	ld l,l			;6f06
-	adc a,b			;6f07
-	dec c			;6f08
-	add a,h			;6f09
-	adc a,a			;6f0a
-	add hl,de			;6f0b
-sub_6f0ch:
-	or e			;6f0c
-	add a,a			;6f0d
-	dec bc			;6f0e
-	add hl,bc			;6f0f
-	inc bc			;6f10
-	nop			;6f11
-	add a,l			;6f12
-	inc c			;6f13
-	ld h,h			;6f14
-	jr c,l6ee7h		;6f15
-	ret po			;6f17
-	ld (bc),a			;6f18
-	ld b,b			;6f19
-	ld (bc),a			;6f1a
-	add a,b			;6f1b
-	ld b,000h		;6f1c
-	add a,c			;6f1e
-	ld h,b			;6f1f
-	ld (bc),a			;6f20
-	ld (hl),b			;6f21
-	adc a,e			;6f22
-	ret z			;6f23
-	adc a,c			;6f24
-	ld e,010h		;6f25
-	rra			;6f27
-	rlca			;6f28
-	ld sp,03efdh		;6f29
-	sbc a,0eeh		;6f2c
-	inc b			;6f2e
-	nop			;6f2f
-	adc a,h			;6f30
-	ld bc,l0903h		;6f31
-	ex af,af'			;6f34
-	inc e			;6f35
-	rra			;6f36
-	di			;6f37
-	ret p			;6f38
-	ld a,d			;6f39
-	ld a,(de)			;6f3a
-	inc bc			;6f3b
-	inc e			;6f3c
-	inc bc			;6f3d
-	nop			;6f3e
-	ld (bc),a			;6f3f
-	inc b			;6f40
-	add a,e			;6f41
-	ld c,01ah		;6f42
-	ld hl,(0d302h)		;6f44
-	add a,c			;6f47
-	sub c			;6f48
-	inc bc			;6f49
-	nop			;6f4a
-	add a,d			;6f4b
-	add a,b			;6f4c
-	sbc a,003h		;6f4d
-	nop			;6f4f
-	adc a,b			;6f50
-	add a,b			;6f51
-	ret po			;6f52
-	ret z			;6f53
-	call nz,0fbf8h		;6f54
-	ret po			;6f57
-	ld e,(hl)			;6f58
-	ld (bc),a			;6f59
-	ld a,h			;6f5a
-	add a,e			;6f5b
-	add hl,sp			;6f5c
-	inc sp			;6f5d
-	rst 10h			;6f5e
-	inc bc			;6f5f
-	nop			;6f60
-	add a,c			;6f61
-	ex af,af'			;6f62
-	ld (bc),a			;6f63
-	add hl,de			;6f64
-	add a,e			;6f65
-	ld bc,l2811h		;6f66
-	inc b			;6f69
-	jr nz,l6eefh		;6f6a
-	nop			;6f6c
-	adc a,h			;6f6d
-	inc c			;6f6e
-	daa			;6f6f
-	nop			;6f70
-	add a,c			;6f71
-	inc b			;6f72
-	ld (bc),a			;6f73
-	nop			;6f74
-	add a,c			;6f75
-	ld bc,l0302h		;6f76
-	add a,e			;6f79
-	rlca			;6f7a
-	ld bc,l0321h		;6f7b
-	nop			;6f7e
-	add a,c			;6f7f
-	inc b			;6f80
-	ld (bc),a			;6f81
-	inc c			;6f82
-	adc a,d			;6f83
-	inc e			;6f84
-	djnz $+14		;6f85
-	adc a,0b8h		;6f87
-	ld e,d			;6f89
-	nop			;6f8a
-	jr nc,l6f93h		;6f8b
-	ld a,h			;6f8d
-	inc b			;6f8e
-	nop			;6f8f
-	ld (bc),a			;6f90
-	ld b,b			;6f91
-	adc a,d			;6f92
-l6f93h:
-	ld h,e			;6f93
-	ld hl,l3430h		;6f94
-	dec sp			;6f97
-	add hl,sp			;6f98
-	rrca			;6f99
-	ld (hl),a			;6f9a
-	ld h,0f7h		;6f9b
-	ld b,000h		;6f9d
-	adc a,d			;6f9f
-	add a,b			;6fa0
-	sub b			;6fa1
-	jr l6fa4h		;6fa2
-l6fa4h:
-	add a,b			;6fa4
-	ret m			;6fa5
-	ld a,d			;6fa6
-	cp (hl)			;6fa7
-	ld b,b			;6fa8
-	ld l,h			;6fa9
-	ld (bc),a			;6faa
-	ld (hl),b			;6fab
-	add a,l			;6fac
-	ld de,l0202h+1		;6fad
-	ld bc,l01ffh+1		;6fb0
-	ld bc,l0202h		;6fb3
-	dec b			;6fb6
-	nop			;6fb7
-	sub d			;6fb8
-	jr l6ff7h		;6fb9
-	ld l,h			;6fbb
-	ld a,b			;6fbc
-	inc l			;6fbd
-	inc c			;6fbe
-	ld l,a			;6fbf
-	jp nz,l51c0h		;6fc0
-	inc e			;6fc3
-l6fc4h:
-	inc a			;6fc4
-	ld bc,sub_06ffh+1		;6fc5
-	nop			;6fc8
-	cp a			;6fc9
-	dec sp			;6fca
-	ld (bc),a			;6fcb
-	ld bc,l0800h+2		;6fcc
-	adc a,d			;6fcf
-	dec de			;6fd0
-	rlca			;6fd1
-	inc sp			;6fd2
-	ex (sp),hl			;6fd3
-	jp c,083f9h		;6fd4
-	rlca			;6fd7
-	add a,(hl)			;6fd8
-	nop			;6fd9
-	inc bc			;6fda
-	add a,b			;6fdb
-	adc a,b			;6fdc
-	jp po,090c0h		;6fdd
-	sbc a,h			;6fe0
-	sbc a,b			;6fe1
-	jr l7054h		;6fe2
-	and b			;6fe4
-	ld (bc),a			;6fe5
-	add a,b			;6fe6
-	inc sp			;6fe7
-	nop			;6fe8
-	nop			;6fe9
-	ex af,af'			;6fea
-	nop			;6feb
-	ex af,af'			;6fec
-	jr l6ff1h		;6fed
-	nop			;6fef
-	add a,c			;6ff0
-l6ff1h:
-	jr l6fffh		;6ff1
-	inc a			;6ff3
-	add a,c			;6ff4
-	jr l7005h		;6ff5
-l6ff7h:
-	halt			;6ff7
-	add a,d			;6ff8
-	inc (hl)			;6ff9
-	djnz l7006h		;6ffa
-l6ffch:
-	nop			;6ffc
-	add a,c			;6ffd
-	inc a			;6ffe
-l6fffh:
-	inc bc			;6fff
-	ld a,(hl)			;7000
-l7001h:
-	ld (bc),a			;7001
-	halt			;7002
-	ld c,0e7h		;7003
-l7005h:
-	add a,e			;7005
-l7006h:
-	ld h,(hl)			;7006
-	inc h			;7007
-	ld a,(hl)			;7008
-	inc bc			;7009
-	rst 38h			;700a
-	inc c			;700b
-	rst 20h			;700c
-	inc c			;700d
-	nop			;700e
-l700fh:
-	add a,h			;700f
-	djnz $+44		;7010
-	inc a			;7012
-	jr c,l701fh		;7013
-	nop			;7015
-	add a,(hl)			;7016
-	jr $+4		;7017
-	ld (hl),066h		;7019
-	ld (hl),h			;701b
-	jr c,l7024h		;701c
-	nop			;701e
-l701fh:
-	adc a,d			;701f
-	add a,b			;7020
-	and b			;7021
-	djnz l6fc4h		;7022
-l7024h:
-	ret nc			;7024
-	add a,b			;7025
-	ret nc			;7026
-	sub b			;7027
-	and b			;7028
-l7029h:
-	add a,b			;7029
-	ld b,000h		;702a
-l702ch:
-	ld (bc),a			;702c
-	ld bc,01188h		;702d
-	jr l706eh		;7030
-	ex af,af'			;7032
-	ld d,01ch		;7033
-	ld e,00fh		;7035
-	inc bc			;7037
-	nop			;7038
-	adc a,l			;7039
-	jr nz,l6ffch		;703a
-	ret po			;703c
-	call nc,l14b7h+1		;703d
-	and h			;7040
-	call nc,0dc82h		;7041
-	sbc a,b			;7044
-	sub b			;7045
-	and b			;7046
-	ld (bc),a			;7047
-	nop			;7048
-	xor (hl)			;7049
-	ld (bc),a			;704a
-	inc bc			;704b
-	add hl,de			;704c
-	add hl,hl			;704d
-	ld (hl),l			;704e
-	ld b,c			;704f
-	ld (hl),c			;7050
-	ld a,b			;7051
-	ld a,h			;7052
-	ld c,b			;7053
-l7054h:
-	halt			;7054
-	ld a,h			;7055
-	halt			;7056
-	rla			;7057
-	add a,b			;7058
-	ret po			;7059
-	jr nc,l7094h		;705a
-	call nz,0d4e0h		;705c
-	cp c			;705f
-	inc d			;7060
-	and l			;7061
-	call nc,0df83h		;7062
-	sbc a,d			;7065
-	sbc a,b			;7066
-	and b			;7067
-	dec b			;7068
-	rlca			;7069
-	ld (l592bh),a		;706a
-	jp (hl)			;706d
-l706eh:
-	push af			;706e
-	ld b,c			;706f
-	ld (hl),c			;7070
-	ret m			;7071
-	call m,0f6c8h		;7072
-	ld a,h			;7075
-	halt			;7076
-	rla			;7077
-	dec bc			;7078
-	nop			;7079
-	add a,d			;707a
-	djnz l709dh		;707b
-	ld (bc),a			;707d
-	jr z,l7001h		;707e
-	djnz l708ah		;7080
-	nop			;7082
-	add a,(hl)			;7083
-	djnz l70aeh		;7084
-	ld h,d			;7086
-	and d			;7087
-	add a,(hl)			;7088
-	ret po			;7089
-l708ah:
-	ld (bc),a			;708a
-	jr nz,l700fh		;708b
-	nop			;708d
-	add a,b			;708e
-	ld (bc),a			;708f
-	ld b,b			;7090
-	adc a,b			;7091
-	ex af,af'			;7092
-	ld d,h			;7093
-l7094h:
-	inc d			;7094
-	djnz l7097h		;7095
-l7097h:
-	ld b,h			;7097
-	jr c,$-128		;7098
-	inc bc			;709a
-	nop			;709b
-	add a,d			;709c
-l709dh:
-	add a,b			;709d
-	nop			;709e
-	ld (bc),a			;709f
-	ld bc,l0282h		;70a0
-	ld (de),a			;70a3
-	ld (bc),a			;70a4
-	ld hl,(l2202h)		;70a5
-	ld (bc),a			;70a8
-	jr nz,l702ch		;70a9
-	ld e,003h		;70ab
-	ld (bc),a			;70ad
-l70aeh:
-	add a,c			;70ae
-	ld bc,l0001h+1		;70af
-	adc a,a			;70b2
-	ret nz			;70b3
-	ld h,b			;70b4
-	jr nz,$+34		;70b5
-	rlca			;70b7
-	inc h			;70b8
-	inc b			;70b9
-	inc h			;70ba
-	nop			;70bb
-	ld b,b			;70bc
-	ccf			;70bd
-	ld e,000h		;70be
-	ld b,b			;70c0
-	ld bc,l0302h		;70c1
-	add a,d			;70c4
-	ld b,046h		;70c5
-	ld (bc),a			;70c7
-	and 005h		;70c8
-	add a,085h		;70ca
-	jp nz,0fcc0h		;70cc
-	ld a,(hl)			;70cf
-	ld h,d			;70d0
-	ld b,060h		;70d1
-	add a,c			;70d3
-	inc a			;70d4
-	ex af,af'			;70d5
-	nop			;70d6
-	add a,c			;70d7
-	jr nz,l70dch		;70d8
-	ld l,h			;70da
-	add a,c			;70db
-l70dch:
-	add a,002h		;70dc
-	jp nz,0c087h		;70de
-	jp nz,0c2c0h		;70e1
-	ret nz			;70e4
-	call nz,l02c2h		;70e5
-	ret nz			;70e8
-	add a,h			;70e9
-	call nz,0c0c2h		;70ea
-	ld bc,l0001h+1		;70ed
-	adc a,b			;70f0
-	ld b,d			;70f1
-	ret nz			;70f2
-	pop bc			;70f3
-	ret nz			;70f4
-	jp nz,0c4c0h		;70f5
-	jp nz,0c002h		;70f8
-	add a,e			;70fb
-	ld a,(hl)			;70fc
-	ld b,b			;70fd
-	ret nc			;70fe
-	ld (bc),a			;70ff
-	ret z			;7100
-	add a,d			;7101
-	ret nz			;7102
-	ret nc			;7103
-	ld (bc),a			;7104
-	ret nz			;7105
-	add a,e			;7106
-	ret nc			;7107
-	ret nz			;7108
-	ret z			;7109
-	ld (bc),a			;710a
-	ret nz			;710b
-	add a,(hl)			;710c
-	ret po			;710d
-	ld a,a			;710e
-	rra			;710f
-	nop			;7110
-	djnz l7147h		;7111
-	ld (bc),a			;7113
-	ld (l3088h),a		;7114
-	inc (hl)			;7117
-	jr nz,l711eh		;7118
-	ld (bc),a			;711a
-l711bh:
-	ld c,0fch		;711b
-	ret p			;711d
-l711eh:
-	dec bc			;711e
-	nop			;711f
-	add a,h			;7120
-	jr l7143h		;7121
-	ld e,b			;7123
-	or b			;7124
-	inc b			;7125
-	add a,b			;7126
-	ex af,af'			;7127
-	nop			;7128
-	add a,h			;7129
-	jr l7130h		;712a
-	ld a,(de)			;712c
-	dec c			;712d
-	inc b			;712e
-	ld (bc),a			;712f
-l7130h:
-	ex af,af'			;7130
-	djnz l7143h		;7131
-	nop			;7133
-	adc a,b			;7134
-	rlca			;7135
-	inc c			;7136
-	dec de			;7137
-	scf			;7138
-	ld l,(hl)			;7139
-	call c,0f0b8h		;713a
-	ex af,af'			;713d
-	nop			;713e
-	adc a,b			;713f
-	ret po			;7140
-	jr nc,l711bh		;7141
-l7143h:
-	call pe,sub_3b76h		;7143
-	dec e			;7146
-l7147h:
-	rrca			;7147
-	djnz l717ah		;7148
-	ld b,000h		;714a
-	adc a,d			;714c
-	ld bc,l0603h		;714d
-	dec c			;7150
-	dec de			;7151
-	scf			;7152
-	ld l,a			;7153
-	ld e,(hl)			;7154
-	ret c			;7155
-	ret nc			;7156
-	dec b			;7157
-	nop			;7158
-	add a,a			;7159
-	ld (hl),b			;715a
-	ret nz			;715b
-	ld (hl),b			;715c
-	ret p			;715d
-	ret po			;715e
-	ret nz			;715f
-	add a,b			;7160
-	add hl,bc			;7161
-	nop			;7162
-	add a,a			;7163
-	ld c,003h		;7164
-	ld c,00fh		;7166
-	rlca			;7168
-	inc bc			;7169
-	ld bc,l0009h+1		;716a
-	adc a,d			;716d
-	add a,b			;716e
-	ret nz			;716f
-	ld h,b			;7170
-	or b			;7171
-	ret c			;7172
-	call pe,sub_7af6h		;7173
-	dec de			;7176
-	dec bc			;7177
-	djnz l71aeh		;7178
-l717ah:
-	add a,a			;717a
-	ret m			;717b
-	rst 38h			;717c
-	call m,0c0e0h		;717d
-	ret m			;7180
-	ret p			;7181
-	add hl,bc			;7182
-	nop			;7183
-	ld (bc),a			;7184
-	cp a			;7185
-	dec b			;7186
-	rst 38h			;7187
-	add hl,bc			;7188
-	nop			;7189
-	adc a,b			;718a
-	inc hl			;718b
-	ld d,a			;718c
-	ccf			;718d
-	rst 38h			;718e
-	ld a,b			;718f
-	ld l,e			;7190
-	rst 38h			;7191
-	call m,l0008h		;7192
-	add a,e			;7195
-	adc a,h			;7196
-	ret c			;7197
-	.DB 0fdh,002h,0ffh	;illegal sequence		;7198
-	add a,c			;719b
-	cp 002h		;719c
-	rst 38h			;719e
-	ex af,af'			;719f
-	nop			;71a0
-	adc a,b			;71a1
-	rst 30h			;71a2
-	call p,0f5cdh		;71a3
-	rst 20h			;71a6
-	rst 38h			;71a7
-	ld a,a			;71a8
-	ld bc,l0008h		;71a9
-	add a,(hl)			;71ac
-	rra			;71ad
-l71aeh:
-	ld a,a			;71ae
-	rst 38h			;71af
-	ld a,a			;71b0
-	ccf			;71b1
-	rrca			;71b2
-	dec c			;71b3
-	nop			;71b4
-	sub c			;71b5
-	add a,b			;71b6
-	call m,0feffh		;71b7
-	ret m			;71ba
-	ret p			;71bb
-	ret po			;71bc
-	add a,b			;71bd
-	ret nz			;71be
-	ret p			;71bf
-	cp 0ffh		;71c0
-	call m,0fafeh		;71c2
-	ret m			;71c5
-	call m,0ff09h		;71c6
-	add a,c			;71c9
-	ld a,a			;71ca
-	ld (bc),a			;71cb
-	rst 38h			;71cc
-	add a,d			;71cd
-	rst 8			;71ce
-	rst 20h			;71cf
-	inc bc			;71d0
-	rst 38h			;71d1
-	add a,d			;71d2
-	rst 8			;71d3
-	ex de,hl			;71d4
-	ld (bc),a			;71d5
-	ld a,a			;71d6
-	add a,e			;71d7
-	ccf			;71d8
-	rst 30h			;71d9
-	scf			;71da
-	ld (bc),a			;71db
-	ld h,(hl)			;71dc
-	add a,e			;71dd
-	dec d			;71de
-	ld (hl),c			;71df
-	ccf			;71e0
-	ld b,0ffh		;71e1
-	adc a,h			;71e3
-	and 0c0h		;71e4
-	sbc a,h			;71e6
-	ccf			;71e7
-	inc a			;71e8
-	jr c,l71fbh		;71e9
-	ld a,024h		;71eb
-	rst 38h			;71ed
-l71eeh:
-	cp 0bfh		;71ee
-	ld b,0ffh		;71f0
-	add a,d			;71f2
-	rst 30h			;71f3
-	rst 20h			;71f4
-	inc bc			;71f5
-	rst 8			;71f6
-	add a,e			;71f7
-	adc a,0e7h		;71f8
-	ccf			;71fa
-l71fbh:
-	ld (bc),a			;71fb
-	rra			;71fc
-	add a,d			;71fd
-	ccf			;71fe
-	ld a,a			;71ff
-	dec b			;7200
-	rst 38h			;7201
-	add a,e			;7202
-	rst 18h			;7203
-	sbc a,c			;7204
-	cp a			;7205
-	ld (bc),a			;7206
-	adc a,a			;7207
-	add a,c			;7208
-	rrca			;7209
-	ld (bc),a			;720a
-	nop			;720b
-	add a,h			;720c
-	ld (bc),a			;720d
-	inc c			;720e
-	ld a,h			;720f
-	ret m			;7210
-	ld (bc),a			;7211
-	ret p			;7212
-	add a,c			;7213
-	ret po			;7214
-	ld (bc),a			;7215
-	ret nz			;7216
-	ld (bc),a			;7217
-	add a,b			;7218
-	dec b			;7219
-	nop			;721a
-	add a,c			;721b
-	ld h,b			;721c
-	ld (bc),a			;721d
-	ret p			;721e
-	add a,d			;721f
-	ret m			;7220
-	ld sp,hl			;7221
-	inc bc			;7222
-	sbc a,a			;7223
-	add a,d			;7224
-	cp a			;7225
-	ld a,a			;7226
-	inc b			;7227
-	rst 38h			;7228
-	inc b			;7229
-	nop			;722a
-	add a,d			;722b
-	ld bc,l0202h+1		;722c
-	rrca			;722f
-	ld (bc),a			;7230
-	rra			;7231
-	inc bc			;7232
-	rst 38h			;7233
-	add a,e			;7234
-	ld e,a			;7235
-	daa			;7236
-	rra			;7237
-	inc bc			;7238
-	nop			;7239
-	ld (bc),a			;723a
-	inc b			;723b
-	add a,e			;723c
-	ld c,01ah		;723d
-	ld a,(0f302h)		;723f
-	add a,e			;7242
-	pop af			;7243
-	ld h,b			;7244
-	jr nz,l7249h		;7245
-	ret nz			;7247
-	add a,c			;7248
-l7249h:
-	sbc a,002h		;7249
-	nop			;724b
-	add a,h			;724c
-	add a,b			;724d
-	ret po			;724e
-	ret p			;724f
-	ret m			;7250
-	ld (bc),a			;7251
-	call m,0ff03h		;7252
-	add a,e			;7255
-	cp 0ffh		;7256
-	ld a,a			;7258
-	ld (bc),a			;7259
-	rst 38h			;725a
-	add a,l			;725b
-	nop			;725c
-	ld b,00fh		;725d
-	dec de			;725f
-	dec e			;7260
-	ld (bc),a			;7261
-	rra			;7262
-	add a,d			;7263
-	dec de			;7264
-	dec sp			;7265
-	ld (bc),a			;7266
-	add hl,sp			;7267
-	ld (bc),a			;7268
-	jr c,l71eeh		;7269
-	ret m			;726b
-	rst 18h			;726c
-	ld l,a			;726d
-	inc h			;726e
-	nop			;726f
-	add a,e			;7270
-	inc bc			;7271
-	rlca			;7272
-	inc bc			;7273
-	ld (bc),a			;7274
-	rlca			;7275
-	sbc a,b			;7276
-	rrca			;7277
-	daa			;7278
+	.DB $02		;6c00
+	.DB $04		;6c01
+	.DB $02		;6c02
+	.DB $01		;6c03
+	.DB $8c		;6c04
+	.DB $12		;6c05
+	.DB $16		;6c06
+	.DB $01		;6c07
+	.DB $8e		;6c08
+	.DB $e0		;6c09
+	.DB $c0		;6c0a
+	.DB $07		;6c0b
+	.DB $1f		;6c0c
+	.DB $0c		;6c0d
+	.DB $60		;6c0e
+	.DB $c0		;6c0f
+	.DB $80		;6c10
+	.DB $06		;6c11
+	.DB $00		;6c12
+	.DB $82		;6c13
+	.DB $d8		;6c14
+	.DB $b8		;6c15
+	.DB $02		;6c16
+	.DB $7f		;6c17
+	.DB $88		;6c18
+	.DB $87		;6c19
+	.DB $1e		;6c1a
+	.DB $3e		;6c1b
+	.DB $7e		;6c1c
+	.DB $fc		;6c1d
+	.DB $f0		;6c1e
+	.DB $c4		;6c1f
+	.DB $cc		;6c20
+	.DB $02		;6c21
+	.DB $c8		;6c22
+	.DB $83		;6c23
+	.DB $08		;6c24
+	.DB $24		;6c25
+	.DB $0c		;6c26
+	.DB $02		;6c27
+	.DB $06		;6c28
+	.DB $8b		;6c29
+	.DB $18		;6c2a
+	.DB $53		;6c2b
+	.DB $f7		;6c2c
+	.DB $f6		;6c2d
+	.DB $7e		;6c2e
+	.DB $9e		;6c2f
+	.DB $5f		;6c30
+	.DB $49		;6c31
+	.DB $9f		;6c32
+	.DB $bf		;6c33
+	.DB $8a		;6c34
+	.DB $02		;6c35
+	.DB $0f		;6c36
+	.DB $02		;6c37
+	.DB $00		;6c38
+	.DB $86		;6c39
+	.DB $02		;6c3a
+	.DB $0c		;6c3b
+	.DB $64		;6c3c
+	.DB $38		;6c3d
+	.DB $d0		;6c3e
+	.DB $e0		;6c3f
+	.DB $02		;6c40
+	.DB $40		;6c41
+	.DB $02		;6c42
+	.DB $80		;6c43
+	.DB $06		;6c44
+	.DB $00		;6c45
+	.DB $8e		;6c46
+	.DB $40		;6c47
+	.DB $c0		;6c48
+	.DB $a0		;6c49
+	.DB $58		;6c4a
+	.DB $99		;6c4b
+	.DB $1e		;6c4c
+	.DB $18		;6c4d
+	.DB $1f		;6c4e
+	.DB $07		;6c4f
+	.DB $31		;6c50
+	.DB $fd		;6c51
+	.DB $3e		;6c52
+	.DB $de		;6c53
+	.DB $0e		;6c54
+	.DB $04		;6c55
+	.DB $00		;6c56
+	.DB $8c		;6c57
+	.DB $01		;6c58
+	.DB $00		;6c59
+	.DB $06		;6c5a
+	.DB $07		;6c5b
+	.DB $03		;6c5c
+	.DB $09		;6c5d
+	.DB $1d		;6c5e
+	.DB $ce		;6c5f
+	.DB $c6		;6c60
+	.DB $56		;6c61
+	.DB $27		;6c62
+	.DB $1d		;6c63
+	.DB $06		;6c64
+	.DB $00		;6c65
+	.DB $82		;6c66
+	.DB $10		;6c67
+	.DB $20		;6c68
+	.DB $02		;6c69
+	.DB $c0		;6c6a
+	.DB $85		;6c6b
+	.DB $80		;6c6c
+	.DB $00		;6c6d
+	.DB $20		;6c6e
+	.DB $c0		;6c6f
+	.DB $40		;6c70
+	.DB $04		;6c71
+	.DB $00		;6c72
+	.DB $8d		;6c73
+	.DB $80		;6c74
+	.DB $00		;6c75
+	.DB $38		;6c76
+	.DB $7c		;6c77
+	.DB $c4		;6c78
+	.DB $87		;6c79
+	.DB $9f		;6c7a
+	.DB $71		;6c7b
+	.DB $62		;6c7c
+	.DB $63		;6c7d
+	.DB $26		;6c7e
+	.DB $3c		;6c7f
+	.DB $d8		;6c80
+	.DB $03		;6c81
+	.DB $00		;6c82
+	.DB $87		;6c83
+	.DB $0b		;6c84
+	.DB $11		;6c85
+	.DB $00		;6c86
+	.DB $19		;6c87
+	.DB $11		;6c88
+	.DB $30		;6c89
+	.DB $38		;6c8a
+	.DB $03		;6c8b
+	.DB $30		;6c8c
+	.DB $83		;6c8d
+	.DB $10		;6c8e
+	.DB $8c		;6c8f
+	.DB $0c		;6c90
+	.DB $24		;6c91
+	.DB $00		;6c92
+	.DB $82		;6c93
+	.DB $03		;6c94
+	.DB $07		;6c95
+	.DB $02		;6c96
+	.DB $03		;6c97
+	.DB $92		;6c98
+	.DB $07		;6c99
+	.DB $0f		;6c9a
+	.DB $26		;6c9b
+	.DB $2c		;6c9c
+	.DB $3c		;6c9d
+	.DB $18		;6c9e
+	.DB $3e		;6c9f
+	.DB $1e		;6ca0
+	.DB $1f		;6ca1
+	.DB $0f		;6ca2
+	.DB $0e		;6ca3
+	.DB $f8		;6ca4
+	.DB $f2		;6ca5
+	.DB $f0		;6ca6
+	.DB $e2		;6ca7
+	.DB $ee		;6ca8
+	.DB $b0		;6ca9
+	.DB $20		;6caa
+	.DB $05		;6cab
+	.DB $00		;6cac
+	.DB $82		;6cad
+	.DB $80		;6cae
+	.DB $40		;6caf
+	.DB $02		;6cb0
+	.DB $60		;6cb1
+	.DB $87		;6cb2
+	.DB $40		;6cb3
+	.DB $3f		;6cb4
+	.DB $1f		;6cb5
+	.DB $04		;6cb6
+	.DB $5e		;6cb7
+	.DB $47		;6cb8
+	.DB $01		;6cb9
+	.DB $07		;6cba
+	.DB $00		;6cbb
+	.DB $9c		;6cbc
+	.DB $40		;6cbd
+	.DB $78		;6cbe
+	.DB $f0		;6cbf
+	.DB $c0		;6cc0
+	.DB $b0		;6cc1
+	.DB $00		;6cc2
+	.DB $48		;6cc3
+	.DB $c4		;6cc4
+	.DB $f8		;6cc5
+	.DB $7f		;6cc6
+	.DB $07		;6cc7
+	.DB $85		;6cc8
+	.DB $41		;6cc9
+	.DB $0f		;6cca
+	.DB $03		;6ccb
+	.DB $0e		;6ccc
+	.DB $8f		;6ccd
+	.DB $ee		;6cce
+	.DB $d0		;6ccf
+	.DB $11		;6cd0
+	.DB $7e		;6cd1
+	.DB $3f		;6cd2
+	.DB $3e		;6cd3
+	.DB $7e		;6cd4
+	.DB $7d		;6cd5
+	.DB $79		;6cd6
+	.DB $18		;6cd7
+	.DB $10		;6cd8
+	.DB $02		;6cd9
+	.DB $03		;6cda
+	.DB $81		;6cdb
+	.DB $01		;6cdc
+	.DB $04		;6cdd
+	.DB $00		;6cde
+	.DB $81		;6cdf
+	.DB $c0		;6ce0
+	.DB $04		;6ce1
+	.DB $00		;6ce2
+	.DB $87		;6ce3
+	.DB $80		;6ce4
+	.DB $e0		;6ce5
+	.DB $c0		;6ce6
+	.DB $1e		;6ce7
+	.DB $e7		;6ce8
+	.DB $e0		;6ce9
+	.DB $7f		;6cea
+	.DB $0b		;6ceb
+	.DB $00		;6cec
+	.DB $8c		;6ced
+	.DB $06		;6cee
+	.DB $04		;6cef
+	.DB $00		;6cf0
+	.DB $79		;6cf1
+	.DB $e8		;6cf2
+	.DB $47		;6cf3
+	.DB $1f		;6cf4
+	.DB $5f		;6cf5
+	.DB $1d		;6cf6
+	.DB $23		;6cf7
+	.DB $6b		;6cf8
+	.DB $62		;6cf9
+	.DB $02		;6cfa
+	.DB $64		;6cfb
+	.DB $82		;6cfc
+	.DB $88		;6cfd
+	.DB $5c		;6cfe
+	.DB $02		;6cff
+	.DB $78		;6d00
+	.DB $81		;6d01
+	.DB $b0		;6d02
+	.DB $02		;6d03
+	.DB $00		;6d04
+	.DB $81		;6d05
+	.DB $7e		;6d06
+	.DB $02		;6d07
+	.DB $e7		;6d08
+	.DB $81		;6d09
+	.DB $ff		;6d0a
+	.DB $02		;6d0b
+	.DB $e7		;6d0c
+	.DB $81		;6d0d
+	.DB $00		;6d0e
+	.DB $05		;6d0f
+	.DB $e0		;6d10
+	.DB $81		;6d11
+	.DB $ff		;6d12
+	.DB $03		;6d13
+	.DB $00		;6d14
+	.DB $8d		;6d15
+	.DB $3e		;6d16
+	.DB $60		;6d17
+	.DB $66		;6d18
+	.DB $3e		;6d19
+	.DB $00		;6d1a
+	.DB $3c		;6d1b
+	.DB $66		;6d1c
+	.DB $3c		;6d1d
+	.DB $00		;6d1e
+	.DB $3c		;6d1f
+	.DB $7e		;6d20
+	.DB $66		;6d21
+	.DB $00		;6d22
+	.DB $02		;6d23
+	.DB $60		;6d24
+	.DB $81		;6d25
+	.DB $7e		;6d26
+	.DB $02		;6d27
+	.DB $00		;6d28
+	.DB $02		;6d29
+	.DB $18		;6d2a
+	.DB $81		;6d2b
+	.DB $00		;6d2c
+	.DB $02		;6d2d
+	.DB $18		;6d2e
+	.DB $81		;6d2f
+	.DB $00		;6d30
+	.DB $02		;6d31
+	.DB $18		;6d32
+	.DB $83		;6d33
+	.DB $00		;6d34
+	.DB $10		;6d35
+	.DB $18		;6d36
+	.DB $03		;6d37
+	.DB $00		;6d38
+	.DB $00		;6d39
+	.DB $08		;6d3a
+	.DB $00		;6d3b
+	.DB $02		;6d3c
+	.DB $18		;6d3d
+	.DB $06		;6d3e
+	.DB $08		;6d3f
+	.DB $02		;6d40
+	.DB $00		;6d41
+	.DB $82		;6d42
+	.DB $18		;6d43
+	.DB $3c		;6d44
+	.DB $0b		;6d45
+	.DB $1c		;6d46
+	.DB $81		;6d47
+	.DB $18		;6d48
+	.DB $0e		;6d49
+	.DB $36		;6d4a
+	.DB $82		;6d4b
+	.DB $34		;6d4c
+	.DB $10		;6d4d
+	.DB $0a		;6d4e
+	.DB $00		;6d4f
+	.DB $81		;6d50
+	.DB $1c		;6d51
+	.DB $03		;6d52
+	.DB $3e		;6d53
+	.DB $02		;6d54
+	.DB $36		;6d55
+	.DB $0e		;6d56
+	.DB $67		;6d57
+	.DB $83		;6d58
+	.DB $66		;6d59
+	.DB $24		;6d5a
+	.DB $3e		;6d5b
+	.DB $03		;6d5c
+	.DB $7f		;6d5d
+	.DB $0c		;6d5e
+	.DB $67		;6d5f
+	.DB $0c		;6d60
+	.DB $00		;6d61
+	.DB $83		;6d62
+	.DB $18		;6d63
+	.DB $14		;6d64
+	.DB $28		;6d65
+	.DB $0b		;6d66
+	.DB $00		;6d67
+	.DB $85		;6d68
+	.DB $08		;6d69
+	.DB $38		;6d6a
+	.DB $5a		;6d6b
+	.DB $5c		;6d6c
+	.DB $2c		;6d6d
+	.DB $07		;6d6e
+	.DB $00		;6d6f
+	.DB $82		;6d70
+	.DB $80		;6d71
+	.DB $a0		;6d72
+	.DB $02		;6d73
+	.DB $f0		;6d74
+	.DB $81		;6d75
+	.DB $d8		;6d76
+	.DB $02		;6d77
+	.DB $70		;6d78
+	.DB $83		;6d79
+	.DB $90		;6d7a
+	.DB $e0		;6d7b
+	.DB $40		;6d7c
+	.DB $06		;6d7d
+	.DB $00		;6d7e
+	.DB $89		;6d7f
+	.DB $03		;6d80
+	.DB $0f		;6d81
+	.DB $1d		;6d82
+	.DB $0f		;6d83
+	.DB $23		;6d84
+	.DB $07		;6d85
+	.DB $1b		;6d86
+	.DB $0b		;6d87
+	.DB $05		;6d88
+	.DB $04		;6d89
+	.DB $00		;6d8a
+	.DB $8d		;6d8b
+	.DB $a0		;6d8c
+	.DB $f0		;6d8d
+	.DB $60		;6d8e
+	.DB $f4		;6d8f
+	.DB $bc		;6d90
+	.DB $fc		;6d91
+	.DB $fe		;6d92
+	.DB $ce		;6d93
+	.DB $76		;6d94
+	.DB $28		;6d95
+	.DB $9c		;6d96
+	.DB $c0		;6d97
+	.DB $40		;6d98
+	.DB $02		;6d99
+	.DB $00		;6d9a
+	.DB $81		;6d9b
+	.DB $01		;6d9c
+	.DB $02		;6d9d
+	.DB $07		;6d9e
+	.DB $ab		;6d9f
+	.DB $11		;6da0
+	.DB $7f		;6da1
+	.DB $3f		;6da2
+	.DB $1d		;6da3
+	.DB $6f		;6da4
+	.DB $23		;6da5
+	.DB $67		;6da6
+	.DB $3b		;6da7
+	.DB $0b		;6da8
+	.DB $0d		;6da9
+	.DB $08		;6daa
+	.DB $00		;6dab
+	.DB $60		;6dac
+	.DB $3c		;6dad
+	.DB $b8		;6dae
+	.DB $fc		;6daf
+	.DB $66		;6db0
+	.DB $f4		;6db1
+	.DB $bf		;6db2
+	.DB $fc		;6db3
+	.DB $ff		;6db4
+	.DB $ce		;6db5
+	.DB $77		;6db6
+	.DB $29		;6db7
+	.DB $9e		;6db8
+	.DB $c0		;6db9
+	.DB $40		;6dba
+	.DB $03		;6dbb
+	.DB $19		;6dbc
+	.DB $3d		;6dbd
+	.DB $57		;6dbe
+	.DB $67		;6dbf
+	.DB $d1		;6dc0
+	.DB $7f		;6dc1
+	.DB $3f		;6dc2
+	.DB $9d		;6dc3
+	.DB $6f		;6dc4
+	.DB $23		;6dc5
+	.DB $e7		;6dc6
+	.DB $3b		;6dc7
+	.DB $0b		;6dc8
+	.DB $0d		;6dc9
+	.DB $08		;6dca
+	.DB $0b		;6dcb
+	.DB $00		;6dcc
+	.DB $82		;6dcd
+	.DB $10		;6dce
+	.DB $30		;6dcf
+	.DB $02		;6dd0
+	.DB $18		;6dd1
+	.DB $09		;6dd2
+	.DB $00		;6dd3
+	.DB $85		;6dd4
+	.DB $08		;6dd5
+	.DB $18		;6dd6
+	.DB $da		;6dd7
+	.DB $1c		;6dd8
+	.DB $78		;6dd9
+	.DB $03		;6dda
+	.DB $18		;6ddb
+	.DB $81		;6ddc
+	.DB $80		;6ddd
+	.DB $03		;6dde
+	.DB $c0		;6ddf
+	.DB $81		;6de0
+	.DB $c8		;6de1
+	.DB $03		;6de2
+	.DB $cc		;6de3
+	.DB $82		;6de4
+	.DB $fc		;6de5
+	.DB $f8		;6de6
+	.DB $05		;6de7
+	.DB $c0		;6de8
+	.DB $04		;6de9
+	.DB $00		;6dea
+	.DB $82		;6deb
+	.DB $01		;6dec
+	.DB $11		;6ded
+	.DB $04		;6dee
+	.DB $19		;6def
+	.DB $02		;6df0
+	.DB $1f		;6df1
+	.DB $04		;6df2
+	.DB $01		;6df3
+	.DB $82		;6df4
+	.DB $00		;6df5
+	.DB $c0		;6df6
+	.DB $04		;6df7
+	.DB $e0		;6df8
+	.DB $05		;6df9
+	.DB $e3		;6dfa
+	.DB $02		;6dfb
+	.DB $ff		;6dfc
+	.DB $81		;6dfd
+	.DB $fe		;6dfe
+	.DB $03		;6dff
+	.DB $e0		;6e00
+	.DB $81		;6e01
+	.DB $00		;6e02
+	.DB $02		;6e03
+	.DB $01		;6e04
+	.DB $81		;6e05
+	.DB $03		;6e06
+	.DB $08		;6e07
+	.DB $63		;6e08
+	.DB $03		;6e09
+	.DB $7f		;6e0a
+	.DB $81		;6e0b
+	.DB $03		;6e0c
+	.DB $07		;6e0d
+	.DB $3e		;6e0e
+	.DB $09		;6e0f
+	.DB $00		;6e10
+	.DB $81		;6e11
+	.DB $1c		;6e12
+	.DB $02		;6e13
+	.DB $3e		;6e14
+	.DB $0f		;6e15
+	.DB $7f		;6e16
+	.DB $05		;6e17
+	.DB $ff		;6e18
+	.DB $08		;6e19
+	.DB $7f		;6e1a
+	.DB $82		;6e1b
+	.DB $00		;6e1c
+	.DB $30		;6e1d
+	.DB $08		;6e1e
+	.DB $78		;6e1f
+	.DB $81		;6e20
+	.DB $7c		;6e21
+	.DB $04		;6e22
+	.DB $7f		;6e23
+	.DB $81		;6e24
+	.DB $1f		;6e25
+	.DB $02		;6e26
+	.DB $00		;6e27
+	.DB $81		;6e28
+	.DB $0c		;6e29
+	.DB $06		;6e2a
+	.DB $1e		;6e2b
+	.DB $02		;6e2c
+	.DB $fe		;6e2d
+	.DB $82		;6e2e
+	.DB $fc		;6e2f
+	.DB $f0		;6e30
+	.DB $0e		;6e31
+	.DB $00		;6e32
+	.DB $82		;6e33
+	.DB $18		;6e34
+	.DB $30		;6e35
+	.DB $0e		;6e36
+	.DB $00		;6e37
+	.DB $82		;6e38
+	.DB $18		;6e39
+	.DB $0c		;6e3a
+	.DB $1d		;6e3b
+	.DB $00		;6e3c
+	.DB $87		;6e3d
+	.DB $04		;6e3e
+	.DB $08		;6e3f
+	.DB $13		;6e40
+	.DB $26		;6e41
+	.DB $4c		;6e42
+	.DB $18		;6e43
+	.DB $50		;6e44
+	.DB $09		;6e45
+	.DB $00		;6e46
+	.DB $87		;6e47
+	.DB $20		;6e48
+	.DB $10		;6e49
+	.DB $c8		;6e4a
+	.DB $64		;6e4b
+	.DB $32		;6e4c
+	.DB $18		;6e4d
+	.DB $0a		;6e4e
+	.DB $10		;6e4f
+	.DB $10		;6e50
+	.DB $07		;6e51
+	.DB $00		;6e52
+	.DB $89		;6e53
+	.DB $01		;6e54
+	.DB $02		;6e55
+	.DB $04		;6e56
+	.DB $09		;6e57
+	.DB $13		;6e58
+	.DB $27		;6e59
+	.DB $0e		;6e5a
+	.DB $48		;6e5b
+	.DB $40		;6e5c
+	.DB $06		;6e5d
+	.DB $00		;6e5e
+	.DB $86		;6e5f
+	.DB $40		;6e60
+	.DB $00		;6e61
+	.DB $70		;6e62
+	.DB $e0		;6e63
+	.DB $c0		;6e64
+	.DB $80		;6e65
+	.DB $0a		;6e66
+	.DB $00		;6e67
+	.DB $86		;6e68
+	.DB $02		;6e69
+	.DB $00		;6e6a
+	.DB $0e		;6e6b
+	.DB $07		;6e6c
+	.DB $03		;6e6d
+	.DB $01		;6e6e
+	.DB $0b		;6e6f
+	.DB $00		;6e70
+	.DB $89		;6e71
+	.DB $80		;6e72
+	.DB $40		;6e73
+	.DB $20		;6e74
+	.DB $90		;6e75
+	.DB $c8		;6e76
+	.DB $e4		;6e77
+	.DB $70		;6e78
+	.DB $12		;6e79
+	.DB $02		;6e7a
+	.DB $10		;6e7b
+	.DB $14		;6e7c
+	.DB $85		;6e7d
+	.DB $f8		;6e7e
+	.DB $3c		;6e7f
+	.DB $40		;6e80
+	.DB $c0		;6e81
+	.DB $80		;6e82
+	.DB $0b		;6e83
+	.DB $00		;6e84
+	.DB $02		;6e85
+	.DB $be		;6e86
+	.DB $84		;6e87
+	.DB $6e		;6e88
+	.DB $d1		;6e89
+	.DB $6e		;6e8a
+	.DB $c6		;6e8b
+	.DB $0a		;6e8c
+	.DB $00		;6e8d
+	.DB $84		;6e8e
+	.DB $03		;6e8f
+	.DB $57		;6e90
+	.DB $0f		;6e91
+	.DB $3c		;6e92
+	.DB $0c		;6e93
+	.DB $00		;6e94
+	.DB $85		;6e95
+	.DB $0c		;6e96
+	.DB $18		;6e97
+	.DB $8d		;6e98
+	.DB $fe		;6e99
+	.DB $0c		;6e9a
+	.DB $0b		;6e9b
+	.DB $00		;6e9c
+	.DB $86		;6e9d
+	.DB $c7		;6e9e
+	.DB $d4		;6e9f
+	.DB $cd		;6ea0
+	.DB $f1		;6ea1
+	.DB $e0		;6ea2
+	.DB $70		;6ea3
+	.DB $0a		;6ea4
+	.DB $00		;6ea5
+	.DB $85		;6ea6
+	.DB $04		;6ea7
+	.DB $4e		;6ea8
+	.DB $7f		;6ea9
+	.DB $01		;6eaa
+	.DB $0f		;6eab
+	.DB $0e		;6eac
+	.DB $00		;6ead
+	.DB $86		;6eae
+	.DB $80		;6eaf
+	.DB $fc		;6eb0
+	.DB $36		;6eb1
+	.DB $9a		;6eb2
+	.DB $c8		;6eb3
+	.DB $40		;6eb4
+	.DB $03		;6eb5
+	.DB $00		;6eb6
+	.DB $8d		;6eb7
+	.DB $60		;6eb8
+	.DB $2c		;6eb9
+	.DB $24		;6eba
+	.DB $e0		;6ebb
+	.DB $f2		;6ebc
+	.DB $fa		;6ebd
+	.DB $f8		;6ebe
+	.DB $fc		;6ebf
+	.DB $ff		;6ec0
+	.DB $7f		;6ec1
+	.DB $39		;6ec2
+	.DB $24		;6ec3
+	.DB $72		;6ec4
+	.DB $02		;6ec5
+	.DB $3e		;6ec6
+	.DB $91		;6ec7
+	.DB $3c		;6ec8
+	.DB $ba		;6ec9
+	.DB $23		;6eca
+	.DB $8c		;6ecb
+	.DB $f5		;6ecc
+	.DB $c7		;6ecd
+	.DB $e1		;6ece
+	.DB $f0		;6ecf
+	.DB $f9		;6ed0
+	.DB $3f		;6ed1
+	.DB $07		;6ed2
+	.DB $83		;6ed3
+	.DB $69		;6ed4
+	.DB $74		;6ed5
+	.DB $36		;6ed6
+	.DB $f3		;6ed7
+	.DB $33		;6ed8
+	.DB $02		;6ed9
+	.DB $66		;6eda
+	.DB $9e		;6edb
+	.DB $05		;6edc
+	.DB $61		;6edd
+	.DB $3f		;6ede
+	.DB $f3		;6edf
+	.DB $df		;6ee0
+	.DB $3f		;6ee1
+	.DB $f8		;6ee2
+	.DB $e0		;6ee3
+	.DB $f3		;6ee4
+	.DB $86		;6ee5
+	.DB $00		;6ee6
+	.DB $1c		;6ee7
+	.DB $3f		;6ee8
+	.DB $3c		;6ee9
+	.DB $38		;6eea
+	.DB $10		;6eeb
+	.DB $3e		;6eec
+	.DB $24		;6eed
+	.DB $d7		;6eee
+	.DB $8e		;6eef
+	.DB $3d		;6ef0
+	.DB $73		;6ef1
+	.DB $7a		;6ef2
+	.DB $fb		;6ef3
+	.DB $fd		;6ef4
+	.DB $e1		;6ef5
+	.DB $c3		;6ef6
+	.DB $c7		;6ef7
+	.DB $63		;6ef8
+	.DB $03		;6ef9
+	.DB $02		;6efa
+	.DB $07		;6efb
+	.DB $88		;6efc
+	.DB $c6		;6efd
+	.DB $c3		;6efe
+	.DB $0c		;6eff
+	.DB $06		;6f00
+	.DB $1e		;6f01
+	.DB $3f		;6f02
+	.DB $3e		;6f03
+	.DB $4e		;6f04
+	.DB $02		;6f05
+	.DB $6d		;6f06
+	.DB $88		;6f07
+	.DB $0d		;6f08
+	.DB $84		;6f09
+	.DB $8f		;6f0a
+	.DB $19		;6f0b
+	.DB $b3		;6f0c
+	.DB $87		;6f0d
+	.DB $0b		;6f0e
+	.DB $09		;6f0f
+	.DB $03		;6f10
+	.DB $00		;6f11
+	.DB $85		;6f12
+	.DB $0c		;6f13
+	.DB $64		;6f14
+	.DB $38		;6f15
+	.DB $d0		;6f16
+	.DB $e0		;6f17
+	.DB $02		;6f18
+	.DB $40		;6f19
+	.DB $02		;6f1a
+	.DB $80		;6f1b
+	.DB $06		;6f1c
+	.DB $00		;6f1d
+	.DB $81		;6f1e
+	.DB $60		;6f1f
+	.DB $02		;6f20
+	.DB $70		;6f21
+	.DB $8b		;6f22
+	.DB $c8		;6f23
+	.DB $89		;6f24
+	.DB $1e		;6f25
+	.DB $10		;6f26
+	.DB $1f		;6f27
+	.DB $07		;6f28
+	.DB $31		;6f29
+	.DB $fd		;6f2a
+	.DB $3e		;6f2b
+	.DB $de		;6f2c
+	.DB $ee		;6f2d
+	.DB $04		;6f2e
+	.DB $00		;6f2f
+	.DB $8c		;6f30
+	.DB $01		;6f31
+	.DB $03		;6f32
+	.DB $09		;6f33
+	.DB $08		;6f34
+	.DB $1c		;6f35
+	.DB $1f		;6f36
+	.DB $f3		;6f37
+	.DB $f0		;6f38
+	.DB $7a		;6f39
+	.DB $1a		;6f3a
+	.DB $03		;6f3b
+	.DB $1c		;6f3c
+	.DB $03		;6f3d
+	.DB $00		;6f3e
+	.DB $02		;6f3f
+	.DB $04		;6f40
+	.DB $83		;6f41
+	.DB $0e		;6f42
+	.DB $1a		;6f43
+	.DB $2a		;6f44
+	.DB $02		;6f45
+	.DB $d3		;6f46
+	.DB $81		;6f47
+	.DB $91		;6f48
+	.DB $03		;6f49
+	.DB $00		;6f4a
+	.DB $82		;6f4b
+	.DB $80		;6f4c
+	.DB $de		;6f4d
+	.DB $03		;6f4e
+	.DB $00		;6f4f
+	.DB $88		;6f50
+	.DB $80		;6f51
+	.DB $e0		;6f52
+	.DB $c8		;6f53
+	.DB $c4		;6f54
+	.DB $f8		;6f55
+	.DB $fb		;6f56
+	.DB $e0		;6f57
+	.DB $5e		;6f58
+	.DB $02		;6f59
+	.DB $7c		;6f5a
+	.DB $83		;6f5b
+	.DB $39		;6f5c
+	.DB $33		;6f5d
+	.DB $d7		;6f5e
+	.DB $03		;6f5f
+	.DB $00		;6f60
+	.DB $81		;6f61
+	.DB $08		;6f62
+	.DB $02		;6f63
+	.DB $19		;6f64
+	.DB $83		;6f65
+	.DB $01		;6f66
+	.DB $11		;6f67
+	.DB $28		;6f68
+	.DB $04		;6f69
+	.DB $20		;6f6a
+	.DB $83		;6f6b
+	.DB $00		;6f6c
+	.DB $8c		;6f6d
+	.DB $0c		;6f6e
+	.DB $27		;6f6f
+	.DB $00		;6f70
+	.DB $81		;6f71
+	.DB $04		;6f72
+	.DB $02		;6f73
+	.DB $00		;6f74
+	.DB $81		;6f75
+	.DB $01		;6f76
+	.DB $02		;6f77
+	.DB $03		;6f78
+	.DB $83		;6f79
+	.DB $07		;6f7a
+	.DB $01		;6f7b
+	.DB $21		;6f7c
+	.DB $03		;6f7d
+	.DB $00		;6f7e
+	.DB $81		;6f7f
+	.DB $04		;6f80
+	.DB $02		;6f81
+	.DB $0c		;6f82
+	.DB $8a		;6f83
+	.DB $1c		;6f84
+	.DB $10		;6f85
+	.DB $0e		;6f86
+	.DB $ce		;6f87
+	.DB $b8		;6f88
+	.DB $5a		;6f89
+	.DB $00		;6f8a
+	.DB $30		;6f8b
+	.DB $06		;6f8c
+	.DB $7c		;6f8d
+	.DB $04		;6f8e
+	.DB $00		;6f8f
+	.DB $02		;6f90
+	.DB $40		;6f91
+	.DB $8a		;6f92
+	.DB $63		;6f93
+	.DB $21		;6f94
+	.DB $30		;6f95
+	.DB $34		;6f96
+	.DB $3b		;6f97
+	.DB $39		;6f98
+	.DB $0f		;6f99
+	.DB $77		;6f9a
+	.DB $26		;6f9b
+	.DB $f7		;6f9c
+	.DB $06		;6f9d
+	.DB $00		;6f9e
+	.DB $8a		;6f9f
+	.DB $80		;6fa0
+	.DB $90		;6fa1
+	.DB $18		;6fa2
+	.DB $00		;6fa3
+	.DB $80		;6fa4
+	.DB $f8		;6fa5
+	.DB $7a		;6fa6
+	.DB $be		;6fa7
+	.DB $40		;6fa8
+	.DB $6c		;6fa9
+	.DB $02		;6faa
+	.DB $70		;6fab
+	.DB $85		;6fac
+	.DB $11		;6fad
+	.DB $03		;6fae
+	.DB $02		;6faf
+	.DB $01		;6fb0
+	.DB $00		;6fb1
+	.DB $02		;6fb2
+	.DB $01		;6fb3
+	.DB $02		;6fb4
+	.DB $02		;6fb5
+	.DB $05		;6fb6
+	.DB $00		;6fb7
+	.DB $92		;6fb8
+	.DB $18		;6fb9
+	.DB $3c		;6fba
+	.DB $6c		;6fbb
+	.DB $78		;6fbc
+	.DB $2c		;6fbd
+	.DB $0c		;6fbe
+	.DB $6f		;6fbf
+	.DB $c2		;6fc0
+	.DB $c0		;6fc1
+	.DB $51		;6fc2
+	.DB $1c		;6fc3
+	.DB $3c		;6fc4
+	.DB $01		;6fc5
+	.DB $00		;6fc6
+	.DB $07		;6fc7
+	.DB $00		;6fc8
+	.DB $bf		;6fc9
+	.DB $3b		;6fca
+	.DB $02		;6fcb
+	.DB $01		;6fcc
+	.DB $02		;6fcd
+	.DB $08		;6fce
+	.DB $8a		;6fcf
+	.DB $1b		;6fd0
+	.DB $07		;6fd1
+	.DB $33		;6fd2
+	.DB $e3		;6fd3
+	.DB $da		;6fd4
+	.DB $f9		;6fd5
+	.DB $83		;6fd6
+	.DB $07		;6fd7
+	.DB $86		;6fd8
+	.DB $00		;6fd9
+	.DB $03		;6fda
+	.DB $80		;6fdb
+	.DB $88		;6fdc
+	.DB $e2		;6fdd
+	.DB $c0		;6fde
+	.DB $90		;6fdf
+	.DB $9c		;6fe0
+	.DB $98		;6fe1
+	.DB $18		;6fe2
+	.DB $70		;6fe3
+	.DB $a0		;6fe4
+	.DB $02		;6fe5
+	.DB $80		;6fe6
+	.DB $33		;6fe7
+	.DB $00		;6fe8
+	.DB $00		;6fe9
+	.DB $08		;6fea
+	.DB $00		;6feb
+	.DB $08		;6fec
+	.DB $18		;6fed
+	.DB $02		;6fee
+	.DB $00		;6fef
+	.DB $81		;6ff0
+	.DB $18		;6ff1
+	.DB $0c		;6ff2
+	.DB $3c		;6ff3
+	.DB $81		;6ff4
+	.DB $18		;6ff5
+	.DB $0e		;6ff6
+	.DB $76		;6ff7
+	.DB $82		;6ff8
+	.DB $34		;6ff9
+	.DB $10		;6ffa
+	.DB $0a		;6ffb
+	.DB $00		;6ffc
+	.DB $81		;6ffd
+	.DB $3c		;6ffe
+	.DB $03		;6fff
+	.DB $7e		;7000
+	.DB $02		;7001
+	.DB $76		;7002
+	.DB $0e		;7003
+	.DB $e7		;7004
+	.DB $83		;7005
+	.DB $66		;7006
+	.DB $24		;7007
+	.DB $7e		;7008
+	.DB $03		;7009
+	.DB $ff		;700a
+	.DB $0c		;700b
+	.DB $e7		;700c
+	.DB $0c		;700d
+	.DB $00		;700e
+	.DB $84		;700f
+	.DB $10		;7010
+	.DB $2c		;7011
+	.DB $3c		;7012
+	.DB $38		;7013
+	.DB $0a		;7014
+	.DB $00		;7015
+	.DB $86		;7016
+	.DB $18		;7017
+	.DB $04		;7018
+	.DB $36		;7019
+	.DB $66		;701a
+	.DB $74		;701b
+	.DB $38		;701c
+	.DB $06		;701d
+	.DB $00		;701e
+	.DB $8a		;701f
+	.DB $80		;7020
+	.DB $a0		;7021
+	.DB $10		;7022
+	.DB $a0		;7023
+	.DB $d0		;7024
+	.DB $80		;7025
+	.DB $d0		;7026
+	.DB $90		;7027
+	.DB $a0		;7028
+	.DB $80		;7029
+	.DB $06		;702a
+	.DB $00		;702b
+	.DB $02		;702c
+	.DB $01		;702d
+	.DB $88		;702e
+	.DB $11		;702f
+	.DB $18		;7030
+	.DB $3c		;7031
+	.DB $08		;7032
+	.DB $16		;7033
+	.DB $1c		;7034
+	.DB $1e		;7035
+	.DB $0f		;7036
+	.DB $03		;7037
+	.DB $00		;7038
+	.DB $8d		;7039
+	.DB $20		;703a
+	.DB $c0		;703b
+	.DB $e0		;703c
+	.DB $d4		;703d
+	.DB $b8		;703e
+	.DB $14		;703f
+	.DB $a4		;7040
+	.DB $d4		;7041
+	.DB $82		;7042
+	.DB $dc		;7043
+	.DB $98		;7044
+	.DB $90		;7045
+	.DB $a0		;7046
+	.DB $02		;7047
+	.DB $00		;7048
+	.DB $ae		;7049
+	.DB $02		;704a
+	.DB $03		;704b
+	.DB $19		;704c
+	.DB $29		;704d
+	.DB $75		;704e
+	.DB $41		;704f
+	.DB $71		;7050
+	.DB $78		;7051
+	.DB $7c		;7052
+	.DB $48		;7053
+	.DB $76		;7054
+	.DB $7c		;7055
+	.DB $76		;7056
+	.DB $17		;7057
+	.DB $80		;7058
+	.DB $e0		;7059
+	.DB $30		;705a
+	.DB $38		;705b
+	.DB $c4		;705c
+	.DB $e0		;705d
+	.DB $d4		;705e
+	.DB $b9		;705f
+	.DB $14		;7060
+	.DB $a5		;7061
+	.DB $d4		;7062
+	.DB $83		;7063
+	.DB $df		;7064
+	.DB $9a		;7065
+	.DB $98		;7066
+	.DB $a0		;7067
+	.DB $05		;7068
+	.DB $07		;7069
+	.DB $32		;706a
+	.DB $2b		;706b
+	.DB $59		;706c
+	.DB $e9		;706d
+	.DB $f5		;706e
+	.DB $41		;706f
+	.DB $71		;7070
+	.DB $f8		;7071
+	.DB $fc		;7072
+	.DB $c8		;7073
+	.DB $f6		;7074
+	.DB $7c		;7075
+	.DB $76		;7076
+	.DB $17		;7077
+	.DB $0b		;7078
+	.DB $00		;7079
+	.DB $82		;707a
+	.DB $10		;707b
+	.DB $20		;707c
+	.DB $02		;707d
+	.DB $28		;707e
+	.DB $81		;707f
+	.DB $10		;7080
+	.DB $08		;7081
+	.DB $00		;7082
+	.DB $86		;7083
+	.DB $10		;7084
+	.DB $28		;7085
+	.DB $62		;7086
+	.DB $a2		;7087
+	.DB $86		;7088
+	.DB $e0		;7089
+	.DB $02		;708a
+	.DB $20		;708b
+	.DB $82		;708c
+	.DB $00		;708d
+	.DB $80		;708e
+	.DB $02		;708f
+	.DB $40		;7090
+	.DB $88		;7091
+	.DB $08		;7092
+	.DB $54		;7093
+	.DB $14		;7094
+	.DB $10		;7095
+	.DB $00		;7096
+	.DB $44		;7097
+	.DB $38		;7098
+	.DB $80		;7099
+	.DB $03		;709a
+	.DB $00		;709b
+	.DB $82		;709c
+	.DB $80		;709d
+	.DB $00		;709e
+	.DB $02		;709f
+	.DB $01		;70a0
+	.DB $82		;70a1
+	.DB $02		;70a2
+	.DB $12		;70a3
+	.DB $02		;70a4
+	.DB $2a		;70a5
+	.DB $02		;70a6
+	.DB $22		;70a7
+	.DB $02		;70a8
+	.DB $20		;70a9
+	.DB $81		;70aa
+	.DB $1e		;70ab
+	.DB $03		;70ac
+	.DB $02		;70ad
+	.DB $81		;70ae
+	.DB $01		;70af
+	.DB $02		;70b0
+	.DB $00		;70b1
+	.DB $8f		;70b2
+	.DB $c0		;70b3
+	.DB $60		;70b4
+	.DB $20		;70b5
+	.DB $22		;70b6
+	.DB $07		;70b7
+	.DB $24		;70b8
+	.DB $04		;70b9
+	.DB $24		;70ba
+	.DB $00		;70bb
+	.DB $40		;70bc
+	.DB $3f		;70bd
+	.DB $1e		;70be
+	.DB $00		;70bf
+	.DB $40		;70c0
+	.DB $01		;70c1
+	.DB $02		;70c2
+	.DB $03		;70c3
+	.DB $82		;70c4
+	.DB $06		;70c5
+	.DB $46		;70c6
+	.DB $02		;70c7
+	.DB $e6		;70c8
+	.DB $05		;70c9
+	.DB $c6		;70ca
+	.DB $85		;70cb
+	.DB $c2		;70cc
+	.DB $c0		;70cd
+	.DB $fc		;70ce
+	.DB $7e		;70cf
+	.DB $62		;70d0
+	.DB $06		;70d1
+	.DB $60		;70d2
+	.DB $81		;70d3
+	.DB $3c		;70d4
+	.DB $08		;70d5
+	.DB $00		;70d6
+	.DB $81		;70d7
+	.DB $20		;70d8
+	.DB $02		;70d9
+	.DB $6c		;70da
+	.DB $81		;70db
+	.DB $c6		;70dc
+	.DB $02		;70dd
+	.DB $c2		;70de
+	.DB $87		;70df
+	.DB $c0		;70e0
+	.DB $c2		;70e1
+	.DB $c0		;70e2
+	.DB $c2		;70e3
+	.DB $c0		;70e4
+	.DB $c4		;70e5
+	.DB $c2		;70e6
+	.DB $02		;70e7
+	.DB $c0		;70e8
+	.DB $84		;70e9
+	.DB $c4		;70ea
+	.DB $c2		;70eb
+	.DB $c0		;70ec
+	.DB $01		;70ed
+	.DB $02		;70ee
+	.DB $00		;70ef
+	.DB $88		;70f0
+	.DB $42		;70f1
+	.DB $c0		;70f2
+	.DB $c1		;70f3
+	.DB $c0		;70f4
+	.DB $c2		;70f5
+	.DB $c0		;70f6
+	.DB $c4		;70f7
+	.DB $c2		;70f8
+	.DB $02		;70f9
+	.DB $c0		;70fa
+	.DB $83		;70fb
+	.DB $7e		;70fc
+	.DB $40		;70fd
+	.DB $d0		;70fe
+	.DB $02		;70ff
+	.DB $c8		;7100
+	.DB $82		;7101
+	.DB $c0		;7102
+	.DB $d0		;7103
+	.DB $02		;7104
+	.DB $c0		;7105
+	.DB $83		;7106
+	.DB $d0		;7107
+	.DB $c0		;7108
+	.DB $c8		;7109
+	.DB $02		;710a
+	.DB $c0		;710b
+	.DB $86		;710c
+	.DB $e0		;710d
+	.DB $7f		;710e
+	.DB $1f		;710f
+	.DB $00		;7110
+	.DB $10		;7111
+	.DB $34		;7112
+	.DB $02		;7113
+	.DB $32		;7114
+	.DB $88		;7115
+	.DB $30		;7116
+	.DB $34		;7117
+	.DB $20		;7118
+	.DB $04		;7119
+	.DB $02		;711a
+	.DB $0e		;711b
+	.DB $fc		;711c
+	.DB $f0		;711d
+	.DB $0b		;711e
+	.DB $00		;711f
+	.DB $84		;7120
+	.DB $18		;7121
+	.DB $20		;7122
+	.DB $58		;7123
+	.DB $b0		;7124
+	.DB $04		;7125
+	.DB $80		;7126
+	.DB $08		;7127
+	.DB $00		;7128
+	.DB $84		;7129
+	.DB $18		;712a
+	.DB $04		;712b
+	.DB $1a		;712c
+	.DB $0d		;712d
+	.DB $04		;712e
+	.DB $02		;712f
+	.DB $08		;7130
+	.DB $10		;7131
+	.DB $10		;7132
+	.DB $00		;7133
+	.DB $88		;7134
+	.DB $07		;7135
+	.DB $0c		;7136
+	.DB $1b		;7137
+	.DB $37		;7138
+	.DB $6e		;7139
+	.DB $dc		;713a
+	.DB $b8		;713b
+	.DB $f0		;713c
+	.DB $08		;713d
+	.DB $00		;713e
+	.DB $88		;713f
+	.DB $e0		;7140
+	.DB $30		;7141
+	.DB $d8		;7142
+	.DB $ec		;7143
+	.DB $76		;7144
+	.DB $3b		;7145
+	.DB $1d		;7146
+	.DB $0f		;7147
+	.DB $10		;7148
+	.DB $30		;7149
+	.DB $06		;714a
+	.DB $00		;714b
+	.DB $8a		;714c
+	.DB $01		;714d
+	.DB $03		;714e
+	.DB $06		;714f
+	.DB $0d		;7150
+	.DB $1b		;7151
+	.DB $37		;7152
+	.DB $6f		;7153
+	.DB $5e		;7154
+	.DB $d8		;7155
+	.DB $d0		;7156
+	.DB $05		;7157
+	.DB $00		;7158
+	.DB $87		;7159
+	.DB $70		;715a
+	.DB $c0		;715b
+	.DB $70		;715c
+	.DB $f0		;715d
+	.DB $e0		;715e
+	.DB $c0		;715f
+	.DB $80		;7160
+	.DB $09		;7161
+	.DB $00		;7162
+	.DB $87		;7163
+	.DB $0e		;7164
+	.DB $03		;7165
+	.DB $0e		;7166
+	.DB $0f		;7167
+	.DB $07		;7168
+	.DB $03		;7169
+	.DB $01		;716a
+	.DB $0a		;716b
+	.DB $00		;716c
+	.DB $8a		;716d
+	.DB $80		;716e
+	.DB $c0		;716f
+	.DB $60		;7170
+	.DB $b0		;7171
+	.DB $d8		;7172
+	.DB $ec		;7173
+	.DB $f6		;7174
+	.DB $7a		;7175
+	.DB $1b		;7176
+	.DB $0b		;7177
+	.DB $10		;7178
+	.DB $34		;7179
+	.DB $87		;717a
+	.DB $f8		;717b
+	.DB $ff		;717c
+	.DB $fc		;717d
+	.DB $e0		;717e
+	.DB $c0		;717f
+	.DB $f8		;7180
+	.DB $f0		;7181
+	.DB $09		;7182
+	.DB $00		;7183
+	.DB $02		;7184
+	.DB $bf		;7185
+	.DB $05		;7186
+	.DB $ff		;7187
+	.DB $09		;7188
+	.DB $00		;7189
+	.DB $88		;718a
+	.DB $23		;718b
+	.DB $57		;718c
+	.DB $3f		;718d
+	.DB $ff		;718e
+	.DB $78		;718f
+	.DB $6b		;7190
+	.DB $ff		;7191
+	.DB $fc		;7192
+	.DB $08		;7193
+	.DB $00		;7194
+	.DB $83		;7195
+	.DB $8c		;7196
+	.DB $d8		;7197
+	.DB $fd		;7198
+	.DB $02		;7199
+	.DB $ff		;719a
+	.DB $81		;719b
+	.DB $fe		;719c
+	.DB $02		;719d
+	.DB $ff		;719e
+	.DB $08		;719f
+	.DB $00		;71a0
+	.DB $88		;71a1
+	.DB $f7		;71a2
+	.DB $f4		;71a3
+	.DB $cd		;71a4
+	.DB $f5		;71a5
+	.DB $e7		;71a6
+	.DB $ff		;71a7
+	.DB $7f		;71a8
+	.DB $01		;71a9
+	.DB $08		;71aa
+	.DB $00		;71ab
+	.DB $86		;71ac
+	.DB $1f		;71ad
+	.DB $7f		;71ae
+	.DB $ff		;71af
+	.DB $7f		;71b0
+	.DB $3f		;71b1
+	.DB $0f		;71b2
+	.DB $0d		;71b3
+	.DB $00		;71b4
+	.DB $91		;71b5
+	.DB $80		;71b6
+	.DB $fc		;71b7
+	.DB $ff		;71b8
+	.DB $fe		;71b9
+	.DB $f8		;71ba
+	.DB $f0		;71bb
+	.DB $e0		;71bc
+	.DB $80		;71bd
+	.DB $c0		;71be
+	.DB $f0		;71bf
+	.DB $fe		;71c0
+	.DB $ff		;71c1
+	.DB $fc		;71c2
+	.DB $fe		;71c3
+	.DB $fa		;71c4
+	.DB $f8		;71c5
+	.DB $fc		;71c6
+	.DB $09		;71c7
+	.DB $ff		;71c8
+	.DB $81		;71c9
+	.DB $7f		;71ca
+	.DB $02		;71cb
+	.DB $ff		;71cc
+	.DB $82		;71cd
+	.DB $cf		;71ce
+	.DB $e7		;71cf
+	.DB $03		;71d0
+	.DB $ff		;71d1
+	.DB $82		;71d2
+	.DB $cf		;71d3
+	.DB $eb		;71d4
+	.DB $02		;71d5
+	.DB $7f		;71d6
+	.DB $83		;71d7
+	.DB $3f		;71d8
+	.DB $f7		;71d9
+	.DB $37		;71da
+	.DB $02		;71db
+	.DB $66		;71dc
+	.DB $83		;71dd
+	.DB $15		;71de
+	.DB $71		;71df
+	.DB $3f		;71e0
+	.DB $06		;71e1
+	.DB $ff		;71e2
+	.DB $8c		;71e3
+	.DB $e6		;71e4
+	.DB $c0		;71e5
+	.DB $9c		;71e6
+	.DB $3f		;71e7
+	.DB $3c		;71e8
+	.DB $38		;71e9
+	.DB $10		;71ea
+	.DB $3e		;71eb
+	.DB $24		;71ec
+	.DB $ff		;71ed
+	.DB $fe		;71ee
+	.DB $bf		;71ef
+	.DB $06		;71f0
+	.DB $ff		;71f1
+	.DB $82		;71f2
+	.DB $f7		;71f3
+	.DB $e7		;71f4
+	.DB $03		;71f5
+	.DB $cf		;71f6
+	.DB $83		;71f7
+	.DB $ce		;71f8
+	.DB $e7		;71f9
+	.DB $3f		;71fa
+	.DB $02		;71fb
+	.DB $1f		;71fc
+	.DB $82		;71fd
+	.DB $3f		;71fe
+	.DB $7f		;71ff
+	.DB $05		;7200
+	.DB $ff		;7201
+	.DB $83		;7202
+	.DB $df		;7203
+	.DB $99		;7204
+	.DB $bf		;7205
+	.DB $02		;7206
+	.DB $8f		;7207
+	.DB $81		;7208
+	.DB $0f		;7209
+	.DB $02		;720a
+	.DB $00		;720b
+	.DB $84		;720c
+	.DB $02		;720d
+	.DB $0c		;720e
+	.DB $7c		;720f
+	.DB $f8		;7210
+	.DB $02		;7211
+	.DB $f0		;7212
+	.DB $81		;7213
+	.DB $e0		;7214
+	.DB $02		;7215
+	.DB $c0		;7216
+	.DB $02		;7217
+	.DB $80		;7218
+	.DB $05		;7219
+	.DB $00		;721a
+	.DB $81		;721b
+	.DB $60		;721c
+	.DB $02		;721d
+	.DB $f0		;721e
+	.DB $82		;721f
+	.DB $f8		;7220
+	.DB $f9		;7221
+	.DB $03		;7222
+	.DB $9f		;7223
+	.DB $82		;7224
+	.DB $bf		;7225
+	.DB $7f		;7226
+	.DB $04		;7227
+	.DB $ff		;7228
+	.DB $04		;7229
+	.DB $00		;722a
+	.DB $82		;722b
+	.DB $01		;722c
+	.DB $03		;722d
+	.DB $02		;722e
+	.DB $0f		;722f
+	.DB $02		;7230
+	.DB $1f		;7231
+	.DB $03		;7232
+	.DB $ff		;7233
+	.DB $83		;7234
+	.DB $5f		;7235
+	.DB $27		;7236
+	.DB $1f		;7237
+	.DB $03		;7238
+	.DB $00		;7239
+	.DB $02		;723a
+	.DB $04		;723b
+	.DB $83		;723c
+	.DB $0e		;723d
+	.DB $1a		;723e
+	.DB $3a		;723f
+	.DB $02		;7240
+	.DB $f3		;7241
+	.DB $83		;7242
+	.DB $f1		;7243
+	.DB $60		;7244
+	.DB $20		;7245
+	.DB $02		;7246
+	.DB $c0		;7247
+	.DB $81		;7248
+	.DB $de		;7249
+	.DB $02		;724a
+	.DB $00		;724b
+	.DB $84		;724c
+	.DB $80		;724d
+	.DB $e0		;724e
+	.DB $f0		;724f
+	.DB $f8		;7250
+	.DB $02		;7251
+	.DB $fc		;7252
+	.DB $03		;7253
+	.DB $ff		;7254
+	.DB $83		;7255
+	.DB $fe		;7256
+	.DB $ff		;7257
+	.DB $7f		;7258
+	.DB $02		;7259
+	.DB $ff		;725a
+	.DB $85		;725b
+	.DB $00		;725c
+	.DB $06		;725d
+	.DB $0f		;725e
+	.DB $1b		;725f
+	.DB $1d		;7260
+	.DB $02		;7261
+	.DB $1f		;7262
+	.DB $82		;7263
+	.DB $1b		;7264
+	.DB $3b		;7265
+	.DB $02		;7266
+	.DB $39		;7267
+	.DB $02		;7268
+	.DB $38		;7269
+	.DB $83		;726a
+	.DB $f8		;726b
+	.DB $df		;726c
+	.DB $6f		;726d
+	.DB $24		;726e
+	.DB $00		;726f
+	.DB $83		;7270
+	.DB $03		;7271
+	.DB $07		;7272
+	.DB $03		;7273
+	.DB $02		;7274
+	.DB $07		;7275
+	.DB $98		;7276
+	.DB $0f		;7277
+	.DB $27		;7278
 l7279h:
-	cpl			;7279
-	ccf			;727a
-	rra			;727b
-	rrca			;727c
-	daa			;727d
-	rra			;727e
-	dec bc			;727f
-	ld a,(bc)			;7280
-	call m,0eccch		;7281
-	cp (hl)			;7284
-	cp 0beh		;7285
-	xor 0b8h		;7287
-	ld e,d			;7289
-	nop			;728a
-	jr nc,l7293h		;728b
-	call m,sub_023eh+2		;728d
-	ld h,b			;7290
-	add a,h			;7291
-	ld b,b			;7292
-l7293h:
-	ld b,a			;7293
-	ld e,a			;7294
-	ld h,a			;7295
-	ld (bc),a			;7296
-	ld (hl),a			;7297
-	adc a,(hl)			;7298
-	dec (hl)			;7299
-	dec sp			;729a
-	add hl,sp			;729b
-	rrca			;729c
-l729dh:
-	ld (hl),a			;729d
-	ld h,0f7h		;729e
-	nop			;72a0
-l72a1h:
-	ld b,b			;72a1
-	ld a,b			;72a2
-	ret p			;72a3
-	ret nz			;72a4
-	or b			;72a5
-	add a,b			;72a6
-l72a7h:
-	ld (bc),a			;72a7
-	ret c			;72a8
-	add a,c			;72a9
-	ret m			;72aa
-	inc b			;72ab
-	rst 38h			;72ac
-	add a,e			;72ad
-	ld c,c			;72ae
-	ld l,a			;72af
-	halt			;72b0
-	ld (bc),a			;72b1
-	rst 38h			;72b2
-	add a,l			;72b3
-	out (003h),a		;72b4
-	ld a,a			;72b6
-	ld a,03dh		;72b7
-	ld (bc),a			;72b9
-	ld a,a			;72ba
-	add a,e			;72bb
-	ld a,e			;72bc
-	jr l72cfh		;72bd
-	ld (bc),a			;72bf
-	inc bc			;72c0
-	adc a,e			;72c1
-	ld bc,l3c18h		;72c2
-	ld l,h			;72c5
-	ld a,b			;72c6
-	call pe,sub_6f0ch		;72c7
-	jp nz,0d1c0h		;72ca
-	ld (bc),a			;72cd
-	cp h			;72ce
-l72cfh:
-	add a,(hl)			;72cf
-	add hl,de			;72d0
-	pop bc			;72d1
-	rst 20h			;72d2
-	ld a,h			;72d3
-	cp a			;72d4
-	dec sp			;72d5
-	ld (bc),a			;72d6
-	ld bc,l0800h+2		;72d7
-	sbc a,b			;72da
-	dec de			;72db
-	rlca			;72dc
-	inc sp			;72dd
-	ex (sp),hl			;72de
-	jp c,083fbh		;72df
-	rlca			;72e2
-	rst 30h			;72e3
-	ld l,b			;72e4
-	jp 0c098h		;72e5
-	rst 20h			;72e8
-	ex (sp),hl			;72e9
-	di			;72ea
-	cp 0fch		;72eb
-	ld e,h			;72ed
-	ret m			;72ee
-	or h			;72ef
-	add a,b			;72f0
-	ret nz			;72f1
-	or b			;72f2
-	ld (bc),a			;72f3
-	nop			;72f4
-	add a,c			;72f5
-	ld a,(hl)			;72f6
-	ld (bc),a			;72f7
-	rst 20h			;72f8
-	add a,c			;72f9
-	rst 38h			;72fa
-	ld (bc),a			;72fb
-	rst 20h			;72fc
-	add a,c			;72fd
-	nop			;72fe
-	dec b			;72ff
-	ret po			;7300
-	add a,c			;7301
-	rst 38h			;7302
-	inc bc			;7303
-	nop			;7304
-	adc a,l			;7305
-	ld a,060h		;7306
-	ld h,(hl)			;7308
-	ld a,000h		;7309
-	inc a			;730b
-	ld h,(hl)			;730c
-	inc a			;730d
-	nop			;730e
-	inc a			;730f
-	ld a,(hl)			;7310
-	ld h,(hl)			;7311
-	nop			;7312
-	ld (bc),a			;7313
-	ld h,b			;7314
-	add a,c			;7315
-	ld a,(hl)			;7316
-	ld (bc),a			;7317
-	nop			;7318
-	ld (bc),a			;7319
-	jr l729dh		;731a
-	nop			;731c
-	ld (bc),a			;731d
-	jr l72a1h		;731e
-	nop			;7320
-	ld (bc),a			;7321
-	jr l72a7h		;7322
-	nop			;7324
-	djnz l733fh		;7325
-	inc bc			;7327
-	nop			;7328
-	nop			;7329
-	ex af,af'			;732a
-	nop			;732b
-	ex af,af'			;732c
-	jr l7331h		;732d
-	nop			;732f
-	add a,c			;7330
-l7331h:
-	jr l733fh		;7331
-sub_7333h:
-	inc a			;7333
-	add a,c			;7334
-	jr l7345h		;7335
-	ld a,(hl)			;7337
-	add a,d			;7338
-	inc a			;7339
-	jr l7346h		;733a
-	nop			;733c
-	add a,c			;733d
-	inc a			;733e
-l733fh:
-	dec b			;733f
-	ld a,(hl)			;7340
-	ld c,0ffh		;7341
-	add a,e			;7343
-	ld a,(hl)			;7344
-l7345h:
-	inc a			;7345
-l7346h:
-	ld a,(hl)			;7346
-	rrca			;7347
-	rst 38h			;7348
-	inc c			;7349
-	nop			;734a
-	add a,c			;734b
-	jr l7350h		;734c
-	inc a			;734e
-	add a,c			;734f
-l7350h:
-	jr c,l735ch		;7350
-	nop			;7352
-l7353h:
-	add a,d			;7353
-	jr l7392h		;7354
-	ld (bc),a			;7356
-	ld a,(hl)			;7357
-	add a,d			;7358
-	ld a,h			;7359
-	jr c,l7362h		;735a
-l735ch:
-	nop			;735c
-	add a,d			;735d
-	add a,b			;735e
-	and b			;735f
-	ld (bc),a			;7360
-	ret p			;7361
-l7362h:
-	add a,c			;7362
-	ret c			;7363
-	ld (bc),a			;7364
-	ret p			;7365
-	add a,e			;7366
-	sub b			;7367
-	ret po			;7368
-	ret nz			;7369
-	ld b,000h		;736a
-	add a,(hl)			;736c
-	inc bc			;736d
-	rrca			;736e
-	dec e			;736f
-	rra			;7370
-	ccf			;7371
-	rrca			;7372
-	inc bc			;7373
-	rra			;7374
-	add a,c			;7375
-	rrca			;7376
-	inc bc			;7377
-	nop			;7378
-	adc a,l			;7379
-	and b			;737a
-	ret p			;737b
-	ret po			;737c
-	call p,0fcbch		;737d
-	cp 0deh		;7380
-	or 0fch		;7382
-	sbc a,h			;7384
-	ret nc			;7385
-	ret po			;7386
-	ld (bc),a			;7387
-	nop			;7388
-	add a,h			;7389
-	inc bc			;738a
-	rlca			;738b
-	rra			;738c
-	add hl,sp			;738d
-	ld (bc),a			;738e
-	ld a,a			;738f
-	add a,c			;7390
-	ld a,l			;7391
-l7392h:
-	ld (bc),a			;7392
-	ld a,a			;7393
-	add a,c			;7394
-	ld l,a			;7395
-	inc bc			;7396
-	ld a,a			;7397
-	sub h			;7398
-	rra			;7399
-	add a,b			;739a
-	ret po			;739b
-	inc a			;739c
-	cp b			;739d
-	call m,0f4e6h		;739e
-	cp a			;73a1
-	call m,0deffh		;73a2
-	rst 30h			;73a5
-	rst 38h			;73a6
-	sbc a,(hl)			;73a7
-	ret c			;73a8
-	ret po			;73a9
-	rlca			;73aa
-	rra			;73ab
-	ccf			;73ac
-	ld (bc),a			;73ad
-	ld a,a			;73ae
-	add a,h			;73af
-	ld sp,hl			;73b0
-	rst 38h			;73b1
-	ld a,a			;73b2
-	.DB 0fdh,002h,0ffh	;illegal sequence		;73b3
-	add a,d			;73b6
-	rst 28h			;73b7
-	rst 38h			;73b8
-	ld (bc),a			;73b9
-	ld a,a			;73ba
-	add a,c			;73bb
-	rra			;73bc
-	dec bc			;73bd
-	nop			;73be
-	add a,d			;73bf
-	djnz $+48		;73c0
-	ld (bc),a			;73c2
-	jr c,l7346h		;73c3
-	djnz l73cfh		;73c5
-	nop			;73c7
-	add a,(hl)			;73c8
-	jr l7403h		;73c9
-	jp m,0febeh		;73cb
-	ret m			;73ce
-l73cfh:
-	ld (bc),a			;73cf
-	jr c,l7353h		;73d0
-	add a,b			;73d2
-	inc bc			;73d3
-	ret nz			;73d4
-	add a,c			;73d5
-	ret z			;73d6
-	inc bc			;73d7
-	call c,0fc02h		;73d8
-	add a,c			;73db
-	ret m			;73dc
-	inc b			;73dd
-	ret nz			;73de
-	add a,d			;73df
-	add a,b			;73e0
-	nop			;73e1
-	ld (bc),a			;73e2
-	ld bc,l0382h		;73e3
-	inc de			;73e6
-	inc b			;73e7
-	dec sp			;73e8
-	ld (bc),a			;73e9
-	ccf			;73ea
-	add a,c			;73eb
-	rra			;73ec
-	inc bc			;73ed
-	inc bc			;73ee
-	add a,d			;73ef
-	ld bc,l04c0h		;73f0
-	ret po			;73f3
-	add a,c			;73f4
-	ex (sp),hl			;73f5
-	inc b			;73f6
-	rst 20h			;73f7
-	inc bc			;73f8
-	rst 38h			;73f9
-	add a,c			;73fa
-	cp 002h		;73fb
-	ret po			;73fd
-	add a,c			;73fe
-	ld bc,l0302h		;73ff
-	add a,d			;7402
-l7403h:
-	rlca			;7403
-	ld h,a			;7404
-	rlca			;7405
-	rst 20h			;7406
-	inc bc			;7407
-	rst 38h			;7408
-	add a,c			;7409
-	ld a,a			;740a
-	rlca			;740b
-	ld a,(hl)			;740c
-	add a,c			;740d
-	inc a			;740e
-	ex af,af'			;740f
-	nop			;7410
-	add a,c			;7411
-	inc a			;7412
-	ld (bc),a			;7413
-	ld a,(hl)			;7414
-	inc e			;7415
-	rst 38h			;7416
-	add a,d			;7417
-	ld a,(hl)			;7418
-	ld (hl),b			;7419
-	ex af,af'			;741a
-	ret m			;741b
-	add a,c			;741c
-	call m,0ff04h		;741d
-	add a,h			;7420
-	ld a,a			;7421
-	rra			;7422
-	nop			;7423
-	inc e			;7424
-	ld b,03eh		;7425
-	inc bc			;7427
-	cp 082h		;7428
-	call m,sub_0bf0h		;742a
-	nop			;742d
-	add a,h			;742e
-	jr l7469h		;742f
-	ld a,b			;7431
-	ret p			;7432
-	inc b			;7433
-	ret nz			;7434
-	ex af,af'			;7435
-	nop			;7436
-	add a,h			;7437
-	jr l7456h		;7438
-	ld e,00fh		;743a
-	inc b			;743c
-	inc bc			;743d
-	ex af,af'			;743e
-	jr l7451h		;743f
-	nop			;7441
-	adc a,b			;7442
-	rlca			;7443
-	rrca			;7444
-	rra			;7445
-	ccf			;7446
-	ld a,(hl)			;7447
-	call m,0f0f8h		;7448
-	ex af,af'			;744b
-	nop			;744c
-	adc a,b			;744d
-	ret po			;744e
-	ret p			;744f
-	ret m			;7450
-l7451h:
-	call m,l3f7eh		;7451
-	rra			;7454
-	rrca			;7455
-l7456h:
-	djnz l7490h		;7456
-	ld b,000h		;7458
-	adc a,d			;745a
-	ld bc,l0702h+1		;745b
-	rrca			;745e
-	rra			;745f
-	ccf			;7460
-	ld a,a			;7461
-	ld a,(hl)			;7462
-	ret m			;7463
-	ret p			;7464
-	dec b			;7465
-	nop			;7466
-	add a,c			;7467
-	ld (hl),b			;7468
-l7469h:
-	inc bc			;7469
-	ret p			;746a
-	add a,e			;746b
-	ret po			;746c
-	ret nz			;746d
-	add a,b			;746e
-	add hl,bc			;746f
-	nop			;7470
-	add a,c			;7471
-	ld c,003h		;7472
-	rrca			;7474
-	add a,e			;7475
-	rlca			;7476
-	inc bc			;7477
-	ld bc,l0009h+1		;7478
-	adc a,d			;747b
-l747ch:
-	add a,b			;747c
-	ret nz			;747d
-	ret po			;747e
-	ret p			;747f
-	ret m			;7480
-	call m,sub_7efeh		;7481
-	rra			;7484
-	rrca			;7485
-	djnz l74c4h		;7486
-	add a,a			;7488
-	ret m			;7489
-	rst 38h			;748a
-	call m,0c0e0h		;748b
-	ret m			;748e
-	ret p			;748f
-l7490h:
-	add hl,bc			;7490
-	nop			;7491
-	rlca			;7492
-	rst 38h			;7493
-	add hl,bc			;7494
-	nop			;7495
-	inc b			;7496
-	rst 38h			;7497
-	add a,c			;7498
-	ld a,a			;7499
-	ld (bc),a			;749a
-	rst 38h			;749b
-	add a,c			;749c
-	call m,l0008h		;749d
-	ex af,af'			;74a0
-	rst 38h			;74a1
-	ex af,af'			;74a2
-	nop			;74a3
-	ld b,0ffh		;74a4
-	add a,d			;74a6
-	ld a,a			;74a7
-	ld bc,l0008h		;74a8
-	add a,(hl)			;74ab
-	rra			;74ac
-l74adh:
-	ld a,a			;74ad
-	rst 38h			;74ae
-	ld a,a			;74af
-	ccf			;74b0
-	rrca			;74b1
-	dec c			;74b2
-	nop			;74b3
-	adc a,l			;74b4
-	add a,b			;74b5
-	call m,0feffh		;74b6
-	ret m			;74b9
-	ret p			;74ba
-	ret po			;74bb
-	add a,b			;74bc
-	ret nz			;74bd
-	ret p			;74be
-	cp 0ffh		;74bf
-	call m,0fe02h		;74c1
-l74c4h:
-	ld a,0ffh		;74c4
-	add a,c			;74c6
-	ccf			;74c7
-	ld (bc),a			;74c8
-	rra			;74c9
-	add a,d			;74ca
-	ccf			;74cb
-	ld a,a			;74cc
-	dec b			;74cd
-	rst 38h			;74ce
-	add a,e			;74cf
-	rst 18h			;74d0
-	sbc a,a			;74d1
-	cp a			;74d2
-	ld (bc),a			;74d3
-	adc a,a			;74d4
-	add a,c			;74d5
-	rrca			;74d6
-	ld (bc),a			;74d7
-	nop			;74d8
-	add a,h			;74d9
-	ld (bc),a			;74da
-	inc c			;74db
-	ld a,h			;74dc
-	ret m			;74dd
-	ld (bc),a			;74de
-	ret p			;74df
-	add a,c			;74e0
-	ret po			;74e1
-	ld (bc),a			;74e2
-	ret nz			;74e3
-	ld (bc),a			;74e4
-	add a,b			;74e5
-	dec b			;74e6
-	nop			;74e7
-	add a,c			;74e8
-	ld h,b			;74e9
-	ld (bc),a			;74ea
-	ret p			;74eb
-	add a,d			;74ec
-	ret m			;74ed
-	ld sp,hl			;74ee
-	inc bc			;74ef
-	sbc a,a			;74f0
-	add a,d			;74f1
-	cp a			;74f2
-	ld a,a			;74f3
-	inc b			;74f4
-	rst 38h			;74f5
-	inc b			;74f6
-	nop			;74f7
-	add a,d			;74f8
-	ld bc,l0202h+1		;74f9
-	rrca			;74fc
-	ld (bc),a			;74fd
-	rra			;74fe
-	ld b,0ffh		;74ff
-	inc bc			;7501
-	nop			;7502
-	ld (bc),a			;7503
-	inc b			;7504
-	add a,e			;7505
-	ld c,01eh		;7506
-	ld a,008h		;7508
-	rst 38h			;750a
-	ld (bc),a			;750b
-	nop			;750c
-	add a,h			;750d
-	add a,b			;750e
-	ret po			;750f
-	ret p			;7510
-	ret m			;7511
-	ld (bc),a			;7512
-	call m,0ff05h		;7513
-	add a,c			;7516
-	ld a,a			;7517
-	ld (bc),a			;7518
-	rst 38h			;7519
-	add a,l			;751a
-	nop			;751b
-	ld b,00fh		;751c
-	dec de			;751e
-	dec e			;751f
-	ld (bc),a			;7520
-	rra			;7521
-	add a,d			;7522
-	dec de			;7523
-	dec sp			;7524
-	ld (bc),a			;7525
-	add hl,sp			;7526
-	ld (bc),a			;7527
-	jr c,l74adh		;7528
-	ret m			;752a
-	rst 38h			;752b
-	ld a,a			;752c
-	inc h			;752d
-	nop			;752e
-	add a,e			;752f
-	inc bc			;7530
-	rlca			;7531
-	inc bc			;7532
-	ld (bc),a			;7533
-	rlca			;7534
-	add a,l			;7535
-	rrca			;7536
-	daa			;7537
-	cpl			;7538
-	ccf			;7539
-	rra			;753a
-	ld (bc),a			;753b
-	ccf			;753c
-	add a,c			;753d
-	rra			;753e
-	ld (bc),a			;753f
-	rrca			;7540
-	dec c			;7541
-	rst 38h			;7542
-	add a,c			;7543
-	ld b,b			;7544
+	.DB $2f		;7279
+	.DB $3f		;727a
+	.DB $1f		;727b
+	.DB $0f		;727c
+	.DB $27		;727d
+	.DB $1f		;727e
+	.DB $0b		;727f
+	.DB $0a		;7280
+	.DB $fc		;7281
+	.DB $cc		;7282
+	.DB $ec		;7283
+	.DB $be		;7284
+	.DB $fe		;7285
+	.DB $be		;7286
+	.DB $ee		;7287
+	.DB $b8		;7288
+	.DB $5a		;7289
+	.DB $00		;728a
+	.DB $30		;728b
+	.DB $06		;728c
+	.DB $fc		;728d
+	.DB $40		;728e
+	.DB $02		;728f
+	.DB $60		;7290
+	.DB $84		;7291
+	.DB $40		;7292
+	.DB $47		;7293
+	.DB $5f		;7294
+	.DB $67		;7295
+	.DB $02		;7296
+	.DB $77		;7297
+	.DB $8e		;7298
+	.DB $35		;7299
+	.DB $3b		;729a
+	.DB $39		;729b
+	.DB $0f		;729c
+	.DB $77		;729d
+	.DB $26		;729e
+	.DB $f7		;729f
+	.DB $00		;72a0
+	.DB $40		;72a1
+	.DB $78		;72a2
+	.DB $f0		;72a3
+	.DB $c0		;72a4
+	.DB $b0		;72a5
+	.DB $80		;72a6
+	.DB $02		;72a7
+	.DB $d8		;72a8
+	.DB $81		;72a9
+	.DB $f8		;72aa
+	.DB $04		;72ab
+	.DB $ff		;72ac
+	.DB $83		;72ad
+	.DB $49		;72ae
+	.DB $6f		;72af
+	.DB $76		;72b0
+	.DB $02		;72b1
+	.DB $ff		;72b2
+	.DB $85		;72b3
+	.DB $d3		;72b4
+	.DB $03		;72b5
+	.DB $7f		;72b6
+	.DB $3e		;72b7
+	.DB $3d		;72b8
+	.DB $02		;72b9
+	.DB $7f		;72ba
+	.DB $83		;72bb
+	.DB $7b		;72bc
+	.DB $18		;72bd
+	.DB $10		;72be
+	.DB $02		;72bf
+	.DB $03		;72c0
+	.DB $8b		;72c1
+	.DB $01		;72c2
+	.DB $18		;72c3
+	.DB $3c		;72c4
+	.DB $6c		;72c5
+	.DB $78		;72c6
+	.DB $ec		;72c7
+	.DB $0c		;72c8
+	.DB $6f		;72c9
+	.DB $c2		;72ca
+	.DB $c0		;72cb
+	.DB $d1		;72cc
+	.DB $02		;72cd
+	.DB $bc		;72ce
+	.DB $86		;72cf
+	.DB $19		;72d0
+	.DB $c1		;72d1
+	.DB $e7		;72d2
+	.DB $7c		;72d3
+	.DB $bf		;72d4
+	.DB $3b		;72d5
+	.DB $02		;72d6
+	.DB $01		;72d7
+	.DB $02		;72d8
+	.DB $08		;72d9
+	.DB $98		;72da
+	.DB $1b		;72db
+	.DB $07		;72dc
+	.DB $33		;72dd
+	.DB $e3		;72de
+	.DB $da		;72df
+	.DB $fb		;72e0
+	.DB $83		;72e1
+	.DB $07		;72e2
+	.DB $f7		;72e3
+	.DB $68		;72e4
+	.DB $c3		;72e5
+	.DB $98		;72e6
+	.DB $c0		;72e7
+	.DB $e7		;72e8
+	.DB $e3		;72e9
+	.DB $f3		;72ea
+	.DB $fe		;72eb
+	.DB $fc		;72ec
+	.DB $5c		;72ed
+	.DB $f8		;72ee
+	.DB $b4		;72ef
+	.DB $80		;72f0
+	.DB $c0		;72f1
+	.DB $b0		;72f2
+	.DB $02		;72f3
+	.DB $00		;72f4
+	.DB $81		;72f5
+	.DB $7e		;72f6
+	.DB $02		;72f7
+	.DB $e7		;72f8
+	.DB $81		;72f9
+	.DB $ff		;72fa
+	.DB $02		;72fb
+	.DB $e7		;72fc
+	.DB $81		;72fd
+	.DB $00		;72fe
+	.DB $05		;72ff
+	.DB $e0		;7300
+	.DB $81		;7301
+	.DB $ff		;7302
+	.DB $03		;7303
+	.DB $00		;7304
+	.DB $8d		;7305
+	.DB $3e		;7306
+	.DB $60		;7307
+	.DB $66		;7308
+	.DB $3e		;7309
+	.DB $00		;730a
+	.DB $3c		;730b
+	.DB $66		;730c
+	.DB $3c		;730d
+	.DB $00		;730e
+	.DB $3c		;730f
+	.DB $7e		;7310
+	.DB $66		;7311
+	.DB $00		;7312
+	.DB $02		;7313
+	.DB $60		;7314
+	.DB $81		;7315
+	.DB $7e		;7316
+	.DB $02		;7317
+	.DB $00		;7318
+	.DB $02		;7319
+	.DB $18		;731a
+	.DB $81		;731b
+	.DB $00		;731c
+	.DB $02		;731d
+	.DB $18		;731e
+	.DB $81		;731f
+	.DB $00		;7320
+	.DB $02		;7321
+	.DB $18		;7322
+	.DB $83		;7323
+	.DB $00		;7324
+	.DB $10		;7325
+	.DB $18		;7326
+	.DB $03		;7327
+	.DB $00		;7328
+	.DB $00		;7329
+	.DB $08		;732a
+	.DB $00		;732b
+	.DB $08		;732c
+	.DB $18		;732d
+	.DB $02		;732e
+	.DB $00		;732f
+	.DB $81		;7330
+	.DB $18		;7331
+	.DB $0c		;7332
+	.DB $3c		;7333
+	.DB $81		;7334
+	.DB $18		;7335
+	.DB $0e		;7336
+	.DB $7e		;7337
+	.DB $82		;7338
+	.DB $3c		;7339
+	.DB $18		;733a
+	.DB $0a		;733b
+	.DB $00		;733c
+	.DB $81		;733d
+	.DB $3c		;733e
+	.DB $05		;733f
+	.DB $7e		;7340
+	.DB $0e		;7341
+	.DB $ff		;7342
+	.DB $83		;7343
+	.DB $7e		;7344
+	.DB $3c		;7345
+	.DB $7e		;7346
+	.DB $0f		;7347
+	.DB $ff		;7348
+	.DB $0c		;7349
+	.DB $00		;734a
+	.DB $81		;734b
+	.DB $18		;734c
+	.DB $02		;734d
+	.DB $3c		;734e
+	.DB $81		;734f
+	.DB $38		;7350
+	.DB $0a		;7351
+	.DB $00		;7352
+	.DB $82		;7353
+	.DB $18		;7354
+	.DB $3c		;7355
+	.DB $02		;7356
+	.DB $7e		;7357
+	.DB $82		;7358
+	.DB $7c		;7359
+	.DB $38		;735a
+	.DB $06		;735b
+	.DB $00		;735c
+	.DB $82		;735d
+	.DB $80		;735e
+	.DB $a0		;735f
+	.DB $02		;7360
+	.DB $f0		;7361
+	.DB $81		;7362
+	.DB $d8		;7363
+	.DB $02		;7364
+	.DB $f0		;7365
+	.DB $83		;7366
+	.DB $90		;7367
+	.DB $e0		;7368
+	.DB $c0		;7369
+	.DB $06		;736a
+	.DB $00		;736b
+	.DB $86		;736c
+	.DB $03		;736d
+	.DB $0f		;736e
+	.DB $1d		;736f
+	.DB $1f		;7370
+	.DB $3f		;7371
+	.DB $0f		;7372
+	.DB $03		;7373
+	.DB $1f		;7374
+	.DB $81		;7375
+	.DB $0f		;7376
+	.DB $03		;7377
+	.DB $00		;7378
+	.DB $8d		;7379
+	.DB $a0		;737a
+	.DB $f0		;737b
+	.DB $e0		;737c
+	.DB $f4		;737d
+	.DB $bc		;737e
+	.DB $fc		;737f
+	.DB $fe		;7380
+	.DB $de		;7381
+	.DB $f6		;7382
+	.DB $fc		;7383
+	.DB $9c		;7384
+	.DB $d0		;7385
+	.DB $e0		;7386
+	.DB $02		;7387
+	.DB $00		;7388
+	.DB $84		;7389
+	.DB $03		;738a
+	.DB $07		;738b
+	.DB $1f		;738c
+	.DB $39		;738d
+	.DB $02		;738e
+	.DB $7f		;738f
+	.DB $81		;7390
+	.DB $7d		;7391
+	.DB $02		;7392
+	.DB $7f		;7393
+	.DB $81		;7394
+	.DB $6f		;7395
+	.DB $03		;7396
+	.DB $7f		;7397
+	.DB $94		;7398
+	.DB $1f		;7399
+	.DB $80		;739a
+	.DB $e0		;739b
+	.DB $3c		;739c
+	.DB $b8		;739d
+	.DB $fc		;739e
+	.DB $e6		;739f
+	.DB $f4		;73a0
+	.DB $bf		;73a1
+	.DB $fc		;73a2
+	.DB $ff		;73a3
+	.DB $de		;73a4
+	.DB $f7		;73a5
+	.DB $ff		;73a6
+	.DB $9e		;73a7
+	.DB $d8		;73a8
+	.DB $e0		;73a9
+	.DB $07		;73aa
+	.DB $1f		;73ab
+	.DB $3f		;73ac
+	.DB $02		;73ad
+	.DB $7f		;73ae
+	.DB $84		;73af
+	.DB $f9		;73b0
+	.DB $ff		;73b1
+	.DB $7f		;73b2
+	.DB $fd		;73b3
+	.DB $02		;73b4
+	.DB $ff		;73b5
+	.DB $82		;73b6
+	.DB $ef		;73b7
+	.DB $ff		;73b8
+	.DB $02		;73b9
+	.DB $7f		;73ba
+	.DB $81		;73bb
+	.DB $1f		;73bc
+	.DB $0b		;73bd
+	.DB $00		;73be
+	.DB $82		;73bf
+	.DB $10		;73c0
+	.DB $30		;73c1
+	.DB $02		;73c2
+	.DB $38		;73c3
+	.DB $81		;73c4
+	.DB $10		;73c5
+	.DB $08		;73c6
+	.DB $00		;73c7
+	.DB $86		;73c8
+	.DB $18		;73c9
+	.DB $38		;73ca
+	.DB $fa		;73cb
+	.DB $be		;73cc
+	.DB $fe		;73cd
+	.DB $f8		;73ce
+	.DB $02		;73cf
+	.DB $38		;73d0
+	.DB $81		;73d1
+	.DB $80		;73d2
+	.DB $03		;73d3
+	.DB $c0		;73d4
+	.DB $81		;73d5
+	.DB $c8		;73d6
+	.DB $03		;73d7
+	.DB $dc		;73d8
+	.DB $02		;73d9
+	.DB $fc		;73da
+	.DB $81		;73db
+	.DB $f8		;73dc
+	.DB $04		;73dd
+	.DB $c0		;73de
+	.DB $82		;73df
+	.DB $80		;73e0
+	.DB $00		;73e1
+	.DB $02		;73e2
+	.DB $01		;73e3
+	.DB $82		;73e4
+	.DB $03		;73e5
+	.DB $13		;73e6
+	.DB $04		;73e7
+	.DB $3b		;73e8
+	.DB $02		;73e9
+	.DB $3f		;73ea
+	.DB $81		;73eb
+	.DB $1f		;73ec
+	.DB $03		;73ed
+	.DB $03		;73ee
+	.DB $82		;73ef
+	.DB $01		;73f0
+	.DB $c0		;73f1
+	.DB $04		;73f2
+	.DB $e0		;73f3
+	.DB $81		;73f4
+	.DB $e3		;73f5
+	.DB $04		;73f6
+	.DB $e7		;73f7
+	.DB $03		;73f8
+	.DB $ff		;73f9
+	.DB $81		;73fa
+	.DB $fe		;73fb
+	.DB $02		;73fc
+	.DB $e0		;73fd
+	.DB $81		;73fe
+	.DB $01		;73ff
+	.DB $02		;7400
+	.DB $03		;7401
+	.DB $82		;7402
+	.DB $07		;7403
+	.DB $67		;7404
+	.DB $07		;7405
+	.DB $e7		;7406
+	.DB $03		;7407
+	.DB $ff		;7408
+	.DB $81		;7409
+	.DB $7f		;740a
+	.DB $07		;740b
+	.DB $7e		;740c
+	.DB $81		;740d
+	.DB $3c		;740e
+	.DB $08		;740f
+	.DB $00		;7410
+	.DB $81		;7411
+	.DB $3c		;7412
+	.DB $02		;7413
+	.DB $7e		;7414
+	.DB $1c		;7415
+	.DB $ff		;7416
+	.DB $82		;7417
+	.DB $7e		;7418
+	.DB $70		;7419
+	.DB $08		;741a
+	.DB $f8		;741b
+	.DB $81		;741c
+	.DB $fc		;741d
+	.DB $04		;741e
+	.DB $ff		;741f
+	.DB $84		;7420
+	.DB $7f		;7421
+	.DB $1f		;7422
+	.DB $00		;7423
+	.DB $1c		;7424
+	.DB $06		;7425
+	.DB $3e		;7426
+	.DB $03		;7427
+	.DB $fe		;7428
+	.DB $82		;7429
+	.DB $fc		;742a
+	.DB $f0		;742b
+	.DB $0b		;742c
+	.DB $00		;742d
+	.DB $84		;742e
+	.DB $18		;742f
+	.DB $38		;7430
+	.DB $78		;7431
+	.DB $f0		;7432
+	.DB $04		;7433
+	.DB $c0		;7434
+	.DB $08		;7435
+	.DB $00		;7436
+	.DB $84		;7437
+	.DB $18		;7438
+	.DB $1c		;7439
+	.DB $1e		;743a
+	.DB $0f		;743b
+	.DB $04		;743c
+	.DB $03		;743d
+	.DB $08		;743e
+	.DB $18		;743f
+	.DB $10		;7440
+	.DB $00		;7441
+	.DB $88		;7442
+	.DB $07		;7443
+	.DB $0f		;7444
+	.DB $1f		;7445
+	.DB $3f		;7446
+	.DB $7e		;7447
+	.DB $fc		;7448
+	.DB $f8		;7449
+	.DB $f0		;744a
+	.DB $08		;744b
+	.DB $00		;744c
+	.DB $88		;744d
+	.DB $e0		;744e
+	.DB $f0		;744f
+	.DB $f8		;7450
+	.DB $fc		;7451
+	.DB $7e		;7452
+	.DB $3f		;7453
+	.DB $1f		;7454
+	.DB $0f		;7455
+	.DB $10		;7456
+	.DB $38		;7457
+	.DB $06		;7458
+	.DB $00		;7459
+	.DB $8a		;745a
+	.DB $01		;745b
+	.DB $03		;745c
+	.DB $07		;745d
+	.DB $0f		;745e
+	.DB $1f		;745f
+	.DB $3f		;7460
+	.DB $7f		;7461
+	.DB $7e		;7462
+	.DB $f8		;7463
+	.DB $f0		;7464
+	.DB $05		;7465
+	.DB $00		;7466
+	.DB $81		;7467
+	.DB $70		;7468
+	.DB $03		;7469
+	.DB $f0		;746a
+	.DB $83		;746b
+	.DB $e0		;746c
+	.DB $c0		;746d
+	.DB $80		;746e
+	.DB $09		;746f
+	.DB $00		;7470
+	.DB $81		;7471
+	.DB $0e		;7472
+	.DB $03		;7473
+	.DB $0f		;7474
+	.DB $83		;7475
+	.DB $07		;7476
+	.DB $03		;7477
+	.DB $01		;7478
+	.DB $0a		;7479
+	.DB $00		;747a
+	.DB $8a		;747b
+	.DB $80		;747c
+	.DB $c0		;747d
+	.DB $e0		;747e
+	.DB $f0		;747f
+	.DB $f8		;7480
+	.DB $fc		;7481
+	.DB $fe		;7482
+	.DB $7e		;7483
+	.DB $1f		;7484
+	.DB $0f		;7485
+	.DB $10		;7486
+	.DB $3c		;7487
+	.DB $87		;7488
+	.DB $f8		;7489
+	.DB $ff		;748a
+	.DB $fc		;748b
+	.DB $e0		;748c
+	.DB $c0		;748d
+	.DB $f8		;748e
+	.DB $f0		;748f
+	.DB $09		;7490
+	.DB $00		;7491
+	.DB $07		;7492
+	.DB $ff		;7493
+	.DB $09		;7494
+	.DB $00		;7495
+	.DB $04		;7496
+	.DB $ff		;7497
+	.DB $81		;7498
+	.DB $7f		;7499
+	.DB $02		;749a
+	.DB $ff		;749b
+	.DB $81		;749c
+	.DB $fc		;749d
+	.DB $08		;749e
+	.DB $00		;749f
+	.DB $08		;74a0
+	.DB $ff		;74a1
+	.DB $08		;74a2
+	.DB $00		;74a3
+	.DB $06		;74a4
+	.DB $ff		;74a5
+	.DB $82		;74a6
+	.DB $7f		;74a7
+	.DB $01		;74a8
+	.DB $08		;74a9
+	.DB $00		;74aa
+	.DB $86		;74ab
+	.DB $1f		;74ac
+	.DB $7f		;74ad
+	.DB $ff		;74ae
+	.DB $7f		;74af
+	.DB $3f		;74b0
+	.DB $0f		;74b1
+	.DB $0d		;74b2
+	.DB $00		;74b3
+	.DB $8d		;74b4
+	.DB $80		;74b5
+	.DB $fc		;74b6
+	.DB $ff		;74b7
+	.DB $fe		;74b8
+	.DB $f8		;74b9
+	.DB $f0		;74ba
+	.DB $e0		;74bb
+	.DB $80		;74bc
+	.DB $c0		;74bd
+	.DB $f0		;74be
+	.DB $fe		;74bf
+	.DB $ff		;74c0
+	.DB $fc		;74c1
+	.DB $02		;74c2
+	.DB $fe		;74c3
+	.DB $3e		;74c4
+	.DB $ff		;74c5
+	.DB $81		;74c6
+	.DB $3f		;74c7
+	.DB $02		;74c8
+	.DB $1f		;74c9
+	.DB $82		;74ca
+	.DB $3f		;74cb
+	.DB $7f		;74cc
+	.DB $05		;74cd
+	.DB $ff		;74ce
+	.DB $83		;74cf
+	.DB $df		;74d0
+	.DB $9f		;74d1
+	.DB $bf		;74d2
+	.DB $02		;74d3
+	.DB $8f		;74d4
+	.DB $81		;74d5
+	.DB $0f		;74d6
+	.DB $02		;74d7
+	.DB $00		;74d8
+	.DB $84		;74d9
+	.DB $02		;74da
+	.DB $0c		;74db
+	.DB $7c		;74dc
+	.DB $f8		;74dd
+	.DB $02		;74de
+	.DB $f0		;74df
+	.DB $81		;74e0
+	.DB $e0		;74e1
+	.DB $02		;74e2
+	.DB $c0		;74e3
+	.DB $02		;74e4
+	.DB $80		;74e5
+	.DB $05		;74e6
+	.DB $00		;74e7
+	.DB $81		;74e8
+	.DB $60		;74e9
+	.DB $02		;74ea
+	.DB $f0		;74eb
+	.DB $82		;74ec
+	.DB $f8		;74ed
+	.DB $f9		;74ee
+	.DB $03		;74ef
+	.DB $9f		;74f0
+	.DB $82		;74f1
+	.DB $bf		;74f2
+	.DB $7f		;74f3
+	.DB $04		;74f4
+	.DB $ff		;74f5
+	.DB $04		;74f6
+	.DB $00		;74f7
+	.DB $82		;74f8
+	.DB $01		;74f9
+	.DB $03		;74fa
+	.DB $02		;74fb
+	.DB $0f		;74fc
+	.DB $02		;74fd
+	.DB $1f		;74fe
+	.DB $06		;74ff
+	.DB $ff		;7500
+	.DB $03		;7501
+	.DB $00		;7502
+	.DB $02		;7503
+	.DB $04		;7504
+	.DB $83		;7505
+	.DB $0e		;7506
+	.DB $1e		;7507
+	.DB $3e		;7508
+	.DB $08		;7509
+	.DB $ff		;750a
+	.DB $02		;750b
+	.DB $00		;750c
+	.DB $84		;750d
+	.DB $80		;750e
+	.DB $e0		;750f
+	.DB $f0		;7510
+	.DB $f8		;7511
+	.DB $02		;7512
+	.DB $fc		;7513
+	.DB $05		;7514
+	.DB $ff		;7515
+	.DB $81		;7516
+	.DB $7f		;7517
+	.DB $02		;7518
+	.DB $ff		;7519
+	.DB $85		;751a
+	.DB $00		;751b
+	.DB $06		;751c
+	.DB $0f		;751d
+	.DB $1b		;751e
+	.DB $1d		;751f
+	.DB $02		;7520
+	.DB $1f		;7521
+	.DB $82		;7522
+	.DB $1b		;7523
+	.DB $3b		;7524
+	.DB $02		;7525
+	.DB $39		;7526
+	.DB $02		;7527
+	.DB $38		;7528
+	.DB $83		;7529
+	.DB $f8		;752a
+	.DB $ff		;752b
+	.DB $7f		;752c
+	.DB $24		;752d
+	.DB $00		;752e
+	.DB $83		;752f
+	.DB $03		;7530
+	.DB $07		;7531
+	.DB $03		;7532
+	.DB $02		;7533
+	.DB $07		;7534
+	.DB $85		;7535
+	.DB $0f		;7536
+	.DB $27		;7537
+	.DB $2f		;7538
+	.DB $3f		;7539
+	.DB $1f		;753a
+	.DB $02		;753b
+	.DB $3f		;753c
+	.DB $81		;753d
+	.DB $1f		;753e
+	.DB $02		;753f
+	.DB $0f		;7540
+	.DB $0d		;7541
+	.DB $ff		;7542
+	.DB $81		;7543
+	.DB $40		;7544
 sub_7545h:
-	ld (bc),a			;7545
-	ret po			;7546
-	add a,c			;7547
-	ret nz			;7548
-	inc c			;7549
-	rst 38h			;754a
-	adc a,d			;754b
-	nop			;754c
-	ld b,b			;754d
-	ld a,b			;754e
-	ret p			;754f
-	ret nz			;7550
-	or b			;7551
-	add a,b			;7552
-	ret c			;7553
-	call c,006f8h		;7554
-	rst 38h			;7557
-	add a,c			;7558
-	ld a,a			;7559
-	ld (bc),a			;755a
-	rst 38h			;755b
-	add a,e			;755c
-	rst 18h			;755d
-	rra			;755e
-	ld a,a			;755f
-	ld (bc),a			;7560
-	ccf			;7561
-	inc bc			;7562
-	ld a,a			;7563
-	add a,d			;7564
-	rra			;7565
-	inc de			;7566
-	ld (bc),a			;7567
-	inc bc			;7568
-	add a,c			;7569
-	ld bc,0ff0fh		;756a
-	add a,c			;756d
-	ld a,a			;756e
-	rrca			;756f
-	rst 38h			;7570
-	add a,c			;7571
-	ret pe			;7572
-	ld b,0ffh		;7573
-	add a,c			;7575
-	cp 002h		;7576
-	call m,0f882h		;7578
-	call m,0f802h		;757b
-	add a,c			;757e
-	or b			;757f
-	ld (bc),a			;7580
-	nop			;7581
-	rrca			;7582
-	rst 38h			;7583
-	add a,c			;7584
-	nop			;7585
-	jr nz,$-1		;7586
-	nop			;7588
+	.DB $02		;7545
+	.DB $e0		;7546
+	.DB $81		;7547
+	.DB $c0		;7548
+	.DB $0c		;7549
+	.DB $ff		;754a
+	.DB $8a		;754b
+	.DB $00		;754c
+	.DB $40		;754d
+	.DB $78		;754e
+	.DB $f0		;754f
+	.DB $c0		;7550
+	.DB $b0		;7551
+	.DB $80		;7552
+	.DB $d8		;7553
+	.DB $dc		;7554
+	.DB $f8		;7555
+	.DB $06		;7556
+	.DB $ff		;7557
+	.DB $81		;7558
+	.DB $7f		;7559
+	.DB $02		;755a
+	.DB $ff		;755b
+	.DB $83		;755c
+	.DB $df		;755d
+	.DB $1f		;755e
+	.DB $7f		;755f
+	.DB $02		;7560
+	.DB $3f		;7561
+	.DB $03		;7562
+	.DB $7f		;7563
+	.DB $82		;7564
+	.DB $1f		;7565
+	.DB $13		;7566
+	.DB $02		;7567
+	.DB $03		;7568
+	.DB $81		;7569
+	.DB $01		;756a
+	.DB $0f		;756b
+	.DB $ff		;756c
+	.DB $81		;756d
+	.DB $7f		;756e
+	.DB $0f		;756f
+	.DB $ff		;7570
+	.DB $81		;7571
+	.DB $e8		;7572
+	.DB $06		;7573
+	.DB $ff		;7574
+	.DB $81		;7575
+	.DB $fe		;7576
+	.DB $02		;7577
+	.DB $fc		;7578
+	.DB $82		;7579
+	.DB $f8		;757a
+	.DB $fc		;757b
+	.DB $02		;757c
+	.DB $f8		;757d
+	.DB $81		;757e
+	.DB $b0		;757f
+	.DB $02		;7580
+	.DB $00		;7581
+	.DB $0f		;7582
+	.DB $ff		;7583
+	.DB $81		;7584
+	.DB $00		;7585
+	.DB $20		;7586
+	.DB $ff		;7587
+	.DB $00		;7588
 l7589h:
-	rlca			;7589
-	nop			;758a
-	add a,c			;758b
-	ex af,af'			;758c
-	rlca			;758d
-	nop			;758e
-	add a,c			;758f
-	inc b			;7590
-	djnz l7593h		;7591
-l7593h:
-	add a,d			;7593
-	inc c			;7594
-	ld c,006h		;7595
-	rrca			;7597
-	add a,e			;7598
-	inc c			;7599
-	inc e			;759a
-	inc a			;759b
-	dec b			;759c
-	call m,l0003h+2		;759d
-	add a,a			;75a0
-	ld bc,l0702h+1		;75a1
-	inc c			;75a4
-	inc e			;75a5
-	inc a			;75a6
-	ld a,h			;75a7
-	inc b			;75a8
-	call m,l0008h		;75a9
-	add a,d			;75ac
-	inc c			;75ad
-	ld c,006h		;75ae
-	rrca			;75b0
-	add a,h			;75b1
-	inc c			;75b2
-	inc e			;75b3
-	inc a			;75b4
-	ld a,h			;75b5
-	inc bc			;75b6
-	call m,0f881h		;75b7
-	inc bc			;75ba
-	nop			;75bb
-	add a,l			;75bc
-	add a,b			;75bd
-	pop bc			;75be
-	ex (sp),hl			;75bf
-	rst 30h			;75c0
-	rst 38h			;75c1
-	inc bc			;75c2
-	rrca			;75c3
-	add a,l			;75c4
-	ld c,a			;75c5
-	rst 8			;75c6
-	rst 0			;75c7
-	jp l08c1h		;75c8
-	call m,l0f82h+2		;75cb
-	rra			;75ce
-	ccf			;75cf
-	ld a,a			;75d0
-	inc bc			;75d1
-	rst 38h			;75d2
-	add a,c			;75d3
-	ei			;75d4
-	ex af,af'			;75d5
-	call m,l0f82h+2		;75d6
-	rra			;75d9
-	ccf			;75da
-	ld a,a			;75db
-	inc b			;75dc
-	rst 38h			;75dd
-	adc a,h			;75de
-	rrca			;75df
-	rra			;75e0
-	ccf			;75e1
-	ld a,a			;75e2
-	rst 38h			;75e3
-	cp 0fch		;75e4
-	ret m			;75e6
-	ret p			;75e7
-	ret po			;75e8
-	ret nz			;75e9
-	add a,b			;75ea
-	inc b			;75eb
-	nop			;75ec
-	add a,h			;75ed
-	rrca			;75ee
-	rra			;75ef
-	ccf			;75f0
-	ld a,a			;75f1
-	inc c			;75f2
-	rst 38h			;75f3
-	inc bc			;75f4
-	ret nz			;75f5
-	add a,a			;75f6
-	pop bc			;75f7
-	jp 0cfc7h		;75f8
-	rst 18h			;75fb
-	call m,sub_067ch		;75fc
-	call m,0f382h		;75ff
-	pop hl			;7602
-	inc bc			;7603
-	ret nz			;7604
-	add a,e			;7605
-	pop bc			;7606
-	jp l03c7h		;7607
-	call m,07c81h		;760a
-	inc b			;760d
-	call m,0ff08h		;760e
-	add a,d			;7611
-	ret p			;7612
-	ret po			;7613
-	inc b			;7614
-	ret nz			;7615
-	add a,a			;7616
-	pop bc			;7617
-	ex (sp),hl			;7618
-	inc b			;7619
-	inc c			;761a
-	inc e			;761b
-	inc a			;761c
-	ld a,h			;761d
-	inc bc			;761e
-	call m,0ff82h		;761f
-	rst 28h			;7622
-	ld b,0cfh		;7623
-	rlca			;7625
-	rst 38h			;7626
-	add a,c			;7627
-	rst 28h			;7628
-	ex af,af'			;7629
-	call m,0cf82h		;762a
-	rst 18h			;762d
-	ld c,0ffh		;762e
-	ex af,af'			;7630
-	call m,0f781h		;7631
-	rlca			;7634
-	rst 38h			;7635
-	ex af,af'			;7636
-	call m,0cf08h		;7637
-	ld (bc),a			;763a
-	rst 38h			;763b
-	adc a,c			;763c
-	rst 18h			;763d
-	rst 8			;763e
-	rst 28h			;763f
-	rst 30h			;7640
-	rst 18h			;7641
-	rst 8			;7642
-	rst 18h			;7643
-	jp 003c1h		;7644
-	ret nz			;7647
-	add a,d			;7648
-	pop bc			;7649
-	jp 0fc04h		;764a
-	add a,c			;764d
-	ld a,h			;764e
-	inc bc			;764f
-	call m,0ff03h		;7650
-	adc a,c			;7653
-	ld a,a			;7654
-	ccf			;7655
-	ld e,00ch		;7656
-	nop			;7658
-	ret p			;7659
-	ret po			;765a
-	ret nz			;765b
-	add a,b			;765c
-	inc b			;765d
-	nop			;765e
-	add a,e			;765f
-	rst 0			;7660
-	jp 003c1h		;7661
-	ret nz			;7664
-	add a,l			;7665
-	pop bc			;7666
-	jp 0c3c7h		;7667
-	pop bc			;766a
-	dec b			;766b
-	ret nz			;766c
-	add a,h			;766d
-	ret m			;766e
-	ret p			;766f
-	ret po			;7670
-	ret nz			;7671
-	inc b			;7672
-	nop			;7673
-	add a,c			;7674
-	rst 0			;7675
-	ld (bc),a			;7676
-	jp 0c103h		;7677
-	ld (bc),a			;767a
-	ret nz			;767b
-	add a,l			;767c
-	ret m			;767d
-	ret p			;767e
-	ret po			;767f
+	.DB $07		;7589
+	.DB $00		;758a
+	.DB $81		;758b
+	.DB $08		;758c
+	.DB $07		;758d
+	.DB $00		;758e
+	.DB $81		;758f
+	.DB $04		;7590
+	.DB $10		;7591
+	.DB $00		;7592
+	.DB $82		;7593
+	.DB $0c		;7594
+	.DB $0e		;7595
+	.DB $06		;7596
+	.DB $0f		;7597
+	.DB $83		;7598
+	.DB $0c		;7599
+	.DB $1c		;759a
+	.DB $3c		;759b
+	.DB $05		;759c
+	.DB $fc		;759d
+	.DB $05		;759e
+	.DB $00		;759f
+	.DB $87		;75a0
+	.DB $01		;75a1
+	.DB $03		;75a2
+	.DB $07		;75a3
+	.DB $0c		;75a4
+	.DB $1c		;75a5
+	.DB $3c		;75a6
+	.DB $7c		;75a7
+	.DB $04		;75a8
+	.DB $fc		;75a9
+	.DB $08		;75aa
+	.DB $00		;75ab
+	.DB $82		;75ac
+	.DB $0c		;75ad
+	.DB $0e		;75ae
+	.DB $06		;75af
+	.DB $0f		;75b0
+	.DB $84		;75b1
+	.DB $0c		;75b2
+	.DB $1c		;75b3
+	.DB $3c		;75b4
+	.DB $7c		;75b5
+	.DB $03		;75b6
+	.DB $fc		;75b7
+	.DB $81		;75b8
+	.DB $f8		;75b9
+	.DB $03		;75ba
+	.DB $00		;75bb
+	.DB $85		;75bc
+	.DB $80		;75bd
+	.DB $c1		;75be
+	.DB $e3		;75bf
+	.DB $f7		;75c0
+	.DB $ff		;75c1
+	.DB $03		;75c2
+	.DB $0f		;75c3
+	.DB $85		;75c4
+	.DB $4f		;75c5
+	.DB $cf		;75c6
+	.DB $c7		;75c7
+	.DB $c3		;75c8
+	.DB $c1		;75c9
+	.DB $08		;75ca
+	.DB $fc		;75cb
+	.DB $84		;75cc
+	.DB $0f		;75cd
+	.DB $1f		;75ce
+	.DB $3f		;75cf
+	.DB $7f		;75d0
+	.DB $03		;75d1
+	.DB $ff		;75d2
+	.DB $81		;75d3
+	.DB $fb		;75d4
+	.DB $08		;75d5
+	.DB $fc		;75d6
+	.DB $84		;75d7
+	.DB $0f		;75d8
+	.DB $1f		;75d9
+	.DB $3f		;75da
+	.DB $7f		;75db
+	.DB $04		;75dc
+	.DB $ff		;75dd
+	.DB $8c		;75de
+	.DB $0f		;75df
+	.DB $1f		;75e0
+	.DB $3f		;75e1
+	.DB $7f		;75e2
+	.DB $ff		;75e3
+	.DB $fe		;75e4
+	.DB $fc		;75e5
+	.DB $f8		;75e6
+	.DB $f0		;75e7
+	.DB $e0		;75e8
+	.DB $c0		;75e9
+	.DB $80		;75ea
+	.DB $04		;75eb
+	.DB $00		;75ec
+	.DB $84		;75ed
+	.DB $0f		;75ee
+	.DB $1f		;75ef
+	.DB $3f		;75f0
+	.DB $7f		;75f1
+	.DB $0c		;75f2
+	.DB $ff		;75f3
+	.DB $03		;75f4
+	.DB $c0		;75f5
+	.DB $87		;75f6
+	.DB $c1		;75f7
+	.DB $c3		;75f8
+	.DB $c7		;75f9
+	.DB $cf		;75fa
+	.DB $df		;75fb
+	.DB $fc		;75fc
+	.DB $7c		;75fd
+	.DB $06		;75fe
+	.DB $fc		;75ff
+	.DB $82		;7600
+	.DB $f3		;7601
+	.DB $e1		;7602
+	.DB $03		;7603
+	.DB $c0		;7604
+	.DB $83		;7605
+	.DB $c1		;7606
+	.DB $c3		;7607
+	.DB $c7		;7608
+	.DB $03		;7609
+	.DB $fc		;760a
+	.DB $81		;760b
+	.DB $7c		;760c
+	.DB $04		;760d
+	.DB $fc		;760e
+	.DB $08		;760f
+	.DB $ff		;7610
+	.DB $82		;7611
+	.DB $f0		;7612
+	.DB $e0		;7613
+	.DB $04		;7614
+	.DB $c0		;7615
+	.DB $87		;7616
+	.DB $c1		;7617
+	.DB $e3		;7618
+	.DB $04		;7619
+	.DB $0c		;761a
+	.DB $1c		;761b
+	.DB $3c		;761c
+	.DB $7c		;761d
+	.DB $03		;761e
+	.DB $fc		;761f
+	.DB $82		;7620
+	.DB $ff		;7621
+	.DB $ef		;7622
+	.DB $06		;7623
+	.DB $cf		;7624
+	.DB $07		;7625
+	.DB $ff		;7626
+	.DB $81		;7627
+	.DB $ef		;7628
+	.DB $08		;7629
+	.DB $fc		;762a
+	.DB $82		;762b
+	.DB $cf		;762c
+	.DB $df		;762d
+	.DB $0e		;762e
+	.DB $ff		;762f
+	.DB $08		;7630
+	.DB $fc		;7631
+	.DB $81		;7632
+	.DB $f7		;7633
+	.DB $07		;7634
+	.DB $ff		;7635
+	.DB $08		;7636
+	.DB $fc		;7637
+	.DB $08		;7638
+	.DB $cf		;7639
+	.DB $02		;763a
+	.DB $ff		;763b
+	.DB $89		;763c
+	.DB $df		;763d
+	.DB $cf		;763e
+	.DB $ef		;763f
+	.DB $f7		;7640
+	.DB $df		;7641
+	.DB $cf		;7642
+	.DB $df		;7643
+	.DB $c3		;7644
+	.DB $c1		;7645
+	.DB $03		;7646
+	.DB $c0		;7647
+	.DB $82		;7648
+	.DB $c1		;7649
+	.DB $c3		;764a
+	.DB $04		;764b
+	.DB $fc		;764c
+	.DB $81		;764d
+	.DB $7c		;764e
+	.DB $03		;764f
+	.DB $fc		;7650
+	.DB $03		;7651
+	.DB $ff		;7652
+	.DB $89		;7653
+	.DB $7f		;7654
+	.DB $3f		;7655
+	.DB $1e		;7656
+	.DB $0c		;7657
+	.DB $00		;7658
+	.DB $f0		;7659
+	.DB $e0		;765a
+	.DB $c0		;765b
+	.DB $80		;765c
+	.DB $04		;765d
+	.DB $00		;765e
+	.DB $83		;765f
+	.DB $c7		;7660
+	.DB $c3		;7661
+	.DB $c1		;7662
+	.DB $03		;7663
+	.DB $c0		;7664
+	.DB $85		;7665
+	.DB $c1		;7666
+	.DB $c3		;7667
+	.DB $c7		;7668
+	.DB $c3		;7669
+	.DB $c1		;766a
+	.DB $05		;766b
+	.DB $c0		;766c
+	.DB $84		;766d
+	.DB $f8		;766e
+	.DB $f0		;766f
+	.DB $e0		;7670
+	.DB $c0		;7671
+	.DB $04		;7672
+	.DB $00		;7673
+	.DB $81		;7674
+	.DB $c7		;7675
+	.DB $02		;7676
+	.DB $c3		;7677
+	.DB $03		;7678
+	.DB $c1		;7679
+	.DB $02		;767a
+	.DB $c0		;767b
+	.DB $85		;767c
+	.DB $f8		;767d
+	.DB $f0		;767e
+	.DB $e0		;767f
 l7680h:
-	ret nz			;7680
-	add a,b			;7681
-	inc bc			;7682
-	nop			;7683
-	add a,e			;7684
-	rst 0			;7685
-	rst 8			;7686
-	rst 18h			;7687
-	inc bc			;7688
-	rst 38h			;7689
-	add a,d			;768a
-	cp 0fch		;768b
-	inc b			;768d
-	rst 38h			;768e
-	add a,h			;768f
-	ld a,a			;7690
-	ccf			;7691
-	ld e,00ch		;7692
-	inc b			;7694
-	ret nz			;7695
-	add a,c			;7696
-	add a,b			;7697
-	ld a,a			;7698
-	nop			;7699
-	ld a,a			;769a
-	nop			;769b
-	dec e			;769c
-	nop			;769d
-	nop			;769e
-	inc bc			;769f
-	nop			;76a0
-	add a,l			;76a1
-	ld bc,l0702h+1		;76a2
-	rrca			;76a5
-	rlca			;76a6
-	ld (bc),a			;76a7
-	nop			;76a8
-	add a,h			;76a9
-	ret nz			;76aa
-	ret po			;76ab
-	ret p			;76ac
-	ret m			;76ad
-	ld (bc),a			;76ae
-	call m,l0003h		;76af
-	add a,l			;76b2
-	ld bc,l0702h+1		;76b3
-	rrca			;76b6
-	rra			;76b7
-	ld b,000h		;76b8
-	add a,h			;76ba
-	inc c			;76bb
-	ld e,003h		;76bc
-	ld bc,l0006h		;76be
-	inc bc			;76c1
-	call m,sub_7c05h		;76c2
-	add a,d			;76c5
-	ccf			;76c6
-	ld a,a			;76c7
-	ld b,0ffh		;76c8
-	ex af,af'			;76ca
-	call m,l0003h+1		;76cb
-	add a,(hl)			;76ce
-	ld (bc),a			;76cf
-	rlca			;76d0
-	rrca			;76d1
-	rra			;76d2
-	inc bc			;76d3
-	ld bc,l0003h+1		;76d4
-	add a,d			;76d7
-	add a,b			;76d8
-	ret nz			;76d9
-	rlca			;76da
-	call m,0f88bh		;76db
-	ccf			;76de
-	ld a,a			;76df
-	rst 38h			;76e0
-	ld a,a			;76e1
-	ld a,01dh		;76e2
-	dec bc			;76e4
-	rlca			;76e5
-	nop			;76e6
-	add a,b			;76e7
-	inc bc			;76e8
-	ret nz			;76e9
-	add a,e			;76ea
-	ret z			;76eb
-	call c,008feh		;76ec
-	ld a,h			;76ef
-	dec b			;76f0
-	rst 38h			;76f1
-	add a,e			;76f2
-	cp 0fch		;76f3
-	ret m			;76f5
-	inc b			;76f6
-	call m,sub_7c04h		;76f7
-	add a,c			;76fa
-	ret po			;76fb
-	inc bc			;76fc
-	ret p			;76fd
-	inc bc			;76fe
-	ret m			;76ff
-	add a,c			;7700
-	call m,0ff05h		;7701
-	adc a,e			;7704
-	cp 0fch		;7705
-	ld sp,hl			;7707
-	ret p			;7708
-	ret po			;7709
-	ret nz			;770a
-	add a,b			;770b
-	jr nz,$+112		;770c
-	ret m			;770e
-	call m,0ff05h		;770f
-	add a,e			;7712
-	cp 0fch		;7713
-	ret m			;7715
-	ex af,af'			;7716
-	rlca			;7717
-	ex af,af'			;7718
-	rst 38h			;7719
-	add a,c			;771a
-	ld a,h			;771b
-	rlca			;771c
-	call m,0f084h		;771d
-	and 0cfh		;7720
-	rst 18h			;7722
-	inc b			;7723
-	rst 38h			;7724
-	inc bc			;7725
-	ld a,h			;7726
-	rlca			;7727
-	call m,0fe03h		;7728
-	inc bc			;772b
-	rst 38h			;772c
-	add a,h			;772d
-	di			;772e
-	rst 20h			;772f
-	rst 8			;7730
-	rst 18h			;7731
-	inc bc			;7732
-	rst 38h			;7733
-	add a,c			;7734
-	rst 18h			;7735
-	ex af,af'			;7736
-	call m,0f082h		;7737
-	ret po			;773a
-	ld b,0c0h		;773b
-	inc bc			;773d
-	rst 38h			;773e
-	add a,l			;773f
-	cp 0fch		;7740
-	ret m			;7742
-	ret p			;7743
-	ret po			;7744
-	ld (bc),a			;7745
-	call m,sub_7c05h+1		;7746
-	dec b			;7749
-	rst 38h			;774a
-	add a,e			;774b
-	cp 0fch		;774c
-	ret m			;774e
-	ex af,af'			;774f
-	rst 38h			;7750
-	ex af,af'			;7751
-	call m,0cf06h		;7752
-	add a,d			;7755
-	adc a,0cch		;7756
-	dec b			;7758
-	call m,sub_7c03h		;7759
-	ex af,af'			;775c
-	ret nz			;775d
-	inc b			;775e
-	rst 38h			;775f
-	add a,d			;7760
-	rst 18h			;7761
-	rst 8			;7762
-	ld (bc),a			;7763
-	rst 0			;7764
-	add a,e			;7765
-	ret z			;7766
-	call c,sub_05feh		;7767
-	rst 38h			;776a
-	inc b			;776b
-	ld a,h			;776c
-	inc b			;776d
-	call m,sub_0705h		;776e
-	add a,a			;7771
-	ld b,004h		;7772
-	nop			;7774
-	ret p			;7775
-	ret po			;7776
-	ret nz			;7777
-	add a,b			;7778
-	inc b			;7779
-	nop			;777a
-	add a,e			;777b
-	ret z			;777c
-	call c,sub_05feh		;777d
-	rst 38h			;7780
-	ex af,af'			;7781
-	ret nz			;7782
-	add a,h			;7783
-	ld a,b			;7784
-	ld (hl),b			;7785
-	ld h,b			;7786
-	ld b,b			;7787
-	inc b			;7788
-	nop			;7789
-	inc bc			;778a
-	jp 0c103h		;778b
-	ld (bc),a			;778e
-	ret nz			;778f
-	add a,l			;7790
-	ret m			;7791
-	ret p			;7792
-	ret po			;7793
-	ret nz			;7794
-	add a,b			;7795
-	inc bc			;7796
-	nop			;7797
-	ld b,0ffh		;7798
-	add a,d			;779a
-	cp 0fch		;779b
-	ld b,007h		;779d
-	add a,d			;779f
-	ld b,004h		;77a0
-	inc b			;77a2
-	ret nz			;77a3
-	add a,c			;77a4
-	add a,b			;77a5
-	ld a,a			;77a6
-	nop			;77a7
-	ld a,a			;77a8
-	nop			;77a9
-	dec e			;77aa
-	nop			;77ab
-	nop			;77ac
-	ld a,a			;77ad
-	nop			;77ae
-	ld a,a			;77af
-	nop			;77b0
-	add hl,bc			;77b1
-	nop			;77b2
-	add a,c			;77b3
-	jr nz,l77d6h		;77b4
-	nop			;77b6
-	ld (bc),a			;77b7
-	jr nz,$+3		;77b8
-	jr nc,l77bfh		;77ba
-	jr c,$+56		;77bc
-	nop			;77be
-l77bfh:
-	ld (bc),a			;77bf
-	inc a			;77c0
-	add a,h			;77c1
-	inc e			;77c2
-	ld c,006h		;77c3
-	ld (bc),a			;77c5
-	ld a,a			;77c6
-	nop			;77c7
-	ld a,a			;77c8
-	nop			;77c9
-	inc a			;77ca
-	nop			;77cb
-	nop			;77cc
-	ld a,a			;77cd
-	nop			;77ce
-	ld a,a			;77cf
-	nop			;77d0
-	ld a,a			;77d1
-	nop			;77d2
-	add hl,de			;77d3
-	nop			;77d4
-	add a,d			;77d5
-l77d6h:
-	rra			;77d6
-	ccf			;77d7
-	ld b,000h		;77d8
-	add a,d			;77da
-	rst 38h			;77db
-	cp 007h		;77dc
-	nop			;77de
-	add a,c			;77df
-	ld bc,l0006h		;77e0
-	ld (bc),a			;77e3
-	ret po			;77e4
-	ld b,000h		;77e5
-	ld (bc),a			;77e7
-	jr c,l77f0h		;77e8
-	nop			;77ea
-	add a,d			;77eb
-	rlca			;77ec
-	rrca			;77ed
-	ld b,000h		;77ee
-l77f0h:
-	ld (bc),a			;77f0
-	ccf			;77f1
-	ld b,000h		;77f2
-	add a,d			;77f4
-	cp 0ffh		;77f5
-	ld b,000h		;77f7
-	ld (bc),a			;77f9
-	jr c,l7802h		;77fa
-	nop			;77fc
-	add a,d			;77fd
-	rlca			;77fe
-	inc e			;77ff
+	.DB $c0		;7680
+	.DB $80		;7681
+	.DB $03		;7682
+	.DB $00		;7683
+	.DB $83		;7684
+	.DB $c7		;7685
+	.DB $cf		;7686
+	.DB $df		;7687
+	.DB $03		;7688
+	.DB $ff		;7689
+	.DB $82		;768a
+	.DB $fe		;768b
+	.DB $fc		;768c
+	.DB $04		;768d
+	.DB $ff		;768e
+	.DB $84		;768f
+	.DB $7f		;7690
+	.DB $3f		;7691
+	.DB $1e		;7692
+	.DB $0c		;7693
+	.DB $04		;7694
+	.DB $c0		;7695
+	.DB $81		;7696
+	.DB $80		;7697
+	.DB $7f		;7698
+	.DB $00		;7699
+	.DB $7f		;769a
+	.DB $00		;769b
+	.DB $1d		;769c
+	.DB $00		;769d
+	.DB $00		;769e
+	.DB $03		;769f
+	.DB $00		;76a0
+	.DB $85		;76a1
+	.DB $01		;76a2
+	.DB $03		;76a3
+	.DB $07		;76a4
+	.DB $0f		;76a5
+	.DB $07		;76a6
+	.DB $02		;76a7
+	.DB $00		;76a8
+	.DB $84		;76a9
+	.DB $c0		;76aa
+	.DB $e0		;76ab
+	.DB $f0		;76ac
+	.DB $f8		;76ad
+	.DB $02		;76ae
+	.DB $fc		;76af
+	.DB $03		;76b0
+	.DB $00		;76b1
+	.DB $85		;76b2
+	.DB $01		;76b3
+	.DB $03		;76b4
+	.DB $07		;76b5
+	.DB $0f		;76b6
+	.DB $1f		;76b7
+	.DB $06		;76b8
+	.DB $00		;76b9
+	.DB $84		;76ba
+	.DB $0c		;76bb
+	.DB $1e		;76bc
+	.DB $03		;76bd
+	.DB $01		;76be
+	.DB $06		;76bf
+	.DB $00		;76c0
+	.DB $03		;76c1
+	.DB $fc		;76c2
+	.DB $05		;76c3
+	.DB $7c		;76c4
+	.DB $82		;76c5
+	.DB $3f		;76c6
+	.DB $7f		;76c7
+	.DB $06		;76c8
+	.DB $ff		;76c9
+	.DB $08		;76ca
+	.DB $fc		;76cb
+	.DB $04		;76cc
+	.DB $00		;76cd
+	.DB $86		;76ce
+	.DB $02		;76cf
+	.DB $07		;76d0
+	.DB $0f		;76d1
+	.DB $1f		;76d2
+	.DB $03		;76d3
+	.DB $01		;76d4
+	.DB $04		;76d5
+	.DB $00		;76d6
+	.DB $82		;76d7
+	.DB $80		;76d8
+	.DB $c0		;76d9
+	.DB $07		;76da
+	.DB $fc		;76db
+	.DB $8b		;76dc
+	.DB $f8		;76dd
+	.DB $3f		;76de
+	.DB $7f		;76df
+	.DB $ff		;76e0
+	.DB $7f		;76e1
+	.DB $3e		;76e2
+	.DB $1d		;76e3
+	.DB $0b		;76e4
+	.DB $07		;76e5
+	.DB $00		;76e6
+	.DB $80		;76e7
+	.DB $03		;76e8
+	.DB $c0		;76e9
+	.DB $83		;76ea
+	.DB $c8		;76eb
+	.DB $dc		;76ec
+	.DB $fe		;76ed
+	.DB $08		;76ee
+	.DB $7c		;76ef
+	.DB $05		;76f0
+	.DB $ff		;76f1
+	.DB $83		;76f2
+	.DB $fe		;76f3
+	.DB $fc		;76f4
+	.DB $f8		;76f5
+	.DB $04		;76f6
+	.DB $fc		;76f7
+	.DB $04		;76f8
+	.DB $7c		;76f9
+	.DB $81		;76fa
+	.DB $e0		;76fb
+	.DB $03		;76fc
+	.DB $f0		;76fd
+	.DB $03		;76fe
+	.DB $f8		;76ff
+	.DB $81		;7700
+	.DB $fc		;7701
+	.DB $05		;7702
+	.DB $ff		;7703
+	.DB $8b		;7704
+	.DB $fe		;7705
+	.DB $fc		;7706
+	.DB $f9		;7707
+	.DB $f0		;7708
+	.DB $e0		;7709
+	.DB $c0		;770a
+	.DB $80		;770b
+	.DB $20		;770c
+	.DB $70		;770d
+	.DB $f8		;770e
+	.DB $fc		;770f
+	.DB $05		;7710
+	.DB $ff		;7711
+	.DB $83		;7712
+	.DB $fe		;7713
+	.DB $fc		;7714
+	.DB $f8		;7715
+	.DB $08		;7716
+	.DB $07		;7717
+	.DB $08		;7718
+	.DB $ff		;7719
+	.DB $81		;771a
+	.DB $7c		;771b
+	.DB $07		;771c
+	.DB $fc		;771d
+	.DB $84		;771e
+	.DB $f0		;771f
+	.DB $e6		;7720
+	.DB $cf		;7721
+	.DB $df		;7722
+	.DB $04		;7723
+	.DB $ff		;7724
+	.DB $03		;7725
+	.DB $7c		;7726
+	.DB $07		;7727
+	.DB $fc		;7728
+	.DB $03		;7729
+	.DB $fe		;772a
+	.DB $03		;772b
+	.DB $ff		;772c
+	.DB $84		;772d
+	.DB $f3		;772e
+	.DB $e7		;772f
+	.DB $cf		;7730
+	.DB $df		;7731
+	.DB $03		;7732
+	.DB $ff		;7733
+	.DB $81		;7734
+	.DB $df		;7735
+	.DB $08		;7736
+	.DB $fc		;7737
+	.DB $82		;7738
+	.DB $f0		;7739
+	.DB $e0		;773a
+	.DB $06		;773b
+	.DB $c0		;773c
+	.DB $03		;773d
+	.DB $ff		;773e
+	.DB $85		;773f
+	.DB $fe		;7740
+	.DB $fc		;7741
+	.DB $f8		;7742
+	.DB $f0		;7743
+	.DB $e0		;7744
+	.DB $02		;7745
+	.DB $fc		;7746
+	.DB $06		;7747
+	.DB $7c		;7748
+	.DB $05		;7749
+	.DB $ff		;774a
+	.DB $83		;774b
+	.DB $fe		;774c
+	.DB $fc		;774d
+	.DB $f8		;774e
+	.DB $08		;774f
+	.DB $ff		;7750
+	.DB $08		;7751
+	.DB $fc		;7752
+	.DB $06		;7753
+	.DB $cf		;7754
+	.DB $82		;7755
+	.DB $ce		;7756
+	.DB $cc		;7757
+	.DB $05		;7758
+	.DB $fc		;7759
+	.DB $03		;775a
+	.DB $7c		;775b
+	.DB $08		;775c
+	.DB $c0		;775d
+	.DB $04		;775e
+	.DB $ff		;775f
+	.DB $82		;7760
+	.DB $df		;7761
+	.DB $cf		;7762
+	.DB $02		;7763
+	.DB $c7		;7764
+	.DB $83		;7765
+	.DB $c8		;7766
+	.DB $dc		;7767
+	.DB $fe		;7768
+	.DB $05		;7769
+	.DB $ff		;776a
+	.DB $04		;776b
+	.DB $7c		;776c
+	.DB $04		;776d
+	.DB $fc		;776e
+	.DB $05		;776f
+	.DB $07		;7770
+	.DB $87		;7771
+	.DB $06		;7772
+	.DB $04		;7773
+	.DB $00		;7774
+	.DB $f0		;7775
+	.DB $e0		;7776
+	.DB $c0		;7777
+	.DB $80		;7778
+	.DB $04		;7779
+	.DB $00		;777a
+	.DB $83		;777b
+	.DB $c8		;777c
+	.DB $dc		;777d
+	.DB $fe		;777e
+	.DB $05		;777f
+	.DB $ff		;7780
+	.DB $08		;7781
+	.DB $c0		;7782
+	.DB $84		;7783
+	.DB $78		;7784
+	.DB $70		;7785
+	.DB $60		;7786
+	.DB $40		;7787
+	.DB $04		;7788
+	.DB $00		;7789
+	.DB $03		;778a
+	.DB $c3		;778b
+	.DB $03		;778c
+	.DB $c1		;778d
+	.DB $02		;778e
+	.DB $c0		;778f
+	.DB $85		;7790
+	.DB $f8		;7791
+	.DB $f0		;7792
+	.DB $e0		;7793
+	.DB $c0		;7794
+	.DB $80		;7795
+	.DB $03		;7796
+	.DB $00		;7797
+	.DB $06		;7798
+	.DB $ff		;7799
+	.DB $82		;779a
+	.DB $fe		;779b
+	.DB $fc		;779c
+	.DB $06		;779d
+	.DB $07		;779e
+	.DB $82		;779f
+	.DB $06		;77a0
+	.DB $04		;77a1
+	.DB $04		;77a2
+	.DB $c0		;77a3
+	.DB $81		;77a4
+	.DB $80		;77a5
+	.DB $7f		;77a6
+	.DB $00		;77a7
+	.DB $7f		;77a8
+	.DB $00		;77a9
+	.DB $1d		;77aa
+	.DB $00		;77ab
+	.DB $00		;77ac
+	.DB $7f		;77ad
+	.DB $00		;77ae
+	.DB $7f		;77af
+	.DB $00		;77b0
+	.DB $09		;77b1
+	.DB $00		;77b2
+	.DB $81		;77b3
+	.DB $20		;77b4
+	.DB $20		;77b5
+	.DB $00		;77b6
+	.DB $02		;77b7
+	.DB $20		;77b8
+	.DB $03		;77b9
+	.DB $30		;77ba
+	.DB $03		;77bb
+	.DB $38		;77bc
+	.DB $38		;77bd
+	.DB $00		;77be
+	.DB $02		;77bf
+	.DB $3c		;77c0
+	.DB $84		;77c1
+	.DB $1c		;77c2
+	.DB $0e		;77c3
+	.DB $06		;77c4
+	.DB $02		;77c5
+	.DB $7f		;77c6
+	.DB $00		;77c7
+	.DB $7f		;77c8
+	.DB $00		;77c9
+	.DB $3c		;77ca
+	.DB $00		;77cb
+	.DB $00		;77cc
+	.DB $7f		;77cd
+	.DB $00		;77ce
+	.DB $7f		;77cf
+	.DB $00		;77d0
+	.DB $7f		;77d1
+	.DB $00		;77d2
+	.DB $19		;77d3
+	.DB $00		;77d4
+	.DB $82		;77d5
+	.DB $1f		;77d6
+	.DB $3f		;77d7
+	.DB $06		;77d8
+	.DB $00		;77d9
+	.DB $82		;77da
+	.DB $ff		;77db
+	.DB $fe		;77dc
+	.DB $07		;77dd
+	.DB $00		;77de
+	.DB $81		;77df
+	.DB $01		;77e0
+	.DB $06		;77e1
+	.DB $00		;77e2
+	.DB $02		;77e3
+	.DB $e0		;77e4
+	.DB $06		;77e5
+	.DB $00		;77e6
+	.DB $02		;77e7
+	.DB $38		;77e8
+	.DB $06		;77e9
+	.DB $00		;77ea
+	.DB $82		;77eb
+	.DB $07		;77ec
+	.DB $0f		;77ed
+	.DB $06		;77ee
+	.DB $00		;77ef
+	.DB $02		;77f0
+	.DB $3f		;77f1
+	.DB $06		;77f2
+	.DB $00		;77f3
+	.DB $82		;77f4
+	.DB $fe		;77f5
+	.DB $ff		;77f6
+	.DB $06		;77f7
+	.DB $00		;77f8
+	.DB $02		;77f9
+	.DB $38		;77fa
+	.DB $06		;77fb
+	.DB $00		;77fc
+	.DB $82		;77fd
+	.DB $07		;77fe
+	.DB $1c		;77ff
 l7800h:
-	ld (bc),a			;7800
-	nop			;7801
+	.DB $02		;7800
+	.DB $00		;7801
 l7802h:
-	add a,c			;7802
-	ccf			;7803
-	inc b			;7804
-	inc c			;7805
-	add a,c			;7806
-	dec e			;7807
-	ld (bc),a			;7808
-	nop			;7809
-	add a,c			;780a
-	rst 38h			;780b
+	.DB $81		;7802
+	.DB $3f		;7803
+	.DB $04		;7804
+	.DB $0c		;7805
+	.DB $81		;7806
+	.DB $1d		;7807
+	.DB $02		;7808
+	.DB $00		;7809
+	.DB $81		;780a
+	.DB $ff		;780b
 l780ch:
-	inc b			;780c
-	call z,0dc85h		;780d
-	jr c,l7882h		;7810
-	ld a,a			;7812
-	ccf			;7813
-	ld (bc),a			;7814
-	nop			;7815
-	add a,d			;7816
-	ld a,a			;7817
-	rst 38h			;7818
-	ld (bc),a			;7819
-	nop			;781a
-l781bh:
-	adc a,b			;781b
-	call m,00efeh		;781c
-	inc e			;781f
-	call m,038f8h		;7820
-	ld (hl),b			;7823
-	ld (bc),a			;7824
-	ld a,a			;7825
-	add a,h			;7826
-	ret p			;7827
-	ret po			;7828
-	rst 38h			;7829
-	ld a,a			;782a
-	ld (bc),a			;782b
-	nop			;782c
-	add a,d			;782d
-	cp 0fch		;782e
-	ld (bc),a			;7830
-	nop			;7831
-	add a,e			;7832
-	call m,038f8h		;7833
-	inc bc			;7836
-	ld (hl),b			;7837
+	.DB $04		;780c
+	.DB $cc		;780d
+	.DB $85		;780e
+	.DB $dc		;780f
+	.DB $38		;7810
+	.DB $70		;7811
+	.DB $7f		;7812
+	.DB $3f		;7813
+	.DB $02		;7814
+	.DB $00		;7815
+	.DB $82		;7816
+	.DB $7f		;7817
+	.DB $ff		;7818
+	.DB $02		;7819
+	.DB $00		;781a
+	.DB $88		;781b
+	.DB $fc		;781c
+	.DB $fe		;781d
+	.DB $0e		;781e
+	.DB $1c		;781f
+	.DB $fc		;7820
+	.DB $f8		;7821
+	.DB $38		;7822
+	.DB $70		;7823
+	.DB $02		;7824
+	.DB $7f		;7825
+	.DB $84		;7826
+	.DB $f0		;7827
+	.DB $e0		;7828
+	.DB $ff		;7829
+	.DB $7f		;782a
+	.DB $02		;782b
+	.DB $00		;782c
+	.DB $82		;782d
+	.DB $fe		;782e
+	.DB $fc		;782f
+	.DB $02		;7830
+	.DB $00		;7831
+	.DB $83		;7832
+	.DB $fc		;7833
+	.DB $f8		;7834
+	.DB $38		;7835
+	.DB $03		;7836
+	.DB $70		;7837
 l7838h:
-	ld (bc),a			;7838
-	ret po			;7839
-	add a,d			;783a
-	rst 38h			;783b
-	ld a,a			;783c
-	ld (bc),a			;783d
-	nop			;783e
-	sub h			;783f
-	ld a,(hl)			;7840
-	call m,l381ch		;7841
-	ret m			;7844
-	ret p			;7845
-	inc bc			;7846
-	rlca			;7847
-	ld c,01dh		;7848
-	dec sp			;784a
-	ld (hl),b			;784b
-	ret po			;784c
-	ret nz			;784d
+	.DB $02		;7838
+	.DB $e0		;7839
+	.DB $82		;783a
+	.DB $ff		;783b
+	.DB $7f		;783c
+	.DB $02		;783d
+	.DB $00		;783e
+	.DB $94		;783f
+	.DB $7e		;7840
+	.DB $fc		;7841
+	.DB $1c		;7842
+	.DB $38		;7843
+	.DB $f8		;7844
+	.DB $f0		;7845
+	.DB $03		;7846
+	.DB $07		;7847
+	.DB $0e		;7848
+	.DB $1d		;7849
+	.DB $3b		;784a
+	.DB $70		;784b
+	.DB $e0		;784c
+	.DB $c0		;784d
 l784eh:
-	ret p			;784e
-	jr nc,l7889h		;784f
-	ret m			;7851
-	call m,sub_021ch		;7852
-	ld c,003h		;7855
-	ld a,h			;7857
-	add a,e			;7858
-	halt			;7859
-	rst 30h			;785a
-	rst 20h			;785b
-	ld (bc),a			;785c
-	ex (sp),hl			;785d
-	adc a,b			;785e
-	ld e,03eh		;785f
-	ld a,(hl)			;7861
+	.DB $f0		;784e
+	.DB $30		;784f
+	.DB $38		;7850
+	.DB $f8		;7851
+	.DB $fc		;7852
+	.DB $1c		;7853
+	.DB $02		;7854
+	.DB $0e		;7855
+	.DB $03		;7856
+	.DB $7c		;7857
+	.DB $83		;7858
+	.DB $76		;7859
+	.DB $f7		;785a
+	.DB $e7		;785b
+	.DB $02		;785c
+	.DB $e3		;785d
+	.DB $88		;785e
+	.DB $1e		;785f
+	.DB $3e		;7860
+	.DB $7e		;7861
 l7862h:
-	xor 0deh		;7862
-	call c,sub_1c9ch		;7864
-	ld (bc),a			;7867
-	ld (hl),b			;7868
-	add a,e			;7869
-	ld (hl),a			;786a
-	ld (hl),e			;786b
-	pop af			;786c
-	inc bc			;786d
-	ret po			;786e
-	adc a,l			;786f
-	rlca			;7870
-	ld c,0feh		;7871
-	call m,0e0c0h		;7873
-	ld (hl),b			;7876
-	jr c,l78f1h		;7877
-	ld (hl),c			;7879
-	ld (hl),a			;787a
-	ld (hl),e			;787b
-	pop af			;787c
-	inc bc			;787d
-	ret po			;787e
-l787fh:
-	adc a,b			;787f
+	.DB $ee		;7862
+	.DB $de		;7863
+	.DB $dc		;7864
+	.DB $9c		;7865
+	.DB $1c		;7866
+	.DB $02		;7867
+	.DB $70		;7868
+	.DB $83		;7869
+	.DB $77		;786a
+	.DB $73		;786b
+	.DB $f1		;786c
+	.DB $03		;786d
+	.DB $e0		;786e
+	.DB $8d		;786f
+	.DB $07		;7870
+	.DB $0e		;7871
+	.DB $fe		;7872
+	.DB $fc		;7873
+	.DB $c0		;7874
+	.DB $e0		;7875
+	.DB $70		;7876
+	.DB $38		;7877
+	.DB $78		;7878
+	.DB $71		;7879
+	.DB $77		;787a
+	.DB $73		;787b
+	.DB $f1		;787c
+	.DB $03		;787d
+	.DB $e0		;787e
+	.DB $88		;787f
 l7880h:
-	ld (hl),b			;7880
-	ret nz			;7881
-l7882h:
-	nop			;7882
-	add a,b			;7883
-	ret nz			;7884
-	ret po			;7885
-	ld a,b			;7886
-	inc e			;7887
-	inc bc			;7888
-l7889h:
-	add hl,de			;7889
-	add a,c			;788a
-	dec sp			;788b
-	inc bc			;788c
-	inc sp			;788d
-	add a,c			;788e
-	rst 38h			;788f
-	inc bc			;7890
-	sbc a,b			;7891
-	add a,c			;7892
-	cp b			;7893
-	inc bc			;7894
-	jr nc,l781bh		;7895
-	call m,sub_423ch		;7897
-	sbc a,c			;789a
-	ld (bc),a			;789b
-	and c			;789c
-	adc a,(hl)			;789d
-	sbc a,c			;789e
-	ld b,d			;789f
-	inc a			;78a0
-	ccf			;78a1
-	ld a,a			;78a2
-	ld h,b			;78a3
-	ld a,(hl)			;78a4
-	ccf			;78a5
-	inc bc			;78a6
-	ld a,a			;78a7
-	ld a,(hl)			;78a8
-	ccf			;78a9
-	ld a,a			;78aa
-	ld h,b			;78ab
-	ld (bc),a			;78ac
-	ld a,(hl)			;78ad
-	add a,d			;78ae
-	ld h,b			;78af
-	ld a,a			;78b0
-	ld (bc),a			;78b1
-	ccf			;78b2
-	add a,d			;78b3
-	ld a,a			;78b4
-	ld h,b			;78b5
-	ld (bc),a			;78b6
-	ld l,a			;78b7
-	add a,e			;78b8
-	ld h,e			;78b9
-	ld a,a			;78ba
-	ccf			;78bb
-	ld (bc),a			;78bc
-	inc e			;78bd
-	add a,c			;78be
-	ld a,002h		;78bf
-	ld (hl),085h		;78c1
-	ld h,e			;78c3
-	ld l,a			;78c4
-	rst 28h			;78c5
-	nop			;78c6
-	ld a,l			;78c7
-	inc b			;78c8
-	ld de,l0003h		;78c9
-	add a,e			;78cc
-	djnz l787fh		;78cd
-	ld d,b			;78cf
-	ld (bc),a			;78d0
-	djnz l78d5h		;78d1
-	nop			;78d3
-	nop			;78d4
+	.DB $70		;7880
+	.DB $c0		;7881
+	.DB $00		;7882
+	.DB $80		;7883
+	.DB $c0		;7884
+	.DB $e0		;7885
+	.DB $78		;7886
+	.DB $1c		;7887
+	.DB $03		;7888
+	.DB $19		;7889
+	.DB $81		;788a
+	.DB $3b		;788b
+	.DB $03		;788c
+	.DB $33		;788d
+	.DB $81		;788e
+	.DB $ff		;788f
+	.DB $03		;7890
+	.DB $98		;7891
+	.DB $81		;7892
+	.DB $b8		;7893
+	.DB $03		;7894
+	.DB $30		;7895
+	.DB $84		;7896
+	.DB $fc		;7897
+	.DB $3c		;7898
+	.DB $42		;7899
+	.DB $99		;789a
+	.DB $02		;789b
+	.DB $a1		;789c
+	.DB $8e		;789d
+	.DB $99		;789e
+	.DB $42		;789f
+	.DB $3c		;78a0
+	.DB $3f		;78a1
+	.DB $7f		;78a2
+	.DB $60		;78a3
+	.DB $7e		;78a4
+	.DB $3f		;78a5
+	.DB $03		;78a6
+	.DB $7f		;78a7
+	.DB $7e		;78a8
+	.DB $3f		;78a9
+	.DB $7f		;78aa
+	.DB $60		;78ab
+	.DB $02		;78ac
+	.DB $7e		;78ad
+	.DB $82		;78ae
+	.DB $60		;78af
+	.DB $7f		;78b0
+	.DB $02		;78b1
+	.DB $3f		;78b2
+	.DB $82		;78b3
+	.DB $7f		;78b4
+	.DB $60		;78b5
+	.DB $02		;78b6
+	.DB $6f		;78b7
+	.DB $83		;78b8
+	.DB $63		;78b9
+	.DB $7f		;78ba
+	.DB $3f		;78bb
+	.DB $02		;78bc
+	.DB $1c		;78bd
+	.DB $81		;78be
+	.DB $3e		;78bf
+	.DB $02		;78c0
+	.DB $36		;78c1
+	.DB $85		;78c2
+	.DB $63		;78c3
+	.DB $6f		;78c4
+	.DB $ef		;78c5
+	.DB $00		;78c6
+	.DB $7d		;78c7
+	.DB $04		;78c8
+	.DB $11		;78c9
+	.DB $03		;78ca
+	.DB $00		;78cb
+	.DB $83		;78cc
+	.DB $10		;78cd
+	.DB $b0		;78ce
+	.DB $50		;78cf
+	.DB $02		;78d0
+	.DB $10		;78d1
+	.DB $02		;78d2
+	.DB $00		;78d3
+	.DB $00		;78d4
 l78d5h:
-	dec b			;78d5
-	ld a,c			;78d6
-	or (hl)			;78d7
-	ld a,c			;78d8
-	ld a,h			;78d9
-	ld a,d			;78da
-	ld b,e			;78db
-	ld a,e			;78dc
-	or 07bh		;78dd
-	xor a			;78df
-	ld a,h			;78e0
-	ld l,(hl)			;78e1
-	ld a,l			;78e2
-	inc (hl)			;78e3
-	ld a,(hl)			;78e4
-	dec b			;78e5
-	ld a,c			;78e6
-	or (hl)			;78e7
-	ld a,c			;78e8
-	ld a,h			;78e9
-	ld a,d			;78ea
-	ld b,e			;78eb
-	ld a,e			;78ec
-	or 07bh		;78ed
-	xor a			;78ef
-	ld a,h			;78f0
-l78f1h:
-	ld l,(hl)			;78f1
-	ld a,l			;78f2
-	inc (hl)			;78f3
-	ld a,(hl)			;78f4
-	dec b			;78f5
-	ld a,c			;78f6
-	or (hl)			;78f7
-	ld a,c			;78f8
-	ld a,h			;78f9
-	ld a,d			;78fa
-	ld b,e			;78fb
-	ld a,e			;78fc
-	or 07bh		;78fd
-	xor a			;78ff
-	ld a,h			;7900
-	ld l,(hl)			;7901
-	ld a,l			;7902
-	inc (hl)			;7903
-	ld a,(hl)			;7904
-	ld bc,08115h		;7905
-	inc b			;7908
-	dec b			;7909
-	inc bc			;790a
-	inc d			;790b
-	add hl,bc			;790c
-	ld bc,08113h		;790d
-	inc b			;7910
-	dec b			;7911
-	inc bc			;7912
-	ld d,009h		;7913
-	ld bc,l2110h		;7915
-	inc b			;7918
-	dec d			;7919
-	ld d,e			;791a
-	ld e,019h		;791b
-	ld bc,001c8h		;791d
-	ld c,021h		;7920
-	ex af,af'			;7922
-	dec d			;7923
-	inc de			;7924
-	rrca			;7925
-	rla			;7926
-	ld (de),a			;7927
-	rrca			;7928
-	ld d,013h		;7929
-	ld a,(bc)			;792b
-	add hl,de			;792c
-	ld hl,l1506h		;792d
-	inc de			;7930
-	inc b			;7931
-	rla			;7932
-	ld (de),a			;7933
-	ld a,(bc)			;7934
-	jr $+1		;7935
-	ld de,l0881h		;7937
-	dec b			;793a
-	inc bc			;793b
-	ld (de),a			;793c
-	rlca			;793d
-	ld b,d			;793e
-	ld d,008h		;793f
-	ld bc,001c8h		;7941
-	dec bc			;7944
-	add a,c			;7945
-	ld b,005h		;7946
-	inc bc			;7948
-	ld de,l0109h		;7949
-	add hl,bc			;794c
-	add a,c			;794d
-	ld b,004h		;794e
-	ld (bc),a			;7950
-	ld a,(bc)			;7951
-	ld b,003h		;7952
-	ld a,(bc)			;7954
-	add hl,bc			;7955
-	add a,c			;7956
-	dec b			;7957
-	inc b			;7958
-	ld (bc),a			;7959
-	dec bc			;795a
-	ex af,af'			;795b
-	ld bc,0810ah		;795c
-	ex af,af'			;795f
-	dec b			;7960
-	inc bc			;7961
-	ld a,(bc)			;7962
-	rlca			;7963
-	ld b,d			;7964
-	inc d			;7965
-	ex af,af'			;7966
-	ld bc,001c8h		;7967
-	rrca			;796a
-	ld hl,01409h		;796b
-	ld (de),a			;796e
-	ld a,(bc)			;796f
-	jr $+33		;7970
-	dec b			;7972
-	inc d			;7973
-	ld (de),a			;7974
-	ld a,(bc)			;7975
-	ld a,(de)			;7976
-	ld (bc),a			;7977
-	ld a,(bc)			;7978
-	ex af,af'			;7979
-	dec b			;797a
-	rlca			;797b
-	ld (bc),a			;797c
-	rrca			;797d
-	ex af,af'			;797e
-	ld bc,l2112h		;797f
-	add hl,bc			;7982
-	inc d			;7983
-	ld d,d			;7984
-	ld e,018h		;7985
-	ld bc,001c8h		;7987
-	ld a,(bc)			;798a
-	add a,c			;798b
-	inc b			;798c
-	inc b			;798d
-	ld (bc),a			;798e
-	ld a,(bc)			;798f
-	ex af,af'			;7990
-	ld hl,01404h		;7991
-	ld (de),a			;7994
-	ld a,(bc)			;7995
-	sub d			;7996
-	ld b,01ah		;7997
-	ld (bc),a			;7999
-	dec b			;799a
-	ld (l0a06h),hl		;799b
-	ld (de),a			;799e
-	dec b			;799f
-	ld d,013h		;79a0
-	ld a,(bc)			;79a2
-	add hl,de			;79a3
-	ld bc,08105h		;79a4
-	ld b,005h		;79a7
-	inc bc			;79a9
-	dec b			;79aa
-	rlca			;79ab
-	ld (bc),a			;79ac
-	inc b			;79ad
-	ld (l0a06h),hl		;79ae
-	ld d,d			;79b1
-	ld (de),a			;79b2
-	jr l79b6h		;79b3
-	ret z			;79b5
-l79b6h:
-	ld bc,02115h		;79b6
-	inc b			;79b9
-	dec d			;79ba
-	inc de			;79bb
-	inc d			;79bc
-	add hl,de			;79bd
-	ld bc,l210fh		;79be
-	inc b			;79c1
-	dec d			;79c2
-	inc de			;79c3
-	ld d,019h		;79c4
-	ld bc,08110h		;79c6
-	inc b			;79c9
-	dec b			;79ca
-	ld b,e			;79cb
-	ld e,009h		;79cc
-	ld bc,001c8h		;79ce
-	dec bc			;79d1
-	ld hl,l1506h		;79d2
-	inc de			;79d5
-	ld de,l0118h+1		;79d6
-l79d9h:
-	add hl,bc			;79d9
-	ld hl,l1405h+1		;79da
-	ld (de),a			;79dd
-	ld a,(bc)			;79de
-	ld d,013h		;79df
-	ld a,(bc)			;79e1
-	add hl,de			;79e2
-	ld hl,l1405h		;79e3
-	ld (de),a			;79e6
-	dec bc			;79e7
-	jr l79ebh		;79e8
-	ld a,(bc)			;79ea
-l79ebh:
-	ld hl,01508h		;79eb
-	inc de			;79ee
-	ld a,(bc)			;79ef
-	rla			;79f0
-	ld d,d			;79f1
-	inc d			;79f2
-	jr l79f6h		;79f3
-	ret z			;79f5
-l79f6h:
-	ld bc,l210ah		;79f6
-	inc b			;79f9
-	dec d			;79fa
-	inc de			;79fb
-	add hl,bc			;79fc
-	rla			;79fd
-	ld (de),a			;79fe
-	add hl,bc			;79ff
-	ld d,013h		;7a00
-	add hl,bc			;7a02
-	rla			;7a03
-	ld (de),a			;7a04
-	dec b			;7a05
-	sub d			;7a06
-	ld b,01ah		;7a07
-	ld (bc),a			;7a09
-	ex af,af'			;7a0a
-	ld b,003h		;7a0b
-	ex af,af'			;7a0d
-	add hl,bc			;7a0e
-	ld bc,08105h		;7a0f
-	dec b			;7a12
-	inc b			;7a13
-	ld (bc),a			;7a14
-	ex af,af'			;7a15
-	ld (l0a06h),hl		;7a16
-	ld (de),a			;7a19
-	ld c,018h		;7a1a
-	ld hl,l1405h+1		;7a1c
-	ld d,d			;7a1f
-	ld (de),a			;7a20
-	ld d,019h		;7a21
-	ld bc,001c8h		;7a23
-	ld a,(bc)			;7a26
-	ld hl,l1405h+1		;7a27
-	ld (de),a			;7a2a
-	rrca			;7a2b
-	jr $+33		;7a2c
-	ld b,015h		;7a2e
-	inc de			;7a30
-	ld b,017h		;7a31
-	ld (de),a			;7a33
-	ld a,(bc)			;7a34
-	jr $-127		;7a35
-	inc b			;7a37
-	inc b			;7a38
-	ld (bc),a			;7a39
-	dec bc			;7a3a
-	ld (l0a06h),hl		;7a3b
-	ld (de),a			;7a3e
-	ld a,(bc)			;7a3f
+	.DB $05		;78d5
+	.DB $79		;78d6
+	.DB $b6		;78d7
+	.DB $79		;78d8
+	.DB $7c		;78d9
+	.DB $7a		;78da
+	.DB $43		;78db
+	.DB $7b		;78dc
+	.DB $f6		;78dd
+	.DB $7b		;78de
+	.DB $af		;78df
+	.DB $7c		;78e0
+	.DB $6e		;78e1
+	.DB $7d		;78e2
+	.DB $34		;78e3
+	.DB $7e		;78e4
+	.DB $05		;78e5
+	.DB $79		;78e6
+	.DB $b6		;78e7
+	.DB $79		;78e8
+	.DB $7c		;78e9
+	.DB $7a		;78ea
+	.DB $43		;78eb
+	.DB $7b		;78ec
+	.DB $f6		;78ed
+	.DB $7b		;78ee
+	.DB $af		;78ef
+	.DB $7c		;78f0
+	.DB $6e		;78f1
+	.DB $7d		;78f2
+	.DB $34		;78f3
+	.DB $7e		;78f4
+	.DB $05		;78f5
+	.DB $79		;78f6
+	.DB $b6		;78f7
+	.DB $79		;78f8
+	.DB $7c		;78f9
+	.DB $7a		;78fa
+	.DB $43		;78fb
+	.DB $7b		;78fc
+	.DB $f6		;78fd
+	.DB $7b		;78fe
+	.DB $af		;78ff
+	.DB $7c		;7900
+	.DB $6e		;7901
+	.DB $7d		;7902
+	.DB $34		;7903
+	.DB $7e		;7904
+	.DB $01		;7905
+	.DB $15		;7906
+	.DB $81		;7907
+	.DB $04		;7908
+	.DB $05		;7909
+	.DB $03		;790a
+	.DB $14		;790b
+	.DB $09		;790c
+	.DB $01		;790d
+	.DB $13		;790e
+	.DB $81		;790f
+	.DB $04		;7910
+	.DB $05		;7911
+	.DB $03		;7912
+	.DB $16		;7913
+	.DB $09		;7914
+	.DB $01		;7915
+	.DB $10		;7916
+	.DB $21		;7917
+	.DB $04		;7918
+	.DB $15		;7919
+	.DB $53		;791a
+	.DB $1e		;791b
+	.DB $19		;791c
+	.DB $01		;791d
+	.DB $c8		;791e
+	.DB $01		;791f
+	.DB $0e		;7920
+	.DB $21		;7921
+	.DB $08		;7922
+	.DB $15		;7923
+	.DB $13		;7924
+	.DB $0f		;7925
+	.DB $17		;7926
+	.DB $12		;7927
+	.DB $0f		;7928
+	.DB $16		;7929
+	.DB $13		;792a
+	.DB $0a		;792b
+	.DB $19		;792c
+	.DB $21		;792d
+	.DB $06		;792e
+	.DB $15		;792f
+	.DB $13		;7930
+	.DB $04		;7931
+	.DB $17		;7932
+	.DB $12		;7933
+	.DB $0a		;7934
+	.DB $18		;7935
+	.DB $01		;7936
+	.DB $11		;7937
+	.DB $81		;7938
+	.DB $08		;7939
+	.DB $05		;793a
+	.DB $03		;793b
+	.DB $12		;793c
+	.DB $07		;793d
+	.DB $42		;793e
+	.DB $16		;793f
+	.DB $08		;7940
+	.DB $01		;7941
+	.DB $c8		;7942
+	.DB $01		;7943
+	.DB $0b		;7944
+	.DB $81		;7945
+	.DB $06		;7946
+	.DB $05		;7947
+	.DB $03		;7948
+	.DB $11		;7949
+	.DB $09		;794a
+	.DB $01		;794b
+	.DB $09		;794c
+	.DB $81		;794d
+	.DB $06		;794e
+	.DB $04		;794f
+	.DB $02		;7950
+	.DB $0a		;7951
+	.DB $06		;7952
+	.DB $03		;7953
+	.DB $0a		;7954
+	.DB $09		;7955
+	.DB $81		;7956
+	.DB $05		;7957
+	.DB $04		;7958
+	.DB $02		;7959
+	.DB $0b		;795a
+	.DB $08		;795b
+	.DB $01		;795c
+	.DB $0a		;795d
+	.DB $81		;795e
+	.DB $08		;795f
+	.DB $05		;7960
+	.DB $03		;7961
+	.DB $0a		;7962
+	.DB $07		;7963
+	.DB $42		;7964
+	.DB $14		;7965
+	.DB $08		;7966
+	.DB $01		;7967
+	.DB $c8		;7968
+	.DB $01		;7969
+	.DB $0f		;796a
+	.DB $21		;796b
+	.DB $09		;796c
+	.DB $14		;796d
+	.DB $12		;796e
+	.DB $0a		;796f
+	.DB $18		;7970
+	.DB $21		;7971
+	.DB $05		;7972
+	.DB $14		;7973
+	.DB $12		;7974
+	.DB $0a		;7975
+	.DB $1a		;7976
+	.DB $02		;7977
+	.DB $0a		;7978
+	.DB $08		;7979
+	.DB $05		;797a
+	.DB $07		;797b
+	.DB $02		;797c
+	.DB $0f		;797d
+	.DB $08		;797e
+	.DB $01		;797f
+	.DB $12		;7980
+	.DB $21		;7981
+	.DB $09		;7982
+	.DB $14		;7983
+	.DB $52		;7984
+	.DB $1e		;7985
+	.DB $18		;7986
+	.DB $01		;7987
+	.DB $c8		;7988
+	.DB $01		;7989
+	.DB $0a		;798a
+	.DB $81		;798b
+	.DB $04		;798c
+	.DB $04		;798d
+	.DB $02		;798e
+	.DB $0a		;798f
+	.DB $08		;7990
+	.DB $21		;7991
+	.DB $04		;7992
+	.DB $14		;7993
+	.DB $12		;7994
+	.DB $0a		;7995
+	.DB $92		;7996
+	.DB $06		;7997
+	.DB $1a		;7998
+	.DB $02		;7999
+	.DB $05		;799a
+	.DB $22		;799b
+	.DB $06		;799c
+	.DB $0a		;799d
+	.DB $12		;799e
+	.DB $05		;799f
+	.DB $16		;79a0
+	.DB $13		;79a1
+	.DB $0a		;79a2
+	.DB $19		;79a3
+	.DB $01		;79a4
+	.DB $05		;79a5
+	.DB $81		;79a6
+	.DB $06		;79a7
+	.DB $05		;79a8
+	.DB $03		;79a9
+	.DB $05		;79aa
+	.DB $07		;79ab
+	.DB $02		;79ac
+	.DB $04		;79ad
+	.DB $22		;79ae
+	.DB $06		;79af
+	.DB $0a		;79b0
+	.DB $52		;79b1
+	.DB $12		;79b2
+	.DB $18		;79b3
+	.DB $01		;79b4
+	.DB $c8		;79b5
+	.DB $01		;79b6
+	.DB $15		;79b7
+	.DB $21		;79b8
+	.DB $04		;79b9
+	.DB $15		;79ba
+	.DB $13		;79bb
+	.DB $14		;79bc
+	.DB $19		;79bd
+	.DB $01		;79be
+	.DB $0f		;79bf
+	.DB $21		;79c0
+	.DB $04		;79c1
+	.DB $15		;79c2
+	.DB $13		;79c3
+	.DB $16		;79c4
+	.DB $19		;79c5
+	.DB $01		;79c6
+	.DB $10		;79c7
+	.DB $81		;79c8
+	.DB $04		;79c9
+	.DB $05		;79ca
+	.DB $43		;79cb
+	.DB $1e		;79cc
+	.DB $09		;79cd
+	.DB $01		;79ce
+	.DB $c8		;79cf
+	.DB $01		;79d0
+	.DB $0b		;79d1
+	.DB $21		;79d2
+	.DB $06		;79d3
+	.DB $15		;79d4
+	.DB $13		;79d5
+	.DB $11		;79d6
+	.DB $19		;79d7
+	.DB $01		;79d8
+	.DB $09		;79d9
+	.DB $21		;79da
+	.DB $06		;79db
+	.DB $14		;79dc
+	.DB $12		;79dd
+	.DB $0a		;79de
+	.DB $16		;79df
+	.DB $13		;79e0
+	.DB $0a		;79e1
+	.DB $19		;79e2
+	.DB $21		;79e3
+	.DB $05		;79e4
+	.DB $14		;79e5
+	.DB $12		;79e6
+	.DB $0b		;79e7
+	.DB $18		;79e8
+	.DB $01		;79e9
+	.DB $0a		;79ea
+	.DB $21		;79eb
+	.DB $08		;79ec
+	.DB $15		;79ed
+	.DB $13		;79ee
+	.DB $0a		;79ef
+	.DB $17		;79f0
+	.DB $52		;79f1
+	.DB $14		;79f2
+	.DB $18		;79f3
+	.DB $01		;79f4
+	.DB $c8		;79f5
+	.DB $01		;79f6
+	.DB $0a		;79f7
+	.DB $21		;79f8
+	.DB $04		;79f9
+	.DB $15		;79fa
+	.DB $13		;79fb
+	.DB $09		;79fc
+	.DB $17		;79fd
+	.DB $12		;79fe
+	.DB $09		;79ff
+	.DB $16		;7a00
+	.DB $13		;7a01
+	.DB $09		;7a02
+	.DB $17		;7a03
+	.DB $12		;7a04
+	.DB $05		;7a05
+	.DB $92		;7a06
+	.DB $06		;7a07
+	.DB $1a		;7a08
+	.DB $02		;7a09
+	.DB $08		;7a0a
+	.DB $06		;7a0b
+	.DB $03		;7a0c
+	.DB $08		;7a0d
+	.DB $09		;7a0e
+	.DB $01		;7a0f
+	.DB $05		;7a10
+	.DB $81		;7a11
+	.DB $05		;7a12
+	.DB $04		;7a13
+	.DB $02		;7a14
+	.DB $08		;7a15
+	.DB $22		;7a16
+	.DB $06		;7a17
+	.DB $0a		;7a18
+	.DB $12		;7a19
+	.DB $0e		;7a1a
+	.DB $18		;7a1b
+	.DB $21		;7a1c
+	.DB $06		;7a1d
+	.DB $14		;7a1e
+	.DB $52		;7a1f
+	.DB $12		;7a20
+	.DB $16		;7a21
+	.DB $19		;7a22
+	.DB $01		;7a23
+	.DB $c8		;7a24
+	.DB $01		;7a25
+	.DB $0a		;7a26
+	.DB $21		;7a27
+	.DB $06		;7a28
+	.DB $14		;7a29
+	.DB $12		;7a2a
+	.DB $0f		;7a2b
+	.DB $18		;7a2c
+	.DB $21		;7a2d
+	.DB $06		;7a2e
+	.DB $15		;7a2f
+	.DB $13		;7a30
+	.DB $06		;7a31
+	.DB $17		;7a32
+	.DB $12		;7a33
+	.DB $0a		;7a34
+	.DB $18		;7a35
+	.DB $81		;7a36
+	.DB $04		;7a37
+	.DB $04		;7a38
+	.DB $02		;7a39
+	.DB $0b		;7a3a
+	.DB $22		;7a3b
+	.DB $06		;7a3c
+	.DB $0a		;7a3d
+	.DB $12		;7a3e
+	.DB $0a		;7a3f
 l7a40h:
-	sub d			;7a40
-	dec b			;7a41
-	ld a,(de)			;7a42
-	ld b,003h		;7a43
-	ld a,(bc)			;7a45
-	add hl,bc			;7a46
-	add a,c			;7a47
-	ex af,af'			;7a48
-	inc b			;7a49
-	ld b,d			;7a4a
-	inc d			;7a4b
-	ex af,af'			;7a4c
-	ld bc,001c8h		;7a4d
-	ld a,(bc)			;7a50
-	ld hl,01404h		;7a51
-	ld (de),a			;7a54
-	rrca			;7a55
-	jr l79d9h		;7a56
-	inc b			;7a58
-	inc b			;7a59
-	ld (bc),a			;7a5a
-	ld a,(bc)			;7a5b
-	ld (l0a06h),hl		;7a5c
-	ld (de),a			;7a5f
-	dec b			;7a60
-	sub d			;7a61
-	ld b,01ah		;7a62
-	ld (bc),a			;7a64
-	ex af,af'			;7a65
-	ld b,003h		;7a66
-	ld a,(bc)			;7a68
-	add hl,bc			;7a69
-	ld bc,l2105h		;7a6a
-	ld b,015h		;7a6d
-	inc de			;7a6f
-	dec b			;7a70
-	rla			;7a71
-	ld (de),a			;7a72
-	inc b			;7a73
-	sub d			;7a74
-	ld b,01ah		;7a75
-	ld b,d			;7a77
-	ld (de),a			;7a78
-	ex af,af'			;7a79
-	ld bc,001c8h		;7a7a
-	inc c			;7a7d
-	add a,c			;7a7e
-	ld b,005h		;7a7f
-	inc bc			;7a81
-	ld a,(bc)			;7a82
-	rlca			;7a83
-	ld (bc),a			;7a84
-	dec c			;7a85
-	ld b,003h		;7a86
-	ld a,(bc)			;7a88
-	add hl,bc			;7a89
-	add a,c			;7a8a
-	ld b,005h		;7a8b
-	inc bc			;7a8d
-	ld b,007h		;7a8e
-	ld (bc),a			;7a90
-	ld a,(bc)			;7a91
-	ex af,af'			;7a92
-	ld bc,l210ch		;7a93
-	ex af,af'			;7a96
-	dec d			;7a97
-	inc de			;7a98
-	ld (de),a			;7a99
-	rla			;7a9a
-	ld d,d			;7a9b
-	ld d,018h		;7a9c
-	ld bc,001c8h		;7a9e
-	ld a,(bc)			;7aa1
-	add a,c			;7aa2
-	ld b,004h		;7aa3
-	ld (bc),a			;7aa5
-	rrca			;7aa6
-	ex af,af'			;7aa7
-	add a,c			;7aa8
-	dec b			;7aa9
-	inc b			;7aaa
-	ld (bc),a			;7aab
-	dec b			;7aac
-	ld (l0a06h),hl		;7aad
-	ld (de),a			;7ab0
-	ld a,(bc)			;7ab1
-	jr l7ac9h		;7ab2
-	rla			;7ab4
-	ld (de),a			;7ab5
-	rrca			;7ab6
-	jr l7abah		;7ab7
-	rrca			;7ab9
-l7abah:
-	add a,c			;7aba
-	rlca			;7abb
-	inc b			;7abc
-	ld b,d			;7abd
-	rra			;7abe
-	ex af,af'			;7abf
-	ld bc,001c8h		;7ac0
-	ld a,(bc)			;7ac3
-	add a,c			;7ac4
-	inc b			;7ac5
-	inc b			;7ac6
-	ld (bc),a			;7ac7
-	ld a,(bc)			;7ac8
-l7ac9h:
-	ex af,af'			;7ac9
-	add a,c			;7aca
-	ld b,005h		;7acb
-	inc bc			;7acd
-	inc b			;7ace
-	rlca			;7acf
-	ld (bc),a			;7ad0
-	ld a,(bc)			;7ad1
-	ex af,af'			;7ad2
-	ld hl,l1405h+1		;7ad3
-	ld (de),a			;7ad6
-	ld a,(bc)			;7ad7
-	sub d			;7ad8
-	ld b,01ah		;7ad9
-	ld (bc),a			;7adb
-	dec b			;7adc
-	ld (00a05h),hl		;7add
-	ld d,013h		;7ae0
-	ld a,(bc)			;7ae2
-	add hl,de			;7ae3
-	ld hl,l1405h+1		;7ae4
-	ld d,d			;7ae7
-	inc d			;7ae8
-	jr l7aech		;7ae9
-	ret z			;7aeb
-l7aech:
-	ld bc,0810fh		;7aec
-	inc b			;7aef
-	inc b			;7af0
-	ld (bc),a			;7af1
-	rrca			;7af2
-	ld (00a05h),hl		;7af3
-sub_7af6h:
-	ld (de),a			;7af6
-	ld a,(bc)			;7af7
-	ld d,013h		;7af8
-	ld a,(bc)			;7afa
-	add hl,de			;7afb
-	add a,c			;7afc
-	dec b			;7afd
-	inc b			;7afe
-	ld (bc),a			;7aff
+	.DB $92		;7a40
+	.DB $05		;7a41
+	.DB $1a		;7a42
+	.DB $06		;7a43
+	.DB $03		;7a44
+	.DB $0a		;7a45
+	.DB $09		;7a46
+	.DB $81		;7a47
+	.DB $08		;7a48
+	.DB $04		;7a49
+	.DB $42		;7a4a
+	.DB $14		;7a4b
+	.DB $08		;7a4c
+	.DB $01		;7a4d
+	.DB $c8		;7a4e
+	.DB $01		;7a4f
+	.DB $0a		;7a50
+	.DB $21		;7a51
+	.DB $04		;7a52
+	.DB $14		;7a53
+	.DB $12		;7a54
+	.DB $0f		;7a55
+	.DB $18		;7a56
+	.DB $81		;7a57
+	.DB $04		;7a58
+	.DB $04		;7a59
+	.DB $02		;7a5a
+	.DB $0a		;7a5b
+	.DB $22		;7a5c
+	.DB $06		;7a5d
+	.DB $0a		;7a5e
+	.DB $12		;7a5f
+	.DB $05		;7a60
+	.DB $92		;7a61
+	.DB $06		;7a62
+	.DB $1a		;7a63
+	.DB $02		;7a64
+	.DB $08		;7a65
+	.DB $06		;7a66
+	.DB $03		;7a67
+	.DB $0a		;7a68
+	.DB $09		;7a69
+	.DB $01		;7a6a
+	.DB $05		;7a6b
+	.DB $21		;7a6c
+	.DB $06		;7a6d
+	.DB $15		;7a6e
+	.DB $13		;7a6f
+	.DB $05		;7a70
+	.DB $17		;7a71
+	.DB $12		;7a72
+	.DB $04		;7a73
+	.DB $92		;7a74
+	.DB $06		;7a75
+	.DB $1a		;7a76
+	.DB $42		;7a77
+	.DB $12		;7a78
+	.DB $08		;7a79
+	.DB $01		;7a7a
+	.DB $c8		;7a7b
+	.DB $01		;7a7c
+	.DB $0c		;7a7d
+	.DB $81		;7a7e
+	.DB $06		;7a7f
+	.DB $05		;7a80
+	.DB $03		;7a81
+	.DB $0a		;7a82
+	.DB $07		;7a83
+	.DB $02		;7a84
+	.DB $0d		;7a85
+	.DB $06		;7a86
+	.DB $03		;7a87
+	.DB $0a		;7a88
+	.DB $09		;7a89
+	.DB $81		;7a8a
+	.DB $06		;7a8b
+	.DB $05		;7a8c
+	.DB $03		;7a8d
+	.DB $06		;7a8e
+	.DB $07		;7a8f
+	.DB $02		;7a90
+	.DB $0a		;7a91
+	.DB $08		;7a92
+	.DB $01		;7a93
+	.DB $0c		;7a94
+	.DB $21		;7a95
+	.DB $08		;7a96
+	.DB $15		;7a97
+	.DB $13		;7a98
+	.DB $12		;7a99
+	.DB $17		;7a9a
+	.DB $52		;7a9b
+	.DB $16		;7a9c
+	.DB $18		;7a9d
+	.DB $01		;7a9e
+	.DB $c8		;7a9f
+	.DB $01		;7aa0
+	.DB $0a		;7aa1
+	.DB $81		;7aa2
+	.DB $06		;7aa3
+	.DB $04		;7aa4
+	.DB $02		;7aa5
+	.DB $0f		;7aa6
+	.DB $08		;7aa7
+	.DB $81		;7aa8
+	.DB $05		;7aa9
+	.DB $04		;7aaa
+	.DB $02		;7aab
+	.DB $05		;7aac
+	.DB $22		;7aad
+	.DB $06		;7aae
+	.DB $0a		;7aaf
+	.DB $12		;7ab0
+	.DB $0a		;7ab1
+	.DB $18		;7ab2
+	.DB $15		;7ab3
+	.DB $17		;7ab4
+	.DB $12		;7ab5
+	.DB $0f		;7ab6
+	.DB $18		;7ab7
+	.DB $01		;7ab8
+	.DB $0f		;7ab9
+	.DB $81		;7aba
+	.DB $07		;7abb
+	.DB $04		;7abc
+	.DB $42		;7abd
+	.DB $1f		;7abe
+	.DB $08		;7abf
+	.DB $01		;7ac0
+	.DB $c8		;7ac1
+	.DB $01		;7ac2
+	.DB $0a		;7ac3
+	.DB $81		;7ac4
+	.DB $04		;7ac5
+	.DB $04		;7ac6
+	.DB $02		;7ac7
+	.DB $0a		;7ac8
+	.DB $08		;7ac9
+	.DB $81		;7aca
+	.DB $06		;7acb
+	.DB $05		;7acc
+	.DB $03		;7acd
+	.DB $04		;7ace
+	.DB $07		;7acf
+	.DB $02		;7ad0
+	.DB $0a		;7ad1
+	.DB $08		;7ad2
+	.DB $21		;7ad3
+	.DB $06		;7ad4
+	.DB $14		;7ad5
+	.DB $12		;7ad6
+	.DB $0a		;7ad7
+	.DB $92		;7ad8
+	.DB $06		;7ad9
+	.DB $1a		;7ada
+	.DB $02		;7adb
+	.DB $05		;7adc
+	.DB $22		;7add
+	.DB $05		;7ade
+	.DB $0a		;7adf
+	.DB $16		;7ae0
+	.DB $13		;7ae1
+	.DB $0a		;7ae2
+	.DB $19		;7ae3
+	.DB $21		;7ae4
+	.DB $06		;7ae5
+	.DB $14		;7ae6
+	.DB $52		;7ae7
+	.DB $14		;7ae8
+	.DB $18		;7ae9
+	.DB $01		;7aea
+	.DB $c8		;7aeb
+	.DB $01		;7aec
+	.DB $0f		;7aed
+	.DB $81		;7aee
+	.DB $04		;7aef
+	.DB $04		;7af0
+	.DB $02		;7af1
+	.DB $0f		;7af2
+	.DB $22		;7af3
+	.DB $05		;7af4
+	.DB $0a		;7af5
+	.DB $12		;7af6
+	.DB $0a		;7af7
+	.DB $16		;7af8
+	.DB $13		;7af9
+	.DB $0a		;7afa
+	.DB $19		;7afb
+	.DB $81		;7afc
+	.DB $05		;7afd
+	.DB $04		;7afe
+	.DB $02		;7aff
 l7b00h:
-	dec b			;7b00
-	ld a,(bc)			;7b01
-	ld (de),a			;7b02
-	ld a,(bc)			;7b03
-	jr l7b07h		;7b04
-	ld a,(bc)			;7b06
-l7b07h:
-	ld hl,01408h		;7b07
-	ld (de),a			;7b0a
-	ld a,(bc)			;7b0b
-	sub d			;7b0c
-	dec b			;7b0d
-	ld a,(de)			;7b0e
-	ld b,d			;7b0f
-	inc d			;7b10
-	ex af,af'			;7b11
-	ld bc,001c8h		;7b12
-	ld a,(bc)			;7b15
-	add a,c			;7b16
-	inc b			;7b17
-	dec b			;7b18
-	inc bc			;7b19
-	add hl,bc			;7b1a
-	rlca			;7b1b
-l7b1ch:
-	ld (bc),a			;7b1c
-	ex af,af'			;7b1d
-	ld b,003h		;7b1e
-	add hl,bc			;7b20
-	rlca			;7b21
-	ld (bc),a			;7b22
-	ex af,af'			;7b23
-	ld (l0a06h),hl		;7b24
-	ld (de),a			;7b27
-	ex af,af'			;7b28
-	ld d,013h		;7b29
-	dec b			;7b2b
-	add hl,de			;7b2c
-	ld bc,l2105h		;7b2d
-	dec b			;7b30
-	inc d			;7b31
-	ld (de),a			;7b32
-	dec b			;7b33
-	sub d			;7b34
-	ld b,01ah		;7b35
-	ld (bc),a			;7b37
-	ld a,(bc)			;7b38
-	ex af,af'			;7b39
-	add a,c			;7b3a
-	ld b,004h		;7b3b
-	ld b,d			;7b3d
-	ld (de),a			;7b3e
-	ld b,009h		;7b3f
-	ld bc,001c8h		;7b41
-	ld de,l0881h		;7b44
-	inc b			;7b47
-	ld (bc),a			;7b48
-	inc c			;7b49
-	ld (l0a06h),hl		;7b4a
-	ld (de),a			;7b4d
-	inc d			;7b4e
-	ld d,017h		;7b4f
-	jr l7b54h		;7b51
-	inc d			;7b53
-l7b54h:
-	add a,c			;7b54
-	ex af,af'			;7b55
-	dec b			;7b56
-	inc bc			;7b57
-	rrca			;7b58
-	rlca			;7b59
-	ld b,d			;7b5a
-	ld e,008h		;7b5b
-	ld bc,001c8h		;7b5d
-	rrca			;7b60
-	ld hl,01404h		;7b61
-	ld (de),a			;7b64
-	rrca			;7b65
-	sub d			;7b66
-	dec b			;7b67
-	ld a,(de)			;7b68
-	ld (bc),a			;7b69
-	rrca			;7b6a
-	ld b,003h		;7b6b
-	ld a,(bc)			;7b6d
-	add hl,bc			;7b6e
-	ld hl,l1405h		;7b6f
-	ld (de),a			;7b72
-	dec b			;7b73
-	ld a,(de)			;7b74
-	ld (bc),a			;7b75
-	ld a,(bc)			;7b76
-	ex af,af'			;7b77
-	ld bc,0810ah		;7b78
-	ex af,af'			;7b7b
-	inc b			;7b7c
-	ld (bc),a			;7b7d
-	ld a,(bc)			;7b7e
-	ld (00a05h),hl		;7b7f
-	ld d,d			;7b82
-	inc d			;7b83
+	.DB $05		;7b00
+	.DB $0a		;7b01
+	.DB $12		;7b02
+	.DB $0a		;7b03
+	.DB $18		;7b04
+	.DB $01		;7b05
+	.DB $0a		;7b06
+	.DB $21		;7b07
+	.DB $08		;7b08
+	.DB $14		;7b09
+	.DB $12		;7b0a
+	.DB $0a		;7b0b
+	.DB $92		;7b0c
+	.DB $05		;7b0d
+	.DB $1a		;7b0e
+	.DB $42		;7b0f
+	.DB $14		;7b10
+	.DB $08		;7b11
+	.DB $01		;7b12
+	.DB $c8		;7b13
+	.DB $01		;7b14
+	.DB $0a		;7b15
+	.DB $81		;7b16
+	.DB $04		;7b17
+	.DB $05		;7b18
+	.DB $03		;7b19
+	.DB $09		;7b1a
+	.DB $07		;7b1b
+	.DB $02		;7b1c
+	.DB $08		;7b1d
+	.DB $06		;7b1e
+	.DB $03		;7b1f
+	.DB $09		;7b20
+	.DB $07		;7b21
+	.DB $02		;7b22
+	.DB $08		;7b23
+	.DB $22		;7b24
+	.DB $06		;7b25
+	.DB $0a		;7b26
+	.DB $12		;7b27
+	.DB $08		;7b28
+	.DB $16		;7b29
+	.DB $13		;7b2a
+	.DB $05		;7b2b
+	.DB $19		;7b2c
+	.DB $01		;7b2d
+	.DB $05		;7b2e
+	.DB $21		;7b2f
+	.DB $05		;7b30
+	.DB $14		;7b31
+	.DB $12		;7b32
+	.DB $05		;7b33
+	.DB $92		;7b34
+	.DB $06		;7b35
+	.DB $1a		;7b36
+	.DB $02		;7b37
+	.DB $0a		;7b38
+	.DB $08		;7b39
+	.DB $81		;7b3a
+	.DB $06		;7b3b
+	.DB $04		;7b3c
+	.DB $42		;7b3d
+	.DB $12		;7b3e
+	.DB $06		;7b3f
+	.DB $09		;7b40
+	.DB $01		;7b41
+	.DB $c8		;7b42
+	.DB $01		;7b43
+	.DB $11		;7b44
+	.DB $81		;7b45
+	.DB $08		;7b46
+	.DB $04		;7b47
+	.DB $02		;7b48
+	.DB $0c		;7b49
+	.DB $22		;7b4a
+	.DB $06		;7b4b
+	.DB $0a		;7b4c
+	.DB $12		;7b4d
+	.DB $14		;7b4e
+	.DB $16		;7b4f
+	.DB $17		;7b50
+	.DB $18		;7b51
+	.DB $01		;7b52
+	.DB $14		;7b53
+	.DB $81		;7b54
+	.DB $08		;7b55
+	.DB $05		;7b56
+	.DB $03		;7b57
+	.DB $0f		;7b58
+	.DB $07		;7b59
+	.DB $42		;7b5a
+	.DB $1e		;7b5b
+	.DB $08		;7b5c
+	.DB $01		;7b5d
+	.DB $c8		;7b5e
+	.DB $01		;7b5f
+	.DB $0f		;7b60
+	.DB $21		;7b61
+	.DB $04		;7b62
+	.DB $14		;7b63
+	.DB $12		;7b64
+	.DB $0f		;7b65
+	.DB $92		;7b66
+	.DB $05		;7b67
+	.DB $1a		;7b68
+	.DB $02		;7b69
+	.DB $0f		;7b6a
+	.DB $06		;7b6b
+	.DB $03		;7b6c
+	.DB $0a		;7b6d
+	.DB $09		;7b6e
+	.DB $21		;7b6f
+	.DB $05		;7b70
+	.DB $14		;7b71
+	.DB $12		;7b72
+	.DB $05		;7b73
+	.DB $1a		;7b74
+	.DB $02		;7b75
+	.DB $0a		;7b76
+	.DB $08		;7b77
+	.DB $01		;7b78
+	.DB $0a		;7b79
+	.DB $81		;7b7a
+	.DB $08		;7b7b
+	.DB $04		;7b7c
+	.DB $02		;7b7d
+	.DB $0a		;7b7e
+	.DB $22		;7b7f
+	.DB $05		;7b80
+	.DB $0a		;7b81
+	.DB $52		;7b82
+	.DB $14		;7b83
 l7b84h:
-	jr l7b87h		;7b84
-	ret z			;7b86
-l7b87h:
-	ld bc,l210ah		;7b87
-	ld b,014h		;7b8a
-	ld (de),a			;7b8c
-	rrca			;7b8d
-	jr l7bb1h		;7b8e
-	ld b,015h		;7b90
-	inc de			;7b92
-	ld b,017h		;7b93
-	ld (de),a			;7b95
-	ld a,(bc)			;7b96
-	jr $+1		;7b97
-	djnz l7b1ch		;7b99
-	inc b			;7b9b
-	inc b			;7b9c
-	ld (bc),a			;7b9d
-	inc d			;7b9e
-	ex af,af'			;7b9f
-	ld bc,l210ch		;7ba0
-	ex af,af'			;7ba3
-	dec d			;7ba4
-	ld d,e			;7ba5
-	ld e,019h		;7ba6
-	ld bc,001c8h		;7ba8
-	ld a,(de)			;7bab
-	add a,c			;7bac
-	inc b			;7bad
-	inc b			;7bae
-	ld (bc),a			;7baf
-	inc de			;7bb0
-l7bb1h:
-	ld (l0a06h),hl		;7bb1
-	ld (de),a			;7bb4
-	add hl,de			;7bb5
+	.DB $18		;7b84
+	.DB $01		;7b85
+	.DB $c8		;7b86
+	.DB $01		;7b87
+	.DB $0a		;7b88
+	.DB $21		;7b89
+	.DB $06		;7b8a
+	.DB $14		;7b8b
+	.DB $12		;7b8c
+	.DB $0f		;7b8d
+	.DB $18		;7b8e
+	.DB $21		;7b8f
+	.DB $06		;7b90
+	.DB $15		;7b91
+	.DB $13		;7b92
+	.DB $06		;7b93
+	.DB $17		;7b94
+	.DB $12		;7b95
+	.DB $0a		;7b96
+	.DB $18		;7b97
+	.DB $01		;7b98
+	.DB $10		;7b99
+	.DB $81		;7b9a
+	.DB $04		;7b9b
+	.DB $04		;7b9c
+	.DB $02		;7b9d
+	.DB $14		;7b9e
+	.DB $08		;7b9f
+	.DB $01		;7ba0
+	.DB $0c		;7ba1
+	.DB $21		;7ba2
+	.DB $08		;7ba3
+	.DB $15		;7ba4
+	.DB $53		;7ba5
+	.DB $1e		;7ba6
+	.DB $19		;7ba7
+	.DB $01		;7ba8
+	.DB $c8		;7ba9
+	.DB $01		;7baa
+	.DB $1a		;7bab
+	.DB $81		;7bac
+	.DB $04		;7bad
+	.DB $04		;7bae
+	.DB $02		;7baf
+	.DB $13		;7bb0
+	.DB $22		;7bb1
+	.DB $06		;7bb2
+	.DB $0a		;7bb3
+	.DB $12		;7bb4
+	.DB $19		;7bb5
 l7bb6h:
-	ld d,013h		;7bb6
-	ld (de),a			;7bb8
-	rla			;7bb9
-	ld (de),a			;7bba
-	ld (de),a			;7bbb
-	sub d			;7bbc
-	ld b,01ah		;7bbd
-	ld (bc),a			;7bbf
-	djnz l7bc8h		;7bc0
-	ld b,e			;7bc2
-	ld e,009h		;7bc3
-	ld bc,001c8h		;7bc5
-l7bc8h:
-	ld a,(bc)			;7bc8
-	ld hl,01504h		;7bc9
-	inc de			;7bcc
-	add hl,bc			;7bcd
-	rla			;7bce
-	ld (de),a			;7bcf
-	add hl,bc			;7bd0
-	ld d,013h		;7bd1
-	add hl,bc			;7bd3
+	.DB $16		;7bb6
+	.DB $13		;7bb7
+	.DB $12		;7bb8
+	.DB $17		;7bb9
+	.DB $12		;7bba
+	.DB $12		;7bbb
+	.DB $92		;7bbc
+	.DB $06		;7bbd
+	.DB $1a		;7bbe
+	.DB $02		;7bbf
+	.DB $10		;7bc0
+	.DB $06		;7bc1
+	.DB $43		;7bc2
+	.DB $1e		;7bc3
+	.DB $09		;7bc4
+	.DB $01		;7bc5
+	.DB $c8		;7bc6
+	.DB $01		;7bc7
+	.DB $0a		;7bc8
+	.DB $21		;7bc9
+	.DB $04		;7bca
+	.DB $15		;7bcb
+	.DB $13		;7bcc
+	.DB $09		;7bcd
+	.DB $17		;7bce
+	.DB $12		;7bcf
+	.DB $09		;7bd0
+	.DB $16		;7bd1
+	.DB $13		;7bd2
+	.DB $09		;7bd3
 l7bd4h:
-	rla			;7bd4
-	ld (de),a			;7bd5
-	dec b			;7bd6
-	sub d			;7bd7
-	ld b,01ah		;7bd8
-	ld (bc),a			;7bda
-	ex af,af'			;7bdb
-	ld b,003h		;7bdc
-	ex af,af'			;7bde
-	add hl,bc			;7bdf
-	ld bc,08105h		;7be0
-	dec b			;7be3
-	inc b			;7be4
-	ld (bc),a			;7be5
-	ex af,af'			;7be6
-	ld (l0a06h),hl		;7be7
-	ld (de),a			;7bea
-	ld c,018h		;7beb
-	ld hl,l1405h+1		;7bed
-	ld d,d			;7bf0
-	ld (de),a			;7bf1
-	ld d,019h		;7bf2
-	ld bc,001c8h		;7bf4
-	dec bc			;7bf7
-	ld hl,l1506h		;7bf8
-	inc de			;7bfb
-	ld a,(bc)			;7bfc
-	add hl,de			;7bfd
-	ld bc,l2105h		;7bfe
-	ld b,014h		;7c01
-sub_7c03h:
-	ld (de),a			;7c03
-sub_7c04h:
-	ld a,(bc)			;7c04
-sub_7c05h:
-	ld d,013h		;7c05
-	ld a,(bc)			;7c07
-	add hl,de			;7c08
-	ld hl,l1405h		;7c09
-	ld (de),a			;7c0c
-	dec bc			;7c0d
-	jr l7c11h		;7c0e
-	ld a,(bc)			;7c10
-l7c11h:
-	ld hl,01508h		;7c11
-	inc de			;7c14
-	ld a,(bc)			;7c15
-	rla			;7c16
-	ld d,d			;7c17
-	inc d			;7c18
-	jr l7c1ch		;7c19
-	ret z			;7c1b
-l7c1ch:
-	ld bc,08111h		;7c1c
-	rlca			;7c1f
-	inc b			;7c20
-	ld (bc),a			;7c21
-	jr l7c46h		;7c22
+	.DB $17		;7bd4
+	.DB $12		;7bd5
+	.DB $05		;7bd6
+	.DB $92		;7bd7
+	.DB $06		;7bd8
+	.DB $1a		;7bd9
+	.DB $02		;7bda
+	.DB $08		;7bdb
+	.DB $06		;7bdc
+	.DB $03		;7bdd
+	.DB $08		;7bde
+	.DB $09		;7bdf
+	.DB $01		;7be0
+	.DB $05		;7be1
+	.DB $81		;7be2
+	.DB $05		;7be3
+	.DB $04		;7be4
+	.DB $02		;7be5
+	.DB $08		;7be6
+	.DB $22		;7be7
+	.DB $06		;7be8
+	.DB $0a		;7be9
+	.DB $12		;7bea
+	.DB $0e		;7beb
+	.DB $18		;7bec
+	.DB $21		;7bed
+	.DB $06		;7bee
+	.DB $14		;7bef
+	.DB $52		;7bf0
+	.DB $12		;7bf1
+	.DB $16		;7bf2
+	.DB $19		;7bf3
+	.DB $01		;7bf4
+	.DB $c8		;7bf5
+	.DB $01		;7bf6
+	.DB $0b		;7bf7
+	.DB $21		;7bf8
+	.DB $06		;7bf9
+	.DB $15		;7bfa
+	.DB $13		;7bfb
+	.DB $0a		;7bfc
+	.DB $19		;7bfd
+	.DB $01		;7bfe
+	.DB $05		;7bff
+	.DB $21		;7c00
+	.DB $06		;7c01
+	.DB $14		;7c02
+	.DB $12		;7c03
+	.DB $0a		;7c04
+	.DB $16		;7c05
+	.DB $13		;7c06
+	.DB $0a		;7c07
+	.DB $19		;7c08
+	.DB $21		;7c09
+	.DB $05		;7c0a
+	.DB $14		;7c0b
+	.DB $12		;7c0c
+	.DB $0b		;7c0d
+	.DB $18		;7c0e
+	.DB $01		;7c0f
+	.DB $0a		;7c10
+	.DB $21		;7c11
+	.DB $08		;7c12
+	.DB $15		;7c13
+	.DB $13		;7c14
+	.DB $0a		;7c15
+	.DB $17		;7c16
+	.DB $52		;7c17
+	.DB $14		;7c18
+	.DB $18		;7c19
+	.DB $01		;7c1a
+	.DB $c8		;7c1b
+	.DB $01		;7c1c
+	.DB $11		;7c1d
+	.DB $81		;7c1e
+	.DB $07		;7c1f
+	.DB $04		;7c20
+	.DB $02		;7c21
+	.DB $18		;7c22
+	.DB $22		;7c23
 l7c24h:
-	ld b,00ah		;7c24
-	ld d,013h		;7c26
-	inc d			;7c28
-	add hl,de			;7c29
-	ld bc,l2110h		;7c2a
-	ex af,af'			;7c2d
-	dec d			;7c2e
-	inc de			;7c2f
-	add hl,bc			;7c30
-	rla			;7c31
-	ld (de),a			;7c32
-	ld c,092h		;7c33
-	ld b,01ah		;7c35
-	ld b,d			;7c37
-	inc d			;7c38
-	ex af,af'			;7c39
-	ld bc,001c8h		;7c3a
-	rrca			;7c3d
-	add a,c			;7c3e
-	ld b,005h		;7c3f
-	inc bc			;7c41
-	rrca			;7c42
-	rlca			;7c43
-	ld (bc),a			;7c44
-	rrca			;7c45
-l7c46h:
-	ld b,003h		;7c46
-	add hl,bc			;7c48
-	add hl,bc			;7c49
-	ld hl,l1405h		;7c4a
-	ld (de),a			;7c4d
-	dec b			;7c4e
-	ld a,(de)			;7c4f
-	ld (bc),a			;7c50
-	dec b			;7c51
-	ex af,af'			;7c52
-	ld bc,l210bh		;7c53
-	inc b			;7c56
-	inc d			;7c57
-	ld (de),a			;7c58
-	add hl,bc			;7c59
-	ld d,053h		;7c5a
-	ld e,019h		;7c5c
-	ld bc,001c8h		;7c5e
-	ld (de),a			;7c61
-	add a,c			;7c62
-	inc b			;7c63
-	inc b			;7c64
-l7c65h:
-	ld (bc),a			;7c65
-	ld (de),a			;7c66
-	ld (l0a06h),hl		;7c67
-	ld (de),a			;7c6a
-	inc d			;7c6b
-	ld d,013h		;7c6c
-	ld a,(bc)			;7c6e
-	rla			;7c6f
-	ld (de),a			;7c70
-	inc d			;7c71
-	jr $-127		;7c72
-	ld b,004h		;7c74
-	ld (bc),a			;7c76
-	inc c			;7c77
-	ld b,003h		;7c78
-	ld a,(bc)			;7c7a
-	rlca			;7c7b
-	ld b,d			;7c7c
-	inc d			;7c7d
-	ex af,af'			;7c7e
-	ld bc,001c8h		;7c7f
-sub_7c82h:
-	ld a,(bc)			;7c82
-	add a,c			;7c83
-	dec b			;7c84
-	dec b			;7c85
-	inc bc			;7c86
-	ld a,(bc)			;7c87
-	rlca			;7c88
-	ld (bc),a			;7c89
-	ld a,(bc)			;7c8a
-	ld (l0a06h),hl		;7c8b
-	ld (de),a			;7c8e
-	dec b			;7c8f
-	ld d,013h		;7c90
-	dec b			;7c92
-	add hl,de			;7c93
-	ld bc,l2108h		;7c94
-	inc b			;7c97
-	inc d			;7c98
-	ld (de),a			;7c99
-	ld a,(bc)			;7c9a
-	ld d,013h		;7c9b
-	dec b			;7c9d
-l7c9eh:
-	rla			;7c9e
-	ld (de),a			;7c9f
-	rlca			;7ca0
-	sub d			;7ca1
+	.DB $06		;7c24
+	.DB $0a		;7c25
+	.DB $16		;7c26
+	.DB $13		;7c27
+	.DB $14		;7c28
+	.DB $19		;7c29
+	.DB $01		;7c2a
+	.DB $10		;7c2b
+	.DB $21		;7c2c
+	.DB $08		;7c2d
+	.DB $15		;7c2e
+	.DB $13		;7c2f
+	.DB $09		;7c30
+	.DB $17		;7c31
+	.DB $12		;7c32
+	.DB $0e		;7c33
+	.DB $92		;7c34
+	.DB $06		;7c35
+	.DB $1a		;7c36
+	.DB $42		;7c37
+	.DB $14		;7c38
+	.DB $08		;7c39
+	.DB $01		;7c3a
+	.DB $c8		;7c3b
+	.DB $01		;7c3c
+	.DB $0f		;7c3d
+	.DB $81		;7c3e
+	.DB $06		;7c3f
+	.DB $05		;7c40
+	.DB $03		;7c41
+	.DB $0f		;7c42
+	.DB $07		;7c43
+	.DB $02		;7c44
+	.DB $0f		;7c45
+	.DB $06		;7c46
+	.DB $03		;7c47
+	.DB $09		;7c48
+	.DB $09		;7c49
+	.DB $21		;7c4a
+	.DB $05		;7c4b
+	.DB $14		;7c4c
+	.DB $12		;7c4d
+	.DB $05		;7c4e
+	.DB $1a		;7c4f
+	.DB $02		;7c50
+	.DB $05		;7c51
+	.DB $08		;7c52
+	.DB $01		;7c53
+	.DB $0b		;7c54
+	.DB $21		;7c55
+	.DB $04		;7c56
+	.DB $14		;7c57
+	.DB $12		;7c58
+	.DB $09		;7c59
+	.DB $16		;7c5a
+	.DB $53		;7c5b
+	.DB $1e		;7c5c
+	.DB $19		;7c5d
+	.DB $01		;7c5e
+	.DB $c8		;7c5f
+	.DB $01		;7c60
+	.DB $12		;7c61
+	.DB $81		;7c62
+	.DB $04		;7c63
+	.DB $04		;7c64
+	.DB $02		;7c65
+	.DB $12		;7c66
+	.DB $22		;7c67
+	.DB $06		;7c68
+	.DB $0a		;7c69
+	.DB $12		;7c6a
+	.DB $14		;7c6b
+	.DB $16		;7c6c
+	.DB $13		;7c6d
+	.DB $0a		;7c6e
+	.DB $17		;7c6f
+	.DB $12		;7c70
+	.DB $14		;7c71
+	.DB $18		;7c72
+	.DB $81		;7c73
+	.DB $06		;7c74
+	.DB $04		;7c75
+	.DB $02		;7c76
+	.DB $0c		;7c77
+	.DB $06		;7c78
+	.DB $03		;7c79
+	.DB $0a		;7c7a
+	.DB $07		;7c7b
+	.DB $42		;7c7c
+	.DB $14		;7c7d
+	.DB $08		;7c7e
+	.DB $01		;7c7f
+	.DB $c8		;7c80
+	.DB $01		;7c81
+	.DB $0a		;7c82
+	.DB $81		;7c83
+	.DB $05		;7c84
+	.DB $05		;7c85
+	.DB $03		;7c86
+	.DB $0a		;7c87
+	.DB $07		;7c88
+	.DB $02		;7c89
+	.DB $0a		;7c8a
+	.DB $22		;7c8b
+	.DB $06		;7c8c
+	.DB $0a		;7c8d
+	.DB $12		;7c8e
+	.DB $05		;7c8f
+	.DB $16		;7c90
+	.DB $13		;7c91
+	.DB $05		;7c92
+	.DB $19		;7c93
+	.DB $01		;7c94
+	.DB $08		;7c95
+	.DB $21		;7c96
+	.DB $04		;7c97
+	.DB $14		;7c98
+	.DB $12		;7c99
+	.DB $0a		;7c9a
+	.DB $16		;7c9b
+	.DB $13		;7c9c
+	.DB $05		;7c9d
+	.DB $17		;7c9e
+	.DB $12		;7c9f
+	.DB $07		;7ca0
+	.DB $92		;7ca1
 l7ca2h:
-	ld b,01ah		;7ca2
-	ld (bc),a			;7ca4
-	ld a,(bc)			;7ca5
-	ex af,af'			;7ca6
-	ld hl,l1405h+1		;7ca7
-	ld d,d			;7caa
-	ld (de),a			;7cab
-	jr l7cafh		;7cac
-	ret z			;7cae
-l7cafh:
-	ld bc,0810fh		;7caf
-	ex af,af'			;7cb2
-	inc b			;7cb3
-	ld (bc),a			;7cb4
-	rrca			;7cb5
-	ld (l0a06h),hl		;7cb6
-	ld (de),a			;7cb9
-	inc d			;7cba
-	ld d,017h		;7cbb
-	jr l7cc0h		;7cbd
-	inc d			;7cbf
-l7cc0h:
-	add a,c			;7cc0
-	ex af,af'			;7cc1
-	dec b			;7cc2
-	inc bc			;7cc3
-	rrca			;7cc4
-	rlca			;7cc5
-	ld b,d			;7cc6
-	ld e,008h		;7cc7
-	ld bc,001c8h		;7cc9
-	ld de,l0721h		;7ccc
-	inc d			;7ccf
-	ld (de),a			;7cd0
-	jr l7c65h		;7cd1
-	ld b,01ah		;7cd3
-	ld b,003h		;7cd5
-	inc d			;7cd7
-	add hl,bc			;7cd8
-	ld bc,08110h		;7cd9
-	ex af,af'			;7cdc
-	dec b			;7cdd
-	inc bc			;7cde
-	add hl,bc			;7cdf
-	rlca			;7ce0
-	ld (bc),a			;7ce1
-	ld c,022h		;7ce2
-	ld b,00ah		;7ce4
-	ld d,d			;7ce6
-	inc d			;7ce7
-	jr l7cebh		;7ce8
-	ret z			;7cea
-l7cebh:
-	ld bc,l210dh		;7ceb
-	inc b			;7cee
-	inc d			;7cef
-	ld (de),a			;7cf0
-	ld (de),a			;7cf1
-	sub d			;7cf2
-	ld b,01ah		;7cf3
-	ld (bc),a			;7cf5
-	inc d			;7cf6
-sub_7cf7h:
-	ld b,003h		;7cf7
-	ld a,(bc)			;7cf9
-	rlca			;7cfa
-	ld (bc),a			;7cfb
-	inc d			;7cfc
-	ex af,af'			;7cfd
-	ld hl,l1405h+1		;7cfe
-	ld (de),a			;7d01
-	djnz $+22		;7d02
-	inc de			;7d04
-	ld a,(bc)			;7d05
-	rla			;7d06
-	ld d,d			;7d07
-	inc d			;7d08
-	jr l7d0ch		;7d09
-	ret z			;7d0b
-l7d0ch:
-	ld bc,l2105h		;7d0c
-	dec b			;7d0f
-	inc d			;7d10
-	ld (de),a			;7d11
-	rlca			;7d12
-	sub d			;7d13
-	ld b,01ah		;7d14
-	ld (bc),a			;7d16
-	inc b			;7d17
-	ld (l0a06h),hl		;7d18
-	jr l7c9eh		;7d1b
-	ld b,004h		;7d1d
-	ld (bc),a			;7d1f
-	dec b			;7d20
-	ld b,003h		;7d21
-	dec b			;7d23
-	rlca			;7d24
-	ld (bc),a			;7d25
-	inc b			;7d26
-	ld (l0a06h),hl		;7d27
-	ld (de),a			;7d2a
-	rlca			;7d2b
-	jr l7d2fh		;7d2c
-	inc b			;7d2e
-l7d2fh:
-	ld hl,01504h		;7d2f
-	inc de			;7d32
-	inc b			;7d33
-	rla			;7d34
-	ld (de),a			;7d35
-	inc b			;7d36
-	sub d			;7d37
-	ld b,01ah		;7d38
-	ld b,d			;7d3a
-	inc d			;7d3b
-	ld b,009h		;7d3c
-	ld bc,001c8h		;7d3e
-	ld a,(bc)			;7d41
-	ld hl,01505h		;7d42
-	inc de			;7d45
-	dec b			;7d46
-	rla			;7d47
+	.DB $06		;7ca2
+	.DB $1a		;7ca3
+	.DB $02		;7ca4
+	.DB $0a		;7ca5
+	.DB $08		;7ca6
+	.DB $21		;7ca7
+	.DB $06		;7ca8
+	.DB $14		;7ca9
+	.DB $52		;7caa
+	.DB $12		;7cab
+	.DB $18		;7cac
+	.DB $01		;7cad
+	.DB $c8		;7cae
+	.DB $01		;7caf
+	.DB $0f		;7cb0
+	.DB $81		;7cb1
+	.DB $08		;7cb2
+	.DB $04		;7cb3
+	.DB $02		;7cb4
+	.DB $0f		;7cb5
+	.DB $22		;7cb6
+	.DB $06		;7cb7
+	.DB $0a		;7cb8
+	.DB $12		;7cb9
+	.DB $14		;7cba
+	.DB $16		;7cbb
+	.DB $17		;7cbc
+	.DB $18		;7cbd
+	.DB $01		;7cbe
+	.DB $14		;7cbf
+	.DB $81		;7cc0
+	.DB $08		;7cc1
+	.DB $05		;7cc2
+	.DB $03		;7cc3
+	.DB $0f		;7cc4
+	.DB $07		;7cc5
+	.DB $42		;7cc6
+	.DB $1e		;7cc7
+	.DB $08		;7cc8
+	.DB $01		;7cc9
+	.DB $c8		;7cca
+	.DB $01		;7ccb
+	.DB $11		;7ccc
+	.DB $21		;7ccd
+	.DB $07		;7cce
+	.DB $14		;7ccf
+	.DB $12		;7cd0
+	.DB $18		;7cd1
+	.DB $92		;7cd2
+	.DB $06		;7cd3
+	.DB $1a		;7cd4
+	.DB $06		;7cd5
+	.DB $03		;7cd6
+	.DB $14		;7cd7
+	.DB $09		;7cd8
+	.DB $01		;7cd9
+	.DB $10		;7cda
+	.DB $81		;7cdb
+	.DB $08		;7cdc
+	.DB $05		;7cdd
+	.DB $03		;7cde
+	.DB $09		;7cdf
+	.DB $07		;7ce0
+	.DB $02		;7ce1
+	.DB $0e		;7ce2
+	.DB $22		;7ce3
+	.DB $06		;7ce4
+	.DB $0a		;7ce5
+	.DB $52		;7ce6
+	.DB $14		;7ce7
+	.DB $18		;7ce8
+	.DB $01		;7ce9
+	.DB $c8		;7cea
+	.DB $01		;7ceb
+	.DB $0d		;7cec
+	.DB $21		;7ced
+	.DB $04		;7cee
+	.DB $14		;7cef
+	.DB $12		;7cf0
+	.DB $12		;7cf1
+	.DB $92		;7cf2
+	.DB $06		;7cf3
+	.DB $1a		;7cf4
+	.DB $02		;7cf5
+	.DB $14		;7cf6
+	.DB $06		;7cf7
+	.DB $03		;7cf8
+	.DB $0a		;7cf9
+	.DB $07		;7cfa
+	.DB $02		;7cfb
+	.DB $14		;7cfc
+	.DB $08		;7cfd
+	.DB $21		;7cfe
+	.DB $06		;7cff
+	.DB $14		;7d00
+	.DB $12		;7d01
+	.DB $10		;7d02
+	.DB $16		;7d03
+	.DB $13		;7d04
+	.DB $0a		;7d05
+	.DB $17		;7d06
+	.DB $52		;7d07
+	.DB $14		;7d08
+	.DB $18		;7d09
+	.DB $01		;7d0a
+	.DB $c8		;7d0b
+	.DB $01		;7d0c
+	.DB $05		;7d0d
+	.DB $21		;7d0e
+	.DB $05		;7d0f
+	.DB $14		;7d10
+	.DB $12		;7d11
+	.DB $07		;7d12
+	.DB $92		;7d13
+	.DB $06		;7d14
+	.DB $1a		;7d15
+	.DB $02		;7d16
+	.DB $04		;7d17
+	.DB $22		;7d18
+	.DB $06		;7d19
+	.DB $0a		;7d1a
+	.DB $18		;7d1b
+	.DB $81		;7d1c
+	.DB $06		;7d1d
+	.DB $04		;7d1e
+	.DB $02		;7d1f
+	.DB $05		;7d20
+	.DB $06		;7d21
+	.DB $03		;7d22
+	.DB $05		;7d23
+	.DB $07		;7d24
+	.DB $02		;7d25
+	.DB $04		;7d26
+	.DB $22		;7d27
+	.DB $06		;7d28
+	.DB $0a		;7d29
+	.DB $12		;7d2a
+	.DB $07		;7d2b
+	.DB $18		;7d2c
+	.DB $01		;7d2d
+	.DB $04		;7d2e
+	.DB $21		;7d2f
+	.DB $04		;7d30
+	.DB $15		;7d31
+	.DB $13		;7d32
+	.DB $04		;7d33
+	.DB $17		;7d34
+	.DB $12		;7d35
+	.DB $04		;7d36
+	.DB $92		;7d37
+	.DB $06		;7d38
+	.DB $1a		;7d39
+	.DB $42		;7d3a
+	.DB $14		;7d3b
+	.DB $06		;7d3c
+	.DB $09		;7d3d
+	.DB $01		;7d3e
+	.DB $c8		;7d3f
+	.DB $01		;7d40
+	.DB $0a		;7d41
+	.DB $21		;7d42
+	.DB $05		;7d43
+	.DB $15		;7d44
+	.DB $13		;7d45
+	.DB $05		;7d46
+	.DB $17		;7d47
 l7d48h:
-	ld (de),a			;7d48
-	ld a,(bc)			;7d49
-	sub d			;7d4a
-	ld b,01ah		;7d4b
-	ld (bc),a			;7d4d
-	dec b			;7d4e
-	ld b,003h		;7d4f
-	dec b			;7d51
-	add hl,bc			;7d52
-	ld bc,08105h		;7d53
-	inc b			;7d56
-	inc b			;7d57
-	ld (bc),a			;7d58
-	ld a,(bc)			;7d59
-	ld b,003h		;7d5a
-	dec b			;7d5c
-	rlca			;7d5d
-	ld (bc),a			;7d5e
-	rlca			;7d5f
-	ld (l0a06h),hl		;7d60
-	ld (de),a			;7d63
-	ld a,(bc)			;7d64
-	jr l7d88h		;7d65
-	ld b,014h		;7d67
-	ld d,d			;7d69
-	ld (de),a			;7d6a
-	jr l7d6eh		;7d6b
-	ret z			;7d6d
-l7d6eh:
-	ld bc,0810ah		;7d6e
-	inc b			;7d71
-	inc b			;7d72
-	ld (bc),a			;7d73
+	.DB $12		;7d48
+	.DB $0a		;7d49
+	.DB $92		;7d4a
+	.DB $06		;7d4b
+	.DB $1a		;7d4c
+	.DB $02		;7d4d
+	.DB $05		;7d4e
+	.DB $06		;7d4f
+	.DB $03		;7d50
+	.DB $05		;7d51
+	.DB $09		;7d52
+	.DB $01		;7d53
+	.DB $05		;7d54
+	.DB $81		;7d55
+	.DB $04		;7d56
+	.DB $04		;7d57
+	.DB $02		;7d58
+	.DB $0a		;7d59
+	.DB $06		;7d5a
+	.DB $03		;7d5b
+	.DB $05		;7d5c
+	.DB $07		;7d5d
+	.DB $02		;7d5e
+	.DB $07		;7d5f
+	.DB $22		;7d60
+	.DB $06		;7d61
+	.DB $0a		;7d62
+	.DB $12		;7d63
+	.DB $0a		;7d64
+	.DB $18		;7d65
+	.DB $21		;7d66
+	.DB $06		;7d67
+	.DB $14		;7d68
+	.DB $52		;7d69
+	.DB $12		;7d6a
+	.DB $18		;7d6b
+	.DB $01		;7d6c
+	.DB $c8		;7d6d
+	.DB $01		;7d6e
+	.DB $0a		;7d6f
+	.DB $81		;7d70
+	.DB $04		;7d71
+	.DB $04		;7d72
+	.DB $02		;7d73
 l7d74h:
-	ld a,(bc)			;7d74
-	ld b,003h		;7d75
-	ld a,(bc)			;7d77
-	add hl,bc			;7d78
-	ld bc,l210ah		;7d79
-	inc b			;7d7c
-	inc d			;7d7d
-	ld (de),a			;7d7e
-	ld de,08118h		;7d7f
-	ld b,004h		;7d82
-	ld (bc),a			;7d84
-	inc c			;7d85
-	ld b,003h		;7d86
-l7d88h:
-	dec bc			;7d88
-	rlca			;7d89
-	ld b,d			;7d8a
-	inc d			;7d8b
-	ld b,003h		;7d8c
-	ld a,(bc)			;7d8e
-	add hl,bc			;7d8f
-	ld bc,001c8h		;7d90
-	ld de,sub_067fh+2		;7d93
-	inc b			;7d96
-	ld (bc),a			;7d97
-	rrca			;7d98
-	ld b,003h		;7d99
-	ld a,(bc)			;7d9b
-	rlca			;7d9c
-	ld (bc),a			;7d9d
-	inc b			;7d9e
-	ld (l0a06h),hl		;7d9f
-	ld (de),a			;7da2
-	rlca			;7da3
-	sub d			;7da4
-	ld b,01ah		;7da5
-	ld (bc),a			;7da7
-	rrca			;7da8
-	ex af,af'			;7da9
-	ld bc,l210ch		;7daa
-	dec b			;7dad
-	dec d			;7dae
-	inc de			;7daf
-	add hl,bc			;7db0
-	rla			;7db1
-	ld d,d			;7db2
-	inc d			;7db3
-	ld d,013h		;7db4
-	ld a,(bc)			;7db6
-	add hl,de			;7db7
-	ld bc,001c8h		;7db8
-	ld a,(bc)			;7dbb
-	add a,c			;7dbc
-	ld b,005h		;7dbd
-	inc bc			;7dbf
-	rrca			;7dc0
-	rlca			;7dc1
-	ld (bc),a			;7dc2
-	rrca			;7dc3
+	.DB $0a		;7d74
+	.DB $06		;7d75
+	.DB $03		;7d76
+	.DB $0a		;7d77
+	.DB $09		;7d78
+	.DB $01		;7d79
+	.DB $0a		;7d7a
+	.DB $21		;7d7b
+	.DB $04		;7d7c
+	.DB $14		;7d7d
+	.DB $12		;7d7e
+	.DB $11		;7d7f
+	.DB $18		;7d80
+	.DB $81		;7d81
+	.DB $06		;7d82
+	.DB $04		;7d83
+	.DB $02		;7d84
+	.DB $0c		;7d85
+	.DB $06		;7d86
+	.DB $03		;7d87
+	.DB $0b		;7d88
+	.DB $07		;7d89
+	.DB $42		;7d8a
+	.DB $14		;7d8b
+	.DB $06		;7d8c
+	.DB $03		;7d8d
+	.DB $0a		;7d8e
+	.DB $09		;7d8f
+	.DB $01		;7d90
+	.DB $c8		;7d91
+	.DB $01		;7d92
+	.DB $11		;7d93
+	.DB $81		;7d94
+	.DB $06		;7d95
+	.DB $04		;7d96
+	.DB $02		;7d97
+	.DB $0f		;7d98
+	.DB $06		;7d99
+	.DB $03		;7d9a
+	.DB $0a		;7d9b
+	.DB $07		;7d9c
+	.DB $02		;7d9d
+	.DB $04		;7d9e
+	.DB $22		;7d9f
+	.DB $06		;7da0
+	.DB $0a		;7da1
+	.DB $12		;7da2
+	.DB $07		;7da3
+	.DB $92		;7da4
+	.DB $06		;7da5
+	.DB $1a		;7da6
+	.DB $02		;7da7
+	.DB $0f		;7da8
+	.DB $08		;7da9
+	.DB $01		;7daa
+	.DB $0c		;7dab
+	.DB $21		;7dac
+	.DB $05		;7dad
+	.DB $15		;7dae
+	.DB $13		;7daf
+	.DB $09		;7db0
+	.DB $17		;7db1
+	.DB $52		;7db2
+	.DB $14		;7db3
+	.DB $16		;7db4
+	.DB $13		;7db5
+	.DB $0a		;7db6
+	.DB $19		;7db7
+	.DB $01		;7db8
+	.DB $c8		;7db9
+	.DB $01		;7dba
+	.DB $0a		;7dbb
+	.DB $81		;7dbc
+	.DB $06		;7dbd
+	.DB $05		;7dbe
+	.DB $03		;7dbf
+	.DB $0f		;7dc0
+	.DB $07		;7dc1
+	.DB $02		;7dc2
+	.DB $0f		;7dc3
 l7dc4h:
-	ld b,003h		;7dc4
-l7dc6h:
-	dec b			;7dc6
-	add hl,bc			;7dc7
-	ld hl,l1405h		;7dc8
-	ld (de),a			;7dcb
-	ex af,af'			;7dcc
-	ld a,(de)			;7dcd
-	ld (bc),a			;7dce
-	ld a,(bc)			;7dcf
-	ex af,af'			;7dd0
-	ld bc,l210bh		;7dd1
-	inc b			;7dd4
-	inc d			;7dd5
-	ld (de),a			;7dd6
-	add hl,bc			;7dd7
-	ld d,053h		;7dd8
-	ld e,019h		;7dda
-	ld bc,001c8h		;7ddc
-	ld a,(bc)			;7ddf
-	add a,c			;7de0
-	dec b			;7de1
-	dec b			;7de2
-	inc bc			;7de3
-	ld a,(bc)			;7de4
-	rlca			;7de5
-	ld (bc),a			;7de6
-	ld a,(bc)			;7de7
-	ld (l0a06h),hl		;7de8
-	ld (de),a			;7deb
-	dec b			;7dec
-	ld d,013h		;7ded
-	dec b			;7def
-	add hl,de			;7df0
-	ld bc,l2108h		;7df1
-	inc b			;7df4
-	inc d			;7df5
-	ld (de),a			;7df6
-	ld a,(bc)			;7df7
+	.DB $06		;7dc4
+	.DB $03		;7dc5
+	.DB $05		;7dc6
+	.DB $09		;7dc7
+	.DB $21		;7dc8
+	.DB $05		;7dc9
+	.DB $14		;7dca
+	.DB $12		;7dcb
+	.DB $08		;7dcc
+	.DB $1a		;7dcd
+	.DB $02		;7dce
+	.DB $0a		;7dcf
+	.DB $08		;7dd0
+	.DB $01		;7dd1
+	.DB $0b		;7dd2
+	.DB $21		;7dd3
+	.DB $04		;7dd4
+	.DB $14		;7dd5
+	.DB $12		;7dd6
+	.DB $09		;7dd7
+	.DB $16		;7dd8
+	.DB $53		;7dd9
+	.DB $1e		;7dda
+	.DB $19		;7ddb
+	.DB $01		;7ddc
+	.DB $c8		;7ddd
+	.DB $01		;7dde
+	.DB $0a		;7ddf
+	.DB $81		;7de0
+	.DB $05		;7de1
+	.DB $05		;7de2
+	.DB $03		;7de3
+	.DB $0a		;7de4
+	.DB $07		;7de5
+	.DB $02		;7de6
+	.DB $0a		;7de7
+	.DB $22		;7de8
+	.DB $06		;7de9
+	.DB $0a		;7dea
+	.DB $12		;7deb
+	.DB $05		;7dec
+	.DB $16		;7ded
+	.DB $13		;7dee
+	.DB $05		;7def
+	.DB $19		;7df0
+	.DB $01		;7df1
+	.DB $08		;7df2
+	.DB $21		;7df3
+	.DB $04		;7df4
+	.DB $14		;7df5
+	.DB $12		;7df6
+	.DB $0a		;7df7
 l7df8h:
-	ld d,013h		;7df8
-	dec b			;7dfa
-	rla			;7dfb
-	ld (de),a			;7dfc
-	rlca			;7dfd
-	sub d			;7dfe
-	ld b,01ah		;7dff
-	ld (bc),a			;7e01
-	ld a,(bc)			;7e02
-	ex af,af'			;7e03
-	ld hl,l1405h+1		;7e04
-	ld d,d			;7e07
-	ld (de),a			;7e08
-	jr l7e0ch		;7e09
-	ret z			;7e0b
-l7e0ch:
-	ld bc,l2112h		;7e0c
-	ld b,014h		;7e0f
-	ld (de),a			;7e11
-	ld c,016h		;7e12
-	inc de			;7e14
-	ld a,(bc)			;7e15
-	rla			;7e16
-	ld (de),a			;7e17
-	inc b			;7e18
-	sub d			;7e19
-	ld b,01ah		;7e1a
-	ld (bc),a			;7e1c
-	inc b			;7e1d
-	ld (l0a06h),hl		;7e1e
-	ld (de),a			;7e21
-	rrca			;7e22
-	jr $+1		;7e23
-	ld c,081h		;7e25
-	dec b			;7e27
-	dec b			;7e28
-	inc bc			;7e29
-	add hl,bc			;7e2a
-	rlca			;7e2b
-	ld b,d			;7e2c
-	inc d			;7e2d
-	ld b,003h		;7e2e
-	ld a,(bc)			;7e30
-	add hl,bc			;7e31
-	ld bc,001c8h		;7e32
-	dec b			;7e35
-	ld hl,l1405h		;7e36
-	ld (de),a			;7e39
-	rlca			;7e3a
-	sub d			;7e3b
-	ld b,01ah		;7e3c
-	ld (bc),a			;7e3e
-	inc b			;7e3f
-	ld (l0a06h),hl		;7e40
-	jr l7dc6h		;7e43
-	ld b,004h		;7e45
-	ld (bc),a			;7e47
-	dec b			;7e48
-	ld b,003h		;7e49
-	dec b			;7e4b
-	rlca			;7e4c
-	ld (bc),a			;7e4d
-	inc b			;7e4e
-	ld (l0a06h),hl		;7e4f
-	ld (de),a			;7e52
-	rlca			;7e53
-	jr l7e57h		;7e54
-	inc b			;7e56
-l7e57h:
-	ld hl,01504h		;7e57
-	inc de			;7e5a
-	inc b			;7e5b
-	rla			;7e5c
-	ld (de),a			;7e5d
-	inc b			;7e5e
-	sub d			;7e5f
-	ld b,01ah		;7e60
-	ld b,d			;7e62
-	inc d			;7e63
-	ld b,009h		;7e64
-	ld bc,001c8h		;7e66
-	ld a,(bc)			;7e69
-	ld hl,01505h		;7e6a
-	inc de			;7e6d
-	dec b			;7e6e
-	rla			;7e6f
-	ld (de),a			;7e70
-	ld a,(bc)			;7e71
-	sub d			;7e72
-	ld b,01ah		;7e73
-	ld (bc),a			;7e75
-	dec b			;7e76
-	ld b,003h		;7e77
-	dec b			;7e79
-	add hl,bc			;7e7a
-	ld bc,08105h		;7e7b
-	inc b			;7e7e
-	inc b			;7e7f
-	ld (bc),a			;7e80
-	ld a,(bc)			;7e81
-	ld b,003h		;7e82
-	dec b			;7e84
-	rlca			;7e85
-	ld (bc),a			;7e86
-	rlca			;7e87
-	ld (l0a06h),hl		;7e88
-	ld (de),a			;7e8b
-	ld a,(bc)			;7e8c
-	jr l7eb0h		;7e8d
-	ld b,014h		;7e8f
-	ld d,d			;7e91
-	ld (de),a			;7e92
-	jr l7e96h		;7e93
-	ret z			;7e95
-l7e96h:
-	ld bc,l210ah		;7e96
-	ld b,015h		;7e99
-	inc de			;7e9b
-	ld b,017h		;7e9c
-	ld (de),a			;7e9e
-	ld a,(bc)			;7e9f
-	ld d,013h		;7ea0
-	dec b			;7ea2
-	add hl,de			;7ea3
-	add a,c			;7ea4
-	dec b			;7ea5
-	inc b			;7ea6
-	ld (bc),a			;7ea7
-	dec b			;7ea8
-	ld a,(bc)			;7ea9
-	ld (de),a			;7eaa
-	dec b			;7eab
-	jr l7eafh		;7eac
-	ld a,(bc)			;7eae
-l7eafh:
-	add a,c			;7eaf
-l7eb0h:
-	inc b			;7eb0
-	inc b			;7eb1
-	ld (bc),a			;7eb2
-	dec b			;7eb3
-	ld b,043h		;7eb4
-	ld e,009h		;7eb6
-	ld bc,001c8h		;7eb8
-	ld a,(bc)			;7ebb
-	add a,c			;7ebc
-	inc b			;7ebd
-	dec b			;7ebe
-	inc bc			;7ebf
-	add hl,bc			;7ec0
-	rlca			;7ec1
+	.DB $16		;7df8
+	.DB $13		;7df9
+	.DB $05		;7dfa
+	.DB $17		;7dfb
+	.DB $12		;7dfc
+	.DB $07		;7dfd
+	.DB $92		;7dfe
+	.DB $06		;7dff
+	.DB $1a		;7e00
+	.DB $02		;7e01
+	.DB $0a		;7e02
+	.DB $08		;7e03
+	.DB $21		;7e04
+	.DB $06		;7e05
+	.DB $14		;7e06
+	.DB $52		;7e07
+	.DB $12		;7e08
+	.DB $18		;7e09
+	.DB $01		;7e0a
+	.DB $c8		;7e0b
+	.DB $01		;7e0c
+	.DB $12		;7e0d
+	.DB $21		;7e0e
+	.DB $06		;7e0f
+	.DB $14		;7e10
+	.DB $12		;7e11
+	.DB $0e		;7e12
+	.DB $16		;7e13
+	.DB $13		;7e14
+	.DB $0a		;7e15
+	.DB $17		;7e16
+	.DB $12		;7e17
+	.DB $04		;7e18
+	.DB $92		;7e19
+	.DB $06		;7e1a
+	.DB $1a		;7e1b
+	.DB $02		;7e1c
+	.DB $04		;7e1d
+	.DB $22		;7e1e
+	.DB $06		;7e1f
+	.DB $0a		;7e20
+	.DB $12		;7e21
+	.DB $0f		;7e22
+	.DB $18		;7e23
+	.DB $01		;7e24
+	.DB $0e		;7e25
+	.DB $81		;7e26
+	.DB $05		;7e27
+	.DB $05		;7e28
+	.DB $03		;7e29
+	.DB $09		;7e2a
+	.DB $07		;7e2b
+	.DB $42		;7e2c
+	.DB $14		;7e2d
+	.DB $06		;7e2e
+	.DB $03		;7e2f
+	.DB $0a		;7e30
+	.DB $09		;7e31
+	.DB $01		;7e32
+	.DB $c8		;7e33
+	.DB $01		;7e34
+	.DB $05		;7e35
+	.DB $21		;7e36
+	.DB $05		;7e37
+	.DB $14		;7e38
+	.DB $12		;7e39
+	.DB $07		;7e3a
+	.DB $92		;7e3b
+	.DB $06		;7e3c
+	.DB $1a		;7e3d
+	.DB $02		;7e3e
+	.DB $04		;7e3f
+	.DB $22		;7e40
+	.DB $06		;7e41
+	.DB $0a		;7e42
+	.DB $18		;7e43
+	.DB $81		;7e44
+	.DB $06		;7e45
+	.DB $04		;7e46
+	.DB $02		;7e47
+	.DB $05		;7e48
+	.DB $06		;7e49
+	.DB $03		;7e4a
+	.DB $05		;7e4b
+	.DB $07		;7e4c
+	.DB $02		;7e4d
+	.DB $04		;7e4e
+	.DB $22		;7e4f
+	.DB $06		;7e50
+	.DB $0a		;7e51
+	.DB $12		;7e52
+	.DB $07		;7e53
+	.DB $18		;7e54
+	.DB $01		;7e55
+	.DB $04		;7e56
+	.DB $21		;7e57
+	.DB $04		;7e58
+	.DB $15		;7e59
+	.DB $13		;7e5a
+	.DB $04		;7e5b
+	.DB $17		;7e5c
+	.DB $12		;7e5d
+	.DB $04		;7e5e
+	.DB $92		;7e5f
+	.DB $06		;7e60
+	.DB $1a		;7e61
+	.DB $42		;7e62
+	.DB $14		;7e63
+	.DB $06		;7e64
+	.DB $09		;7e65
+	.DB $01		;7e66
+	.DB $c8		;7e67
+	.DB $01		;7e68
+	.DB $0a		;7e69
+	.DB $21		;7e6a
+	.DB $05		;7e6b
+	.DB $15		;7e6c
+	.DB $13		;7e6d
+	.DB $05		;7e6e
+	.DB $17		;7e6f
+	.DB $12		;7e70
+	.DB $0a		;7e71
+	.DB $92		;7e72
+	.DB $06		;7e73
+	.DB $1a		;7e74
+	.DB $02		;7e75
+	.DB $05		;7e76
+	.DB $06		;7e77
+	.DB $03		;7e78
+	.DB $05		;7e79
+	.DB $09		;7e7a
+	.DB $01		;7e7b
+	.DB $05		;7e7c
+	.DB $81		;7e7d
+	.DB $04		;7e7e
+	.DB $04		;7e7f
+	.DB $02		;7e80
+	.DB $0a		;7e81
+	.DB $06		;7e82
+	.DB $03		;7e83
+	.DB $05		;7e84
+	.DB $07		;7e85
+	.DB $02		;7e86
+	.DB $07		;7e87
+	.DB $22		;7e88
+	.DB $06		;7e89
+	.DB $0a		;7e8a
+	.DB $12		;7e8b
+	.DB $0a		;7e8c
+	.DB $18		;7e8d
+	.DB $21		;7e8e
+	.DB $06		;7e8f
+	.DB $14		;7e90
+	.DB $52		;7e91
+	.DB $12		;7e92
+	.DB $18		;7e93
+	.DB $01		;7e94
+	.DB $c8		;7e95
+	.DB $01		;7e96
+	.DB $0a		;7e97
+	.DB $21		;7e98
+	.DB $06		;7e99
+	.DB $15		;7e9a
+	.DB $13		;7e9b
+	.DB $06		;7e9c
+	.DB $17		;7e9d
+	.DB $12		;7e9e
+	.DB $0a		;7e9f
+	.DB $16		;7ea0
+	.DB $13		;7ea1
+	.DB $05		;7ea2
+	.DB $19		;7ea3
+	.DB $81		;7ea4
+	.DB $05		;7ea5
+	.DB $04		;7ea6
+	.DB $02		;7ea7
+	.DB $05		;7ea8
+	.DB $0a		;7ea9
+	.DB $12		;7eaa
+	.DB $05		;7eab
+	.DB $18		;7eac
+	.DB $01		;7ead
+	.DB $0a		;7eae
+	.DB $81		;7eaf
+	.DB $04		;7eb0
+	.DB $04		;7eb1
+	.DB $02		;7eb2
+	.DB $05		;7eb3
+	.DB $06		;7eb4
+	.DB $43		;7eb5
+	.DB $1e		;7eb6
+	.DB $09		;7eb7
+	.DB $01		;7eb8
+	.DB $c8		;7eb9
+	.DB $01		;7eba
+	.DB $0a		;7ebb
+	.DB $81		;7ebc
+	.DB $04		;7ebd
+	.DB $05		;7ebe
+	.DB $03		;7ebf
+	.DB $09		;7ec0
+	.DB $07		;7ec1
 l7ec2h:
-	ld (bc),a			;7ec2
-	ex af,af'			;7ec3
-	ld b,003h		;7ec4
-	add hl,bc			;7ec6
-	rlca			;7ec7
-	ld (bc),a			;7ec8
-	ex af,af'			;7ec9
-	ld (l0a06h),hl		;7eca
-	ld (de),a			;7ecd
-	ex af,af'			;7ece
-	ld d,013h		;7ecf
-	dec b			;7ed1
-	add hl,de			;7ed2
-	ld bc,l2105h		;7ed3
-	dec b			;7ed6
-	inc d			;7ed7
-	ld (de),a			;7ed8
-	dec b			;7ed9
-	sub d			;7eda
-	ld b,01ah		;7edb
-	ld (bc),a			;7edd
-	ld a,(bc)			;7ede
-	ex af,af'			;7edf
-	add a,c			;7ee0
-	ld b,004h		;7ee1
-	ld b,d			;7ee3
-	ld (de),a			;7ee4
-	ld b,009h		;7ee5
-	ld bc,001c8h		;7ee7
-	dec b			;7eea
-	add a,c			;7eeb
-	dec b			;7eec
-	inc b			;7eed
-	ld (bc),a			;7eee
-	rlca			;7eef
-	ld (l0a06h),hl		;7ef0
-	ld (de),a			;7ef3
-	dec b			;7ef4
-	sub d			;7ef5
-	ld b,01ah		;7ef6
-	ex af,af'			;7ef8
-	ld hl,l1405h+1		;7ef9
-	ld (de),a			;7efc
-	dec b			;7efd
-sub_7efeh:
-	ld d,013h		;7efe
+	.DB $02		;7ec2
+	.DB $08		;7ec3
+	.DB $06		;7ec4
+	.DB $03		;7ec5
+	.DB $09		;7ec6
+	.DB $07		;7ec7
+	.DB $02		;7ec8
+	.DB $08		;7ec9
+	.DB $22		;7eca
+	.DB $06		;7ecb
+	.DB $0a		;7ecc
+	.DB $12		;7ecd
+	.DB $08		;7ece
+	.DB $16		;7ecf
+	.DB $13		;7ed0
+	.DB $05		;7ed1
+	.DB $19		;7ed2
+	.DB $01		;7ed3
+	.DB $05		;7ed4
+	.DB $21		;7ed5
+	.DB $05		;7ed6
+	.DB $14		;7ed7
+	.DB $12		;7ed8
+	.DB $05		;7ed9
+	.DB $92		;7eda
+	.DB $06		;7edb
+	.DB $1a		;7edc
+	.DB $02		;7edd
+	.DB $0a		;7ede
+	.DB $08		;7edf
+	.DB $81		;7ee0
+	.DB $06		;7ee1
+	.DB $04		;7ee2
+	.DB $42		;7ee3
+	.DB $12		;7ee4
+	.DB $06		;7ee5
+	.DB $09		;7ee6
+	.DB $01		;7ee7
+	.DB $c8		;7ee8
+	.DB $01		;7ee9
+	.DB $05		;7eea
+	.DB $81		;7eeb
+	.DB $05		;7eec
+	.DB $04		;7eed
+	.DB $02		;7eee
+	.DB $07		;7eef
+	.DB $22		;7ef0
+	.DB $06		;7ef1
+	.DB $0a		;7ef2
+	.DB $12		;7ef3
+	.DB $05		;7ef4
+	.DB $92		;7ef5
+	.DB $06		;7ef6
+	.DB $1a		;7ef7
+	.DB $08		;7ef8
+	.DB $21		;7ef9
+	.DB $06		;7efa
+	.DB $14		;7efb
+	.DB $12		;7efc
+	.DB $05		;7efd
+	.DB $16		;7efe
+	.DB $13		;7eff
 l7f00h:
-	dec b			;7f00
-	rla			;7f01
-	ld (de),a			;7f02
-	inc b			;7f03
-	sub d			;7f04
-	ld b,01ah		;7f05
-	ld (bc),a			;7f07
-	rlca			;7f08
-	ex af,af'			;7f09
-	ld bc,08104h		;7f0a
-	inc b			;7f0d
-	dec b			;7f0e
-	inc bc			;7f0f
-	inc b			;7f10
-	rlca			;7f11
-	ld (bc),a			;7f12
-	inc b			;7f13
-	ld (l0a06h),hl		;7f14
-	ld d,d			;7f17
-	inc d			;7f18
-	ld d,019h		;7f19
-	ld bc,l31c8h		;7f1b
-	nop			;7f1e
-	call nz,sub_0021h		;7f1f
-	ret nz			;7f22
-	ld de,0c001h		;7f23
-	ld bc,l03ffh+1		;7f26
-	ld (hl),000h		;7f29
-	ldir		;7f2b
-	call sub_4131h		;7f2d
-	call sub_07feh		;7f30
-	ld a,002h		;7f33
-	out (0bfh),a		;7f35
-	ld a,080h		;7f37
-	out (0bfh),a		;7f39
-	ld a,0e2h		;7f3b
-	out (0bfh),a		;7f3d
+	.DB $05		;7f00
+	.DB $17		;7f01
+	.DB $12		;7f02
+	.DB $04		;7f03
+	.DB $92		;7f04
+	.DB $06		;7f05
+	.DB $1a		;7f06
+	.DB $02		;7f07
+	.DB $07		;7f08
+	.DB $08		;7f09
+	.DB $01		;7f0a
+	.DB $04		;7f0b
+	.DB $81		;7f0c
+	.DB $04		;7f0d
+	.DB $05		;7f0e
+	.DB $03		;7f0f
+	.DB $04		;7f10
+	.DB $07		;7f11
+	.DB $02		;7f12
+	.DB $04		;7f13
+	.DB $22		;7f14
+	.DB $06		;7f15
+	.DB $0a		;7f16
+	.DB $52		;7f17
+	.DB $14		;7f18
+	.DB $16		;7f19
+	.DB $19		;7f1a
+	.DB $01		;7f1b
+	.DB $c8		;7f1c
+	.DB $31		;7f1d
+	.DB $00		;7f1e
+	.DB $c4		;7f1f
+	.DB $21		;7f20
+	.DB $00		;7f21
+	.DB $c0		;7f22
+	.DB $11		;7f23
+	.DB $01		;7f24
+	.DB $c0		;7f25
+	.DB $01		;7f26
+	.DB $00		;7f27
+	.DB $04		;7f28
+	.DB $36		;7f29
+	.DB $00		;7f2a
+	.DB $ed		;7f2b
+	.DB $b0		;7f2c
+	.DB $cd		;7f2d
+	.DB $31		;7f2e
+	.DB $41		;7f2f
+	.DB $cd		;7f30
+	.DB $fe		;7f31
+	.DB $07		;7f32
+	.DB $3e		;7f33
+	.DB $02		;7f34
+	.DB $d3		;7f35
+	.DB $bf		;7f36
+	.DB $3e		;7f37
+	.DB $80		;7f38
+	.DB $d3		;7f39
+	.DB $bf		;7f3a
+	.DB $3e		;7f3b
+	.DB $e2		;7f3c
+	.DB $d3		;7f3d
+	.DB $bf		;7f3e
 l7f3fh:
-	ld a,081h		;7f3f
-	out (0bfh),a		;7f41
-	ld a,08ah		;7f43
-	ld (0c100h),a		;7f45
-l7f48h:
-	ei			;7f48
-	rst 8			;7f49
-	jp l7f48h		;7f4a
-	rst 38h			;7f4d
-	rst 38h			;7f4e
-	rst 38h			;7f4f
-	rst 38h			;7f50
-	rst 38h			;7f51
-	rst 38h			;7f52
-	rst 38h			;7f53
-	rst 38h			;7f54
-	rst 38h			;7f55
-	rst 38h			;7f56
-	rst 38h			;7f57
-	rst 38h			;7f58
-	rst 38h			;7f59
-	rst 38h			;7f5a
-	rst 38h			;7f5b
-	rst 38h			;7f5c
-	rst 38h			;7f5d
-	rst 38h			;7f5e
-	rst 38h			;7f5f
-	rst 38h			;7f60
-	rst 38h			;7f61
-	rst 38h			;7f62
-	rst 38h			;7f63
-	rst 38h			;7f64
-	rst 38h			;7f65
-	rst 38h			;7f66
-	rst 38h			;7f67
-	rst 38h			;7f68
-	rst 38h			;7f69
-	rst 38h			;7f6a
-	rst 38h			;7f6b
-	rst 38h			;7f6c
-	rst 38h			;7f6d
-	rst 38h			;7f6e
-	rst 38h			;7f6f
-	rst 38h			;7f70
-	rst 38h			;7f71
-	rst 38h			;7f72
-	rst 38h			;7f73
-	rst 38h			;7f74
-	rst 38h			;7f75
-	rst 38h			;7f76
-	rst 38h			;7f77
-	rst 38h			;7f78
-	rst 38h			;7f79
-	rst 38h			;7f7a
-	rst 38h			;7f7b
-	rst 38h			;7f7c
-	rst 38h			;7f7d
-	rst 38h			;7f7e
-	rst 38h			;7f7f
+	.DB $3e		;7f3f
+	.DB $81		;7f40
+	.DB $d3		;7f41
+	.DB $bf		;7f42
+	.DB $3e		;7f43
+	.DB $8a		;7f44
+	.DB $32		;7f45
+	.DB $00		;7f46
+	.DB $c1		;7f47
+	.DB $fb		;7f48
+	.DB $cf		;7f49
+	.DB $c3		;7f4a
+	.DB $48		;7f4b
+	.DB $7f		;7f4c
+	.DB $ff		;7f4d
+	.DB $ff		;7f4e
+	.DB $ff		;7f4f
+	.DB $ff		;7f50
+	.DB $ff		;7f51
+	.DB $ff		;7f52
+	.DB $ff		;7f53
+	.DB $ff		;7f54
+	.DB $ff		;7f55
+	.DB $ff		;7f56
+	.DB $ff		;7f57
+	.DB $ff		;7f58
+	.DB $ff		;7f59
+	.DB $ff		;7f5a
+	.DB $ff		;7f5b
+	.DB $ff		;7f5c
+	.DB $ff		;7f5d
+	.DB $ff		;7f5e
+	.DB $ff		;7f5f
+	.DB $ff		;7f60
+	.DB $ff		;7f61
+	.DB $ff		;7f62
+	.DB $ff		;7f63
+	.DB $ff		;7f64
+	.DB $ff		;7f65
+	.DB $ff		;7f66
+	.DB $ff		;7f67
+	.DB $ff		;7f68
+	.DB $ff		;7f69
+	.DB $ff		;7f6a
+	.DB $ff		;7f6b
+	.DB $ff		;7f6c
+	.DB $ff		;7f6d
+	.DB $ff		;7f6e
+	.DB $ff		;7f6f
+	.DB $ff		;7f70
+	.DB $ff		;7f71
+	.DB $ff		;7f72
+	.DB $ff		;7f73
+	.DB $ff		;7f74
+	.DB $ff		;7f75
+	.DB $ff		;7f76
+	.DB $ff		;7f77
+	.DB $ff		;7f78
+	.DB $ff		;7f79
+	.DB $ff		;7f7a
+	.DB $ff		;7f7b
+	.DB $ff		;7f7c
+	.DB $ff		;7f7d
+	.DB $ff		;7f7e
+	.DB $ff		;7f7f
 l7f80h:
-	rst 38h			;7f80
-	rst 38h			;7f81
-	rst 38h			;7f82
-	rst 38h			;7f83
-	rst 38h			;7f84
-	rst 38h			;7f85
-	rst 38h			;7f86
-	rst 38h			;7f87
-	rst 38h			;7f88
-	rst 38h			;7f89
-	rst 38h			;7f8a
-	rst 38h			;7f8b
-	rst 38h			;7f8c
-	rst 38h			;7f8d
-	rst 38h			;7f8e
-	rst 38h			;7f8f
-	rst 38h			;7f90
-	rst 38h			;7f91
-	rst 38h			;7f92
-	rst 38h			;7f93
-	rst 38h			;7f94
-	rst 38h			;7f95
-	rst 38h			;7f96
-	rst 38h			;7f97
-	rst 38h			;7f98
-	rst 38h			;7f99
-	rst 38h			;7f9a
-	rst 38h			;7f9b
-	rst 38h			;7f9c
-	rst 38h			;7f9d
-	rst 38h			;7f9e
-	rst 38h			;7f9f
-	rst 38h			;7fa0
-	rst 38h			;7fa1
-	rst 38h			;7fa2
-	rst 38h			;7fa3
-	rst 38h			;7fa4
-	rst 38h			;7fa5
-	rst 38h			;7fa6
-	rst 38h			;7fa7
-	rst 38h			;7fa8
-	rst 38h			;7fa9
+	.DB $ff		;7f80
+	.DB $ff		;7f81
+	.DB $ff		;7f82
+	.DB $ff		;7f83
+	.DB $ff		;7f84
+	.DB $ff		;7f85
+	.DB $ff		;7f86
+	.DB $ff		;7f87
+	.DB $ff		;7f88
+	.DB $ff		;7f89
+	.DB $ff		;7f8a
+	.DB $ff		;7f8b
+	.DB $ff		;7f8c
+	.DB $ff		;7f8d
+	.DB $ff		;7f8e
+	.DB $ff		;7f8f
+	.DB $ff		;7f90
+	.DB $ff		;7f91
+	.DB $ff		;7f92
+	.DB $ff		;7f93
+	.DB $ff		;7f94
+	.DB $ff		;7f95
+	.DB $ff		;7f96
+	.DB $ff		;7f97
+	.DB $ff		;7f98
+	.DB $ff		;7f99
+	.DB $ff		;7f9a
+	.DB $ff		;7f9b
+	.DB $ff		;7f9c
+	.DB $ff		;7f9d
+	.DB $ff		;7f9e
+	.DB $ff		;7f9f
+	.DB $ff		;7fa0
+	.DB $ff		;7fa1
+	.DB $ff		;7fa2
+	.DB $ff		;7fa3
+	.DB $ff		;7fa4
+	.DB $ff		;7fa5
+	.DB $ff		;7fa6
+	.DB $ff		;7fa7
+	.DB $ff		;7fa8
+	.DB $ff		;7fa9
 l7faah:
-	rst 38h			;7faa
-	rst 38h			;7fab
-	rst 38h			;7fac
-	rst 38h			;7fad
-	rst 38h			;7fae
-	rst 38h			;7faf
-	rst 38h			;7fb0
-	rst 38h			;7fb1
-	rst 38h			;7fb2
-	rst 38h			;7fb3
-	rst 38h			;7fb4
-	rst 38h			;7fb5
-	rst 38h			;7fb6
-	rst 38h			;7fb7
-	rst 38h			;7fb8
-	rst 38h			;7fb9
-	rst 38h			;7fba
-	rst 38h			;7fbb
-	rst 38h			;7fbc
-	rst 38h			;7fbd
-	rst 38h			;7fbe
-	rst 38h			;7fbf
-	rst 38h			;7fc0
-	rst 38h			;7fc1
-	rst 38h			;7fc2
-	rst 38h			;7fc3
-	rst 38h			;7fc4
-	rst 38h			;7fc5
-	rst 38h			;7fc6
-	rst 38h			;7fc7
-	rst 38h			;7fc8
-	rst 38h			;7fc9
-	rst 38h			;7fca
-	rst 38h			;7fcb
-	rst 38h			;7fcc
-	rst 38h			;7fcd
-	rst 38h			;7fce
-	rst 38h			;7fcf
-	rst 38h			;7fd0
-	rst 38h			;7fd1
-	rst 38h			;7fd2
-	rst 38h			;7fd3
-	rst 38h			;7fd4
-	rst 38h			;7fd5
-	rst 38h			;7fd6
-	rst 38h			;7fd7
-	rst 38h			;7fd8
-	rst 38h			;7fd9
-	rst 38h			;7fda
-	rst 38h			;7fdb
-	rst 38h			;7fdc
-	rst 38h			;7fdd
-	rst 38h			;7fde
-	rst 38h			;7fdf
-	rst 38h			;7fe0
-	rst 38h			;7fe1
-	rst 38h			;7fe2
-	rst 38h			;7fe3
-	rst 38h			;7fe4
-	rst 38h			;7fe5
-	rst 38h			;7fe6
-	rst 38h			;7fe7
-	rst 38h			;7fe8
-	rst 38h			;7fe9
-	rst 38h			;7fea
-	ld c,b			;7feb
-	ld l,04fh		;7fec
-	jr nz,$+83		;7fee
-	ld b,l			;7ff0
-	ld d,b			;7ff1
-	ld l,020h		;7ff2
-	ld sp,02031h		;7ff4
-	ld sp,l3839h		;7ff7
-	dec (hl)			;7ffa
-	jr nz,sub_7fffh		;7ffb
-	dec b			;7ffd
-	nop			;7ffe
-sub_7fffh:
-	inc a			;7fff
+	.DB $ff		;7faa
+	.DB $ff		;7fab
+	.DB $ff		;7fac
+	.DB $ff		;7fad
+	.DB $ff		;7fae
+	.DB $ff		;7faf
+	.DB $ff		;7fb0
+	.DB $ff		;7fb1
+	.DB $ff		;7fb2
+	.DB $ff		;7fb3
+	.DB $ff		;7fb4
+	.DB $ff		;7fb5
+	.DB $ff		;7fb6
+	.DB $ff		;7fb7
+	.DB $ff		;7fb8
+	.DB $ff		;7fb9
+	.DB $ff		;7fba
+	.DB $ff		;7fbb
+	.DB $ff		;7fbc
+	.DB $ff		;7fbd
+	.DB $ff		;7fbe
+	.DB $ff		;7fbf
+	.DB $ff		;7fc0
+	.DB $ff		;7fc1
+	.DB $ff		;7fc2
+	.DB $ff		;7fc3
+	.DB $ff		;7fc4
+	.DB $ff		;7fc5
+	.DB $ff		;7fc6
+	.DB $ff		;7fc7
+	.DB $ff		;7fc8
+	.DB $ff		;7fc9
+	.DB $ff		;7fca
+	.DB $ff		;7fcb
+	.DB $ff		;7fcc
+	.DB $ff		;7fcd
+	.DB $ff		;7fce
+	.DB $ff		;7fcf
+	.DB $ff		;7fd0
+	.DB $ff		;7fd1
+	.DB $ff		;7fd2
+	.DB $ff		;7fd3
+	.DB $ff		;7fd4
+	.DB $ff		;7fd5
+	.DB $ff		;7fd6
+	.DB $ff		;7fd7
+	.DB $ff		;7fd8
+	.DB $ff		;7fd9
+	.DB $ff		;7fda
+	.DB $ff		;7fdb
+	.DB $ff		;7fdc
+	.DB $ff		;7fdd
+	.DB $ff		;7fde
+	.DB $ff		;7fdf
+	.DB $ff		;7fe0
+	.DB $ff		;7fe1
+	.DB $ff		;7fe2
+	.DB $ff		;7fe3
+	.DB $ff		;7fe4
+	.DB $ff		;7fe5
+	.DB $ff		;7fe6
+	.DB $ff		;7fe7
+	.DB $ff		;7fe8
+	.DB $ff		;7fe9
+	.DB $ff		;7fea
+	.DB $48		;7feb
+	.DB $2e		;7fec
+	.DB $4f		;7fed
+	.DB $20		;7fee
+	.DB $53		;7fef
+	.DB $45		;7ff0
+	.DB $50		;7ff1
+	.DB $2e		;7ff2
+	.DB $20		;7ff3
+	.DB $31		;7ff4
+	.DB $31		;7ff5
+	.DB $20		;7ff6
+	.DB $31		;7ff7
+	.DB $39		;7ff8
+	.DB $38		;7ff9
+	.DB $35		;7ffa
+	.DB $20		;7ffb
+	.DB $02		;7ffc
+	.DB $05		;7ffd
+	.DB $00		;7ffe
+	.DB $3c		;7fff
