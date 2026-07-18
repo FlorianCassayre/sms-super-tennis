@@ -16,23 +16,23 @@
 
 	.ORGA	00000h
 
-l0000h:
+start:
 	di			;0000
 l0001h:
 	im 1		;0001
 l0003h:
 	ld sp,0dffeh		;0003
 l0006h:
-	jr l0071h		;0006
+	jr init		;0006
 l0008h:
 	ei			;0008
 l0009h:
 	ld hl,0c002h		;0009
-l000ch:
+loop_splash:
 	ld a,(hl)			;000c
 	or a			;000d
 l000eh:
-	jr z,l000ch		;000e
+	jr z,loop_splash		;000e
 l0010h:
 	xor a			;0010
 l0011h:
@@ -106,7 +106,7 @@ l0064h:
 	ld (0c02dh),a		;006b
 	pop af			;006e
 	retn		;006f
-l0071h:
+init:
 	call sub_0042h		;0071
 	ld a,0aah		;0074
 	ld (0d000h),a		;0076
@@ -186,7 +186,7 @@ l0118h:
 	ld hl,l0003h+1		;0118
 	ld (0c060h),hl		;011b
 l011eh:
-	ld hl,l0000h		;011e
+	ld hl,start		;011e
 	ld (0c31ah),hl		;0121
 	xor a			;0124
 	ld (0c301h),a		;0125
@@ -734,26 +734,7 @@ l04deh:
 l04fbh:
 	ld a,h			;04fb
 	add hl,bc			;04fc
-	ld d,b			;04fd
-sub_04feh:
-	ld d,l			;04fe
-	ld d,e			;04ff
-l0500h:
-	ld c,b			;0500
-l0501h:
-	jr nz,l0556h		;0501
-l0503h:
-	ld d,h			;0503
-	ld b,c			;0504
-	ld d,d			;0505
-	ld d,h			;0506
-	jr nz,$+66		;0507
-	ld d,l			;0509
-	ld d,h			;050a
-	ld d,h			;050b
-l050ch:
-	ld c,a			;050c
-	ld c,(hl)			;050d
+.DB $50 $55 $53 $48 $20 $53 $54 $41 $52 $54 $20 $42 $55 $54 $54 $4F $4E ; "PUSH START BUTTON"			;04fd
 	nop			;050e
 	add hl,bc			;050f
 	ld c,h			;0510
@@ -817,7 +798,6 @@ l050ch:
 	ld bc,l3931h		;0550
 	jr c,l058ah		;0553
 	nop			;0555
-l0556h:
 	ld bc,0b4b3h		;0556
 	nop			;0559
 	add hl,bc			;055a
@@ -1345,7 +1325,7 @@ l07eah:
 sub_07feh:
 	ld b,003h		;07fe
 l0800h:
-	ld de,l0000h		;0800
+	ld de,start		;0800
 l0803h:
 	dec de			;0803
 l0804h:
@@ -1583,7 +1563,7 @@ l091fh:
 	jr nz,$+32		;091f
 l0921h:
 	jr nz,$+32		;0921
-	ld hl,l0000h		;0923
+	ld hl,start		;0923
 	nop			;0926
 	nop			;0927
 	ld (l2423h),hl		;0928
@@ -1885,7 +1865,7 @@ l0ac7h:
 	adc a,0ffh		;0acd
 	ld (0c31bh),a		;0acf
 	jr c,l0ae2h		;0ad2
-	ld hl,l0000h		;0ad4
+	ld hl,start		;0ad4
 	ld (0c31ah),hl		;0ad7
 	ld (0c319h),hl		;0ada
 	ld (0c31ch),hl		;0add
@@ -1902,7 +1882,7 @@ l0ae2h:
 	adc a,0ffh		;0af6
 	ld (0c31bh),a		;0af8
 	jr c,l0b0bh		;0afb
-	ld hl,l0000h		;0afd
+	ld hl,start		;0afd
 	ld (0c31ah),hl		;0b00
 	ld (0c319h),hl		;0b03
 	ld (0c31ch),hl		;0b06
@@ -2012,7 +1992,7 @@ l0baeh:
 	bit 3,a		;0bc0
 l0bc2h:
 	jp z,l0e7bh		;0bc2
-	ld hl,l0000h		;0bc5
+	ld hl,start		;0bc5
 	ld (0c30eh),hl		;0bc8
 	ld b,000h		;0bcb
 	ld a,(0c30ch)		;0bcd
@@ -2165,7 +2145,7 @@ l0cb9h:
 	ld hl,0a800h		;0cc7
 	jr l0ccfh		;0cca
 l0ccch:
-	ld hl,l0000h		;0ccc
+	ld hl,start		;0ccc
 l0ccfh:
 	ld (ix+01eh),l		;0ccf
 	ld a,h			;0cd2
@@ -2200,7 +2180,7 @@ sub_0d02h:
 	ld (0c31bh),a		;0d0a
 	jr c,l0d1dh		;0d0d
 l0d0fh:
-	ld hl,l0000h		;0d0f
+	ld hl,start		;0d0f
 	ld (0c319h),hl		;0d12
 	ld (0c31ah),hl		;0d15
 	ld (0c31ch),hl		;0d18
@@ -2526,12 +2506,12 @@ l0f72h:
 	ld de,0fffeh		;0f75
 	add hl,de			;0f78
 	jr c,l0f7eh		;0f79
-	ld hl,l0000h		;0f7b
+	ld hl,start		;0f7b
 l0f7eh:
 	ld (0c31ah),hl		;0f7e
 	ret			;0f81
 l0f82h:
-	ld hl,l0000h		;0f82
+	ld hl,start		;0f82
 	ld (0c30eh),hl		;0f85
 	ld hl,(0c319h)		;0f88
 	ld a,(0c31bh)		;0f8b
@@ -2544,7 +2524,7 @@ l0f82h:
 	ld a,(0c30dh)		;0f9d
 	dec a			;0fa0
 	jr z,l0fa6h		;0fa1
-	ld bc,l0501h		;0fa3
+.DB $01 $01 $05
 l0fa6h:
 	ld (ix+00ah),b		;0fa6
 	ld a,(0c314h)		;0fa9
@@ -3303,7 +3283,7 @@ l1303h:
 	inc hl			;1309
 l130ah:
 	ex de,hl			;130a
-	ld hl,l0000h		;130b
+	ld hl,start		;130b
 	ld bc,0c600h		;130e
 	exx			;1311
 l1312h:
@@ -3343,7 +3323,7 @@ sub_1322h:
 	ld h,a			;1344
 l1345h:
 	ld (0c030h),hl		;1345
-	ld de,l0000h		;1348
+	ld de,start		;1348
 	or a			;134b
 	jr z,l1353h		;134c
 	neg		;134e
@@ -3895,7 +3875,7 @@ sub_167ch:
 	ld (bc),a			;168d
 	ld (bc),a			;168e
 	ld bc,l0100h+1		;168f
-	ld bc,l0000h		;1692
+	ld bc,start		;1692
 	nop			;1695
 	nop			;1696
 	nop			;1697
@@ -4524,14 +4504,14 @@ l193ch:
 	and 01dh		;196a
 	ld a,016h		;196c
 	ld (bc),a			;196e
-	ld bc,l0000h		;196f
+	ld bc,start		;196f
 	nop			;1972
 	nop			;1973
 	nop			;1974
 	ld bc,00406h		;1975
 	inc bc			;1978
 	ld (bc),a			;1979
-	ld bc,l0000h		;197a
+	ld bc,start		;197a
 	nop			;197d
 	nop			;197e
 	nop			;197f
@@ -4545,7 +4525,7 @@ l193ch:
 	inc b			;198a
 	inc bc			;198b
 	ld (bc),a			;198c
-	ld bc,l0000h		;198d
+	ld bc,start		;198d
 	nop			;1990
 	nop			;1991
 	nop			;1992
@@ -4820,7 +4800,7 @@ l1ab0h:
 	ld (bc),a			;1ada
 l1adbh:
 	ld bc,l0100h+1		;1adb
-	ld bc,l0000h		;1ade
+	ld bc,start		;1ade
 	nop			;1ae1
 	nop			;1ae2
 	nop			;1ae3
@@ -4974,7 +4954,7 @@ l1b92h:
 	ld (bc),a			;1b94
 	ld (bc),a			;1b95
 	ld bc,l0100h+1		;1b96
-	ld bc,l0000h		;1b99
+	ld bc,start		;1b99
 	nop			;1b9c
 	nop			;1b9d
 	nop			;1b9e
@@ -5091,7 +5071,7 @@ l1c1eh:
 	ld (bc),a			;1c23
 	ld (bc),a			;1c24
 	ld bc,l0100h+1		;1c25
-	ld bc,l0000h		;1c28
+	ld bc,start		;1c28
 	nop			;1c2b
 	nop			;1c2c
 	nop			;1c2d
@@ -5152,7 +5132,7 @@ l1c6ah:
 	ld (bc),a			;1c6f
 	ld (bc),a			;1c70
 	ld bc,l0100h+1		;1c71
-	ld bc,l0000h		;1c74
+	ld bc,start		;1c74
 l1c77h:
 	nop			;1c77
 	nop			;1c78
@@ -5223,7 +5203,7 @@ l1cbdh:
 	ld (bc),a			;1cc3
 	ld (bc),a			;1cc4
 	ld bc,l0100h+1		;1cc5
-	ld bc,l0000h		;1cc8
+	ld bc,start		;1cc8
 	nop			;1ccb
 	nop			;1ccc
 	nop			;1ccd
@@ -5289,7 +5269,7 @@ l1cbdh:
 	ld (bc),a			;1d16
 	ld (bc),a			;1d17
 	ld bc,l0100h+1		;1d18
-	ld bc,l0000h		;1d1b
+	ld bc,start		;1d1b
 	nop			;1d1e
 	nop			;1d1f
 	nop			;1d20
@@ -5362,7 +5342,7 @@ l1d6ah:
 	ld (bc),a			;1d72
 	ld (bc),a			;1d73
 	ld bc,l0100h+1		;1d74
-	ld bc,l0000h		;1d77
+	ld bc,start		;1d77
 	nop			;1d7a
 	nop			;1d7b
 	nop			;1d7c
@@ -5436,7 +5416,7 @@ l1dc5h:
 	ld (bc),a			;1dce
 	ld (bc),a			;1dcf
 	ld bc,l0100h+1		;1dd0
-	ld bc,l0000h		;1dd3
+	ld bc,start		;1dd3
 	nop			;1dd6
 	nop			;1dd7
 	nop			;1dd8
@@ -5644,7 +5624,7 @@ l1ebeh:
 	ld (bc),a			;1ed0
 	ld bc,l0100h+1		;1ed1
 	ld bc,l0100h+1		;1ed4
-	ld bc,l0000h		;1ed7
+	ld bc,start		;1ed7
 	nop			;1eda
 	nop			;1edb
 	nop			;1edc
@@ -6463,7 +6443,7 @@ l2286h:
 	ld (bc),a			;2294
 	ld (bc),a			;2295
 	ld bc,l0100h+1		;2296
-	ld bc,l0000h		;2299
+	ld bc,start		;2299
 	nop			;229c
 	nop			;229d
 	nop			;229e
@@ -9922,7 +9902,7 @@ l3451h:
 	jp p,l7ec2h		;347a
 	or a			;347d
 	ret nz			;347e
-	ld hl,l0000h		;347f
+	ld hl,start		;347f
 	ld a,(0c010h)		;3482
 	add a,a			;3485
 	add a,l			;3486
@@ -9959,7 +9939,7 @@ l34a4h:
 l34b4h:
 	ld hl,0c2f0h		;34b4
 	ld (hl),d			;34b7
-	ld hl,l0000h		;34b8
+	ld hl,start		;34b8
 	ld a,(0c2f7h)		;34bb
 	ld (0c2f4h),a		;34be
 	nop			;34c1
@@ -10006,7 +9986,7 @@ l34fch:
 	nop			;3500
 	ld (bc),a			;3501
 	ld b,b			;3502
-	ld bc,l0000h		;3503
+	ld bc,start		;3503
 	nop			;3506
 	nop			;3507
 	nop			;3508
@@ -10239,7 +10219,7 @@ l363bh:
 	nop			;3644
 	nop			;3645
 l3646h:
-	ld bc,l0000h		;3646
+	ld bc,start		;3646
 	ld (bc),a			;3649
 	nop			;364a
 	nop			;364b
@@ -10248,8 +10228,8 @@ l3646h:
 	nop			;364e
 	inc b			;364f
 	nop			;3650
-	ld bc,l0000h		;3651
-	ld bc,l0000h		;3654
+	ld bc,start		;3651
+	ld bc,start		;3654
 	nop			;3657
 	jr nc,l367bh		;3658
 	add a,h			;365a
@@ -12243,7 +12223,7 @@ l4103h:
 l4107h:
 	ld (0c108h),hl		;4107
 l410ah:
-	ld hl,l0000h		;410a
+	ld hl,start		;410a
 	ld (0c101h),hl		;410d
 	ret			;4110
 l4111h:
@@ -13398,7 +13378,7 @@ l47b5h:
 	ld bc,l4001h		;47bb
 	ld bc,0a000h		;47be
 	ld bc,0f003h		;47c1
-	ld bc,l0000h		;47c4
+	ld bc,start		;47c4
 	ld bc,l02e1h		;47c7
 l47cah:
 	jp (hl)			;47ca
@@ -13409,7 +13389,7 @@ l47cah:
 	ld bc,04301h		;47d3
 	ld bc,0a000h		;47d6
 	ld bc,0f303h		;47d9
-	ld bc,l0000h		;47dc
+	ld bc,start		;47dc
 	ld bc,l02e1h		;47df
 l47e2h:
 	ret pe			;47e2
@@ -14749,7 +14729,7 @@ l4ed2h:
 	ld de,0fff8h		;4ede
 	add hl,de			;4ee1
 	jr c,l4ee7h		;4ee2
-	ld hl,l0000h		;4ee4
+	ld hl,start		;4ee4
 l4ee7h:
 	ld (0c31ah),hl		;4ee7
 	inc (ix+010h)		;4eea
@@ -14796,7 +14776,7 @@ l4f2ch:
 	ld ix,0c320h		;4f3a
 	ld de,l0020h		;4f3e
 	ld b,003h		;4f41
-	ld hl,l0000h		;4f43
+	ld hl,start		;4f43
 	ld c,l			;4f46
 l4f47h:
 	ld a,(ix+000h)		;4f47
@@ -17365,7 +17345,7 @@ l5b24h:
 	nop			;5b33
 	add a,e			;5b34
 	ret po			;5b35
-	call m,sub_04feh		;5b36
+.DB $FC $FE $04
 	nop			;5b39
 	add a,h			;5b3a
 l5b3bh:
@@ -18577,7 +18557,7 @@ l6088h:
 	ld de,l1713h		;60ae
 	dec d			;60b1
 	inc de			;60b2
-	ld bc,l050ch		;60b3
+.DB $01 $0C $05
 l60b6h:
 	nop			;60b6
 	adc a,c			;60b7
@@ -19198,7 +19178,7 @@ l6379h:
 	ld (de),a			;6392
 	nop			;6393
 	add a,h			;6394
-	ld bc,l0503h		;6395
+.DB $01 $03 $05
 	inc b			;6398
 	ld (bc),a			;6399
 	ex af,af'			;639a
@@ -20207,7 +20187,7 @@ l6830h:
 	ld a,(bc)			;6832
 	nop			;6833
 	add a,(hl)			;6834
-	ld bc,l0500h		;6835
+.DB $01 $00 $05
 	rlca			;6838
 	ld a,0d7h		;6839
 	ex af,af'			;683b
