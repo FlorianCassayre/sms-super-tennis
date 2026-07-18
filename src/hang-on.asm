@@ -712,38 +712,16 @@ l04deh:
 l04fbh:
 	ld a,h			;04fb
 	add hl,bc			;04fc
-	.DB $50 $55 $53 $48 $20 $53 $54 $41 $52 $54 $20 $42 $55 $54 $54 $4F $4E ; "PUSH START BUTTON"			;04fd
-	nop			;050e
+	.DB "PUSH START BUTTON"			;04fd
+	.DB $00			;050e
 	add hl,bc			;050f
-	ld c,h			;0510
-	ld b,l			;0511
-	ld d,(hl)			;0512
-	ld b,l			;0513
-	ld c,h			;0514
-	nop			;0515
+	.DB "LEVEL"			;0510
+	.DB $00			;0515
 	add hl,bc			;0516
-	ld c,b			;0517
-	ld c,c			;0518
-	dec sp			;0519
-	ld d,e			;051a
-	ld b,e			;051b
-	ld c,a			;051c
-	ld d,d			;051d
-	ld b,l			;051e
-	nop			;051f
+	.DB "HI;SCORE"			;0517
+	.DB $00			;051f
 	add hl,bc			;0520
-	ld c,a			;0521
-	ld d,d			;0522
-	ld c,c			;0523
-	ld b,a			;0524
-	ld c,c			;0525
-	ld c,(hl)			;0526
-	ld b,c			;0527
-	ld c,h			;0528
-	jr nz,l0572h		;0529
-	ld b,c			;052b
-	ld c,l			;052c
-	ld b,l			;052d
+	.DB "ORIGINAL GAME"
 	jr nz,l04deh		;052e
 	jr nz,$-81		;0530
 	or b			;0532
@@ -751,31 +729,16 @@ l04fbh:
 	or d			;0534
 	nop			;0535
 	add hl,bc			;0536
-	ld d,d			;0537
-	ld b,l			;0538
-	ld d,b			;0539
-	ld d,d			;053a
-	ld c,a			;053b
-	ld b,a			;053c
-	ld d,d			;053d
-	ld b,c			;053e
-	ld c,l			;053f
-	ld c,l			;0540
-	ld b,l			;0541
-	ld b,h			;0542
-	jr nz,l058ch		;0543
-	ld b,c			;0545
-	ld c,l			;0546
-	ld b,l			;0547
+	.DB "REPROGRAMMED GAME"
 	jr nz,$-82		;0548
 	jr nz,l04fbh		;054a
 	or b			;054c
 	or c			;054d
 	or d			;054e
 	nop			;054f
-	ld bc,l3931h		;0550
-	jr c,l058ah		;0553
-	nop			;0555
+	.DB $01		;0550
+	.DB "1985"		;0551
+	.DB $00			;0555
 	ld bc,0b4b3h		;0556
 	nop			;0559
 	add hl,bc			;055a
@@ -11732,53 +11695,12 @@ l3e7dh:
 	call z,0fb79h		;3ebb
 	ld a,0c6h		;3ebe
 	ld a,c			;3ec0
-	ld b,a			;3ec1
-	ld b,c			;3ec2
-	ld c,l			;3ec3
-	ld b,l			;3ec4
-	jr nz,l3f16h		;3ec5
-	ld d,(hl)			;3ec7
-	ld b,l			;3ec8
-	ld d,d			;3ec9
-	nop			;3eca
-	ld b,e			;3ecb
-	ld c,a			;3ecc
-	ld c,(hl)			;3ecd
-	ld b,a			;3ece
-	ld d,d			;3ecf
-	ld b,c			;3ed0
-	ld d,h			;3ed1
-	ld d,l			;3ed2
-	ld c,h			;3ed3
-	ld b,c			;3ed4
-	ld d,h			;3ed5
-	ld c,c			;3ed6
-	ld c,a			;3ed7
-	ld c,(hl)			;3ed8
-	ld d,e			;3ed9
-	ld a,(04300h)		;3eda
-	ld c,b			;3edd
-	ld b,c			;3ede
-	ld c,h			;3edf
-	ld c,h			;3ee0
-	ld b,l			;3ee1
-	ld c,(hl)			;3ee2
-	ld b,a			;3ee3
-	ld b,l			;3ee4
-	jr nz,l3f3bh		;3ee5
-	ld c,b			;3ee7
-	ld b,l			;3ee8
-	jr nz,l3f39h		;3ee9
-	ld b,l			;3eeb
-	ld e,b			;3eec
-	ld d,h			;3eed
-	jr nz,l3f33h		;3eee
-	ld c,a			;3ef0
-	ld d,l			;3ef1
-	ld d,d			;3ef2
-	ld d,e			;3ef3
-	ld b,l			;3ef4
-	nop			;3ef5
+	.DB "GAME OVER"			;3ec1
+	.DB $00			;3eca
+	.DB "CONGRATULATIONS:"			;3ecb
+    .DB $00			;3edb
+    .DB "CHALLENGE THE NEXT COURSE"			;3ece
+    .DB $00			;3ecf
 	jr nz,$+32		;3ef6
 	jr nz,l3f1ah		;3ef8
 	jr nz,l3f1ch		;3efa
@@ -27122,10 +27044,7 @@ l7faah:
 	.DB $31		;7ff4
 	.DB $31		;7ff5
 	.DB $20		;7ff6
-	.DB $31		;7ff7
-	.DB $39		;7ff8
-	.DB $38		;7ff9
-	.DB $35		;7ffa
+	.DB "1985"		;7ff7
 	.DB $20		;7ffb
 	.DB $02		;7ffc
 	.DB $05		;7ffd
