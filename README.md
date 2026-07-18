@@ -17,7 +17,7 @@ You will need Docker to build the image:
 
 The initial disassembly is done with this snippet:
 ```shell
-./docker/run.sh z80dasm -a -l hang-on-japan.sms > src/hang-on.asm
+./docker/run.sh z80dasm -g 0x0000 -a -l hang-on-japan.sms > src/hang-on.asm
 
 sed -i -E \
     -e 's/^([[:space:]]*)org([[:space:]]+)/\1.ORGA\2/' \
