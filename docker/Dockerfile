@@ -23,7 +23,7 @@ FROM debian:trixie-slim
 COPY --from=builder /usr/src/wla-dx/build/binaries/* /usr/local/bin/
 
 RUN apt-get update \
-    && apt-get install -y adduser \
+    && apt-get install -y z80dasm adduser \
     && groupadd --gid 1000 dockeruser \
     && adduser --system --shell /bin/bash --uid 1000 --ingroup dockeruser dockeruser \
     && rm -rf /var/lib/apt/lists/*
