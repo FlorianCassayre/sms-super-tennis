@@ -1,6 +1,6 @@
 import re
 
-FILE = "src/hang-on.asm"
+FILE = "src/super-tennis.asm"
 
 lines = open(FILE).readlines()
 

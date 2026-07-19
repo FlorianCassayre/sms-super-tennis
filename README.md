@@ -1,4 +1,4 @@
-# Hang-On Disassembly
+# Super Tennis Disassembly
 
 ## Environment
 
@@ -17,7 +17,7 @@ You will need Docker to build the image:
 
 The initial disassembly is done with this snippet:
 ```shell
-./docker/run.sh z80dasm -g 0x0000 -a -l hang-on-japan.sms > src/hang-on.asm
+./docker/run.sh z80dasm -g 0x0000 -a -l super-tennis.sms > src/super-tennis.asm
 
 sed -i -E \
     -e 's/^([[:space:]]*)org([[:space:]]+)/\1.ORGA\2/' \
@@ -26,9 +26,9 @@ sed -i -E \
     -e 's/\bdefs\b/.DSB/g' \
     -e 's/\bdefm\b/.DB/g' \
     -e 's/\bequ\b/.EQU/g' \
-    src/hang-on.asm
+    src/super-tennis.asm
 
-sed -i -E "s/(\.DB[[:space:]]+)'([^']*)'/\1\"\2\"/g" src/hang-on.asm
+sed -i -E "s/(\.DB[[:space:]]+)'([^']*)'/\1\"\2\"/g" src/super-tennis.asm
 
 TMP=$(mktemp)
 {
@@ -50,14 +50,14 @@ cat <<'EOF'
 ; --- end generated header ---
 
 EOF
-cat src/hang-on.asm
+cat src/super-tennis.asm
 } > "$TMP"
-mv "$TMP" src/hang-on.asm
+mv "$TMP" src/super-tennis.asm
 
 python3 - <<'PY'
 import re
 
-with open('src/hang-on.asm', 'r') as f:
+with open('src/super-tennis.asm', 'r') as f:
     text = f.read()
 
 def repl(m):
@@ -71,14 +71,14 @@ text = re.sub(
     text
 )
 
-with open('src/hang-on.asm', 'w') as f:
+with open('src/super-tennis.asm', 'w') as f:
     f.write(text)
 PY
 ```
 
 You can then try to compile the disassembled file. In case of mismatch, you may inspect the differences:
 ```shell
-cmp -l hang-on-japan.sms build/hang-on-japan.sms
+cmp -l super-tennis.sms build/super-tennis.sms
 ```
 
 ## Acknowledgment
