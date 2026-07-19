@@ -35,18 +35,15 @@ TMP=$(mktemp)
 cat <<'EOF'
 ; --- generated header ---
 .MEMORYMAP
-    DEFAULTSLOT 0
-    SLOTSIZE $10000
+    SLOTSIZE $8000
     SLOT 0 $0000
+    DEFAULTSLOT 0
 .ENDME
-
 .ROMBANKMAP
     BANKSTOTAL 1
-    BANKSIZE $10000
+    BANKSIZE $8000
     BANKS 1
 .ENDRO
-
-.BANK 0 SLOT 0
 ; --- end generated header ---
 
 EOF

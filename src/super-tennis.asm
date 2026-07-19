@@ -1,15 +1,14 @@
 ; --- generated header ---
 .MEMORYMAP
-    DEFAULTSLOT 0
-    SLOTSIZE $10000
+    SLOTSIZE $8000
     SLOT 0 $0000
+    DEFAULTSLOT 0
 .ENDME
 .ROMBANKMAP
     BANKSTOTAL 1
-    BANKSIZE $10000
+    BANKSIZE $8000
     BANKS 1
 .ENDRO
-.BANK 0 SLOT 0
 ; --- end generated header ---
 ; z80dasm 1.1.6
 ; command line: z80dasm -g 0x0000 -a -l super-tennis.sms
@@ -19,20 +18,20 @@
 start:
 	jp init		; c3 85 00 ;0000
 l0003h:
-	ccf			; 3f ;0003
+	.DB $3f			;0003
 l0004h:
-	ccf			; 3f ;0004
+	.DB $3f			;0004
 l0005h:
-	scf			; 37 ;0005
+	.DB $37			;0005
 l0006h:
-	ex af,af'			; 08 ;0006
+	.DB $08			;0006
 l0007h:
-	inc bc			; 03 ;0007
+	.DB $03			;0007
 l0008h:
-	nop			; 00 ;0008
+	.DB $00			;0008
 l0009h:
-	cpl			; 2f ;0009
-	ld hl,(00f25h)		; 2a 25 0f ;000a
+	.DB $2f			;0009
+	.DB $2a $25 $0f		;000a
 	dec bc			; 0b ;000d
 l000eh:
 	ld a,(bc)			; 0a ;000e
@@ -156,6 +155,7 @@ init:
 	di			; f3 ;0085
 	ld sp,0dffeh		; 31 fe df ;0086
 	im 1		; ed 56 ;0089
+	; Clear RAM range 0xc000-0xc03f
 	ld hl,0c000h		; 21 00 c0 ;008b
 	ld de,0c001h		; 11 01 c0 ;008e
 	ld bc,l003fh		; 01 3f 00 ;0091
@@ -16394,295 +16394,331 @@ l5a04h:
 	.DB $01		;5b41
 	.DB $00		;5b42
 	.DB $09		;5b43
-	.DB $00		;5b44
-	.DB $81		;5b45
-	.DB $3c		;5b46
-	.DB $04		;5b47
-	.DB $66		;5b48
-	.DB $85		;5b49
-	.DB $3c		;5b4a
-	.DB $00		;5b4b
-	.DB $00		;5b4c
-	.DB $18		;5b4d
-	.DB $38		;5b4e
-	.DB $03		;5b4f
-	.DB $18		;5b50
-	.DB $ae		;5b51
-	.DB $3c		;5b52
-	.DB $00		;5b53
-	.DB $00		;5b54
-	.DB $3c		;5b55
-	.DB $66		;5b56
-	.DB $66		;5b57
-	.DB $0c		;5b58
-	.DB $30		;5b59
-	.DB $7e		;5b5a
-	.DB $00		;5b5b
-	.DB $00		;5b5c
-	.DB $3c		;5b5d
-	.DB $66		;5b5e
-	.DB $0c		;5b5f
-	.DB $06		;5b60
-	.DB $66		;5b61
-	.DB $3c		;5b62
-	.DB $00		;5b63
-	.DB $00		;5b64
-	.DB $0c		;5b65
-	.DB $1c		;5b66
-	.DB $2c		;5b67
-	.DB $4c		;5b68
-	.DB $7e		;5b69
-	.DB $0c		;5b6a
-	.DB $00		;5b6b
-	.DB $00		;5b6c
-	.DB $7c		;5b6d
-	.DB $60		;5b6e
-	.DB $7c		;5b6f
-	.DB $06		;5b70
-	.DB $66		;5b71
-	.DB $3c		;5b72
-	.DB $00		;5b73
-	.DB $00		;5b74
-	.DB $3c		;5b75
-	.DB $60		;5b76
-	.DB $7c		;5b77
-	.DB $66		;5b78
-	.DB $66		;5b79
-	.DB $3c		;5b7a
-	.DB $00		;5b7b
-	.DB $00		;5b7c
-	.DB $7e		;5b7d
-	.DB $66		;5b7e
-	.DB $08		;5b7f
-	.DB $03		;5b80
-	.DB $18		;5b81
-	.DB $02		;5b82
-	.DB $00		;5b83
-	.DB $8e		;5b84
-	.DB $3c		;5b85
-	.DB $66		;5b86
-	.DB $3c		;5b87
-	.DB $66		;5b88
-	.DB $66		;5b89
-	.DB $3c		;5b8a
-	.DB $00		;5b8b
-	.DB $00		;5b8c
-	.DB $3c		;5b8d
-	.DB $66		;5b8e
-	.DB $66		;5b8f
-	.DB $3e		;5b90
-	.DB $06		;5b91
-	.DB $3c		;5b92
-	.DB $02		;5b93
-	.DB $00		;5b94
-	.DB $02		;5b95
-	.DB $18		;5b96
-	.DB $02		;5b97
-	.DB $00		;5b98
-	.DB $02		;5b99
-	.DB $18		;5b9a
-	.DB $02		;5b9b
-	.DB $00		;5b9c
-	.DB $81		;5b9d
-	.DB $3c		;5b9e
-	.DB $03		;5b9f
-	.DB $62		;5ba0
-	.DB $95		;5ba1
-	.DB $7e		;5ba2
-	.DB $62		;5ba3
-	.DB $00		;5ba4
-	.DB $00		;5ba5
-	.DB $7c		;5ba6
-	.DB $62		;5ba7
-	.DB $7c		;5ba8
-	.DB $62		;5ba9
-	.DB $62		;5baa
-	.DB $7c		;5bab
-	.DB $00		;5bac
-	.DB $00		;5bad
-	.DB $3c		;5bae
-	.DB $66		;5baf
-	.DB $60		;5bb0
-	.DB $60		;5bb1
-	.DB $66		;5bb2
-	.DB $3c		;5bb3
-	.DB $00		;5bb4
-	.DB $00		;5bb5
-	.DB $7c		;5bb6
-	.DB $04		;5bb7
-	.DB $62		;5bb8
-	.DB $99		;5bb9
-	.DB $7c		;5bba
-	.DB $00		;5bbb
-	.DB $00		;5bbc
-	.DB $7e		;5bbd
-	.DB $60		;5bbe
-	.DB $7c		;5bbf
-	.DB $60		;5bc0
-	.DB $60		;5bc1
-	.DB $7e		;5bc2
-	.DB $00		;5bc3
-	.DB $00		;5bc4
-	.DB $7e		;5bc5
-	.DB $60		;5bc6
-	.DB $64		;5bc7
-	.DB $7c		;5bc8
-	.DB $64		;5bc9
-	.DB $60		;5bca
-	.DB $00		;5bcb
-	.DB $00		;5bcc
-	.DB $3c		;5bcd
-	.DB $62		;5bce
-	.DB $60		;5bcf
-	.DB $6e		;5bd0
-	.DB $62		;5bd1
-	.DB $3c		;5bd2
-	.DB $02		;5bd3
-	.DB $00		;5bd4
-	.DB $02		;5bd5
-	.DB $62		;5bd6
-	.DB $81		;5bd7
-	.DB $7e		;5bd8
-	.DB $03		;5bd9
-	.DB $62		;5bda
-	.DB $02		;5bdb
-	.DB $00		;5bdc
-	.DB $81		;5bdd
-	.DB $3c		;5bde
-	.DB $04		;5bdf
-	.DB $18		;5be0
-	.DB $84		;5be1
-	.DB $3c		;5be2
-	.DB $00		;5be3
-	.DB $00		;5be4
-	.DB $1e		;5be5
-	.DB $03		;5be6
-	.DB $0c		;5be7
-	.DB $8a		;5be8
-	.DB $4c		;5be9
-	.DB $38		;5bea
-	.DB $00		;5beb
-	.DB $00		;5bec
-	.DB $62		;5bed
-	.DB $64		;5bee
-	.DB $78		;5bef
-	.DB $68		;5bf0
-	.DB $64		;5bf1
-	.DB $62		;5bf2
-	.DB $02		;5bf3
-	.DB $00		;5bf4
-	.DB $04		;5bf5
-	.DB $60		;5bf6
-	.DB $87		;5bf7
-	.DB $62		;5bf8
-	.DB $7e		;5bf9
-	.DB $00		;5bfa
-	.DB $00		;5bfb
-	.DB $62		;5bfc
-	.DB $76		;5bfd
-	.DB $6a		;5bfe
-	.DB $03		;5bff
-	.DB $62		;5c00
-	.DB $02		;5c01
-	.DB $00		;5c02
-	.DB $84		;5c03
-	.DB $62		;5c04
-	.DB $72		;5c05
-	.DB $6a		;5c06
-	.DB $66		;5c07
-	.DB $02		;5c08
-	.DB $62		;5c09
-	.DB $02		;5c0a
-	.DB $00		;5c0b
-	.DB $81		;5c0c
-	.DB $3c		;5c0d
-	.DB $04		;5c0e
-	.DB $62		;5c0f
-	.DB $87		;5c10
-	.DB $3c		;5c11
-	.DB $00		;5c12
-	.DB $00		;5c13
-	.DB $7c		;5c14
-	.DB $62		;5c15
-	.DB $62		;5c16
-	.DB $7c		;5c17
-	.DB $02		;5c18
-	.DB $60		;5c19
-	.DB $02		;5c1a
-	.DB $00		;5c1b
-	.DB $99		;5c1c
-	.DB $3c		;5c1d
-	.DB $62		;5c1e
-	.DB $62		;5c1f
-	.DB $6a		;5c20
-	.DB $66		;5c21
-	.DB $3e		;5c22
-	.DB $00		;5c23
-	.DB $00		;5c24
-	.DB $7c		;5c25
-	.DB $62		;5c26
-	.DB $62		;5c27
-	.DB $7c		;5c28
-	.DB $64		;5c29
-	.DB $62		;5c2a
-	.DB $00		;5c2b
-	.DB $00		;5c2c
-	.DB $3c		;5c2d
-	.DB $62		;5c2e
-	.DB $38		;5c2f
-	.DB $04		;5c30
-	.DB $62		;5c31
-	.DB $3c		;5c32
-	.DB $00		;5c33
-	.DB $00		;5c34
-	.DB $7e		;5c35
-	.DB $05		;5c36
-	.DB $18		;5c37
-	.DB $02		;5c38
-	.DB $00		;5c39
-	.DB $05		;5c3a
-	.DB $62		;5c3b
-	.DB $81		;5c3c
-	.DB $3c		;5c3d
-	.DB $02		;5c3e
-	.DB $00		;5c3f
-	.DB $04		;5c40
-	.DB $62		;5c41
-	.DB $85		;5c42
-	.DB $34		;5c43
-	.DB $18		;5c44
-	.DB $00		;5c45
-	.DB $00		;5c46
-	.DB $62		;5c47
-	.DB $04		;5c48
-	.DB $6a		;5c49
-	.DB $89		;5c4a
-	.DB $34		;5c4b
-	.DB $00		;5c4c
-	.DB $00		;5c4d
-	.DB $72		;5c4e
-	.DB $34		;5c4f
-	.DB $38		;5c50
-	.DB $1c		;5c51
-	.DB $2c		;5c52
-	.DB $4e		;5c53
-	.DB $02		;5c54
-	.DB $00		;5c55
-	.DB $02		;5c56
-	.DB $62		;5c57
-	.DB $81		;5c58
-	.DB $34		;5c59
-	.DB $03		;5c5a
-	.DB $18		;5c5b
-	.DB $02		;5c5c
-	.DB $00		;5c5d
-	.DB $af		;5c5e
-	.DB $7e		;5c5f
-	.DB $04		;5c60
-	.DB $38		;5c61
-	.DB $1c		;5c62
-	.DB $20		;5c63
-	.DB $7e		;5c64
+	; Character "0"
+	.DB %00000000		;5b44
+	.DB %10000001		; Apply first pattern to row 0 and 7 ;5b45
+	.DB %00111100		;5b46
+	.DB %00000100		; ??? ;5b47
+	.DB %01100110		;5b48
+	.DB %10000101		; ??? ;5b49
+	.DB %00111100		;5b4a
+	.DB %00000000		;5b4b
+	; Character "1"
+	.DB %00000000		;5b4c
+	.DB %00011000		;5b4d
+	.DB %00111000		;5b4e
+	.DB %00000011		; ??? ;5b4f
+	.DB %00011000		;5b50
+	.DB %10101110		; ??? ;5b51
+	.DB %00111100		;5b52
+	.DB %00000000		;5b53
+	; Character "2"
+	.DB %00000000		;5b54
+    .DB %00111100		;5b55
+    .DB %01100110		;5b56
+    .DB %01100110		;5b57
+    .DB %00001100		;5b58
+    .DB %00110000		;5b59
+    .DB %01111110		;5b5a
+    .DB %00000000		;5b5b
+	; Character "3"
+	.DB %00000000		;5b5c
+	.DB %00111100		;5b5d
+	.DB %01100110		;5b5e
+	.DB %00001100		;5b5f
+	.DB %00000110		;5b60
+	.DB %01100110		;5b61
+	.DB %00111100		;5b62
+	.DB %00000000		;5b63
+	; Character "4"
+	.DB %00000000		;5b64
+    .DB %00001100		;5b65
+    .DB %00011100		;5b66
+    .DB %00101100		;5b67
+    .DB %01001100		;5b68
+    .DB %01111110		;5b69
+    .DB %00001100		;5b6a
+    .DB %00000000		;5b6b
+    ; Character "5"
+	.DB %00000000		;5b6c
+    .DB %01111100		;5b6d
+    .DB %01100000		;5b6e
+    .DB %01111100		;5b6f
+    .DB %00000110		;5b70
+    .DB %01100110		;5b71
+    .DB %00111100		;5b72
+    .DB %00000000		;5b73
+    ; Character "6"
+    .DB %00000000		;5b74
+    .DB %00111100		;5b75
+    .DB %01100000		;5b76
+    .DB %01111100		;5b77
+    .DB %01100110		;5b78
+    .DB %01100110		;5b79
+    .DB %00111100		;5b7a
+    .DB %00000000		;5b7b
+    ; Character "7" ???
+    .DB %00000000		;5b7c
+    .DB %01111110		;5b7d
+    .DB %01100110		;5b7e
+    .DB %00001000		;5b7f
+    .DB %00000011		;5b80
+    .DB %00011000		;5b81
+    .DB %00000010		;5b82
+    .DB %00000000		;5b83
+    ; Character "8" ???
+    .DB %10001110		;5b84
+    .DB %00111100		;5b85
+    .DB %01100110		;5b86
+    .DB %00111100		;5b87
+    .DB %01100110		;5b88
+    .DB %01100110		;5b89
+    .DB %00111100		;5b8a
+    .DB %00000000		;5b8b
+    ; Character "9" ???
+    .DB %00000000		;5b8c
+    .DB %00111100		;5b8d
+    .DB %01100110		;5b8e
+    .DB %01100110		;5b8f
+    .DB %00111110		;5b90
+    .DB %00000110		;5b91
+    .DB %00111100		;5b92
+    .DB %00000010		;5b93
+    ; Character ":" ???
+    .DB %00000000		;5b94
+    .DB %00000010		;5b95
+    .DB %00011000		;5b96
+    .DB %00000010		;5b97
+    .DB %00000000		;5b98
+    .DB %00000010		;5b99
+    .DB %00011000		;5b9a
+    .DB %00000010		;5b9b
+    .DB %00000000		;5b9c
+    .DB %10000001		;5b9d
+    .DB %00111100		;5b9e
+    .DB %00000011		;5b9f
+    .DB %01100010		;5ba0
+    .DB %10010101		;5ba1
+    .DB %01111110		;5ba2
+    .DB %01100010		;5ba3
+    .DB %00000000		;5ba4
+    ; Character "B"
+    .DB %00000000		;5ba5
+    .DB %01111100		;5ba6
+    .DB %01100010		;5ba7
+    .DB %01111100		;5ba8
+    .DB %01100010		;5ba9
+    .DB %01100010		;5baa
+    .DB %01111100		;5bab
+    .DB %00000000		;5bac
+    ; Character "C"
+    .DB %00000000		;5bad
+    .DB %00111100		;5bae
+    .DB %01100110		;5baf
+    .DB %01100000		;5bb0
+    .DB %01100000		;5bb1
+    .DB %01100110		;5bb2
+    .DB %00111100		;5bb3
+    .DB %00000000		;5bb4
+    ; Character "D" ???
+    .DB %00000000		;5bb5
+    .DB %01111100		;5bb6
+    .DB %00000100		;5bb7
+    .DB %01100010		;5bb8
+    .DB %10011001		;5bb9
+    .DB %01111100		;5bba
+    .DB %00000000		;5bbb
+    ; Character "E"
+    .DB %00000000		;5bbc
+    .DB %01111110		;5bbd
+    .DB %01100000		;5bbe
+    .DB %01111100		;5bbf
+    .DB %01100000		;5bc0
+    .DB %01100000		;5bc1
+    .DB %01111110		;5bc2
+    .DB %00000000		;5bc3
+    ; Character "F"
+    .DB %00000000		;5bc4
+    .DB %01111110		;5bc5
+    .DB %01100000		;5bc6
+    .DB %01100100		;5bc7
+    .DB %01111100		;5bc8
+    .DB %01100100		;5bc9
+    .DB %01100000		;5bca
+    .DB %00000000		;5bcb
+    ; Character "G"
+    .DB %00000000		;5bcc
+    .DB %00111100		;5bcd
+    .DB %01100010		;5bce
+    .DB %01100000		;5bcf
+    .DB %01101110		;5bd0
+    .DB %01100010		;5bd1
+    .DB %00111100		;5bd2
+    .DB %00000010		;5bd3
+    ; Character "H" ???
+    .DB %00000000		;5bd4
+    .DB %00000010		; ??? ;5bd5
+    .DB %01100010		;5bd6
+    .DB %10000001		; ??? ;5bd7
+    .DB %01111110		;5bd8
+	.DB %00000011		; ??? ;5bd9
+	.DB %01100010		;5bda
+	.DB %00000010		; ??? ;5bdb
+	.DB %00000000		;5bdc
+	; Character "I" ???
+	.DB %10000001		; ??? ;5bdd
+	.DB %00111100		;5bde
+	.DB %00000100		; ??? ;5bdf
+	.DB %00011000		;5be0
+	.DB %10000100		; ??? ;5be1
+	.DB %00111100		;5be2
+	.DB %00000000		;5be3
+	; Character "J" ???
+	.DB %00000000		;5be4
+	.DB %00011110		;5be5
+	.DB %00000011		; ??? ;5be6
+	.DB %00001100		;5be7
+	.DB %10001010		; ??? ;5be8
+	.DB %01001100		;5be9
+	.DB %00111000		;5bea
+	.DB %00000000		;5beb
+	; Character "K" ???
+	.DB %00000000		;5bec
+	.DB %01100010		;5bed
+	.DB %01100100		;5bee
+	.DB %01111000		;5bef
+	.DB %01101000		;5bf0
+	.DB %01100100		;5bf1
+	.DB %01100010		;5bf2
+	.DB %00000010		; ??? ;5bf3
+	; Character "L" ???
+	.DB %00000000		;5bf4
+	.DB %00000100		; ??? ;5bf5
+	.DB %01100000		;5bf6
+	.DB %10000111		; ??? ;5bf7
+	.DB %01100010		;5bf8
+	.DB %01111110		;5bf9
+	.DB %00000000		;5bfa
+	; Character "M" ???
+	.DB %00000000		;5bfb
+	.DB %01100010		;5bfc
+	.DB %01110110		;5bfd
+	.DB %01101010		;5bfe
+	.DB %00000011		; ??? ;5bff
+	.DB %01100010		;5c00
+	.DB %00000010		; ??? ;5c01
+	; Character "N" ???
+	.DB %00000000		;5c02
+	.DB %10000100		; ??? ;5c03
+	.DB %01100010		;5c04
+	.DB %01110010		;5c05
+	.DB %01101010		;5c06
+	.DB %01100110		;5c07
+	.DB %00000010		; ??? ;5c08
+	.DB %01100010		;5c09
+	.DB %00000010		;5c0a
+	; Character "O" ???
+	.DB %00000000		;5c0b
+	.DB %10000001		;5c0c
+	.DB %00111100		;5c0d
+	.DB %00000100		;5c0e
+	.DB %01100010		;5c0f
+	.DB %10000111		;5c10
+	.DB %00111100		;5c11
+	.DB %00000000		;5c12
+	; Character "P" ???
+	.DB %00000000		;5c13
+	.DB %01111100		;5c14
+	.DB %01100010		;5c15
+	.DB %01100010		;5c16
+	.DB %01111100		;5c17
+	.DB %00000010		;5c18
+	.DB %01100000		;5c19
+	.DB %00000010		;5c1a
+	; Character "Q" ???
+	.DB %00000000		;5c1b
+	.DB %10011001		; ??? ;5c1c
+	.DB %00111100		;5c1d
+	.DB %01100010		;5c1e
+	.DB %01100010		;5c1f
+	.DB %01101010		;5c20
+	.DB %01100110		;5c21
+	.DB %00111110		;5c22
+	.DB %00000000		;5c23
+	; Character "R"
+	.DB %00000000		;5c24
+	.DB %01111100		;5c25
+	.DB %01100010		;5c26
+	.DB %01100010		;5c27
+	.DB %01111100		;5c28
+	.DB %01100100		;5c29
+	.DB %01100010		;5c2a
+	.DB %00000000		;5c2b
+	; Character "S"
+	.DB %00000000		;5c2c
+	.DB %00111100		;5c2d
+	.DB %01100010		;5c2e
+	.DB %00111000		;5c2f
+	.DB %00000100		;5c30
+	.DB %01100010		;5c31
+	.DB %00111100		;5c32
+	.DB %00000000		;5c33
+	; Character "T" ???
+	.DB %00000000		;5c34
+	.DB %01111110		;5c35
+	.DB %00000101		; ??? ;5c36
+	.DB %00011000		;5c37
+	.DB %00000010		; ??? ;5c38
+	.DB %00000000		;5c39
+	; Character "U" ???
+	.DB %00000101		;5c3a
+	.DB %01100010		;5c3b
+	.DB %10000001		;5c3c
+	.DB %00111100		;5c3d
+	.DB %00000010		;5c3e
+	.DB %00000000		;5c3f
+	; Character "V" ???
+	.DB %00000100		;5c40
+	.DB %01100010		;5c41
+	.DB %10000101		;5c42
+	.DB %00110100		;5c43
+	.DB %00011000		;5c44
+	.DB %00000000		;5c45
+	; Character "W" ???
+	.DB %00000000		;5c46
+	.DB %01100010		;5c47
+	.DB %00000100		;5c48
+	.DB %01101010		;5c49
+	.DB %10001001		;5c4a
+	.DB %00110100		;5c4b
+	.DB %00000000		;5c4c
+	; Character "X" ???
+	.DB %00000000		;5c4d
+	.DB %01110010		;5c4e
+	.DB %00110100		;5c4f
+	.DB %00111000		;5c50
+	.DB %00011100		;5c51
+	.DB %00101100		;5c52
+	.DB %01001110		;5c53
+	.DB %00000010		;5c54
+	; Character "Y" ???
+	.DB %00000000		;5c55
+	.DB %00000010		;5c56
+	.DB %01100010		;5c57
+	.DB %10000001		;5c58
+	.DB %00110100		;5c59
+	.DB %00000011		;5c5a
+	.DB %00011000		;5c5b
+	.DB %00000010		;5c5c
+	; Character "Z" ???
+	.DB %00000000		;5c5d
+	.DB %10101111		;5c5e
+	.DB %01111110		;5c5f
+	.DB %00000100		;5c60
+	.DB %00111000		;5c61
+	.DB %00011100		;5c62
+	.DB %00100000		;5c63
+	.DB %01111110		;5c64
 	.DB $00		;5c65
 	.DB $3c		;5c66
 	.DB $42		;5c67
@@ -24351,352 +24387,17 @@ l7e9dh:
 	rla			; 17 ;7ea0
 	cpl			; 2f ;7ea1
 	ret			; c9 ;7ea2
-	rst 38h			; ff ;7ea3
-	rst 38h			; ff ;7ea4
-	rst 38h			; ff ;7ea5
-	rst 38h			; ff ;7ea6
-	rst 38h			; ff ;7ea7
-	rst 38h			; ff ;7ea8
-	rst 38h			; ff ;7ea9
-	rst 38h			; ff ;7eaa
-	rst 38h			; ff ;7eab
-	rst 38h			; ff ;7eac
-	rst 38h			; ff ;7ead
-	rst 38h			; ff ;7eae
-	rst 38h			; ff ;7eaf
-	rst 38h			; ff ;7eb0
-	rst 38h			; ff ;7eb1
-	rst 38h			; ff ;7eb2
-	rst 38h			; ff ;7eb3
-	rst 38h			; ff ;7eb4
-	rst 38h			; ff ;7eb5
-	rst 38h			; ff ;7eb6
-	rst 38h			; ff ;7eb7
-	rst 38h			; ff ;7eb8
-	rst 38h			; ff ;7eb9
-	rst 38h			; ff ;7eba
-	rst 38h			; ff ;7ebb
-	rst 38h			; ff ;7ebc
-	rst 38h			; ff ;7ebd
-	rst 38h			; ff ;7ebe
-	rst 38h			; ff ;7ebf
-	rst 38h			; ff ;7ec0
-	rst 38h			; ff ;7ec1
-	rst 38h			; ff ;7ec2
-	rst 38h			; ff ;7ec3
-	rst 38h			; ff ;7ec4
-	rst 38h			; ff ;7ec5
-	rst 38h			; ff ;7ec6
-	rst 38h			; ff ;7ec7
-	rst 38h			; ff ;7ec8
-	rst 38h			; ff ;7ec9
-	rst 38h			; ff ;7eca
-	rst 38h			; ff ;7ecb
-	rst 38h			; ff ;7ecc
-	rst 38h			; ff ;7ecd
-	rst 38h			; ff ;7ece
-	rst 38h			; ff ;7ecf
-	rst 38h			; ff ;7ed0
-	rst 38h			; ff ;7ed1
-	rst 38h			; ff ;7ed2
-	rst 38h			; ff ;7ed3
-	rst 38h			; ff ;7ed4
-	rst 38h			; ff ;7ed5
-	rst 38h			; ff ;7ed6
-	rst 38h			; ff ;7ed7
-	rst 38h			; ff ;7ed8
-	rst 38h			; ff ;7ed9
-	rst 38h			; ff ;7eda
-	rst 38h			; ff ;7edb
-	rst 38h			; ff ;7edc
-	rst 38h			; ff ;7edd
-	rst 38h			; ff ;7ede
-	rst 38h			; ff ;7edf
-	rst 38h			; ff ;7ee0
-	rst 38h			; ff ;7ee1
-	rst 38h			; ff ;7ee2
-	rst 38h			; ff ;7ee3
-	rst 38h			; ff ;7ee4
-	rst 38h			; ff ;7ee5
-	rst 38h			; ff ;7ee6
-	rst 38h			; ff ;7ee7
-	rst 38h			; ff ;7ee8
-	rst 38h			; ff ;7ee9
-	rst 38h			; ff ;7eea
-	rst 38h			; ff ;7eeb
-	rst 38h			; ff ;7eec
-	rst 38h			; ff ;7eed
-	rst 38h			; ff ;7eee
-	rst 38h			; ff ;7eef
-	rst 38h			; ff ;7ef0
-	rst 38h			; ff ;7ef1
-	rst 38h			; ff ;7ef2
-	rst 38h			; ff ;7ef3
-	rst 38h			; ff ;7ef4
-	rst 38h			; ff ;7ef5
-	rst 38h			; ff ;7ef6
-	rst 38h			; ff ;7ef7
-	rst 38h			; ff ;7ef8
-	rst 38h			; ff ;7ef9
-	rst 38h			; ff ;7efa
-	rst 38h			; ff ;7efb
-	rst 38h			; ff ;7efc
-	rst 38h			; ff ;7efd
-	rst 38h			; ff ;7efe
-	rst 38h			; ff ;7eff
-	rst 38h			; ff ;7f00
+	.DSB 94, $ff			;7ea3
 l7f01h:
-	rst 38h			; ff ;7f01
+	.DSB 1, $ff			;7f01
 l7f02h:
-	rst 38h			; ff ;7f02
-	rst 38h			; ff ;7f03
-	rst 38h			; ff ;7f04
-	rst 38h			; ff ;7f05
+	.DSB 4, $ff			;7f02
 l7f06h:
-	rst 38h			; ff ;7f06
-	rst 38h			; ff ;7f07
-	rst 38h			; ff ;7f08
-	rst 38h			; ff ;7f09
-	rst 38h			; ff ;7f0a
-	rst 38h			; ff ;7f0b
-	rst 38h			; ff ;7f0c
-	rst 38h			; ff ;7f0d
-	rst 38h			; ff ;7f0e
-	rst 38h			; ff ;7f0f
-	rst 38h			; ff ;7f10
-	rst 38h			; ff ;7f11
-	rst 38h			; ff ;7f12
-	rst 38h			; ff ;7f13
-	rst 38h			; ff ;7f14
-	rst 38h			; ff ;7f15
-	rst 38h			; ff ;7f16
-	rst 38h			; ff ;7f17
-	rst 38h			; ff ;7f18
-	rst 38h			; ff ;7f19
-	rst 38h			; ff ;7f1a
-	rst 38h			; ff ;7f1b
-	rst 38h			; ff ;7f1c
-	rst 38h			; ff ;7f1d
-	rst 38h			; ff ;7f1e
-	rst 38h			; ff ;7f1f
-	rst 38h			; ff ;7f20
-	rst 38h			; ff ;7f21
-	rst 38h			; ff ;7f22
-	rst 38h			; ff ;7f23
-	rst 38h			; ff ;7f24
-	rst 38h			; ff ;7f25
-	rst 38h			; ff ;7f26
-	rst 38h			; ff ;7f27
-	rst 38h			; ff ;7f28
-	rst 38h			; ff ;7f29
-	rst 38h			; ff ;7f2a
-	rst 38h			; ff ;7f2b
-	rst 38h			; ff ;7f2c
-	rst 38h			; ff ;7f2d
-	rst 38h			; ff ;7f2e
-	rst 38h			; ff ;7f2f
-	rst 38h			; ff ;7f30
-	rst 38h			; ff ;7f31
-	rst 38h			; ff ;7f32
-	rst 38h			; ff ;7f33
-	rst 38h			; ff ;7f34
-	rst 38h			; ff ;7f35
-	rst 38h			; ff ;7f36
-	rst 38h			; ff ;7f37
-	rst 38h			; ff ;7f38
-	rst 38h			; ff ;7f39
-	rst 38h			; ff ;7f3a
-	rst 38h			; ff ;7f3b
-	rst 38h			; ff ;7f3c
-	rst 38h			; ff ;7f3d
-	rst 38h			; ff ;7f3e
-	rst 38h			; ff ;7f3f
-	rst 38h			; ff ;7f40
-	rst 38h			; ff ;7f41
-	rst 38h			; ff ;7f42
-	rst 38h			; ff ;7f43
-	rst 38h			; ff ;7f44
-	rst 38h			; ff ;7f45
-	rst 38h			; ff ;7f46
-	rst 38h			; ff ;7f47
-	rst 38h			; ff ;7f48
-	rst 38h			; ff ;7f49
-	rst 38h			; ff ;7f4a
-	rst 38h			; ff ;7f4b
-	rst 38h			; ff ;7f4c
-	rst 38h			; ff ;7f4d
-	rst 38h			; ff ;7f4e
-	rst 38h			; ff ;7f4f
-	rst 38h			; ff ;7f50
-	rst 38h			; ff ;7f51
-	rst 38h			; ff ;7f52
-	rst 38h			; ff ;7f53
-	rst 38h			; ff ;7f54
-	rst 38h			; ff ;7f55
-	rst 38h			; ff ;7f56
-	rst 38h			; ff ;7f57
-	rst 38h			; ff ;7f58
-	rst 38h			; ff ;7f59
-	rst 38h			; ff ;7f5a
-	rst 38h			; ff ;7f5b
-	rst 38h			; ff ;7f5c
-	rst 38h			; ff ;7f5d
-	rst 38h			; ff ;7f5e
-	rst 38h			; ff ;7f5f
-	rst 38h			; ff ;7f60
-	rst 38h			; ff ;7f61
-	rst 38h			; ff ;7f62
-	rst 38h			; ff ;7f63
-	rst 38h			; ff ;7f64
-	rst 38h			; ff ;7f65
-	rst 38h			; ff ;7f66
-	rst 38h			; ff ;7f67
-	rst 38h			; ff ;7f68
-	rst 38h			; ff ;7f69
-	rst 38h			; ff ;7f6a
-	rst 38h			; ff ;7f6b
-	rst 38h			; ff ;7f6c
-	rst 38h			; ff ;7f6d
-	rst 38h			; ff ;7f6e
-	rst 38h			; ff ;7f6f
-	rst 38h			; ff ;7f70
-	rst 38h			; ff ;7f71
-	rst 38h			; ff ;7f72
-	rst 38h			; ff ;7f73
-	rst 38h			; ff ;7f74
-	rst 38h			; ff ;7f75
-	rst 38h			; ff ;7f76
-	rst 38h			; ff ;7f77
-	rst 38h			; ff ;7f78
-	rst 38h			; ff ;7f79
-	rst 38h			; ff ;7f7a
-	rst 38h			; ff ;7f7b
-	rst 38h			; ff ;7f7c
-	rst 38h			; ff ;7f7d
-	rst 38h			; ff ;7f7e
-	rst 38h			; ff ;7f7f
-	rst 38h			; ff ;7f80
-	rst 38h			; ff ;7f81
-	rst 38h			; ff ;7f82
-	rst 38h			; ff ;7f83
-	rst 38h			; ff ;7f84
-	rst 38h			; ff ;7f85
-	rst 38h			; ff ;7f86
-	rst 38h			; ff ;7f87
-	rst 38h			; ff ;7f88
-	rst 38h			; ff ;7f89
-	rst 38h			; ff ;7f8a
-	rst 38h			; ff ;7f8b
-	rst 38h			; ff ;7f8c
-	rst 38h			; ff ;7f8d
-	rst 38h			; ff ;7f8e
-	rst 38h			; ff ;7f8f
-	rst 38h			; ff ;7f90
-	rst 38h			; ff ;7f91
-	rst 38h			; ff ;7f92
-	rst 38h			; ff ;7f93
-	rst 38h			; ff ;7f94
-	rst 38h			; ff ;7f95
-	rst 38h			; ff ;7f96
-	rst 38h			; ff ;7f97
-	rst 38h			; ff ;7f98
-	rst 38h			; ff ;7f99
-	rst 38h			; ff ;7f9a
-	rst 38h			; ff ;7f9b
+	.DSB 150, $ff			;7f06
 sub_7f9ch:
-	rst 38h			; ff ;7f9c
-	rst 38h			; ff ;7f9d
-	rst 38h			; ff ;7f9e
-	rst 38h			; ff ;7f9f
-	rst 38h			; ff ;7fa0
-	rst 38h			; ff ;7fa1
-	rst 38h			; ff ;7fa2
-	rst 38h			; ff ;7fa3
-	rst 38h			; ff ;7fa4
-	rst 38h			; ff ;7fa5
-	rst 38h			; ff ;7fa6
-	rst 38h			; ff ;7fa7
-	rst 38h			; ff ;7fa8
-	rst 38h			; ff ;7fa9
-	rst 38h			; ff ;7faa
-	rst 38h			; ff ;7fab
-	rst 38h			; ff ;7fac
-	rst 38h			; ff ;7fad
-	rst 38h			; ff ;7fae
-	rst 38h			; ff ;7faf
-	rst 38h			; ff ;7fb0
-	rst 38h			; ff ;7fb1
-	rst 38h			; ff ;7fb2
-	rst 38h			; ff ;7fb3
-	rst 38h			; ff ;7fb4
-	rst 38h			; ff ;7fb5
-	rst 38h			; ff ;7fb6
-	rst 38h			; ff ;7fb7
-	rst 38h			; ff ;7fb8
-	rst 38h			; ff ;7fb9
-	rst 38h			; ff ;7fba
-	rst 38h			; ff ;7fbb
-	rst 38h			; ff ;7fbc
-	rst 38h			; ff ;7fbd
-	rst 38h			; ff ;7fbe
-	rst 38h			; ff ;7fbf
-	rst 38h			; ff ;7fc0
-	rst 38h			; ff ;7fc1
-	rst 38h			; ff ;7fc2
-	rst 38h			; ff ;7fc3
-	rst 38h			; ff ;7fc4
-	rst 38h			; ff ;7fc5
-	rst 38h			; ff ;7fc6
-	rst 38h			; ff ;7fc7
-	rst 38h			; ff ;7fc8
-	rst 38h			; ff ;7fc9
-	rst 38h			; ff ;7fca
-	rst 38h			; ff ;7fcb
-	rst 38h			; ff ;7fcc
-	rst 38h			; ff ;7fcd
-	rst 38h			; ff ;7fce
-	rst 38h			; ff ;7fcf
-	rst 38h			; ff ;7fd0
-	rst 38h			; ff ;7fd1
-	rst 38h			; ff ;7fd2
-	rst 38h			; ff ;7fd3
-	rst 38h			; ff ;7fd4
-	rst 38h			; ff ;7fd5
-	rst 38h			; ff ;7fd6
-	rst 38h			; ff ;7fd7
-	rst 38h			; ff ;7fd8
-	rst 38h			; ff ;7fd9
-	rst 38h			; ff ;7fda
-	rst 38h			; ff ;7fdb
-	rst 38h			; ff ;7fdc
-	rst 38h			; ff ;7fdd
-	rst 38h			; ff ;7fde
-	rst 38h			; ff ;7fdf
-	rst 38h			; ff ;7fe0
-	rst 38h			; ff ;7fe1
-	rst 38h			; ff ;7fe2
-	rst 38h			; ff ;7fe3
-	rst 38h			; ff ;7fe4
-	rst 38h			; ff ;7fe5
-	rst 38h			; ff ;7fe6
-	rst 38h			; ff ;7fe7
-	rst 38h			; ff ;7fe8
-	rst 38h			; ff ;7fe9
-	rst 38h			; ff ;7fea
-	rst 38h			; ff ;7feb
-	rst 38h			; ff ;7fec
-	rst 38h			; ff ;7fed
-	rst 38h			; ff ;7fee
-	rst 38h			; ff ;7fef
-	ld d,h			; 54 ;7ff0
-	ld c,l			; 4d ;7ff1
-	ld d,d			; 52 ;7ff2
-	jr nz,$+83		; 20 53 ;7ff3
-	ld b,l			; 45 ;7ff5
-	ld b,a			; 47 ;7ff6
-	ld b,c			; 41 ;7ff7
-	rst 38h			; ff ;7ff8
-	rst 38h			; ff ;7ff9
+    .DSB 84, $ff			;7f9c
+	.DB "TMR SEGA"			;7ff0
+	.DB $ff $ff			;7ff8
 	call nc,sub_0788h		; d4 88 07 ;7ffa
 	ld b,b			; 40 ;7ffd
 	.DB 001h,04ch		;7ffe
