@@ -2,7 +2,7 @@ import re
 
 FILE = 'src/super-tennis.asm'
 
-data = open('super-tennis.sms', 'rb').read()
+data = open('super-tennis-usa-europe.sms', 'rb').read()
 lines = open(FILE).read().splitlines()
 
 locations = []

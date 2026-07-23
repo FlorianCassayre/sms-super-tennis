@@ -11,7 +11,7 @@
 .ENDRO
 ; --- end generated header ---
 ; z80dasm 1.1.6
-; command line: z80dasm -g 0x0000 -a -l super-tennis.sms
+; command line: z80dasm -g 0x0000 -a -l super-tennis-usa-europe.sms
 
 	.ORGA	00000h
 

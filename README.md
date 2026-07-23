@@ -17,7 +17,7 @@ You will need Docker to build the image:
 
 The initial disassembly is done with this snippet:
 ```shell
-./docker/run.sh z80dasm -g 0x0000 -a -l super-tennis.sms > src/super-tennis.asm
+./docker/run.sh z80dasm -g 0x0000 -a -l super-tennis-usa-europe.sms > src/super-tennis.asm
 
 sed -i -E \
     -e 's/^([[:space:]]*)org([[:space:]]+)/\1.ORGA\2/' \
@@ -75,7 +75,7 @@ PY
 
 You can then try to compile the disassembled file. In case of mismatch, you may inspect the differences:
 ```shell
-cmp -l super-tennis.sms build/super-tennis.sms
+cmp -l super-tennis-usa-europe.sms build/super-tennis-usa-europe.sms
 ```
 
 ## Acknowledgment
