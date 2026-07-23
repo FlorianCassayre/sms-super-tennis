@@ -162,7 +162,12 @@ init:
 	ld (hl),000h		; 36 00 ;0094
 l0096h:
 	ldir		; ed b0 ;0096
-	call sub_7dd7h		; cd d7 7d ;0098
+	.IFDEF _J
+		call sub_75b4h		; cd b4 75 ;0098
+	.ENDIF
+	.IFDEF _UE
+		call sub_7dd7h		; cd d7 7d ;0098
+	.ENDIF
 	ld a,092h		; 3e 92 ;009b
 	out (0dfh),a		; d3 df ;009d
 	ld a,055h		; 3e 55 ;009f
@@ -195,7 +200,12 @@ l00cbh:
 l00cch:
 	jr c,l00cbh		; 38 fd ;00cc
 	djnz l00c8h		; 10 f8 ;00ce
-	call 04106h		; cd 06 41 ;00d0
+	.IFDEF _J
+		call 04101h		; cd 01 41 ;00d0
+	.ENDIF
+	.IFDEF _UE
+		call 04106h		; cd 06 41 ;00d0
+	.ENDIF
 	ld (0c010h),a		; 32 10 c0 ;00d3
 l00d6h:
 	di			; f3 ;00d6
@@ -232,37 +242,72 @@ l010fh:
 	call sub_0481h		; cd 81 04 ;010f
 l0112h:
 	ld de,l2000h		; 11 00 20 ;0112
-	ld hl,05b43h		; 21 43 5b ;0115
+	.IFDEF _J
+		ld hl,05b3eh		; 21 3e 5b ;0115
+	.ENDIF
+	.IFDEF _UE
+		ld hl,05b43h		; 21 43 5b ;0115
+	.ENDIF
 l0118h:
 	call sub_04b5h		; cd b5 04 ;0118
 	ld de,start		; 11 00 00 ;011b
 l011eh:
-	ld hl,l5de3h		; 21 e3 5d ;011e
+	.IFDEF _J
+		ld hl,l5ddeh		; 21 de 5d ;011e
+	.ENDIF
+	.IFDEF _UE
+		ld hl,l5de3h		; 21 e3 5d ;011e
+	.ENDIF
 	call sub_04b5h		; cd b5 04 ;0121
 l0124h:
 	ld de,0c600h		; 11 00 c6 ;0124
 l0127h:
-	ld hl,l70cbh		; 21 cb 70 ;0127
+	.IFDEF _J
+		ld hl,l70c6h		; 21 c6 70 ;0127
+	.ENDIF
+	.IFDEF _UE
+		ld hl,l70cbh		; 21 cb 70 ;0127
+	.ENDIF
 l012ah:
 	call sub_04edh		; cd ed 04 ;012a
 	ld de,0c720h		; 11 20 c7 ;012d
 l0130h:
-	ld hl,04b46h		; 21 46 4b ;0130
+	.IFDEF _J
+		ld hl,04b41h		; 21 41 4b ;0130
+	.ENDIF
+	.IFDEF _UE
+		ld hl,04b46h		; 21 46 4b ;0130
+	.ENDIF
 l0133h:
 	call sub_04edh		; cd ed 04 ;0133
 l0136h:
 	ld de,0c76ch		; 11 6c c7 ;0136
-	ld hl,04b74h		; 21 74 4b ;0139
+	.IFDEF _J
+		ld hl,04b6fh		; 21 6f 4b ;0139
+	.ENDIF
+	.IFDEF _UE
+		ld hl,04b74h		; 21 74 4b ;0139
+	.ENDIF
 l013ch:
 	call sub_04edh		; cd ed 04 ;013c
 	ld de,0c84ch		; 11 4c c8 ;013f
 l0142h:
-	ld hl,05958h		; 21 58 59 ;0142
+	.IFDEF _J
+		ld hl,05953h		; 21 53 59 ;0142
+	.ENDIF
+	.IFDEF _UE
+		ld hl,05958h		; 21 58 59 ;0142
+	.ENDIF
 l0145h:
 	call sub_04edh		; cd ed 04 ;0145
 l0148h:
 	ld de,0cbe8h		; 11 e8 cb ;0148
-	ld hl,04c37h		; 21 37 4c ;014b
+	.IFDEF _J
+		ld hl,04c32h		; 21 32 4c ;014b
+	.ENDIF
+	.IFDEF _UE
+		ld hl,04c37h		; 21 37 4c ;014b
+	.ENDIF
 	call sub_04edh		; cd ed 04 ;014e
 l0151h:
 	call l0386h+2		; cd 88 03 ;0151
@@ -346,12 +391,22 @@ l01e4h:
 	ld c,00ch		; 0e 0c ;01e7
 	call sub_0260h		; cd 60 02 ;01e9
 	call sub_0268h		; cd 68 02 ;01ec
-	call sub_35b0h		; cd b0 35 ;01ef
+	.IFDEF _J
+		call sub_35abh		; cd ab 35 ;01ef
+	.ENDIF
+	.IFDEF _UE
+		call sub_35b0h		; cd b0 35 ;01ef
+	.ENDIF
 	call sub_3566h		; cd 66 35 ;01f2
 	call sub_027bh		; cd 7b 02 ;01f5
 	call sub_0795h		; cd 95 07 ;01f8
 l01fbh:
-	call sub_796fh		; cd 6f 79 ;01fb
+	.IFDEF _J
+		call sub_7144h		; cd 44 71 ;01fb
+	.ENDIF
+	.IFDEF _UE
+		call sub_796fh		; cd 6f 79 ;01fb
+	.ENDIF
 l01feh:
 	ld hl,0c001h		; 21 01 c0 ;01fe
 l0201h:
@@ -374,7 +429,12 @@ l0206h:
 	ei			; fb ;0211
 	ret			; c9 ;0212
 l0213h:
-	call sub_7dd7h		; cd d7 7d ;0213
+	.IFDEF _J
+		call sub_75b4h		; cd b4 75 ;0213
+	.ENDIF
+	.IFDEF _UE
+		call sub_7dd7h		; cd d7 7d ;0213
+	.ENDIF
 	jp l00d6h		; c3 d6 00 ;0216
 l0219h:
 	ld c,018h		; 0e 18 ;0219
@@ -609,7 +669,12 @@ l036ah:
 	ld (hl),000h		; 36 00 ;0378
 	ret			; c9 ;037a
 sub_037bh:
-	call sub_7dd7h		; cd d7 7d ;037b
+	.IFDEF _J
+		call sub_75b4h		; cd b4 75 ;037b
+	.ENDIF
+	.IFDEF _UE
+		call sub_7dd7h		; cd d7 7d ;037b
+	.ENDIF
 l037eh:
 	ld a,(0c004h)		; 3a 04 c0 ;037e
 l0381h:
@@ -1150,7 +1215,12 @@ sub_0642h:
 	add a,a			; 87 ;0645
 	ld e,a			; 5f ;0646
 	ld d,000h		; 16 00 ;0647
-	ld hl,l4124h		; 21 24 41 ;0649
+	.IFDEF _J
+		ld hl,l411fh		; 21 1f 41 ;0649
+	.ENDIF
+	.IFDEF _UE
+		ld hl,l4124h		; 21 24 41 ;0649
+	.ENDIF
 	add hl,de			; 19 ;064c
 	ld e,(hl)			; 5e ;064d
 	inc hl			; 23 ;064e
@@ -1492,28 +1562,63 @@ l0826h:
 	call sub_03a4h		; cd a4 03 ;082a
 	call l0386h+2		; cd 88 03 ;082d
 	ld hl,start		; 21 00 00 ;0830
-	ld de,l3b08h		; 11 08 3b ;0833
+	.IFDEF _J
+		ld de,l3b03h		; 11 03 3b ;0833
+	.ENDIF
+	.IFDEF _UE
+		ld de,l3b08h		; 11 08 3b ;0833
+	.ENDIF
 	ld b,008h		; 06 08 ;0836
 	call sub_0481h		; cd 81 04 ;0838
 	ld hl,l0010h		; 21 10 00 ;083b
-	ld de,l3b10h		; 11 10 3b ;083e
+	.IFDEF _J
+		ld de,l3b0bh		; 11 0b 3b ;083e
+	.ENDIF
+	.IFDEF _UE
+		ld de,l3b10h		; 11 10 3b ;083e
+	.ENDIF
 	ld b,00bh		; 06 0b ;0841
 	call sub_0481h		; cd 81 04 ;0843
 	ld de,02600h		; 11 00 26 ;0846
-	ld hl,l3b1bh		; 21 1b 3b ;0849
+	.IFDEF _J
+		ld hl,l3b16h		; 21 16 3b ;0849
+	.ENDIF
+	.IFDEF _UE
+		ld hl,l3b1bh		; 21 1b 3b ;0849
+	.ENDIF
 	call sub_04b5h		; cd b5 04 ;084c
 	ld hl,03854h		; 21 54 38 ;084f
-	ld de,l3efah		; 11 fa 3e ;0852
+	.IFDEF _J
+		ld de,l3ef5h		; 11 f5 3e ;0852
+	.ENDIF
+	.IFDEF _UE
+		ld de,l3efah		; 11 fa 3e ;0852
+	.ENDIF
 	ld b,005h		; 06 05 ;0855
 	ld c,00ah		; 0e 0a ;0857
 	call l0464h		; cd 64 04 ;0859
 	ld de,l39c0h		; 11 c0 39 ;085c
-	ld hl,03f5eh		; 21 5e 3f ;085f
+	.IFDEF _J
+		ld hl,03f59h		; 21 59 3f ;085f
+	.ENDIF
+	.IFDEF _UE
+		ld hl,03f5eh		; 21 5e 3f ;085f
+	.ENDIF
 	call sub_04b5h		; cd b5 04 ;0862
-	ld hl,0407fh		; 21 7f 40 ;0865
+	.IFDEF _J
+		ld hl,0407ah		; 21 7a 40 ;0865
+	.ENDIF
+	.IFDEF _UE
+		ld hl,0407fh		; 21 7f 40 ;0865
+	.ENDIF
 	call sub_03b7h		; cd b7 03 ;0868
 	ld hl,l3d96h		; 21 96 3d ;086b
-	ld de,l40f0h		; 11 f0 40 ;086e
+	.IFDEF _J
+		ld de,l40ebh		; 11 eb 40 ;086e
+	.ENDIF
+	.IFDEF _UE
+		ld de,l40f0h		; 11 f0 40 ;086e
+	.ENDIF
 	ld bc,l0016h		; 01 16 00 ;0871
 	call sub_042fh		; cd 2f 04 ;0874
 	xor a			; af ;0877
@@ -1559,7 +1664,12 @@ l088dh:
 	call sub_03a4h		; cd a4 03 ;08cb
 	call l0386h+2		; cd 88 03 ;08ce
 	ld de,start		; 11 00 00 ;08d1
-	ld hl,l5de3h		; 21 e3 5d ;08d4
+	.IFDEF _J
+		ld hl,l5ddeh		; 21 de 5d ;08d4
+	.ENDIF
+	.IFDEF _UE
+		ld hl,l5de3h		; 21 e3 5d ;08d4
+	.ENDIF
 	call sub_04b5h		; cd b5 04 ;08d7
 	ld hl,0c047h		; 21 47 c0 ;08da
 	ld b,004h		; 06 04 ;08dd
@@ -1788,7 +1898,12 @@ sub_0a85h:
 	push bc			; c5 ;0a85
 	push de			; d5 ;0a86
 	ld b,004h		; 06 04 ;0a87
-	ld de,l489bh		; 11 9b 48 ;0a89
+	.IFDEF _J
+		ld de,l4896h		; 11 96 48 ;0a89
+	.ENDIF
+	.IFDEF _UE
+		ld de,l489bh		; 11 9b 48 ;0a89
+	.ENDIF
 l0a8ch:
 	push de			; d5 ;0a8c
 	exx			; d9 ;0a8d
@@ -1845,20 +1960,40 @@ l0abdh:
 	ld b,020h		; 06 20 ;0ac7
 	call sub_0481h		; cd 81 04 ;0ac9
 	ld de,02600h		; 11 00 26 ;0acc
-	ld hl,l4fc5h		; 21 c5 4f ;0acf
+	.IFDEF _J
+		ld hl,l4fc0h		; 21 c0 4f ;0acf
+	.ENDIF
+	.IFDEF _UE
+		ld hl,l4fc5h		; 21 c5 4f ;0acf
+	.ENDIF
 	call sub_04b5h		; cd b5 04 ;0ad2
 	ld de,03800h		; 11 00 38 ;0ad5
-	ld hl,l5654h		; 21 54 56 ;0ad8
+	.IFDEF _J
+		ld hl,l564fh		; 21 4f 56 ;0ad8
+	.ENDIF
+	.IFDEF _UE
+		ld hl,l5654h		; 21 54 56 ;0ad8
+	.ENDIF
 	call sub_04b5h		; cd b5 04 ;0adb
 	ld de,start		; 11 00 00 ;0ade
-	ld hl,l5de3h		; 21 e3 5d ;0ae1
+	.IFDEF _J
+		ld hl,l5ddeh		; 21 de 5d ;0ae1
+	.ENDIF
+	.IFDEF _UE
+		ld hl,l5de3h		; 21 e3 5d ;0ae1
+	.ENDIF
 	call sub_04b5h		; cd b5 04 ;0ae4
 	ld hl,0c100h		; 21 00 c1 ;0ae7
 	ld de,0c101h		; 11 01 c1 ;0aea
 	ld bc,l003fh		; 01 3f 00 ;0aed
 	ld (hl),0d0h		; 36 d0 ;0af0
 	ldir		; ed b0 ;0af2
-	call sub_35c6h		; cd c6 35 ;0af4
+	.IFDEF _J
+		call sub_35c1h		; cd c1 35 ;0af4
+	.ENDIF
+	.IFDEF _UE
+		call sub_35c6h		; cd c6 35 ;0af4
+	.ENDIF
 	ld a,(0c04ah)		; 3a 4a c0 ;0af7
 	rrca			; 0f ;0afa
 	and 007h		; e6 07 ;0afb
@@ -8334,7 +8469,9 @@ l35a1h:
 	ld a,013h		; 3e 13 ;35a6
 l35a8h:
 	out (0beh),a		; d3 be ;35a8
-	ld a,002h		; 3e 02 ;35aa
+	.DB $3e		;35aa
+sub_35abh:
+	.DB $02		;35ab
 	ld (0c49dh),a		; 32 9d c4 ;35ac
 	ret			; c9 ;35af
 sub_35b0h:
@@ -8345,7 +8482,9 @@ sub_35b0h:
 	ld (hl),000h		; 36 00 ;35b6
 	ld hl,(0c4a8h)		; 2a a8 c4 ;35b8
 	ld de,(0c4aah)		; ed 5b aa c4 ;35bb
-	ld bc,(0c4ach)		; ed 4b ac c4 ;35bf
+	.DB $ed $4b		;35bf
+sub_35c1h:
+	.DB $ac $c4		;35c1
 	jp l0464h		; c3 64 04 ;35c3
 sub_35c6h:
 	ld hl,l35dch		; 21 dc 35 ;35c6
@@ -9336,7 +9475,9 @@ l3af1h:
 	nop			; 00 ;3aff
 	add a,d			; 82 ;3b00
 l3b01h:
-	ld bc,l0206h		; 01 06 02 ;3b01
+	.DB $01 $06		;3b01
+l3b03h:
+	.DB $02		;3b03
 	inc b			; 04 ;3b04
 	inc b			; 04 ;3b05
 	nop			; 00 ;3b06
@@ -9344,6 +9485,7 @@ l3b01h:
 l3b08h:
 	jr nc,l3b49h		; 30 3f ;3b08
 	scf			; 37 ;3b0a
+l3b0bh:
 	nop			; 00 ;3b0b
 	daa			; 27 ;3b0c
 	dec hl			; 2b ;3b0d
@@ -9356,6 +9498,7 @@ l3b12h:
 	nop			; 00 ;3b13
 	nop			; 00 ;3b14
 	nop			; 00 ;3b15
+l3b16h:
 	nop			; 00 ;3b16
 	nop			; 00 ;3b17
 	nop			; 00 ;3b18
@@ -10189,6 +10332,7 @@ l3ed4h:
 	nop			; 00 ;3ef2
 	ld a,a			; 7f ;3ef3
 	nop			; 00 ;3ef4
+l3ef5h:
 	ld a,a			; 7f ;3ef5
 	nop			; 00 ;3ef6
 	inc hl			; 23 ;3ef7
@@ -10538,7 +10682,9 @@ l40c0h:
 	jr nz,l40e9h		; 20 01 ;40e6
 	rra			; 1f ;40e8
 l40e9h:
-	ld bc,l011eh+1		; 01 1f 01 ;40e9
+	.DB $01 $1f		;40e9
+l40ebh:
+	.DB $01		;40eb
 	ld a,(de)			; 1a ;40ec
 	ld bc,l0118h+1		; 01 19 01 ;40ed
 l40f0h:
@@ -10568,6 +10714,7 @@ l4100h:
 	or a			; b7 ;411a
 	jr nz,l4122h		; 20 05 ;411b
 	ld a,0ffh		; 3e ff ;411d
+l411fh:
 	out (03fh),a		; d3 3f ;411f
 	ret			; c9 ;4121
 l4122h:
@@ -11970,7 +12117,9 @@ l46b6h:
 	nop			; 00 ;488e
 	call p,0fbf9h		; f4 f9 fb ;488f
 	jp nc,0fc01h		; d2 01 fc ;4892
-	call m,l01feh+1		; fc ff 01 ;4895
+	.DB $fc		;4895
+l4896h:
+	.DB $ff $01		;4896
 	call m,0fefch		; fc fc fe ;4898
 l489bh:
 	nop			; 00 ;489b
@@ -13451,6 +13600,7 @@ l4f74h:
 	ret po			; e0 ;4fbb
 	call po,0ece8h		; e4 e8 ec ;4fbc
 	ret p			; f0 ;4fbf
+l4fc0h:
 	call p,0fcf8h		; f4 f8 fc ;4fc0
 	rst 38h			; ff ;4fc3
 	nop			; 00 ;4fc4
@@ -15082,6 +15232,7 @@ l5501h:
 	.DB $00		;564c
 	.DB $00		;564d
 	.DB $5e		;564e
+l564fh:
 	.DB $55		;564f
 	.DB $bf		;5650
 	.DB $ff		;5651
@@ -16374,6 +16525,7 @@ l5a04h:
 	.DB $00		;5ddb
 	.DB $7f		;5ddc
 	.DB $00		;5ddd
+l5ddeh:
 	.DB $7f		;5dde
 	.DB $00		;5ddf
 	.DB $6a		;5de0
@@ -20959,7 +21111,9 @@ l70b9h:
 	nop			; 00 ;70c1
 	add a,l			; 85 ;70c2
 	jr c,l70b9h		; 38 f4 ;70c3
-	call pe,sub_0e8ch		; ec 8c 0e ;70c5
+	.DB $ec			;70c5
+l70c6h:
+	.DB $8c $0e			;70c6
 	inc bc			; 03 ;70c8
 	nop			; 00 ;70c9
 	nop			; 00 ;70ca
@@ -21066,6 +21220,7 @@ l713ch:
 	ld a,h			; 7c ;7141
 l7142h:
 	jr c,$+32		; 38 20 ;7142
+sub_7144h:
 	nop			; 00 ;7144
 	nop			; 00 ;7145
 	ld c,b			; 48 ;7146
@@ -21925,6 +22080,7 @@ l7504h:
 	nop			; 00 ;75b1
 	nop			; 00 ;75b2
 	dec b			; 05 ;75b3
+sub_75b4h:
 	ld c,0a8h		; 0e a8 ;75b4
 	ld (0d406h),hl		; 22 06 d4 ;75b6
 	ld (hl),l			; 75 ;75b9
