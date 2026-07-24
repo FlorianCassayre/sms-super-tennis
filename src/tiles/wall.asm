@@ -40,10 +40,10 @@
 	.DB %00100111		;535d
 	.DB %00100111		;535e
 	.DB %10001111		;535f
-	.DB 3		;5360
+	.DB RLE_REP | 3		;5360
 	.DB %11111111		;5361
     ; Vertical stripes
-	.DB 8		;5362
+	.DB RLE_REP | 8		;5362
 	.DB %10101010		;5363
 	; ???
 	.DB %10000101		;5364
@@ -63,52 +63,52 @@
 	.DB %01000001		;536f
 	.DB %01111111		;5370
 	.DB %10000001		;5371
-	.DB 3		;5372
+	.DB RLE_REP | 3		;5372
 	.DB %11111111		;5373
 	; SEGA bottom "G"
-	.DB 2		;5374
+	.DB RLE_REP | 2		;5374
 	.DB %01010101		;5375
 	.DB %10000011		;5376
 	.DB %01000101		;5377
 	.DB %01111101		;5378
 	.DB %10000001		;5379
-	.DB 3		;537a
+	.DB RLE_REP | 3		;537a
 	.DB %11111111		;537b
 	; SEGA bottom "A"
-	.DB 2		;537c
+	.DB RLE_REP | 2		;537c
 	.DB %01011010		;537d
 	.DB %10000011		;537e
 	.DB %01010010		;537f
 	.DB %01011110		;5380
 	.DB %01010000		;5381
-	.DB 3		;5382
+	.DB RLE_REP | 3		;5382
 	.DB %11111111		;5383
     ; Diagonal vertical stripes (dark)
 	.DB %10000001		;5384
 	.DB %10101010		;5385
-	.DB 3		;5386
+	.DB RLE_REP | 3		;5386
 	.DB %10101000		;5387
-	.DB 3		;5388
+	.DB RLE_REP | 3		;5388
 	.DB %10100000		;5389
 	.DB %10000001		;538a
 	.DB %10000000		;538b
     ; Empty
-	.DB 8		;538c
+	.DB RLE_REP | 8		;538c
 	.DB %00000000		;538d
 	; Diagonal vertical stripes (dark)
-	.DB 5		;538e
+	.DB RLE_REP | 5		;538e
 	.DB %10101010		;538f
-	.DB 3		;5390
+	.DB RLE_REP | 3		;5390
 	.DB %10101000		;5391
 	; Diagonal vertical stripes (dark)
-	.DB 2		;5392
+	.DB RLE_REP | 2		;5392
 	.DB %10000000		;5393
-	.DB 6		;5394
+	.DB RLE_REP | 6		;5394
 	.DB %00000000		;5395
 	; Diagonal vertical stripes (dark)
-	.DB 3		;5396
+	.DB RLE_REP | 3		;5396
 	.DB %10100000		;5397
-	.DB 3		;5398
+	.DB RLE_REP | 3		;5398
 	.DB %10000000		;5399
-	.DB 5		;539a
+	.DB RLE_REP | 5		;539a
 	.DB %00000000		;539b

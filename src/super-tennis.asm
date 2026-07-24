@@ -15,7 +15,9 @@
 
 	.ORGA	00000h
 
+	.INCLUDE "algorithm/rle_constants.asm"
 	.INCLUDE "io/constants.asm"
+	.INCLUDE "physics/constants.asm"
 
 start:
 	jp init		; c3 85 00 ;0000
@@ -234,14 +236,14 @@ l00ffh:
 l0102h:
 	ld b,001h		; 06 01 ;0102
 l0104h:
-	call sub_0481h		; cd 81 04 ;0104
+	call sub_load_cram		; cd 81 04 ;0104
 	ld hl,l0010h		; 21 10 00 ;0107
 l010ah:
 	ld de,l002dh		; 11 2d 00 ;010a
 l010dh:
 	ld b,001h		; 06 01 ;010d
 l010fh:
-	call sub_0481h		; cd 81 04 ;010f
+	call sub_load_cram		; cd 81 04 ;010f
 l0112h:
 	ld de,l2000h		; 11 00 20 ;0112
 	.IFDEF _J
@@ -251,7 +253,7 @@ l0112h:
 		ld hl,05b43h		; 21 43 5b ;0115
 	.ENDIF
 l0118h:
-	call sub_04b5h		; cd b5 04 ;0118
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;0118
 	ld de,start		; 11 00 00 ;011b
 l011eh:
 	.IFDEF _J
@@ -260,7 +262,7 @@ l011eh:
 	.IFDEF _UE
 		ld hl,l5de3h		; 21 e3 5d ;011e
 	.ENDIF
-	call sub_04b5h		; cd b5 04 ;0121
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;0121
 l0124h:
 	ld de,0c600h		; 11 00 c6 ;0124
 l0127h:
@@ -271,7 +273,7 @@ l0127h:
 		ld hl,l70cbh		; 21 cb 70 ;0127
 	.ENDIF
 l012ah:
-	call sub_04edh		; cd ed 04 ;012a
+	call sub_rle_decompress_bitplanes_to_ram		; cd ed 04 ;012a
 	ld de,0c720h		; 11 20 c7 ;012d
 l0130h:
 	.IFDEF _J
@@ -281,7 +283,7 @@ l0130h:
 		ld hl,04b46h		; 21 46 4b ;0130
 	.ENDIF
 l0133h:
-	call sub_04edh		; cd ed 04 ;0133
+	call sub_rle_decompress_bitplanes_to_ram		; cd ed 04 ;0133
 l0136h:
 	ld de,0c76ch		; 11 6c c7 ;0136
 	.IFDEF _J
@@ -291,7 +293,7 @@ l0136h:
 		ld hl,04b74h		; 21 74 4b ;0139
 	.ENDIF
 l013ch:
-	call sub_04edh		; cd ed 04 ;013c
+	call sub_rle_decompress_bitplanes_to_ram		; cd ed 04 ;013c
 	ld de,0c84ch		; 11 4c c8 ;013f
 l0142h:
 	.IFDEF _J
@@ -301,7 +303,7 @@ l0142h:
 		ld hl,05958h		; 21 58 59 ;0142
 	.ENDIF
 l0145h:
-	call sub_04edh		; cd ed 04 ;0145
+	call sub_rle_decompress_bitplanes_to_ram		; cd ed 04 ;0145
 l0148h:
 	ld de,0cbe8h		; 11 e8 cb ;0148
 	.IFDEF _J
@@ -310,7 +312,7 @@ l0148h:
 	.IFDEF _UE
 		ld hl,04c37h		; 21 37 4c ;014b
 	.ENDIF
-	call sub_04edh		; cd ed 04 ;014e
+	call sub_rle_decompress_bitplanes_to_ram		; cd ed 04 ;014e
 l0151h:
 	call l0386h+2		; cd 88 03 ;0151
 	ld a,080h		; 3e 80 ;0154
@@ -319,7 +321,7 @@ l0159h:
 	ld a,080h		; 3e 80 ;0159
 l015bh:
 	ld (0c006h),a		; 32 06 c0 ;015b
-	call sub_03a0h		; cd a0 03 ;015e
+	call sub_enable_display		; cd a0 03 ;015e
 	ei			; fb ;0161
 	jp l07f8h		; c3 f8 07 ;0162
 l0165h:
@@ -560,22 +562,13 @@ l0386h:
 	add a,l			; 85 ;038c
 	inc bc			; 03 ;038d
 	ld bc,l037eh+2		; 01 80 03 ;038e
-	call sub_0450h		; cd 50 04 ;0391
+	call sub_vram_fill_word		; cd 50 04 ;0391
 	ld hl,03f00h		; 21 00 3f ;0394
 	ld de,l0386h+1		; 11 87 03 ;0397
 	ld bc,l0040h		; 01 40 00 ;039a
 l039dh:
-	jp l0440h		; c3 40 04 ;039d
-sub_03a0h:
-	ld a,0e0h		; 3e e0 ;03a0
-	jr l03a6h		; 18 02 ;03a2
-sub_03a4h:
-	ld a,0a0h		; 3e a0 ;03a4
-l03a6h:
-	out (0bfh),a		; d3 bf ;03a6
-	ld a,081h		; 3e 81 ;03a8
-	out (0bfh),a		; d3 bf ;03aa
-	ret			; c9 ;03ac
+	jp sub_vram_fill_byte		; c3 40 04 ;039d
+	.INCLUDE "graphics/display.asm"
 sub_03adh:
 	ld hl,(0c08ah)		; 2a 8a c0 ;03ad
 	dec hl			; 2b ;03b0
@@ -583,26 +576,7 @@ sub_03adh:
 	ld a,l			; 7d ;03b4
 	or h			; b4 ;03b5
 	ret			; c9 ;03b6
-sub_03b7h:
-	ld b,(hl)			; 46 ;03b7
-	inc hl			; 23 ;03b8
-l03b9h:
-	push bc			; c5 ;03b9
-	ld e,(hl)			; 5e ;03ba
-	inc hl			; 23 ;03bb
-	ld d,(hl)			; 56 ;03bc
-	inc hl			; 23 ;03bd
-	ld c,(hl)			; 4e ;03be
-	inc hl			; 23 ;03bf
-	ld b,(hl)			; 46 ;03c0
-	inc hl			; 23 ;03c1
-	ex de,hl			; eb ;03c2
-	call sub_cp_ram_vram		; cd 2f 04 ;03c3
-	ex de,hl			; eb ;03c6
-	add hl,bc			; 09 ;03c7
-	pop bc			; c1 ;03c8
-	djnz l03b9h		; 10 ee ;03c9
-	ret			; c9 ;03cb
+	.INCLUDE "graphics/upload_vram_chunks.asm"
 	push hl			; e5 ;03cc
 	ld hl,(0c08ch)		; 2a 8c c0 ;03cd
 	ld a,h			; 7c ;03d0
@@ -638,97 +612,13 @@ l03f4h:
 	djnz l03f0h		; 10 fa ;03f4
 	ret			; c9 ;03f6
 	.INCLUDE "math/mul_de_bc.asm"
-sub_040bh:
-	ld a,010h		; 3e 10 ;040b
-l040dh:
-	sla e		; cb 23 ;040d
-	rl d		; cb 12 ;040f
-	adc hl,hl		; ed 6a ;0411
-	jr c,l041eh		; 38 09 ;0413
-	sbc hl,bc		; ed 42 ;0415
-	jr nc,l0421h		; 30 08 ;0417
-	add hl,bc			; 09 ;0419
-	dec a			; 3d ;041a
-	jr nz,l040dh		; 20 f0 ;041b
-	ret			; c9 ;041d
-l041eh:
-	or a			; b7 ;041e
-	sbc hl,bc		; ed 42 ;041f
-l0421h:
-	inc e			; 1c ;0421
-	dec a			; 3d ;0422
-	jr nz,l040dh		; 20 e8 ;0423
-	ret			; c9 ;0425
+	.INCLUDE "math/div_hl_de_bc.asm"
 	.INCLUDE "graphics/set_vdp_write_addr.asm"
 	.INCLUDE "graphics/cp_ram_vram.asm"
-l0440h:
-	call sub_set_vdp_write_addr		; cd 26 04 ;0440
-	push bc			; c5 ;0443
-	push de			; d5 ;0444
-l0445h:
-	ld a,(de)			; 1a ;0445
-	out (0beh),a		; d3 be ;0446
-	dec bc			; 0b ;0448
-	ld a,c			; 79 ;0449
-	or b			; b0 ;044a
-	jr nz,l0445h		; 20 f8 ;044b
-	pop de			; d1 ;044d
-	pop bc			; c1 ;044e
-	ret			; c9 ;044f
-sub_0450h:
-	call sub_set_vdp_write_addr		; cd 26 04 ;0450
-	ex (sp),hl			; e3 ;0453
-	ex (sp),hl			; e3 ;0454
-l0455h:
-	ld a,(de)			; 1a ;0455
-	out (0beh),a		; d3 be ;0456
-	push de			; d5 ;0458
-	inc de			; 13 ;0459
-	ld a,(de)			; 1a ;045a
-	out (0beh),a		; d3 be ;045b
-	pop de			; d1 ;045d
-	dec bc			; 0b ;045e
-	ld a,c			; 79 ;045f
-	or b			; b0 ;0460
-	jr nz,l0455h		; 20 f2 ;0461
-	ret			; c9 ;0463
-l0464h:
-	push bc			; c5 ;0464
-	ld b,000h		; 06 00 ;0465
-	call sub_set_vdp_write_addr		; cd 26 04 ;0467
-l046ah:
-	ld a,(de)			; 1a ;046a
-	out (0beh),a		; d3 be ;046b
-	inc de			; 13 ;046d
-	ex (sp),hl			; e3 ;046e
-	ex (sp),hl			; e3 ;046f
-	ld a,(de)			; 1a ;0470
-	out (0beh),a		; d3 be ;0471
-	inc de			; 13 ;0473
-	dec bc			; 0b ;0474
-	ld a,c			; 79 ;0475
-	or b			; b0 ;0476
-	jr nz,l046ah		; 20 f1 ;0477
-	ld bc,l0040h		; 01 40 00 ;0479
-	add hl,bc			; 09 ;047c
-	pop bc			; c1 ;047d
-	djnz l0464h		; 10 e4 ;047e
-	ret			; c9 ;0480
-sub_0481h:
-	ld a,l			; 7d ;0481
-	out (0bfh),a		; d3 bf ;0482
-	ld a,0c0h		; 3e c0 ;0484
-l0486h:
-	or h			; b4 ;0486
-	out (0bfh),a		; d3 bf ;0487
-l0489h:
-	ex (sp),hl			; e3 ;0489
-	ex (sp),hl			; e3 ;048a
-	ld a,(de)			; 1a ;048b
-	out (0beh),a		; d3 be ;048c
-	inc de			; 13 ;048e
-	djnz l0489h		; 10 f8 ;048f
-	ret			; c9 ;0491
+	.INCLUDE "graphics/vram_fill_byte.asm"
+	.INCLUDE "graphics/vram_fill_word.asm"
+	.INCLUDE "graphics/load_vram_rect.asm"
+	.INCLUDE "graphics/load_cram.asm"
 sub_0492h:
 	ld (0c088h),a		; 32 88 c0 ;0492
 	call sub_set_vdp_write_addr		; cd 26 04 ;0495
@@ -756,94 +646,7 @@ l04a9h:
 	or c			; b1 ;04b1
 	jr nz,l0499h		; 20 e5 ;04b2
 	ret			; c9 ;04b4
-sub_04b5h:
-	ld b,004h		; 06 04 ;04b5
-l04b7h:
-	push bc			; c5 ;04b7
-	push de			; d5 ;04b8
-	call sub_04c2h		; cd c2 04 ;04b9
-	pop de			; d1 ;04bc
-	inc de			; 13 ;04bd
-sub_04beh:
-	pop bc			; c1 ;04be
-	djnz l04b7h		; 10 f6 ;04bf
-	ret			; c9 ;04c1
-sub_04c2h:
-	ld a,(hl)			; 7e ;04c2
-	inc hl			; 23 ;04c3
-	or a			; b7 ;04c4
-	ret z			; c8 ;04c5
-	ld b,a			; 47 ;04c6
-	and 080h		; e6 80 ;04c7
-	ld c,a			; 4f ;04c9
-	ld a,b			; 78 ;04ca
-	and 07fh		; e6 7f ;04cb
-	ld b,a			; 47 ;04cd
-l04ceh:
-	ld a,e			; 7b ;04ce
-	out (0bfh),a		; d3 bf ;04cf
-	ld a,d			; 7a ;04d1
-	or 040h		; f6 40 ;04d2
-	out (0bfh),a		; d3 bf ;04d4
-	ex (sp),hl			; e3 ;04d6
-	ex (sp),hl			; e3 ;04d7
-	ld a,(hl)			; 7e ;04d8
-	out (0beh),a		; d3 be ;04d9
-	xor a			; af ;04db
-	or c			; b1 ;04dc
-	jr z,l04e0h		; 28 01 ;04dd
-	inc hl			; 23 ;04df
-l04e0h:
-	inc de			; 13 ;04e0
-	inc de			; 13 ;04e1
-	inc de			; 13 ;04e2
-	inc de			; 13 ;04e3
-	djnz l04ceh		; 10 e8 ;04e4
-	jp nz,sub_04c2h		; c2 c2 04 ;04e6
-	inc hl			; 23 ;04e9
-	jp sub_04c2h		; c3 c2 04 ;04ea
-sub_04edh:
-	ld b,004h		; 06 04 ;04ed
-l04efh:
-	push bc			; c5 ;04ef
-l04f0h:
-	push de			; d5 ;04f0
-	call sub_04fah		; cd fa 04 ;04f1
-	pop de			; d1 ;04f4
-	inc de			; 13 ;04f5
-	pop bc			; c1 ;04f6
-	djnz l04efh		; 10 f6 ;04f7
-	ret			; c9 ;04f9
-sub_04fah:
-	ld a,(hl)			; 7e ;04fa
-	inc hl			; 23 ;04fb
-	or a			; b7 ;04fc
-	ret z			; c8 ;04fd
-	ld b,a			; 47 ;04fe
-	and 080h		; e6 80 ;04ff
-	ld c,a			; 4f ;0501
-l0502h:
-	ld a,b			; 78 ;0502
-	and 07fh		; e6 7f ;0503
-	ld b,a			; 47 ;0505
-l0506h:
-	ld a,(hl)			; 7e ;0506
-	ld (de),a			; 12 ;0507
-l0508h:
-	xor a			; af ;0508
-	or c			; b1 ;0509
-	jr z,l050dh		; 28 01 ;050a
-l050ch:
-	inc hl			; 23 ;050c
-l050dh:
-	inc de			; 13 ;050d
-	inc de			; 13 ;050e
-	inc de			; 13 ;050f
-	inc de			; 13 ;0510
-	djnz l0506h		; 10 f3 ;0511
-	jp nz,sub_04fah		; c2 fa 04 ;0513
-	inc hl			; 23 ;0516
-	jp sub_04fah		; c3 fa 04 ;0517
+	.INCLUDE "algorithm/rle_decompress_bitplanes.asm"
 l051ah:
 	call sub_05cch		; cd cc 05 ;051a
 	xor a			; af ;051d
@@ -1392,7 +1195,7 @@ l0811h:
 l0826h:
 	jp nz,l088dh		; c2 8d 08 ;0826
 	di			; f3 ;0829
-	call sub_03a4h		; cd a4 03 ;082a
+	call sub_disable_display		; cd a4 03 ;082a
 	call l0386h+2		; cd 88 03 ;082d
 	ld hl,start		; 21 00 00 ;0830
 	.IFDEF _J
@@ -1402,7 +1205,7 @@ l0826h:
 		ld de,l3b08h		; 11 08 3b ;0833
 	.ENDIF
 	ld b,008h		; 06 08 ;0836
-	call sub_0481h		; cd 81 04 ;0838
+	call sub_load_cram		; cd 81 04 ;0838
 	ld hl,l0010h		; 21 10 00 ;083b
 	.IFDEF _J
 		ld de,l3b0bh		; 11 0b 3b ;083e
@@ -1411,7 +1214,7 @@ l0826h:
 		ld de,l3b10h		; 11 10 3b ;083e
 	.ENDIF
 	ld b,00bh		; 06 0b ;0841
-	call sub_0481h		; cd 81 04 ;0843
+	call sub_load_cram		; cd 81 04 ;0843
 	ld de,02600h		; 11 00 26 ;0846
 	.IFDEF _J
 		ld hl,l3b16h		; 21 16 3b ;0849
@@ -1419,7 +1222,7 @@ l0826h:
 	.IFDEF _UE
 		ld hl,l3b1bh		; 21 1b 3b ;0849
 	.ENDIF
-	call sub_04b5h		; cd b5 04 ;084c
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;084c
 	ld hl,03854h		; 21 54 38 ;084f
 	.IFDEF _J
 		ld de,l3ef5h		; 11 f5 3e ;0852
@@ -1429,7 +1232,7 @@ l0826h:
 	.ENDIF
 	ld b,005h		; 06 05 ;0855
 	ld c,00ah		; 0e 0a ;0857
-	call l0464h		; cd 64 04 ;0859
+	call sub_load_vram_rect		; cd 64 04 ;0859
 	ld de,l39c0h		; 11 c0 39 ;085c
 	.IFDEF _J
 		ld hl,03f59h		; 21 59 3f ;085f
@@ -1437,14 +1240,14 @@ l0826h:
 	.IFDEF _UE
 		ld hl,03f5eh		; 21 5e 3f ;085f
 	.ENDIF
-	call sub_04b5h		; cd b5 04 ;0862
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;0862
 	.IFDEF _J
 		ld hl,0407ah		; 21 7a 40 ;0865
 	.ENDIF
 	.IFDEF _UE
 		ld hl,0407fh		; 21 7f 40 ;0865
 	.ENDIF
-	call sub_03b7h		; cd b7 03 ;0868
+	call sub_upload_vram_chunks		; cd b7 03 ;0868
 	ld hl,l3d96h		; 21 96 3d ;086b
 	.IFDEF _J
 		ld de,l40ebh		; 11 eb 40 ;086e
@@ -1461,7 +1264,7 @@ l0826h:
 	set 6,(hl)		; cb f6 ;0881
 	ld a,088h		; 3e 88 ;0883
 	ld (0de00h),a		; 32 00 de ;0885
-	call sub_03a0h		; cd a0 03 ;0888
+	call sub_enable_display		; cd a0 03 ;0888
 	ei			; fb ;088b
 	ret			; c9 ;088c
 l088dh:
@@ -1494,7 +1297,7 @@ l088dh:
 	jp nz,l096eh		; c2 6e 09 ;08c5
 	set 6,(hl)		; cb f6 ;08c8
 	di			; f3 ;08ca
-	call sub_03a4h		; cd a4 03 ;08cb
+	call sub_disable_display		; cd a4 03 ;08cb
 	call l0386h+2		; cd 88 03 ;08ce
 	ld de,start		; 11 00 00 ;08d1
 	.IFDEF _J
@@ -1503,7 +1306,7 @@ l088dh:
 	.IFDEF _UE
 		ld hl,l5de3h		; 21 e3 5d ;08d4
 	.ENDIF
-	call sub_04b5h		; cd b5 04 ;08d7
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;08d7
 	ld hl,0c047h		; 21 47 c0 ;08da
 	ld b,004h		; 06 04 ;08dd
 	xor a			; af ;08df
@@ -1552,7 +1355,7 @@ l08e0h:
 	ld de,0cbc6h		; 11 c6 cb ;0956
 	ld bc,l0022h		; 01 22 00 ;0959
 	call sub_cp_ram_vram		; cd 2f 04 ;095c
-	call sub_03a0h		; cd a0 03 ;095f
+	call sub_enable_display		; cd a0 03 ;095f
 	xor a			; af ;0962
 	ld (0c48ah),a		; 32 8a c4 ;0963
 	ld (0c499h),a		; 32 99 c4 ;0966
@@ -1787,11 +1590,11 @@ l0abah:
 	ret			; c9 ;0abc
 l0abdh:
 	di			; f3 ;0abd
-	call sub_03a4h		; cd a4 03 ;0abe
+	call sub_disable_display		; cd a4 03 ;0abe
 	ld hl,start		; 21 00 00 ;0ac1
 	ld de,l0003h		; 11 03 00 ;0ac4
 	ld b,020h		; 06 20 ;0ac7
-	call sub_0481h		; cd 81 04 ;0ac9
+	call sub_load_cram		; cd 81 04 ;0ac9
 	ld de,02600h		; 11 00 26 ;0acc
 	.IFDEF _J
 		ld hl,l4fc0h		; 21 c0 4f ;0acf
@@ -1799,7 +1602,7 @@ l0abdh:
 	.IFDEF _UE
 		ld hl,l4fc5h		; 21 c5 4f ;0acf
 	.ENDIF
-	call sub_04b5h		; cd b5 04 ;0ad2
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;0ad2
 	ld de,03800h		; 11 00 38 ;0ad5
 	.IFDEF _J
 		ld hl,l564fh		; 21 4f 56 ;0ad8
@@ -1807,7 +1610,7 @@ l0abdh:
 	.IFDEF _UE
 		ld hl,l5654h		; 21 54 56 ;0ad8
 	.ENDIF
-	call sub_04b5h		; cd b5 04 ;0adb
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;0adb
 	ld de,start		; 11 00 00 ;0ade
 	.IFDEF _J
 		ld hl,l5ddeh		; 21 de 5d ;0ae1
@@ -1815,7 +1618,7 @@ l0abdh:
 	.IFDEF _UE
 		ld hl,l5de3h		; 21 e3 5d ;0ae1
 	.ENDIF
-	call sub_04b5h		; cd b5 04 ;0ae4
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;0ae4
 	ld hl,0c100h		; 21 00 c1 ;0ae7
 	ld de,0c101h		; 11 01 c1 ;0aea
 	ld bc,l003fh		; 01 3f 00 ;0aed
@@ -1841,7 +1644,7 @@ l0b00h:
 	or 080h		; f6 80 ;0b0e
 l0b10h:
 	ld (0c006h),a		; 32 06 c0 ;0b10
-	call sub_03a0h		; cd a0 03 ;0b13
+	call sub_enable_display		; cd a0 03 ;0b13
 	ei			; fb ;0b16
 	ret			; c9 ;0b17
 	ld a,(0c518h)		; 3a 18 c5 ;0b18
@@ -2399,7 +2202,7 @@ l0eb9h:
 	or a			; b7 ;0ebc
 	jr nz,l0ef3h		; 20 34 ;0ebd
 	di			; f3 ;0ebf
-	call sub_03a4h		; cd a4 03 ;0ec0
+	call sub_disable_display		; cd a4 03 ;0ec0
 	call l0386h+2		; cd 88 03 ;0ec3
 	ld hl,l2c00h		; 21 00 2c ;0ec6
 	ld de,0c76ch		; 11 6c c7 ;0ec9
@@ -2409,11 +2212,11 @@ l0eb9h:
 	ld hl,l3a8eh		; 21 8e 3a ;0ed4
 	ld de,0c720h		; 11 20 c7 ;0ed7
 	ld bc,l0213h		; 01 13 02 ;0eda
-	call l0464h		; cd 64 04 ;0edd
+	call sub_load_vram_rect		; cd 64 04 ;0edd
 	xor a			; af ;0ee0
 l0ee1h:
 	ld (0c011h),a		; 32 11 c0 ;0ee1
-	call sub_03a0h		; cd a0 03 ;0ee4
+	call sub_enable_display		; cd a0 03 ;0ee4
 	ei			; fb ;0ee7
 	ld hl,000f0h		; 21 f0 00 ;0ee8
 	ld (0c08ah),hl		; 22 8a c0 ;0eeb
@@ -2437,11 +2240,11 @@ l0f02h:
 l0f07h:
 	ld de,l002dh		; 11 2d 00 ;0f07
 	ld b,002h		; 06 02 ;0f0a
-	call sub_0481h		; cd 81 04 ;0f0c
+	call sub_load_cram		; cd 81 04 ;0f0c
 	ld hl,l0010h		; 21 10 00 ;0f0f
 	ld de,l002dh		; 11 2d 00 ;0f12
 	ld b,001h		; 06 01 ;0f15
-	jp sub_0481h		; c3 81 04 ;0f17
+	jp sub_load_cram		; c3 81 04 ;0f17
 	jp l1548h		; c3 48 15 ;0f1a
 	ld a,(0c30dh)		; 3a 0d c3 ;0f1d
 	ld (ix+00dh),a		; dd 77 0d ;0f20
@@ -2551,7 +2354,7 @@ l0fb9h:
 l0fe2h:
 	ld de,start		; 11 00 00 ;0fe2
 	ex de,hl			; eb ;0fe5
-	call sub_040bh		; cd 0b 04 ;0fe6
+	call sub_div_hl_de_bc		; cd 0b 04 ;0fe6
 	ld d,e			; 53 ;0fe9
 	ld e,h			; 5c ;0fea
 	ld hl,08000h		; 21 00 80 ;0feb
@@ -3444,7 +3247,7 @@ l1448h:
 	ld (0c500h),hl		; 22 00 c5 ;14d7
 	ld hl,0c516h		; 21 16 c5 ;14da
 	res 6,(hl)		; cb b6 ;14dd
-	call sub_159ch		; cd 9c 15 ;14df
+	call sub_ball_bounce		; cd 9c 15 ;14df
 	ld hl,0c517h		; 21 17 c5 ;14e2
 	inc (hl)			; 34 ;14e5
 	ld a,005h		; 3e 05 ;14e6
@@ -3551,62 +3354,7 @@ l1593h:
 l1597h:
 	ld (ix+00bh),0d8h		; dd 36 0b d8 ;1597
 	ret			; c9 ;159b
-sub_159ch:
-	ld de,(0c506h)		; ed 5b 06 c5 ;159c
-	ld bc,000a0h		; 01 a0 00 ;15a0
-	call sub_mul_de_bc		; cd f7 03 ;15a3
-	ld d,e			; 53 ;15a6
-	ld e,h			; 5c ;15a7
-	xor a			; af ;15a8
-	ld hl,start		; 21 00 00 ;15a9
-	sbc hl,de		; ed 52 ;15ac
-	ld (0c506h),hl		; 22 06 c5 ;15ae
-	ld a,(0c517h)		; 3a 17 c5 ;15b1
-	cp 002h		; fe 02 ;15b4
-	ret nc			; d0 ;15b6
-	ld de,(0c50eh)		; ed 5b 0e c5 ;15b7
-	bit 7,d		; cb 7a ;15bb
-	jr z,l15c6h		; 28 07 ;15bd
-	xor a			; af ;15bf
-	ld hl,start		; 21 00 00 ;15c0
-	sbc hl,de		; ed 52 ;15c3
-	ex de,hl			; eb ;15c5
-l15c6h:
-	ld bc,l007fh+1		; 01 80 00 ;15c6
-	call sub_mul_de_bc		; cd f7 03 ;15c9
-	ld d,e			; 53 ;15cc
-	ld e,h			; 5c ;15cd
-	ld a,(0c50fh)		; 3a 0f c5 ;15ce
-	bit 7,a		; cb 7f ;15d1
-	jr z,l15dch		; 28 07 ;15d3
-	xor a			; af ;15d5
-	ld hl,start		; 21 00 00 ;15d6
-	sbc hl,de		; ed 52 ;15d9
-	ex de,hl			; eb ;15db
-l15dch:
-	ld (0c50eh),de		; ed 53 0e c5 ;15dc
-	ld de,(0c50ch)		; ed 5b 0c c5 ;15e0
-	bit 7,d		; cb 7a ;15e4
-	jr z,l15efh		; 28 07 ;15e6
-	xor a			; af ;15e8
-	ld hl,start		; 21 00 00 ;15e9
-	sbc hl,de		; ed 52 ;15ec
-	ex de,hl			; eb ;15ee
-l15efh:
-	ld bc,l007fh+1		; 01 80 00 ;15ef
-	call sub_mul_de_bc		; cd f7 03 ;15f2
-	ld d,e			; 53 ;15f5
-	ld e,h			; 5c ;15f6
-	ld a,(0c50dh)		; 3a 0d c5 ;15f7
-	bit 7,a		; cb 7f ;15fa
-	jr z,l1605h		; 28 07 ;15fc
-	xor a			; af ;15fe
-	ld hl,start		; 21 00 00 ;15ff
-	sbc hl,de		; ed 52 ;1602
-	ex de,hl			; eb ;1604
-l1605h:
-	ld (0c50ch),de		; ed 53 0c c5 ;1605
-	ret			; c9 ;1609
+	.INCLUDE "physics/ball_bounce.asm"
 sub_160ah:
 	ld a,e			; 7b ;160a
 l160bh:
@@ -3637,7 +3385,7 @@ l1624h:
 	pop bc			; c1 ;1636
 l1637h:
 	ld hl,start		; 21 00 00 ;1637
-	call sub_040bh		; cd 0b 04 ;163a
+	call sub_div_hl_de_bc		; cd 0b 04 ;163a
 	ld b,e			; 43 ;163d
 	ld c,h			; 4c ;163e
 	ld de,(0c50eh)		; ed 5b 0e c5 ;163f
@@ -3784,7 +3532,7 @@ l1714h:
 l1728h:
 	ld hl,(0c506h)		; 2a 06 c5 ;1728
 	push hl			; e5 ;172b
-	call sub_159ch		; cd 9c 15 ;172c
+	call sub_ball_bounce		; cd 9c 15 ;172c
 	pop de			; d1 ;172f
 	bit 7,d		; cb 7a ;1730
 	jr z,l173bh		; 28 07 ;1732
@@ -3822,7 +3570,7 @@ l1769h:
 	inc bc			; 03 ;176c
 l176dh:
 	nop			; 00 ;176d
-	ld bc,l0506h		; 01 06 05 ;176e
+	ld bc,00506h		; 01 06 05 ;176e
 l1771h:
 	nop			; 00 ;1771
 	ld (bc),a			; 02 ;1772
@@ -5587,7 +5335,7 @@ l2423h:
 	ld (ix+002h),013h		; dd 36 02 13 ;2453
 	ret			; c9 ;2457
 l2458h:
-	ld bc,l050ch		; 01 0c 05 ;2458
+	ld bc,0050ch		; 01 0c 05 ;2458
 	inc b			; 04 ;245b
 	dec b			; 05 ;245c
 	nop			; 00 ;245d
@@ -5595,7 +5343,7 @@ l2458h:
 	inc b			; 04 ;245f
 	dec b			; 05 ;2460
 	nop			; 00 ;2461
-	ld bc,l0508h		; 01 08 05 ;2462
+	ld bc,00508h		; 01 08 05 ;2462
 	nop			; 00 ;2465
 	ld bc,l0104h		; 01 04 01 ;2466
 	inc c			; 0c ;2469
@@ -8108,7 +7856,7 @@ sub_3457h:
 	pop bc			; c1 ;345b
 	ld de,l34a9h		; 11 a9 34 ;345c
 	di			; f3 ;345f
-	call sub_0450h		; cd 50 04 ;3460
+	call sub_vram_fill_word		; cd 50 04 ;3460
 	ei			; fb ;3463
 	pop hl			; e1 ;3464
 	ld de,l0040h		; 11 40 00 ;3465
@@ -8311,7 +8059,7 @@ sub_35b0h:
 	.DB $ed $4b		;35bf
 sub_35c1h:
 	.DB $ac $c4		;35c1
-	jp l0464h		; c3 64 04 ;35c3
+	jp sub_load_vram_rect		; c3 64 04 ;35c3
 sub_35c6h:
 	ld hl,l35dch		; 21 dc 35 ;35c6
 	xor a			; af ;35c9
@@ -8323,7 +8071,7 @@ sub_35c6h:
 	ex de,hl			; eb ;35d2
 	ld hl,l0013h+2		; 21 15 00 ;35d3
 	ld b,002h		; 06 02 ;35d6
-	call sub_0481h		; cd 81 04 ;35d8
+	call sub_load_cram		; cd 81 04 ;35d8
 	ret			; c9 ;35db
 l35dch:
 	dec hl			; 2b ;35dc
@@ -8380,7 +8128,7 @@ l3627h:
 	ld de,l3706h		; 11 06 37 ;362b
 	ld bc,l0020h		; 01 20 00 ;362e
 	di			; f3 ;3631
-	call sub_0450h		; cd 50 04 ;3632
+	call sub_vram_fill_word		; cd 50 04 ;3632
 	ei			; fb ;3635
 	ld b,008h		; 06 08 ;3636
 l3638h:
@@ -8417,15 +8165,15 @@ l3663h:
 	ld hl,l0010h		; 21 10 00 ;366e
 	ld de,03719h		; 11 19 37 ;3671
 	ld b,001h		; 06 01 ;3674
-	call sub_0481h		; cd 81 04 ;3676
+	call sub_load_cram		; cd 81 04 ;3676
 	ld a,005h		; 3e 05 ;3679
 	call sub_35e6h		; cd e6 35 ;367b
 	di			; f3 ;367e
 	ld hl,start		; 21 00 00 ;367f
 	ld de,l3708h		; 11 08 37 ;3682
 	ld b,011h		; 06 11 ;3685
-	call sub_0481h		; cd 81 04 ;3687
-	call sub_03a4h		; cd a4 03 ;368a
+	call sub_load_cram		; cd 81 04 ;3687
+	call sub_disable_display		; cd a4 03 ;368a
 	call l0386h+2		; cd 88 03 ;368d
 	ld a,000h		; 3e 00 ;3690
 	out (0bfh),a		; d3 bf ;3692
@@ -8433,17 +8181,17 @@ l3663h:
 	out (0bfh),a		; d3 bf ;3696
 	ld hl,l37e3h		; 21 e3 37 ;3698
 	ld de,02600h		; 11 00 26 ;369b
-	call sub_04b5h		; cd b5 04 ;369e
+	call sub_rle_decompress_bitplanes		; cd b5 04 ;369e
 	ld hl,l3a5ah		; 21 5a 3a ;36a1
 	ld de,l3783h		; 11 83 37 ;36a4
 	ld bc,l0804h+2		; 01 06 08 ;36a7
-	call l0464h		; cd 64 04 ;36aa
+	call sub_load_vram_rect		; cd 64 04 ;36aa
 	ld hl,0371ah		; 21 1a 37 ;36ad
-	call sub_03b7h		; cd b7 03 ;36b0
+	call sub_upload_vram_chunks		; cd b7 03 ;36b0
 	ei			; fb ;36b3
 	ld a,086h		; 3e 86 ;36b4
 	ld (0de00h),a		; 32 00 de ;36b6
-	call sub_03a0h		; cd a0 03 ;36b9
+	call sub_enable_display		; cd a0 03 ;36b9
 	ld a,040h		; 3e 40 ;36bc
 	call sub_35e6h		; cd e6 35 ;36be
 	ld hl,l3b60h		; 21 60 3b ;36c1
@@ -9204,7 +8952,7 @@ l3a8eh:
 	jr nz,l3a96h		; 20 00 ;3a94
 l3a96h:
 	inc bc			; 03 ;3a96
-	ld bc,l0502h		; 01 02 05 ;3a97
+	ld bc,00502h		; 01 02 05 ;3a97
 	add a,e			; 83 ;3a9a
 	ld (bc),a			; 02 ;3a9b
 	nop			; 00 ;3a9c
@@ -11786,7 +11534,7 @@ l46b6h:
 	nop			; 00 ;47ac
 	rst 18h			; df ;47ad
 	ret m			; f8 ;47ae
-	call m,sub_04beh		; fc be 04 ;47af
+	.DB $fc $be $04		;47af
 	ret pe			; e8 ;47b2
 	ei			; fb ;47b3
 	xor c			; a9 ;47b4
@@ -16245,7 +15993,6 @@ l5a04h:
 	.DB $08		;5c9e
 	.DB $00		;5c9f
 	.INCLUDE "tiles/font_stroke.asm"
-	.DB $00		;5dd4
 	.DB $7f		;5dd5
 	.DB $00		;5dd6
 	.DB $7f		;5dd7
@@ -22213,7 +21960,7 @@ l7800h:
 	ld bc,l03f0h		; 01 f0 03 ;7839
 	nop			; 00 ;783c
 	ret nc			; d0 ;783d
-	ld bc,l04f0h		; 01 f0 04 ;783e
+	ld bc,004f0h		; 01 f0 04 ;783e
 	jp po,l6600h		; e2 00 66 ;7841
 	nop			; 00 ;7844
 	ld d,h			; 54 ;7845

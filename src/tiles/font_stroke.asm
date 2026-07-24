@@ -1,10 +1,10 @@
 	; Character "0"
-	.DB %10000010		;5ca0
+	.DB RLE_LIT | 2		;5ca0
 	.DB %00111100		;5ca1
 	.DB %01000010		;5ca2
-	.DB 4		;5ca3
+	.DB RLE_REP | 4		;5ca3
 	.DB %10011001		;5ca4
-	.DB %10110110		;5ca5
+	.DB RLE_LIT | 54		;5ca5
 	.DB %01000010		;5ca6
 	.DB %00111100		;5ca7
 	; Character "1"
@@ -66,12 +66,12 @@
 	.DB %10000001		;5cd9
 	.DB %10011001		;5cda
 	.DB %11110110		;5cdb
-	.DB 3		;5cdc
+	.DB RLE_REP | 3		;5cdc
 	.DB %00100100		;5cdd
-	.DB 2		;5cde
+	.DB RLE_REP | 2		;5cde
 	.DB %00111100		;5cdf
 	; Character "8"
-	.DB %10010000		;5ce0
+	.DB RLE_LIT | 16		;5ce0
 	.DB %01000010		;5ce1
 	.DB %10011001		;5ce2
 	.DB %01000010		;5ce3
@@ -90,20 +90,20 @@
 	.DB %01111100		;5cef
 	; Character ":"
 	.DB %00111100		;5cf0
-	.DB 2		;5cf1
+	.DB RLE_REP | 2		;5cf1
 	.DB %00100100		;5cf2
-	.DB 2		;5cf3
+	.DB RLE_REP | 2		;5cf3
 	.DB %00111100		;5cf4
-	.DB 2		;5cf5
+	.DB RLE_REP | 2		;5cf5
 	.DB %00100100		;5cf6
-	.DB %10000011		;5cf7
+	.DB RLE_LIT | 3		;5cf7
 	.DB %00111100		;5cf8
 	; Character "A"
 	.DB %01111110		;5cf9
 	.DB %11000011		;5cfa
-	.DB 3		;5cfb
+	.DB RLE_REP | 3		;5cfb
 	.DB %10011101		;5cfc
-	.DB %10010101		;5cfd
+	.DB RLE_LIT | 21		;5cfd
 	.DB %10000001		;5cfe
 	.DB %10011101		;5cff
 	.DB %11110111		;5d00
@@ -128,9 +128,9 @@
 	; Character "D"
 	.DB %11111110		;5d11
 	.DB %10000011		;5d12
-	.DB 4		;5d13
+	.DB RLE_REP | 4		;5d13
 	.DB %10011101		;5d14
-	.DB %10111011		;5d15
+	.DB RLE_LIT | 59		;5d15
 	.DB %10000011		;5d16
 	.DB %11111110		;5d17
 	; Character "E"
@@ -198,9 +198,9 @@
 	.DB %11110111		;5d4f
 	; Character "L"
 	.DB %11110000		;5d50
-	.DB 3		;5d51
+	.DB RLE_REP | 3		;5d51
 	.DB %10010000		;5d52
-	.DB %10001001		;5d53
+	.DB RLE_LIT | 9		;5d53
 	.DB %10010111		;5d54
 	.DB %10011101		;5d55
 	.DB %10000001		;5d56
@@ -211,12 +211,12 @@
 	.DB %10001001		;5d5a
 	.DB %10010101		;5d5b
 	.DB %10011101		;5d5c
-	.DB 2		;5d5d
+	.DB RLE_REP | 2		;5d5d
 	.DB %10010101		;5d5e
-	.DB 2		;5d5f
+	.DB RLE_REP | 2		;5d5f
 	; Character "N"
 	.DB %11110111		;5d60
-	.DB %10001001		;5d61
+	.DB RLE_LIT | 9		;5d61
 	.DB %10011101		;5d62
 	.DB %10001101		;5d63
 	.DB %10010101		;5d64
@@ -227,9 +227,9 @@
 	; Character "O"
 	.DB %01111110		;5d69
 	.DB %11000011		;5d6a
-	.DB 4		;5d6b
+	.DB RLE_REP | 4		;5d6b
 	.DB %10011101		;5d6c
-	.DB %10100101		;5d6d
+	.DB RLE_LIT | 37		;5d6d
 	.DB %11000011		;5d6e
 	.DB %01111110		;5d6f
 	; Character "P"
@@ -272,23 +272,23 @@
 	.DB %11111111		;5d90
 	.DB %10000001		;5d91
 	.DB %11100111		;5d92
-	.DB 4		;5d93
+	.DB RLE_REP | 4		;5d93
 	.DB %00100100		;5d94
-	.DB %10000010		;5d95
+	.DB RLE_LIT | 2		;5d95
 	.DB %00111100		;5d96
 	; Character "U"
 	.DB %11110111		;5d97
-	.DB 4		;5d98
+	.DB RLE_REP | 4		;5d98
 	.DB %10010101		;5d99
-	.DB %10000100		;5d9a
+	.DB RLE_LIT | 4		;5d9a
 	.DB %10011101		;5d9b
 	.DB %11000011		;5d9c
 	.DB %01111110		;5d9d
 	; Character "V"
 	.DB %11110111		;5d9e
-	.DB 3		;5d9f
+	.DB RLE_REP | 3		;5d9f
 	.DB %10010101		;5da0
-	.DB %10000110		;5da1
+	.DB RLE_LIT | 6		;5da1
 	.DB %10011101		;5da2
 	.DB %11001011		;5da3
 	.DB %01100110		;5da4
@@ -296,9 +296,9 @@
 	; Character "W"
 	.DB %11110111		;5da6
 	.DB %10011101		;5da7
-	.DB 4		;5da8
+	.DB RLE_REP | 4		;5da8
 	.DB %10010101		;5da9
-	.DB %10011010		;5daa
+	.DB RLE_LIT | 26		;5daa
 	.DB %11001011		;5dab
 	.DB %01111110		;5dac
 	; Character "X"
@@ -329,9 +329,9 @@
 	.DB %10000001		;5dc3
 	.DB %11111111		;5dc4
 	; Character "."
-	.DB %00101100		;5dc5
+	.DB RLE_REP | 44		;5dc5
 	.DB %00000000		;5dc6
-	.DB %10001100		;5dc7
+	.DB RLE_LIT | 12		;5dc7
 	.DB %00011000		;5dc8
 	.DB %00100100		;5dc9
 	.DB %00100100		;5dca
@@ -345,3 +345,4 @@
 	.DB %00011000		;5dd1
 	.DB %00100100		;5dd2
 	.DB %00111100		;5dd3
+	.DB RLE_END		;5dd4
