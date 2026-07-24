@@ -1,3 +1,4 @@
+	.DB $09		;5b43
 	; Character "0"
 	.DB %00000000		;5b44
 	.DB RLE_LIT | 1		;5b45
