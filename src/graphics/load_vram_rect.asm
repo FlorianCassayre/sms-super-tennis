@@ -6,8 +6,11 @@ sub_load_vram_rect:
 	ld a,(de)			; 1a ;046a
 	out (0beh),a		; d3 be ;046b
 	inc de			; 13 ;046d
+
+	; Waste some cycles
 	ex (sp),hl			; e3 ;046e
 	ex (sp),hl			; e3 ;046f
+
 	ld a,(de)			; 1a ;0470
 	out (0beh),a		; d3 be ;0471
 	inc de			; 13 ;0473
