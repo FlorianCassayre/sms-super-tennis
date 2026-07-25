@@ -1,3 +1,6 @@
+	.DB RLE_REP | 8		;5c9e
+	.DB %00000000		;5c9f
+	; Characters stroke
 	; Character "0"
 	.DB RLE_LIT | 2		;5ca0
 	.DB %00111100		;5ca1

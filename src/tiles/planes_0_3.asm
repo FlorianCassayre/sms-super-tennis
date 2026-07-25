@@ -1,0 +1,145 @@
+	.DB RLE_REP | 14		;3a77
+	.DB %00000000		;3a78
+	.DB RLE_LIT | 2		;3a79
+	.DB %00011110		;3a7a
+	.DB %00000001		;3a7b
+	.DB RLE_REP | 7		;3a7c
+	.DB %00000000		;3a7d
+	.DB RLE_LIT | 1		;3a7e
+	.DB %10000000		;3a7f
+	.DB RLE_REP | 32		;3a80
+	.DB %00000000		;3a81
+	.DB RLE_LIT | 5		;3a82
+	.DB %00110000		;3a83
+	.DB %00001000		;3a84
+	.DB %00000100		;3a85
+	.DB %00000010		;3a86
+	.DB %00000001		;3a87
+	.DB RLE_REP | 8		;3a88
+	.DB %00000000		;3a89
+	.DB RLE_LIT | 1		;3a8a
+	.DB %10000000		;3a8b
+	.DB RLE_REP | 2		;3a8c
+	.DB %01000000		;3a8d
+	.DB RLE_REP | 8		;3a8e
+	.DB %00000000		;3a8f
+	.DB RLE_REP | 6		;3a90
+	.DB %00100000		;3a91
+	.DB RLE_LIT | 3		;3a92
+	.DB %00000000		;3a93
+	.DB %00100000		;3a94
+	.DB %00000000		;3a95
+	.DB RLE_REP | 3		;3a96
+	.DB %00000001		;3a97
+	.DB RLE_REP | 2		;3a98
+	.DB %00000101		;3a99
+	.DB RLE_LIT | 3		;3a9a
+	.DB %00000010		;3a9b
+	.DB %00000000		;3a9c
+	.DB %00000100		;3a9d
+	.DB RLE_REP | 5		;3a9e
+	.DB %00001000		;3a9f
+	.DB RLE_LIT | 2		;3aa0
+	.DB %00001111		;3aa1
+	.DB %10010000		;3aa2
+	.DB RLE_REP | 6		;3aa3
+	.DB %00000000		;3aa4
+	.DB RLE_LIT | 1		;3aa5
+	.DB %11111111		;3aa6
+	.DB RLE_REP | 2		;3aa7
+	.DB %00000000		;3aa8
+	.DB RLE_REP | 3		;3aa9
+	.DB %00101000		;3aaa
+	.DB RLE_REP | 2		;3aab
+	.DB %00001000		;3aac
+	.DB RLE_LIT | 3		;3aad
+	.DB %11001111		;3aae
+	.DB %00000000		;3aaf
+	.DB %01100000		;3ab0
+	.DB RLE_REP | 5		;3ab1
+	.DB %00100001		;3ab2
+	.DB RLE_LIT | 4		;3ab3
+	.DB %10100000		;3ab4
+	.DB %00010010		;3ab5
+	.DB %00100000		;3ab6
+	.DB %00000000		;3ab7
+	.DB RLE_REP | 2		;3ab8
+	.DB %00100000		;3ab9
+	.DB RLE_REP | 2		;3aba
+	.DB %01000000		;3abb
+	.DB RLE_LIT | 3		;3abc
+	.DB %10000000		;3abd
+	.DB %00000000		;3abe
+	.DB %00000001		;3abf
+	.DB RLE_REP | 7		;3ac0
+	.DB %00000000		;3ac1
+	.DB RLE_LIT | 7		;3ac2
+	.DB %00100000		;3ac3
+	.DB %11000000		;3ac4
+	.DB %01000000		;3ac5
+	.DB %01000000		;3ac6
+	.DB %00000000		;3ac7
+	.DB %00001000		;3ac8
+	.DB %00000111		;3ac9
+	.DB RLE_REP | 3		;3aca
+	.DB %00000000		;3acb
+	.DB RLE_LIT | 5		;3acc
+	.DB %00100000		;3acd
+	.DB %00010000		;3ace
+	.DB %00010000		;3acf
+	.DB %00100000		;3ad0
+	.DB %10000000		;3ad1
+	.DB RLE_REP | 3		;3ad2
+	.DB %00000000		;3ad3
+	.DB RLE_LIT | 14		;3ad4
+	.DB %00001000		;3ad5
+	.DB %00010000		;3ad6
+	.DB %00010000		;3ad7
+	.DB %00001000		;3ad8
+	.DB %00000011		;3ad9
+	.DB %00000000		;3ada
+	.DB %00001001		;3adb
+	.DB %00000110		;3adc
+	.DB %00000100		;3add
+	.DB %00000100		;3ade
+	.DB %00000000		;3adf
+	.DB %00100000		;3ae0
+	.DB %11000000		;3ae1
+	.DB %00000000		;3ae2
+	.DB RLE_REP | 3		;3ae3
+	.DB %00100000		;3ae4
+	.DB RLE_REP | 3		;3ae5
+	.DB %01000000		;3ae6
+	.DB RLE_REP | 21		;3ae7
+	.DB %00000000		;3ae8
+	.DB RLE_LIT | 2		;3ae9
+	.DB %00000101		;3aea
+	.DB %00000011		;3aeb
+	.DB RLE_REP | 5		;3aec
+	.DB %00000000		;3aed
+	.DB RLE_REP | 2		;3aee
+	.DB %10000000		;3aef
+	.DB RLE_REP | 112		;3af0
+	.DB %00000000		;3af1
+	.DB RLE_LIT | 11		;3af2
+	.DB %00010000		;3af3
+	.DB %00001100		;3af4
+	.DB %00000011		;3af5
+	.DB %00000000		;3af6
+	.DB %00001001		;3af7
+	.DB %00000110		;3af8
+	.DB %00000100		;3af9
+	.DB %00000100		;3afa
+	.DB %00000000		;3afb
+	.DB %00100000		;3afc
+	.DB %11000000		;3afd
+	.DB RLE_REP | 9		;3afe
+	.DB %00000000		;3aff
+	.DB RLE_LIT | 2		;3b00
+	.DB %00000001		;3b01
+	.DB %00000110		;3b02
+	.DB RLE_REP | 2		;3b03
+	.DB %00000100		;3b04
+	.DB RLE_REP | 4		;3b05
+	.DB %00000000		;3b06
+	.DB RLE_END		;3b07

@@ -1,0 +1,7 @@
+	.DB RLE_REP | 127		;5dd5
+	.DB %00000000		;5dd6
+	.DB RLE_REP | 127		;5dd7
+	.DB %00000000		;5dd8
+	.DB RLE_REP | 106		;5dd9
+	.DB %00000000		;5dda
+	.DB RLE_END		;5ddb
