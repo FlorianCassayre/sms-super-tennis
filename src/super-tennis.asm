@@ -511,12 +511,7 @@ sub_03adh:
 	adc hl,hl		; ed 6a ;03dc
 	jr nz,l03e3h		; 20 03 ;03de
 l03e0h:
-	.IFDEF _J
-		ld hl,0733ch		; 21 73 3c ;03e0
-	.ENDIF
-	.IFDEF _UE
-		ld hl,0733ch		; 21 3c 73 ;03e0
-	.ENDIF
+	ld hl,0733ch		; 21 3c 73 ;03e0
 l03e3h:
 	ld a,r		; ed 5f ;03e3
 	xor l			; ad ;03e5
@@ -5463,29 +5458,11 @@ l268fh:
 	and e			; a3 ;269f
 	ret			; c9 ;26a0
 l26a1h:
-	call sub_26abh		; cd ab 26 ;26a1
+	call sub_26ab_update		; cd ab 26 ;26a1
 	call sub_26cbh		; cd cb 26 ;26a4
 	call sub_27f5h		; cd f5 27 ;26a7
 	ret			; c9 ;26aa
-sub_26abh:
-	ld a,(0c000h)		; 3a 00 c0 ;26ab
-	bit 3,a		; cb 5f ;26ae
-	ret nz			; c0 ;26b0
-	ld a,(ix+001h)		; dd 7e 01 ;26b1
-	ld b,a			; 47 ;26b4
-	and 001h		; e6 01 ;26b5
-	ret nz			; c0 ;26b7
-	ld a,b			; 78 ;26b8
-	and 002h		; e6 02 ;26b9
-	jr nz,l26c2h		; 20 05 ;26bb
-	ld a,(0c1c0h)		; 3a c0 c1 ;26bd
-	jr l26c5h		; 18 03 ;26c0
-l26c2h:
-	ld a,(0c1c2h)		; 3a c2 c1 ;26c2
-l26c5h:
-	and 00fh		; e6 0f ;26c5
-	ld (ix+015h),a		; dd 77 15 ;26c7
-	ret			; c9 ;26ca
+	.INCLUDE "graphics/26ab_update.asm"
 sub_26cbh:
 	xor a			; af ;26cb
 	ex af,af'			; 08 ;26cc
@@ -9366,1645 +9343,1275 @@ data_planes_11_0:
 	.INCLUDE "tiles/planes_11_2.asm"
 	.INCLUDE "tiles/planes_11_3.asm"
 	.IFDEF _J
-		.DB $3a		;7144
-    	.DB $00		;7145
-    	.DB $c0		;7146
-    	.DB $cb		;7147
-    	.DB $5f		;7148
-    	.DB $c0		;7149
-    	.DB $cd		;714a
-    	.DB $83		;714b
-    	.DB $71		;714c
-    	.DB $cd		;714d
-    	.DB $67		;714e
-    	.DB $71		;714f
-    	.DB $dd		;7150
-    	.DB $21		;7151
-    	.DB $05		;7152
-    	.DB $de		;7153
-    	.DB $06		;7154
-    	.DB $07		;7155
-    	.DB $c5		;7156
-    	.DB $dd		;7157
-    	.DB $cb		;7158
-    	.DB $00		;7159
-    	.DB $7e		;715a
+		.DB $3a
+    	.DB $00
+    	.DB $c0
+    	.DB $cb
+    	.DB $5f
+    	.DB $c0
+    	.DB $cd
+    	.DB $83
+    	.DB $71
+    	.DB $cd
+    	.DB $67
+    	.DB $71
+    	.DB $dd
+    	.DB $21
+    	.DB $05
+    	.DB $de
+    	.DB $06
+    	.DB $07
+		push bc			; c5 ;797b
+		bit 7,(ix+000h)		; dd cb 00 7e ;797c
     	.DB $c4		;715b
     	.DB $ba		;715c
     	.DB $72		;715d
-    	.DB $11		;715e
-    	.DB $20		;715f
-    	.DB $00		;7160
-    	.DB $dd		;7161
-    	.DB $19		;7162
-    	.DB $c1		;7163
-    	.DB $10		;7164
-    	.DB $f0		;7165
-    	.DB $c9		;7166
-    	.DB $3a		;7167
-    	.DB $01		;7168
-    	.DB $de		;7169
-    	.DB $b7		;716a
-    	.DB $c8		;716b
-    	.DB $21		;716c
-    	.DB $02		;716d
-    	.DB $de		;716e
-    	.DB $35		;716f
-    	.DB $c0		;7170
-    	.DB $7f		;7171
-    	.DB $3d		;7172
-    	.DB $32		;7173
-    	.DB $0d		;7174
-    	.DB $de		;7175
-    	.DB $32		;7176
-    	.DB $2d		;7177
-    	.DB $de		;7178
-    	.DB $32		;7179
-    	.DB $4d		;717a
-    	.DB $de		;717b
-    	.DB $32		;717c
-    	.DB $01		;717d
-    	.DB $de		;717e
-    	.DB $3e		;717f
-    	.DB $18		;7180
-    	.DB $77		;7181
-    	.DB $c9		;7182
-    	.DB $3a		;7183
-    	.DB $00		;7184
-    	.DB $de		;7185
-    	.DB $cb		;7186
-    	.DB $7f		;7187
-    	.DB $ca		;7188
-    	.DB $a5		;7189
-    	.DB $75		;718a
-    	.DB $fe		;718b
-    	.DB $a2		;718c
-    	.DB $d2		;718d
-    	.DB $a5		;718e
-    	.DB $75		;718f
-    	.DB $d6		;7190
-    	.DB $81		;7191
-    	.DB $f8		;7192
-    	.DB $4f		;7193
-    	.DB $06		;7194
-    	.DB $00		;7195
-    	.DB $21		;7196
-    	.DB $aa		;7197
-    	.DB $71		;7198
-    	.DB $09		;7199
-    	.DB $09		;719a
-    	.DB $4e		;719b
-    	.DB $23		;719c
-    	.DB $46		;719d
-    	.DB $11		;719e
-    	.DB $37		;719f
-    	.DB $00		;71a0
-    	.DB $19		;71a1
-    	.DB $7e		;71a2
-    	.DB $23		;71a3
-    	.DB $66		;71a4
-    	.DB $6f		;71a5
-    	.DB $3a		;71a6
-    	.DB $03		;71a7
-    	.DB $de		;71a8
-    	.DB $e9		;71a9
-    	.DB $80		;71aa
-    	.DB $76		;71ab
-    	.DB $c8		;71ac
-    	.DB $77		;71ad
-    	.DB $14		;71ae
-    	.DB $78		;71af
-    	.DB $62		;71b0
-    	.DB $78		;71b1
-    	.DB $b7		;71b2
-    	.DB $78		;71b3
-    	.DB $08		;71b4
-    	.DB $79		;71b5
-    	.DB $d5		;71b6
-    	.DB $79		;71b7
-    	.DB $59		;71b8
-    	.DB $7a		;71b9
-    	.DB $3d		;71ba
-    	.DB $7e		;71bb
-    	.DB $c3		;71bc
-    	.DB $7a		;71bd
-    	.DB $e2		;71be
-    	.DB $7a		;71bf
-    	.DB $23		;71c0
-    	.DB $7b		;71c1
-    	.DB $59		;71c2
-    	.DB $7b		;71c3
-    	.DB $81		;71c4
-    	.DB $7b		;71c5
-    	.DB $9e		;71c6
-    	.DB $7b		;71c7
-    	.DB $bf		;71c8
-    	.DB $7b		;71c9
-    	.DB $e0		;71ca
-    	.DB $7b		;71cb
-    	.DB $13		;71cc
-    	.DB $7c		;71cd
-    	.DB $20		;71ce
-    	.DB $7c		;71cf
-    	.DB $2e		;71d0
-    	.DB $7c		;71d1
-    	.DB $2e		;71d2
-    	.DB $7c		;71d3
-    	.DB $57		;71d4
-    	.DB $7c		;71d5
-    	.DB $be		;71d6
-    	.DB $7c		;71d7
-    	.DB $6d		;71d8
-    	.DB $7d		;71d9
-    	.DB $b4		;71da
-    	.DB $7d		;71db
-    	.DB $00		;71dc
-    	.DB $7e		;71dd
-    	.DB $b4		;71de
-    	.DB $72		;71df
-    	.DB $0b		;71e0
-    	.DB $20		;71e1
-    	.DB $3c		;71e2
-    	.DB $72		;71e3
-    	.DB $3c		;71e4
-    	.DB $72		;71e5
-    	.DB $3c		;71e6
-    	.DB $72		;71e7
-    	.DB $3c		;71e8
-    	.DB $72		;71e9
-    	.DB $3c		;71ea
-    	.DB $72		;71eb
-    	.DB $3c		;71ec
-    	.DB $72		;71ed
-    	.DB $3c		;71ee
-    	.DB $72		;71ef
-    	.DB $3c		;71f0
-    	.DB $72		;71f1
-    	.DB $85		;71f2
-    	.DB $72		;71f3
-    	.DB $85		;71f4
-    	.DB $72		;71f5
-    	.DB $85		;71f6
-    	.DB $72		;71f7
-    	.DB $6c		;71f8
-    	.DB $72		;71f9
-    	.DB $4d		;71fa
-    	.DB $72		;71fb
-    	.DB $85		;71fc
-    	.DB $72		;71fd
-    	.DB $85		;71fe
-    	.DB $72		;71ff
-    	.DB $85		;7200
-    	.DB $72		;7201
-    	.DB $85		;7202
-    	.DB $72		;7203
-    	.DB $7d		;7204
-    	.DB $72		;7205
-    	.DB $7d		;7206
-    	.DB $72		;7207
-    	.DB $85		;7208
-    	.DB $72		;7209
-    	.DB $85		;720a
-    	.DB $72		;720b
-    	.DB $49		;720c
-    	.DB $72		;720d
-    	.DB $49		;720e
-    	.DB $72		;720f
-    	.DB $49		;7210
-    	.DB $72		;7211
-    	.DB $49		;7212
-    	.DB $72		;7213
-    	.DB $49		;7214
-    	.DB $72		;7215
-    	.DB $2a		;7216
-    	.DB $72		;7217
-    	.DB $1a		;7218
-    	.DB $72		;7219
-    	.DB $21		;721a
-    	.DB $01		;721b
-    	.DB $de		;721c
-    	.DB $71		;721d
-    	.DB $23		;721e
-    	.DB $70		;721f
-    	.DB $af		;7220
-    	.DB $32		;7221
-    	.DB $65		;7222
-    	.DB $de		;7223
-    	.DB $3d		;7224
-    	.DB $d3		;7225
-    	.DB $7f		;7226
-    	.DB $c3		;7227
-    	.DB $b4		;7228
-    	.DB $72		;7229
-    	.DB $af		;722a
-    	.DB $32		;722b
-    	.DB $25		;722c
-    	.DB $de		;722d
-    	.DB $32		;722e
-    	.DB $45		;722f
-    	.DB $de		;7230
-    	.DB $3e		;7231
-    	.DB $bf		;7232
-    	.DB $d3		;7233
-    	.DB $7f		;7234
-    	.DB $3e		;7235
-    	.DB $df		;7236
-    	.DB $d3		;7237
-    	.DB $7f		;7238
-    	.DB $c3		;7239
-    	.DB $b4		;723a
-    	.DB $72		;723b
-    	.DB $cd		;723c
-    	.DB $a5		;723d
-    	.DB $75		;723e
-    	.DB $3e		;723f
-    	.DB $80		;7240
-    	.DB $32		;7241
-    	.DB $03		;7242
-    	.DB $de		;7243
-    	.DB $11		;7244
-    	.DB $05		;7245
-    	.DB $de		;7246
-    	.DB $18		;7247
-    	.DB $48		;7248
-    	.DB $1e		;7249
-    	.DB $10		;724a
-    	.DB $18		;724b
-    	.DB $21		;724c
-    	.DB $b7		;724d
-    	.DB $20		;724e
-    	.DB $64		;724f
-    	.DB $32		;7250
-    	.DB $03		;7251
-    	.DB $de		;7252
-    	.DB $11		;7253
-    	.DB $85		;7254
-    	.DB $de		;7255
-    	.DB $3e		;7256
-    	.DB $df		;7257
-    	.DB $d3		;7258
-    	.DB $7f		;7259
-    	.DB $21		;725a
-    	.DB $05		;725b
-    	.DB $de		;725c
-    	.DB $cb		;725d
-    	.DB $d6		;725e
-    	.DB $21		;725f
-    	.DB $25		;7260
-    	.DB $de		;7261
-    	.DB $cb		;7262
-    	.DB $d6		;7263
-    	.DB $21		;7264
-    	.DB $45		;7265
-    	.DB $de		;7266
-    	.DB $cb		;7267
-    	.DB $d6		;7268
-    	.DB $c3		;7269
-    	.DB $91		;726a
-    	.DB $72		;726b
-    	.DB $1e		;726c
-    	.DB $08		;726d
-    	.DB $bb		;726e
-    	.DB $30		;726f
-    	.DB $43		;7270
-    	.DB $7b		;7271
-    	.DB $32		;7272
-    	.DB $03		;7273
-    	.DB $de		;7274
-    	.DB $cd		;7275
-    	.DB $b4		;7276
-    	.DB $75		;7277
-    	.DB $cd		;7278
-    	.DB $c0		;7279
-    	.DB $75		;727a
-    	.DB $18		;727b
-    	.DB $03		;727c
-    	.DB $b7		;727d
-    	.DB $20		;727e
-    	.DB $34		;727f
-    	.DB $11		;7280
-    	.DB $05		;7281
-    	.DB $de		;7282
-    	.DB $18		;7283
-    	.DB $0c		;7284
-    	.DB $b7		;7285
-    	.DB $20		;7286
-    	.DB $2c		;7287
-    	.DB $11		;7288
-    	.DB $25		;7289
-    	.DB $de		;728a
-    	.DB $cd		;728b
-    	.DB $b4		;728c
-    	.DB $75		;728d
-    	.DB $cd		;728e
-    	.DB $c0		;728f
-    	.DB $75		;7290
-    	.DB $60		;7291
-    	.DB $69		;7292
-    	.DB $46		;7293
-    	.DB $23		;7294
-    	.DB $c5		;7295
-    	.DB $01		;7296
-    	.DB $09		;7297
-    	.DB $00		;7298
-    	.DB $ed		;7299
-    	.DB $b0		;729a
-    	.DB $3e		;729b
-    	.DB $20		;729c
-    	.DB $12		;729d
-    	.DB $13		;729e
-    	.DB $3e		;729f
-    	.DB $01		;72a0
-    	.DB $12		;72a1
-    	.DB $13		;72a2
-    	.DB $af		;72a3
-    	.DB $12		;72a4
-    	.DB $13		;72a5
-    	.DB $12		;72a6
-    	.DB $13		;72a7
-    	.DB $12		;72a8
-    	.DB $e5		;72a9
-    	.DB $21		;72aa
-    	.DB $12		;72ab
-    	.DB $00		;72ac
-    	.DB $19		;72ad
-    	.DB $eb		;72ae
-    	.DB $e1		;72af
-    	.DB $13		;72b0
-    	.DB $c1		;72b1
-    	.DB $10		;72b2
-    	.DB $e1		;72b3
-    	.DB $3e		;72b4
-    	.DB $80		;72b5
-    	.DB $32		;72b6
-    	.DB $00		;72b7
-    	.DB $de		;72b8
-    	.DB $c9		;72b9
-    	.DB $dd		;72ba
-    	.DB $5e		;72bb
-    	.DB $0c		;72bc
-    	.DB $dd		;72bd
-    	.DB $56		;72be
-    	.DB $0d		;72bf
-    	.DB $13		;72c0
-    	.DB $dd		;72c1
-    	.DB $73		;72c2
-    	.DB $0c		;72c3
-    	.DB $dd		;72c4
-    	.DB $72		;72c5
-    	.DB $0d		;72c6
-    	.DB $dd		;72c7
-    	.DB $6e		;72c8
-    	.DB $0a		;72c9
-    	.DB $dd		;72ca
-    	.DB $66		;72cb
-    	.DB $0b		;72cc
-    	.DB $b7		;72cd
-    	.DB $ed		;72ce
-    	.DB $52		;72cf
-    	.DB $cc		;72d0
-    	.DB $20		;72d1
-    	.DB $74		;72d2
-    	.DB $dd		;72d3
-    	.DB $5e		;72d4
-    	.DB $10		;72d5
-    	.DB $dd		;72d6
-    	.DB $56		;72d7
-    	.DB $11		;72d8
-    	.DB $7b		;72d9
-    	.DB $b2		;72da
-    	.DB $20		;72db
-    	.DB $07		;72dc
-    	.DB $dd		;72dd
-    	.DB $36		;72de
-    	.DB $16		;72df
-    	.DB $0f		;72e0
-    	.DB $c3		;72e1
-    	.DB $92		;72e2
-    	.DB $73		;72e3
-    	.DB $dd		;72e4
-    	.DB $cb		;72e5
-    	.DB $00		;72e6
-    	.DB $6e		;72e7
-    	.DB $20		;72e8
-    	.DB $25		;72e9
-    	.DB $dd		;72ea
-    	.DB $7e		;72eb
-    	.DB $06		;72ec
-    	.DB $b7		;72ed
-    	.DB $20		;72ee
-    	.DB $14		;72ef
-    	.DB $dd		;72f0
-    	.DB $73		;72f1
-    	.DB $12		;72f2
-    	.DB $dd		;72f3
-    	.DB $72		;72f4
-    	.DB $13		;72f5
-    	.DB $c3		;72f6
-    	.DB $4b		;72f7
-    	.DB $73		;72f8
-    	.DB $3d		;72f9
-    	.DB $4f		;72fa
-    	.DB $06		;72fb
-    	.DB $00		;72fc
-    	.DB $09		;72fd
-    	.DB $09		;72fe
-    	.DB $7e		;72ff
-    	.DB $23		;7300
-    	.DB $66		;7301
-    	.DB $6f		;7302
-    	.DB $c9		;7303
-    	.DB $21		;7304
-    	.DB $ad		;7305
-    	.DB $7e		;7306
-    	.DB $cd		;7307
-    	.DB $f9		;7308
-    	.DB $72		;7309
-    	.DB $cd		;730a
-    	.DB $ea		;730b
-    	.DB $73		;730c
-    	.DB $18		;730d
-    	.DB $3c		;730e
-    	.DB $d5		;730f
-    	.DB $dd		;7310
-    	.DB $6e		;7311
-    	.DB $14		;7312
-    	.DB $dd		;7313
-    	.DB $66		;7314
-    	.DB $15		;7315
-    	.DB $b7		;7316
-    	.DB $ed		;7317
-    	.DB $52		;7318
-    	.DB $f5		;7319
-    	.DB $7d		;731a
-    	.DB $f2		;731b
-    	.DB $20		;731c
-    	.DB $73		;731d
-    	.DB $ed		;731e
-    	.DB $44		;731f
-    	.DB $67		;7320
-    	.DB $dd		;7321
-    	.DB $5e		;7322
-    	.DB $0c		;7323
-    	.DB $cd		;7324
-    	.DB $61		;7325
-    	.DB $76		;7326
-    	.DB $dd		;7327
-    	.DB $5e		;7328
-    	.DB $0a		;7329
-    	.DB $cd		;732a
-    	.DB $6d		;732b
-    	.DB $76		;732c
-    	.DB $5f		;732d
-    	.DB $16		;732e
-    	.DB $00		;732f
-    	.DB $f1		;7330
-    	.DB $7b		;7331
-    	.DB $f2		;7332
-    	.DB $3b		;7333
-    	.DB $73		;7334
-    	.DB $ed		;7335
-    	.DB $44		;7336
-    	.DB $28		;7337
-    	.DB $02		;7338
-    	.DB $15		;7339
-    	.DB $5f		;733a
-    	.DB $e1		;733b
-    	.DB $19		;733c
-    	.DB $eb		;733d
-    	.DB $dd		;733e
-    	.DB $73		;733f
-    	.DB $12		;7340
-    	.DB $dd		;7341
-    	.DB $72		;7342
-    	.DB $13		;7343
-    	.DB $dd		;7344
-    	.DB $7e		;7345
-    	.DB $06		;7346
-    	.DB $b7		;7347
-    	.DB $c2		;7348
-    	.DB $04		;7349
-    	.DB $73		;734a
-    	.DB $dd		;734b
-    	.DB $7e		;734c
-    	.DB $07		;734d
-    	.DB $b7		;734e
-    	.DB $20		;734f
-    	.DB $0b		;7350
-    	.DB $dd		;7351
-    	.DB $7e		;7352
-    	.DB $08		;7353
-    	.DB $2f		;7354
-    	.DB $e6		;7355
-    	.DB $0f		;7356
-    	.DB $dd		;7357
-    	.DB $77		;7358
-    	.DB $16		;7359
-    	.DB $18		;735a
-    	.DB $0b		;735b
-    	.DB $cb		;735c
-    	.DB $bf		;735d
-    	.DB $21		;735e
-    	.DB $5c		;735f
-    	.DB $7e		;7360
-    	.DB $cd		;7361
-    	.DB $f9		;7362
-    	.DB $72		;7363
-    	.DB $cd		;7364
-    	.DB $b0		;7365
-    	.DB $73		;7366
-    	.DB $dd		;7367
-    	.DB $cb		;7368
-    	.DB $00		;7369
-    	.DB $76		;736a
-    	.DB $20		;736b
-    	.DB $25		;736c
-    	.DB $dd		;736d
-    	.DB $7e		;736e
-    	.DB $01		;736f
-    	.DB $e6		;7370
-    	.DB $0f		;7371
-    	.DB $4f		;7372
-    	.DB $06		;7373
-    	.DB $00		;7374
-    	.DB $21		;7375
-    	.DB $a5		;7376
-    	.DB $73		;7377
-    	.DB $09		;7378
-    	.DB $4e		;7379
-    	.DB $dd		;737a
-    	.DB $7e		;737b
-    	.DB $12		;737c
-    	.DB $e6		;737d
-    	.DB $0f		;737e
-    	.DB $b1		;737f
-    	.DB $cd		;7380
-    	.DB $9d		;7381
-    	.DB $75		;7382
-    	.DB $dd		;7383
-    	.DB $7e		;7384
-    	.DB $12		;7385
-    	.DB $e6		;7386
-    	.DB $f0		;7387
-    	.DB $dd		;7388
-    	.DB $b6		;7389
-    	.DB $13		;738a
-    	.DB $0f		;738b
-    	.DB $0f		;738c
-    	.DB $0f		;738d
-    	.DB $0f		;738e
-    	.DB $cd		;738f
-    	.DB $9d		;7390
-    	.DB $75		;7391
-    	.DB $dd		;7392
-    	.DB $7e		;7393
-    	.DB $01		;7394
-    	.DB $e6		;7395
-    	.DB $0f		;7396
-    	.DB $4f		;7397
-    	.DB $06		;7398
-    	.DB $00		;7399
-    	.DB $21		;739a
-    	.DB $a9		;739b
-    	.DB $73		;739c
-    	.DB $09		;739d
-    	.DB $7e		;739e
-    	.DB $dd		;739f
-    	.DB $b6		;73a0
-    	.DB $16		;73a1
-    	.DB $c3		;73a2
-    	.DB $9d		;73a3
-    	.DB $75		;73a4
-    	.DB $80		;73a5
-    	.DB $a0		;73a6
-    	.DB $c0		;73a7
-    	.DB $c0		;73a8
-    	.DB $90		;73a9
-    	.DB $b0		;73aa
-    	.DB $d0		;73ab
-    	.DB $f0		;73ac
-    	.DB $dd		;73ad
-    	.DB $77		;73ae
-    	.DB $0e		;73af
-    	.DB $e5		;73b0
-    	.DB $dd		;73b1
-    	.DB $7e		;73b2
-    	.DB $0e		;73b3
-    	.DB $cb		;73b4
-    	.DB $3f		;73b5
-    	.DB $f5		;73b6
-    	.DB $4f		;73b7
-    	.DB $06		;73b8
-    	.DB $00		;73b9
-    	.DB $09		;73ba
-    	.DB $f1		;73bb
-    	.DB $7e		;73bc
-    	.DB $e1		;73bd
-    	.DB $38		;73be
-    	.DB $14		;73bf
-    	.DB $0f		;73c0
-    	.DB $0f		;73c1
-    	.DB $0f		;73c2
-    	.DB $0f		;73c3
-    	.DB $b7		;73c4
-    	.DB $28		;73c5
-    	.DB $e6		;73c6
-    	.DB $fe		;73c7
-    	.DB $10		;73c8
-    	.DB $20		;73c9
-    	.DB $05		;73ca
-    	.DB $dd		;73cb
-    	.DB $35		;73cc
-    	.DB $0e		;73cd
-    	.DB $18		;73ce
-    	.DB $e0		;73cf
-    	.DB $fe		;73d0
-    	.DB $20		;73d1
-    	.DB $28		;73d2
-    	.DB $0b		;73d3
-    	.DB $dd		;73d4
-    	.DB $34		;73d5
-    	.DB $0e		;73d6
-    	.DB $f6		;73d7
-    	.DB $f0		;73d8
-    	.DB $dd		;73d9
-    	.DB $86		;73da
-    	.DB $08		;73db
-    	.DB $3c		;73dc
-    	.DB $38		;73dd
-    	.DB $01		;73de
-    	.DB $af		;73df
-    	.DB $2f		;73e0
-    	.DB $e6		;73e1
-    	.DB $0f		;73e2
-    	.DB $dd		;73e3
-    	.DB $77		;73e4
-    	.DB $16		;73e5
-    	.DB $c9		;73e6
-    	.DB $dd		;73e7
-    	.DB $77		;73e8
-    	.DB $0f		;73e9
-    	.DB $e5		;73ea
-    	.DB $dd		;73eb
-    	.DB $7e		;73ec
-    	.DB $0f		;73ed
-    	.DB $cb		;73ee
-    	.DB $3f		;73ef
-    	.DB $f5		;73f0
-    	.DB $4f		;73f1
-    	.DB $06		;73f2
-    	.DB $00		;73f3
-    	.DB $09		;73f4
-    	.DB $f1		;73f5
-    	.DB $7e		;73f6
-    	.DB $e1		;73f7
-    	.DB $38		;73f8
-    	.DB $14		;73f9
-    	.DB $0f		;73fa
-    	.DB $0f		;73fb
-    	.DB $0f		;73fc
-    	.DB $0f		;73fd
-    	.DB $b7		;73fe
-    	.DB $ca		;73ff
-    	.DB $e7		;7400
-    	.DB $73		;7401
-    	.DB $fe		;7402
-    	.DB $10		;7403
-    	.DB $20		;7404
-    	.DB $08		;7405
-    	.DB $dd		;7406
-    	.DB $35		;7407
-    	.DB $0f		;7408
-    	.DB $18		;7409
-    	.DB $df		;740a
-    	.DB $fe		;740b
-    	.DB $20		;740c
-    	.DB $c8		;740d
-    	.DB $dd		;740e
-    	.DB $34		;740f
-    	.DB $0f		;7410
-    	.DB $2f		;7411
-    	.DB $e6		;7412
-    	.DB $0f		;7413
-    	.DB $6f		;7414
-    	.DB $26		;7415
-    	.DB $00		;7416
-    	.DB $eb		;7417
-    	.DB $19		;7418
-    	.DB $dd		;7419
-    	.DB $75		;741a
-    	.DB $12		;741b
-    	.DB $dd		;741c
-    	.DB $74		;741d
-    	.DB $13		;741e
-    	.DB $c9		;741f
-    	.DB $dd		;7420
-    	.DB $5e		;7421
-    	.DB $03		;7422
-    	.DB $dd		;7423
-    	.DB $56		;7424
-    	.DB $04		;7425
-    	.DB $1a		;7426
-    	.DB $13		;7427
-    	.DB $fe		;7428
-    	.DB $e0		;7429
-    	.DB $d2		;742a
-    	.DB $b4		;742b
-    	.DB $74		;742c
-    	.DB $dd		;742d
-    	.DB $cb		;742e
-    	.DB $00		;742f
-    	.DB $5e		;7430
-    	.DB $20		;7431
-    	.DB $60		;7432
-    	.DB $b7		;7433
-    	.DB $f2		;7434
-    	.DB $6f		;7435
-    	.DB $74		;7436
-    	.DB $d6		;7437
-    	.DB $80		;7438
-    	.DB $28		;7439
-    	.DB $03		;743a
-    	.DB $dd		;743b
-    	.DB $86		;743c
-    	.DB $05		;743d
-    	.DB $21		;743e
-    	.DB $cf		;743f
-    	.DB $75		;7440
-    	.DB $4f		;7441
-    	.DB $06		;7442
-    	.DB $00		;7443
-    	.DB $09		;7444
-    	.DB $09		;7445
-    	.DB $7e		;7446
-    	.DB $dd		;7447
-    	.DB $77		;7448
-    	.DB $10		;7449
-    	.DB $23		;744a
-    	.DB $7e		;744b
-    	.DB $dd		;744c
-    	.DB $77		;744d
-    	.DB $11		;744e
-    	.DB $dd		;744f
-    	.DB $cb		;7450
-    	.DB $00		;7451
-    	.DB $6e		;7452
-    	.DB $28		;7453
-    	.DB $58		;7454
-    	.DB $1a		;7455
-    	.DB $13		;7456
-    	.DB $d6		;7457
-    	.DB $80		;7458
-    	.DB $dd		;7459
-    	.DB $86		;745a
-    	.DB $05		;745b
-    	.DB $21		;745c
-    	.DB $cf		;745d
-    	.DB $75		;745e
-    	.DB $4f		;745f
-    	.DB $06		;7460
-    	.DB $00		;7461
-    	.DB $09		;7462
-    	.DB $09		;7463
-    	.DB $7e		;7464
-    	.DB $dd		;7465
-    	.DB $77		;7466
-    	.DB $14		;7467
-    	.DB $23		;7468
-    	.DB $7e		;7469
-    	.DB $dd		;746a
-    	.DB $77		;746b
-    	.DB $15		;746c
-    	.DB $1a		;746d
-    	.DB $13		;746e
-    	.DB $d5		;746f
-    	.DB $67		;7470
-    	.DB $dd		;7471
-    	.DB $5e		;7472
-    	.DB $02		;7473
-    	.DB $cd		;7474
-    	.DB $61		;7475
-    	.DB $76		;7476
-    	.DB $d1		;7477
-    	.DB $dd		;7478
-    	.DB $75		;7479
-    	.DB $0a		;747a
-    	.DB $dd		;747b
-    	.DB $74		;747c
-    	.DB $0b		;747d
-    	.DB $af		;747e
-    	.DB $dd		;747f
-    	.DB $77		;7480
-    	.DB $0e		;7481
-    	.DB $dd		;7482
-    	.DB $77		;7483
-    	.DB $0f		;7484
-    	.DB $dd		;7485
-    	.DB $73		;7486
-    	.DB $03		;7487
-    	.DB $dd		;7488
-    	.DB $72		;7489
-    	.DB $04		;748a
-    	.DB $af		;748b
-    	.DB $dd		;748c
-    	.DB $77		;748d
-    	.DB $0c		;748e
-    	.DB $dd		;748f
-    	.DB $77		;7490
-    	.DB $0d		;7491
-    	.DB $c9		;7492
-    	.DB $dd		;7493
-    	.DB $77		;7494
-    	.DB $11		;7495
-    	.DB $1a		;7496
-    	.DB $13		;7497
-    	.DB $dd		;7498
-    	.DB $77		;7499
-    	.DB $10		;749a
-    	.DB $dd		;749b
-    	.DB $cb		;749c
-    	.DB $00		;749d
-    	.DB $6e		;749e
-    	.DB $28		;749f
-    	.DB $cc		;74a0
-    	.DB $1a		;74a1
-    	.DB $13		;74a2
-    	.DB $dd		;74a3
-    	.DB $77		;74a4
-    	.DB $15		;74a5
-    	.DB $1a		;74a6
-    	.DB $13		;74a7
-    	.DB $dd		;74a8
-    	.DB $77		;74a9
-    	.DB $14		;74aa
-    	.DB $18		;74ab
-    	.DB $c0		;74ac
-    	.DB $1a		;74ad
-    	.DB $b7		;74ae
-    	.DB $f2		;74af
-    	.DB $6e		;74b0
-    	.DB $74		;74b1
-    	.DB $18		;74b2
-    	.DB $ca		;74b3
-    	.DB $21		;74b4
-    	.DB $c7		;74b5
-    	.DB $74		;74b6
-    	.DB $e5		;74b7
-    	.DB $e6		;74b8
-    	.DB $1f		;74b9
-    	.DB $21		;74ba
-    	.DB $cb		;74bb
-    	.DB $74		;74bc
-    	.DB $4f		;74bd
-    	.DB $06		;74be
-    	.DB $00		;74bf
-    	.DB $09		;74c0
-    	.DB $09		;74c1
-    	.DB $7e		;74c2
-    	.DB $23		;74c3
-    	.DB $66		;74c4
-    	.DB $6f		;74c5
-    	.DB $e9		;74c6
-    	.DB $13		;74c7
-    	.DB $c3		;74c8
-    	.DB $26		;74c9
-    	.DB $74		;74ca
-    	.DB $fb		;74cb
-    	.DB $74		;74cc
-    	.DB $00		;74cd
-    	.DB $75		;74ce
-    	.DB $3b		;74cf
-    	.DB $75		;74d0
-    	.DB $05		;74d1
-    	.DB $75		;74d2
-    	.DB $1c		;74d3
-    	.DB $75		;74d4
-    	.DB $26		;74d5
-    	.DB $75		;74d6
-    	.DB $eb		;74d7
-    	.DB $74		;74d8
-    	.DB $2c		;74d9
-    	.DB $75		;74da
-    	.DB $2c		;74db
-    	.DB $75		;74dc
-    	.DB $2c		;74dd
-    	.DB $75		;74de
-    	.DB $48		;74df
-    	.DB $75		;74e0
-    	.DB $63		;74e1
-    	.DB $75		;74e2
-    	.DB $76		;74e3
-    	.DB $75		;74e4
-    	.DB $21		;74e5
-    	.DB $75		;74e6
-    	.DB $f3		;74e7
-    	.DB $74		;74e8
-    	.DB $2c		;74e9
-    	.DB $75		;74ea
-    	.DB $3e		;74eb
-    	.DB $80		;74ec
-    	.DB $32		;74ed
-    	.DB $04		;74ee
-    	.DB $de		;74ef
-    	.DB $c3		;74f0
-    	.DB $3b		;74f1
-    	.DB $75		;74f2
-    	.DB $1a		;74f3
-    	.DB $dd		;74f4
-    	.DB $86		;74f5
-    	.DB $05		;74f6
-    	.DB $dd		;74f7
-    	.DB $77		;74f8
-    	.DB $05		;74f9
-    	.DB $c9		;74fa
-    	.DB $1a		;74fb
-    	.DB $dd		;74fc
-    	.DB $77		;74fd
-    	.DB $02		;74fe
-    	.DB $c9		;74ff
-    	.DB $1a		;7500
-    	.DB $dd		;7501
-    	.DB $77		;7502
-    	.DB $08		;7503
-    	.DB $c9		;7504
-    	.DB $1a		;7505
-    	.DB $f6		;7506
-    	.DB $e0		;7507
-    	.DB $f5		;7508
-    	.DB $cd		;7509
-    	.DB $9d		;750a
-    	.DB $75		;750b
-    	.DB $f1		;750c
-    	.DB $f6		;750d
-    	.DB $fc		;750e
-    	.DB $3c		;750f
-    	.DB $20		;7510
-    	.DB $05		;7511
-    	.DB $dd		;7512
-    	.DB $cb		;7513
-    	.DB $00		;7514
-    	.DB $b6		;7515
-    	.DB $c9		;7516
-    	.DB $dd		;7517
-    	.DB $cb		;7518
-    	.DB $00		;7519
-    	.DB $f6		;751a
-    	.DB $c9		;751b
-    	.DB $1a		;751c
-    	.DB $dd		;751d
-    	.DB $77		;751e
-    	.DB $07		;751f
-    	.DB $c9		;7520
-    	.DB $1a		;7521
-    	.DB $dd		;7522
-    	.DB $77		;7523
-    	.DB $06		;7524
-    	.DB $c9		;7525
-    	.DB $eb		;7526
-    	.DB $5e		;7527
-    	.DB $23		;7528
-    	.DB $56		;7529
-    	.DB $1b		;752a
-    	.DB $c9		;752b
-    	.DB $21		;752c
-    	.DB $05		;752d
-    	.DB $de		;752e
-    	.DB $cb		;752f
-    	.DB $96		;7530
-    	.DB $21		;7531
-    	.DB $25		;7532
-    	.DB $de		;7533
-    	.DB $cb		;7534
-    	.DB $96		;7535
-    	.DB $21		;7536
-    	.DB $45		;7537
-    	.DB $de		;7538
-    	.DB $cb		;7539
-    	.DB $96		;753a
-    	.DB $af		;753b
-    	.DB $32		;753c
-    	.DB $03		;753d
-    	.DB $de		;753e
-    	.DB $dd		;753f
-    	.DB $77		;7540
-    	.DB $00		;7541
-    	.DB $cd		;7542
-    	.DB $8e		;7543
-    	.DB $75		;7544
-    	.DB $e1		;7545
-    	.DB $e1		;7546
-    	.DB $c9		;7547
-    	.DB $1a		;7548
-    	.DB $4f		;7549
-    	.DB $13		;754a
-    	.DB $1a		;754b
-    	.DB $47		;754c
-    	.DB $c5		;754d
-    	.DB $dd		;754e
-    	.DB $e5		;754f
-    	.DB $e1		;7550
-    	.DB $dd		;7551
-    	.DB $35		;7552
-    	.DB $09		;7553
-    	.DB $dd		;7554
-    	.DB $4e		;7555
-    	.DB $09		;7556
-    	.DB $dd		;7557
-    	.DB $35		;7558
-    	.DB $09		;7559
-    	.DB $06		;755a
-    	.DB $00		;755b
-    	.DB $09		;755c
-    	.DB $72		;755d
-    	.DB $2b		;755e
-    	.DB $73		;755f
-    	.DB $d1		;7560
-    	.DB $1b		;7561
-    	.DB $c9		;7562
-    	.DB $dd		;7563
-    	.DB $e5		;7564
-    	.DB $e1		;7565
-    	.DB $dd		;7566
-    	.DB $4e		;7567
-    	.DB $09		;7568
-    	.DB $06		;7569
-    	.DB $00		;756a
-    	.DB $09		;756b
-    	.DB $5e		;756c
-    	.DB $23		;756d
-    	.DB $56		;756e
-    	.DB $dd		;756f
-    	.DB $34		;7570
-    	.DB $09		;7571
-    	.DB $dd		;7572
-    	.DB $34		;7573
-    	.DB $09		;7574
-    	.DB $c9		;7575
-    	.DB $1a		;7576
-    	.DB $13		;7577
-    	.DB $c6		;7578
-    	.DB $17		;7579
-    	.DB $4f		;757a
-    	.DB $06		;757b
-    	.DB $00		;757c
-    	.DB $dd		;757d
-    	.DB $e5		;757e
-    	.DB $e1		;757f
-    	.DB $09		;7580
-    	.DB $7e		;7581
-    	.DB $b7		;7582
-    	.DB $20		;7583
-    	.DB $02		;7584
-    	.DB $1a		;7585
-    	.DB $77		;7586
-    	.DB $13		;7587
-    	.DB $35		;7588
-    	.DB $c2		;7589
-    	.DB $26		;758a
-    	.DB $75		;758b
-    	.DB $13		;758c
-    	.DB $c9		;758d
-    	.DB $dd		;758e
-    	.DB $7e		;758f
-    	.DB $01		;7590
-    	.DB $e6		;7591
-    	.DB $0f		;7592
-    	.DB $4f		;7593
-    	.DB $06		;7594
-    	.DB $00		;7595
-    	.DB $21		;7596
-    	.DB $a9		;7597
-    	.DB $73		;7598
-    	.DB $09		;7599
-    	.DB $7e		;759a
-    	.DB $f6		;759b
-    	.DB $0f		;759c
-    	.DB $dd		;759d
-    	.DB $cb		;759e
-    	.DB $00		;759f
-    	.DB $56		;75a0
-    	.DB $c0		;75a1
-    	.DB $d3		;75a2
-    	.DB $7f		;75a3
-    	.DB $c9		;75a4
-    	.DB $d9		;75a5
-    	.DB $21		;75a6
-    	.DB $01		;75a7
-    	.DB $de		;75a8
-    	.DB $11		;75a9
-    	.DB $02		;75aa
-    	.DB $de		;75ab
-    	.DB $01		;75ac
-    	.DB $df		;75ad
-    	.DB $00		;75ae
-    	.DB $36		;75af
-    	.DB $00		;75b0
-    	.DB $ed		;75b1
-    	.DB $b0		;75b2
-    	.DB $d9		;75b3
-    sub_audio_silence:
-    	.DB $d9		;75b4
-    	.DB $21		;75b5
-    	.DB $cb		;75b6
-    	.DB $75		;75b7
-    	.DB $0e		;75b8
-    	.DB $7f		;75b9
-    	.DB $06		;75ba
-    	.DB $04		;75bb
-    	.DB $ed		;75bc
-    	.DB $b3		;75bd
-    	.DB $d9		;75be
-    	.DB $c9		;75bf
-    	.DB $af		;75c0
-    	.DB $32		;75c1
-    	.DB $85		;75c2
-    	.DB $de		;75c3
-    	.DB $32		;75c4
-    	.DB $a5		;75c5
-    	.DB $de		;75c6
-    	.DB $32		;75c7
-    	.DB $c5		;75c8
-    	.DB $de		;75c9
-    	.DB $c9		;75ca
-    	.DB $9f		;75cb
-    	.DB $bf		;75cc
-    	.DB $df		;75cd
-    	.DB $ff		;75ce
-    	.DB $00		;75cf
-    	.DB $00		;75d0
-    	.DB $ff		;75d1
-    	.DB $03		;75d2
-    	.DB $c7		;75d3
-    	.DB $03		;75d4
-    	.DB $90		;75d5
-    	.DB $03		;75d6
-    	.DB $5d		;75d7
-    	.DB $03		;75d8
-    	.DB $2d		;75d9
-    	.DB $03		;75da
-    	.DB $ff		;75db
-    	.DB $02		;75dc
-    	.DB $d4		;75dd
-    	.DB $02		;75de
-    	.DB $ab		;75df
-    	.DB $02		;75e0
-    	.DB $85		;75e1
-    	.DB $02		;75e2
-    	.DB $61		;75e3
-    	.DB $02		;75e4
-    	.DB $3f		;75e5
-    	.DB $02		;75e6
-    	.DB $1e		;75e7
-    	.DB $02		;75e8
-    	.DB $00		;75e9
-    	.DB $02		;75ea
-    	.DB $e3		;75eb
-    	.DB $01		;75ec
-    	.DB $c8		;75ed
-    	.DB $01		;75ee
-    	.DB $af		;75ef
-    	.DB $01		;75f0
-    	.DB $96		;75f1
-    	.DB $01		;75f2
-    	.DB $80		;75f3
-    	.DB $01		;75f4
-    	.DB $6a		;75f5
-    	.DB $01		;75f6
-    	.DB $56		;75f7
-    	.DB $01		;75f8
-    	.DB $43		;75f9
-    	.DB $01		;75fa
-    	.DB $30		;75fb
-    	.DB $01		;75fc
-    	.DB $1f		;75fd
-    	.DB $01		;75fe
-    	.DB $0f		;75ff
-    	.DB $01		;7600
-    	.DB $00		;7601
-    	.DB $01		;7602
-    	.DB $f2		;7603
-    	.DB $00		;7604
-    	.DB $e4		;7605
-    	.DB $00		;7606
-    	.DB $d7		;7607
-    	.DB $00		;7608
-    	.DB $cb		;7609
-    	.DB $00		;760a
-    	.DB $c0		;760b
-    	.DB $00		;760c
-    	.DB $b5		;760d
-    	.DB $00		;760e
-    	.DB $ab		;760f
-    	.DB $00		;7610
-    	.DB $a1		;7611
-    	.DB $00		;7612
-    	.DB $98		;7613
-    	.DB $00		;7614
-    	.DB $90		;7615
-    	.DB $00		;7616
-    	.DB $88		;7617
-    	.DB $00		;7618
-    	.DB $80		;7619
-    	.DB $00		;761a
-    	.DB $79		;761b
-    	.DB $00		;761c
-    	.DB $72		;761d
-    	.DB $00		;761e
-    	.DB $6c		;761f
-    	.DB $00		;7620
-    	.DB $66		;7621
-    	.DB $00		;7622
-    	.DB $60		;7623
-    	.DB $00		;7624
-    	.DB $5b		;7625
-    	.DB $00		;7626
-    	.DB $55		;7627
-    	.DB $00		;7628
-    	.DB $51		;7629
-    	.DB $00		;762a
-    	.DB $4c		;762b
-    	.DB $00		;762c
-    	.DB $48		;762d
-    	.DB $00		;762e
-    	.DB $44		;762f
-    	.DB $00		;7630
-    	.DB $40		;7631
-    	.DB $00		;7632
-    	.DB $3c		;7633
-    	.DB $00		;7634
-    	.DB $39		;7635
-    	.DB $00		;7636
-    	.DB $36		;7637
-    	.DB $00		;7638
-    	.DB $33		;7639
-    	.DB $00		;763a
-    	.DB $30		;763b
-    	.DB $00		;763c
-    	.DB $2d		;763d
-    	.DB $00		;763e
-    	.DB $2b		;763f
-    	.DB $00		;7640
-    	.DB $28		;7641
-    	.DB $00		;7642
-    	.DB $26		;7643
-    	.DB $00		;7644
-    	.DB $24		;7645
-    	.DB $00		;7646
-    	.DB $22		;7647
-    	.DB $00		;7648
-    	.DB $20		;7649
-    	.DB $00		;764a
-    	.DB $1e		;764b
-    	.DB $00		;764c
-    	.DB $1c		;764d
-    	.DB $00		;764e
-    	.DB $1b		;764f
-    	.DB $00		;7650
-    	.DB $19		;7651
-    	.DB $00		;7652
-    	.DB $18		;7653
-    	.DB $00		;7654
-    	.DB $16		;7655
-    	.DB $00		;7656
-    	.DB $15		;7657
-    	.DB $00		;7658
-    	.DB $14		;7659
-    	.DB $00		;765a
-    	.DB $13		;765b
-    	.DB $00		;765c
-    	.DB $12		;765d
-    	.DB $00		;765e
-    	.DB $11		;765f
-    	.DB $00		;7660
-    	.DB $16		;7661
-    	.DB $00		;7662
-    	.DB $6a		;7663
-    	.DB $06		;7664
-    	.DB $08		;7665
-    	.DB $29		;7666
-    	.DB $30		;7667
-    	.DB $01		;7668
-    	.DB $19		;7669
-    	.DB $10		;766a
-    	.DB $fa		;766b
-    	.DB $c9		;766c
-    	.DB $06		;766d
-    	.DB $08		;766e
-    	.DB $ed		;766f
-    	.DB $6a		;7670
-    	.DB $7c		;7671
-    	.DB $38		;7672
-    	.DB $03		;7673
-    	.DB $bb		;7674
-    	.DB $38		;7675
-    	.DB $03		;7676
-    	.DB $93		;7677
-    	.DB $67		;7678
-    	.DB $b7		;7679
-    	.DB $10		;767a
-    	.DB $f3		;767b
-    	.DB $7d		;767c
-    	.DB $17		;767d
-    	.DB $2f		;767e
-    	.DB $c9		;767f
-    	.DB $04		;7680
-    	.DB $80		;7681
-    	.DB $20		;7682
-    	.DB $05		;7683
-    	.DB $a5		;7684
-    	.DB $76		;7685
+		ld de,l0020h		; 11 20 00 ;7983
+		add ix,de		; dd 19 ;7986
+		pop bc			; c1 ;7988
+		.DB $10 $f0
+		ret			; c9 ;798b
+	sub_798ch:
+		ld a,(0de01h)		; 3a 01 de ;798c
+		or a			; b7 ;798f
+		ret z			; c8 ;7990
+		ld hl,0de02h		; 21 02 de ;7991
+		dec (hl)			; 35 ;7994
+		ret nz			; c0 ;7995
+		ld a,a			; 7f ;7996
+		dec a			; 3d ;7997
+		ld (0de0dh),a		; 32 0d de ;7998
+		ld (0de2dh),a		; 32 2d de ;799b
+		ld (0de4dh),a		; 32 4d de ;799e
+		ld (0de01h),a		; 32 01 de ;79a1
+		ld a,018h		; 3e 18 ;79a4
+		ld (hl),a			; 77 ;79a6
+		ret			; c9 ;79a7
+    	.DB $3a
+    	.DB $00
+    	.DB $de
+    	.DB $cb
+    	.DB $7f
+    	.DB $ca
+    	.DB $a5
+    	.DB $75
+    	.DB $fe
+    	.DB $a2
+    	.DB $d2
+    	.DB $a5
+    	.DB $75
+    	.DB $d6
+    	.DB $81
+    	.DB $f8
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $21
+    	.DB $aa
+    	.DB $71
+    	.DB $09
+    	.DB $09
+    	.DB $4e
+    	.DB $23
+    	.DB $46
+    	.DB $11
+    	.DB $37
+    	.DB $00
+    	.DB $19
+    	.DB $7e
+    	.DB $23
+    	.DB $66
+    	.DB $6f
+    	.DB $3a
+    	.DB $03
+    	.DB $de
+    	.DB $e9
+    	.DB $80
+    	.DB $76
+    	.DB $c8
+    	.DB $77
+    	.DB $14
+    	.DB $78
+    	.DB $62
+    	.DB $78
+    	.DB $b7
+    	.DB $78
+    	.DB $08
+    	.DB $79
+    	.DB $d5
+    	.DB $79
+    	.DB $59
+    	.DB $7a
+    	.DB $3d
+    	.DB $7e
+    	.DB $c3
+    	.DB $7a
+    	.DB $e2
+    	.DB $7a
+    	.DB $23
+    	.DB $7b
+    	.DB $59
+    	.DB $7b
+    	.DB $81
+    	.DB $7b
+    	.DB $9e
+    	.DB $7b
+    	.DB $bf
+    	.DB $7b
+    	.DB $e0
+    	.DB $7b
+    	.DB $13
+    	.DB $7c
+    	.DB $20
+    	.DB $7c
+    	.DB $2e
+    	.DB $7c
+    	.DB $2e
+    	.DB $7c
+    	.DB $57
+    	.DB $7c
+    	.DB $be
+    	.DB $7c
+    	.DB $6d
+    	.DB $7d
+    	.DB $b4
+    	.DB $7d
+    	.DB $00
+    	.DB $7e
+    	.DB $b4
+    	.DB $72
+    	.DB $0b
+    	.DB $20
+    	.DB $3c
+    	.DB $72
+    	.DB $3c
+    	.DB $72
+    	.DB $3c
+    	.DB $72
+    	.DB $3c
+    	.DB $72
+    	.DB $3c
+    	.DB $72
+    	.DB $3c
+    	.DB $72
+    	.DB $3c
+    	.DB $72
+    	.DB $3c
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $6c
+    	.DB $72
+    	.DB $4d
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $7d
+    	.DB $72
+    	.DB $7d
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $85
+    	.DB $72
+    	.DB $49
+    	.DB $72
+    	.DB $49
+    	.DB $72
+    	.DB $49
+    	.DB $72
+    	.DB $49
+    	.DB $72
+    	.DB $49
+    	.DB $72
+    	.DB $2a
+    	.DB $72
+    	.DB $1a
+    	.DB $72
+    	.DB $21
+    	.DB $01
+    	.DB $de
+    	.DB $71
+    	.DB $23
+    	.DB $70
+    	.DB $af
+    	.DB $32
+    	.DB $65
+    	.DB $de
+    	.DB $3d
+    	.DB $d3
+    	.DB $7f
+    	.DB $c3
+    	.DB $b4
+    	.DB $72
+    	.DB $af
+    	.DB $32
+    	.DB $25
+    	.DB $de
+    	.DB $32
+    	.DB $45
+    	.DB $de
+    	.DB $3e
+    	.DB $bf
+    	.DB $d3
+    	.DB $7f
+    	.DB $3e
+    	.DB $df
+    	.DB $d3
+    	.DB $7f
+    	.DB $c3
+    	.DB $b4
+    	.DB $72
+    	.DB $cd
+    	.DB $a5
+    	.DB $75
+    	.DB $3e
+    	.DB $80
+    	.DB $32
+    	.DB $03
+    	.DB $de
+    	.DB $11
+    	.DB $05
+    	.DB $de
+    	.DB $18
+    	.DB $48
+    	.DB $1e
+    	.DB $10
+    	.DB $18
+    	.DB $21
+    	.DB $b7
+    	.DB $20
+    	.DB $64
+    	.DB $32
+    	.DB $03
+    	.DB $de
+    	.DB $11
+    	.DB $85
+    	.DB $de
+    	.DB $3e
+    	.DB $df
+    	.DB $d3
+    	.DB $7f
+    	.DB $21
+    	.DB $05
+    	.DB $de
+    	.DB $cb
+    	.DB $d6
+    	.DB $21
+    	.DB $25
+    	.DB $de
+    	.DB $cb
+    	.DB $d6
+    	.DB $21
+    	.DB $45
+    	.DB $de
+    	.DB $cb
+    	.DB $d6
+    	.DB $c3
+    	.DB $91
+    	.DB $72
+    	.DB $1e
+    	.DB $08
+    	.DB $bb
+    	.DB $30
+    	.DB $43
+    	.DB $7b
+    	.DB $32
+    	.DB $03
+    	.DB $de
+    	.DB $cd
+    	.DB $b4
+    	.DB $75
+    	.DB $cd
+    	.DB $c0
+    	.DB $75
+    	.DB $18
+    	.DB $03
+    	.DB $b7
+    	.DB $20
+    	.DB $34
+    	.DB $11
+    	.DB $05
+    	.DB $de
+    	.DB $18
+    	.DB $0c
+    	.DB $b7
+    	.DB $20
+    	.DB $2c
+    	.DB $11
+    	.DB $25
+    	.DB $de
+    	.DB $cd
+    	.DB $b4
+    	.DB $75
+    	.DB $cd
+    	.DB $c0
+    	.DB $75
+    	.DB $60
+    	.DB $69
+    	.DB $46
+    	.DB $23
+    	.DB $c5
+    	.DB $01
+    	.DB $09
+    	.DB $00
+    	.DB $ed
+    	.DB $b0
+    	.DB $3e
+    	.DB $20
+    	.DB $12
+    	.DB $13
+    	.DB $3e
+    	.DB $01
+    	.DB $12
+    	.DB $13
+    	.DB $af
+    	.DB $12
+    	.DB $13
+    	.DB $12
+    	.DB $13
+    	.DB $12
+    	.DB $e5
+    	.DB $21
+    	.DB $12
+    	.DB $00
+    	.DB $19
+    	.DB $eb
+    	.DB $e1
+    	.DB $13
+    	.DB $c1
+    	.DB $10
+    	.DB $e1
+    	.DB $3e
+    	.DB $80
+    	.DB $32
+    	.DB $00
+    	.DB $de
+    	.DB $c9
+    	.DB $dd
+    	.DB $5e
+    	.DB $0c
+    	.DB $dd
+    	.DB $56
+    	.DB $0d
+    	.DB $13
+    	.DB $dd
+    	.DB $73
+    	.DB $0c
+    	.DB $dd
+    	.DB $72
+    	.DB $0d
+    	.DB $dd
+    	.DB $6e
+    	.DB $0a
+    	.DB $dd
+    	.DB $66
+    	.DB $0b
+    	.DB $b7
+    	.DB $ed
+    	.DB $52
+    	.DB $cc
+    	.DB $20
+    	.DB $74
+    	.DB $dd
+    	.DB $5e
+    	.DB $10
+    	.DB $dd
+    	.DB $56
+    	.DB $11
+    	.DB $7b
+    	.DB $b2
+    	.DB $20
+    	.DB $07
+    	.DB $dd
+    	.DB $36
+    	.DB $16
+    	.DB $0f
+    	.DB $c3
+    	.DB $92
+    	.DB $73
+    	.DB $dd
+    	.DB $cb
+    	.DB $00
+    	.DB $6e
+    	.DB $20
+    	.DB $25
+    	.DB $dd
+    	.DB $7e
+    	.DB $06
+    	.DB $b7
+    	.DB $20
+    	.DB $14
+    	.DB $dd
+    	.DB $73
+    	.DB $12
+    	.DB $dd
+    	.DB $72
+    	.DB $13
+    	.DB $c3
+    	.DB $4b
+    	.DB $73
+    	.DB $3d
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $09
+    	.DB $09
+    	.DB $7e
+    	.DB $23
+    	.DB $66
+    	.DB $6f
+    	.DB $c9
+    	.DB $21
+    	.DB $ad
+    	.DB $7e
+    	.DB $cd
+    	.DB $f9
+    	.DB $72
+    	.DB $cd
+    	.DB $ea
+    	.DB $73
+    	.DB $18
+    	.DB $3c
+    	.DB $d5
+    	.DB $dd
+    	.DB $6e
+    	.DB $14
+    	.DB $dd
+    	.DB $66
+    	.DB $15
+    	.DB $b7
+    	.DB $ed
+    	.DB $52
+    	.DB $f5
+    	.DB $7d
+    	.DB $f2
+    	.DB $20
+    	.DB $73
+    	.DB $ed
+    	.DB $44
+    	.DB $67
+    	.DB $dd
+    	.DB $5e
+    	.DB $0c
+    	.DB $cd
+    	.DB $61
+    	.DB $76
+    	.DB $dd
+    	.DB $5e
+    	.DB $0a
+    	.DB $cd
+    	.DB $6d
+    	.DB $76
+    	.DB $5f
+    	.DB $16
+    	.DB $00
+    	.DB $f1
+    	.DB $7b
+    	.DB $f2
+    	.DB $3b
+    	.DB $73
+    	.DB $ed
+    	.DB $44
+    	.DB $28
+    	.DB $02
+    	.DB $15
+    	.DB $5f
+    	.DB $e1
+    	.DB $19
+    	.DB $eb
+    	.DB $dd
+    	.DB $73
+    	.DB $12
+    	.DB $dd
+    	.DB $72
+    	.DB $13
+    	.DB $dd
+    	.DB $7e
+    	.DB $06
+    	.DB $b7
+    	.DB $c2
+    	.DB $04
+    	.DB $73
+    	.DB $dd
+    	.DB $7e
+    	.DB $07
+    	.DB $b7
+    	.DB $20
+    	.DB $0b
+    	.DB $dd
+    	.DB $7e
+    	.DB $08
+    	.DB $2f
+    	.DB $e6
+    	.DB $0f
+    	.DB $dd
+    	.DB $77
+    	.DB $16
+    	.DB $18
+    	.DB $0b
+    	.DB $cb
+    	.DB $bf
+    	.DB $21
+    	.DB $5c
+    	.DB $7e
+    	.DB $cd
+    	.DB $f9
+    	.DB $72
+    	.DB $cd
+    	.DB $b0
+    	.DB $73
+    	.DB $dd
+    	.DB $cb
+    	.DB $00
+    	.DB $76
+    	.DB $20
+    	.DB $25
+    	.DB $dd
+    	.DB $7e
+    	.DB $01
+    	.DB $e6
+    	.DB $0f
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $21
+    	.DB $a5
+    	.DB $73
+    	.DB $09
+    	.DB $4e
+    	.DB $dd
+    	.DB $7e
+    	.DB $12
+    	.DB $e6
+    	.DB $0f
+    	.DB $b1
+    	.DB $cd
+    	.DB $9d
+    	.DB $75
+    	.DB $dd
+    	.DB $7e
+    	.DB $12
+    	.DB $e6
+    	.DB $f0
+    	.DB $dd
+    	.DB $b6
+    	.DB $13
+    	.DB $0f
+    	.DB $0f
+    	.DB $0f
+    	.DB $0f
+    	.DB $cd
+    	.DB $9d
+    	.DB $75
+    	.DB $dd
+    	.DB $7e
+    	.DB $01
+    	.DB $e6
+    	.DB $0f
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $21
+    	.DB $a9
+    	.DB $73
+    	.DB $09
+    	.DB $7e
+    	.DB $dd
+    	.DB $b6
+    	.DB $16
+    	.DB $c3
+    	.DB $9d
+    	.DB $75
+    	.DB $80
+    	.DB $a0
+    	.DB $c0
+    	.DB $c0
+    l7bcch:
+    	.DB $90
+    	.DB $b0
+    	.DB $d0
+    	.DB $f0
+    	.DB $dd
+    	.DB $77
+    	.DB $0e
+    	.DB $e5
+    	.DB $dd
+    	.DB $7e
+    	.DB $0e
+    	.DB $cb
+    	.DB $3f
+    	.DB $f5
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $09
+    	.DB $f1
+    	.DB $7e
+    	.DB $e1
+    	.DB $38
+    	.DB $14
+    	.DB $0f
+    	.DB $0f
+    	.DB $0f
+    	.DB $0f
+    	.DB $b7
+    	.DB $28
+    	.DB $e6
+    	.DB $fe
+    	.DB $10
+    	.DB $20
+    	.DB $05
+    	.DB $dd
+    	.DB $35
+    	.DB $0e
+    	.DB $18
+    	.DB $e0
+    	.DB $fe
+    	.DB $20
+    	.DB $28
+    	.DB $0b
+    	.DB $dd
+    	.DB $34
+    	.DB $0e
+    	.DB $f6
+    	.DB $f0
+    	.DB $dd
+    	.DB $86
+    	.DB $08
+    	.DB $3c
+    	.DB $38
+    	.DB $01
+    	.DB $af
+    	.DB $2f
+    	.DB $e6
+    	.DB $0f
+    	.DB $dd
+    	.DB $77
+    	.DB $16
+    	.DB $c9
+    	.DB $dd
+    	.DB $77
+    	.DB $0f
+    	.DB $e5
+    	.DB $dd
+    	.DB $7e
+    	.DB $0f
+    	.DB $cb
+    	.DB $3f
+    	.DB $f5
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $09
+    	.DB $f1
+    	.DB $7e
+    	.DB $e1
+    	.DB $38
+    	.DB $14
+    	.DB $0f
+    	.DB $0f
+    	.DB $0f
+    	.DB $0f
+    	.DB $b7
+    	.DB $ca
+    	.DB $e7
+    	.DB $73
+    	.DB $fe
+    	.DB $10
+    	.DB $20
+    	.DB $08
+    	.DB $dd
+    	.DB $35
+    	.DB $0f
+    	.DB $18
+    	.DB $df
+    	.DB $fe
+    	.DB $20
+    	.DB $c8
+    	.DB $dd
+    	.DB $34
+    	.DB $0f
+    	.DB $2f
+    	.DB $e6
+    	.DB $0f
+    	.DB $6f
+    	.DB $26
+    	.DB $00
+    	.DB $eb
+    	.DB $19
+    	.DB $dd
+    	.DB $75
+    	.DB $12
+    	.DB $dd
+    	.DB $74
+    	.DB $13
+    	.DB $c9
+    	.DB $dd
+    	.DB $5e
+    	.DB $03
+    	.DB $dd
+    	.DB $56
+    	.DB $04
+    	.DB $1a
+    	.DB $13
+    	.DB $fe
+    	.DB $e0
+    	.DB $d2
+    	.DB $b4
+    	.DB $74
+    	.DB $dd
+    	.DB $cb
+    	.DB $00
+    	.DB $5e
+    	.DB $20
+    	.DB $60
+    	.DB $b7
+    	.DB $f2
+    	.DB $6f
+    	.DB $74
+    	.DB $d6
+    	.DB $80
+    	.DB $28
+    	.DB $03
+    	.DB $dd
+    	.DB $86
+    	.DB $05
+    	.DB $21
+    	.DB $cf
+    	.DB $75
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $09
+    	.DB $09
+    	.DB $7e
+    	.DB $dd
+    	.DB $77
+    	.DB $10
+    	.DB $23
+    	.DB $7e
+    	.DB $dd
+    	.DB $77
+    	.DB $11
+    	.DB $dd
+    	.DB $cb
+    	.DB $00
+    	.DB $6e
+    	.DB $28
+    	.DB $58
+    	.DB $1a
+    	.DB $13
+    	.DB $d6
+    	.DB $80
+    	.DB $dd
+    	.DB $86
+    	.DB $05
+    	.DB $21
+    	.DB $cf
+    	.DB $75
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $09
+    	.DB $09
+    	.DB $7e
+    	.DB $dd
+    	.DB $77
+    	.DB $14
+    	.DB $23
+    	.DB $7e
+    	.DB $dd
+    	.DB $77
+    	.DB $15
+    	.DB $1a
+    	.DB $13
+    	.DB $d5
+    	.DB $67
+    	.DB $dd
+    	.DB $5e
+    	.DB $02
+    	.DB $cd
+    	.DB $61
+    	.DB $76
+    	.DB $d1
+    	.DB $dd
+    	.DB $75
+    	.DB $0a
+    	.DB $dd
+    	.DB $74
+    	.DB $0b
+    	.DB $af
+    	.DB $dd
+    	.DB $77
+    	.DB $0e
+    	.DB $dd
+    	.DB $77
+    	.DB $0f
+    	.DB $dd
+    	.DB $73
+    	.DB $03
+    	.DB $dd
+    	.DB $72
+    	.DB $04
+    	.DB $af
+    	.DB $dd
+    	.DB $77
+    	.DB $0c
+    	.DB $dd
+    	.DB $77
+    	.DB $0d
+    	.DB $c9
+    	.DB $dd
+    	.DB $77
+    	.DB $11
+    	.DB $1a
+    	.DB $13
+    	.DB $dd
+    	.DB $77
+    	.DB $10
+    	.DB $dd
+    	.DB $cb
+    	.DB $00
+    	.DB $6e
+    	.DB $28
+    	.DB $cc
+    	.DB $1a
+    	.DB $13
+    	.DB $dd
+    	.DB $77
+    	.DB $15
+    	.DB $1a
+    	.DB $13
+    	.DB $dd
+    	.DB $77
+    	.DB $14
+    	.DB $18
+    	.DB $c0
+    	.DB $1a
+    	.DB $b7
+    	.DB $f2
+    	.DB $6e
+    	.DB $74
+    	.DB $18
+    	.DB $ca
+    	.DB $21
+    	.DB $c7
+    	.DB $74
+    	.DB $e5
+    	.DB $e6
+    	.DB $1f
+    	.DB $21
+    	.DB $cb
+    	.DB $74
+    	.DB $4f
+    	.DB $06
+    	.DB $00
+    	.DB $09
+    	.DB $09
+    	.DB $7e
+    	.DB $23
+    	.DB $66
+    	.DB $6f
+    	.DB $e9
+    	.DB $13
+    	.DB $c3
+    	.DW $7426
+    	.DW $74fb
+    	.DW $7500
+    	.DW $753b
+    	.DW $7505
+    	.DW $751c
+    	.DW $7526
+    	.DW $74eb
+    	.DW $752c
+    	.DW $752c
+    	.DW $752c
+    	.DW $7548
+    	.DW $7563
+    	.DW $7576
+    	.DW $7521
+    	.DW $74f3
+	    .INCLUDE "fragment.asm"
 	.ENDIF
-	.IFDEF _UE
-		inc b			; 04 ;7149
-		add a,b			; 80 ;714a
-		jr nz,$+5		; 20 05 ;714b
-		ld l,(hl)			; 6e ;714d
-		ld (hl),c			; 71 ;714e
-	.ENDIF
-	push af			; f5 ;714f
-	ld bc,l0d07h+1		; 01 08 0d ;7150
-	add a,b			; 80 ;7153
-	.IFDEF _J
-		ld hl,0f505h		; 21 05 f5 ;7154
-		.DB $76			; 76 ;7157
-	.ENDIF
-	.IFDEF _UE
-		ld hl,0be05h		; 21 05 be ;7154
-		ld (hl),c			; 71 ;7157
-	.ENDIF
-	push af			; f5 ;7158
-	ld (bc),a			; 02 ;7159
-	ld bc,0800bh		; 01 0b 80 ;715a
-	.IFDEF _J
-		ld (03605h),hl		; 22 05 36 ;715d
-		.DB $77			; 77 ;7160
-	.ENDIF
-	.IFDEF _UE
-		ld (0ff05h),hl		; 22 05 ff ;715d
-		ld (hl),c			; 71 ;7160
-	.ENDIF
-	push af			; f5 ;7161
-	ld (bc),a			; 02 ;7162
-	ld bc,0800bh		; 01 0b 80 ;7163
-	inc hl			; 23 ;7166
-	dec b			; 05 ;7167
-	.IFDEF _J
-		.DB $7b			; 7b ;7168
-		.DB $77			; 77 ;7169
-	.ENDIF
-	.IFDEF _UE
-		ld b,h			; 44 ;7168
-		ld (hl),d			; 72 ;7169
-	.ENDIF
-	inc bc			; 03 ;716a
-	ld bc,00d01h		; 01 01 0d ;716b
-	and b			; a0 ;716e
-	ld bc,0a09fh		; 01 9f a0 ;716f
-	ld (bc),a			; 02 ;7172
-	and b			; a0 ;7173
-	ld bc,0a09fh		; 01 9f a0 ;7174
-	ld (bc),a			; 02 ;7177
-	and b			; a0 ;7178
-	ld bc,0a09fh		; 01 9f a0 ;7179
-	ld (bc),a			; 02 ;717c
-	xor c			; a9 ;717d
-	and l			; a5 ;717e
-	and d			; a2 ;717f
-	and b			; a0 ;7180
-	sbc a,a			; 9f ;7181
-	sbc a,(hl)			; 9e ;7182
-	sbc a,e			; 9b ;7183
-	sbc a,l			; 9d ;7184
-	inc b			; 04 ;7185
-	sbc a,c			; 99 ;7186
-	ld (bc),a			; 02 ;7187
-	and b			; a0 ;7188
-	ld bc,0a09fh		; 01 9f a0 ;7189
-	ld (bc),a			; 02 ;718c
-	and b			; a0 ;718d
-	ld bc,0a09fh		; 01 9f a0 ;718e
-	ld (bc),a			; 02 ;7191
-	and b			; a0 ;7192
-	ld bc,0a09fh		; 01 9f a0 ;7193
-	ld (bc),a			; 02 ;7196
-	xor c			; a9 ;7197
-	and l			; a5 ;7198
-	and d			; a2 ;7199
-	and b			; a0 ;719a
-	and c			; a1 ;719b
-	and d			; a2 ;719c
-	and h			; a4 ;719d
-	and l			; a5 ;719e
-	inc b			; 04 ;719f
-	and l			; a5 ;71a0
-	xor c			; a9 ;71a1
-	ld (bc),a			; 02 ;71a2
-	xor c			; a9 ;71a3
-	ld bc,0a9a9h		; 01 a9 a9 ;71a4
-	ld b,0aah		; 06 aa ;71a7
-	ld (bc),a			; 02 ;71a9
-	xor c			; a9 ;71aa
-	xor d			; aa ;71ab
-	xor c			; a9 ;71ac
-	xor c			; a9 ;71ad
-	ld bc,0a9a9h		; 01 a9 a9 ;71ae
-	ld b,0a7h		; 06 a7 ;71b1
-	ld (bc),a			; 02 ;71b3
-	and l			; a5 ;71b4
-	and a			; a7 ;71b5
-	xor c			; a9 ;71b6
-	ld (bc),a			; 02 ;71b7
-	xor c			; a9 ;71b8
-	ld bc,0a9a9h		; 01 a9 a9 ;71b9
-	inc c			; 0c ;71bc
-	jp po,l0280h		; e2 80 02 ;71bd
-	sbc a,c			; 99 ;71c0
-	ld (bc),a			; 02 ;71c1
-	and b			; a0 ;71c2
-	sbc a,c			; 99 ;71c3
-	and b			; a0 ;71c4
-	sbc a,c			; 99 ;71c5
-	and b			; a0 ;71c6
-	sbc a,c			; 99 ;71c7
-	and b			; a0 ;71c8
-	sub h			; 94 ;71c9
-	and b			; a0 ;71ca
-	sub h			; 94 ;71cb
-	and b			; a0 ;71cc
-	sbc a,c			; 99 ;71cd
-	and b			; a0 ;71ce
-	sbc a,c			; 99 ;71cf
-	and b			; a0 ;71d0
-	sbc a,c			; 99 ;71d1
-	and b			; a0 ;71d2
-	sbc a,c			; 99 ;71d3
-	and b			; a0 ;71d4
-	sbc a,c			; 99 ;71d5
-	and b			; a0 ;71d6
-	sbc a,c			; 99 ;71d7
-	and b			; a0 ;71d8
-	sub h			; 94 ;71d9
-	and b			; a0 ;71da
-	sub h			; 94 ;71db
-	sbc a,(hl)			; 9e ;71dc
-	sbc a,c			; 99 ;71dd
-	and b			; a0 ;71de
-	sbc a,c			; 99 ;71df
-	inc b			; 04 ;71e0
-	and b			; a0 ;71e1
-	ld (bc),a			; 02 ;71e2
-	and b			; a0 ;71e3
-	ld bc,0a0a0h		; 01 a0 a0 ;71e4
-	ld b,0a2h		; 06 a2 ;71e7
-	ld (bc),a			; 02 ;71e9
-	and b			; a0 ;71ea
-	and d			; a2 ;71eb
-	and b			; a0 ;71ec
-	and b			; a0 ;71ed
-	ld bc,0a0a0h		; 01 a0 a0 ;71ee
-	ld b,09eh		; 06 9e ;71f1
-	ld (bc),a			; 02 ;71f3
-	sbc a,l			; 9d ;71f4
-	sbc a,(hl)			; 9e ;71f5
-	and b			; a0 ;71f6
-	and b			; a0 ;71f7
-	ld bc,0e4a0h		; 01 a0 e4 ;71f8
-	ld bc,00ca0h		; 01 a0 0c ;71fb
-	jp po,l0280h		; e2 80 02 ;71fe
-	call po,0990ah		; e4 0a 99 ;7201
-	ld (bc),a			; 02 ;7204
-	sbc a,l			; 9d ;7205
-	sbc a,c			; 99 ;7206
-	sbc a,l			; 9d ;7207
-	sbc a,c			; 99 ;7208
-	sbc a,l			; 9d ;7209
-	sbc a,c			; 99 ;720a
-	sbc a,l			; 9d ;720b
-	sub h			; 94 ;720c
-	sbc a,e			; 9b ;720d
-	sub h			; 94 ;720e
-	sbc a,e			; 9b ;720f
-	sbc a,c			; 99 ;7210
-	sbc a,l			; 9d ;7211
-	sbc a,c			; 99 ;7212
-	sbc a,l			; 9d ;7213
-	sbc a,c			; 99 ;7214
-	sbc a,l			; 9d ;7215
-	sbc a,c			; 99 ;7216
-	sbc a,l			; 9d ;7217
-	sbc a,c			; 99 ;7218
-	sbc a,l			; 9d ;7219
-	sbc a,c			; 99 ;721a
-	sbc a,l			; 9d ;721b
-	sub h			; 94 ;721c
-	sbc a,e			; 9b ;721d
-	sub h			; 94 ;721e
-	sbc a,e			; 9b ;721f
-	sbc a,c			; 99 ;7220
-	sbc a,l			; 9d ;7221
-	sbc a,c			; 99 ;7222
-	inc b			; 04 ;7223
-	sbc a,c			; 99 ;7224
-	ld (bc),a			; 02 ;7225
-	sbc a,c			; 99 ;7226
-	ld bc,09999h		; 01 99 99 ;7227
-	ld b,099h		; 06 99 ;722a
-	ld (bc),a			; 02 ;722c
-	sbc a,c			; 99 ;722d
-	sbc a,c			; 99 ;722e
-	sbc a,c			; 99 ;722f
-	sbc a,c			; 99 ;7230
-	ld bc,09999h		; 01 99 99 ;7231
-	ld b,099h		; 06 99 ;7234
-	ld (bc),a			; 02 ;7236
-	sbc a,c			; 99 ;7237
-	sbc a,c			; 99 ;7238
-	sbc a,c			; 99 ;7239
-	sbc a,c			; 99 ;723a
-	ld bc,0e499h		; 01 99 e4 ;723b
-	ld bc,l0c99h		; 01 99 0c ;723e
-	add a,b			; 80 ;7241
-	ex af,af'			; 08 ;7242
-	and 0e3h		; e6 e3 ;7243
-	inc b			; 04 ;7245
-	add a,b			; 80 ;7246
-	ld (bc),a			; 02 ;7247
+	.DB $04			; 04 ;7149
+    .DB $80			; 80 ;714a
+    .DB $20		; 20 ;714b
+    .DB $05		; 05 ;714c
+    .DW l716eh		;714d
+	.DB $f5		;714f
+	.DB $01		;7150
+	.DB $08		;7151
+	.DB $0d		;7152
+	.DB $80		;7153
+	.DB $21		;7154
+	.DB $05		;7155
+	.DW l71beh		;7156
+	.DB $f5		;7158
+	.DB $02		;7159
+	.DB $01		;715a
+	.DB $0b		;715b
+	.DB $80		;715c
+	.DB $22		;715d
+	.DB $05		;715e
+	.DW l71ffh			;715f
+	.DB $f5		;7161
+	.DB $02		;7162
+	.DB $01		;7163
+	.DB $0b		;7164
+	.DB $80		;7165
+	.DB $23		;7166
+	.DB $05		;7167
+	.DW l7244h			;7168
+	.DB $03		;716a
+	.DB $01		;716b
+	.DB $01		;716c
+	.DB $0d		;716d
+l716eh:
+	.DB $a0		;716e
+	.DB $01		;716f
+	.DB $9f		;7170
+	.DB $a0		;7171
+	.DB $02		;7172
+	.DB $a0		;7173
+	.DB $01		;7174
+	.DB $9f		;7175
+	.DB $a0		;7176
+	.DB $02		;7177
+	.DB $a0		;7178
+	.DB $01		;7179
+	.DB $9f		;717a
+	.DB $a0		;717b
+	.DB $02		;717c
+	.DB $a9		;717d
+	.DB $a5		;717e
+	.DB $a2		;717f
+	.DB $a0		;7180
+	.DB $9f		;7181
+	.DB $9e		;7182
+	.DB $9b		;7183
+	.DB $9d		;7184
+	.DB $04		;7185
+	.DB $99		;7186
+	.DB $02		;7187
+	.DB $a0		;7188
+	.DB $01		;7189
+	.DB $9f		;718a
+	.DB $a0		;718b
+	.DB $02		;718c
+	.DB $a0		;718d
+	.DB $01		;718e
+	.DB $9f		;718f
+	.DB $a0		;7190
+	.DB $02		;7191
+	.DB $a0		;7192
+	.DB $01		;7193
+	.DB $9f		;7194
+	.DB $a0		;7195
+	.DB $02		;7196
+	.DB $a9		;7197
+	.DB $a5		;7198
+	.DB $a2		;7199
+	.DB $a0		;719a
+	.DB $a1		;719b
+	.DB $a2		;719c
+	.DB $a4		;719d
+	.DB $a5		;719e
+	.DB $04		;719f
+	.DB $a5		;71a0
+	.DB $a9		;71a1
+	.DB $02		;71a2
+	.DB $a9		;71a3
+	.DB $01		;71a4
+	.DB $a9		;71a5
+	.DB $a9		;71a6
+	.DB $06		;71a7
+	.DB $aa		;71a8
+	.DB $02		;71a9
+	.DB $a9		;71aa
+	.DB $aa		;71ab
+	.DB $a9		;71ac
+	.DB $a9		;71ad
+	.DB $01		;71ae
+	.DB $a9		;71af
+	.DB $a9		;71b0
+	.DB $06		;71b1
+	.DB $a7		;71b2
+	.DB $02		;71b3
+	.DB $a5		;71b4
+	.DB $a7		;71b5
+	.DB $a9		;71b6
+	.DB $02		;71b7
+	.DB $a9		;71b8
+	.DB $01		;71b9
+	.DB $a9		;71ba
+	.DB $a9		;71bb
+	.DB $0c		;71bc
+	.DB $e2		;71bd
+l71beh:
+	.DB $80		;71be
+	.DB $02		;71bf
+	.DB $99		;71c0
+	.DB $02		;71c1
+	.DB $a0		;71c2
+	.DB $99		;71c3
+	.DB $a0		;71c4
+	.DB $99		;71c5
+	.DB $a0		;71c6
+	.DB $99		;71c7
+	.DB $a0		;71c8
+	.DB $94		;71c9
+	.DB $a0		;71ca
+	.DB $94		;71cb
+	.DB $a0		;71cc
+	.DB $99		;71cd
+	.DB $a0		;71ce
+	.DB $99		;71cf
+	.DB $a0		;71d0
+	.DB $99		;71d1
+	.DB $a0		;71d2
+	.DB $99		;71d3
+	.DB $a0		;71d4
+	.DB $99		;71d5
+	.DB $a0		;71d6
+	.DB $99		;71d7
+	.DB $a0		;71d8
+	.DB $94		;71d9
+	.DB $a0		;71da
+	.DB $94		;71db
+	.DB $9e		;71dc
+	.DB $99		;71dd
+	.DB $a0		;71de
+	.DB $99		;71df
+	.DB $04		;71e0
+	.DB $a0		;71e1
+	.DB $02		;71e2
+	.DB $a0		;71e3
+	.DB $01		;71e4
+	.DB $a0		;71e5
+	.DB $a0		;71e6
+	.DB $06		;71e7
+	.DB $a2		;71e8
+	.DB $02		;71e9
+	.DB $a0		;71ea
+	.DB $a2		;71eb
+	.DB $a0		;71ec
+	.DB $a0		;71ed
+	.DB $01		;71ee
+	.DB $a0		;71ef
+	.DB $a0		;71f0
+	.DB $06		;71f1
+	.DB $9e		;71f2
+	.DB $02		;71f3
+	.DB $9d		;71f4
+	.DB $9e		;71f5
+	.DB $a0		;71f6
+	.DB $a0		;71f7
+	.DB $01		;71f8
+	.DB $a0		;71f9
+	.DB $e4		;71fa
+	.DB $01		;71fb
+	.DB $a0		;71fc
+	.DB $0c		;71fd
+	.DB $e2		;71fe
+l71ffh:
+	.DB $80		;71ff
+	.DB $02		;7200
+	.DB $e4		;7201
+	.DB $0a		;7202
+	.DB $99		;7203
+	.DB $02		;7204
+	.DB $9d		;7205
+	.DB $99		;7206
+	.DB $9d		;7207
+	.DB $99		;7208
+	.DB $9d		;7209
+	.DB $99		;720a
+	.DB $9d		;720b
+	.DB $94		;720c
+	.DB $9b		;720d
+	.DB $94		;720e
+	.DB $9b		;720f
+	.DB $99		;7210
+	.DB $9d		;7211
+	.DB $99		;7212
+	.DB $9d		;7213
+	.DB $99		;7214
+	.DB $9d		;7215
+	.DB $99		;7216
+	.DB $9d		;7217
+	.DB $99		;7218
+	.DB $9d		;7219
+	.DB $99		;721a
+	.DB $9d		;721b
+	.DB $94		;721c
+	.DB $9b		;721d
+	.DB $94		;721e
+	.DB $9b		;721f
+	.DB $99		;7220
+	.DB $9d		;7221
+	.DB $99		;7222
+	.DB $04		;7223
+	.DB $99		;7224
+	.DB $02		;7225
+	.DB $99		;7226
+	.DB $01		;7227
+	.DB $99		;7228
+	.DB $99		;7229
+	.DB $06		;722a
+	.DB $99		;722b
+	.DB $02		;722c
+	.DB $99		;722d
+	.DB $99		;722e
+	.DB $99		;722f
+	.DB $99		;7230
+	.DB $01		;7231
+	.DB $99		;7232
+	.DB $99		;7233
+	.DB $06		;7234
+	.DB $99		;7235
+	.DB $02		;7236
+	.DB $99		;7237
+	.DB $99		;7238
+	.DB $99		;7239
+	.DB $99		;723a
+	.DB $01		;723b
+	.DB $99		;723c
+	.DB $e4		;723d
+	.DB $01		;723e
+	.DB $99		;723f
+	.DB $0c		;7240
+	.DB $80		;7241
+	.DB $08		;7242
+	.DB $e6		;7243
+l7244h:
+	.DB $e3		;7244
+	.DB $04		;7245
+	.DB $80		;7246
+	.DB $02		;7247
 l7248h:
-	pop hl			; e1 ;7248
-	add hl,bc			; 09 ;7249
-	call po,08d02h		; e4 02 8d ;724a
-	inc b			; 04 ;724d
-	pop hl			; e1 ;724e
-	inc c			; 0c ;724f
-	call po,00405h		; e4 05 04 ;7250
-	pop hl			; e1 ;7253
-	add hl,bc			; 09 ;7254
-	call po,l0201h+1		; e4 02 02 ;7255
-	ld (bc),a			; 02 ;7258
-	pop hl			; e1 ;7259
-	inc c			; 0c ;725a
-	call po,00405h		; e4 05 04 ;725b
-	call pe,l0400h		; ec 00 04 ;725e
+	.DB $e1		;7248
+	.DB $09		;7249
+	.DB $e4		;724a
+	.DB $02		;724b
+	.DB $8d		;724c
+	.DB $04		;724d
+	.DB $e1		;724e
+	.DB $0c		;724f
+	.DB $e4		;7250
+	.DB $05		;7251
+	.DB $04		;7252
+	.DB $e1		;7253
+	.DB $09		;7254
+	.DB $e4		;7255
+	.DB $02		;7256
+	.DB $02		;7257
+	.DB $02		;7258
+	.DB $e1		;7259
+	.DB $0c		;725a
+	.DB $e4		;725b
+	.DB $05		;725c
+	.DB $04		;725d
+	.DB $ec		;725e
+	.DB $00		;725f
+	.DB $04		;7260
 	.DW l7248h
 l7263h:
-	pop hl			; e1 ;7263
-	add hl,bc			; 09 ;7264
-	call po,l0102h		; e4 02 01 ;7265
-	ld bc,l00ffh+2		; 01 01 01 ;7268
-	pop hl			; e1 ;726b
-	inc c			; 0c ;726c
-	call po,l0205h		; e4 05 02 ;726d
-	pop hl			; e1 ;7270
-	add hl,bc			; 09 ;7271
-	call po,l0102h		; e4 02 01 ;7272
-	ld bc,0e102h		; 01 02 e1 ;7275
-	inc c			; 0c ;7278
-	call po,l0205h		; e4 05 02 ;7279
-	ld (bc),a			; 02 ;727c
-	ld (bc),a			; 02 ;727d
-	call pe,l0200h		; ec 00 02 ;727e
+	.DB $e1		;7263
+	.DB $09		;7264
+	.DB $e4		;7265
+	.DB $02		;7266
+	.DB $01		;7267
+	.DB $01		;7268
+	.DB $01		;7269
+	.DB $01		;726a
+	.DB $e1		;726b
+	.DB $0c		;726c
+	.DB $e4		;726d
+	.DB $05		;726e
+	.DB $02		;726f
+	.DB $e1		;7270
+	.DB $09		;7271
+	.DB $e4		;7272
+	.DB $02		;7273
+	.DB $01		;7274
+	.DB $01		;7275
+	.DB $02		;7276
+	.DB $e1		;7277
+	.DB $0c		;7278
+	.DB $e4		;7279
+	.DB $05		;727a
+	.DB $02		;727b
+	.DB $02		;727c
+	.DB $02		;727d
+	.DB $ec		;727e
+	.DB $00		;727f
+	.DB $02		;7280
 	.DW l7263h
-	pop hl			; e1 ;7283
-	add hl,bc			; 09 ;7284
-	call po,l0102h		; e4 02 01 ;7285
-	ld bc,l00ffh+2		; 01 01 01 ;7288
-	pop hl			; e1 ;728b
-	inc c			; 0c ;728c
-	call po,l0205h		; e4 05 02 ;728d
-	jp po,08003h		; e2 03 80 ;7290
-	jr nz,l7299h		; 20 04 ;7293
+	.DB $e1		;7283
+	.DB $09		;7284
+	.DB $e4		;7285
+	.DB $02		;7286
+	.DB $01		;7287
+	.DB $01		;7288
+	.DB $01		;7289
+	.DB $01		;728a
+	.DB $e1		;728b
+	.DB $0c		;728c
+	.DB $e4		;728d
+	.DB $05		;728e
+	.DB $02		;728f
+	.DB $e2		;7290
+	.DB $03		;7291
+	.DB $80		;7292
+	.DB $20		;7293
+	.DB $04		;7294
 	.DW l7283h
-	rst 30h			; f7 ;7297
-	inc bc			; 03 ;7298
+	.DB $f7		;7297
+	.DB $03		;7298
 l7299h:
-	dec b			; 05 ;7299
-	dec c			; 0d ;729a
-	add a,b			; 80 ;729b
-	.DB $21 $04		;729c
+	.DB $05		;7299
+	.DB $0d		;729a
+	.DB $80		;729b
+	.DB $21		;729c
+	.DB $04		;729d
 	.DW l72bbh		;729e
-	rst 30h			; f7 ;72a0
-	inc b			; 04 ;72a1
-	dec b			; 05 ;72a2
-	dec bc			; 0b ;72a3
-	add a,b			; 80 ;72a4
-	.DB $22 $04			;72a5
+	.DB $f7		;72a0
+	.DB $04		;72a1
+	.DB $05		;72a2
+	.DB $0b		;72a3
+	.DB $80		;72a4
+	.DB $22		;72a5
+	.DB $04		;72a6
 	.DW l72cbh			;72a7
-	rst 30h			; f7 ;72a9
-	inc b			; 04 ;72aa
-	dec b			; 05 ;72ab
-	dec bc			; 0b ;72ac
+	.DB $f7		;72a9
+	.DB $04		;72aa
+	.DB $05		;72ab
+	.DB $0b		;72ac
 l7283h:
-	xor h			; ac ;72ad
-	inc b			; 04 ;72ae
-	xor h			; ac ;72af
-	or b			; b0 ;72b0
-	or b			; b0 ;72b1
-	or c			; b1 ;72b2
-	ld (bc),a			; 02 ;72b3
-	xor (hl)			; ae ;72b4
-	xor (hl)			; ae ;72b5
-	call po,0b101h		; e4 01 b1 ;72b6
-	ld a,(bc)			; 0a ;72b9
+	.DB $ac		;72ad
+	.DB $04		;72ae
+	.DB $ac		;72af
+	.DB $b0		;72b0
+	.DB $b0		;72b1
+	.DB $b1		;72b2
+	.DB $02		;72b3
+	.DB $ae		;72b4
+	.DB $ae		;72b5
+	.DB $e4		;72b6
+	.DB $01		;72b7
+	.DB $b1		;72b8
+	.DB $0a		;72b9
 	.DB $e2		;72ba
 l72bbh:
 	.DB $a9		;72bb
@@ -13094,21 +12701,11 @@ l7b07h:
 	ld (ix+012h),e		; dd 73 12 ;7b13
 	ld (ix+013h),d		; dd 72 13 ;7b16
 	jp l7b6eh		; c3 6e 7b ;7b19
-sub_7b1ch:
-	dec a			; 3d ;7b1c
-	ld c,a			; 4f ;7b1d
-	ld b,000h		; 06 00 ;7b1e
-	add hl,bc			; 09 ;7b20
-	add hl,bc			; 09 ;7b21
-	ld a,(hl)			; 7e ;7b22
-	inc hl			; 23 ;7b23
-	ld h,(hl)			; 66 ;7b24
-	ld l,a			; 6f ;7b25
-	ret			; c9 ;7b26
+	.INCLUDE "physics/get_terrain_table.asm"
 l7b27h:
 	ld hl,l7956h		; 21 56 79 ;7b27
-	call sub_7b1ch		; cd 1c 7b ;7b2a
-	call sub_7c0dh		; cd 0d 7c ;7b2d
+	call sub_get_terrain_table		; cd 1c 7b ;7b2a
+	call sub_process_terrain		; cd 0d 7c ;7b2d
 	jr l7b6eh		; 18 3c ;7b30
 l7b32h:
 	push de			; d5 ;7b32
@@ -13156,7 +12753,7 @@ l7b6eh:
 l7b7fh:
 	res 7,a		; cb bf ;7b7f
 	ld hl,07905h		; 21 05 79 ;7b81
-	call sub_7b1ch		; cd 1c 7b ;7b84
+	call sub_get_terrain_table		; cd 1c 7b ;7b84
 	call sub_7bd3h		; cd d3 7b ;7b87
 l7b8ah:
 	bit 6,(ix+000h)		; dd cb 00 76 ;7b8a
@@ -13171,7 +12768,7 @@ l7b8ah:
 	ld a,(ix+012h)		; dd 7e 12 ;7b9d
 	and 00fh		; e6 0f ;7ba0
 	or c			; b1 ;7ba2
-	call sub_7dc0h		; cd c0 7d ;7ba3
+	call sub_write_psg		; cd c0 7d ;7ba3
 	ld a,(ix+012h)		; dd 7e 12 ;7ba6
 	and 0f0h		; e6 f0 ;7ba9
 	or (ix+013h)		; dd b6 13 ;7bab
@@ -13179,7 +12776,7 @@ l7b8ah:
 	rrca			; 0f ;7baf
 	rrca			; 0f ;7bb0
 	rrca			; 0f ;7bb1
-	call sub_7dc0h		; cd c0 7d ;7bb2
+	call sub_write_psg		; cd c0 7d ;7bb2
 l7bb5h:
 	ld a,(ix+001h)		; dd 7e 01 ;7bb5
 	and 00fh		; e6 0f ;7bb8
@@ -13189,7 +12786,7 @@ l7bb5h:
 	add hl,bc			; 09 ;7bc0
 	ld a,(hl)			; 7e ;7bc1
 	or (ix+016h)		; dd b6 16 ;7bc2
-	jp sub_7dc0h		; c3 c0 7d ;7bc5
+	jp sub_write_psg		; c3 c0 7d ;7bc5
 l7bc8h:
 	add a,b			; 80 ;7bc8
 	and b			; a0 ;7bc9
@@ -13240,43 +12837,7 @@ l7c03h:
 	and 00fh		; e6 0f ;7c04
 	ld (ix+016h),a		; dd 77 16 ;7c06
 	ret			; c9 ;7c09
-l7c0ah:
-	ld (ix+00fh),a		; dd 77 0f ;7c0a
-sub_7c0dh:
-	push hl			; e5 ;7c0d
-	ld a,(ix+00fh)		; dd 7e 0f ;7c0e
-	srl a		; cb 3f ;7c11
-	push af			; f5 ;7c13
-	ld c,a			; 4f ;7c14
-	ld b,000h		; 06 00 ;7c15
-	add hl,bc			; 09 ;7c17
-	pop af			; f1 ;7c18
-	ld a,(hl)			; 7e ;7c19
-	pop hl			; e1 ;7c1a
-	jr c,l7c31h		; 38 14 ;7c1b
-	rrca			; 0f ;7c1d
-	rrca			; 0f ;7c1e
-	rrca			; 0f ;7c1f
-	rrca			; 0f ;7c20
-	or a			; b7 ;7c21
-	jp z,l7c0ah		; ca 0a 7c ;7c22
-	cp 010h		; fe 10 ;7c25
-	jr nz,l7c31h		; 20 08 ;7c27
-	dec (ix+00fh)		; dd 35 0f ;7c29
-	jr sub_7c0dh		; 18 df ;7c2c
-	cp 020h		; fe 20 ;7c2e
-	ret z			; c8 ;7c30
-l7c31h:
-	inc (ix+00fh)		; dd 34 0f ;7c31
-	cpl			; 2f ;7c34
-	and 00fh		; e6 0f ;7c35
-	ld l,a			; 6f ;7c37
-	ld h,000h		; 26 00 ;7c38
-	ex de,hl			; eb ;7c3a
-	add hl,de			; 19 ;7c3b
-	ld (ix+012h),l		; dd 75 12 ;7c3c
-	ld (ix+013h),h		; dd 74 13 ;7c3f
-	ret			; c9 ;7c42
+	.INCLUDE "physics/process_terrain.asm"
 sub_7c43h:
 	ld e,(ix+003h)		; dd 5e 03 ;7c43
 	ld d,(ix+004h)		; dd 56 04 ;7c46
@@ -13376,294 +12937,25 @@ l7cd7h:
 	jp (hl)			; e9 ;7ce9
 l7ceah:
 	inc de			; 13 ;7cea
-	jp l7c49h		; c3 49 7c ;7ceb
+	.DB $c3 $49		;7ceb
+	.DB $7c		;7ced
 l7ceeh:
-	ld e,07dh		; 1e 7d ;7cee
-	inc hl			; 23 ;7cf0
-	ld a,l			; 7d ;7cf1
-	ld e,(hl)			; 5e ;7cf2
-	ld a,l			; 7d ;7cf3
-	jr z,l7d73h		; 28 7d ;7cf4
-	ccf			; 3f ;7cf6
-	ld a,l			; 7d ;7cf7
-	ld c,c			; 49 ;7cf8
-	ld a,l			; 7d ;7cf9
-	ld c,07dh		; 0e 7d ;7cfa
-	ld c,a			; 4f ;7cfc
-	ld a,l			; 7d ;7cfd
-	ld c,a			; 4f ;7cfe
-	ld a,l			; 7d ;7cff
-	ld c,a			; 4f ;7d00
-	ld a,l			; 7d ;7d01
-	ld l,e			; 6b ;7d02
-	ld a,l			; 7d ;7d03
-	add a,(hl)			; 86 ;7d04
-	ld a,l			; 7d ;7d05
-	sbc a,c			; 99 ;7d06
-	ld a,l			; 7d ;7d07
-	ld b,h			; 44 ;7d08
-	ld a,l			; 7d ;7d09
-	ld d,07dh		; 16 7d ;7d0a
-	ld c,a			; 4f ;7d0c
-	ld a,l			; 7d ;7d0d
-	ld a,080h		; 3e 80 ;7d0e
-	ld (0de04h),a		; 32 04 de ;7d10
-	jp l7d5eh		; c3 5e 7d ;7d13
-	ld a,(de)			; 1a ;7d16
-	add a,(ix+005h)		; dd 86 05 ;7d17
-	ld (ix+005h),a		; dd 77 05 ;7d1a
-	ret			; c9 ;7d1d
-	ld a,(de)			; 1a ;7d1e
-	ld (ix+002h),a		; dd 77 02 ;7d1f
-	ret			; c9 ;7d22
-	ld a,(de)			; 1a ;7d23
-	ld (ix+008h),a		; dd 77 08 ;7d24
-	ret			; c9 ;7d27
-	ld a,(de)			; 1a ;7d28
-	or 0e0h		; f6 e0 ;7d29
-	push af			; f5 ;7d2b
-	call sub_7dc0h		; cd c0 7d ;7d2c
-	pop af			; f1 ;7d2f
-	or 0fch		; f6 fc ;7d30
-	inc a			; 3c ;7d32
-	jr nz,l7d3ah		; 20 05 ;7d33
-	res 6,(ix+000h)		; dd cb 00 b6 ;7d35
-	ret			; c9 ;7d39
-l7d3ah:
-	set 6,(ix+000h)		; dd cb 00 f6 ;7d3a
-	ret			; c9 ;7d3e
-	ld a,(de)			; 1a ;7d3f
-	ld (ix+007h),a		; dd 77 07 ;7d40
-	ret			; c9 ;7d43
-	ld a,(de)			; 1a ;7d44
-	ld (ix+006h),a		; dd 77 06 ;7d45
-	ret			; c9 ;7d48
-l7d49h:
-	ex de,hl			; eb ;7d49
-	ld e,(hl)			; 5e ;7d4a
-	inc hl			; 23 ;7d4b
-	ld d,(hl)			; 56 ;7d4c
-	dec de			; 1b ;7d4d
-	ret			; c9 ;7d4e
-	ld hl,0de05h		; 21 05 de ;7d4f
-	res 2,(hl)		; cb 96 ;7d52
-	ld hl,0de25h		; 21 25 de ;7d54
-	res 2,(hl)		; cb 96 ;7d57
-	ld hl,0de45h		; 21 45 de ;7d59
-	res 2,(hl)		; cb 96 ;7d5c
-l7d5eh:
-	xor a			; af ;7d5e
-	ld (0de03h),a		; 32 03 de ;7d5f
-	ld (ix+000h),a		; dd 77 00 ;7d62
-	call sub_7db1h		; cd b1 7d ;7d65
-	pop hl			; e1 ;7d68
-	pop hl			; e1 ;7d69
-	ret			; c9 ;7d6a
-	ld a,(de)			; 1a ;7d6b
-	ld c,a			; 4f ;7d6c
-	inc de			; 13 ;7d6d
-	ld a,(de)			; 1a ;7d6e
-	ld b,a			; 47 ;7d6f
-	push bc			; c5 ;7d70
-	push ix		; dd e5 ;7d71
-l7d73h:
-	pop hl			; e1 ;7d73
-	dec (ix+009h)		; dd 35 09 ;7d74
-	ld c,(ix+009h)		; dd 4e 09 ;7d77
-	dec (ix+009h)		; dd 35 09 ;7d7a
-	ld b,000h		; 06 00 ;7d7d
-	add hl,bc			; 09 ;7d7f
-	ld (hl),d			; 72 ;7d80
-	dec hl			; 2b ;7d81
-	ld (hl),e			; 73 ;7d82
-	pop de			; d1 ;7d83
-	dec de			; 1b ;7d84
-	ret			; c9 ;7d85
-	push ix		; dd e5 ;7d86
-	pop hl			; e1 ;7d88
-	ld c,(ix+009h)		; dd 4e 09 ;7d89
-	ld b,000h		; 06 00 ;7d8c
-	add hl,bc			; 09 ;7d8e
-	ld e,(hl)			; 5e ;7d8f
-	inc hl			; 23 ;7d90
-	ld d,(hl)			; 56 ;7d91
-	inc (ix+009h)		; dd 34 09 ;7d92
-	inc (ix+009h)		; dd 34 09 ;7d95
-	ret			; c9 ;7d98
-	ld a,(de)			; 1a ;7d99
-	inc de			; 13 ;7d9a
-	add a,017h		; c6 17 ;7d9b
-	ld c,a			; 4f ;7d9d
-	ld b,000h		; 06 00 ;7d9e
-	push ix		; dd e5 ;7da0
-	pop hl			; e1 ;7da2
-	add hl,bc			; 09 ;7da3
-	ld a,(hl)			; 7e ;7da4
-	or a			; b7 ;7da5
-	jr nz,l7daah		; 20 02 ;7da6
-	ld a,(de)			; 1a ;7da8
-	ld (hl),a			; 77 ;7da9
-l7daah:
-	inc de			; 13 ;7daa
-	dec (hl)			; 35 ;7dab
-	jp nz,l7d49h		; c2 49 7d ;7dac
-	inc de			; 13 ;7daf
-	ret			; c9 ;7db0
-sub_7db1h:
-	ld a,(ix+001h)		; dd 7e 01 ;7db1
-	and 00fh		; e6 0f ;7db4
-	ld c,a			; 4f ;7db6
-	ld b,000h		; 06 00 ;7db7
-	ld hl,l7bcch		; 21 cc 7b ;7db9
-	add hl,bc			; 09 ;7dbc
-	ld a,(hl)			; 7e ;7dbd
-	or 00fh		; f6 0f ;7dbe
-sub_7dc0h:
-	bit 2,(ix+000h)		; dd cb 00 56 ;7dc0
-	ret nz			; c0 ;7dc4
-	out (07fh),a		; d3 7f ;7dc5
-	ret			; c9 ;7dc7
-l7dc8h:
-	exx			; d9 ;7dc8
-	ld hl,0de01h		; 21 01 de ;7dc9
-	ld de,0de02h		; 11 02 de ;7dcc
-	ld bc,000dfh		; 01 df 00 ;7dcf
-	ld (hl),000h		; 36 00 ;7dd2
-	ldir		; ed b0 ;7dd4
-	exx			; d9 ;7dd6
-	.INCLUDE "audio/audio_silence.asm"
-sub_7de3h:
-	xor a			; af ;7de3
-	ld (0de85h),a		; 32 85 de ;7de4
-	ld (0dea5h),a		; 32 a5 de ;7de7
-	ld (0dec5h),a		; 32 c5 de ;7dea
-	ret			; c9 ;7ded
-data_audio_silence:
-	.INCLUDE "audio/data/silence.asm"
-l7df2h:
-	nop			; 00 ;7df2
-	nop			; 00 ;7df3
-	rst 38h			; ff ;7df4
-	inc bc			; 03 ;7df5
-	rst 0			; c7 ;7df6
-	inc bc			; 03 ;7df7
-	sub b			; 90 ;7df8
-	inc bc			; 03 ;7df9
-	ld e,l			; 5d ;7dfa
-	inc bc			; 03 ;7dfb
-	dec l			; 2d ;7dfc
-	inc bc			; 03 ;7dfd
-	rst 38h			; ff ;7dfe
-	ld (bc),a			; 02 ;7dff
-	call nc,0ab02h		; d4 02 ab ;7e00
-	ld (bc),a			; 02 ;7e03
-	add a,l			; 85 ;7e04
-	ld (bc),a			; 02 ;7e05
-	ld h,c			; 61 ;7e06
-	ld (bc),a			; 02 ;7e07
-	ccf			; 3f ;7e08
-	ld (bc),a			; 02 ;7e09
-	ld e,002h		; 1e 02 ;7e0a
-	nop			; 00 ;7e0c
-	ld (bc),a			; 02 ;7e0d
-	ex (sp),hl			; e3 ;7e0e
-	ld bc,001c8h		; 01 c8 01 ;7e0f
-	xor a			; af ;7e12
-	ld bc,00196h		; 01 96 01 ;7e13
-	add a,b			; 80 ;7e16
-	ld bc,l016ah		; 01 6a 01 ;7e17
-	ld d,(hl)			; 56 ;7e1a
-	ld bc,l0142h+1		; 01 43 01 ;7e1b
-	jr nc,l7e21h		; 30 01 ;7e1e
-	rra			; 1f ;7e20
-l7e21h:
-	ld bc,l010fh		; 01 0f 01 ;7e21
-	nop			; 00 ;7e24
-	ld bc,l00f1h+1		; 01 f2 00 ;7e25
-	call po,0d700h		; e4 00 d7 ;7e28
-	nop			; 00 ;7e2b
-	rlc b		; cb 00 ;7e2c
-	ret nz			; c0 ;7e2e
-	nop			; 00 ;7e2f
-	or l			; b5 ;7e30
-	nop			; 00 ;7e31
-	xor e			; ab ;7e32
-	nop			; 00 ;7e33
-	and c			; a1 ;7e34
-	nop			; 00 ;7e35
-	sbc a,b			; 98 ;7e36
-	nop			; 00 ;7e37
-	sub b			; 90 ;7e38
-	nop			; 00 ;7e39
-	adc a,b			; 88 ;7e3a
-	nop			; 00 ;7e3b
-	add a,b			; 80 ;7e3c
-	nop			; 00 ;7e3d
-	ld a,c			; 79 ;7e3e
-	nop			; 00 ;7e3f
-	ld (hl),d			; 72 ;7e40
-	nop			; 00 ;7e41
-	ld l,h			; 6c ;7e42
-	nop			; 00 ;7e43
-	ld h,(hl)			; 66 ;7e44
-	nop			; 00 ;7e45
-	ld h,b			; 60 ;7e46
-	nop			; 00 ;7e47
-	ld e,e			; 5b ;7e48
-	nop			; 00 ;7e49
-	ld d,l			; 55 ;7e4a
-	nop			; 00 ;7e4b
-	ld d,c			; 51 ;7e4c
-	nop			; 00 ;7e4d
-	ld c,h			; 4c ;7e4e
-	nop			; 00 ;7e4f
-	ld c,b			; 48 ;7e50
-	nop			; 00 ;7e51
-	ld b,h			; 44 ;7e52
-	nop			; 00 ;7e53
-	ld b,b			; 40 ;7e54
-	nop			; 00 ;7e55
-	inc a			; 3c ;7e56
-	nop			; 00 ;7e57
-	add hl,sp			; 39 ;7e58
-	nop			; 00 ;7e59
-	ld (hl),000h		; 36 00 ;7e5a
-	inc sp			; 33 ;7e5c
-	nop			; 00 ;7e5d
-	jr nc,l7e60h		; 30 00 ;7e5e
-l7e60h:
-	dec l			; 2d ;7e60
-	nop			; 00 ;7e61
-	dec hl			; 2b ;7e62
-	nop			; 00 ;7e63
-	jr z,l7e66h		; 28 00 ;7e64
-l7e66h:
-	ld h,000h		; 26 00 ;7e66
-	inc h			; 24 ;7e68
-	nop			; 00 ;7e69
-	ld (l2000h),hl		; 22 00 20 ;7e6a
-	nop			; 00 ;7e6d
-	ld e,000h		; 1e 00 ;7e6e
-	inc e			; 1c ;7e70
-	nop			; 00 ;7e71
-	dec de			; 1b ;7e72
-	nop			; 00 ;7e73
-	add hl,de			; 19 ;7e74
-	nop			; 00 ;7e75
-	jr l7e78h		; 18 00 ;7e76
-l7e78h:
-	ld d,000h		; 16 00 ;7e78
-	dec d			; 15 ;7e7a
-	nop			; 00 ;7e7b
-	inc d			; 14 ;7e7c
-	nop			; 00 ;7e7d
-	inc de			; 13 ;7e7e
-	nop			; 00 ;7e7f
-	ld (de),a			; 12 ;7e80
-	nop			; 00 ;7e81
-	.DB $11 $00		;7e82
-    .INCLUDE "math/mul_h_e.asm"
-    .INCLUDE "math/div_hl_e.asm"
+	.DW l7ceeh_0		;7cee
+	.DW $7d23		;7cf0
+	.DW $7d5e		;7cf2
+	.DW $7d28		;7cf4
+	.DW $7d3f		;7cf6
+	.DW $7d49		;7cf8
+	.DW $7d0e		;7cfa
+	.DW $7d4f		;7cfc
+	.DW $7d4f		;7cfe
+	.DW $7d4f		;7d00
+	.DW $7d6b		;7d02
+	.DW $7d86		;7d04
+	.DW $7d99		;7d06
+	.DW $7d44		;7d08
+	.DW $7d16		;7d0a
+    .INCLUDE "fragment.asm"
 	.ENDIF
 	.DSB 94, $ff			;7ea3
 	.DSB 1, $ff			;7f01
