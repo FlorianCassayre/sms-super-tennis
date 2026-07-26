@@ -193,13 +193,13 @@ l7df2h:
 	xor a			; af ;7e12
 	ld bc,00196h		; 01 96 01 ;7e13
 	add a,b			; 80 ;7e16
-	ld bc,l016ah		; 01 6a 01 ;7e17
+	ld bc,0016ah		; 01 6a 01 ;7e17
 	ld d,(hl)			; 56 ;7e1a
-	ld bc,l0142h+1		; 01 43 01 ;7e1b
+	ld bc,00142h+1		; 01 43 01 ;7e1b
 	jr nc,l7e21h		; 30 01 ;7e1e
 	rra			; 1f ;7e20
 l7e21h:
-	ld bc,l010fh		; 01 0f 01 ;7e21
+	ld bc,0010fh		; 01 0f 01 ;7e21
 	nop			; 00 ;7e24
 	ld bc,l00f1h+1		; 01 f2 00 ;7e25
 	call po,0d700h		; e4 00 d7 ;7e28
