@@ -4,17 +4,17 @@ sub_update_ball_state:
 	ld hl,(0c50ah)		; 2a 0a c5 ;16b4
 	adc hl,de		; ed 5a ;16b7
 	bit 7,d		; cb 7a ;16b9
-	jr nz,l16c1h		; 20 04 ;16bb
-	jr nc,l16cch		; 30 0d ;16bd
-	jr l16c3h		; 18 02 ;16bf
-l16c1h:
-	jr c,l16cch		; 38 09 ;16c1
-l16c3h:
+	jr nz,+		; 20 04 ;16bb
+	jr nc,+++		; 30 0d ;16bd
+	jr ++		; 18 02 ;16bf
++:
+	jr c,+++		; 38 09 ;16c1
+++:
 	xor a			; af ;16c3
 	ld hl,start		; 21 00 00 ;16c4
 	sbc hl,de		; ed 52 ;16c7
 	ld (0c50eh),hl		; 22 0e c5 ;16c9
-l16cch:
++++:
 	xor a			; af ;16cc
 	ld de,(0c50ch)		; ed 5b 0c c5 ;16cd
 	ld hl,(0c508h)		; 2a 08 c5 ;16d1
@@ -60,35 +60,35 @@ l16f6h:
 	ld (0de00h),a		; 32 00 de ;171a
 	ld a,(0c519h)		; 3a 19 c5 ;171d
 	or a			; b7 ;1720
-	jr nz,l1728h		; 20 05 ;1721
+	jr nz,+		; 20 05 ;1721
 	ld a,001h		; 3e 01 ;1723
 	ld (0c518h),a		; 32 18 c5 ;1725
-l1728h:
++:
 	ld hl,(0c506h)		; 2a 06 c5 ;1728
 	push hl			; e5 ;172b
 	call sub_ball_bounce		; cd 9c 15 ;172c
 	pop de			; d1 ;172f
 	bit 7,d		; cb 7a ;1730
-	jr z,l173bh		; 28 07 ;1732
+	jr z,+		; 28 07 ;1732
 	ld hl,start		; 21 00 00 ;1734
 	xor a			; af ;1737
 	sbc hl,de		; ed 52 ;1738
 	ex de,hl			; eb ;173a
-l173bh:
++:
 	ld (0c506h),de		; ed 53 06 c5 ;173b
-	jr l1756h		; 18 15 ;173f
+	jr +		; 18 15 ;173f
 l1741h:
 	ld a,089h		; 3e 89 ;1741
 	ld (0de00h),a		; 32 00 de ;1743
 l1746h:
 	ld a,(0c519h)		; 3a 19 c5 ;1746
 	or a			; b7 ;1749
-	jr nz,l1756h		; 20 0a ;174a
+	jr nz,+		; 20 0a ;174a
 	ld a,002h		; 3e 02 ;174c
 	ld (0c518h),a		; 32 18 c5 ;174e
 	ld a,001h		; 3e 01 ;1751
 	ld (0c519h),a		; 32 19 c5 ;1753
-l1756h:
++:
 	ld hl,0c000h		; 21 00 c0 ;1756
 	res 0,(hl)		; cb 86 ;1759
 	xor a			; af ;175b

@@ -9,7 +9,7 @@ sub_vdp_build_sprite_buffer:
 	ld (0c492h),a		; 32 92 c4 ;0a1d
 	ld b,003h		; 06 03 ;0a20
 	ld de,0c047h		; 11 47 c0 ;0a22
-l0a25h:
+-:
 	push bc			; c5 ;0a25
 	ld a,(0c491h)		; 3a 91 c4 ;0a26
 	ld b,a			; 47 ;0a29
@@ -37,7 +37,7 @@ l0a25h:
 	inc a			; 3c ;0a4e
 	ld (0c492h),a		; 32 92 c4 ;0a4f
 	pop bc			; c1 ;0a52
-	djnz l0a25h		; 10 d0 ;0a53
+	djnz -		; 10 d0 ;0a53
 	ld a,(0c491h)		; 3a 91 c4 ;0a55
 	ld b,a			; 47 ;0a58
 	ld a,(0c492h)		; 3a 92 c4 ;0a59

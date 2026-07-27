@@ -20,9 +20,9 @@ l0568h:
 	ld a,(de)			; 1a ;0568
 	add a,(ix+00bh)		; dd 86 0b ;0569
 	cp 0d0h		; fe d0 ;056c
-	jr nz,l0572h		; 20 02 ;056e
+	jr nz,+		; 20 02 ;056e
 	ld a,0d8h		; 3e d8 ;0570
-l0572h:
++:
 	ld (hl),a			; 77 ;0572
 	inc de			; 13 ;0573
 	ld a,(de)			; 1a ;0574

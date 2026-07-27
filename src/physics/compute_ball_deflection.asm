@@ -2,9 +2,9 @@ sub_compute_ball_deflection:
 	ld a,e			; 7b ;160a
 l160bh:
 	sub 018h		; d6 18 ;160b
-	jr nc,l1611h		; 30 02 ;160d
+	jr nc,+		; 30 02 ;160d
 	ld a,000h		; 3e 00 ;160f
-l1611h:
++:
 	ld e,a			; 5f ;1611
 	ld d,000h		; 16 00 ;1612
 	ld hl,0d0e8h		; 21 e8 d0 ;1614
@@ -13,20 +13,20 @@ l1611h:
 	ld (0c51ah),a		; 32 1a c5 ;1619
 	ld a,(0c509h)		; 3a 09 c5 ;161c
 	sub (hl)			; 96 ;161f
-	jr nc,l1624h		; 30 02 ;1620
+	jr nc,+		; 30 02 ;1620
 	neg		; ed 44 ;1622
-l1624h:
++:
 	ld d,a			; 57 ;1624
 	ld e,000h		; 1e 00 ;1625
 	ld bc,(0c50ch)		; ed 4b 0c c5 ;1627
 	bit 7,b		; cb 78 ;162b
-	jr z,l1637h		; 28 08 ;162d
+	jr z,+		; 28 08 ;162d
 	xor a			; af ;162f
 	ld hl,start		; 21 00 00 ;1630
 	sbc hl,bc		; ed 42 ;1633
 	push hl			; e5 ;1635
 	pop bc			; c1 ;1636
-l1637h:
++:
 	ld hl,start		; 21 00 00 ;1637
 	call sub_div_hl_de_bc		; cd 0b 04 ;163a
 	ld b,e			; 43 ;163d
@@ -34,23 +34,23 @@ l1637h:
 	ld de,(0c50eh)		; ed 5b 0e c5 ;163f
 	push de			; d5 ;1643
 	bit 7,d		; cb 7a ;1644
-	jr z,l164fh		; 28 07 ;1646
+	jr z,+		; 28 07 ;1646
 	xor a			; af ;1648
 	ld hl,start		; 21 00 00 ;1649
 	sbc hl,de		; ed 52 ;164c
 	ex de,hl			; eb ;164e
-l164fh:
++:
 	call sub_mul_de_bc		; cd f7 03 ;164f
 	ld d,e			; 53 ;1652
 	ld e,h			; 5c ;1653
 	pop hl			; e1 ;1654
 	bit 7,h		; cb 7c ;1655
-	jr z,l1660h		; 28 07 ;1657
+	jr z,+		; 28 07 ;1657
 	xor a			; af ;1659
 	ld hl,start		; 21 00 00 ;165a
 	sbc hl,de		; ed 52 ;165d
 	ex de,hl			; eb ;165f
-l1660h:
++:
 	ld hl,(0c50ah)		; 2a 0a c5 ;1660
 	add hl,de			; 19 ;1663
 	push hl			; e5 ;1664
@@ -74,12 +74,12 @@ l1660h:
 	xor a			; af ;1680
 	sbc hl,de		; ed 52 ;1681
 	push af			; f5 ;1683
-	jr nc,l168dh		; 30 07 ;1684
+	jr nc,+		; 30 07 ;1684
 	xor a			; af ;1686
 	ex de,hl			; eb ;1687
 	ld hl,start		; 21 00 00 ;1688
 	sbc hl,de		; ed 52 ;168b
-l168dh:
++:
 	push hl			; e5 ;168d
 	exx			; d9 ;168e
 	pop bc			; c1 ;168f
@@ -88,21 +88,21 @@ l168dh:
 	ld d,e			; 53 ;1694
 	ld e,h			; 5c ;1695
 	ld hl,08000h		; 21 00 80 ;1696
-	jr nc,l16a2h		; 30 07 ;1699
+	jr nc,+		; 30 07 ;1699
 	xor a			; af ;169b
 	adc hl,de		; ed 5a ;169c
-	jr c,l16a9h		; 38 09 ;169e
-	jr l16a7h		; 18 05 ;16a0
-l16a2h:
+	jr c,+++		; 38 09 ;169e
+	jr ++		; 18 05 ;16a0
++:
 	xor a			; af ;16a2
 	sbc hl,de		; ed 52 ;16a3
-	jr c,l16ach		; 38 05 ;16a5
-l16a7h:
+	jr c,++++		; 38 05 ;16a5
+++:
 	ld a,h			; 7c ;16a7
 	ret			; c9 ;16a8
-l16a9h:
++++:
 	ld a,0ffh		; 3e ff ;16a9
 	ret			; c9 ;16ab
-l16ach:
+++++:
 	ld a,000h		; 3e 00 ;16ac
 	ret			; c9 ;16ae

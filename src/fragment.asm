@@ -7,7 +7,7 @@
     	.DB $c0
 	.ENDIF
 sub_796fh:
-	call sub_79a8h		; cd a8 79 ;796f
+	call sub_79a8h_jump_table		; cd a8 79 ;796f
 	call sub_798ch		; cd 8c 79 ;7972
 	ld ix,0de05h		; dd 21 05 de ;7975
 	ld b,007h		; 06 07 ;7979
@@ -36,7 +36,7 @@ sub_798ch:
 	ld a,018h		; 3e 18 ;79a4
 	ld (hl),a			; 77 ;79a6
 	ret			; c9 ;79a7
-sub_79a8h:
+sub_79a8h_jump_table:
 	ld a,(0de00h)		; 3a 00 de ;79a8
 	bit 7,a		; cb 7f ;79ab
 	jp z,l7dc8h		; ca c8 7d ;79ad
@@ -589,7 +589,7 @@ l7df2h:
 l7e21h:
 	ld bc,0010fh		; 01 0f 01 ;7e21
 	nop			; 00 ;7e24
-	ld bc,l00f1h+1		; 01 f2 00 ;7e25
+	ld bc,000f1h+1		; 01 f2 00 ;7e25
 	call po,0d700h		; e4 00 d7 ;7e28
 	nop			; 00 ;7e2b
 	rlc b		; cb 00 ;7e2c

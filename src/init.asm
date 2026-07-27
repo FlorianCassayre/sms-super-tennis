@@ -42,7 +42,7 @@ init:
 	djnz --		; 10 f8 ;00ce
 	call sub_check_hardware		; cd 06 41 ;00d0
 	ld (0c010h),a		; 32 10 c0 ;00d3
-l00d6h:
+-:
 	di			; f3 ;00d6
 	ld sp,0dffeh		; 31 fe df ;00d7
 	xor a			; af ;00da
@@ -54,7 +54,6 @@ l00d6h:
 	ld bc,l1fbfh		; 01 bf 1f ;00ea
 	ld (hl),000h		; 36 00 ;00ed
 	ldir		; ed b0 ;00ef
-l00f1h:
 	; VDP initialization
 	in a,(0bfh)		; db bf ;00f1
 	ld b,016h		; 06 16 ;00f3
@@ -64,7 +63,6 @@ l00f1h:
 	ld hl,start		; 21 00 00 ;00fc
 	ld de,l002dh		; 11 2d 00 ;00ff
 	ld b,001h		; 06 01 ;0102
-l0104h:
 	call sub_load_cram		; cd 81 04 ;0104
 	ld hl,l0010h		; 21 10 00 ;0107
 	ld de,l002dh		; 11 2d 00 ;010a
@@ -91,7 +89,7 @@ l0104h:
 	ld de,0cbe8h		; 11 e8 cb ;0148
 	ld hl,data_planes_5_0		; 21 37 4c ;014b
 	call sub_rle_decompress_bitplanes_to_ram		; cd ed 04 ;014e
-	call l0386h+2		; cd 88 03 ;0151
+	call sub_init_background_name_table		; cd 88 03 ;0151
 	ld a,080h		; 3e 80 ;0154
 	ld (0de00h),a		; 32 00 de ;0156
 	ld a,080h		; 3e 80 ;0159
@@ -99,3 +97,25 @@ l0104h:
 	call sub_enable_display		; cd a0 03 ;015e
 	ei			; fb ;0161
 	jp game_fsm		; c3 f8 07 ;0162
+.INCLUDE "graphics/isr_vblank_update.asm"
+l0213h:
+	call sub_audio_silence		; cd d7 7d ;0213
+	jp -		; c3 d6 00 ;0216
+l0219h:
+	ld c,018h		; 0e 18 ;0219
+	call sub_delay_vdp		; cd 60 02 ;021b
+	call sub_update_cond_color		; cd 68 02 ;021e
+	jp l01feh		; c3 fe 01 ;0221
+l0224h:
+	ld c,018h		; 0e 18 ;0224
+	call sub_delay_vdp		; cd 60 02 ;0226
+	call sub_update_cond_color		; cd 68 02 ;0229
+	jp l01fbh		; c3 fb 01 ;022c
+l022fh:
+	ld c,00dh		; 0e 0d ;022f
+	call sub_delay_vdp		; cd 60 02 ;0231
+	jp l01e4h		; c3 e4 01 ;0234
+l0237h:
+	ld a,(0c011h)		; 3a 11 c0 ;0237
+	or a			; b7 ;023a
+	jr z,l025dh		; 28 20 ;023b

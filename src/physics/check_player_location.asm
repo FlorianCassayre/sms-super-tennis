@@ -11,11 +11,11 @@ sub_179fh:
 	ld e,000h		; 1e 00 ;179f
 	ld a,(ix+014h)		; dd 7e 14 ;17a1
 	sub (iy+014h)		; fd 96 14 ;17a4
-	jr nc,l17abh		; 30 02 ;17a7
+	jr nc,+		; 30 02 ;17a7
 	neg		; ed 44 ;17a9
-l17abh:
++:
 	cp 004h		; fe 04 ;17ab
-	jr nc,l17d6h		; 30 27 ;17ad
+	jr nc,+		; 30 27 ;17ad
 	ld hl,l17e7h		; 21 e7 17 ;17af
 	call sub_17f1h		; cd f1 17 ;17b2
 	ld (0c082h),bc		; ed 43 82 c0 ;17b5
@@ -29,7 +29,7 @@ l17abh:
 	ld (0c08eh),bc		; ed 43 8e c0 ;17cb
 	ld (0c090h),de		; ed 53 90 c0 ;17cf
 	call sub_1806h		; cd 06 18 ;17d3
-l17d6h:
++:
 	ld d,000h		; 16 00 ;17d6
 	ld hl,l1775h		; 21 75 17 ;17d8
 	add hl,de			; 19 ;17db
