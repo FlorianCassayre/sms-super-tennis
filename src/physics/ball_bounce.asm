@@ -23,7 +23,7 @@ sub_ball_bounce:
 	call sub_mul_de_bc		; cd f7 03 ;15c9
 	ld d,e			; 53 ;15cc
 	ld e,h			; 5c ;15cd
-	ld a,(VEL_Z_HI)		; 3a 0f c5 ;15ce
+	ld a,(VEL_Z + 1)		; 3a 0f c5 ;15ce
 	bit 7,a		; cb 7f ;15d1
 	jr z,+		; 28 07 ;15d3
 	xor a			; af ;15d5
@@ -44,7 +44,7 @@ sub_ball_bounce:
 	call sub_mul_de_bc		; cd f7 03 ;15f2
 	ld d,e			; 53 ;15f5
 	ld e,h			; 5c ;15f6
-	ld a,(VEL_X_HI)		; 3a 0d c5 ;15f7
+	ld a,(VEL_X + 1)		; 3a 0d c5 ;15f7
 	bit 7,a		; cb 7f ;15fa
 	jr z,+		; 28 07 ;15fc
 	xor a			; af ;15fe

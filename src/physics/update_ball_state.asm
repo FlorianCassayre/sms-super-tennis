@@ -1,6 +1,6 @@
 sub_update_ball_state:
 	xor a			; af ;16af
-	ld de,(0c50eh)		; ed 5b 0e c5 ;16b0
+	ld de,(VEL_Z)		; ed 5b 0e c5 ;16b0
 	ld hl,(0c50ah)		; 2a 0a c5 ;16b4
 	adc hl,de		; ed 5a ;16b7
 	bit 7,d		; cb 7a ;16b9
@@ -13,10 +13,10 @@ sub_update_ball_state:
 	xor a			; af ;16c3
 	ld hl,start		; 21 00 00 ;16c4
 	sbc hl,de		; ed 52 ;16c7
-	ld (0c50eh),hl		; 22 0e c5 ;16c9
+	ld (VEL_Z),hl		; 22 0e c5 ;16c9
 +++:
 	xor a			; af ;16cc
-	ld de,(0c50ch)		; ed 5b 0c c5 ;16cd
+	ld de,(VEL_X)		; ed 5b 0c c5 ;16cd
 	ld hl,(0c508h)		; 2a 08 c5 ;16d1
 	adc hl,de		; ed 5a ;16d4
 	bit 7,d		; cb 7a ;16d6
@@ -64,7 +64,7 @@ l16f6h:
 	ld a,001h		; 3e 01 ;1723
 	ld (0c518h),a		; 32 18 c5 ;1725
 +:
-	ld hl,(0c506h)		; 2a 06 c5 ;1728
+	ld hl,(VEL_Y)		; 2a 06 c5 ;1728
 	push hl			; e5 ;172b
 	call sub_ball_bounce		; cd 9c 15 ;172c
 	pop de			; d1 ;172f
@@ -75,7 +75,7 @@ l16f6h:
 	sbc hl,de		; ed 52 ;1738
 	ex de,hl			; eb ;173a
 +:
-	ld (0c506h),de		; ed 53 06 c5 ;173b
+	ld (VEL_Y),de		; ed 53 06 c5 ;173b
 	jr +		; 18 15 ;173f
 l1741h:
 	ld a,089h		; 3e 89 ;1741
@@ -93,7 +93,7 @@ l1746h:
 	res 0,(hl)		; cb 86 ;1759
 	xor a			; af ;175b
 	ld hl,start		; 21 00 00 ;175c
-	ld de,(0c50ch)		; ed 5b 0c c5 ;175f
+	ld de,(VEL_X)		; ed 5b 0c c5 ;175f
 	sbc hl,de		; ed 52 ;1763
-	ld (0c50ch),hl		; 22 0c c5 ;1765
+	ld (VEL_X),hl		; 22 0c c5 ;1765
 	ret			; c9 ;1768

@@ -28,7 +28,7 @@ sub_179fh:
 	pop ix		; dd e1 ;17c9
 	ld (0c08eh),bc		; ed 43 8e c0 ;17cb
 	ld (0c090h),de		; ed 53 90 c0 ;17cf
-	call sub_1806h		; cd 06 18 ;17d3
+	call sub_1806h_bound_check		; cd 06 18 ;17d3
 +:
 	ld d,000h		; 16 00 ;17d6
 	ld hl,l1775h		; 21 75 17 ;17d8
