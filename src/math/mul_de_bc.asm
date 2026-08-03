@@ -1,5 +1,5 @@
 sub_mul_de_bc:
-	ld hl,start		; 21 00 00 ;03f7
+	ld hl,0		; 21 00 00 ;03f7
 	ld a,010h		; 3e 10 ;03fa
 mul_de_bc_loop:
 	add hl,hl			; 29 ;03fc

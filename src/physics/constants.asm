@@ -9,6 +9,8 @@
 .equ BOUNCE_COEF 160 ; (160 / 256 = 0.625 Restitution)
 .equ FRICTION_COEF 128 ; (128 / 256 = 0.500 Damping)
 
+.equ BALL_MAX_BOUNCES 5
+
 .equ STATE_FROZEN $002 ; If state >= 2, object is stationary/dead
 .equ ZERO $0000
 
@@ -65,3 +67,14 @@
 .equ P1_SPEED_STATE_A       $c047   ; Player 1 state index A
 .equ P1_SPEED_STATE_B       $c049   ; Player 1 state index B (CPU?)
 .equ P2_SPEED_STATE         $c04a   ; Player 2 state index
+
+; Player
+.equ PLAYER_BOTTOM $c200
+.equ PLAYER_TOP $c280
+
+.STRUCT player
+	unknown_00 DS 13
+	x          DB
+	unknown_0E DS 6
+	y          DB
+.ENDST

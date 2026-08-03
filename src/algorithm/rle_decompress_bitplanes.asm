@@ -3,7 +3,7 @@
 ; - 0x00: End of Stream (terminates current bitplane)
 ; - 0b1xxxxxxx: Literal Mode. Lower 7 bits define the run length. The next N bytes are copied directly.
 ; - 0b0xxxxxxx: RLE Mode. Lower 7 bits define the run length. The single following byte is repeated N times.
-sub_rle_decompress_bitplanes:
+sub_rle_decompress_bitplanes_to_vram:
 	ld b,004h		; 06 04 ;04b5
 -:
 	push bc			; c5 ;04b7

@@ -2,29 +2,29 @@ sub_check_player_location:
 	ld a,(0c000h)		; 3a 00 c0 ;1787
 	rlca			; 07 ;178a
 	ret nc			; d0 ;178b
-	ld ix,0c200h		; dd 21 00 c2 ;178c
-	ld iy,0c280h		; fd 21 80 c2 ;1790
+	ld ix,PLAYER_BOTTOM		; dd 21 00 c2 ;178c
+	ld iy,PLAYER_TOP		; fd 21 80 c2 ;1790
 	call sub_179fh		; cd 9f 17 ;1794
 	ld ix,0c240h		; dd 21 40 c2 ;1797
 	ld iy,0c2c0h		; fd 21 c0 c2 ;179b
 sub_179fh:
 	ld e,000h		; 1e 00 ;179f
-	ld a,(ix+014h)		; dd 7e 14 ;17a1
-	sub (iy+014h)		; fd 96 14 ;17a4
+	ld a,(ix+player.y)		; dd 7e 14 ;17a1
+	sub (iy+player.y)		; fd 96 14 ;17a4
 	jr nc,+		; 30 02 ;17a7
 	neg		; ed 44 ;17a9
 +:
 	cp 004h		; fe 04 ;17ab
 	jr nc,+		; 30 27 ;17ad
 	ld hl,l17e7h		; 21 e7 17 ;17af
-	call sub_17f1h		; cd f1 17 ;17b2
+	call sub_17f1h_aabb		; cd f1 17 ;17b2
 	ld (0c082h),bc		; ed 43 82 c0 ;17b5
 	ld (0c084h),de		; ed 53 84 c0 ;17b9
 	push ix		; dd e5 ;17bd
 	push iy		; fd e5 ;17bf
 	pop ix		; dd e1 ;17c1
 	ld hl,l17e7h		; 21 e7 17 ;17c3
-	call sub_17f1h		; cd f1 17 ;17c6
+	call sub_17f1h_aabb		; cd f1 17 ;17c6
 	pop ix		; dd e1 ;17c9
 	ld (0c08eh),bc		; ed 43 8e c0 ;17cb
 	ld (0c090h),de		; ed 53 90 c0 ;17cf

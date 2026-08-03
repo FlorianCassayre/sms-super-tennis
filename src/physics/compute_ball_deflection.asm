@@ -22,12 +22,12 @@ l160bh:
 	bit 7,b		; cb 78 ;162b
 	jr z,+		; 28 08 ;162d
 	xor a			; af ;162f
-	ld hl,start		; 21 00 00 ;1630
+	ld hl,0		; 21 00 00 ;1630
 	sbc hl,bc		; ed 42 ;1633
 	push hl			; e5 ;1635
 	pop bc			; c1 ;1636
 +:
-	ld hl,start		; 21 00 00 ;1637
+	ld hl,0		; 21 00 00 ;1637
 	call sub_div_hl_de_bc		; cd 0b 04 ;163a
 	ld b,e			; 43 ;163d
 	ld c,h			; 4c ;163e
@@ -36,7 +36,7 @@ l160bh:
 	bit 7,d		; cb 7a ;1644
 	jr z,+		; 28 07 ;1646
 	xor a			; af ;1648
-	ld hl,start		; 21 00 00 ;1649
+	ld hl,0		; 21 00 00 ;1649
 	sbc hl,de		; ed 52 ;164c
 	ex de,hl			; eb ;164e
 +:
@@ -47,7 +47,7 @@ l160bh:
 	bit 7,h		; cb 7c ;1655
 	jr z,+		; 28 07 ;1657
 	xor a			; af ;1659
-	ld hl,start		; 21 00 00 ;165a
+	ld hl,0		; 21 00 00 ;165a
 	sbc hl,de		; ed 52 ;165d
 	ex de,hl			; eb ;165f
 +:
@@ -77,7 +77,7 @@ l160bh:
 	jr nc,+		; 30 07 ;1684
 	xor a			; af ;1686
 	ex de,hl			; eb ;1687
-	ld hl,start		; 21 00 00 ;1688
+	ld hl,0		; 21 00 00 ;1688
 	sbc hl,de		; ed 52 ;168b
 +:
 	push hl			; e5 ;168d

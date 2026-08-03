@@ -6,6 +6,6 @@ sub_update_cond_color:
 	out (0bfh),a		; d3 bf ;026f
 	ld a,0c0h		; 3e c0 ;0271
 	out (0bfh),a		; d3 bf ;0273
-	ld a,(l0013h)		; 3a 13 00 ;0275
+	ld a,(00013h)		; 3a 13 00 ;0275
 	out (0beh),a		; d3 be ;0278
 	ret			; c9 ;027a

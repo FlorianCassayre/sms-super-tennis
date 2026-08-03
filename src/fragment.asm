@@ -6,20 +6,7 @@
     	.DB $5f
     	.DB $c0
 	.ENDIF
-sub_796fh:
-	call sub_79a8h_jump_table		; cd a8 79 ;796f
-	call sub_798ch		; cd 8c 79 ;7972
-	ld ix,0de05h		; dd 21 05 de ;7975
-	ld b,007h		; 06 07 ;7979
-l797bh:
-	push bc			; c5 ;797b
-	bit 7,(ix+000h)		; dd cb 00 7e ;797c
-	call nz,sub_7addh		; c4 dd 7a ;7980
-	ld de,l0020h		; 11 20 00 ;7983
-	add ix,de		; dd 19 ;7986
-	pop bc			; c1 ;7988
-	djnz l797bh		; 10 f0 ;7989
-	ret			; c9 ;798b
+.INCLUDE "audio/audio_update_channels.asm"
 sub_798ch:
 	ld a,(0de01h)		; 3a 01 de ;798c
 	or a			; b7 ;798f
@@ -60,78 +47,7 @@ sub_79a8h_jump_table:
 	ld l,a			; 6f ;79ca
 	ld a,(0de03h)		; 3a 03 de ;79cb
 	jp (hl)			; e9 ;79ce
-l79cfh:
-	.DW l7149h		;79cf
-	.DW l7291h		;79d1
-	.DW l72ddh		;79d3
-	.DW l732bh		;79d5
-	.DW l7380h		;79d7
-	.DW l73d1h		;79d9
-	.DW l749eh		;79db
-	.DW l7522h		;79dd
-	.DW l78e6h		;79df
-	.DW l758ch		;79e1
-	.DW l75abh		;79e3
-	.IFDEF _J
-		.DW $7b23
-	.ENDIF
-	.IFDEF _UE
-		.DW l758ch		;79e5
-	.ENDIF
-	.DW l75ech		;79e7
-	.DW l7616h		;79e9
-	.DW l7633h		;79eb
-	.DW l7668h		;79ed
-	.DW l7689h		;79ef
-	.DW l76bch		;79f1
-	.DW l76c9h		;79f3
-	.DW l76d7h		;79f5
-	.DW l76d7h		;79f7
-	.DW l7700h		;79f9
-	.DW l7767h		;79fb
-	.DW l7816h		;79fd
-	.DW l785dh		;79ff
-	.DW l78a9h		;7a01
-	.DW l7ad7h		;7a03
-	.DW 0200bh		;7a05
-	.DW l7a61h		;7a07
-    .DW l7a61h		;7a09
-    .DW l7a61h		;7a0b
-    .DW l7a61h		;7a0d
-    .DW l7a61h		;7a0f
-    .DW l7a61h		;7a11
-    .DW l7a61h		;7a13
-	.DW l7a61h		;7a15
-	.DW l7aa6h		;7a17
-    .DW l7aa6h		;7a19
-    .DW l7aa6h		;7a1b
-	.IFDEF _J
-    	.DW $726c
-	.ENDIF
-	.IFDEF _UE
-		.DW l7aa6h		;7a1d
-	.ENDIF
-	.DW l7a72h		;7a1f
-	.DW l7aa6h		;7a21
-	.IFDEF _J
-    	.DW $7285
-	.ENDIF
-	.IFDEF _UE
-		.DW l7a8dh		;7a23
-	.ENDIF
-	.DW l7aa6h		;7a25
-	.DW l7aa6h		;7a27
-	.DW l7a9eh		;7a29
-	.DW l7a9eh		;7a2b
-	.DW l7aa6h		;7a2d
-	.DW l7aa6h		;7a2f
-	.DW l7a6eh		;7a31
-	.DW l7a6eh		;7a33
-	.DW l7a6eh		;7a35
-	.DW l7a6eh		;7a37
-	.DW l7a6eh		;7a39
-	.DW l7a4fh		;7a3b
-	.DW l7a3fh		;7a3d
+.INCLUDE "data/table_l79cfh.asm"
 l7a3fh:
 	ld hl,0de01h		; 21 01 de ;7a3f
 	ld (hl),c			; 71 ;7a42
@@ -226,7 +142,7 @@ l7aafh:
 	inc hl			; 23 ;7ab7
 l7ab8h:
 	push bc			; c5 ;7ab8
-	ld bc,l0009h		; 01 09 00 ;7ab9
+	ld bc,9		; 01 09 00 ;7ab9
 	ldir		; ed b0 ;7abc
 	ld a,020h		; 3e 20 ;7abe
 	ld (de),a			; 12 ;7ac0
@@ -241,7 +157,7 @@ l7ab8h:
 	inc de			; 13 ;7aca
 	ld (de),a			; 12 ;7acb
 	push hl			; e5 ;7acc
-	ld hl,l0012h		; 21 12 00 ;7acd
+	ld hl,00012h		; 21 12 00 ;7acd
 	add hl,de			; 19 ;7ad0
 	ex de,hl			; eb ;7ad1
 	pop hl			; e1 ;7ad2
@@ -252,7 +168,7 @@ l7ad7h:
 	ld a,080h		; 3e 80 ;7ad7
 	ld (0de00h),a		; 32 00 de ;7ad9
 	ret			; c9 ;7adc
-sub_7addh:
+sub_audio_process_active_channel:
 	ld e,(ix+00ch)		; dd 5e 0c ;7add
 	ld d,(ix+00dh)		; dd 56 0d ;7ae0
 	inc de			; 13 ;7ae3
@@ -332,7 +248,7 @@ l7b7fh:
 	res 7,a		; cb bf ;7b7f
 	ld hl,l7905h		; 21 05 79 ;7b81
 	call sub_get_terrain_table		; cd 1c 7b ;7b84
-	call sub_7bd3h		; cd d3 7b ;7b87
+	call sub_audio_compute_word_offset		; cd d3 7b ;7b87
 l7b8ah:
 	bit 6,(ix+000h)		; dd cb 00 76 ;7b8a
 	jr nz,l7bb5h		; 20 25 ;7b8e
@@ -340,7 +256,7 @@ l7b8ah:
 	and 00fh		; e6 0f ;7b93
 	ld c,a			; 4f ;7b95
 	ld b,000h		; 06 00 ;7b96
-	ld hl,l7bc8h		; 21 c8 7b ;7b98
+	ld hl,l7bc8h_audio		; 21 c8 7b ;7b98
 	add hl,bc			; 09 ;7b9b
 	ld c,(hl)			; 4e ;7b9c
 	ld a,(ix+012h)		; dd 7e 12 ;7b9d
@@ -360,61 +276,16 @@ l7bb5h:
 	and 00fh		; e6 0f ;7bb8
 	ld c,a			; 4f ;7bba
 	ld b,000h		; 06 00 ;7bbb
-	ld hl,l7bcch		; 21 cc 7b ;7bbd
+	ld hl,l7bcch_audio		; 21 cc 7b ;7bbd
 	add hl,bc			; 09 ;7bc0
 	ld a,(hl)			; 7e ;7bc1
 	or (ix+016h)		; dd b6 16 ;7bc2
 	jp sub_write_psg		; c3 c0 7d ;7bc5
-l7bc8h:
-	add a,b			; 80 ;7bc8
-	and b			; a0 ;7bc9
-	ret nz			; c0 ;7bca
-	ret nz			; c0 ;7bcb
-l7bcch:
-	sub b			; 90 ;7bcc
-	or b			; b0 ;7bcd
-	ret nc			; d0 ;7bce
-	ret p			; f0 ;7bcf
-l7bd0h:
-	ld (ix+00eh),a		; dd 77 0e ;7bd0
-sub_7bd3h:
-	push hl			; e5 ;7bd3
-	ld a,(ix+00eh)		; dd 7e 0e ;7bd4
-	srl a		; cb 3f ;7bd7
-	push af			; f5 ;7bd9
-	ld c,a			; 4f ;7bda
-	ld b,000h		; 06 00 ;7bdb
-	add hl,bc			; 09 ;7bdd
-	pop af			; f1 ;7bde
-	ld a,(hl)			; 7e ;7bdf
-	pop hl			; e1 ;7be0
-	jr c,l7bf7h		; 38 14 ;7be1
-	rrca			; 0f ;7be3
-	rrca			; 0f ;7be4
-	rrca			; 0f ;7be5
-	rrca			; 0f ;7be6
-	or a			; b7 ;7be7
-	jr z,l7bd0h		; 28 e6 ;7be8
-	cp 010h		; fe 10 ;7bea
-	jr nz,l7bf3h		; 20 05 ;7bec
-	dec (ix+00eh)		; dd 35 0e ;7bee
-	jr sub_7bd3h		; 18 e0 ;7bf1
-l7bf3h:
-	cp 020h		; fe 20 ;7bf3
-	jr z,l7c02h		; 28 0b ;7bf5
-l7bf7h:
-	inc (ix+00eh)		; dd 34 0e ;7bf7
-	or 0f0h		; f6 f0 ;7bfa
-	add a,(ix+008h)		; dd 86 08 ;7bfc
-	inc a			; 3c ;7bff
-	jr c,l7c03h		; 38 01 ;7c00
-l7c02h:
-	xor a			; af ;7c02
-l7c03h:
-	cpl			; 2f ;7c03
-	and 00fh		; e6 0f ;7c04
-	ld (ix+016h),a		; dd 77 16 ;7c06
-	ret			; c9 ;7c09
+l7bc8h_audio:
+	.DB $80 $a0 $c0 $c0			;7bc8
+l7bcch_audio:
+	.DB $90 $b0 $d0 $f0			;7bcc
+	.INCLUDE "audio/audio_compute_word_offset.asm"
 	.INCLUDE "physics/process_terrain.asm"
 sub_7c43h:
 	ld e,(ix+003h)		; dd 5e 03 ;7c43
@@ -528,7 +399,7 @@ sub_7db1h:
 	and 00fh		; e6 0f ;7db4
 	ld c,a			; 4f ;7db6
 	ld b,000h		; 06 00 ;7db7
-	ld hl,l7bcch		; 21 cc 7b ;7db9
+	ld hl,l7bcch_audio		; 21 cc 7b ;7db9
 	add hl,bc			; 09 ;7dbc
 	ld a,(hl)			; 7e ;7dbd
 	or 00fh		; f6 0f ;7dbe

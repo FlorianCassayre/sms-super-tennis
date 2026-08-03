@@ -75,7 +75,7 @@ l01fbh:
 		.DB $cd $44 $71		;01fb
 	.ENDIF
 	.IFDEF _UE
-		call sub_796fh		; cd 6f 79 ;01fb
+		call sub_audio_update_channels		; cd 6f 79 ;01fb
 	.ENDIF
 l01feh:
 	ld hl,$c001

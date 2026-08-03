@@ -60,20 +60,20 @@ init:
 	ld c,0bfh		; 0e bf ;00f5
 	ld hl,l003bh		; 21 3b 00 ;00f7
 	otir		; ed b3 ;00fa
-	ld hl,start		; 21 00 00 ;00fc
-	ld de,l002dh		; 11 2d 00 ;00ff
-	ld b,001h		; 06 01 ;0102
+	ld hl,0		; 21 00 00 ;00fc
+	ld de,l002dh_palette		; 11 2d 00 ;00ff
+	ld b,1		; 06 01 ;0102
 	call sub_load_cram		; cd 81 04 ;0104
-	ld hl,l0010h		; 21 10 00 ;0107
-	ld de,l002dh		; 11 2d 00 ;010a
-	ld b,001h		; 06 01 ;010d
+	ld hl,00010h		; 21 10 00 ;0107
+	ld de,l002dh_palette		; 11 2d 00 ;010a
+	ld b,1		; 06 01 ;010d
 	call sub_load_cram		; cd 81 04 ;010f
 	ld de,l2000h		; 11 00 20 ;0112
 	ld hl,data_planes_9_0		; 21 43 5b ;0115
-	call sub_rle_decompress_bitplanes		; cd b5 04 ;0118
-	ld de,start		; 11 00 00 ;011b
+	call sub_rle_decompress_bitplanes_to_vram		; cd b5 04 ;0118
+	ld de,0		; 11 00 00 ;011b
 	ld hl,data_planes_10_0		; 21 e3 5d ;011e
-	call sub_rle_decompress_bitplanes		; cd b5 04 ;0121
+	call sub_rle_decompress_bitplanes_to_vram		; cd b5 04 ;0121
 	ld de,0c600h		; 11 00 c6 ;0124
 	ld hl,data_planes_11_0		; 21 cb 70 ;0127
 	call sub_rle_decompress_bitplanes_to_ram		; cd ed 04 ;012a

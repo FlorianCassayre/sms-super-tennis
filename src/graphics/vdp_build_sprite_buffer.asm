@@ -8,10 +8,10 @@ sub_vdp_build_sprite_buffer:
 	xor a			; af ;0a1c
 	ld (0c492h),a		; 32 92 c4 ;0a1d
 	ld b,003h		; 06 03 ;0a20
-	ld de,0c047h		; 11 47 c0 ;0a22
+	ld de,GUI_GAME_SETTINGS		; 11 47 c0 ;0a22
 -:
 	push bc			; c5 ;0a25
-	ld a,(0c491h)		; 3a 91 c4 ;0a26
+	ld a,(GUI_CURSOR_Y)		; 3a 91 c4 ;0a26
 	ld b,a			; 47 ;0a29
 	ld a,(0c492h)		; 3a 92 c4 ;0a2a
 	cp b			; b8 ;0a2d
@@ -24,8 +24,8 @@ sub_vdp_build_sprite_buffer:
 	ld c,028h		; 0e 28 ;0a3a
 	ld b,084h		; 06 84 ;0a3c
 	ld a,(de)			; 1a ;0a3e
-	call sub_0aa5h		; cd a5 0a ;0a3f
-	call sub_0a85h		; cd 85 0a ;0a42
+	call sub_mul_a_c_add_b		; cd a5 0a ;0a3f
+	call sub_0a85h_sprite_offset		; cd 85 0a ;0a42
 ++:
 	exx			; d9 ;0a45
 	ld a,c			; 79 ;0a46
@@ -51,11 +51,11 @@ sub_vdp_build_sprite_buffer:
 	ld c,020h		; 0e 20 ;0a69
 	ld b,03ch		; 06 3c ;0a6b
 	ld a,(de)			; 1a ;0a6d
-	call sub_0aa5h		; cd a5 0a ;0a6e
+	call sub_mul_a_c_add_b		; cd a5 0a ;0a6e
 	exx			; d9 ;0a71
 	ld c,09bh		; 0e 9b ;0a72
 	exx			; d9 ;0a74
-	call sub_0a85h		; cd 85 0a ;0a75
+	call sub_0a85h_sprite_offset		; cd 85 0a ;0a75
 ++:
 	ld a,0d0h		; 3e d0 ;0a78
 	ld (hl),a			; 77 ;0a7a

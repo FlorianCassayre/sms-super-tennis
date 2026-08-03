@@ -11,7 +11,7 @@ sub_update_ball_state:
 	jr c,+++		; 38 09 ;16c1
 ++:
 	xor a			; af ;16c3
-	ld hl,start		; 21 00 00 ;16c4
+	ld hl,0		; 21 00 00 ;16c4
 	sbc hl,de		; ed 52 ;16c7
 	ld (VEL_Z),hl		; 22 0e c5 ;16c9
 +++:
@@ -70,7 +70,7 @@ l16f6h:
 	pop de			; d1 ;172f
 	bit 7,d		; cb 7a ;1730
 	jr z,+		; 28 07 ;1732
-	ld hl,start		; 21 00 00 ;1734
+	ld hl,0		; 21 00 00 ;1734
 	xor a			; af ;1737
 	sbc hl,de		; ed 52 ;1738
 	ex de,hl			; eb ;173a
@@ -92,7 +92,7 @@ l1746h:
 	ld hl,0c000h		; 21 00 c0 ;1756
 	res 0,(hl)		; cb 86 ;1759
 	xor a			; af ;175b
-	ld hl,start		; 21 00 00 ;175c
+	ld hl,0		; 21 00 00 ;175c
 	ld de,(VEL_X)		; ed 5b 0c c5 ;175f
 	sbc hl,de		; ed 52 ;1763
 	ld (VEL_X),hl		; 22 0c c5 ;1765
