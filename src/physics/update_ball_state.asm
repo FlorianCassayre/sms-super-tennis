@@ -1,7 +1,7 @@
 sub_update_ball_state:
 	xor a			; af ;16af
 	ld de,(VEL_Z)		; ed 5b 0e c5 ;16b0
-	ld hl,(0c50ah)		; 2a 0a c5 ;16b4
+	ld hl,(POS_Z)		; 2a 0a c5 ;16b4
 	adc hl,de		; ed 5a ;16b7
 	bit 7,d		; cb 7a ;16b9
 	jr nz,+		; 20 04 ;16bb
@@ -17,7 +17,7 @@ sub_update_ball_state:
 +++:
 	xor a			; af ;16cc
 	ld de,(VEL_X)		; ed 5b 0c c5 ;16cd
-	ld hl,(0c508h)		; 2a 08 c5 ;16d1
+	ld hl,(POS_X)		; 2a 08 c5 ;16d1
 	adc hl,de		; ed 5a ;16d4
 	bit 7,d		; cb 7a ;16d6
 	jr nz,l16deh		; 20 04 ;16d8
@@ -25,7 +25,7 @@ sub_update_ball_state:
 	jr l1746h		; 18 68 ;16dc
 l16deh:
 	jr nc,l1741h		; 30 61 ;16de
-	ld a,(0c509h)		; 3a 09 c5 ;16e0
+	ld a,(POS_X + 1)		; 3a 09 c5 ;16e0
 	cp 080h		; fe 80 ;16e3
 	ret c			; d8 ;16e5
 	ld a,h			; 7c ;16e6
@@ -33,14 +33,14 @@ l16deh:
 	ret nc			; d0 ;16e9
 	jr l16f6h		; 18 0a ;16ea
 l16ech:
-	ld a,(0c509h)		; 3a 09 c5 ;16ec
+	ld a,(POS_X + 1)		; 3a 09 c5 ;16ec
 	cp 081h		; fe 81 ;16ef
 	ret nc			; d0 ;16f1
 	ld a,h			; 7c ;16f2
 	cp 080h		; fe 80 ;16f3
 	ret c			; d8 ;16f5
 l16f6h:
-	ld a,(0c50bh)		; 3a 0b c5 ;16f6
+	ld a,(POS_Z + 1)		; 3a 0b c5 ;16f6
 	cp 038h		; fe 38 ;16f9
 	ret c			; d8 ;16fb
 	cp 0c9h		; fe c9 ;16fc
@@ -48,11 +48,11 @@ l16f6h:
 	ld a,(0c516h)		; 3a 16 c5 ;16ff
 	bit 7,a		; cb 7f ;1702
 	ret nz			; c0 ;1704
-	ld a,(0c501h)		; 3a 01 c5 ;1705
+	ld a,(POS_Y + 1)		; 3a 01 c5 ;1705
 	cp 010h		; fe 10 ;1708
 	ret nc			; d0 ;170a
 	ld hl,08000h		; 21 00 80 ;170b
-	ld (0c508h),hl		; 22 08 c5 ;170e
+	ld (POS_X),hl		; 22 08 c5 ;170e
 	ld hl,0c516h		; 21 16 c5 ;1711
 	set 7,(hl)		; cb fe ;1714
 	set 6,(hl)		; cb f6 ;1716

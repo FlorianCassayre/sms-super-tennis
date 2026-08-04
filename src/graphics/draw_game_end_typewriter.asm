@@ -1,4 +1,4 @@
-sub_draw_game_over_typewriter:
+sub_draw_game_end_typewriter:
 	di			; f3 ;347f
 	ld a,l			; 7d ;3480
 	out (0bfh),a		; d3 bf ;3481
@@ -24,5 +24,5 @@ sub_draw_game_over_typewriter:
 	ld a,5		; 3e 05 ;34a0
 	ei			; fb ;34a2
 	call sub_wait_a_frames		; cd e6 35 ;34a3
-	djnz sub_draw_game_over_typewriter		; 10 d7 ;34a6
+	djnz sub_draw_game_end_typewriter		; 10 d7 ;34a6
 	ret			; c9 ;34a8

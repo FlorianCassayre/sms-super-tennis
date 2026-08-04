@@ -1,6 +1,10 @@
 ; Y is 8 bits
 ; X and Z are 16 bits
+.equ POS_Y $c500
+.equ GRAVITY_Y $c502
 .equ VEL_Y $c506
+.equ POS_X $c508
+.equ POS_Z $c50a
 .equ VEL_X $c50c
 .equ VEL_Z $c50e
 
@@ -27,18 +31,25 @@
 .equ DIR_DOWN               $08
 .equ DIR_MASK               $0f ; Lower 4 bits
 
-.equ ENT_SIDE_STATE         $01 ; Court side
-.equ ENT_TYPE               $02 ; Entity type ID?
-.equ ENT_X_POS              $0a ; 16-bit X coordinate (Low = $0A, High = $0B)
-.equ ENT_Y_POS              $0c ; 16-bit Y coordinate (Low = $0C, High = $0D)
-.equ ENT_X_POS_CACHE        $14 ; Cached X high-byte
-.equ ENT_X_VEL              $0e ; 16-bit X velocity
-.equ ENT_Y_VEL              $10 ; 16-bit Y velocity
-.equ ENT_ALLOWED_DIRS       $12 ; Output: final allowed movement bitmask
-.equ ENT_INPUT_DIRS         $15 ; Input: requested movement bitmask (joypad/CPU)
-.equ ENT_TILE_COLLISION     $2d ; Background tilemap collision mask
-.equ ENT_CACHE_Y_MIN        $3c ; Cached Y boundary top (Low = $3C, High = $3D)
-.equ ENT_CACHE_Y_MAX        $3e ; Cached Y boundary bottom (Low = $3E, High = $3F)
+.STRUCT entity
+    _unknown_0 DB		; $00 ; ???
+    side_state DB		; $01 ; Court side
+    type DB		; $02 ; Entity type ID?
+    _unknown_1 DSB 7		; $03
+    x_pos DW		; $0a ; 16-bit X coordinate (Low = $0A, High = $0B)
+    y_pos DW		; $0c ; 16-bit Y coordinate (Low = $0C, High = $0D)
+    x_vel DW		; $0e ; 16-bit X velocity
+    y_vel DW		; $10 ; 16-bit Y velocity
+    allowed_dirs DB		; $12 ; Output: final allowed movement bitmask
+    _unknown_2 DB		; $13 ; ???
+    x_pos_cache DB		; $14 ; Cached X high-byte
+    input_dirs DB		; $15 ; Input: requested movement bitmask (joypad/CPU)
+    _unknown_3 DSB 23		; $16 ; ???
+    tile_collision DB		; $2d ; Background tilemap collision mask
+    _unknown_4 DSB 14		; $2e ; ???
+    cache_y_min DW		; $3c ; Cached Y boundary top (Low = $3C, High = $3D)
+    cache_y_max DW		; $3e ; Cached Y boundary bottom (Low = $3E, High = $3F)
+.ENDST
 
 ; Y-Axis Bounds (min/top)
 .equ BOUND_Y_MIN_VERT_OBJ   $0800
