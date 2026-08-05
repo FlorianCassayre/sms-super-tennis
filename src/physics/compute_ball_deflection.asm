@@ -18,7 +18,7 @@ l160bh:
 +:
 	ld d,a			; 57 ;1624
 	ld e,000h		; 1e 00 ;1625
-	ld bc,(VEL_X)		; ed 4b 0c c5 ;1627
+	ld bc,(ball.y_vel)		; ed 4b 0c c5 ;1627
 	bit 7,b		; cb 78 ;162b
 	jr z,+		; 28 08 ;162d
 	xor a			; af ;162f
@@ -31,7 +31,7 @@ l160bh:
 	call sub_div_hl_de_bc		; cd 0b 04 ;163a
 	ld b,e			; 43 ;163d
 	ld c,h			; 4c ;163e
-	ld de,(VEL_Z)		; ed 5b 0e c5 ;163f
+	ld de,(ball.x_vel)		; ed 5b 0e c5 ;163f
 	push de			; d5 ;1643
 	bit 7,d		; cb 7a ;1644
 	jr z,+		; 28 07 ;1646

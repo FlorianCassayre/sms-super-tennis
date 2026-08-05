@@ -1,21 +1,28 @@
 ; Y is 8 bits
 ; X and Z are 16 bits
-.equ POS_Y $c500
-.equ GRAVITY_Y $c502
-.equ VEL_Y $c506
-.equ POS_X $c508
-.equ POS_Z $c50a
-.equ VEL_X $c50c
-.equ VEL_Z $c50e
+.STRUCT ball_t
+	z_pos DW		; $c500
+	z_gravity DW		; $c502
+	_unknown_0 DW		; $c504
+	z_vel DW		; $c506
+	y_pos DW		; $c508
+	x_pos DW		; $c50a
+	y_vel DW		; $c50c
+	x_vel DW		; $c50e
+	_unknown_1 DSB 7		; $c510
+	state DB		; $c517
+.ENDST
 
-.equ BALL_STATE $c517
+.ENUM $c500
+	ball INSTANCEOF ball_t
+.ENDE
 
 .equ BOUNCE_COEF 160 ; (160 / 256 = 0.625 Restitution)
 .equ FRICTION_COEF 128 ; (128 / 256 = 0.500 Damping)
 
 .equ BALL_MAX_BOUNCES 5
 
-.equ STATE_FROZEN $002 ; If state >= 2, object is stationary/dead
+.equ STATE_FROZEN $02 ; If state >= 2, object is stationary/dead
 .equ ZERO $0000
 
 
@@ -31,25 +38,42 @@
 .equ DIR_DOWN               $08
 .equ DIR_MASK               $0f ; Lower 4 bits
 
-.STRUCT entity
+.STRUCT player_t
     _unknown_0 DB		; $00 ; ???
     side_state DB		; $01 ; Court side
     type DB		; $02 ; Entity type ID?
     _unknown_1 DSB 7		; $03
-    x_pos DW		; $0a ; 16-bit X coordinate (Low = $0A, High = $0B)
-    y_pos DW		; $0c ; 16-bit Y coordinate (Low = $0C, High = $0D)
-    x_vel DW		; $0e ; 16-bit X velocity
-    y_vel DW		; $10 ; 16-bit Y velocity
+    y_pos DW		; $0a ; 16-bit Y coordinate (Low = $0C, High = $0D)
+    x_pos DW		; $0c ; 16-bit X coordinate (Low = $0A, High = $0B)
+    y_vel DW		; $0e ; 16-bit Y velocity
+    x_vel DW		; $10 ; 16-bit X velocity
     allowed_dirs DB		; $12 ; Output: final allowed movement bitmask
     _unknown_2 DB		; $13 ; ???
-    x_pos_cache DB		; $14 ; Cached X high-byte
+    y_pos_cache DB		; $14 ; Cached Y high-byte
     input_dirs DB		; $15 ; Input: requested movement bitmask (joypad/CPU)
-    _unknown_3 DSB 23		; $16 ; ???
+    _unknown_3 DSB 4		; $16 ; ???
+    time_before_serve DB		; $1a
+    _unknown_4 DSB 5		; $1b ; ???
+    _unknown_20 DB		; $20 ; ???
+    _unknown_5 DSB 10		; $21 ; ???
+    maybe_sprite_id DB		; $2b ; ???
+    _unknown_6 DB		; $2c ; ???
     tile_collision DB		; $2d ; Background tilemap collision mask
-    _unknown_4 DSB 14		; $2e ; ???
+    y_div_pos DB		; $2e ; Appears to be a "rough" position spanning only a few units
+    x_div_pos DB		; $2f ; Same
+    _unknown_7 DSB 12		; $3a ; ???
     cache_y_min DW		; $3c ; Cached Y boundary top (Low = $3C, High = $3D)
     cache_y_max DW		; $3e ; Cached Y boundary bottom (Low = $3E, High = $3F)
 .ENDST
+
+.STRUCT player_opponents_t
+	bottom INSTANCEOF player_t
+	top INSTANCEOF player_t
+.ENDST
+
+.ENUM $c200
+	player INSTANCEOF player_opponents_t 2		; $c200 $c240 $c280 $c2c0
+.ENDE
 
 ; Y-Axis Bounds (min/top)
 .equ BOUND_Y_MIN_VERT_OBJ   $0800
@@ -78,14 +102,3 @@
 .equ P1_SPEED_STATE_A       $c047   ; Player 1 state index A
 .equ P1_SPEED_STATE_B       $c049   ; Player 1 state index B (CPU?)
 .equ P2_SPEED_STATE         $c04a   ; Player 2 state index
-
-; Player
-.equ PLAYER_BOTTOM $c200
-.equ PLAYER_TOP $c280
-
-.STRUCT player
-	unknown_00 DS 13
-	x          DB
-	unknown_0E DS 6
-	y          DB
-.ENDST

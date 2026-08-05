@@ -18,8 +18,8 @@ l2ee1h_dispatch:
 	jp z,l2ee1h_dispatch_3		; ca 6b 2f ;2eff
 	jr l2ee1h_dispatch_default		; 18 0c ;2f02
 l2f04h:
-	ld a,001h		; 3e 01 ;2f04
-	ld (0c4a5h),a		; 32 a5 c4 ;2f06
+	ld a,1		; 3e 01 ;2f04
+	ld (SCORE_ANNOUNCEMENT),a		; 32 a5 c4 ;2f06
 	xor a			; af ;2f09
 	ld (0c49dh),a		; 32 9d c4 ;2f0a
 	ld (0c4a6h),a		; 32 a6 c4 ;2f0d

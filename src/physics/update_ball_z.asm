@@ -2,23 +2,23 @@ sub_update_ball_z:
 	ld a,(0c040h)		;14b4
 	rlca			; 07 ;14b7
 	ret nc			; d0 ;14b8
-	ld bc,(GRAVITY_Y)		; ed 4b 02 c5 ;14b9
-	ld hl,(VEL_Y)		; 2a 06 c5 ;14bd
+	ld bc,(ball.z_gravity)		; ed 4b 02 c5 ;14b9
+	ld hl,(ball.z_vel)		; 2a 06 c5 ;14bd
 	add hl,bc			; 09 ;14c0
-	ld (VEL_Y),hl		; 22 06 c5 ;14c1
+	ld (ball.z_vel),hl		; 22 06 c5 ;14c1
 	xor a			; af ;14c4
-	ld de,(POS_Y)		; ed 5b 00 c5 ;14c5
+	ld de,(ball.z_pos)		; ed 5b 00 c5 ;14c5
 	ex de,hl			; eb ;14c9
 	sbc hl,de		; ed 52 ;14ca
-	ld (POS_Y),hl		; 22 00 c5 ;14cc
+	ld (ball.z_pos),hl		; 22 00 c5 ;14cc
 	bit 7,h		; cb 7c ;14cf
 	jp z,l150fh		; ca 0f 15 ;14d1
 	ld hl,0		; 21 00 00 ;14d4
-	ld (POS_Y),hl		; 22 00 c5 ;14d7
+	ld (ball.z_pos),hl		; 22 00 c5 ;14d7
 	ld hl,0c516h		; 21 16 c5 ;14da
 	res 6,(hl)		; cb b6 ;14dd
 	call sub_ball_bounce		; cd 9c 15 ;14df
-	ld hl,BALL_STATE		; 21 17 c5 ;14e2
+	ld hl,ball.state		; 21 17 c5 ;14e2
 	inc (hl)			; 34 ;14e5
 	ld a,BALL_MAX_BOUNCES		; 3e 05 ;14e6
 	cp (hl)			; be ;14e8
@@ -51,14 +51,14 @@ l150fh:
 	call sub_update_ball_state		; cd af 16 ;1515
 	call sub_player_ball_collision		; cd 78 18 ;1518
 	call sub_0e7fh		; cd 7f 0e ;151b
-	ld de,(VEL_Z)		; ed 5b 0e c5 ;151e
-	ld hl,(POS_Z)		; 2a 0a c5 ;1522
+	ld de,(ball.x_vel)		; ed 5b 0e c5 ;151e
+	ld hl,(ball.x_pos)		; 2a 0a c5 ;1522
 	add hl,de			; 19 ;1525
-	ld (POS_Z),hl		; 22 0a c5 ;1526
-	ld de,(VEL_X)		; ed 5b 0c c5 ;1529
-	ld hl,(POS_X)		; 2a 08 c5 ;152d
+	ld (ball.x_pos),hl		; 22 0a c5 ;1526
+	ld de,(ball.y_vel)		; ed 5b 0c c5 ;1529
+	ld hl,(ball.y_pos)		; 2a 08 c5 ;152d
 	add hl,de			; 19 ;1530
-	ld (POS_X),hl		; 22 08 c5 ;1531
+	ld (ball.y_pos),hl		; 22 08 c5 ;1531
 	ld c,000h		; 0e 00 ;1534
 	ld a,h			; 7c ;1536
 	cp 070h		; fe 70 ;1537

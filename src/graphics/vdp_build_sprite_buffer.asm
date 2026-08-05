@@ -8,10 +8,10 @@ sub_vdp_build_sprite_buffer:
 	xor a			; af ;0a1c
 	ld (0c492h),a		; 32 92 c4 ;0a1d
 	ld b,003h		; 06 03 ;0a20
-	ld de,GUI_GAME_SETTINGS		; 11 47 c0 ;0a22
+	ld de,game_settings		; 11 47 c0 ;0a22
 -:
 	push bc			; c5 ;0a25
-	ld a,(GUI_CURSOR_Y)		; 3a 91 c4 ;0a26
+	ld a,(gui.cursor_y)		; 3a 91 c4 ;0a26
 	ld b,a			; 47 ;0a29
 	ld a,(0c492h)		; 3a 92 c4 ;0a2a
 	cp b			; b8 ;0a2d

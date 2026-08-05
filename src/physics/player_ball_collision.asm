@@ -10,8 +10,8 @@ sub_player_ball_collision:
 	ld a,(0c312h)		; 3a 12 c3 ;188f
 	rrca			; 0f ;1892
 	jr c,+		; 38 0a ;1893
-	ld iy,PLAYER_BOTTOM		; fd 21 00 c2 ;1895
-	ld ix,PLAYER_TOP		; dd 21 80 c2 ;1899
+	ld iy,player.1.bottom		; fd 21 00 c2 ;1895
+	ld ix,player.2.bottom		; dd 21 80 c2 ;1899
 	jr ++		; 18 08 ;189d
 +:
 	ld iy,0c240h		; fd 21 40 c2 ;189f
@@ -107,7 +107,7 @@ sub_racket_hit_trajectory:
 	set 7,(ix+01dh)		; dd cb 1d fe ;1951
 	xor a			; af ;1955
 	ld (0c303h),a		; 32 03 c3 ;1956
-	ld (BALL_STATE),a		; 32 17 c5 ;1959
+	ld (ball.state),a		; 32 17 c5 ;1959
 	ld (0c519h),a		; 32 19 c5 ;195c
 	ld a,(ix+001h)		; dd 7e 01 ;195f
 	ld (0c042h),a		; 32 42 c0 ;1962

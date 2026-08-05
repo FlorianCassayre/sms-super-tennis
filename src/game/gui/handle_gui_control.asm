@@ -24,7 +24,7 @@ sub_handle_gui_control:
 	cp 000h		; fe 00 ;09a8
 	ret z			; c8 ;09aa
 	ld b,(hl)			; 46 ;09ab
-	ld hl,GUI_CURSOR_Y		; 21 91 c4 ;09ac
+	ld hl,gui.cursor_y		; 21 91 c4 ;09ac
 	ld a,(hl)			; 7e ;09af
 	srl b		; cb 38 ;09b0
 	sbc a,000h		; de 00 ;09b2
@@ -42,7 +42,7 @@ l09bah:
 l09c7h:
 	ld e,(hl)			; 5e ;09c7
 	ld d,000h		; 16 00 ;09c8
-	ld hl,GUI_GAME_SETTINGS		; 21 47 c0 ;09ca
+	ld hl,game_settings		; 21 47 c0 ;09ca
 	add hl,de			; 19 ;09cd
 	ld a,e			; 7b ;09ce
 	cp 003h		; fe 03 ;09cf

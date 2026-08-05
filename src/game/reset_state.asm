@@ -21,18 +21,18 @@ sub_clear_ram:
 	ld de,0		; 11 00 00 ;08d1
 	ld hl,data_planes_10_0		; 21 e3 5d ;08d4
 	call sub_rle_decompress_bitplanes_to_vram		; cd b5 04 ;08d7
-	ld hl,GUI_GAME_SETTINGS		; 21 47 c0 ;08da
-	ld b,_sizeof_game_settings		; 06 04 ;08dd
+	ld hl,game_settings		; 21 47 c0 ;08da
+	ld b,_sizeof_game_settings_t		; 06 04 ;08dd
 	xor a			; af ;08df
 -:
 	ld (hl),a			; 77 ;08e0
 	inc hl			; 23 ;08e1
 	djnz -		; 10 fc ;08e2
-	ld (GUI_CURSOR_Y),a		; 32 91 c4 ;08e4
-	ld (GUI_TICK_COUNTER),a		; 32 96 c4 ;08e7
+	ld (gui.cursor_y),a		; 32 91 c4 ;08e4
+	ld (gui.tick_counter),a		; 32 96 c4 ;08e7
 	call sub_get_joy_p1		; cd 0f 03 ;08ea
-	ld (GUI_JOYSTICK),a		; 32 93 c4 ;08ed
-	ld (GUI_JOYSTICK_PREVIOUS),a		; 32 94 c4 ;08f0
+	ld (gui.joystick),a		; 32 93 c4 ;08ed
+	ld (gui.joystick_previous),a		; 32 94 c4 ;08f0
 	ld hl,03886h		; 21 86 38 ;08f3
 	ld de,0cb04h		; 11 04 cb ;08f6
 	ld bc,38		; 01 26 00 ;08f9

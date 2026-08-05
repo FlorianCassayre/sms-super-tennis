@@ -1,15 +1,23 @@
-.STRUCT game_settings
+.STRUCT game_settings_t
 	speed_level DB
 	control_level DB
 	player_type DB
 	computer_level DB
 .ENDST
 
-.equ GUI_GAME_SETTINGS $c047
+.ENUM $c047
+	game_settings INSTANCEOF game_settings_t
+.ENDE
 
-.equ GUI_CURSOR_Y $c491
+.STRUCT gui_t
+	cursor_y DB		;c491
+	_unknown_0 DB		;c492
+	joystick DB		;c493
+	joystick_previous DB		;c494
+	_unknown_1 DB		;c495
+	tick_counter DB		;c496
+.ENDST
 
-.equ GUI_JOYSTICK $c493
-.equ GUI_JOYSTICK_PREVIOUS $c494
-
-.equ GUI_TICK_COUNTER $c496
+.ENUM $c491
+	gui INSTANCEOF gui_t
+.ENDE
