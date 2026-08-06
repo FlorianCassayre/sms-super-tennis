@@ -29,7 +29,7 @@ sub_joy_debounce:
 	ld a,c			; 79 ;07c7
 	ld (0c000h),a		; 32 00 c0 ;07c8
 	ld a,000h		; 3e 00 ;07cb
-	ld (0de00h),a		; 32 00 de ;07cd
+	ld (psg_engine.track_request_id),a		; 32 00 de ;07cd
 	ld a,002h		; 3e 02 ;07d0
 	ld (0c006h),a		; 32 06 c0 ;07d2
 	ret			; c9 ;07d5
@@ -42,7 +42,7 @@ sub_joy_debounce:
 	ex af,af'			; 08 ;07e0
 	ld (0c009h),a		; 32 09 c0 ;07e1
 	ld a,000h		; 3e 00 ;07e4
-	ld (0de00h),a		; 32 00 de ;07e6
+	ld (psg_engine.track_request_id),a		; 32 00 de ;07e6
 	ret			; c9 ;07e9
 +++:
 	ex af,af'			; 08 ;07ea

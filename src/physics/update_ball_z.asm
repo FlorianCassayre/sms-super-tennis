@@ -32,7 +32,7 @@ l14f1h:
 	jr nz,l14ffh		; 20 0a ;14f3
 	call sub_0e04h		; cd 04 0e ;14f5
 	ld a,08fh		; 3e 8f ;14f8
-	ld (0de00h),a		; 32 00 de ;14fa
+	ld (psg_engine.track_request_id),a		; 32 00 de ;14fa
 	jr l150fh		; 18 10 ;14fd
 l14ffh:
 	dec a			; 3d ;14ff

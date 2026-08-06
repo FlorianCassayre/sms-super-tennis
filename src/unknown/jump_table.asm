@@ -17,7 +17,7 @@ l7ceeh:
 	.DW l7ceeh_7		;7d0c
 l7ceeh_6:
 	ld a,080h		; 3e 80 ;7d0e
-	ld (0de04h),a		; 32 04 de ;7d10
+	ld (psg_engine._unknown),a		; 32 04 de ;7d10
 	jp l7ceeh_2		; c3 5e 7d ;7d13
 l7ceeh_14:
 	ld a,(de)			; 1a ;7d16
@@ -62,15 +62,15 @@ l7ceeh_5:
 	dec de			; 1b ;7d4d
 	ret			; c9 ;7d4e
 l7ceeh_7:
-ld hl,0de05h		; 21 05 de ;7d4f
+ld hl,psg_channel.1		; 21 05 de ;7d4f
 	res 2,(hl)		; cb 96 ;7d52
-	ld hl,0de25h		; 21 25 de ;7d54
+	ld hl,psg_channel.2		; 21 25 de ;7d54
 	res 2,(hl)		; cb 96 ;7d57
-	ld hl,0de45h		; 21 45 de ;7d59
+	ld hl,psg_channel.3		; 21 45 de ;7d59
 	res 2,(hl)		; cb 96 ;7d5c
 l7ceeh_2:
 	xor a			; af ;7d5e
-	ld (0de03h),a		; 32 03 de ;7d5f
+	ld (psg_engine.priority_flag),a		; 32 03 de ;7d5f
 	ld (ix+000h),a		; dd 77 00 ;7d62
 	call sub_7db1h		; cd b1 7d ;7d65
 	pop hl			; e1 ;7d68

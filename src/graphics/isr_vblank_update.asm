@@ -1,6 +1,6 @@
 isr_vblank_update:
 	push af			; f5 ;0165
-	in a,(0bfh)		; db bf ;0166
+	in a,(I_VDP_STATUS)		; db bf ;0166
 	bit 7,a		; cb 7f ;0168
 	jp z,l0237h		; ca 37 02 ;016a
 	push ix		; dd e5 ;016d
@@ -15,7 +15,7 @@ isr_vblank_update:
 	push de			; d5 ;0178
 	push hl			; e5 ;0179
 	ld hl,0c003h		; 21 03 c0 ;017a
-	in a,(0ddh)		; db dd ;017d
+	in a,(I_JOYPAD_2)		; db dd ;017d
 	and 010h		; e6 10 ;017f
 	ld c,(hl)			; 4e ;0181
 	ld (hl),a			; 77 ;0182

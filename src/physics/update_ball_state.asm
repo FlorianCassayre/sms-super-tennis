@@ -57,7 +57,7 @@ l16f6h:
 	set 7,(hl)		; cb fe ;1714
 	set 6,(hl)		; cb f6 ;1716
 	ld a,08eh		; 3e 8e ;1718
-	ld (0de00h),a		; 32 00 de ;171a
+	ld (psg_engine.track_request_id),a		; 32 00 de ;171a
 	ld a,(0c519h)		; 3a 19 c5 ;171d
 	or a			; b7 ;1720
 	jr nz,+		; 20 05 ;1721
@@ -79,7 +79,7 @@ l16f6h:
 	jr +		; 18 15 ;173f
 l1741h:
 	ld a,089h		; 3e 89 ;1741
-	ld (0de00h),a		; 32 00 de ;1743
+	ld (psg_engine.track_request_id),a		; 32 00 de ;1743
 l1746h:
 	ld a,(0c519h)		; 3a 19 c5 ;1746
 	or a			; b7 ;1749

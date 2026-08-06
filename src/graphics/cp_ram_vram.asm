@@ -4,7 +4,7 @@ sub_cp_ram_vram:
 	push bc			; c5 ;0433
 -:
 	ld a,(de)			; 1a ;0434
-	out (0beh),a		; d3 be ;0435
+	out (IO_VDP_DATA),a		; d3 be ;0435
 	inc de			; 13 ;0437
 	dec bc			; 0b ;0438
 	ld a,c			; 79 ;0439

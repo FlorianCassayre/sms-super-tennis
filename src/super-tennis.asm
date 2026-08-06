@@ -18,6 +18,7 @@
 	.INCLUDE "algorithm/rle_constants.asm"
 	.INCLUDE "game/constants.asm"
 	.INCLUDE "io/constants.asm"
+	.INCLUDE "io/hardware/constants.asm"
 	.INCLUDE "audio/constants.asm"
 	.INCLUDE "physics/constants.asm"
 	.INCLUDE "game/gui/constants.asm"
@@ -51,7 +52,7 @@ l0034h:
 	rst 38h			; ff ;0036
 l0037h:
 	rst 38h			; ff ;0037
-l0038h:
+l0038h_interrupt:
 	jp isr_vblank_update		; c3 65 01 ;0038
 l003bh:
 	ld d,080h		; 16 80 ;003b
@@ -121,11 +122,11 @@ l0249h:
 	nop			; 00 ;024e
 	nop			; 00 ;024f
 	ld a,010h		; 3e 10 ;0250
-	out (0bfh),a		; d3 bf ;0252
+	out (O_VDP_CTRL),a		; d3 bf ;0252
 	ld a,0c0h		; 3e c0 ;0254
-	out (0bfh),a		; d3 bf ;0256
+	out (O_VDP_CTRL),a		; d3 bf ;0256
 	ld a,(0001bh)		; 3a 1b 00 ;0258
-	out (0beh),a		; d3 be ;025b
+	out (IO_VDP_DATA),a		; d3 be ;025b
 l025dh:
 	pop af			; f1 ;025d
 	ei			; fb ;025e
@@ -463,7 +464,7 @@ l0811h:
 	bit 6,(hl)		; cb 76 ;0824
 	.INCLUDE "game/init_splash_screen.asm"
 l088dh:
-	ld a,(0de04h)		; 3a 04 de ;088d
+	ld a,(psg_engine._unknown)		; 3a 04 de ;088d
 	rlca			; 07 ;0890
 	ret nc			; d0 ;0891
 	ld a,083h		; 3e 83 ;0892
@@ -555,7 +556,7 @@ l0b36h:
 	inc hl			; 23 ;0b37
 	ld (hl),000h		; 36 00 ;0b38
 	ret			; c9 ;0b3a
-	ld hl,0c495h		; 21 95 c4 ;0b3b
+	ld hl,score.game_won		; 21 95 c4 ;0b3b
 	ld a,0f8h		; 3e f8 ;0b3e
 	and (hl)			; a6 ;0b40
 	ld (hl),a			; 77 ;0b41
@@ -762,16 +763,16 @@ l0c99h:
 	bit 3,a		; cb 5f ;0cb1
 	ret z			; c8 ;0cb3
 	ld a,000h		; 3e 00 ;0cb4
-	ld (0de00h),a		; 32 00 de ;0cb6
+	ld (psg_engine.track_request_id),a		; 32 00 de ;0cb6
 	ret			; c9 ;0cb9
 l0cbah:
 	ld a,(0c48bh)		; 3a 8b c4 ;0cba
 	bit 0,a		; cb 47 ;0cbd
 	jp nz,l0d5fh		; c2 5f 0d ;0cbf
-	ld a,(0c481h)		; 3a 81 c4 ;0cc2
+	ld a,(score.tie_break)		; 3a 81 c4 ;0cc2
 	bit 0,a		; cb 47 ;0cc5
 	jr nz,l0d07h		; 20 3e ;0cc7
-	ld a,(0c495h)		; 3a 95 c4 ;0cc9
+	ld a,(score.game_won)		; 3a 95 c4 ;0cc9
 	bit 0,a		; cb 47 ;0ccc
 	jp z,l0d63h		; ca 63 0d ;0cce
 l0cd1h:
@@ -789,7 +790,7 @@ l0cd1h:
 	ld a,004h		; 3e 04 ;0cee
 	ld (0c007h),a		; 32 07 c0 ;0cf0
 	call sub_update_set_scores		; cd b8 31 ;0cf3
-	ld a,(0c481h)		; 3a 81 c4 ;0cf6
+	ld a,(score.tie_break)		; 3a 81 c4 ;0cf6
 	bit 0,a		; cb 47 ;0cf9
 	ret z			; c8 ;0cfb
 	ld a,(0c045h)		; 3a 45 c0 ;0cfc
@@ -798,13 +799,13 @@ l0cd1h:
 	ld (0c51bh),a		; 32 1b c5 ;0d03
 	ret			; c9 ;0d06
 l0d07h:
-	ld a,(0c495h)		; 3a 95 c4 ;0d07
+	ld a,(score.game_won)		; 3a 95 c4 ;0d07
 	bit 0,a		; cb 47 ;0d0a
 	jr z,l0d1ah		; 28 0c ;0d0c
 	ld a,(0c51ch)		; 3a 1c c5 ;0d0e
 	ld (0c045h),a		; 32 45 c0 ;0d11
 	xor a			; af ;0d14
-	ld (0c481h),a		; 32 81 c4 ;0d15
+	ld (score.tie_break),a		; 32 81 c4 ;0d15
 	jr l0cd1h		; 18 b7 ;0d18
 l0d1ah:
 	ld hl,0c51bh		; 21 1b c5 ;0d1a
@@ -1249,7 +1250,7 @@ l1000h:
 	ld bc,00c00h		; 01 00 0c ;1002
 	inc c			; 0c ;1005
 	jp nz,02700h		; c2 00 27 ;1006
-	out (000h),a		; d3 00 ;1009
+	out (I_GG_START),a		; d3 00 ;1009
 	nop			; 00 ;100b
 	jp m,0c24ch		; fa 4c c2 ;100c
 	nop			; 00 ;100f
@@ -1257,12 +1258,12 @@ l1000h:
 	ld bc,00c00h		; 01 00 0c ;1012
 	adc a,h			; 8c ;1015
 	jp nz,02700h		; c2 00 27 ;1016
-	out (000h),a		; d3 00 ;1019
+	out (I_GG_START),a		; d3 00 ;1019
 	nop			; 00 ;101b
 	jp m,0c2cch		; fa cc c2 ;101c
 l101fh:
 	ld a,08ch		; 3e 8c ;101f
-	ld (0de00h),a		; 32 00 de ;1021
+	ld (psg_engine.track_request_id),a		; 32 00 de ;1021
 	ld hl,l10ebh		; 21 eb 10 ;1024
 	ld a,(0c046h)		; 3a 46 c0 ;1027
 	add a,a			; 87 ;102a
@@ -1616,7 +1617,7 @@ l1171h:
 	.DB $fd		;11ae
 	.DB $60		;11af
 	ld bc,08c3eh		; 01 3e 8c ;11b0
-	ld (0de00h),a		; 32 00 de ;11b3
+	ld (psg_engine.track_request_id),a		; 32 00 de ;11b3
 	ld a,(0c509h)		; 3a 09 c5 ;11b6
 	sub 080h		; d6 80 ;11b9
 	jr nc,l11bfh		; 30 02 ;11bb
@@ -1698,7 +1699,7 @@ l1221h:
 	.DB $00		;1226
 l1227h:
 	ld a,08ah		; 3e 8a ;1227
-	ld (0de00h),a		; 32 00 de ;1229
+	ld (psg_engine.track_request_id),a		; 32 00 de ;1229
 	ld hl,l1260h		; 21 60 12 ;122c
 	ld a,(0c046h)		; 3a 46 c0 ;122f
 	add a,a			; 87 ;1232
@@ -1742,7 +1743,7 @@ l1260h:
 	.DB $ff		;126b
 l126ch:
 	ld a,08bh		; 3e 8b ;126c
-	ld (0de00h),a		; 32 00 de ;126e
+	ld (psg_engine.track_request_id),a		; 32 00 de ;126e
 	ld hl,l12c0h		; 21 c0 12 ;1271
 	ld a,(0c046h)		; 3a 46 c0 ;1274
 	add a,a			; 87 ;1277
@@ -1823,7 +1824,7 @@ l12c0h:
 	.DB $fd		;12dd
 	.DB $3e		;12de
 	.DB $8c		;12df
-	ld (0de00h),a		; 32 00 de ;12e0
+	ld (psg_engine.track_request_id),a		; 32 00 de ;12e0
 	ld hl,l1338h		; 21 38 13 ;12e3
 	ld a,(0c046h)		; 3a 46 c0 ;12e6
 	add a,a			; 87 ;12e9
@@ -2346,7 +2347,7 @@ l19a5h:
 	ld c,091h		; 0e 91 ;19b3
 l19b5h:
 	ld a,c			; 79 ;19b5
-	ld (0de00h),a		; 32 00 de ;19b6
+	ld (psg_engine.track_request_id),a		; 32 00 de ;19b6
 	ld hl,0c000h		; 21 00 c0 ;19b9
 	res 0,(hl)		; cb 86 ;19bc
 	ld hl,0		; 21 00 00 ;19be
@@ -4450,7 +4451,7 @@ l3560h:
 	.DW unknown_word_0		;3562
 	.DW unknown_word_2		;3564
 sub_3566h:
-	ld a,(SCORE_ANNOUNCEMENT)		; 3a a5 c4 ;3566
+	ld a,(score.announcement)		; 3a a5 c4 ;3566
 	cp 000h		; fe 00 ;3569
 	ret z			; c8 ;356b
 	ld a,(0c49dh)		; 3a 9d c4 ;356c
@@ -4461,13 +4462,13 @@ sub_3566h:
 	ret			; c9 ;3577
 l3578h:
 	ld a,004h		; 3e 04 ;3578
-	out (0bfh),a		; d3 bf ;357a
+	out (O_VDP_CTRL),a		; d3 bf ;357a
 	.IFDEF _UE
 		ld b,005h		; 06 05 ;357c
 		call sub_delay_loop		; cd ff 35 ;357e
     .ENDIF
 	ld a,0c0h		; 3e c0 ;3581
-	out (0bfh),a		; d3 bf ;3583
+	out (O_VDP_CTRL),a		; d3 bf ;3583
 	ld a,(0c4a6h)		; 3a a6 c4 ;3585
 	cp 002h		; fe 02 ;3588
 	jr z,l3599h		; 28 0d ;358a
@@ -4487,7 +4488,7 @@ l35a1h:
 	ld (0c4a6h),a		; 32 a6 c4 ;35a3
 	ld a,013h		; 3e 13 ;35a6
 l35a8h:
-	out (0beh),a		; d3 be ;35a8
+	out (IO_VDP_DATA),a		; d3 be ;35a8
 	.DB $3e		;35aa
 	.DB $02		;35ab
 	ld (0c49dh),a		; 32 9d c4 ;35ac
@@ -4686,7 +4687,10 @@ data_planes_11_0:
 	.INCLUDE "tiles/planes_11_2.asm"
 	.INCLUDE "tiles/planes_11_3.asm"
 	.IFDEF _J
-	    .INCLUDE "fragment.asm"
+    	ld a,($c000)
+    	bit 3,a
+    	ret nz
+	    .INCLUDE "audio/audio_fragment.asm"
 	.ENDIF
 .INCLUDE "data/table_7149h.asm"
 l7905h:
@@ -4798,7 +4802,7 @@ l7956h_3:
 	.DB $ee		;796d
 	.DB $00		;796e
 	.IFDEF _UE
-		.INCLUDE "fragment.asm"
+		.INCLUDE "audio/audio_fragment.asm"
 	.ENDIF
 	.DSB 298, $ff			;7ea3
 	.IFDEF _UE

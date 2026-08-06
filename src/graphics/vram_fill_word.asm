@@ -4,11 +4,11 @@ sub_vram_fill_word:
 	ex (sp),hl			; e3 ;0454
 -:
 	ld a,(de)			; 1a ;0455
-	out (0beh),a		; d3 be ;0456
+	out (IO_VDP_DATA),a		; d3 be ;0456
 	push de			; d5 ;0458
 	inc de			; 13 ;0459
 	ld a,(de)			; 1a ;045a
-	out (0beh),a		; d3 be ;045b
+	out (IO_VDP_DATA),a		; d3 be ;045b
 	pop de			; d1 ;045d
 	dec bc			; 0b ;045e
 	ld a,c			; 79 ;045f

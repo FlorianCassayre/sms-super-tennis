@@ -4,7 +4,7 @@ sub_vram_fill_byte:
 	push de			; d5 ;0444
 -:
 	ld a,(de)			; 1a ;0445
-	out (0beh),a		; d3 be ;0446
+	out (IO_VDP_DATA),a		; d3 be ;0446
 	dec bc			; 0b ;0448
 	ld a,c			; 79 ;0449
 	or b			; b0 ;044a

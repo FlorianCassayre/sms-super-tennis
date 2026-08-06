@@ -55,7 +55,7 @@ init:
 	ld (hl),000h		; 36 00 ;00ed
 	ldir		; ed b0 ;00ef
 	; VDP initialization
-	in a,(0bfh)		; db bf ;00f1
+	in a,(I_VDP_STATUS)		; db bf ;00f1
 	ld b,016h		; 06 16 ;00f3
 	ld c,0bfh		; 0e bf ;00f5
 	ld hl,l003bh		; 21 3b 00 ;00f7
@@ -91,7 +91,7 @@ init:
 	call sub_rle_decompress_bitplanes_to_ram		; cd ed 04 ;014e
 	call sub_init_background_name_table		; cd 88 03 ;0151
 	ld a,080h		; 3e 80 ;0154
-	ld (0de00h),a		; 32 00 de ;0156
+	ld (psg_engine.track_request_id),a		; 32 00 de ;0156
 	ld a,080h		; 3e 80 ;0159
 	ld (0c006h),a		; 32 06 c0 ;015b
 	call sub_enable_display		; cd a0 03 ;015e

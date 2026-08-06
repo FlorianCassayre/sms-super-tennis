@@ -99,6 +99,3 @@
 
 
 .equ TEMP_VEL_SHIFT_MULT    $c402   ; Speed shifts (x1, x2, x4)
-.equ P1_SPEED_STATE_A       $c047   ; Player 1 state index A
-.equ P1_SPEED_STATE_B       $c049   ; Player 1 state index B (CPU?)
-.equ P2_SPEED_STATE         $c04a   ; Player 2 state index

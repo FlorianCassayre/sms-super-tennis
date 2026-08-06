@@ -19,7 +19,7 @@ l2ee1h_dispatch:
 	jr l2ee1h_dispatch_default		; 18 0c ;2f02
 l2f04h:
 	ld a,1		; 3e 01 ;2f04
-	ld (SCORE_ANNOUNCEMENT),a		; 32 a5 c4 ;2f06
+	ld (score.announcement),a		; 32 a5 c4 ;2f06
 	xor a			; af ;2f09
 	ld (0c49dh),a		; 32 9d c4 ;2f0a
 	ld (0c4a6h),a		; 32 a6 c4 ;2f0d
@@ -27,7 +27,7 @@ l2ee1h_dispatch_default:
 	ret			; c9 ;2f10
 l2ee1h_dispatch_0:
 	ld a,096h		; 3e 96 ;2f11
-	ld (0de00h),a		; 32 00 de ;2f13
+	ld (psg_engine.track_request_id),a		; 32 00 de ;2f13
 	xor a			; af ;2f16
 	ld (0c48bh),a		; 32 8b c4 ;2f17
 	ld c,b			; 48 ;2f1a
@@ -47,7 +47,7 @@ l2ee1h_dispatch_0:
 	jp l2f04h		; c3 04 2f ;2f3a
 l2ee1h_dispatch_1:
 	ld a,097h		; 3e 97 ;2f3d
-	ld (0de00h),a		; 32 00 de ;2f3f
+	ld (psg_engine.track_request_id),a		; 32 00 de ;2f3f
 	xor a			; af ;2f42
 	ld (0c48bh),a		; 32 8b c4 ;2f43
 	ld c,b			; 48 ;2f46
@@ -68,7 +68,7 @@ l2ee1h_dispatch_1:
 	jp l2f04h		; c3 04 2f ;2f68
 l2ee1h_dispatch_3:
 	ld a,099h		; 3e 99 ;2f6b
-	ld (0de00h),a		; 32 00 de ;2f6d
+	ld (psg_engine.track_request_id),a		; 32 00 de ;2f6d
 	xor a			; af ;2f70
 	ld (0c48bh),a		; 32 8b c4 ;2f71
 	ld c,b			; 48 ;2f74
@@ -89,7 +89,7 @@ l2ee1h_dispatch_3:
 	jp l2f04h		; c3 04 2f ;2f96
 l2ee1h_dispatch_2:
 	ld a,098h		; 3e 98 ;2f99
-	ld (0de00h),a		; 32 00 de ;2f9b
+	ld (psg_engine.track_request_id),a		; 32 00 de ;2f9b
 	ld hl,0c48bh		; 21 8b c4 ;2f9e
 	inc (hl)			; 34 ;2fa1
 	ld a,(hl)			; 7e ;2fa2

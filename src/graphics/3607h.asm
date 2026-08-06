@@ -26,9 +26,9 @@ l3627h:
 	inc a			; 3c ;363c
 	di			; f3 ;363d
 	ld (0c4ach),a		; 32 ac c4 ;363e
-	out (0bfh),a		; d3 bf ;3641
+	out (O_VDP_CTRL),a		; d3 bf ;3641
 	ld a,089h		; 3e 89 ;3643
-	out (0bfh),a		; d3 bf ;3645
+	out (O_VDP_CTRL),a		; d3 bf ;3645
 	ei			; fb ;3647
 	call sub_wait_for_audio_event		; cd 6a 03 ;3648
 	pop bc			; c1 ;364b
@@ -65,9 +65,9 @@ l3627h:
 	call sub_disable_display		; cd a4 03 ;368a
 	call sub_init_background_name_table		; cd 88 03 ;368d
 	ld a,000h		; 3e 00 ;3690
-	out (0bfh),a		; d3 bf ;3692
+	out (O_VDP_CTRL),a		; d3 bf ;3692
 	ld a,089h		; 3e 89 ;3694
-	out (0bfh),a		; d3 bf ;3696
+	out (O_VDP_CTRL),a		; d3 bf ;3696
 	ld hl,data_planes_0_0		; 21 e3 37 ;3698
 	ld de,02600h		; 11 00 26 ;369b
 	call sub_rle_decompress_bitplanes_to_vram		; cd b5 04 ;369e
@@ -79,7 +79,7 @@ l3627h:
 	call sub_upload_vram_chunks		; cd b7 03 ;36b0
 	ei			; fb ;36b3
 	ld a,086h		; 3e 86 ;36b4
-	ld (0de00h),a		; 32 00 de ;36b6
+	ld (psg_engine.track_request_id),a		; 32 00 de ;36b6
 	call sub_enable_display		; cd a0 03 ;36b9
 	ld a,040h		; 3e 40 ;36bc
 	call sub_wait_a_frames		; cd e6 35 ;36be

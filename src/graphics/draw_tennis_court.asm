@@ -25,7 +25,7 @@ sub_draw_tennis_court:
 	and 007h		; e6 07 ;0afb
 	ld (0c046h),a		; 32 46 c0 ;0afd
 	ld a,081h		; 3e 81 ;0b00
-	ld (0de00h),a		; 32 00 de ;0b02
+	ld (psg_engine.track_request_id),a		; 32 00 de ;0b02
 	ld a,005h		; 3e 05 ;0b05
 	ld hl,0c000h		; 21 00 c0 ;0b07
 	bit 3,(hl)		; cb 5e ;0b0a

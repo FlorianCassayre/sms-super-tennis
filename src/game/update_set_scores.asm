@@ -1,9 +1,9 @@
 sub_update_set_scores:
-	ld a,(SCORE_DELAY_TIMER)		; 3a 9d c4 ;31b8
+	ld a,(score.delay_timer)		; 3a 9d c4 ;31b8
 	cp 000h		; fe 00 ;31bb
 	jr z,l31d1h		; 28 12 ;31bd
 	dec a			; 3d ;31bf
-	ld (SCORE_DELAY_TIMER),a		; 32 9d c4 ;31c0
+	ld (score.delay_timer),a		; 32 9d c4 ;31c0
 l31c3h:
 	ld a,(0c089h)		; 3a 89 c0 ;31c3
 	or 080h		; f6 80 ;31c6
@@ -33,7 +33,7 @@ l31e5h:
 	ld (0c49eh),a		; 32 9e c4 ;31ff
 	jp l31c3h		; c3 c3 31 ;3202
 l3205h:
-	ld a,(WINNER_PLAYER)		; 3a 97 c4 ;3205
+	ld a,(score.winner_player)		; 3a 97 c4 ;3205
 	ld b,a			; 47 ;3208
 	xor a			; af ;3209
 	ld a,(score.set_current_index)		; 3a 8a c4 ;320a
@@ -59,11 +59,11 @@ l3205h:
 	jr c,l3236h		; 38 07 ;322d
 l322fh:
 	ld a,083h		; 3e 83 ;322f
-	ld (0de00h),a		; 32 00 de ;3231
+	ld (psg_engine.track_request_id),a		; 32 00 de ;3231
 	jr l3276h		; 18 40 ;3234
 l3236h:
 	ld a,085h		; 3e 85 ;3236
-	ld (0de00h),a		; 32 00 de ;3238
+	ld (psg_engine.track_request_id),a		; 32 00 de ;3238
 	ld a,(0c499h)		; 3a 99 c4 ;323b
 	inc a			; 3c ;323e
 	ld (0c499h),a		; 32 99 c4 ;323f
@@ -86,11 +86,11 @@ l3249h:
 	jr c,l3265h		; 38 07 ;325c
 l325eh:
 	ld a,082h		; 3e 82 ;325e
-	ld (0de00h),a		; 32 00 de ;3260
+	ld (psg_engine.track_request_id),a		; 32 00 de ;3260
 	jr l3276h		; 18 11 ;3263
 l3265h:
 	ld a,084h		; 3e 84 ;3265
-	ld (0de00h),a		; 32 00 de ;3267
+	ld (psg_engine.track_request_id),a		; 32 00 de ;3267
 	ld a,(0c49ah)		; 3a 9a c4 ;326a
 	inc a			; 3c ;326d
 	ld (0c49ah),a		; 32 9a c4 ;326e
@@ -146,7 +146,7 @@ l3276h:
 	ld d,000h		; 16 00 ;32d1
 	ld b,001h		; 06 01 ;32d3
 	ld hl,03c26h		; 21 26 3c ;32d5
-	ld (SCORE_BLINKING_SET_VRAM_ADDR),hl		; 22 a0 c4 ;32d8
+	ld (score.blinking_set_vram_addr),hl		; 22 a0 c4 ;32d8
 	call sub_3192_draw		; cd 92 31 ;32db
 	pop hl			; e1 ;32de
 	push hl			; e5 ;32df
@@ -157,17 +157,17 @@ l3276h:
 	call sub_3192_draw		; cd 92 31 ;32e8
 l32ebh:
 	pop hl			; e1 ;32eb
-	ld hl,(SCORE_BLINKING_SET_VRAM_ADDR)		; 2a a0 c4 ;32ec
+	ld hl,(score.blinking_set_vram_addr)		; 2a a0 c4 ;32ec
 	ld de,(0c4aah)		; ed 5b aa c4 ;32ef
 	add hl,de			; 19 ;32f3
-	ld (SCORE_BLINKING_SET_VRAM_ADDR),hl		; 22 a0 c4 ;32f4
+	ld (score.blinking_set_vram_addr),hl		; 22 a0 c4 ;32f4
 	xor a			; af ;32f7
-	ld (SCORE_BLINKING_SET_FRAME_COUNTER),a		; 32 a4 c4 ;32f8
+	ld (score.blinking_set_frame_counter),a		; 32 a4 c4 ;32f8
 	ld a,002h		; 3e 02 ;32fb
 	ld (0c49eh),a		; 32 9e c4 ;32fd
 	jp l31c3h		; c3 c3 31 ;3300
 l3303h:
-	ld a,(SCORE_BLINKING_SET_FRAME_COUNTER)		; 3a a4 c4 ;3303
+	ld a,(score.blinking_set_frame_counter)		; 3a a4 c4 ;3303
 	and 001h		; e6 01 ;3306
 	cp 000h		; fe 00 ;3308
 	jr nz,l3311h		; 20 05 ;330a
@@ -179,37 +179,37 @@ l3311h:
 	inc d			; 14 ;3315
 	ld e,001h		; 1e 01 ;3316
 l3318h_write_vdp_word:
-	ld hl,(SCORE_BLINKING_SET_VRAM_ADDR)		; 2a a0 c4 ;3318
+	ld hl,(score.blinking_set_vram_addr)		; 2a a0 c4 ;3318
 	ld a,l			; 7d ;331b
 	di			; f3 ;331c
-	out (0bfh),a		; d3 bf ;331d
+	out (O_VDP_CTRL),a		; d3 bf ;331d
 	ld a,h			; 7c ;331f
 	or 040h		; f6 40 ;3320
-	out (0bfh),a		; d3 bf ;3322
+	out (O_VDP_CTRL),a		; d3 bf ;3322
 	ld a,d			; 7a ;3324
 	ex (sp),hl			; e3 ;3325
 	ex (sp),hl			; e3 ;3326
-	out (0beh),a		; d3 be ;3327
+	out (IO_VDP_DATA),a		; d3 be ;3327
 	ld a,e			; 7b ;3329
 	ex (sp),hl			; e3 ;332a
 	ex (sp),hl			; e3 ;332b
-	out (0beh),a		; d3 be ;332c
+	out (IO_VDP_DATA),a		; d3 be ;332c
 	ei			; fb ;332e
-	ld a,(SCORE_BLINKING_SET_FRAME_COUNTER)		; 3a a4 c4 ;332f
+	ld a,(score.blinking_set_frame_counter)		; 3a a4 c4 ;332f
 	inc a			; 3c ;3332
-	ld (SCORE_BLINKING_SET_FRAME_COUNTER),a		; 32 a4 c4 ;3333
+	ld (score.blinking_set_frame_counter),a		; 32 a4 c4 ;3333
 	cp 00ah		; fe 0a ;3336
 	jr nc,l3342h		; 30 08 ;3338
 	ld a,008h		; 3e 08 ;333a
-	ld (SCORE_DELAY_TIMER),a		; 32 9d c4 ;333c
+	ld (score.delay_timer),a		; 32 9d c4 ;333c
 	jp l31c3h		; c3 c3 31 ;333f
 l3342h:
 	xor a			; af ;3342
-	ld (SCORE_BLINKING_SET_FRAME_COUNTER),a		; 32 a4 c4 ;3343
+	ld (score.blinking_set_frame_counter),a		; 32 a4 c4 ;3343
 	ld a,003h		; 3e 03 ;3346
 	ld (0c49eh),a		; 32 9e c4 ;3348
 	ld a,080h		; 3e 80 ;334b
-	ld (SCORE_DELAY_TIMER),a		; 32 9d c4 ;334d
+	ld (score.delay_timer),a		; 32 9d c4 ;334d
 	jp l31c3h		; c3 c3 31 ;3350
 l3353h:
 	ld hl,03b54h		; 21 54 3b ;3353
@@ -252,18 +252,18 @@ l3382h:
 	jp l33b1h		; c3 b1 33 ;33a1
 l33a4h:
 	ld a,001h		; 3e 01 ;33a4
-	ld (0c481h),a		; 32 81 c4 ;33a6
+	ld (score.tie_break),a		; 32 81 c4 ;33a6
 	jp l33bah		; c3 ba 33 ;33a9
 l33ach:
 	ld a,004h		; 3e 04 ;33ac
-	ld (0c495h),a		; 32 95 c4 ;33ae
+	ld (score.game_won),a		; 32 95 c4 ;33ae
 l33b1h:
-	ld hl,0c495h		; 21 95 c4 ;33b1
+	ld hl,score.game_won		; 21 95 c4 ;33b1
 	set 1,(hl)		; cb ce ;33b4
 	xor a			; af ;33b6
-	ld (0c481h),a		; 32 81 c4 ;33b7
+	ld (score.tie_break),a		; 32 81 c4 ;33b7
 l33bah:
 	xor a			; af ;33ba
 	ld (score.point.bottom),a		; 32 88 c4 ;33bb
 	ld (score.point.top),a		; 32 89 c4 ;33be
-	jp l3037h		; c3 37 30 ;33c1
+	jp sub_update_score_points@l3037h		; c3 37 30 ;33c1

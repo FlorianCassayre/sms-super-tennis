@@ -29,12 +29,12 @@ sub_init_splash_screen:
 	ld bc,22		; 01 16 00 ;0871
 	call sub_cp_ram_vram		; cd 2f 04 ;0874
 	xor a			; af ;0877
-	ld (0de04h),a		; 32 04 de ;0878
+	ld (psg_engine._unknown),a		; 32 04 de ;0878
 	ld (0c011h),a		; 32 11 c0 ;087b
 	ld hl,0c006h		; 21 06 c0 ;087e
 	set 6,(hl)		; cb f6 ;0881
-	ld a,088h		; 3e 88 ;0883
-	ld (0de00h),a		; 32 00 de ;0885
+	ld a,$81 + ((audio_track_splash_screen - audio_track_data_pointers) >> 1)		; 3e 88 ;0883
+	ld (psg_engine.track_request_id),a		; 32 00 de ;0885
 	call sub_enable_display		; cd a0 03 ;0888
 	ei			; fb ;088b
 	ret			; c9 ;088c

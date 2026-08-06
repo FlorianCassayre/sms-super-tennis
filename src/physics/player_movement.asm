@@ -15,14 +15,14 @@ sub_player_movement:
 	ld a,(ix + player_t.side_state)		; dd 7e 01 ;26e2
 	and 1		; e6 01 ;26e5
 	jr nz,+		; 20 0c ;26e7
-	ld a,(MATCH_STATE_FLAG)		; 3a 44 c0 ;26e9
+	ld a,(game.match_state_flag)		; 3a 44 c0 ;26e9
 	and 1		; e6 01 ;26ec
 	jr nz,++		; 20 1e ;26ee
 	ld hl,BOUND_Y_MIN_QUAD_A2		; 21 00 8d ;26f0
 	jr ++		; 18 19 ;26f3
 +:
 	ld hl,BOUND_Y_MIN_QUAD_B1		; 21 00 60 ;26f5
-	ld a,(MATCH_STATE_FLAG)		; 3a 44 c0 ;26f8
+	ld a,(game.match_state_flag)		; 3a 44 c0 ;26f8
 	and 1		; e6 01 ;26fb
 	jr z,++		; 28 0f ;26fd
 	ld hl,BOUND_Y_MIN_QUAD_B2		; 21 00 88 ;26ff
@@ -62,14 +62,14 @@ l2704h:
 	ld a,(ix + player_t.side_state)		; dd 7e 01 ;273e
 	and 1		; e6 01 ;2741
 	jr nz,+		; 20 0c ;2743
-	ld a,(MATCH_STATE_FLAG)		; 3a 44 c0 ;2745
+	ld a,(game.match_state_flag)		; 3a 44 c0 ;2745
 	and 1		; e6 01 ;2748
 	jr z,++		; 28 1e ;274a
 	ld hl,BOUND_Y_MAX_QUAD_A2		; 21 00 74 ;274c
 	jr ++		; 18 19 ;274f
 +:
 	ld hl,BOUND_Y_MAX_QUAD_B1		; 21 00 9d ;2751
-	ld a,(MATCH_STATE_FLAG)		; 3a 44 c0 ;2754
+	ld a,(game.match_state_flag)		; 3a 44 c0 ;2754
 	and 1		; e6 01 ;2757
 	jr nz,++		; 20 0f ;2759
 	ld hl,BOUND_Y_MAX_QUAD_B2		; 21 00 76 ;275b

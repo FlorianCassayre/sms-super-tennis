@@ -27,14 +27,14 @@ sub_rle_decompress_stream:
 	ld b,a			; 47 ;04cd
 -:
 	ld a,e			; 7b ;04ce
-	out (0bfh),a		; d3 bf ;04cf
+	out (O_VDP_CTRL),a		; d3 bf ;04cf
 	ld a,d			; 7a ;04d1
 	or 040h		; f6 40 ;04d2
-	out (0bfh),a		; d3 bf ;04d4
+	out (O_VDP_CTRL),a		; d3 bf ;04d4
 	ex (sp),hl			; e3 ;04d6
 	ex (sp),hl			; e3 ;04d7
 	ld a,(hl)			; 7e ;04d8
-	out (0beh),a		; d3 be ;04d9
+	out (IO_VDP_DATA),a		; d3 be ;04d9
 	xor a			; af ;04db
 	or c			; b1 ;04dc
 	jr z,+		; 28 01 ;04dd

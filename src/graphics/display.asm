@@ -4,7 +4,7 @@ sub_enable_display:
 sub_disable_display:
 	ld a,0a0h		; 3e a0 ;03a4
 +:
-	out (0bfh),a		; d3 bf ;03a6
+	out (O_VDP_CTRL),a		; d3 bf ;03a6
 	ld a,081h		; 3e 81 ;03a8
-	out (0bfh),a		; d3 bf ;03aa
+	out (O_VDP_CTRL),a		; d3 bf ;03aa
 	ret			; c9 ;03ac

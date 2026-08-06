@@ -1,7 +1,3 @@
-.equ PORT_JOY1 $dc ; P1{UDLR12} + P2{UD}
-.equ PORT_JOY2 $dd ; P2{LR12} + (unused)
-.equ PORT_KBD_MATRIX $de
-
 .equ JOY_BIT_UP    0
 .equ JOY_BIT_DOWN  1
 .equ JOY_BIT_LEFT  2

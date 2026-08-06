@@ -8,7 +8,7 @@ sub_draw_game_end:
 	jp @maybe_tie		; c3 52 34 ;33d4
 @game_won:
 	ld a,087h		; 3e 87 ;33d7
-	ld (0de00h),a		; 32 00 de ;33d9
+	ld (psg_engine.track_request_id),a		; 32 00 de ;33d9
 	ld hl,03b48h		; 21 48 3b ;33dc
 	ld b,008h		; 06 08 ;33df
 	ld de,00018h		; 11 18 00 ;33e1
@@ -31,7 +31,7 @@ sub_draw_game_end:
 	cp 004h		; fe 04 ;340d
 	jp z,sub_3607h		; ca 07 36 ;340f
 	ld a,086h		; 3e 86 ;3412
-	ld (0de00h),a		; 32 00 de ;3414
+	ld (psg_engine.track_request_id),a		; 32 00 de ;3414
 	ld hl,03b48h		; 21 48 3b ;3417
 	ld de,00018h		; 11 18 00 ;341a
 	ld b,009h		; 06 09 ;341d

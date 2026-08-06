@@ -4,19 +4,19 @@ sub_apply_player_movement:
 	bit 0,(ix + player_t.side_state)		; dd cb 01 46 ;27f9
 	jr nz,l2819h		; 20 1a ;27fd
 	ld hl,table_player_velocity_top_a		; 21 b1 28 ;27ff
-	ld a,(P1_SPEED_STATE_A)		; 3a 47 c0 ;2802
+	ld a,(game.p1_speed_state_a)		; 3a 47 c0 ;2802
 	call sub_lookup_player_velocity		; cd 21 28 ;2805
 	ld hl,table_player_velocity_top_b		; 21 35 29 ;2808
-	ld a,(P1_SPEED_STATE_A)		; 3a 47 c0 ;280b
+	ld a,(game.p1_speed_state_a)		; 3a 47 c0 ;280b
 	ld (TEMP_VEL_SHIFT_MULT),a		; 32 02 c4 ;280e
-	ld a,(P1_SPEED_STATE_B)		; 3a 49 c0 ;2811
+	ld a,(game.p1_speed_state_b)		; 3a 49 c0 ;2811
 	and a			; a7 ;2814
 	ret z			; c8 ;2815
 	dec a			; 3d ;2816
 	jr sub_lookup_player_velocity		; 18 08 ;2817
 l2819h:
 	ld hl,table_player_velocity_bottom		; 21 8d 29 ;2819
-	ld a,(P2_SPEED_STATE)		; 3a 4a c0 ;281c
+	ld a,(game.p2_speed_state)		; 3a 4a c0 ;281c
 	and $07		; e6 07 ;281f
 sub_lookup_player_velocity:
 	ld e,a			; 5f ;2821

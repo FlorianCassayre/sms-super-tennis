@@ -1,10 +1,10 @@
 sub_3192_draw:
 	di			; f3 ;3192
 	ld a,l			; 7d ;3193
-	out (0bfh),a		; d3 bf ;3194
+	out (O_VDP_CTRL),a		; d3 bf ;3194
 	ld a,h			; 7c ;3196
 	set 6,a		; cb f7 ;3197
-	out (0bfh),a		; d3 bf ;3199
+	out (O_VDP_CTRL),a		; d3 bf ;3199
 	ld a,b			; 78 ;319b
 	cp 002h		; fe 02 ;319c
 	jr c,+		; 38 03 ;319e
@@ -15,13 +15,13 @@ sub_3192_draw:
 ++:
 -:
 	inc a			; 3c ;31a4
-	out (0beh),a		; d3 be ;31a5
+	out (IO_VDP_DATA),a		; d3 be ;31a5
 	ex (sp),hl			; e3 ;31a7
 	ex (sp),hl			; e3 ;31a8
 	ex (sp),hl			; e3 ;31a9
 	ex (sp),hl			; e3 ;31aa
 	ld a,001h		; 3e 01 ;31ab
-	out (0beh),a		; d3 be ;31ad
+	out (IO_VDP_DATA),a		; d3 be ;31ad
 	ex (sp),hl			; e3 ;31af
 	ex (sp),hl			; e3 ;31b0
 	ex (sp),hl			; e3 ;31b1

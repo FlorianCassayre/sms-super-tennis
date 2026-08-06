@@ -4,7 +4,7 @@ sub_load_vram_rect:
 	call sub_set_vdp_write_addr		; cd 26 04 ;0467
 -:
 	ld a,(de)			; 1a ;046a
-	out (0beh),a		; d3 be ;046b
+	out (IO_VDP_DATA),a		; d3 be ;046b
 	inc de			; 13 ;046d
 
 	; Waste some cycles
@@ -12,7 +12,7 @@ sub_load_vram_rect:
 	ex (sp),hl			; e3 ;046f
 
 	ld a,(de)			; 1a ;0470
-	out (0beh),a		; d3 be ;0471
+	out (IO_VDP_DATA),a		; d3 be ;0471
 	inc de			; 13 ;0473
 	dec bc			; 0b ;0474
 	ld a,c			; 79 ;0475
