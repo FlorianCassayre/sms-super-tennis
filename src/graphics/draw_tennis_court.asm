@@ -24,7 +24,7 @@ sub_draw_tennis_court:
 	rrca			; 0f ;0afa
 	and 007h		; e6 07 ;0afb
 	ld (0c046h),a		; 32 46 c0 ;0afd
-	ld a,081h		; 3e 81 ;0b00
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_start		; 3e 81 ;0b00
 	ld (psg_engine.track_request_id),a		; 32 00 de ;0b02
 	ld a,005h		; 3e 05 ;0b05
 	ld hl,0c000h		; 21 00 c0 ;0b07

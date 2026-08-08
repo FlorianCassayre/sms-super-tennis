@@ -26,7 +26,7 @@ l2f04h:
 l2ee1h_dispatch_default:
 	ret			; c9 ;2f10
 l2ee1h_dispatch_0:
-	ld a,096h		; 3e 96 ;2f11
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_in		; 3e 96 ;2f11
 	ld (psg_engine.track_request_id),a		; 32 00 de ;2f13
 	xor a			; af ;2f16
 	ld (0c48bh),a		; 32 8b c4 ;2f17
@@ -46,7 +46,7 @@ l2ee1h_dispatch_0:
 	ld (0c4a7h),a		; 32 a7 c4 ;2f37
 	jp l2f04h		; c3 04 2f ;2f3a
 l2ee1h_dispatch_1:
-	ld a,097h		; 3e 97 ;2f3d
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_out		; 3e 97 ;2f3d
 	ld (psg_engine.track_request_id),a		; 32 00 de ;2f3f
 	xor a			; af ;2f42
 	ld (0c48bh),a		; 32 8b c4 ;2f43
@@ -67,7 +67,7 @@ l2ee1h_dispatch_1:
 	ld (0c4a7h),a		; 32 a7 c4 ;2f65
 	jp l2f04h		; c3 04 2f ;2f68
 l2ee1h_dispatch_3:
-	ld a,099h		; 3e 99 ;2f6b
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_99		; 3e 99 ;2f6b
 	ld (psg_engine.track_request_id),a		; 32 00 de ;2f6d
 	xor a			; af ;2f70
 	ld (0c48bh),a		; 32 8b c4 ;2f71
@@ -88,7 +88,7 @@ l2ee1h_dispatch_3:
 	ld (0c4a7h),a		; 32 a7 c4 ;2f93
 	jp l2f04h		; c3 04 2f ;2f96
 l2ee1h_dispatch_2:
-	ld a,098h		; 3e 98 ;2f99
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_fault		; 3e 98 ;2f99
 	ld (psg_engine.track_request_id),a		; 32 00 de ;2f9b
 	ld hl,0c48bh		; 21 8b c4 ;2f9e
 	inc (hl)			; 34 ;2fa1

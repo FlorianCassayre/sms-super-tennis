@@ -58,11 +58,11 @@ l3205h:
 	cp 5		; fe 05 ;322b
 	jr c,l3236h		; 38 07 ;322d
 l322fh:
-	ld a,083h		; 3e 83 ;322f
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_lost		; 3e 83 ;322f
 	ld (psg_engine.track_request_id),a		; 32 00 de ;3231
 	jr l3276h		; 18 40 ;3234
 l3236h:
-	ld a,085h		; 3e 85 ;3236
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_set_lost		; 3e 85 ;3236
 	ld (psg_engine.track_request_id),a		; 32 00 de ;3238
 	ld a,(0c499h)		; 3a 99 c4 ;323b
 	inc a			; 3c ;323e
@@ -85,11 +85,11 @@ l3249h:
 	cp 5		; fe 05 ;325a
 	jr c,l3265h		; 38 07 ;325c
 l325eh:
-	ld a,082h		; 3e 82 ;325e
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_won		; 3e 82 ;325e
 	ld (psg_engine.track_request_id),a		; 32 00 de ;3260
 	jr l3276h		; 18 11 ;3263
 l3265h:
-	ld a,084h		; 3e 84 ;3265
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_set_won		; 3e 84 ;3265
 	ld (psg_engine.track_request_id),a		; 32 00 de ;3267
 	ld a,(0c49ah)		; 3a 9a c4 ;326a
 	inc a			; 3c ;326d

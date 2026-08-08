@@ -20,8 +20,10 @@
 	.INCLUDE "io/constants.asm"
 	.INCLUDE "io/hardware/constants.asm"
 	.INCLUDE "audio/constants.asm"
+	.INCLUDE "audio/data/constants.asm"
 	.INCLUDE "physics/constants.asm"
 	.INCLUDE "game/gui/constants.asm"
+	.INCLUDE "audio/data/note_t.i"
 
 start:
 	jp init		; c3 85 00 ;0000
@@ -1262,7 +1264,7 @@ l1000h:
 	nop			; 00 ;101b
 	jp m,0c2cch		; fa cc c2 ;101c
 l101fh:
-	ld a,08ch		; 3e 8c ;101f
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;101f
 	ld (psg_engine.track_request_id),a		; 32 00 de ;1021
 	ld hl,l10ebh		; 21 eb 10 ;1024
 	ld a,(0c046h)		; 3a 46 c0 ;1027
@@ -1698,7 +1700,7 @@ l1221h:
 	.DB $1c		;1225
 	.DB $00		;1226
 l1227h:
-	ld a,08ah		; 3e 8a ;1227
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_8a		; 3e 8a ;1227
 	ld (psg_engine.track_request_id),a		; 32 00 de ;1229
 	ld hl,l1260h		; 21 60 12 ;122c
 	ld a,(0c046h)		; 3a 46 c0 ;122f
@@ -1742,7 +1744,7 @@ l1260h:
 	.DB $50		;126a
 	.DB $ff		;126b
 l126ch:
-	ld a,08bh		; 3e 8b ;126c
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_high		; 3e 8b ;126c
 	ld (psg_engine.track_request_id),a		; 32 00 de ;126e
 	ld hl,l12c0h		; 21 c0 12 ;1271
 	ld a,(0c046h)		; 3a 46 c0 ;1274
@@ -4692,7 +4694,7 @@ data_planes_11_0:
     	ret nz
 	    .INCLUDE "audio/audio_fragment.asm"
 	.ENDIF
-.INCLUDE "data/table_7149h.asm"
+.INCLUDE "audio/data/audio_track_data.asm"
 l7905h:
 	.DW l7919h_0		;7905
 	.DW l7919h_1		;7907

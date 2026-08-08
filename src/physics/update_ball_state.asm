@@ -56,7 +56,7 @@ l16f6h:
 	ld hl,0c516h		; 21 16 c5 ;1711
 	set 7,(hl)		; cb fe ;1714
 	set 6,(hl)		; cb f6 ;1716
-	ld a,08eh		; 3e 8e ;1718
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_ball_net		; 3e 8e ;1718
 	ld (psg_engine.track_request_id),a		; 32 00 de ;171a
 	ld a,(0c519h)		; 3a 19 c5 ;171d
 	or a			; b7 ;1720
@@ -78,7 +78,7 @@ l16f6h:
 	ld (ball.z_vel),de		; ed 53 06 c5 ;173b
 	jr +		; 18 15 ;173f
 l1741h:
-	ld a,089h		; 3e 89 ;1741
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_wall		; 3e 89 ;1741
 	ld (psg_engine.track_request_id),a		; 32 00 de ;1743
 l1746h:
 	ld a,(0c519h)		; 3a 19 c5 ;1746

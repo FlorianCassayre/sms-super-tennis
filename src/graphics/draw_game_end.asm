@@ -7,7 +7,7 @@ sub_draw_game_end:
 	jp z,@game_lost		; ca 0a 34 ;33d1
 	jp @maybe_tie		; c3 52 34 ;33d4
 @game_won:
-	ld a,087h		; 3e 87 ;33d7
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_match_lost		; 3e 87 ;33d7
 	ld (psg_engine.track_request_id),a		; 32 00 de ;33d9
 	ld hl,03b48h		; 21 48 3b ;33dc
 	ld b,008h		; 06 08 ;33df
@@ -30,7 +30,7 @@ sub_draw_game_end:
 	ld a,(0c04ah)		; 3a 4a c0 ;340a
 	cp 004h		; fe 04 ;340d
 	jp z,sub_3607h		; ca 07 36 ;340f
-	ld a,086h		; 3e 86 ;3412
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_match_won		; 3e 86 ;3412
 	ld (psg_engine.track_request_id),a		; 32 00 de ;3414
 	ld hl,03b48h		; 21 48 3b ;3417
 	ld de,00018h		; 11 18 00 ;341a

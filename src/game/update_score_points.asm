@@ -168,7 +168,7 @@ sub_update_score_points:
 	call sub_3192_draw		; cd 92 31 ;3136
 	jp @finish_score_update		; c3 b6 30 ;3139
 @sub_313ch:
-	ld a,$81 + ((audio_track_9a - audio_track_data_pointers) >> 1)		; 3e 9a ;313c
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_9a		; 3e 9a ;313c
 	ld (psg_engine.track_request_id),a		; 32 00 de ;313e
 	ld hl,03904h		; 21 04 39 ;3141
 	ld (0c4a8h),hl		; 22 a8 c4 ;3144

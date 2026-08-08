@@ -35,7 +35,7 @@ l7a4fh:
 	ld a,0dfh		; 3e df ;7a5a
 	out (O_PSG_ALT),a		; d3 7f ;7a5c
 	jp l7ad7h		; c3 d7 7a ;7a5e
-l7a61h:
+audio_track_routine_music:
 	call l7dc8h		; cd c8 7d ;7a61
 	ld a,080h		; 3e 80 ;7a64
 	ld (psg_engine.priority_flag),a		; 32 03 de ;7a66
@@ -63,7 +63,7 @@ l7a72h:
 	ld hl,psg_channel.3		; 21 45 de ;7a85
 	set 2,(hl)		; cb d6 ;7a88
 	jp l7aafh		; c3 af 7a ;7a8a
-l7a8dh:
+audio_track_routine_sound_alt:
 	.IFDEF _J
 		.DB $1e
 		.DB $08
@@ -90,7 +90,7 @@ l7a9eh:
 l7aa1h:
 	ld de,psg_channel.1		; 11 05 de ;7aa1
 	jr l7aafh		; 18 09 ;7aa4
-l7aa6h;
+audio_track_routine_sound:
 	or a			; b7 ;7aa6
 	jr nz,l7ad7h		; 20 2e ;7aa7
 	ld de,psg_channel.2		; 11 25 de ;7aa9
@@ -254,7 +254,7 @@ l7bc8h_audio:
 l7bcch_audio:
 	.DB $90 $b0 $d0 $f0			;7bcc
 	.INCLUDE "audio/audio_compute_word_offset.asm"
-	.INCLUDE "physics/audio_get_envelope_table.asm"
+	.INCLUDE "audio/audio_get_envelope_table.asm"
 sub_7c43h:
 	ld e,(ix + psg_channel_t.track_data_pointer)		; dd 5e 03 ;7c43
 	ld d,(ix + psg_channel_t.track_data_pointer + 1)		; dd 56 04 ;7c46
@@ -342,7 +342,7 @@ l7cd7h:
 	ld hl,l7ceah		; 21 ea 7c ;7cd7
 	push hl			; e5 ;7cda
 	and 01fh		; e6 1f ;7cdb
-	ld hl,l7ceeh		; 21 ee 7c ;7cdd
+	ld hl,audio_command_routine		; 21 ee 7c ;7cdd
 	ld c,a			; 4f ;7ce0
 	ld b,000h		; 06 00 ;7ce1
 	add hl,bc			; 09 ;7ce3
@@ -355,11 +355,11 @@ l7cd7h:
 l7ceah:
 	inc de			; 13 ;7cea
 	jp l7c49h		; c3 49 7c ;7ceb
-.INCLUDE "unknown/jump_table.asm"
+.INCLUDE "audio/audio_command_routine.asm"
 l7daah:
 	inc de			; 13 ;7daa
 	dec (hl)			; 35 ;7dab
-	jp nz,l7ceeh_5		; c2 49 7d ;7dac
+	jp nz,audio_command_routine_goto		; c2 49 7d ;7dac
 	inc de			; 13 ;7daf
 	ret			; c9 ;7db0
 sub_7db1h:

@@ -19,7 +19,7 @@
 	effect_timer DB		;06
 	envelope_id_pointer DB		;07
 	base_volume DB			;08
-	_unknown_0 DB			;09
+	call_stack_ptr DB			;09
 	target_duration DW		;0a
 	current_tick DW			;0c
 	volume_envelope_index DB		;0e
@@ -29,7 +29,8 @@
 	slide_target_frequency_low DB		;14
 	slide_target_frequency_high DB		;15
 	current_volume DB		;16
-	_unknown_1 DSB 9		;17
+	loop_counters DS 4		;17
+	_padding DSB 5		;1b
 .ENDST
 
 .ENUM $de00

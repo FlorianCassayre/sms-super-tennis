@@ -31,7 +31,7 @@ l14f1h:
 	dec a			; 3d ;14f2
 	jr nz,l14ffh		; 20 0a ;14f3
 	call sub_0e04h		; cd 04 0e ;14f5
-	ld a,08fh		; 3e 8f ;14f8
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_bounce		; 3e 8f ;14f8
 	ld (psg_engine.track_request_id),a		; 32 00 de ;14fa
 	jr l150fh		; 18 10 ;14fd
 l14ffh:

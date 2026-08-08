@@ -78,7 +78,7 @@ l3627h:
 	ld hl,data_chunks_1		; 21 1a 37 ;36ad
 	call sub_upload_vram_chunks		; cd b7 03 ;36b0
 	ei			; fb ;36b3
-	ld a,086h		; 3e 86 ;36b4
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_match_won		; 3e 86 ;36b4
 	ld (psg_engine.track_request_id),a		; 32 00 de ;36b6
 	call sub_enable_display		; cd a0 03 ;36b9
 	ld a,040h		; 3e 40 ;36bc

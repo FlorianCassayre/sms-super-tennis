@@ -33,7 +33,7 @@ sub_init_splash_screen:
 	ld (0c011h),a		; 32 11 c0 ;087b
 	ld hl,0c006h		; 21 06 c0 ;087e
 	set 6,(hl)		; cb f6 ;0881
-	ld a,$81 + ((audio_track_splash_screen - audio_track_data_pointers) >> 1)		; 3e 88 ;0883
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_splash_screen		; 3e 88 ;0883
 	ld (psg_engine.track_request_id),a		; 32 00 de ;0885
 	call sub_enable_display		; cd a0 03 ;0888
 	ei			; fb ;088b
