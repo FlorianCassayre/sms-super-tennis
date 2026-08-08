@@ -1,6 +1,6 @@
 .equ PORT_PSG $7f
 
-.STRUCT psg_engine_t
+.STRUCT audio_psg_engine_t
 	track_request_id DB		;de00
 	state DB		;de01
 	tempo_countdown DB		;de02
@@ -10,7 +10,7 @@
 
 .equ PSG_CHANNELS 7
 
-.STRUCT psg_channel_t
+.STRUCT audio_psg_channel_t
 	status_flags DB			;00
 	psg_channel_map DB		;01
 	note_length_multiplier DB		;02
@@ -34,6 +34,6 @@
 .ENDST
 
 .ENUM $de00
-	psg_engine INSTANCEOF psg_engine_t		;de00
-	psg_channel INSTANCEOF psg_channel_t PSG_CHANNELS		;de05 de25 de45 de65 de85 dea5 dec5
+	psg_engine INSTANCEOF audio_psg_engine_t		;de00
+	psg_channel INSTANCEOF audio_psg_channel_t PSG_CHANNELS		;de05 de25 de45 de65 de85 dea5 dec5
 .ENDE

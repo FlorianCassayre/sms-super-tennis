@@ -6,11 +6,11 @@ sub_init_splash_screen:
 	ld hl,0		; 21 00 00 ;0830
 	ld de,l3b08h_palette		; 11 08 3b ;0833
 	ld b,8		; 06 08 ;0836
-	call sub_load_cram		; cd 81 04 ;0838
+	call sub_graphics_palette_load		; cd 81 04 ;0838
 	ld hl,00010h		; 21 10 00 ;083b
 	ld de,l3b10h_palette		; 11 10 3b ;083e
 	ld b,11		; 06 0b ;0841
-	call sub_load_cram		; cd 81 04 ;0843
+	call sub_graphics_palette_load		; cd 81 04 ;0843
 	ld de,02600h		; 11 00 26 ;0846
 	ld hl,data_planes_1_0		; 21 1b 3b ;0849
 	call sub_rle_decompress_bitplanes_to_vram		; cd b5 04 ;084c

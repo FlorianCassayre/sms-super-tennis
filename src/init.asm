@@ -40,8 +40,8 @@ init:
 	add hl,de			; 19 ;00cb
 	jr c,-		; 38 fd ;00cc
 	djnz --		; 10 f8 ;00ce
-	call sub_check_hardware		; cd 06 41 ;00d0
-	ld (0c010h),a		; 32 10 c0 ;00d3
+	call sub_hardware_self_test		; cd 06 41 ;00d0
+	ld (state.hardware_type),a		; 32 10 c0 ;00d3
 -:
 	di			; f3 ;00d6
 	ld sp,0dffeh		; 31 fe df ;00d7
@@ -63,11 +63,11 @@ init:
 	ld hl,0		; 21 00 00 ;00fc
 	ld de,l002dh_palette		; 11 2d 00 ;00ff
 	ld b,1		; 06 01 ;0102
-	call sub_load_cram		; cd 81 04 ;0104
+	call sub_graphics_palette_load		; cd 81 04 ;0104
 	ld hl,00010h		; 21 10 00 ;0107
 	ld de,l002dh_palette		; 11 2d 00 ;010a
 	ld b,1		; 06 01 ;010d
-	call sub_load_cram		; cd 81 04 ;010f
+	call sub_graphics_palette_load		; cd 81 04 ;010f
 	ld de,l2000h		; 11 00 20 ;0112
 	ld hl,data_planes_9_0		; 21 43 5b ;0115
 	call sub_rle_decompress_bitplanes_to_vram		; cd b5 04 ;0118

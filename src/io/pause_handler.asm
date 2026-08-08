@@ -15,3 +15,5 @@ nmi_pause_handler:
 +:
 	pop af			; f1 ;0082
 	retn		; ed 45 ;0083
+
+.ASSERT nmi_pause_handler == $0066, LDERROR

@@ -1,4 +1,4 @@
-sub_load_cram:
+sub_graphics_palette_load:
 	ld a,l			; 7d ;0481
 	out (O_VDP_CTRL),a		; d3 bf ;0482
 	ld a,0c0h		; 3e c0 ;0484

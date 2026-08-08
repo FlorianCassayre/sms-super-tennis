@@ -1,4 +1,4 @@
-.STRUCT note_t
+.STRUCT audio_note_t
     rest DB 
     a1 DB	as1 DB	b1 DB	c1 DB	cs1 DB	d1 DB	ds1 DB	e1 DB	f1 DB	fs1 DB	g1 DB	gs1 DB
     a2 DB	as2 DB	b2 DB	c2 DB	cs2 DB	d2 DB	ds2 DB	e2 DB	f2 DB	fs2 DB	g2 DB	gs2 DB
@@ -9,5 +9,5 @@
 .ENDST
 
 .ENUM $80
-	note INSTANCEOF note_t
+	note INSTANCEOF audio_note_t
 .ENDE

@@ -12,8 +12,8 @@ sub_draw_game_end:
 	ld hl,03b48h		; 21 48 3b ;33dc
 	ld b,008h		; 06 08 ;33df
 	ld de,00018h		; 11 18 00 ;33e1
-	call sub_3457h		; cd 57 34 ;33e4
-	call sub_346eh		; cd 6e 34 ;33e7
+	call sub_3457h_clean_vram		; cd 57 34 ;33e4
+	call sub_draw_game_end_line		; cd 6e 34 ;33e7
 	ld hl,03c18h		; 21 18 3c ;33ea
 	ld de,0351fh		; 11 1f 35 ;33ed
 	ld b,008h		; 06 08 ;33f0
@@ -35,8 +35,8 @@ sub_draw_game_end:
 	ld hl,03b48h		; 21 48 3b ;3417
 	ld de,00018h		; 11 18 00 ;341a
 	ld b,009h		; 06 09 ;341d
-	call sub_3457h		; cd 57 34 ;341f
-	call sub_346eh		; cd 6e 34 ;3422
+	call sub_3457h_clean_vram		; cd 57 34 ;341f
+	call sub_draw_game_end_line		; cd 6e 34 ;3422
 	ld hl,03c18h		; 21 18 3c ;3425
 	ld de,034d7h		; 11 d7 34 ;3428
 	ld b,007h		; 06 07 ;342b

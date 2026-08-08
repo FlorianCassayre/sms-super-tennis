@@ -15,115 +15,95 @@
 
 	.ORGA	00000h
 
+	.INCLUDE "hardware/hardware_io.i"
+	.INCLUDE "hardware/hardware_type.i"
+	.INCLUDE "state/state_t.i"
 	.INCLUDE "algorithm/rle_constants.asm"
-	.INCLUDE "game/constants.asm"
+	.INCLUDE "game/score/game_score_t.i"
+	.INCLUDE "game/game_t.i"
+	.INCLUDE "game/ball/ball_t.i"
+	.INCLUDE "game/ball/game_ball.i"
+	.INCLUDE "game/player/player_t.i"
+	.INCLUDE "game/player/game_player.i"
 	.INCLUDE "io/constants.asm"
-	.INCLUDE "io/hardware/constants.asm"
 	.INCLUDE "audio/psg/audio_psg.i"
 	.INCLUDE "physics/constants.asm"
 	.INCLUDE "game/gui/constants.asm"
-	.INCLUDE "audio/note/note_t.i"
+	.INCLUDE "audio/note/audio_note_t.i"
 	.INCLUDE "audio/command/audio_command_routines_t.i"
 	.INCLUDE "audio/track/audio_tracks_t.i"
 	.INCLUDE "audio/track/audio_track_macros.i"
 start:
 	jp init		; c3 85 00 ;0000
 .INCLUDE "graphics/palettes/palette_0.asm"
-	jr nc,l0034h		; 30 0f ;0023
-	rlca			; 07 ;0025
-l0026h:
-	ld (bc),a			; 02 ;0026
-	nop			; 00 ;0027
-	nop			; 00 ;0028
-l0029h:
-	nop			; 00 ;0029
-l002ah:
-	nop			; 00 ;002a
-	nop			; 00 ;002b
-	ccf			; 3f ;002c
+	.DB $30		;0023
+	.DB $0f		;0024
+	.DB $07		;0025
+	.DB $02		;0026
+	.DB $00		;0027
+	.DB $00		;0028
+	.DB $00		;0029
+	.DB $00		;002a
+	.DB $00		;002b
+	.DB $3f		;002c
 l002dh_palette:
 	.DB $00		;002d
 	.DB $0f		;002e
-	rst 38h			; ff ;002f
-	rst 38h			; ff ;0030
-	rst 38h			; ff ;0031
-	rst 38h			; ff ;0032
-	rst 38h			; ff ;0033
-l0034h:
-	rst 38h			; ff ;0034
-	rst 38h			; ff ;0035
-	rst 38h			; ff ;0036
-l0037h:
-	rst 38h			; ff ;0037
+	.DB $ff		;002f
+	.DB $ff		;0030
+	.DB $ff		;0031
+	.DB $ff		;0032
+	.DB $ff		;0033
+	.DB $ff		;0034
+	.DB $ff		;0035
+	.DB $ff		;0036
+	.DB $ff		;0037
 l0038h_interrupt:
 	jp isr_vblank_update		; c3 65 01 ;0038
+.ASSERT l0038h_interrupt == $0038, LDERROR
 l003bh:
-	ld d,080h		; 16 80 ;003b
-	and b			; a0 ;003d
-	add a,c			; 81 ;003e
+	.DW $8016		;003b
+	.DW $81a0		;003d
 l003fh:
-	rst 38h			; ff ;003f
+	.DB $ff			;003f
 l0040h:
-	add a,d			; 82 ;0040
-	rst 38h			; ff ;0041
-	add a,e			; 83 ;0042
-	rst 38h			; ff ;0043
-	add a,h			; 84 ;0044
-	rst 38h			; ff ;0045
-	add a,l			; 85 ;0046
-	ei			; fb ;0047
-	add a,(hl)			; 86 ;0048
-	nop			; 00 ;0049
-	add a,a			; 87 ;004a
-	nop			; 00 ;004b
-	adc a,b			; 88 ;004c
-	nop			; 00 ;004d
-	adc a,c			; 89 ;004e
-	cp a			; bf ;004f
-	adc a,d			; 8a ;0050
-	nop			; 00 ;0051
-	nop			; 00 ;0052
-	nop			; 00 ;0053
-	nop			; 00 ;0054
-	nop			; 00 ;0055
-	rst 38h			; ff ;0056
-	rst 38h			; ff ;0057
-	rst 38h			; ff ;0058
-	rst 38h			; ff ;0059
-	rst 38h			; ff ;005a
-	rst 38h			; ff ;005b
-	rst 38h			; ff ;005c
-	rst 38h			; ff ;005d
-	rst 38h			; ff ;005e
-	rst 38h			; ff ;005f
-	rst 38h			; ff ;0060
-	rst 38h			; ff ;0061
-	rst 38h			; ff ;0062
-	rst 38h			; ff ;0063
-	rst 38h			; ff ;0064
-	rst 38h			; ff ;0065
+	.DB $82			;0040
+	.DW $83ff		;0041
+	.DW $84ff		;0043
+	.DW $85ff		;0045
+	.DW $86fb		;0047
+	.DW $8700		;0049
+	.DW $8800		;004b
+	.DW $8900		;004d
+	.DW $8abf		;004f
+	.DB $00		;0051
+	.DB $00		;0052
+	.DB $00		;0053
+	.DB $00		;0054
+	.DB $00		;0055
+	.DSB 16 $ff		;0056
 .INCLUDE "io/pause_handler.asm"
 .INCLUDE "init.asm"
-	nop			; 00 ;023d
-	nop			; 00 ;023e
-	nop			; 00 ;023f
-	nop			; 00 ;0240
-	nop			; 00 ;0241
-	nop			; 00 ;0242
-	nop			; 00 ;0243
-	nop			; 00 ;0244
-	nop			; 00 ;0245
-	nop			; 00 ;0246
-	nop			; 00 ;0247
-	nop			; 00 ;0248
-l0249h:
-	nop			; 00 ;0249
-	nop			; 00 ;024a
-	nop			; 00 ;024b
-	nop			; 00 ;024c
-	nop			; 00 ;024d
-	nop			; 00 ;024e
-	nop			; 00 ;024f
+	.DB $00		;023d
+	.DB $00		;023e
+	.DB $00		;023f
+	.DB $00		;0240
+	.DB $00		;0241
+	.DB $00		;0242
+	.DB $00		;0243
+	.DB $00		;0244
+	.DB $00		;0245
+	.DB $00		;0246
+	.DB $00		;0247
+	.DB $00		;0248
+	.DB $00		;0249
+	.DB $00		;024a
+	.DB $00		;024b
+	.DB $00		;024c
+	.DB $00		;024d
+	.DB $00		;024e
+	.DB $00		;024f
+l0250h:
 	ld a,010h		; 3e 10 ;0250
 	out (O_VDP_CTRL),a		; d3 bf ;0252
 	ld a,0c0h		; 3e c0 ;0254
@@ -139,8 +119,9 @@ l025dh:
 	.INCLUDE "io/027bh_joy.asm"
 	.INCLUDE "audio/event/audio_event_wait.asm"
 	.INCLUDE "audio/event/audio_idle_wait.asm"
-	nop			; 00 ;0385
-	.DB $11 $e0 ;0386
+	.DB $00		;0385
+	.DB $11		;0386
+	.DB $e0		;0387
 	.INCLUDE "graphics/init_background_name_table.asm"
 	.INCLUDE "graphics/display.asm"
 	.INCLUDE "graphics/decrement_pause_counter.asm"
@@ -154,7 +135,7 @@ l025dh:
 	.INCLUDE "graphics/vram_fill_byte.asm"
 	.INCLUDE "graphics/vram_fill_word.asm"
 	.INCLUDE "graphics/load_vram_rect.asm"
-	.INCLUDE "graphics/load_cram.asm"
+	.INCLUDE "graphics/palette/graphics_palette_load.asm"
 	.INCLUDE "graphics/cp_1bit_ram_vram.asm"
 	.INCLUDE "algorithm/rle_decompress_bitplanes.asm"
 l051ah:
@@ -302,75 +283,81 @@ sub_06b8h:
 	ld (0c514h),hl		; 22 14 c5 ;06bb
 	ret			; c9 ;06be
 l06bfh:
-	ld bc,00206h		; 01 06 02 ;06bf
-	rlca			; 07 ;06c2
-	ld (bc),a			; 02 ;06c3
-	rlca			; 07 ;06c4
-	ld (bc),a			; 02 ;06c5
-	rlca			; 07 ;06c6
-	inc bc			; 03 ;06c7
-	rlca			; 07 ;06c8
-	inc bc			; 03 ;06c9
-	rlca			; 07 ;06ca
-	inc bc			; 03 ;06cb
-sub_06cch:
-	ex af,af'			; 08 ;06cc
-	inc bc			; 03 ;06cd
-	ex af,af'			; 08 ;06ce
-	inc b			; 04 ;06cf
-	ex af,af'			; 08 ;06d0
-	inc b			; 04 ;06d1
-	ex af,af'			; 08 ;06d2
-	inc b			; 04 ;06d3
-	ex af,af'			; 08 ;06d4
-	inc b			; 04 ;06d5
-	ex af,af'			; 08 ;06d6
-	inc b			; 04 ;06d7
-	ex af,af'			; 08 ;06d8
-	inc b			; 04 ;06d9
-	ex af,af'			; 08 ;06da
-	inc b			; 04 ;06db
-	ex af,af'			; 08 ;06dc
-	inc b			; 04 ;06dd
-	ex af,af'			; 08 ;06de
+	.DB $01		;06bf
+	.DB $06		;06c0
+	.DB $02		;06c1
+	.DB $07		;06c2
+	.DB $02		;06c3
+	.DB $07		;06c4
+	.DB $02		;06c5
+	.DB $07		;06c6
+	.DB $03		;06c7
+	.DB $07		;06c8
+	.DB $03		;06c9
+	.DB $07		;06ca
+	.DB $03		;06cb
+	.DB $08		;06cc
+	.DB $03		;06cd
+	.DB $08		;06ce
+	.DB $04		;06cf
+	.DB $08		;06d0
+	.DB $04		;06d1
+	.DB $08		;06d2
+	.DB $04		;06d3
+	.DB $08		;06d4
+	.DB $04		;06d5
+	.DB $08		;06d6
+	.DB $04		;06d7
+	.DB $08		;06d8
+	.DB $04		;06d9
+	.DB $08		;06da
+	.DB $04		;06db
+	.DB $08		;06dc
+	.DB $04		;06dd
+	.DB $08		;06de
 l06dfh:
-	nop			; 00 ;06df
-	dec b			; 05 ;06e0
-	ld bc,00104h+2		; 01 06 01 ;06e1
-	ld b,001h		; 06 01 ;06e4
-	ld b,002h		; 06 02 ;06e6
-	ld b,002h		; 06 02 ;06e8
-	ld b,002h		; 06 02 ;06ea
-	rlca			; 07 ;06ec
-	ld (bc),a			; 02 ;06ed
-	rlca			; 07 ;06ee
-	inc bc			; 03 ;06ef
-	rlca			; 07 ;06f0
-	inc bc			; 03 ;06f1
-	ex af,af'			; 08 ;06f2
-	inc b			; 04 ;06f3
-	ex af,af'			; 08 ;06f4
-	inc b			; 04 ;06f5
-	ex af,af'			; 08 ;06f6
-	inc b			; 04 ;06f7
-	ex af,af'			; 08 ;06f8
-	inc b			; 04 ;06f9
-	ex af,af'			; 08 ;06fa
-	inc b			; 04 ;06fb
-	ex af,af'			; 08 ;06fc
-	inc b			; 04 ;06fd
-	ex af,af'			; 08 ;06fe
+	.DB $00		;06df
+	.DB $05		;06e0
+	.DB $01		;06e1
+	.DB $06		;06e2
+	.DB $01		;06e3
+	.DB $06		;06e4
+	.DB $01		;06e5
+	.DB $06		;06e6
+	.DB $02		;06e7
+	.DB $06		;06e8
+	.DB $02		;06e9
+	.DB $06		;06ea
+	.DB $02		;06eb
+	.DB $07		;06ec
+	.DB $02		;06ed
+	.DB $07		;06ee
+	.DB $03		;06ef
+	.DB $07		;06f0
+	.DB $03		;06f1
+	.DB $08		;06f2
+	.DB $04		;06f3
+	.DB $08		;06f4
+	.DB $04		;06f5
+	.DB $08		;06f6
+	.DB $04		;06f7
+	.DB $08		;06f8
+	.DB $04		;06f9
+	.DB $08		;06fa
+	.DB $04		;06fb
+	.DB $08		;06fc
+	.DB $04		;06fd
+	.DB $08		;06fe
 l06ffh:
-	nop			; 00 ;06ff
-	add a,020h		; c6 20 ;0700
-	add a,040h		; c6 40 ;0702
-	add a,060h		; c6 60 ;0704
-	add a,080h		; c6 80 ;0706
-	add a,0a0h		; c6 a0 ;0708
-	add a,0c0h		; c6 c0 ;070a
-	add a,0e0h		; c6 e0 ;070c
-	add a,000h		; c6 00 ;070e
-	rst 0			; c7 ;0710
+	.DW $c600		;06ff
+	.DW $c620		;0701
+	.DW $c640		;0703
+	.DW $c660		;0705
+	.DW $c680		;0707
+	.DW $c6a0		;0709
+	.DW $c6c0		;070b
+	.DW $c6e0		;070d
+	.DW $c700		;070f
 sub_0711h_entity_action_dispatch:
 	ld hl,l074fh_memory_table		; 21 4f 07 ;0711
 	ld a,(0c086h)		; 3a 86 c0 ;0714
@@ -697,37 +684,49 @@ l0c3bh:
 	ld (0c006h),a		; 32 06 c0 ;0c3b
 	ret			; c9 ;0c3e
 l0c3fh:
-	nop			; 00 ;0c3f
-	ld bc,000ffh+1		; 01 00 01 ;0c40
+	.DB $00		;0c3f
+	.DB $01		;0c40
+	.DB $00		;0c41
+	.DB $01		;0c42
 l0c43h:
-	nop			; 00 ;0c43
-	ld bc,00302h		; 01 02 03 ;0c44
+	.DB $00		;0c43
+	.DB $01		;0c44
+	.DB $02		;0c45
+	.DB $03		;0c46
 l0c47h:
-	inc bc			; 03 ;0c47
-	ld (bc),a			; 02 ;0c48
-	nop			; 00 ;0c49
-	nop			; 00 ;0c4a
-	ld bc,3		; 01 03 00 ;0c4b
-	nop			; 00 ;0c4e
-	nop			; 00 ;0c4f
-	nop			; 00 ;0c50
-	nop			; 00 ;0c51
-	nop			; 00 ;0c52
-	nop			; 00 ;0c53
-	nop			; 00 ;0c54
-	nop			; 00 ;0c55
-	nop			; 00 ;0c56
+	.DB $03		;0c47
+	.DB $02		;0c48
+	.DB $00		;0c49
+	.DB $00		;0c4a
+	.DB $01		;0c4b
+	.DB $03		;0c4c
+	.DB $00		;0c4d
+	.DB $00		;0c4e
+	.DB $00		;0c4f
+	.DB $00		;0c50
+	.DB $00		;0c51
+	.DB $00		;0c52
+	.DB $00		;0c53
+	.DB $00		;0c54
+	.DB $00		;0c55
+	.DB $00		;0c56
 l0c57h:
-	inc bc			; 03 ;0c57
-	ld (bc),a			; 02 ;0c58
-	ld bc,00102h		; 01 02 01 ;0c59
-	inc bc			; 03 ;0c5c
-	ld bc,00102h		; 01 02 01 ;0c5d
-	ld (bc),a			; 02 ;0c60
-	inc bc			; 03 ;0c61
-	ld (bc),a			; 02 ;0c62
-	ld bc,00102h		; 01 02 01 ;0c63
-	inc bc			; 03 ;0c66
+	.DB $03		;0c57
+	.DB $02		;0c58
+	.DB $01		;0c59
+	.DB $02		;0c5a
+	.DB $01		;0c5b
+	.DB $03		;0c5c
+	.DB $01		;0c5d
+	.DB $02		;0c5e
+	.DB $01		;0c5f
+	.DB $02		;0c60
+	.DB $03		;0c61
+	.DB $02		;0c62
+	.DB $01		;0c63
+	.DB $02		;0c64
+	.DB $01		;0c65
+	.DB $03		;0c66
 l0c67h:
 	ld (bc),a			; 02 ;0c67
 	ld bc,00102h		; 01 02 01 ;0c68
@@ -746,7 +745,7 @@ l0c67h:
 	ld (hl),001h		; 36 01 ;0c80
 	ld hl,00078h		; 21 78 00 ;0c82
 	ld (0c08ah),hl		; 22 8a c0 ;0c85
-	call sub_0d84h		; cd 84 0d ;0c88
+	call sub_menu_highlight_cursor		; cd 84 0d ;0c88
 	jp l2ee1h_dispatch		; c3 e1 2e ;0c8b
 l0c8eh:
 	call sub_decrement_pause_counter		; cd ad 03 ;0c8e
@@ -860,50 +859,7 @@ l0d71h:
 	inc hl			; 23 ;0d80
 	ld (hl),000h		; 36 00 ;0d81
 	ret			; c9 ;0d83
-sub_0d84h:
-	ld a,(0c518h)		; 3a 18 c5 ;0d84
-	dec a			; 3d ;0d87
-	jr z,l0db5h		; 28 2b ;0d88
-	dec a			; 3d ;0d8a
-	jr z,l0da4h		; 28 17 ;0d8b
-	dec a			; 3d ;0d8d
-	jr z,l0d9ah		; 28 0a ;0d8e
-	ld a,(0c041h)		; 3a 41 c0 ;0d90
-	ld (0c042h),a		; 32 42 c0 ;0d93
-	ld c,000h		; 0e 00 ;0d96
-	jr l0dc0h		; 18 26 ;0d98
-l0d9ah:
-	ld a,(0c519h)		; 3a 19 c5 ;0d9a
-	or a			; b7 ;0d9d
-	jr nz,l0da4h		; 20 04 ;0d9e
-	ld c,000h		; 0e 00 ;0da0
-	jr l0dc0h		; 18 1c ;0da2
-l0da4h:
-	ld c,001h		; 0e 01 ;0da4
-	ld a,(0c519h)		; 3a 19 c5 ;0da6
-	dec a			; 3d ;0da9
-	jr z,l0dc0h		; 28 14 ;0daa
-	ld c,000h		; 0e 00 ;0dac
-	dec a			; 3d ;0dae
-	jr z,l0dc0h		; 28 0f ;0daf
-	ld c,002h		; 0e 02 ;0db1
-	jr l0dc0h		; 18 0b ;0db3
-l0db5h:
-	ld c,002h		; 0e 02 ;0db5
-	ld a,(0c040h)		; 3a 40 c0 ;0db7
-	bit 0,a		; cb 47 ;0dba
-	jr nz,l0dc0h		; 20 02 ;0dbc
-	ld c,003h		; 0e 03 ;0dbe
-l0dc0h:
-	ld a,(0c042h)		; 3a 42 c0 ;0dc0
-	ld e,a			; 5f ;0dc3
-	ld d,000h		; 16 00 ;0dc4
-	ld hl,l0e00h		; 21 00 0e ;0dc6
-	add hl,de			; 19 ;0dc9
-	ld a,(hl)			; 7e ;0dca
-	or c			; b1 ;0dcb
-	ld (0c480h),a		; 32 80 c4 ;0dcc
-	ret			; c9 ;0dcf
+	.INCLUDE "graphics/menu_highlight_cursor.asm"
 l0dd0h:
 	ld d,c			; 51 ;0dd0
 	add a,b			; 80 ;0dd1
@@ -957,40 +913,7 @@ l0e00h:
 	add a,b			; 80 ;0e01
 	ld b,b			; 40 ;0e02
 	add a,b			; 80 ;0e03
-sub_0e04h:
-	ld a,(0c518h)		; 3a 18 c5 ;0e04
-	or a			; b7 ;0e07
-	ret nz			; c0 ;0e08
-	ld a,(0c040h)		; 3a 40 c0 ;0e09
-	bit 0,a		; cb 47 ;0e0c
-	jr z,l0e3bh		; 28 2b ;0e0e
-	ld a,(0c041h)		; 3a 41 c0 ;0e10
-	add a,a			; 87 ;0e13
-	ld e,a			; 5f ;0e14
-	add a,a			; 87 ;0e15
-	add a,e			; 83 ;0e16
-	ld e,a			; 5f ;0e17
-	ld d,000h		; 16 00 ;0e18
-	ld hl,l0dd0h		; 21 d0 0d ;0e1a
-	add hl,de			; 19 ;0e1d
-	ld a,(0c509h)		; 3a 09 c5 ;0e1e
-	cp (hl)			; be ;0e21
-	jr c,l0e6fh		; 38 4b ;0e22
-	inc hl			; 23 ;0e24
-	cp (hl)			; be ;0e25
-	jr nc,l0e6fh		; 30 47 ;0e26
-	inc hl			; 23 ;0e28
-	ld a,(0c044h)		; 3a 44 c0 ;0e29
-	add a,a			; 87 ;0e2c
-	ld e,a			; 5f ;0e2d
-	add hl,de			; 19 ;0e2e
-	ld a,(0c50bh)		; 3a 0b c5 ;0e2f
-	cp (hl)			; be ;0e32
-	jr c,l0e6fh		; 38 3a ;0e33
-	inc hl			; 23 ;0e35
-	cp (hl)			; be ;0e36
-	jr c,l0e67h		; 38 2e ;0e37
-	jr l0e6fh		; 18 34 ;0e39
+	.INCLUDE "game/gui/sub_menu_button_press_test.asm"
 l0e3bh:
 	ld a,(0c042h)		; 3a 42 c0 ;0e3b
 	add a,a			; 87 ;0e3e
@@ -1036,73 +959,7 @@ l0e71h:
 l0e7bh:
 	ld (0c519h),a		; 32 19 c5 ;0e7b
 	ret			; c9 ;0e7e
-sub_0e7fh:
-	ld hl,l0eaah		; 21 aa 0e ;0e7f
-	ld a,(0c509h)		; 3a 09 c5 ;0e82
-	cp (hl)			; be ;0e85
-	jr c,l0ea4h		; 38 1c ;0e86
-	inc hl			; 23 ;0e88
-	cp (hl)			; be ;0e89
-	jr nc,l0ea4h		; 30 18 ;0e8a
-	inc hl			; 23 ;0e8c
-	ld a,(0c000h)		; 3a 00 c0 ;0e8d
-	bit 7,a		; cb 7f ;0e90
-	jr z,l0e96h		; 28 02 ;0e92
-	inc hl			; 23 ;0e94
-	inc hl			; 23 ;0e95
-l0e96h:
-	ld a,(0c50bh)		; 3a 0b c5 ;0e96
-	cp (hl)			; be ;0e99
-	jr c,l0ea4h		; 38 08 ;0e9a
-	inc hl			; 23 ;0e9c
-	cp (hl)			; be ;0e9d
-	jr nc,l0ea4h		; 30 04 ;0e9e
-	ld a,000h		; 3e 00 ;0ea0
-	jr l0ea6h		; 18 02 ;0ea2
-l0ea4h:
-	ld a,001h		; 3e 01 ;0ea4
-l0ea6h:
-	ld (0c51dh),a		; 32 1d c5 ;0ea6
-	ret			; c9 ;0ea9
-l0eaah:
-	add hl,hl			; 29 ;0eaa
-	out (052h),a		; d3 52 ;0eab
-	xor (hl)			; ae ;0ead
-	ld b,h			; 44 ;0eae
-	cp h			; bc ;0eaf
-	ld hl,0c006h		; 21 06 c0 ;0eb0
-	bit 6,(hl)		; cb 76 ;0eb3
-	jr nz,l0eefh		; 20 38 ;0eb5
-	set 6,(hl)		; cb f6 ;0eb7
-	ld a,(0c010h)		; 3a 10 c0 ;0eb9
-	or a			; b7 ;0ebc
-	jr nz,l0ef3h		; 20 34 ;0ebd
-	di			; f3 ;0ebf
-	call sub_disable_display		; cd a4 03 ;0ec0
-	call sub_init_background_name_table		; cd 88 03 ;0ec3
-	ld hl,l2c00h		; 21 00 2c ;0ec6
-	ld de,0c76ch		; 11 6c c7 ;0ec9
-	ld bc,224		; 01 e0 00 ;0ecc
-	ld a,001h		; 3e 01 ;0ecf
-	call sub_cp_1bit_ram_vram		; cd 92 04 ;0ed1
-	ld hl,03a8eh		; 21 8e 3a ;0ed4
-	ld de,0c720h		; 11 20 c7 ;0ed7
-	ld bc,(2 << 8) | 19		; 01 13 02 ;0eda
-	call sub_load_vram_rect		; cd 64 04 ;0edd
-	xor a			; af ;0ee0
-	ld (0c011h),a		; 32 11 c0 ;0ee1
-	call sub_enable_display		; cd a0 03 ;0ee4
-	ei			; fb ;0ee7
-	ld hl,000f0h		; 21 f0 00 ;0ee8
-	ld (0c08ah),hl		; 22 8a c0 ;0eeb
-	ret			; c9 ;0eee
-l0eefh:
-	call sub_decrement_pause_counter		; cd ad 03 ;0eef
-	ret nz			; c0 ;0ef2
-l0ef3h:
-	ld hl,0c006h		; 21 06 c0 ;0ef3
-	ld (hl),081h		; 36 81 ;0ef6
-	ret			; c9 ;0ef8
+	.INCLUDE "game/button_press_test.asm"
 sub_0ef9h_palette_swap:
 	ld hl,0c006h		; 21 06 c0 ;0ef9
 	bit 6,(hl)		; cb 76 ;0efc
@@ -1114,11 +971,11 @@ l0f02h:
 	ld hl,0		; 21 00 00 ;0f04
 	ld de,l002dh_palette		; 11 2d 00 ;0f07
 	ld b,2		; 06 02 ;0f0a
-	call sub_load_cram		; cd 81 04 ;0f0c
+	call sub_graphics_palette_load		; cd 81 04 ;0f0c
 	ld hl,00010h		; 21 10 00 ;0f0f
 	ld de,l002dh_palette		; 11 2d 00 ;0f12
 	ld b,1		; 06 01 ;0f15
-	jp sub_load_cram		; c3 81 04 ;0f17
+	jp sub_graphics_palette_load		; c3 81 04 ;0f17
 l0f1ah:
 	jp l1548h		; c3 48 15 ;0f1a
 l0f1dh:
@@ -2204,7 +2061,7 @@ l1775h:
 	.DB $09		;1784
 	.DB $0a		;1785
 	.DB $05		;1786
-	.INCLUDE "physics/check_player_location.asm"
+	.INCLUDE "game/player/check_player_location.asm"
 l17e7h:
 	call m,0f808h		; fc 08 f8 ;17e7
 	djnz l1773h		; 10 87 ;17ea
@@ -2231,85 +2088,9 @@ l1800h:
 l1804h:
 	ld d,a			; 57 ;1804
 	ret			; c9 ;1805
-sub_1806h_bound_check:
-	ld bc,(0c08eh)		; ed 4b 8e c0 ;1806
-	ld de,(0c090h)		; ed 5b 90 c0 ;180a
-	ld a,(0c082h)		; 3a 82 c0 ;180e
-	cp c			; b9 ;1811
-	jr z,l1818h		; 28 04 ;1812
-	jr nc,l1824h		; 30 0e ;1814
-	jr l1838h		; 18 20 ;1816
-l1818h:
-	call sub_1854h		; cd 54 18 ;1818
-	ld hl,l1769h		; 21 69 17 ;181b
-	ld e,a			; 5f ;181e
-	ld d,000h		; 16 00 ;181f
-	add hl,de			; 19 ;1821
-	ld e,(hl)			; 5e ;1822
-	ret			; c9 ;1823
-l1824h:
-	cp b			; b8 ;1824
-	jr z,l182ch		; 28 05 ;1825
-	jr c,l182ch		; 38 03 ;1827
-	xor a			; af ;1829
-	jr l182fh		; 18 03 ;182a
-l182ch:
-	call sub_1854h		; cd 54 18 ;182c
-l182fh:
-	ld e,a			; 5f ;182f
-	ld d,000h		; 16 00 ;1830
-	ld hl,l176dh		; 21 6d 17 ;1832
-	add hl,de			; 19 ;1835
-	ld e,(hl)			; 5e ;1836
-	ret			; c9 ;1837
-l1838h:
-	ld a,(0c083h)		; 3a 83 c0 ;1838
-	cp c			; b9 ;183b
-	jr z,l1843h		; 28 05 ;183c
-	jr nc,l184fh		; 30 0f ;183e
-	xor a			; af ;1840
-	jr l1846h		; 18 03 ;1841
-l1843h:
-	call sub_1854h		; cd 54 18 ;1843
-l1846h:
-	ld e,a			; 5f ;1846
-	ld d,000h		; 16 00 ;1847
-	ld hl,l1771h		; 21 71 17 ;1849
-	add hl,de			; 19 ;184c
-	ld e,(hl)			; 5e ;184d
-	ret			; c9 ;184e
-l184fh:
-	cp b			; b8 ;184f
-	jr c,l1843h		; 38 f1 ;1850
-	jr l182ch		; 18 d8 ;1852
-sub_1854h:
-	ld a,(0c084h)		; 3a 84 c0 ;1854
-	cp e			; bb ;1857
-	jr z,l186fh		; 28 15 ;1858
-	jr c,l1863h		; 38 07 ;185a
-	cp d			; ba ;185c
-	jr z,l1875h		; 28 16 ;185d
-	jr c,l1875h		; 38 14 ;185f
-	jr l186dh		; 18 0a ;1861
-l1863h:
-	ld a,(0c085h)		; 3a 85 c0 ;1863
-	cp e			; bb ;1866
-	jr z,l1872h		; 28 09 ;1867
-	jr nc,l1872h		; 30 07 ;1869
-	jr l186dh		; 18 00 ;186b
-l186dh:
-	xor a			; af ;186d
-	ret			; c9 ;186e
-l186fh:
-	ld a,001h		; 3e 01 ;186f
-	ret			; c9 ;1871
-l1872h:
-	ld a,002h		; 3e 02 ;1872
-	ret			; c9 ;1874
-l1875h:
-	ld a,003h		; 3e 03 ;1875
-	ret			; c9 ;1877
-	.INCLUDE "physics/player_ball_collision.asm"
+	.INCLUDE "physics/1806h_bound_check.asm"
+	.INCLUDE "physics/classify_zone.asm"
+	.INCLUDE "game/player/player_ball_collision.asm"
 l1967h:
 	ld a,(ball.z_pos + 1)		; 3a 01 c5 ;1967
 	cp 018h		; fe 18 ;196a
@@ -3977,10 +3758,10 @@ l268fh:
 	and 010h		; e6 10 ;269d
 	and e			; a3 ;269f
 	ret			; c9 ;26a0
-	.INCLUDE "physics/move_players.asm"
+	.INCLUDE "game/player/move_players.asm"
 	.INCLUDE "graphics/26ab_update.asm"
-	.INCLUDE "physics/player_movement.asm"
-	.INCLUDE "physics/apply_player_movement.asm"
+	.INCLUDE "game/player/player_movement.asm"
+	.INCLUDE "game/player/apply_player_movement.asm"
 	.INCLUDE "physics/data/table_player_velocity_top_a.asm"
 	.INCLUDE "physics/data/table_player_velocity_top_b.asm"
 	.INCLUDE "physics/data/table_player_velocity_bottom.asm"
@@ -3991,341 +3772,16 @@ data_animation_attributes:
 	.INCLUDE "physics/2c13h_ball_state.asm"
 	.INCLUDE "physics/ball_trajectory.asm"
 	.INCLUDE "math/abs10.asm"
-l2d58h:
-	.DB $ff		;2d58
-	.DB $ff		;2d59
-	.DB $ff		;2d5a
-	.DB $00		;2d5b
-	.DB $00		;2d5c
-	.DB $00		;2d5d
-	.DB $00		;2d5e
-	.DB $00		;2d5f
-	.DB $00		;2d60
-	.DB $00		;2d61
-	.DB $00		;2d62
-	.DB $00		;2d63
-	.DB $00		;2d64
-	.DB $01		;2d65
-	.DB $01		;2d66
-	.DB $01		;2d67
-	.DB $01		;2d68
-	.DB $01		;2d69
-	.DB $01		;2d6a
-	.DB $00		;2d6b
-	.DB $00		;2d6c
-	.DB $00		;2d6d
-	.DB $00		;2d6e
-	.DB $00		;2d6f
-	.DB $00		;2d70
-	.DB $00		;2d71
-	.DB $00		;2d72
-	.DB $00		;2d73
-	.DB $00		;2d74
-	.DB $ff		;2d75
-	.DB $ff		;2d76
-	.DB $ff		;2d77
-l2d78h:
-	.DB $00		;2d78
-	.DB $00		;2d79
-	.DB $00		;2d7a
-	.DB $ff		;2d7b
-	.DB $00		;2d7c
-	.DB $00		;2d7d
-	.DB $00		;2d7e
-	.DB $00		;2d7f
-	.DB $00		;2d80
-	.DB $00		;2d81
-	.DB $00		;2d82
-	.DB $00		;2d83
-	.DB $01		;2d84
-	.DB $00		;2d85
-	.DB $00		;2d86
-	.DB $00		;2d87
-	.DB $00		;2d88
-	.DB $00		;2d89
-	.DB $00		;2d8a
-	.DB $01		;2d8b
-	.DB $00		;2d8c
-	.DB $00		;2d8d
-	.DB $00		;2d8e
-	.DB $00		;2d8f
-	.DB $00		;2d90
-	.DB $00		;2d91
-	.DB $00		;2d92
-	.DB $00		;2d93
-	.DB $ff		;2d94
-	.DB $00		;2d95
-	.DB $00		;2d96
-	.DB $00		;2d97
-l2d98h:
-	.DB $0a		;2d98
-	.DB $09		;2d99
-	.DB $07		;2d9a
-	.DB $05		;2d9b
-	.DB $0a		;2d9c
-	.DB $09		;2d9d
-	.DB $07		;2d9e
-	.DB $05		;2d9f
-	.DB $0a		;2da0
-	.DB $09		;2da1
-	.DB $07		;2da2
-	.DB $05		;2da3
-	.DB $0a		;2da4
-	.DB $09		;2da5
-	.DB $07		;2da6
-	.DB $05		;2da7
-	.DB $0a		;2da8
-	.DB $09		;2da9
-	.DB $07		;2daa
-	.DB $05		;2dab
-	.DB $0a		;2dac
-	.DB $09		;2dad
-	.DB $07		;2dae
-	.DB $05		;2daf
-	.DB $0a		;2db0
-	.DB $09		;2db1
-	.DB $07		;2db2
-	.DB $05		;2db3
-	.DB $0a		;2db4
-	.DB $09		;2db5
-	.DB $07		;2db6
-	.DB $05		;2db7
-	.DB $0a		;2db8
-	.DB $09		;2db9
-	.DB $07		;2dba
-	.DB $05		;2dbb
-	.DB $0a		;2dbc
-	.DB $09		;2dbd
-	.DB $07		;2dbe
-	.DB $05		;2dbf
-	.DB $0a		;2dc0
-	.DB $09		;2dc1
-	.DB $07		;2dc2
-	.DB $05		;2dc3
-	.DB $0a		;2dc4
-	.DB $09		;2dc5
-	.DB $07		;2dc6
-	.DB $05		;2dc7
-	.DB $0a		;2dc8
-	.DB $09		;2dc9
-	.DB $07		;2dca
-	.DB $05		;2dcb
-	.DB $0a		;2dcc
-	.DB $09		;2dcd
-	.DB $07		;2dce
-	.DB $05		;2dcf
-	.DB $0a		;2dd0
-	.DB $09		;2dd1
-	.DB $07		;2dd2
-	.DB $05		;2dd3
-	.DB $0a		;2dd4
-	.DB $09		;2dd5
-	.DB $07		;2dd6
-	.DB $05		;2dd7
-	.DB $0a		;2dd8
-	.DB $09		;2dd9
-	.DB $07		;2dda
-	.DB $05		;2ddb
-	.DB $0a		;2ddc
-	.DB $09		;2ddd
-	.DB $07		;2dde
-	.DB $05		;2ddf
-	.DB $0a		;2de0
-	.DB $09		;2de1
-	.DB $07		;2de2
-	.DB $05		;2de3
-	.DB $0a		;2de4
-	.DB $09		;2de5
-	.DB $07		;2de6
-	.DB $05		;2de7
-	.DB $0a		;2de8
-	.DB $09		;2de9
-	.DB $07		;2dea
-	.DB $05		;2deb
-	.DB $0a		;2dec
-	.DB $09		;2ded
-	.DB $07		;2dee
-	.DB $05		;2def
-	.DB $0a		;2df0
-	.DB $09		;2df1
-	.DB $07		;2df2
-	.DB $05		;2df3
-	.DB $0a		;2df4
-	.DB $09		;2df5
-	.DB $07		;2df6
-	.DB $05		;2df7
-	.DB $0a		;2df8
-	.DB $08		;2df9
-	.DB $06		;2dfa
-	.DB $04		;2dfb
-	.DB $0a		;2dfc
-	.DB $08		;2dfd
-	.DB $06		;2dfe
-	.DB $04		;2dff
-	.DB $09		;2e00
-	.DB $07		;2e01
-	.DB $06		;2e02
-	.DB $04		;2e03
-	.DB $09		;2e04
-	.DB $07		;2e05
-	.DB $06		;2e06
-	.DB $04		;2e07
-	.DB $09		;2e08
-	.DB $07		;2e09
-	.DB $06		;2e0a
-	.DB $04		;2e0b
-	.DB $09		;2e0c
-	.DB $07		;2e0d
-	.DB $06		;2e0e
-	.DB $04		;2e0f
-	.DB $09		;2e10
-	.DB $07		;2e11
-	.DB $06		;2e12
-	.DB $04		;2e13
-	.DB $09		;2e14
-	.DB $07		;2e15
-	.DB $06		;2e16
-	.DB $04		;2e17
-	.DB $0a		;2e18
-	.DB $08		;2e19
-	.DB $06		;2e1a
-	.DB $04		;2e1b
-	.DB $0a		;2e1c
-	.DB $08		;2e1d
-	.DB $06		;2e1e
-	.DB $04		;2e1f
-	.DB $09		;2e20
-	.DB $07		;2e21
-	.DB $06		;2e22
-	.DB $04		;2e23
-	.DB $09		;2e24
-	.DB $07		;2e25
-	.DB $06		;2e26
-	.DB $04		;2e27
-	.DB $09		;2e28
-	.DB $07		;2e29
-	.DB $06		;2e2a
-	.DB $04		;2e2b
-	.DB $09		;2e2c
-	.DB $07		;2e2d
-	.DB $06		;2e2e
-	.DB $04		;2e2f
-	.DB $09		;2e30
-	.DB $07		;2e31
-	.DB $06		;2e32
-	.DB $04		;2e33
-	.DB $09		;2e34
-	.DB $07		;2e35
-	.DB $06		;2e36
-	.DB $04		;2e37
-	.DB $0a		;2e38
-	.DB $09		;2e39
-	.DB $07		;2e3a
-	.DB $05		;2e3b
-	.DB $0a		;2e3c
-	.DB $09		;2e3d
-	.DB $07		;2e3e
-	.DB $05		;2e3f
-	.DB $0a		;2e40
-	.DB $09		;2e41
-	.DB $07		;2e42
-	.DB $05		;2e43
-	.DB $0a		;2e44
-	.DB $09		;2e45
-	.DB $07		;2e46
-	.DB $05		;2e47
-	.DB $0a		;2e48
-	.DB $09		;2e49
-	.DB $07		;2e4a
-	.DB $05		;2e4b
-	.DB $0a		;2e4c
-	.DB $09		;2e4d
-	.DB $07		;2e4e
-	.DB $05		;2e4f
-	.DB $0a		;2e50
-	.DB $09		;2e51
-	.DB $07		;2e52
-	.DB $05		;2e53
-	.DB $0a		;2e54
-	.DB $09		;2e55
-	.DB $07		;2e56
-	.DB $05		;2e57
-	.DB $0a		;2e58
-	.DB $09		;2e59
-	.DB $07		;2e5a
-	.DB $05		;2e5b
-	.DB $0a		;2e5c
-	.DB $09		;2e5d
-	.DB $07		;2e5e
-	.DB $05		;2e5f
-	.DB $0a		;2e60
-	.DB $09		;2e61
-	.DB $07		;2e62
-	.DB $05		;2e63
-	.DB $0a		;2e64
-	.DB $09		;2e65
-	.DB $07		;2e66
-	.DB $05		;2e67
-	.DB $0a		;2e68
-	.DB $09		;2e69
-	.DB $07		;2e6a
-	.DB $05		;2e6b
-	.DB $0a		;2e6c
-	.DB $09		;2e6d
-	.DB $07		;2e6e
-	.DB $05		;2e6f
-	.DB $0a		;2e70
-	.DB $09		;2e71
-	.DB $07		;2e72
-	.DB $05		;2e73
-	.DB $0a		;2e74
-	.DB $09		;2e75
-	.DB $07		;2e76
-	.DB $05		;2e77
-	.DB $0a		;2e78
-	.DB $09		;2e79
-	.DB $07		;2e7a
-	.DB $05		;2e7b
-	.DB $0a		;2e7c
-	.DB $09		;2e7d
-	.DB $07		;2e7e
-	.DB $05		;2e7f
-	.DB $0a		;2e80
-	.DB $09		;2e81
-	.DB $07		;2e82
-	.DB $05		;2e83
-	.DB $0a		;2e84
-	.DB $09		;2e85
-	.DB $07		;2e86
-	.DB $05		;2e87
-	.DB $0a		;2e88
-	.DB $09		;2e89
-	.DB $07		;2e8a
-	.DB $05		;2e8b
-	.DB $0a		;2e8c
-	.DB $09		;2e8d
-	.DB $07		;2e8e
-	.DB $05		;2e8f
-	.DB $0a		;2e90
-	.DB $09		;2e91
-	.DB $07		;2e92
-	.DB $05		;2e93
-	.DB $0a		;2e94
-	.DB $09		;2e95
-	.DB $07		;2e96
-	.DB $05		;2e97
+	.INCLUDE "game/ball/game_ball_trajectory_data.asm"
 	.INCLUDE "graphics/2e98h_2d_scale_clamp.asm"
 	.INCLUDE "math/div_a_b_c.asm"
-l2edfh:
-	ld c,a			; 4f ;2edf
-	ret			; c9 ;2ee0
 	.INCLUDE "game/l2ee1h_dispatch.asm"
-	.INCLUDE "game/update_score_points.asm"
+	.INCLUDE "game/score/update_score_points.asm"
 	.INCLUDE "math/div10.asm"
 	.INCLUDE "graphics/3192_draw.asm"
-	.INCLUDE "game/update_set_scores.asm"
+	.INCLUDE "game/score/update_set_scores.asm"
 	.INCLUDE "graphics/draw_game_end.asm"
-sub_3457h:
+sub_3457h_clean_vram:
 	push bc			; c5 ;3457
 	push de			; d5 ;3458
 	push hl			; e5 ;3459
@@ -4340,16 +3796,9 @@ sub_3457h:
 	add hl,de			; 19 ;3468
 	pop de			; d1 ;3469
 	pop bc			; c1 ;346a
-	djnz sub_3457h		; 10 ea ;346b
+	djnz sub_3457h_clean_vram		; 10 ea ;346b
 	ret			; c9 ;346d
-sub_346eh:
-	ld hl,03b8ah		; 21 8a 3b ;346e
-	ld de,034abh		; 11 ab 34 ;3471
-	ld b,016h		; 06 16 ;3474
-	call sub_draw_game_end_typewriter		; cd 7f 34 ;3476
-	ld a,005h		; 3e 05 ;3479
-	call sub_wait_a_frames		; cd e6 35 ;347b
-	ret			; c9 ;347e
+	.INCLUDE "graphics/draw_game_end_line.asm"
 	.INCLUDE "graphics/draw_game_end_typewriter.asm"
 l34a9h:
 	nop			; 00 ;34a9
@@ -4453,16 +3902,7 @@ l3560h:
 	.DW unknown_word_1		;3560
 	.DW unknown_word_0		;3562
 	.DW unknown_word_2		;3564
-sub_3566h:
-	ld a,(score.announcement)		; 3a a5 c4 ;3566
-	cp 000h		; fe 00 ;3569
-	ret z			; c8 ;356b
-	ld a,(0c49dh)		; 3a 9d c4 ;356c
-	cp 000h		; fe 00 ;356f
-	jr z,l3578h		; 28 05 ;3571
-	dec a			; 3d ;3573
-	ld (0c49dh),a		; 32 9d c4 ;3574
-	ret			; c9 ;3577
+	.INCLUDE "game/update_announcement_timer.asm"
 l3578h:
 	ld a,004h		; 3e 04 ;3578
 	out (O_VDP_CTRL),a		; d3 bf ;357a
@@ -4497,19 +3937,7 @@ l35a8h:
 	ld (0c49dh),a		; 32 9d c4 ;35ac
 	ret			; c9 ;35af
 	.INCLUDE "graphics/load_vram_rect_dynamic.asm"
-sub_35c6h_palette_load:
-	ld hl,l35dch		; 21 dc 35 ;35c6
-	xor a			; af ;35c9
-	ld a,(0c04ah)		; 3a 4a c0 ;35ca
-	rla			; 17 ;35cd
-	ld e,a			; 5f ;35ce
-	ld d,000h		; 16 00 ;35cf
-	add hl,de			; 19 ;35d1
-	ex de,hl			; eb ;35d2
-	ld hl,00013h+2		; 21 15 00 ;35d3
-	ld b,002h		; 06 02 ;35d6
-	call sub_load_cram		; cd 81 04 ;35d8
-	ret			; c9 ;35db
+	.INCLUDE "graphics/35c6h_palette_load.asm"
 l35dch:
 	dec hl			; 2b ;35dc
 	jr c,$+15		; 38 0f ;35dd
@@ -4626,7 +4054,7 @@ l40f0h_name_table:
 	.DB $01		;4103
 	.DB $07		;4104
 	.DB $01		;4105
-	.INCLUDE "io/check_hardware.asm"
+	.INCLUDE "hardware/hardware_self_test.asm"
 unknown_table_0:
 	.INCLUDE "data/unknown_table_0.asm"
 	call m,0fefch		; fc fc fe ;4898
@@ -4690,6 +4118,7 @@ data_planes_11_0:
 	.INCLUDE "tiles/planes_11_2.asm"
 	.INCLUDE "tiles/planes_11_3.asm"
 	.IFDEF _J
+	l7144h:
     	ld a,($c000)
     	bit 3,a
     	ret nz
@@ -4807,21 +4236,5 @@ audio_envelope_pitch_data_3:
 	.IFDEF _UE
 		.INCLUDE "audio/audio.asm"
 	.ENDIF
-	.DSB 298, $ff			;7ea3
-	.IFDEF _UE
-		.DSB 35, $ff			;7f9c
-    .ENDIF
-	.DB "TMR SEGA"			;7ff0
-	.DB $ff $ff			;7ff8
-	.IFDEF _J
-		.DB $a6			;7ff9
-		.DB $6f			;7ffa
-	.ENDIF
-	.IFDEF _UE
-		.DB $d4			;7ff9
-		.DB $88			;7ffa
-	.ENDIF
-	.DB $07		;7ffa
-	.DB $40			;7ffd
-	.INCLUDE "version.asm"
-	.DB $4c		;7fff
+	.INCLUDE "padding.asm"
+	.INCLUDE "header.asm"

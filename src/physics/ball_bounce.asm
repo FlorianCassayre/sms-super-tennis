@@ -5,7 +5,7 @@ sub_ball_bounce:
 	ld d,e			; 53 ;15a6
 	ld e,h			; 5c ;15a7
 	xor a			; af ;15a8
-	ld hl,ZERO		; 21 00 00 ;15a9
+	ld hl,0		; 21 00 00 ;15a9
 	sbc hl,de		; ed 52 ;15ac
 	ld (ball.z_vel),hl		; 22 06 c5 ;15ae
 	ld a,(ball.state)		; 3a 17 c5 ;15b1
@@ -15,7 +15,7 @@ sub_ball_bounce:
 	bit 7,d		; cb 7a ;15bb
 	jr z,+		; 28 07 ;15bd
 	xor a			; af ;15bf
-	ld hl,ZERO		; 21 00 00 ;15c0
+	ld hl,0		; 21 00 00 ;15c0
 	sbc hl,de		; ed 52 ;15c3
 	ex de,hl			; eb ;15c5
 +:
@@ -27,7 +27,7 @@ sub_ball_bounce:
 	bit 7,a		; cb 7f ;15d1
 	jr z,+		; 28 07 ;15d3
 	xor a			; af ;15d5
-	ld hl,ZERO		; 21 00 00 ;15d6
+	ld hl,0		; 21 00 00 ;15d6
 	sbc hl,de		; ed 52 ;15d9
 	ex de,hl			; eb ;15db
 +:
@@ -36,7 +36,7 @@ sub_ball_bounce:
 	bit 7,d		; cb 7a ;15e4
 	jr z,+		; 28 07 ;15e6
 	xor a			; af ;15e8
-	ld hl,ZERO		; 21 00 00 ;15e9
+	ld hl,0		; 21 00 00 ;15e9
 	sbc hl,de		; ed 52 ;15ec
 	ex de,hl			; eb ;15ee
 +:
@@ -48,7 +48,7 @@ sub_ball_bounce:
 	bit 7,a		; cb 7f ;15fa
 	jr z,+		; 28 07 ;15fc
 	xor a			; af ;15fe
-	ld hl,ZERO		; 21 00 00 ;15ff
+	ld hl,0		; 21 00 00 ;15ff
 	sbc hl,de		; ed 52 ;1602
 	ex de,hl			; eb ;1604
 +:

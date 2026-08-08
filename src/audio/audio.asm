@@ -52,10 +52,8 @@ l7a72h:
 	ld (psg_engine.priority_flag),a		; 32 03 de ;7a75
 	ld de,psg_channel.5		; 11 85 de ;7a78
 	.IFDEF _J
-		.DB $3e
-		.DB $df
-		.DB $d3
-		.DB $7f
+		ld a, $df
+		out (O_PSG_ALT), a
 	.ENDIF
 	ld hl,psg_channel.1		; 21 05 de ;7a7b
 	set 2,(hl)		; cb d6 ;7a7e
@@ -66,8 +64,7 @@ l7a72h:
 	jp l7aafh		; c3 af 7a ;7a8a
 audio_track_routine_sound_alt:
 	.IFDEF _J
-		.DB $1e
-		.DB $08
+		ld e, $08
 	.ENDIF
 	.IFDEF _UE
 		or a			; b7 ;7a8d
@@ -138,31 +135,31 @@ l7ad7h:
 	ld (psg_engine.track_request_id),a		; 32 00 de ;7ad9
 	ret			; c9 ;7adc
 sub_audio_process_active_channel:
-	ld e,(ix + psg_channel_t.current_tick)		; dd 5e 0c ;7add
-	ld d,(ix + psg_channel_t.current_tick + 1)		; dd 56 0d ;7ae0
+	ld e,(ix + audio_psg_channel_t.current_tick)		; dd 5e 0c ;7add
+	ld d,(ix + audio_psg_channel_t.current_tick + 1)		; dd 56 0d ;7ae0
 	inc de			; 13 ;7ae3
-	ld (ix + psg_channel_t.current_tick),e		; dd 73 0c ;7ae4
-	ld (ix + psg_channel_t.current_tick + 1),d		; dd 72 0d ;7ae7
-	ld l,(ix + psg_channel_t.target_duration)		; dd 6e 0a ;7aea
-	ld h,(ix + psg_channel_t.target_duration + 1)		; dd 66 0b ;7aed
+	ld (ix + audio_psg_channel_t.current_tick),e		; dd 73 0c ;7ae4
+	ld (ix + audio_psg_channel_t.current_tick + 1),d		; dd 72 0d ;7ae7
+	ld l,(ix + audio_psg_channel_t.target_duration)		; dd 6e 0a ;7aea
+	ld h,(ix + audio_psg_channel_t.target_duration + 1)		; dd 66 0b ;7aed
 	or a			; b7 ;7af0
 	sbc hl,de		; ed 52 ;7af1
 	call z,sub_7c43h		; cc 43 7c ;7af3
-	ld e,(ix + psg_channel_t.base_frequency)		; dd 5e 10 ;7af6
-	ld d,(ix + psg_channel_t.base_frequency + 1)		; dd 56 11 ;7af9
+	ld e,(ix + audio_psg_channel_t.base_frequency)		; dd 5e 10 ;7af6
+	ld d,(ix + audio_psg_channel_t.base_frequency + 1)		; dd 56 11 ;7af9
 	ld a,e			; 7b ;7afc
 	or d			; b2 ;7afd
 	jr nz,l7b07h		; 20 07 ;7afe
-	ld (ix + psg_channel_t.current_volume),00fh		; dd 36 16 0f ;7b00
+	ld (ix + audio_psg_channel_t.current_volume),00fh		; dd 36 16 0f ;7b00
 	jp sub_audio_volume_process@l7bb5h		; c3 b5 7b ;7b04
 l7b07h:
-	bit 5,(ix + psg_channel_t.status_flags)		; dd cb 00 6e ;7b07
+	bit 5,(ix + audio_psg_channel_t.status_flags)		; dd cb 00 6e ;7b07
 	jr nz,sub_audio_calculate_pitch_slide		; 20 25 ;7b0b
-	ld a,(ix + psg_channel_t.effect_timer)		; dd 7e 06 ;7b0d
+	ld a,(ix + audio_psg_channel_t.effect_timer)		; dd 7e 06 ;7b0d
 	or a			; b7 ;7b10
 	jr nz,audio_envelope_pitch_process		; 20 14 ;7b11
-	ld (ix + psg_channel_t.final_frequency),e		; dd 73 12 ;7b13
-	ld (ix + psg_channel_t.final_frequency + 1),d		; dd 72 13 ;7b16
+	ld (ix + audio_psg_channel_t.final_frequency),e		; dd 73 12 ;7b13
+	ld (ix + audio_psg_channel_t.final_frequency + 1),d		; dd 72 13 ;7b16
 	jp sub_audio_volume_process		; c3 6e 7b ;7b19
 	.INCLUDE "audio/audio_pointer_get_by_id.asm"
 audio_envelope_pitch_process:
@@ -172,8 +169,8 @@ audio_envelope_pitch_process:
 	jr sub_audio_volume_process		; 18 3c ;7b30
 sub_audio_calculate_pitch_slide:
 	push de			; d5 ;7b32
-	ld l,(ix + psg_channel_t.slide_target_frequency_low)		; dd 6e 14 ;7b33
-	ld h,(ix + psg_channel_t.slide_target_frequency_high)		; dd 66 15 ;7b36
+	ld l,(ix + audio_psg_channel_t.slide_target_frequency_low)		; dd 6e 14 ;7b33
+	ld h,(ix + audio_psg_channel_t.slide_target_frequency_high)		; dd 66 15 ;7b36
 	or a			; b7 ;7b39
 	sbc hl,de		; ed 52 ;7b3a
 	push af			; f5 ;7b3c
@@ -182,9 +179,9 @@ sub_audio_calculate_pitch_slide:
 	neg		; ed 44 ;7b41
 l7b43h:
 	ld h,a			; 67 ;7b43
-	ld e,(ix + psg_channel_t.current_tick)		; dd 5e 0c ;7b44
+	ld e,(ix + audio_psg_channel_t.current_tick)		; dd 5e 0c ;7b44
 	call sub_mul_h_e		; cd 84 7e ;7b47
-	ld e,(ix + psg_channel_t.target_duration)		; dd 5e 0a ;7b4a
+	ld e,(ix + audio_psg_channel_t.target_duration)		; dd 5e 0a ;7b4a
 	call sub_div_hl_e		; cd 90 7e ;7b4d
 	ld e,a			; 5f ;7b50
 	ld d,000h		; 16 00 ;7b51
@@ -199,9 +196,9 @@ l7b5eh:
 	pop hl			; e1 ;7b5e
 	add hl,de			; 19 ;7b5f
 	ex de,hl			; eb ;7b60
-	ld (ix + psg_channel_t.final_frequency),e		; dd 73 12 ;7b61
-	ld (ix + psg_channel_t.final_frequency + 1),d		; dd 72 13 ;7b64
-	ld a,(ix + psg_channel_t.effect_timer)		; dd 7e 06 ;7b67
+	ld (ix + audio_psg_channel_t.final_frequency),e		; dd 73 12 ;7b61
+	ld (ix + audio_psg_channel_t.final_frequency + 1),d		; dd 72 13 ;7b64
+	ld a,(ix + audio_psg_channel_t.effect_timer)		; dd 7e 06 ;7b67
 	or a			; b7 ;7b6a
 	jp nz,audio_envelope_pitch_process		; c2 27 7b ;7b6b
 	.INCLUDE "audio/envelope/audio_volume_process.asm"
@@ -212,20 +209,20 @@ l7bcch_audio:
 	.INCLUDE "audio/envelope/audio_envelope_volume_apply.asm"
 	.INCLUDE "audio/envelope/audio_envelope_pitch_apply.asm"
 sub_7c43h:
-	ld e,(ix + psg_channel_t.track_data_pointer)		; dd 5e 03 ;7c43
-	ld d,(ix + psg_channel_t.track_data_pointer + 1)		; dd 56 04 ;7c46
+	ld e,(ix + audio_psg_channel_t.track_data_pointer)		; dd 5e 03 ;7c43
+	ld d,(ix + audio_psg_channel_t.track_data_pointer + 1)		; dd 56 04 ;7c46
 l7c49h:
 	ld a,(de)			; 1a ;7c49
 	inc de			; 13 ;7c4a
 	cp 0e0h		; fe e0 ;7c4b
 	jp nc,l7cd7h		; d2 d7 7c ;7c4d
-	bit 3,(ix + psg_channel_t.status_flags)		; dd cb 00 5e ;7c50
+	bit 3,(ix + audio_psg_channel_t.status_flags)		; dd cb 00 5e ;7c50
 	jr nz,l7cb6h		; 20 60 ;7c54
 	or a			; b7 ;7c56
 	jp p,l7c92h		; f2 92 7c ;7c57
 	sub 080h		; d6 80 ;7c5a
 	jr z,l7c61h		; 28 03 ;7c5c
-	add a,(ix + psg_channel_t.transpose_offset)		; dd 86 05 ;7c5e
+	add a,(ix + audio_psg_channel_t.transpose_offset)		; dd 86 05 ;7c5e
 l7c61h:
 	ld hl,table_note_frequencies		; 21 f2 7d ;7c61
 	ld c,a			; 4f ;7c64
@@ -233,26 +230,26 @@ l7c61h:
 	add hl,bc			; 09 ;7c67
 	add hl,bc			; 09 ;7c68
 	ld a,(hl)			; 7e ;7c69
-	ld (ix + psg_channel_t.base_frequency),a		; dd 77 10 ;7c6a
+	ld (ix + audio_psg_channel_t.base_frequency),a		; dd 77 10 ;7c6a
 	inc hl			; 23 ;7c6d
 	ld a,(hl)			; 7e ;7c6e
-	ld (ix + psg_channel_t.base_frequency + 1),a		; dd 77 11 ;7c6f
-	bit 5,(ix + psg_channel_t.status_flags)		; dd cb 00 6e ;7c72
+	ld (ix + audio_psg_channel_t.base_frequency + 1),a		; dd 77 11 ;7c6f
+	bit 5,(ix + audio_psg_channel_t.status_flags)		; dd cb 00 6e ;7c72
 	jr z,l7cd0h		; 28 58 ;7c76
 	ld a,(de)			; 1a ;7c78
 	inc de			; 13 ;7c79
 	sub 080h		; d6 80 ;7c7a
-	add a,(ix + psg_channel_t.transpose_offset)		; dd 86 05 ;7c7c
+	add a,(ix + audio_psg_channel_t.transpose_offset)		; dd 86 05 ;7c7c
 	ld hl,table_note_frequencies		; 21 f2 7d ;7c7f
 	ld c,a			; 4f ;7c82
 	ld b,000h		; 06 00 ;7c83
 	add hl,bc			; 09 ;7c85
 	add hl,bc			; 09 ;7c86
 	ld a,(hl)			; 7e ;7c87
-	ld (ix + psg_channel_t.slide_target_frequency_low),a		; dd 77 14 ;7c88
+	ld (ix + audio_psg_channel_t.slide_target_frequency_low),a		; dd 77 14 ;7c88
 	inc hl			; 23 ;7c8b
 	ld a,(hl)			; 7e ;7c8c
-	ld (ix + psg_channel_t.slide_target_frequency_high),a		; dd 77 15 ;7c8d
+	ld (ix + audio_psg_channel_t.slide_target_frequency_high),a		; dd 77 15 ;7c8d
 l7c90h:
 	ld a,(de)			; 1a ;7c90
 l7c91h:
@@ -260,34 +257,34 @@ l7c91h:
 l7c92h:
 	push de			; d5 ;7c92
 	ld h,a			; 67 ;7c93
-	ld e,(ix + psg_channel_t.note_length_multiplier)		; dd 5e 02 ;7c94
+	ld e,(ix + audio_psg_channel_t.note_length_multiplier)		; dd 5e 02 ;7c94
 	call sub_mul_h_e		; cd 84 7e ;7c97
 	pop de			; d1 ;7c9a
-	ld (ix + psg_channel_t.target_duration),l		; dd 75 0a ;7c9b
-	ld (ix + psg_channel_t.target_duration + 1),h		; dd 74 0b ;7c9e
+	ld (ix + audio_psg_channel_t.target_duration),l		; dd 75 0a ;7c9b
+	ld (ix + audio_psg_channel_t.target_duration + 1),h		; dd 74 0b ;7c9e
 l7ca1h:
 	xor a			; af ;7ca1
-	ld (ix + psg_channel_t.volume_envelope_index),a		; dd 77 0e ;7ca2
-	ld (ix + psg_channel_t.pitch_envelope_index),a		; dd 77 0f ;7ca5
-	ld (ix + psg_channel_t.track_data_pointer),e		; dd 73 03 ;7ca8
-	ld (ix + psg_channel_t.track_data_pointer + 1),d		; dd 72 04 ;7cab
+	ld (ix + audio_psg_channel_t.volume_envelope_index),a		; dd 77 0e ;7ca2
+	ld (ix + audio_psg_channel_t.pitch_envelope_index),a		; dd 77 0f ;7ca5
+	ld (ix + audio_psg_channel_t.track_data_pointer),e		; dd 73 03 ;7ca8
+	ld (ix + audio_psg_channel_t.track_data_pointer + 1),d		; dd 72 04 ;7cab
 	xor a			; af ;7cae
-	ld (ix + psg_channel_t.current_tick),a		; dd 77 0c ;7caf
-	ld (ix + psg_channel_t.current_tick + 1),a		; dd 77 0d ;7cb2
+	ld (ix + audio_psg_channel_t.current_tick),a		; dd 77 0c ;7caf
+	ld (ix + audio_psg_channel_t.current_tick + 1),a		; dd 77 0d ;7cb2
 	ret			; c9 ;7cb5
 l7cb6h:
-	ld (ix + psg_channel_t.base_frequency + 1),a		; dd 77 11 ;7cb6
+	ld (ix + audio_psg_channel_t.base_frequency + 1),a		; dd 77 11 ;7cb6
 	ld a,(de)			; 1a ;7cb9
 	inc de			; 13 ;7cba
-	ld (ix + psg_channel_t.base_frequency),a		; dd 77 10 ;7cbb
-	bit 5,(ix + psg_channel_t.status_flags)		; dd cb 00 6e ;7cbe
+	ld (ix + audio_psg_channel_t.base_frequency),a		; dd 77 10 ;7cbb
+	bit 5,(ix + audio_psg_channel_t.status_flags)		; dd cb 00 6e ;7cbe
 	jr z,l7c90h		; 28 cc ;7cc2
 	ld a,(de)			; 1a ;7cc4
 	inc de			; 13 ;7cc5
-	ld (ix + psg_channel_t.slide_target_frequency_high),a		; dd 77 15 ;7cc6
+	ld (ix + audio_psg_channel_t.slide_target_frequency_high),a		; dd 77 15 ;7cc6
 	ld a,(de)			; 1a ;7cc9
 	inc de			; 13 ;7cca
-	ld (ix + psg_channel_t.slide_target_frequency_low),a		; dd 77 14 ;7ccb
+	ld (ix + audio_psg_channel_t.slide_target_frequency_low),a		; dd 77 14 ;7ccb
 	jr l7c90h		; 18 c0 ;7cce
 l7cd0h:
 	ld a,(de)			; 1a ;7cd0
@@ -320,7 +317,7 @@ l7daah:
 	inc de			; 13 ;7daf
 	ret			; c9 ;7db0
 sub_7db1h:
-	ld a,(ix + psg_channel_t.psg_channel_map)		; dd 7e 01 ;7db1
+	ld a,(ix + audio_psg_channel_t.psg_channel_map)		; dd 7e 01 ;7db1
 	and 00fh		; e6 0f ;7db4
 	ld c,a			; 4f ;7db6
 	ld b,000h		; 06 00 ;7db7

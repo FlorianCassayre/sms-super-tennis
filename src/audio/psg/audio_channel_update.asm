@@ -5,9 +5,9 @@ sub_audio_channel_update:
 	ld b,PSG_CHANNELS		; 06 07 ;7979
 -:
 	push bc			; c5 ;797b
-	bit 7,(ix + psg_channel_t.status_flags)		; dd cb 00 7e ;797c
+	bit 7,(ix + audio_psg_channel_t.status_flags)		; dd cb 00 7e ;797c
 	call nz,sub_audio_process_active_channel		; c4 dd 7a ;7980
-	ld de,_sizeof_psg_channel_t		; 11 20 00 ;7983
+	ld de,_sizeof_audio_psg_channel_t		; 11 20 00 ;7983
 	add ix,de		; dd 19 ;7986
 	pop bc			; c1 ;7988
 	djnz -		; 10 f0 ;7989

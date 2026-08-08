@@ -30,7 +30,7 @@ l14f1h:
 	ld a,(hl)			; 7e ;14f1
 	dec a			; 3d ;14f2
 	jr nz,l14ffh		; 20 0a ;14f3
-	call sub_0e04h		; cd 04 0e ;14f5
+	call sub_menu_button_press_test		; cd 04 0e ;14f5
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_bounce		; 3e 8f ;14f8
 	ld (psg_engine.track_request_id),a		; 32 00 de ;14fa
 	jr l150fh		; 18 10 ;14fd
@@ -50,7 +50,7 @@ l150fh:
 	ret nz			; c0 ;1514
 	call sub_update_ball_state		; cd af 16 ;1515
 	call sub_player_ball_collision		; cd 78 18 ;1518
-	call sub_0e7fh		; cd 7f 0e ;151b
+	call sub_button_press_test		; cd 7f 0e ;151b
 	ld de,(ball.x_vel)		; ed 5b 0e c5 ;151e
 	ld hl,(ball.x_pos)		; 2a 0a c5 ;1522
 	add hl,de			; 19 ;1525

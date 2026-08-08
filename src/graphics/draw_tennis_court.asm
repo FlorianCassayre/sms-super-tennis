@@ -4,7 +4,7 @@ sub_draw_tennis_court:
 	ld hl,0		; 21 00 00 ;0ac1
 	ld de,data_palette_0		; 11 03 00 ;0ac4
 	ld b,32		; 06 20 ;0ac7
-	call sub_load_cram		; cd 81 04 ;0ac9
+	call sub_graphics_palette_load		; cd 81 04 ;0ac9
 	ld de,02600h		; 11 00 26 ;0acc
 	ld hl,data_planes_6_0		; 21 c5 4f ;0acf
 	call sub_rle_decompress_bitplanes_to_vram		; cd b5 04 ;0ad2

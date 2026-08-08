@@ -105,7 +105,7 @@ sub_update_score_points:
 	xor a			; af ;30b6
 	ld (0c4a6h),a		; 32 a6 c4 ;30b7
 	ld (0c49dh),a		; 32 9d c4 ;30ba
-	call sub_3566h		; cd 66 35 ;30bd
+	call sub_update_announcement_timer		; cd 66 35 ;30bd
 	xor a			; af ;30c0
 	ld (score.announcement),a		; 32 a5 c4 ;30c1
 	ld (0c49eh),a		; 32 9e c4 ;30c4

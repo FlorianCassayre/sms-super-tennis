@@ -67,12 +67,12 @@ l01e4h:
 	call sub_delay_vdp		; cd 60 02 ;01e9
 	call sub_update_cond_color		; cd 68 02 ;01ec
 	call sub_load_vram_rect_dynamic		; cd b0 35 ;01ef
-	call sub_3566h		; cd 66 35 ;01f2
+	call sub_update_announcement_timer		; cd 66 35 ;01f2
 	call sub_027bh_joy		; cd 7b 02 ;01f5
 	call sub_joy_debounce		; cd 95 07 ;01f8
 l01fbh:
 	.IFDEF _J
-		.DB $cd $44 $71		;01fb
+		call l7144h		;01fb
 	.ENDIF
 	.IFDEF _UE
 		call sub_audio_channel_update		; cd 6f 79 ;01fb

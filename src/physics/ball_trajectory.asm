@@ -56,7 +56,7 @@ sub_ball_trajectory:
 	or e			; b3 ;2cad
 	ld e,a			; 5f ;2cae
 	ld d,000h		; 16 00 ;2caf
-	ld hl,l2d98h		; 21 98 2d ;2cb1
+	ld hl,game_ball_trajectory_data_bounce_magnitude		; 21 98 2d ;2cb1
 	add hl,de			; 19 ;2cb4
 	ld a,(hl)			; 7e ;2cb5
 	bit 0,(ix+001h)		; dd cb 01 46 ;2cb6
@@ -85,7 +85,7 @@ sub_ball_trajectory:
 	ld a,(0c4b1h)		; 3a b1 c4 ;2cea
 	ld e,010h		; 1e 10 ;2ced
 +:
-	ld hl,l2d58h		; 21 58 2d ;2cef
+	ld hl,game_ball_trajectory_data_axis_a		; 21 58 2d ;2cef
 	call sub_2d0eh_movement		; cd 0e 2d ;2cf2
 	ld a,(0c4b2h)		; 3a b2 c4 ;2cf5
 	ld e,000h		; 1e 00 ;2cf8
@@ -94,7 +94,7 @@ sub_ball_trajectory:
 	ld a,(0c4b3h)		; 3a b3 c4 ;2d00
 	ld e,010h		; 1e 10 ;2d03
 +:
-	ld hl,l2d78h		; 21 78 2d ;2d05
+	ld hl,game_ball_trajectory_data_axis_b		; 21 78 2d ;2d05
 	call sub_2d0eh_movement		; cd 0e 2d ;2d08
 	jp l2d35h		; c3 35 2d ;2d0b
 	.INCLUDE "physics/2d0eh_movement.asm"

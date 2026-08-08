@@ -54,14 +54,14 @@ l3627h:
 	ld hl,00010h		; 21 10 00 ;366e
 	ld de,l3719h_palette		; 11 19 37 ;3671
 	ld b,1		; 06 01 ;3674
-	call sub_load_cram		; cd 81 04 ;3676
+	call sub_graphics_palette_load		; cd 81 04 ;3676
 	ld a,005h		; 3e 05 ;3679
 	call sub_wait_a_frames		; cd e6 35 ;367b
 	di			; f3 ;367e
 	ld hl,0		; 21 00 00 ;367f
 	ld de,l3708h_palette		; 11 08 37 ;3682
 	ld b,17		; 06 11 ;3685
-	call sub_load_cram		; cd 81 04 ;3687
+	call sub_graphics_palette_load		; cd 81 04 ;3687
 	call sub_disable_display		; cd a4 03 ;368a
 	call sub_init_background_name_table		; cd 88 03 ;368d
 	ld a,000h		; 3e 00 ;3690

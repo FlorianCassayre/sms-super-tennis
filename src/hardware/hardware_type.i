@@ -1,0 +1,2 @@
+.equ HARDWARE_SMS $ff
+.equ HARDWARE_SM3 $00
