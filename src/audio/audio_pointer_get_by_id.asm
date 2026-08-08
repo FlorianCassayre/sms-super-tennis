@@ -1,4 +1,4 @@
-sub_get_terrain_table:
+sub_audio_pointer_get_by_id:
 	dec a			; 3d ;7b1c
 	ld c,a			; 4f ;7b1d
 	ld b,000h		; 06 00 ;7b1e

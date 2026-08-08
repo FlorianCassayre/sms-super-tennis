@@ -1,4 +1,4 @@
-.INCLUDE "audio/audio_update_channels.asm"
+.INCLUDE "audio/psg/audio_channel_update.asm"
 sub_798ch:
 	ld a,(psg_engine.state)		; 3a 01 de ;798c
 	or a			; b7 ;798f
@@ -15,7 +15,8 @@ sub_798ch:
 	ld a,018h		; 3e 18 ;79a4
 	ld (hl),a			; 77 ;79a6
 	ret			; c9 ;79a7
-.INCLUDE "audio/audio_track_loader.asm"
+.INCLUDE "audio/track/audio_track_loader.asm"
+.INCLUDE "audio/track/audio_tracks.asm"
 l7a3fh:
 	ld hl,psg_engine.state		; 21 01 de ;7a3f
 	ld (hl),c			; 71 ;7a42
@@ -82,7 +83,7 @@ l7a92h:
 		call sub_audio_silence
 	.ENDIF
 l7a99h:
-	call sub_7de3h		; cd e3 7d ;7a99
+	call sub_7de3h_clear_audio		; cd e3 7d ;7a99
 	jr l7aa1h		; 18 03 ;7a9c
 l7a9eh:
 	or a			; b7 ;7a9e
@@ -97,7 +98,7 @@ audio_track_routine_sound:
 	.IFDEF _J
 		call sub_audio_silence
 	.ENDIF
-	call sub_7de3h		; cd e3 7d ;7aac
+	call sub_7de3h_clear_audio		; cd e3 7d ;7aac
 l7aafh:
 	.IFDEF _UE
 		push bc			; c5 ;7aaf
@@ -153,22 +154,22 @@ sub_audio_process_active_channel:
 	or d			; b2 ;7afd
 	jr nz,l7b07h		; 20 07 ;7afe
 	ld (ix + psg_channel_t.current_volume),00fh		; dd 36 16 0f ;7b00
-	jp l7bb5h		; c3 b5 7b ;7b04
+	jp sub_audio_volume_process@l7bb5h		; c3 b5 7b ;7b04
 l7b07h:
 	bit 5,(ix + psg_channel_t.status_flags)		; dd cb 00 6e ;7b07
 	jr nz,sub_audio_calculate_pitch_slide		; 20 25 ;7b0b
 	ld a,(ix + psg_channel_t.effect_timer)		; dd 7e 06 ;7b0d
 	or a			; b7 ;7b10
-	jr nz,l7b27h		; 20 14 ;7b11
+	jr nz,audio_envelope_pitch_process		; 20 14 ;7b11
 	ld (ix + psg_channel_t.final_frequency),e		; dd 73 12 ;7b13
 	ld (ix + psg_channel_t.final_frequency + 1),d		; dd 72 13 ;7b16
-	jp l7b6eh		; c3 6e 7b ;7b19
-	.INCLUDE "physics/get_terrain_table.asm"
-l7b27h:
-	ld hl,l7956h		; 21 56 79 ;7b27
-	call sub_get_terrain_table		; cd 1c 7b ;7b2a
-	call sub_audio_get_envelope_table		; cd 0d 7c ;7b2d
-	jr l7b6eh		; 18 3c ;7b30
+	jp sub_audio_volume_process		; c3 6e 7b ;7b19
+	.INCLUDE "audio/audio_pointer_get_by_id.asm"
+audio_envelope_pitch_process:
+	ld hl,audio_envelope_pitch_data		; 21 56 79 ;7b27
+	call sub_audio_pointer_get_by_id		; cd 1c 7b ;7b2a
+	call sub_audio_envelope_pitch_apply		; cd 0d 7c ;7b2d
+	jr sub_audio_volume_process		; 18 3c ;7b30
 sub_audio_calculate_pitch_slide:
 	push de			; d5 ;7b32
 	ld l,(ix + psg_channel_t.slide_target_frequency_low)		; dd 6e 14 ;7b33
@@ -202,59 +203,14 @@ l7b5eh:
 	ld (ix + psg_channel_t.final_frequency + 1),d		; dd 72 13 ;7b64
 	ld a,(ix + psg_channel_t.effect_timer)		; dd 7e 06 ;7b67
 	or a			; b7 ;7b6a
-	jp nz,l7b27h		; c2 27 7b ;7b6b
-l7b6eh:
-	ld a,(ix + psg_channel_t.envelope_id_pointer)		; dd 7e 07 ;7b6e
-	or a			; b7 ;7b71
-	jr nz,l7b7fh		; 20 0b ;7b72
-	ld a,(ix + psg_channel_t.base_volume)		; dd 7e 08 ;7b74
-	cpl			; 2f ;7b77
-	and 00fh		; e6 0f ;7b78
-	ld (ix + psg_channel_t.current_volume),a		; dd 77 16 ;7b7a
-	jr l7b8ah		; 18 0b ;7b7d
-l7b7fh:
-	res 7,a		; cb bf ;7b7f
-	ld hl,l7905h		; 21 05 79 ;7b81
-	call sub_get_terrain_table		; cd 1c 7b ;7b84
-	call sub_audio_compute_word_offset		; cd d3 7b ;7b87
-l7b8ah:
-	bit 6,(ix + psg_channel_t.status_flags)		; dd cb 00 76 ;7b8a
-	jr nz,l7bb5h		; 20 25 ;7b8e
-	ld a,(ix + psg_channel_t.psg_channel_map)		; dd 7e 01 ;7b90
-	and 00fh		; e6 0f ;7b93
-	ld c,a			; 4f ;7b95
-	ld b,000h		; 06 00 ;7b96
-	ld hl,l7bc8h_audio		; 21 c8 7b ;7b98
-	add hl,bc			; 09 ;7b9b
-	ld c,(hl)			; 4e ;7b9c
-	ld a,(ix + psg_channel_t.final_frequency)		; dd 7e 12 ;7b9d
-	and 00fh		; e6 0f ;7ba0
-	or c			; b1 ;7ba2
-	call sub_write_psg		; cd c0 7d ;7ba3
-	ld a,(ix + psg_channel_t.final_frequency)		; dd 7e 12 ;7ba6
-	and 0f0h		; e6 f0 ;7ba9
-	or (ix + psg_channel_t.final_frequency + 1)		; dd b6 13 ;7bab
-	rrca			; 0f ;7bae
-	rrca			; 0f ;7baf
-	rrca			; 0f ;7bb0
-	rrca			; 0f ;7bb1
-	call sub_write_psg		; cd c0 7d ;7bb2
-l7bb5h:
-	ld a,(ix + psg_channel_t.psg_channel_map)		; dd 7e 01 ;7bb5
-	and 00fh		; e6 0f ;7bb8
-	ld c,a			; 4f ;7bba
-	ld b,000h		; 06 00 ;7bbb
-	ld hl,l7bcch_audio		; 21 cc 7b ;7bbd
-	add hl,bc			; 09 ;7bc0
-	ld a,(hl)			; 7e ;7bc1
-	or (ix + psg_channel_t.current_volume)		; dd b6 16 ;7bc2
-	jp sub_write_psg		; c3 c0 7d ;7bc5
+	jp nz,audio_envelope_pitch_process		; c2 27 7b ;7b6b
+	.INCLUDE "audio/envelope/audio_volume_process.asm"
 l7bc8h_audio:
 	.DB $80 $a0 $c0 $c0			;7bc8
 l7bcch_audio:
 	.DB $90 $b0 $d0 $f0			;7bcc
-	.INCLUDE "audio/audio_compute_word_offset.asm"
-	.INCLUDE "audio/audio_get_envelope_table.asm"
+	.INCLUDE "audio/envelope/audio_envelope_volume_apply.asm"
+	.INCLUDE "audio/envelope/audio_envelope_pitch_apply.asm"
 sub_7c43h:
 	ld e,(ix + psg_channel_t.track_data_pointer)		; dd 5e 03 ;7c43
 	ld d,(ix + psg_channel_t.track_data_pointer + 1)		; dd 56 04 ;7c46
@@ -269,7 +225,7 @@ l7c49h:
 	jp p,l7c92h		; f2 92 7c ;7c57
 	sub 080h		; d6 80 ;7c5a
 	jr z,l7c61h		; 28 03 ;7c5c
-	add a,(ix+005h)		; dd 86 05 ;7c5e
+	add a,(ix + psg_channel_t.transpose_offset)		; dd 86 05 ;7c5e
 l7c61h:
 	ld hl,table_note_frequencies		; 21 f2 7d ;7c61
 	ld c,a			; 4f ;7c64
@@ -286,7 +242,7 @@ l7c61h:
 	ld a,(de)			; 1a ;7c78
 	inc de			; 13 ;7c79
 	sub 080h		; d6 80 ;7c7a
-	add a,(ix+005h)		; dd 86 05 ;7c7c
+	add a,(ix + psg_channel_t.transpose_offset)		; dd 86 05 ;7c7c
 	ld hl,table_note_frequencies		; 21 f2 7d ;7c7f
 	ld c,a			; 4f ;7c82
 	ld b,000h		; 06 00 ;7c83
@@ -355,7 +311,8 @@ l7cd7h:
 l7ceah:
 	inc de			; 13 ;7cea
 	jp l7c49h		; c3 49 7c ;7ceb
-.INCLUDE "audio/audio_command_routine.asm"
+.INCLUDE "audio/command/audio_command_routine.asm"
+.INCLUDE "audio/command/audio_command_routines.asm"
 l7daah:
 	inc de			; 13 ;7daa
 	dec (hl)			; 35 ;7dab
@@ -371,7 +328,7 @@ sub_7db1h:
 	add hl,bc			; 09 ;7dbc
 	ld a,(hl)			; 7e ;7dbd
 	or 00fh		; f6 0f ;7dbe
-	.INCLUDE "audio/write_psg.asm"
+	.INCLUDE "audio/psg/audio_psg_write.asm"
 l7dc8h:
 	exx			; d9 ;7dc8
 	ld hl,psg_engine.state		; 21 01 de ;7dc9
@@ -380,15 +337,14 @@ l7dc8h:
 	ld (hl),000h		; 36 00 ;7dd2
 	ldir		; ed b0 ;7dd4
 	exx			; d9 ;7dd6
-	.INCLUDE "audio/audio_silence.asm"
-sub_7de3h:
+	.INCLUDE "audio/silence/audio_silence.asm"
+sub_7de3h_clear_audio:
 	xor a			; af ;7de3
 	ld (psg_channel.5),a		; 32 85 de ;7de4
 	ld (psg_channel.6),a		; 32 a5 de ;7de7
 	ld (psg_channel.7),a		; 32 c5 de ;7dea
 	ret			; c9 ;7ded
-data_audio_silence:
-	.INCLUDE "audio/data/silence.asm"
-	.INCLUDE "audio/data/note_frequencies.asm"
+	.INCLUDE "audio/silence/audio_silence_data.asm"
+	.INCLUDE "audio/note/audio_note_frequencies.asm"
 	.INCLUDE "math/mul_h_e.asm"
 	.INCLUDE "math/div_hl_e.asm"

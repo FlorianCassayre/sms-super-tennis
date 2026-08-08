@@ -5,7 +5,7 @@ sub_3607h:
 	ld a,(0c089h)		; 3a 89 c0 ;360f
 	or 080h		; f6 80 ;3612
 	ld (0c089h),a		; 32 89 c0 ;3614
-	call sub_wait_for_audio_event		; cd 6a 03 ;3617
+	call sub_audio_event_wait		; cd 6a 03 ;3617
 	ld hl,03e00h		; 21 00 3e ;361a
 	ld (0c4a8h),hl		; 22 a8 c4 ;361d
 	ld a,000h		; 3e 00 ;3620
@@ -30,7 +30,7 @@ l3627h:
 	ld a,089h		; 3e 89 ;3643
 	out (O_VDP_CTRL),a		; d3 bf ;3645
 	ei			; fb ;3647
-	call sub_wait_for_audio_event		; cd 6a 03 ;3648
+	call sub_audio_event_wait		; cd 6a 03 ;3648
 	pop bc			; c1 ;364b
 	djnz -		; 10 ea ;364c
 	ld hl,(0c4a8h)		; 2a a8 c4 ;364e

@@ -8,7 +8,7 @@ l31c3h:
 	ld a,(0c089h)		; 3a 89 c0 ;31c3
 	or 080h		; f6 80 ;31c6
 	ld (0c089h),a		; 32 89 c0 ;31c8
-	call sub_wait_for_audio_event		; cd 6a 03 ;31cb
+	call sub_audio_event_wait		; cd 6a 03 ;31cb
 	jp sub_update_set_scores		; c3 b8 31 ;31ce
 l31d1h:
 	ld a,(0c49eh)		; 3a 9e c4 ;31d1

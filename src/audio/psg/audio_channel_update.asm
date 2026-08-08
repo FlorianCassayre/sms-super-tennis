@@ -1,4 +1,4 @@
-sub_audio_update_channels:
+sub_audio_channel_update:
 	call sub_audio_track_loader		; cd a8 79 ;796f
 	call sub_798ch		; cd 8c 79 ;7972
 	ld ix,psg_channel		; dd 21 05 de ;7975

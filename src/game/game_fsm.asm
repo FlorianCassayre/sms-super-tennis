@@ -1,5 +1,5 @@
 game_fsm:
-	call sub_wait_for_audio_event		; cd 6a 03 ;07f8
+	call sub_audio_event_wait		; cd 6a 03 ;07f8
 	ld hl,game_fsm		; 21 f8 07 ;07fb
 	push hl			; e5 ;07fe
 	ld a,(0c006h)		; 3a 06 c0 ;07ff

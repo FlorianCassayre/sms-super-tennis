@@ -19,12 +19,13 @@
 	.INCLUDE "game/constants.asm"
 	.INCLUDE "io/constants.asm"
 	.INCLUDE "io/hardware/constants.asm"
-	.INCLUDE "audio/constants.asm"
-	.INCLUDE "audio/data/constants.asm"
+	.INCLUDE "audio/psg/audio_psg.i"
 	.INCLUDE "physics/constants.asm"
 	.INCLUDE "game/gui/constants.asm"
-	.INCLUDE "audio/data/note_t.i"
-
+	.INCLUDE "audio/note/note_t.i"
+	.INCLUDE "audio/command/audio_command_routines_t.i"
+	.INCLUDE "audio/track/audio_tracks_t.i"
+	.INCLUDE "audio/track/audio_track_macros.i"
 start:
 	jp init		; c3 85 00 ;0000
 .INCLUDE "graphics/palettes/palette_0.asm"
@@ -136,8 +137,8 @@ l025dh:
 	.INCLUDE "graphics/delay_vdp.asm"
 	.INCLUDE "graphics/update_cond_color.asm"
 	.INCLUDE "io/027bh_joy.asm"
-	.INCLUDE "audio/wait_for_audio_event.asm"
-	.INCLUDE "audio/wait_for_audio_idle.asm"
+	.INCLUDE "audio/event/audio_event_wait.asm"
+	.INCLUDE "audio/event/audio_idle_wait.asm"
 	nop			; 00 ;0385
 	.DB $11 $e0 ;0386
 	.INCLUDE "graphics/init_background_name_table.asm"
@@ -4692,10 +4693,10 @@ data_planes_11_0:
     	ld a,($c000)
     	bit 3,a
     	ret nz
-	    .INCLUDE "audio/audio_fragment.asm"
+	    .INCLUDE "audio/audio.asm"
 	.ENDIF
-.INCLUDE "audio/data/audio_track_data.asm"
-l7905h:
+.INCLUDE "audio/track/audio_track_data.asm"
+audio_envelope_volume_data:
 	.DW l7919h_0		;7905
 	.DW l7919h_1		;7907
 	.DW l7919h_2		;7909
@@ -4777,20 +4778,20 @@ l7919h_9:
 	.DB $dd		;7953
 	.DB $cb		;7954
 	.DB $02		;7955
-l7956h:
-	.DW l7956h_0		;7956
-	.DW l7956h_1		;7958
-	.DW l7956h_2		;795a
-	.DW l7956h_3		;795c
-l7956h_0:
+audio_envelope_pitch_data:
+	.DW audio_envelope_pitch_data_0		;7956
+	.DW audio_envelope_pitch_data_1		;7958
+	.DW audio_envelope_pitch_data_2		;795a
+	.DW audio_envelope_pitch_data_3		;795c
+audio_envelope_pitch_data_0:
 	.DB $ee		;795e
 	.DB $ff		;795f
 	.DB $01		;7960
-l7956h_1:
+audio_envelope_pitch_data_1:
 	.DB $ff		;7961
 	.DB $ee		;7962
 	.DB $00		;7963
-l7956h_2:
+audio_envelope_pitch_data_2:
 	.DB $ff		;7964
 	.DB $ee		;7965
 	.DB $ff		;7966
@@ -4798,13 +4799,13 @@ l7956h_2:
 	.DB $dd		;7968
 	.DB $ee		;7969
 	.DB $00		;796a
-l7956h_3:
+audio_envelope_pitch_data_3:
 	.DB $ee		;796b
 	.DB $dd		;796c
 	.DB $ee		;796d
 	.DB $00		;796e
 	.IFDEF _UE
-		.INCLUDE "audio/audio_fragment.asm"
+		.INCLUDE "audio/audio.asm"
 	.ENDIF
 	.DSB 298, $ff			;7ea3
 	.IFDEF _UE

@@ -1,5 +1,3 @@
-.equ AUDIO_TRACK_BASE $81
-
 .STRUCT audio_tracks_t
 	track_theme_game_start DB	; 81
 	track_theme_game_won DB	; 82

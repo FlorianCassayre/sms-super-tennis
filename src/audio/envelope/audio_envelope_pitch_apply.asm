@@ -1,6 +1,6 @@
 -:
 	ld (ix + psg_channel_t.pitch_envelope_index),a		; dd 77 0f ;7c0a
-sub_audio_get_envelope_table:
+sub_audio_envelope_pitch_apply:
 	push hl			; e5 ;7c0d
 	ld a,(ix + psg_channel_t.pitch_envelope_index)		; dd 7e 0f ;7c0e
 	srl a		; cb 3f ;7c11
@@ -21,7 +21,7 @@ sub_audio_get_envelope_table:
 	cp 010h		; fe 10 ;7c25
 	jr nz,@apply_pitch_offset		; 20 08 ;7c27
 	dec (ix + psg_channel_t.pitch_envelope_index)		; dd 35 0f ;7c29
-	jr sub_audio_get_envelope_table		; 18 df ;7c2c
+	jr sub_audio_envelope_pitch_apply		; 18 df ;7c2c
 	cp 020h		; fe 20 ;7c2e
 	ret z			; c8 ;7c30
 @apply_pitch_offset:
