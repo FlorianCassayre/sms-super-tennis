@@ -5,8 +5,8 @@ sub_check_player_location:
 	ld ix,player.1.bottom		; dd 21 00 c2 ;178c
 	ld iy,player.2.bottom		; fd 21 80 c2 ;1790
 	call sub_179fh		; cd 9f 17 ;1794
-	ld ix,0c240h		; dd 21 40 c2 ;1797
-	ld iy,0c2c0h		; fd 21 c0 c2 ;179b
+	ld ix,player.1.top		; dd 21 40 c2 ;1797
+	ld iy,player.2.top		; fd 21 c0 c2 ;179b
 sub_179fh:
 	ld e,000h		; 1e 00 ;179f
 	ld a,(ix + player_t.y_pos_cache)		; dd 7e 14 ;17a1
@@ -16,14 +16,14 @@ sub_179fh:
 +:
 	cp 004h		; fe 04 ;17ab
 	jr nc,+		; 30 27 ;17ad
-	ld hl,l17e7h		; 21 e7 17 ;17af
+	ld hl,l17e7h_bounding_box		; 21 e7 17 ;17af
 	call sub_17f1h_aabb		; cd f1 17 ;17b2
 	ld (0c082h),bc		; ed 43 82 c0 ;17b5
 	ld (0c084h),de		; ed 53 84 c0 ;17b9
 	push ix		; dd e5 ;17bd
 	push iy		; fd e5 ;17bf
 	pop ix		; dd e1 ;17c1
-	ld hl,l17e7h		; 21 e7 17 ;17c3
+	ld hl,l17e7h_bounding_box		; 21 e7 17 ;17c3
 	call sub_17f1h_aabb		; cd f1 17 ;17c6
 	pop ix		; dd e1 ;17c9
 	ld (0c08eh),bc		; ed 43 8e c0 ;17cb

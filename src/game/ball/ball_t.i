@@ -7,8 +7,13 @@
 	x_pos DW		; $c50a
 	y_vel DW		; $c50c
 	x_vel DW		; $c50e
-	_unknown_1 DSB 7		; $c510
-	state DB		; $c517
+	_unknown_1 DSB 6		; $c510
+	unknown_hit_flags DB		; $c516
+	bounces_count DB		; $c517
+	foul DB		; $c518
+	foul_triggered_flag DB ; $c519
+	_unknown_2 DSB 3	; $c51a
+	out_flag DB	; $c51d
 .ENDST
 
 .ENUM $c500

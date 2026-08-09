@@ -11,7 +11,7 @@ l160bh:
 	add hl,de			; 19 ;1617
 	ld a,(hl)			; 7e ;1618
 	ld (0c51ah),a		; 32 1a c5 ;1619
-	ld a,(0c509h)		; 3a 09 c5 ;161c
+	ld a,(ball.y_pos + 1)		; 3a 09 c5 ;161c
 	sub (hl)			; 96 ;161f
 	jr nc,+		; 30 02 ;1620
 	neg		; ed 44 ;1622
@@ -51,7 +51,7 @@ l160bh:
 	sbc hl,de		; ed 52 ;165d
 	ex de,hl			; eb ;165f
 +:
-	ld hl,(0c50ah)		; 2a 0a c5 ;1660
+	ld hl,(ball.x_pos)		; 2a 0a c5 ;1660
 	add hl,de			; 19 ;1663
 	push hl			; e5 ;1664
 	ld a,(0c51ah)		; 3a 1a c5 ;1665

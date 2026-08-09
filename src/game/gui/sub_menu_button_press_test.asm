@@ -1,4 +1,4 @@
-sub_menu_button_press_test:
+sub_menu_update_ball_out_of_bounds:
 	ld a,(0c518h)		; 3a 18 c5 ;0e04
 	or a			; b7 ;0e07
 	ret nz			; c0 ;0e08

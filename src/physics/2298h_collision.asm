@@ -28,7 +28,7 @@ sub_2298h_collision:
 	ld b,004h		; 06 04 ;22c4
 +:
 	ld a,b			; 78 ;22c6
-	ld de,l1000h		; 11 00 10 ;22c7
+	ld de,01000h		; 11 00 10 ;22c7
 	cp 004h		; fe 04 ;22ca
 	jr z,+		; 28 03 ;22cc
 	ld de,l1800h		; 11 00 18 ;22ce

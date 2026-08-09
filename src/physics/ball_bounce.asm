@@ -8,7 +8,7 @@ sub_ball_bounce:
 	ld hl,0		; 21 00 00 ;15a9
 	sbc hl,de		; ed 52 ;15ac
 	ld (ball.z_vel),hl		; 22 06 c5 ;15ae
-	ld a,(ball.state)		; 3a 17 c5 ;15b1
+	ld a,(ball.bounces_count)		; 3a 17 c5 ;15b1
 	cp STATE_FROZEN		; fe 02 ;15b4
 	ret nc			; d0 ;15b6
 	ld de,(ball.x_vel)		; ed 5b 0e c5 ;15b7
