@@ -218,7 +218,7 @@ audio_track_data_theme_game_start:
 	AUDIO_RETRIGGER 2
 	.DB CMD_END_TRACK
 
-audio_track_data_theme_game_won:
+audio_track_data_theme_game_wonn:
 	.DB 3
 	CHANNEL_HEADER $80, $20, 4, @channel_1, $f7, $03, $05, $0d
 	CHANNEL_HEADER $80, $21, 4, @channel_2, $f7, $04, $05, $0b

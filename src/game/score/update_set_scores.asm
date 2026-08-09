@@ -85,7 +85,7 @@ l3249h:
 	cp 5		; fe 05 ;325a
 	jr c,l3265h		; 38 07 ;325c
 l325eh:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_won		; 3e 82 ;325e
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_wonn		; 3e 82 ;325e
 	ld (psg_engine.track_request_id),a		; 32 00 de ;3260
 	jr l3276h		; 18 11 ;3263
 l3265h:
@@ -256,9 +256,9 @@ l33a4h:
 	jp l33bah		; c3 ba 33 ;33a9
 l33ach:
 	ld a,004h		; 3e 04 ;33ac
-	ld (score.game_won),a		; 32 95 c4 ;33ae
+	ld (score.game_lost),a		; 32 95 c4 ;33ae
 l33b1h:
-	ld hl,score.game_won		; 21 95 c4 ;33b1
+	ld hl,score.game_lost		; 21 95 c4 ;33b1
 	set 1,(hl)		; cb ce ;33b4
 	xor a			; af ;33b6
 	ld (score.tie_break),a		; 32 81 c4 ;33b7

@@ -1,4 +1,9 @@
 sub_audio_channel_update:
+	.IFDEF _J
+    	ld a,($c000)
+    	bit 3,a
+    	ret nz
+    .ENDIF
 	call sub_audio_track_loader		; cd a8 79 ;796f
 	call sub_798ch		; cd 8c 79 ;7972
 	ld ix,psg_channel		; dd 21 05 de ;7975

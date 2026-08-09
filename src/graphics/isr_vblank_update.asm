@@ -71,12 +71,7 @@ l01e4h:
 	call sub_027bh_joy		; cd 7b 02 ;01f5
 	call sub_joy_debounce		; cd 95 07 ;01f8
 l01fbh:
-	.IFDEF _J
-		call l7144h		;01fb
-	.ENDIF
-	.IFDEF _UE
-		call sub_audio_channel_update		; cd 6f 79 ;01fb
-	.ENDIF
+	call sub_audio_channel_update		; cd 6f 79 ;01fb
 l01feh:
 	ld hl,$c001
 	ld (hl),001h		; 36 01 ;0201

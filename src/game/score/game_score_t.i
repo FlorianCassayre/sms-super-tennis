@@ -16,7 +16,7 @@
 	set_current_index DB		;c48a
 	point_fault_flag DB		;c48b
 	_unknown_1 DSB 9		;c48c
-	game_won DB		;c495
+	game_lost DB		;c495
 	_unknown_2 DB		;c496
 	winner_player DB		;c497
 	_unknown_3 DSB 5		;c498

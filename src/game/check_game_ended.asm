@@ -1,5 +1,5 @@
 sub_check_game_ended:
-	ld a,(score.game_won)		; 3a 95 c4 ;0d25
+	ld a,(score.game_lost)		; 3a 95 c4 ;0d25
 	bit 1,a		; cb 4f ;0d28
 	jr z,l0d67h		; 28 3b ;0d2a
 	bit 2,a		; cb 57 ;0d2c

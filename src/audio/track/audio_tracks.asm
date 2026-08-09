@@ -1,6 +1,6 @@
 audio_track_data:
 	.DW audio_track_data_theme_game_start		;79cf	; 81
-	.DW audio_track_data_theme_game_won		;79d1	; 82
+	.DW audio_track_data_theme_game_wonn		;79d1	; 82
 	.DW audio_track_data_theme_game_lost		;79d3	; 83
 	.DW audio_track_data_theme_set_won		;79d5	; 84
 	.DW audio_track_data_theme_set_lost		;79d7	; 85

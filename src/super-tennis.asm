@@ -17,6 +17,7 @@
 
 	.INCLUDE "hardware/hardware_io.i"
 	.INCLUDE "hardware/hardware_type.i"
+	.INCLUDE "gui/gui_ascii_table.i"
 	.INCLUDE "state/state_t.i"
 	.INCLUDE "algorithm/rle_constants.asm"
 	.INCLUDE "game/score/game_score_t.i"
@@ -547,7 +548,7 @@ l0b36h:
 	inc hl			; 23 ;0b37
 	ld (hl),000h		; 36 00 ;0b38
 	ret			; c9 ;0b3a
-	ld hl,score.game_won		; 21 95 c4 ;0b3b
+	ld hl,score.game_lost		; 21 95 c4 ;0b3b
 	ld a,0f8h		; 3e f8 ;0b3e
 	and (hl)			; a6 ;0b40
 	ld (hl),a			; 77 ;0b41
@@ -775,7 +776,7 @@ l0cbah:
 	ld a,(score.tie_break)		; 3a 81 c4 ;0cc2
 	bit 0,a		; cb 47 ;0cc5
 	jr nz,l0d07h		; 20 3e ;0cc7
-	ld a,(score.game_won)		; 3a 95 c4 ;0cc9
+	ld a,(score.game_lost)		; 3a 95 c4 ;0cc9
 	bit 0,a		; cb 47 ;0ccc
 	jp z,l0d63h		; ca 63 0d ;0cce
 l0cd1h:
@@ -802,7 +803,7 @@ l0cd1h:
 	ld (0c51bh),a		; 32 1b c5 ;0d03
 	ret			; c9 ;0d06
 l0d07h:
-	ld a,(score.game_won)		; 3a 95 c4 ;0d07
+	ld a,(score.game_lost)		; 3a 95 c4 ;0d07
 	bit 0,a		; cb 47 ;0d0a
 	jr z,l0d1ah		; 28 0c ;0d0c
 	ld a,(0c51ch)		; 3a 1c c5 ;0d0e
@@ -3369,7 +3370,7 @@ sub_3457h_clean_vram:
 	push hl			; e5 ;3459
 	push de			; d5 ;345a
 	pop bc			; c1 ;345b
-	ld de,l34a9h		; 11 a9 34 ;345c
+	ld de,gui_text_game_set_match		; 11 a9 34 ;345c
 	di			; f3 ;345f
 	call sub_vram_fill_word		; cd 50 04 ;3460
 	ei			; fb ;3463
@@ -3382,161 +3383,15 @@ sub_3457h_clean_vram:
 	ret			; c9 ;346d
 	.INCLUDE "graphics/draw_game_end_line.asm"
 	.INCLUDE "graphics/draw_game_end_typewriter.asm"
-l34a9h:
-	.DB $00		;34a9
-	.DB $01		;34aa
-	.DB $12		;34ab
-	.DB $01		;34ac
-	.DB $0c		;34ad
-	.DB $01		;34ae
-	.DB $18		;34af
-	.DB $01		;34b0
-	.DB $10		;34b1
-	.DB $01		;34b2
-	.DB $2b		;34b3
-	.DB $01		;34b4
-	.DB $2b		;34b5
-	.DB $01		;34b6
-	.DB $2b		;34b7
-	.DB $01		;34b8
-	.DB $00		;34b9
-	.DB $01		;34ba
-	.DB $00		;34bb
-	.DB $01		;34bc
-	.DB $1e		;34bd
-	.DB $01		;34be
-	.DB $10		;34bf
-	.DB $01		;34c0
-	.DB $1f		;34c1
-	.DB $01		;34c2
-	.DB $2b		;34c3
-	.DB $01		;34c4
-	.DB $2b		;34c5
-	.DB $01		;34c6
-	.DB $2b		;34c7
-	.DB $01		;34c8
-	.DB $00		;34c9
-	.DB $01		;34ca
-	.DB $00		;34cb
-	.DB $01		;34cc
-	.DB $18		;34cd
-	.DB $01		;34ce
-	.DB $0c		;34cf
-	.DB $01		;34d0
-	.DB $1f		;34d1
-	.DB $01		;34d2
-	.DB $0e		;34d3
-	.DB $01		;34d4
-	.DB $13		;34d5
-	.DB $01		;34d6
-	.DB $24		;34d7
-	.DB $01		;34d8
-	.DB $1a		;34d9
-	.DB $01		;34da
-	.DB $20		;34db
-	.DB $01		;34dc
-	.DB $00		;34dd
-	.DB $01		;34de
-	.DB $22		;34df
-	.DB $01		;34e0
-	.DB $14		;34e1
-	.DB $01		;34e2
-	.DB $19		;34e3
-	.DB $01		;34e4
-	.DB $13		;34e5
-	.DB $01		;34e6
-	.DB $0c		;34e7
-	.DB $01		;34e8
-	.DB $21		;34e9
-	.DB $01		;34ea
-	.DB $10		;34eb
-	.DB $01		;34ec
-	.DB $00		;34ed
-	.DB $01		;34ee
-	.DB $24		;34ef
-	.DB $01		;34f0
-	.DB $1a		;34f1
-	.DB $01		;34f2
-	.DB $20		;34f3
-	.DB $01		;34f4
-	.DB $00		;34f5
-	.DB $01		;34f6
-	.DB $1f		;34f7
-	.DB $01		;34f8
-	.DB $1d		;34f9
-	.DB $01		;34fa
-	.DB $14		;34fb
-	.DB $01		;34fc
-	.DB $10		;34fd
-	.DB $01		;34fe
-	.DB $0f		;34ff
-	.DB $01		;3500
-	.DB $0c		;3501
-	.DB $01		;3502
-	.DB $00		;3503
-	.DB $01		;3504
-	.DB $13		;3505
-	.DB $01		;3506
-	.DB $0c		;3507
-	.DB $01		;3508
-	.DB $1d		;3509
-	.DB $01		;350a
-	.DB $0f		;350b
-	.DB $01		;350c
-	.DB $10		;350d
-	.DB $01		;350e
-	.DB $1d		;350f
-	.DB $01		;3510
-	.DB $00		;3511
-	.DB $01		;3512
-	.DB $17		;3513
-	.DB $01		;3514
-	.DB $10		;3515
-	.DB $01		;3516
-	.DB $21		;3517
-	.DB $01		;3518
-	.DB $10		;3519
-	.DB $01		;351a
-	.DB $17		;351b
-	.DB $01		;351c
-	.DB $2c		;351d
-	.DB $01		;351e
-	.DB $24		;351f
-	.DB $01		;3520
-	.DB $1a		;3521
-	.DB $01		;3522
-	.DB $20		;3523
-	.DB $01		;3524
-	.DB $00		;3525
-	.DB $01		;3526
-	.DB $17		;3527
-	.DB $01		;3528
-	.DB $1a		;3529
-	.DB $01		;352a
-	.DB $1e		;352b
-	.DB $01		;352c
-	.DB $10		;352d
-	.DB $01		;352e
-	.DB $1f		;352f
-	.DB $01		;3530
-	.DB $1d		;3531
-	.DB $01		;3532
-	.DB $24		;3533
-	.DB $01		;3534
-	.DB $00		;3535
-	.DB $01		;3536
-	.DB $0c		;3537
-	.DB $01		;3538
-	.DB $12		;3539
-	.DB $01		;353a
-	.DB $0c		;353b
-	.DB $01		;353c
-	.DB $14		;353d
-	.DB $01		;353e
-	.DB $19		;353f
-	.DB $01		;3540
-	.DB $2c		;3541
-	.DB $01		;3542
+gui_text_game_set_match:
+	.STRINGMAP ascii, " GAME...  SET...  MATCH"
+gui_text_win:
+	.STRINGMAP ascii, "YOU WIN"
+	.STRINGMAP ascii, "HAVE YOU TRIED"
+	.STRINGMAP ascii, "A HARDER LEVEL?"
+gui_text_lost:
+	.STRINGMAP ascii, "YOU LOSE"
+	.STRINGMAP ascii, "TRY AGAIN?"
 sub_3543h:
 	ld a,(0c000h)		; 3a 00 c0 ;3543
 	bit 2,a		; cb 57 ;3546
@@ -3773,121 +3628,9 @@ data_planes_11_0:
 	.INCLUDE "tiles/planes_11_2.asm"
 	.INCLUDE "tiles/planes_11_3.asm"
 	.IFDEF _J
-	l7144h:
-    	ld a,($c000)
-    	bit 3,a
-    	ret nz
 	    .INCLUDE "audio/audio.asm"
 	.ENDIF
-.INCLUDE "audio/track/audio_track_data.asm"
-audio_envelope_volume_data:
-	.DW l7919h_0		;7905
-	.DW l7919h_1		;7907
-	.DW l7919h_2		;7909
-	.DW l7919h_3		;790b
-	.DW l7919h_4		;790d
-	.DW l7919h_5		;790f
-	.DW l7919h_6		;7911
-	.DW l7919h_7		;7913
-	.DW l7919h_8		;7915
-	.DW l7919h_9		;7917
-l7919h_0:
-	.DB $de		;7919
-	.DB $ff		;791a
-	.DB $ee		;791b
-	.DB $dd		;791c
-	.DB $cc		;791d
-	.DB $bb		;791e
-	.DB $aa		;791f
-	.DB $01		;7920
-l7919h_1:
-	.DB $ff		;7921
-	.DB $02		;7922
-l7919h_2:
-	.DB $ff		;7923
-	.DB $fd		;7924
-	.DB $02		;7925
-l7919h_3:
-	.DB $ff		;7926
-	.DB $ee		;7927
-	.DB $dd		;7928
-	.DB $cc		;7929
-	.DB $bb		;792a
-	.DB $aa		;792b
-	.DB $01		;792c
-l7919h_4:
-	.DB $ff		;792d
-	.DB $ed		;792e
-	.DB $dc		;792f
-	.DB $ba		;7930
-	.DB $a9		;7931
-	.DB $87		;7932
-	.DB $02		;7933
-l7919h_5:
-	.DB $ef		;7934
-	.DB $ee		;7935
-	.DB $dc		;7936
-	.DB $ba		;7937
-	.DB $a9		;7938
-	.DB $87		;7939
-	.DB $76		;793a
-	.DB $65		;793b
-	.DB $54		;793c
-	.DB $01		;793d
-l7919h_6:
-	.DB $ff		;793e
-	.DB $ed		;793f
-	.DB $ca		;7940
-	.DB $02		;7941
-l7919h_7:
-	.DB $ef		;7942
-	.DB $ed		;7943
-	.DB $cc		;7944
-	.DB $bb		;7945
-	.DB $aa		;7946
-	.DB $99		;7947
-	.DB $01		;7948
-l7919h_8:
-	.DB $df		;7949
-	.DB $ff		;794a
-	.DB $ed		;794b
-	.DB $1c		;794c
-	.DB $ba		;794d
-	.DB $98		;794e
-	.DB $02		;794f
-l7919h_9:
-	.DB $ef		;7950
-	.DB $fe		;7951
-	.DB $ed		;7952
-	.DB $dd		;7953
-	.DB $cb		;7954
-	.DB $02		;7955
-audio_envelope_pitch_data:
-	.DW audio_envelope_pitch_data_0		;7956
-	.DW audio_envelope_pitch_data_1		;7958
-	.DW audio_envelope_pitch_data_2		;795a
-	.DW audio_envelope_pitch_data_3		;795c
-audio_envelope_pitch_data_0:
-	.DB $ee		;795e
-	.DB $ff		;795f
-	.DB $01		;7960
-audio_envelope_pitch_data_1:
-	.DB $ff		;7961
-	.DB $ee		;7962
-	.DB $00		;7963
-audio_envelope_pitch_data_2:
-	.DB $ff		;7964
-	.DB $ee		;7965
-	.DB $ff		;7966
-	.DB $ee		;7967
-	.DB $dd		;7968
-	.DB $ee		;7969
-	.DB $00		;796a
-audio_envelope_pitch_data_3:
-	.DB $ee		;796b
-	.DB $dd		;796c
-	.DB $ee		;796d
-	.DB $00		;796e
+	.INCLUDE "audio/audio_data.asm"
 	.IFDEF _UE
 		.INCLUDE "audio/audio.asm"
 	.ENDIF

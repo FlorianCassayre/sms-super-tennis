@@ -196,5 +196,5 @@ sub_update_score_points:
 @set_winner:
 	ld (score.winner_player),a		; 32 97 c4 ;3177
 	ld a,001h		; 3e 01 ;317a
-	ld (score.game_won),a		; 32 95 c4 ;317c
+	ld (score.game_lost),a		; 32 95 c4 ;317c
 	jp @finish_score_update		; c3 b6 30 ;317f
