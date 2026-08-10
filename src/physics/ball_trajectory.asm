@@ -107,7 +107,7 @@ l2d35h:
 	ld a,001h		; 3e 01 ;2d40
 	ld b,000h		; 06 00 ;2d42
 +:
-	ld de,l0040h		; 11 40 00 ;2d44
+	ld de,040h		; 11 40 00 ;2d44
 	ld hl,0c227h		; 21 27 c2 ;2d47
 	ld (hl),a			; 77 ;2d4a
 	add hl,de			; 19 ;2d4b

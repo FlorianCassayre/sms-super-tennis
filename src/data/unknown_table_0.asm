@@ -1,3 +1,4 @@
+unknown_table_0:
 	.DW unknown_table_0_0		;4124
 	.DW unknown_table_0_1		;4126
 	.DW unknown_table_0_2		;4128
@@ -1913,3 +1914,6 @@ unknown_table_0_79:
 	.DB $ff		;4896
 unknown_table_0_80:
 	.DB 1		;4897
+	.DB $fc		;4898
+	.DB $fc		;4899
+	.DB $fe		;489a

@@ -3,7 +3,7 @@ l1c4ah_jump_table:
 	.DW l1cf7h		;1c4c
 	.DW l1d27h		;1c4e
 	.DW l1c9ch		;1c50
-	.DW l1d89h		;1c52
+	.DW sub_1d89h		;1c52
 	.DW l1d57h		;1c54
 l1c56h:
 	ld a,(ix+028h)		; dd 7e 28 ;1c56
@@ -41,7 +41,7 @@ l1c9ch:
 	and 003h		; e6 03 ;1c9f
 	jr z,l1caah		; 28 07 ;1ca1
 	ld (ix+025h),004h		; dd 36 25 04 ;1ca3
-	jp l1d89h		; c3 89 1d ;1ca7
+	jp sub_1d89h		; c3 89 1d ;1ca7
 l1caah:
 	ld a,(ix+015h)		; dd 7e 15 ;1caa
 	ld c,a			; 4f ;1cad

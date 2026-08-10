@@ -30,7 +30,7 @@ l1bd4h:
 	ld (ix+030h),a		; dd 77 30 ;1be3
 	inc hl			; 23 ;1be6
 	ld e,(hl)			; 5e ;1be7
-	ld hl,01c1bh		; 21 1b 1c ;1be8
+	ld hl,l1c1bh		; 21 1b 1c ;1be8
 	add hl,de			; 19 ;1beb
 	ld a,(hl)			; 7e ;1bec
 	ld (ix + player_t.y_pos),a		; dd 77 0a ;1bed
@@ -67,6 +67,20 @@ l1c07h:
 	.DB $00		;1c18
 	.DB $01		;1c19
 	.DB $04		;1c1a
+l1c1bh:
 	.DB $00		;1c1b
 	.DB $28		;1c1c
 	.DB $00		;1c1d
+	.DB $70		;1c1e
+	.DB $00		;1c1f
+	.DB $28		;1c20
+	.DB $00		;1c21
+	.DB $a0		;1c22
+	.DB $00		;1c23
+	.DB $38		;1c24
+	.DB $00		;1c25
+	.DB $70		;1c26
+	.DB $00		;1c27
+	.DB $38		;1c28
+	.DB $00		;1c29
+	.DB $a0		;1c2a

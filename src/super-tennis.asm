@@ -17,6 +17,8 @@
 
 	.INCLUDE "hardware/hardware_io.i"
 	.INCLUDE "hardware/hardware_type.i"
+	.INCLUDE "hardware/hardware_vdp.i"
+	.INCLUDE "hardware/hardware_vdp_registers_t.i"
 	.INCLUDE "gui/gui_ascii_table.i"
 	.INCLUDE "state/state_t.i"
 	.INCLUDE "algorithm/rle_constants.asm"
@@ -63,21 +65,7 @@ l002dh_palette:
 l0038h_interrupt:
 	jp isr_vblank_update		; c3 65 01 ;0038
 .ASSERT l0038h_interrupt == $0038, LDERROR
-l003bh:
-	.DW $8016		;003b
-	.DW $81a0		;003d
-l003fh:
-	.DB $ff			;003f
-l0040h:
-	.DB $82			;0040
-	.DW $83ff		;0041
-	.DW $84ff		;0043
-	.DW $85ff		;0045
-	.DW $86fb		;0047
-	.DW $8700		;0049
-	.DW $8800		;004b
-	.DW $8900		;004d
-	.DW $8abf		;004f
+	.INCLUDE "hardware/hardware_vdp_initial_register_values.asm"
 	.DB $00		;0051
 	.DB $00		;0052
 	.DB $00		;0053
@@ -86,41 +74,12 @@ l0040h:
 	.DSB 16 $ff		;0056
 .INCLUDE "io/pause_handler.asm"
 .INCLUDE "init.asm"
-	.DB $00		;023d
-	.DB $00		;023e
-	.DB $00		;023f
-	.DB $00		;0240
-	.DB $00		;0241
-	.DB $00		;0242
-	.DB $00		;0243
-	.DB $00		;0244
-	.DB $00		;0245
-	.DB $00		;0246
-	.DB $00		;0247
-	.DB $00		;0248
-	.DB $00		;0249
-	.DB $00		;024a
-	.DB $00		;024b
-	.DB $00		;024c
-	.DB $00		;024d
-	.DB $00		;024e
-	.DB $00		;024f
-l0250h:
-	ld a,010h		; 3e 10 ;0250
-	out (O_VDP_CTRL),a		; d3 bf ;0252
-	ld a,0c0h		; 3e c0 ;0254
-	out (O_VDP_CTRL),a		; d3 bf ;0256
-	ld a,(0001bh)		; 3a 1b 00 ;0258
-	out (IO_VDP_DATA),a		; d3 be ;025b
-l025dh:
-	pop af			; f1 ;025d
-	ei			; fb ;025e
-	ret			; c9 ;025f
 	.INCLUDE "graphics/delay_vdp.asm"
 	.INCLUDE "graphics/update_cond_color.asm"
 	.INCLUDE "io/027bh_joy.asm"
 	.INCLUDE "audio/event/audio_event_wait.asm"
 	.INCLUDE "audio/event/audio_idle_wait.asm"
+l0385h:
 	.DB $00		;0385
 	.DB $11		;0386
 	.DB $e0		;0387
@@ -143,7 +102,7 @@ l025dh:
 l051ah:
 	call sub_z_ordering		; cd cc 05 ;051a
 	xor a			; af ;051d
-l051eh:
+sub_051eh:
 	ld e,a			; 5f ;051e
 	ld d,000h		; 16 00 ;051f
 	push af			; f5 ;0521
@@ -169,10 +128,10 @@ l053eh:
 	pop af			; f1 ;053e
 	inc a			; 3c ;053f
 	cp 006h		; fe 06 ;0540
-	jr nz,l051eh		; 20 da ;0542
-	jp l05a1h		; c3 a1 05 ;0544
+	jr nz,sub_051eh		; 20 da ;0542
+	jp sub_05a1h		; c3 a1 05 ;0544
 	.INCLUDE "graphics/render_sprites.asm"
-l05a1h:
+sub_05a1h:
 	ld a,(0c080h)		; 3a 80 c0 ;05a1
 	ld hl,0c081h		; 21 81 c0 ;05a4
 	sub (hl)			; 96 ;05a7
@@ -190,7 +149,6 @@ l05b7h:
 	djnz l05b7h		; 10 fb ;05ba
 l05bch:
 	ld a,(0c080h)		; 3a 80 c0 ;05bc
-sub_05bfh:
 	ld (0c081h),a		; 32 81 c0 ;05bf
 	xor a			; af ;05c2
 	ld (0c080h),a		; 32 80 c0 ;05c3
@@ -221,7 +179,7 @@ sub_0642h_animation_loop:
 	ld (ix+006h),e		; dd 73 06 ;0655
 	ld (ix+007h),d		; dd 72 07 ;0658
 	ret			; c9 ;065b
-l065ch:
+sub_065ch:
 	ld hl,l06bfh		; 21 bf 06 ;065c
 	ld a,(0c509h)		; 3a 09 c5 ;065f
 	cp 050h		; fe 50 ;0662
@@ -274,11 +232,9 @@ l0699h:
 	ld a,(0c511h)		; 3a 11 c5 ;06af
 	add a,a			; 87 ;06b2
 	ld l,a			; 6f ;06b3
-l06b4h:
 	ld h,000h		; 26 00 ;06b4
 	add hl,de			; 19 ;06b6
 	ld a,(hl)			; 7e ;06b7
-sub_06b8h:
 	inc hl			; 23 ;06b8
 	ld h,(hl)			; 66 ;06b9
 	ld l,a			; 6f ;06ba
@@ -387,7 +343,6 @@ l0732h:
 	ld c,a			; 4f ;0739
 	ld b,000h		; 06 00 ;073a
 	ld hl,0c1c4h		; 21 c4 c1 ;073c
-l073fh:
 	add hl,bc			; 09 ;073f
 	ld a,(ix+001h)		; dd 7e 01 ;0740
 	ld (hl),a			; 77 ;0743
@@ -406,332 +361,67 @@ l074fh_memory_table:
 	.DW $c300		;0757
 l0759h_table:
 	.DW $c340		;0759
-	.DW l23ffh		;075b
+	.DW sub_23ffh		;075b
 	.DW l1bb0h		;075d
 	.DW sub_game_player_update_server_state		;075f
-	.DW l1af2h		;0761
-	.DW l1b68h		;0763
+	.DW sub_1af2h		;0761
+	.DW sub_1b68h		;0763
 	.DW sub_game_player_update_server_state		;0765
-	.DW l1af2h		;0767
-	.DW l1b68h		;0769
+	.DW sub_1af2h		;0767
+	.DW sub_1b68h		;0769
 	.DW sub_game_player_update_server_state		;076b
-	.DW l1bafh_nop		;076d
-	.DW l1bafh_nop		;076f
-	.DW l1bafh_nop		;0771
-	.DW l1bafh_nop		;0773
-	.DW l1bafh_nop		;0775
-	.DW l1bafh_nop		;0777
-	.DW l1bafh_nop		;0779
-	.DW l1bafh_nop		;077b
-	.DW l1bafh_nop		;077d
-	.DW l247ch		;077f
+	.DW sub_1bafh_nop		;076d
+	.DW sub_1bafh_nop		;076f
+	.DW sub_1bafh_nop		;0771
+	.DW sub_1bafh_nop		;0773
+	.DW sub_1bafh_nop		;0775
+	.DW sub_1bafh_nop		;0777
+	.DW sub_1bafh_nop		;0779
+	.DW sub_1bafh_nop		;077b
+	.DW sub_1bafh_nop		;077d
+	.DW sub_247ch		;077f
 	.DW l1c2bh		;0781
 	.DW l0f1ah		;0783
 	.DW l0f1dh		;0785
 	.DW l0f4dh		;0787
 	.DW l0fa5h		;0789
 	.DW l101fh		;078b
-	.DW $11b1		;078d
+	.DW l11b1h		;078d
 	.DW l1227h		;078f
 	.DW l126ch		;0791
-	.DW $12de		;0793
+	.DW l12deh		;0793
 	.INCLUDE "io/joy_debounce.asm"
 	.INCLUDE "game/game_fsm.asm"
 l0811h:
-	or b			; b0 ;0811
-	ld c,021h		; 0e 21 ;0812
-	ex af,af'			; 08 ;0814
-	ret nz			; c0 ;0815
-	ex af,af'			; 08 ;0816
-	sbc a,b			; 98 ;0817
-	ex af,af'			; 08 ;0818
-	jr sub_init_splash_screen		; 18 0b ;0819
-	dec sp			; 3b ;081b
-	dec bc			; 0b ;081c
-	ld l,e			; 6b ;081d
-	inc c			; 0c ;081e
-	and a			; a7 ;081f
-	ex af,af'			; 08 ;0820
-	ld hl,0c006h		; 21 06 c0 ;0821
-	bit 6,(hl)		; cb 76 ;0824
+	.DW l0eb0h		;0811
+	.DW l0821h		;0813
+	.DW l08c0h		;0815
+	.DW l0898h		;0817
+	.DW l0b18h		;0819
+	.DW l0b3bh		;081b
+	.DW l0c6bh		;081d
+	.DW sub_clear_ram		;081f
 	.INCLUDE "game/init_splash_screen.asm"
-l088dh:
-	ld a,(psg_engine._unknown)		; 3a 04 de ;088d
-	rlca			; 07 ;0890
-	ret nc			; d0 ;0891
-	ld a,083h		; 3e 83 ;0892
-	ld (0c006h),a		; 32 06 c0 ;0894
-	ret			; c9 ;0897
-	ld hl,0c000h		; 21 00 c0 ;0898
-	set 3,(hl)		; cb de ;089b
-	set 7,(hl)		; cb fe ;089d
-	ld a,003h		; 3e 03 ;089f
-	ld (0c045h),a		; 32 45 c0 ;08a1
-	jp sub_draw_tennis_court		; c3 bd 0a ;08a4
 	.INCLUDE "game/reset_state.asm"
-l096eh:
-	call sub_vdp_build_sprite_buffer		; cd 10 0a ;096e
-	ld hl,gui.tick_counter		; 21 96 c4 ;0971
-	inc (hl)			; 34 ;0974
-	ld hl,gui.joystick_previous		; 21 94 c4 ;0975
-	call sub_get_joy_p1		; cd 0f 03 ;0978
-	cp (hl)			; be ;097b
-	ret z			; c8 ;097c
-	dec hl			; 2b ;097d
-	cp (hl)			; be ;097e
-	jp z,sub_handle_gui_control		; ca 88 09 ;097f
-	ld (hl),a			; 77 ;0982
-	xor a			; af ;0983
-	ld (0c49ch),a		; 32 9c c4 ;0984
-	ret			; c9 ;0987
 	.INCLUDE "game/gui/handle_gui_control.asm"
-l09f7h:
-	ld a,(game_settings.control_level)		; 3a 48 c0 ;09f7
-	ld (0c4b2h),a		; 32 b2 c4 ;09fa
-	add a,002h		; c6 02 ;09fd
-	ld (0c4b0h),a		; 32 b0 c4 ;09ff
-	ld a,(0c04ah)		; 3a 4a c0 ;0a02
-	ld (0c4b1h),a		; 32 b1 c4 ;0a05
-	srl a		; cb 3f ;0a08
-	ld (0c4b3h),a		; 32 b3 c4 ;0a0a
-	jp sub_draw_tennis_court		; c3 bd 0a ;0a0d
-.INCLUDE "graphics/vdp_build_sprite_buffer.asm"
-sub_0a85h_sprite_offset:
-	push bc			; c5 ;0a85
-	push de			; d5 ;0a86
-	ld b,004h		; 06 04 ;0a87
-	ld de,l489bh_sprite_attributes		; 11 9b 48 ;0a89
-l0a8ch:
-	push de			; d5 ;0a8c
-	exx			; d9 ;0a8d
-	pop de			; d1 ;0a8e
-	ld a,(de)			; 1a ;0a8f
-	add a,c			; 81 ;0a90
-	ld (hl),a			; 77 ;0a91
-	inc hl			; 23 ;0a92
-	inc de			; 13 ;0a93
-	push de			; d5 ;0a94
-	exx			; d9 ;0a95
-	pop de			; d1 ;0a96
-	ld a,(de)			; 1a ;0a97
-	add a,c			; 81 ;0a98
-	ld (hl),a			; 77 ;0a99
-	inc hl			; 23 ;0a9a
-	inc de			; 13 ;0a9b
-	ld a,(de)			; 1a ;0a9c
-	ld (hl),a			; 77 ;0a9d
-	inc hl			; 23 ;0a9e
-	inc de			; 13 ;0a9f
-	djnz l0a8ch		; 10 ea ;0aa0
-	pop de			; d1 ;0aa2
-	pop bc			; c1 ;0aa3
-	ret			; c9 ;0aa4
+	.INCLUDE "graphics/vdp_build_sprite_buffer.asm"
+	.INCLUDE "graphics/0a85h_sprite_offset.asm"
 	.INCLUDE "math/mul_a_c_add_b.asm"
 	.INCLUDE "graphics/draw_tennis_court.asm"
+l0b18h:
 	ld a,(0c518h)		; 3a 18 c5 ;0b18
 	or a			; b7 ;0b1b
-	jr nz,l0b28h		; 20 0a ;0b1c
+	jr nz,sub_0b28h		; 20 0a ;0b1c
 l0b1eh_update_ball:
 	call sub_check_player_location		; cd 87 17 ;0b1e
 	call sub_update_ball		; cd b4 14 ;0b21
 	call sub_0711h_entity_action_dispatch		; cd 11 07 ;0b24
 	ret			; c9 ;0b27
-l0b28h:
-	ld hl,0c006h		; 21 06 c0 ;0b28
-	ld e,006h		; 1e 06 ;0b2b
-	ld a,(0c000h)		; 3a 00 c0 ;0b2d
-	bit 3,a		; cb 5f ;0b30
-	jr z,l0b36h		; 28 02 ;0b32
-	ld e,086h		; 1e 86 ;0b34
-l0b36h:
-	ld (hl),e			; 73 ;0b36
-	inc hl			; 23 ;0b37
-	ld (hl),000h		; 36 00 ;0b38
-	ret			; c9 ;0b3a
-	ld hl,score.game_lost		; 21 95 c4 ;0b3b
-	ld a,0f8h		; 3e f8 ;0b3e
-	and (hl)			; a6 ;0b40
-	ld (hl),a			; 77 ;0b41
-	ld hl,0c200h		; 21 00 c2 ;0b42
-	ld de,player.1.bottom.side_state		; 11 01 c2 ;0b45
-	ld bc,0017fh		; 01 7f 01 ;0b48
-	ld (hl),000h		; 36 00 ;0b4b
-	ldir		; ed b0 ;0b4d
-	ld hl,0		; 21 00 00 ;0b4f
-	ld (0c518h),hl		; 22 18 c5 ;0b52
-	xor a			; af ;0b55
-	ld (0c040h),a		; 32 40 c0 ;0b56
-	ld (0c516h),a		; 32 16 c5 ;0b59
-	ld (ball.bounces_count),a		; 32 17 c5 ;0b5c
-	ld hl,0c100h		; 21 00 c1 ;0b5f
-	ld de,0c101h		; 11 01 c1 ;0b62
-	ld bc,l003fh		; 01 3f 00 ;0b65
-	ld (hl),0d0h		; 36 d0 ;0b68
-	ldir		; ed b0 ;0b6a
-	ld a,(0c043h)		; 3a 43 c0 ;0b6c
-	or a			; b7 ;0b6f
-	jr z,l0ba8h		; 28 36 ;0b70
-	dec a			; 3d ;0b72
-	jr z,l0ba0h		; 28 2b ;0b73
-	dec a			; 3d ;0b75
-	jr z,l0b8fh		; 28 17 ;0b76
-	dec a			; 3d ;0b78
-	jr z,l0b81h		; 28 06 ;0b79
-	ld a,(0c044h)		; 3a 44 c0 ;0b7b
-	or a			; b7 ;0b7e
-	jr nz,l0ba0h		; 20 1f ;0b7f
-l0b81h:
-	ld hl,0c045h		; 21 45 c0 ;0b81
-	ld a,(hl)			; 7e ;0b84
-	inc a			; 3c ;0b85
-	cp 004h		; fe 04 ;0b86
-	jr nz,l0b8ch		; 20 02 ;0b88
-	ld a,000h		; 3e 00 ;0b8a
-l0b8ch:
-	ld (hl),a			; 77 ;0b8c
-	jr l0ba0h		; 18 11 ;0b8d
-l0b8fh:
-	ld hl,0c044h		; 21 44 c0 ;0b8f
-	ld (hl),000h		; 36 00 ;0b92
-	inc hl			; 23 ;0b94
-	ld a,(hl)			; 7e ;0b95
-	inc a			; 3c ;0b96
-	cp 004h		; fe 04 ;0b97
-	jr nz,l0b9dh		; 20 02 ;0b99
-	ld a,000h		; 3e 00 ;0b9b
-l0b9dh:
-	ld (hl),a			; 77 ;0b9d
-	jr l0ba8h		; 18 08 ;0b9e
-l0ba0h:
-	ld hl,0c044h		; 21 44 c0 ;0ba0
-	ld a,(hl)			; 7e ;0ba3
-	inc a			; 3c ;0ba4
-	and 001h		; e6 01 ;0ba5
-	ld (hl),a			; 77 ;0ba7
-l0ba8h:
-	ld hl,l0c43h		; 21 43 0c ;0ba8
-	ld a,(0c000h)		; 3a 00 c0 ;0bab
-	bit 7,a		; cb 7f ;0bae
-	jr nz,l0bb5h		; 20 03 ;0bb0
-	ld hl,l0c3fh		; 21 3f 0c ;0bb2
-l0bb5h:
-	ld a,(0c045h)		; 3a 45 c0 ;0bb5
-	ld e,a			; 5f ;0bb8
-	ld d,000h		; 16 00 ;0bb9
-	add hl,de			; 19 ;0bbb
-	ld a,(hl)			; 7e ;0bbc
-	ld (0c041h),a		; 32 41 c0 ;0bbd
-	ld hl,l0c57h		; 21 57 0c ;0bc0
-	ld a,(0c000h)		; 3a 00 c0 ;0bc3
-	bit 7,a		; cb 7f ;0bc6
-	jr nz,l0bcdh		; 20 03 ;0bc8
-	ld hl,l0c47h		; 21 47 0c ;0bca
-l0bcdh:
-	ld a,(0c041h)		; 3a 41 c0 ;0bcd
-	add a,a			; 87 ;0bd0
-	add a,a			; 87 ;0bd1
-	ld e,a			; 5f ;0bd2
-	ld d,000h		; 16 00 ;0bd3
-	add hl,de			; 19 ;0bd5
-	ld a,(hl)			; 7e ;0bd6
-	ld (player.1.bottom.type),a		; 32 02 c2 ;0bd7
-	inc hl			; 23 ;0bda
-	ld a,(hl)			; 7e ;0bdb
-	ld (0c242h),a		; 32 42 c2 ;0bdc
-	inc hl			; 23 ;0bdf
-	ld a,(hl)			; 7e ;0be0
-	ld (player.2.bottom.type),a		; 32 82 c2 ;0be1
-	inc hl			; 23 ;0be4
-	ld a,(hl)			; 7e ;0be5
-	ld (0c2c2h),a		; 32 c2 c2 ;0be6
-	ld a,04fh		; 3e 4f ;0be9
-	ld (0c344h),a		; 32 44 c3 ;0beb
-	ld a,050h		; 3e 50 ;0bee
-	ld (0c304h),a		; 32 04 c3 ;0bf0
-	ld a,018h		; 3e 18 ;0bf3
-	ld (0c302h),a		; 32 02 c3 ;0bf5
-	ld a,016h		; 3e 16 ;0bf8
-	ld (0c342h),a		; 32 42 c3 ;0bfa
-	xor a			; af ;0bfd
-	ld (0c303h),a		; 32 03 c3 ;0bfe
-	ld (0c343h),a		; 32 43 c3 ;0c01
-	ld a,(0c041h)		; 3a 41 c0 ;0c04
-	ld e,a			; 5f ;0c07
-	ld d,000h		; 16 00 ;0c08
-	ld hl,l0c67h		; 21 67 0c ;0c0a
-	add hl,de			; 19 ;0c0d
-	ld a,(hl)			; 7e ;0c0e
-	ld (players.player_pair_index),a		; 32 12 c3 ;0c0f
-	ld hl,0c1c1h		; 21 c1 c1 ;0c12
-	ld de,l0040h		; 11 40 00 ;0c15
-	xor a			; af ;0c18
-	ld b,006h		; 06 06 ;0c19
-l0c1bh:
-	add hl,de			; 19 ;0c1b
-	ld (hl),a			; 77 ;0c1c
-	inc a			; 3c ;0c1d
-	djnz l0c1bh		; 10 fb ;0c1e
-	ld a,(0c041h)		; 3a 41 c0 ;0c20
-	ld (0c042h),a		; 32 42 c0 ;0c23
-	ld hl,0c000h		; 21 00 c0 ;0c26
-	set 2,(hl)		; cb d6 ;0c29
-	ld a,001h		; 3e 01 ;0c2b
-	ld (0c011h),a		; 32 11 c0 ;0c2d
-	ld (0c48ch),a		; 32 8c c4 ;0c30
-	ld a,004h		; 3e 04 ;0c33
-	bit 3,(hl)		; cb 5e ;0c35
-	jr z,l0c3bh		; 28 02 ;0c37
-	or 080h		; f6 80 ;0c39
-l0c3bh:
-	ld (0c006h),a		; 32 06 c0 ;0c3b
-	ret			; c9 ;0c3e
-l0c3fh:
-	.DB $00		;0c3f
-	.DB $01		;0c40
-	.DB $00		;0c41
-	.DB $01		;0c42
-l0c43h:
-	.DB $00		;0c43
-	.DB $01		;0c44
-	.DB $02		;0c45
-	.DB $03		;0c46
-l0c47h:
-	.DB $03		;0c47
-	.DB $02		;0c48
-	.DB $00		;0c49
-	.DB $00		;0c4a
-	.DB $01		;0c4b
-	.DB $03		;0c4c
-	.DB $00		;0c4d
-	.DB $00		;0c4e
-	.DB $00		;0c4f
-	.DB $00		;0c50
-	.DB $00		;0c51
-	.DB $00		;0c52
-	.DB $00		;0c53
-	.DB $00		;0c54
-	.DB $00		;0c55
-	.DB $00		;0c56
-l0c57h:
-	.DB $03		;0c57
-	.DB $02		;0c58
-	.DB $01		;0c59
-	.DB $02		;0c5a
-	.DB $01		;0c5b
-	.DB $03		;0c5c
-	.DB $01		;0c5d
-	.DB $02		;0c5e
-	.DB $01		;0c5f
-	.DB $02		;0c60
-	.DB $03		;0c61
-	.DB $02		;0c62
-	.DB $01		;0c63
-	.DB $02		;0c64
-	.DB $01		;0c65
-	.DB $03		;0c66
+	.INCLUDE "game/0b28h.asm"
 l0c67h:
 	ld (bc),a			; 02 ;0c67
 	ld bc,00102h		; 01 02 01 ;0c68
+l0c6bh:
 	ld hl,0c007h		; 21 07 c0 ;0c6b
 	ld a,(hl)			; 7e ;0c6e
 	dec a			; 3d ;0c6f
@@ -786,9 +476,9 @@ l0cd1h:
 	ld (0c089h),a		; 32 89 c0 ;0cd8
 	xor a			; af ;0cdb
 	ld (player.1.bottom.type),a		; 32 02 c2 ;0cdc
-	ld (0c242h),a		; 32 42 c2 ;0cdf
+	ld (player.1.top.type),a		; 32 42 c2 ;0cdf
 	ld (player.2.bottom.type),a		; 32 82 c2 ;0ce2
-	ld (0c2c2h),a		; 32 c2 c2 ;0ce5
+	ld (player.2.top.type),a		; 32 c2 c2 ;0ce5
 	ld (0c302h),a		; 32 02 c3 ;0ce8
 	ld (0c302h),a		; 32 02 c3 ;0ceb
 	ld a,004h		; 3e 04 ;0cee
@@ -863,104 +553,61 @@ l0d71h:
 	ret			; c9 ;0d83
 	.INCLUDE "graphics/menu_highlight_cursor.asm"
 l0dd0h:
-	ld d,c			; 51 ;0dd0
-	add a,b			; 80 ;0dd1
-	ld d,d			; 52 ;0dd2
-	add a,b			; 80 ;0dd3
-	add a,b			; 80 ;0dd4
-	xor (hl)			; ae ;0dd5
-	add a,b			; 80 ;0dd6
-	xor l			; ad ;0dd7
-	add a,b			; 80 ;0dd8
-	xor (hl)			; ae ;0dd9
-	ld d,d			; 52 ;0dda
-	add a,b			; 80 ;0ddb
-	ld d,c			; 51 ;0ddc
-	add a,b			; 80 ;0ddd
-	ld d,d			; 52 ;0dde
-	add a,b			; 80 ;0ddf
-	add a,b			; 80 ;0de0
-	xor (hl)			; ae ;0de1
-	add a,b			; 80 ;0de2
-	xor l			; ad ;0de3
-	add a,b			; 80 ;0de4
-	xor (hl)			; ae ;0de5
-	ld d,d			; 52 ;0de6
-	add a,b			; 80 ;0de7
+	.DB $51		;0dd0
+	.DB $80		;0dd1
+	.DB $52		;0dd2
+	.DB $80		;0dd3
+	.DB $80		;0dd4
+	.DB $ae		;0dd5
+	.DB $80		;0dd6
+	.DB $ad		;0dd7
+	.DB $80		;0dd8
+	.DB $ae		;0dd9
+	.DB $52		;0dda
+	.DB $80		;0ddb
+	.DB $51		;0ddc
+	.DB $80		;0ddd
+	.DB $52		;0dde
+	.DB $80		;0ddf
+	.DB $80		;0de0
+	.DB $ae		;0de1
+	.DB $80		;0de2
+	.DB $ad		;0de3
+	.DB $80		;0de4
+	.DB $ae		;0de5
+	.DB $52		;0de6
+	.DB $80		;0de7
 l0de8h:
-	add hl,hl			; 29 ;0de8
-	add a,b			; 80 ;0de9
-	ld d,d			; 52 ;0dea
-	xor (hl)			; ae ;0deb
-	ld b,h			; 44 ;0dec
-	cp h			; bc ;0ded
-	add a,b			; 80 ;0dee
-	out (052h),a		; d3 52 ;0def
-	xor (hl)			; ae ;0df1
-	ld b,h			; 44 ;0df2
-	cp h			; bc ;0df3
-	add hl,hl			; 29 ;0df4
-	add a,b			; 80 ;0df5
-	ld d,d			; 52 ;0df6
-	xor (hl)			; ae ;0df7
-	ld b,h			; 44 ;0df8
-	cp h			; bc ;0df9
-	add a,b			; 80 ;0dfa
-	out (052h),a		; d3 52 ;0dfb
-	xor (hl)			; ae ;0dfd
-	ld b,h			; 44 ;0dfe
-	cp h			; bc ;0dff
+	.DB $29		;0de8
+	.DB $80		;0de9
+	.DB $52		;0dea
+	.DB $ae		;0deb
+	.DB $44		;0dec
+	.DB $bc		;0ded
+	.DB $80		;0dee
+	.DB $d3		;0def
+	.DB $52		;0df0
+	.DB $ae		;0df1
+	.DB $44		;0df2
+	.DB $bc		;0df3
+	.DB $29		;0df4
+	.DB $80		;0df5
+	.DB $52		;0df6
+	.DB $ae		;0df7
+	.DB $44		;0df8
+	.DB $bc		;0df9
+	.DB $80		;0dfa
+	.DB $d3		;0dfb
+	.DB $52		;0dfc
+	.DB $ae		;0dfd
+	.DB $44		;0dfe
+	.DB $bc		;0dff
 l0e00h:
-	ld b,b			; 40 ;0e00
-	add a,b			; 80 ;0e01
-	ld b,b			; 40 ;0e02
-	add a,b			; 80 ;0e03
+	.DB $40		;0e00
+	.DB $80		;0e01
+	.DB $40		;0e02
+	.DB $80		;0e03
 	.INCLUDE "game/gui/sub_menu_button_press_test.asm"
-l0e3bh:
-	ld a,(0c042h)		; 3a 42 c0 ;0e3b
-	add a,a			; 87 ;0e3e
-	ld e,a			; 5f ;0e3f
-	add a,a			; 87 ;0e40
-	add a,e			; 83 ;0e41
-	ld e,a			; 5f ;0e42
-	ld d,000h		; 16 00 ;0e43
-	ld hl,l0de8h		; 21 e8 0d ;0e45
-	add hl,de			; 19 ;0e48
-	ld a,(0c509h)		; 3a 09 c5 ;0e49
-	cp (hl)			; be ;0e4c
-	jr c,l0e6bh		; 38 1c ;0e4d
-	inc hl			; 23 ;0e4f
-	cp (hl)			; be ;0e50
-	jr nc,l0e6bh		; 30 18 ;0e51
-	inc hl			; 23 ;0e53
-	ld a,(0c000h)		; 3a 00 c0 ;0e54
-	bit 7,a		; cb 7f ;0e57
-	jr z,l0e5dh		; 28 02 ;0e59
-	inc hl			; 23 ;0e5b
-	inc hl			; 23 ;0e5c
-l0e5dh:
-	ld a,(0c50bh)		; 3a 0b c5 ;0e5d
-	cp (hl)			; be ;0e60
-	jr c,l0e6bh		; 38 08 ;0e61
-	inc hl			; 23 ;0e63
-	cp (hl)			; be ;0e64
-	jr nc,l0e6bh		; 30 04 ;0e65
-l0e67h:
-	ld a,002h		; 3e 02 ;0e67
-	jr l0e7bh		; 18 10 ;0e69
-l0e6bh:
-	ld a,001h		; 3e 01 ;0e6b
-	jr l0e71h		; 18 02 ;0e6d
-l0e6fh:
-	ld a,003h		; 3e 03 ;0e6f
-l0e71h:
-	ld hl,0c000h		; 21 00 c0 ;0e71
-	res 0,(hl)		; cb 86 ;0e74
-	ld hl,0c518h		; 21 18 c5 ;0e76
-	ld (hl),002h		; 36 02 ;0e79
-l0e7bh:
-	ld (0c519h),a		; 32 19 c5 ;0e7b
-	ret			; c9 ;0e7e
 	.INCLUDE "game/ball/update_ball_out_of_bounds.asm"
 l0eb0h:
 	ld hl,0c006h		; 21 06 c0 ;0eb0
@@ -1013,7 +660,7 @@ l0f02h:
 	ld b,1		; 06 01 ;0f15
 	jp sub_graphics_palette_load		; c3 81 04 ;0f17
 l0f1ah:
-	jp l1548h		; c3 48 15 ;0f1a
+	jp sub_1548h		; c3 48 15 ;0f1a
 l0f1dh:
 	ld a,(0c30dh)		; 3a 0d c3 ;0f1d
 	ld (ix+00dh),a		; dd 77 0d ;0f20
@@ -1037,7 +684,7 @@ l0f1dh:
 	sbc hl,de		; ed 52 ;0f42
 	ld (ix+00ah),l		; dd 75 0a ;0f44
 	ld (ix+00bh),h		; dd 74 0b ;0f47
-	jp l065ch		; c3 5c 06 ;0f4a
+	jp sub_065ch		; c3 5c 06 ;0f4a
 l0f4dh:
 	ld a,(ix+003h)		; dd 7e 03 ;0f4d
 	dec a			; 3d ;0f50
@@ -1077,10 +724,10 @@ l0f99h:
 	ld hl,0c000h		; 21 00 c0 ;0f9d
 	res 0,(hl)		; cb 86 ;0fa0
 l0fa2h:
-	jp l1548h		; c3 48 15 ;0fa2
+	jp sub_1548h		; c3 48 15 ;0fa2
 l0fa5h:
 	ld hl,l1300h		; 21 00 13 ;0fa5
-	ld (0c500h),hl		; 22 00 c5 ;0fa8
+	ld (ball.z_pos),hl		; 22 00 c5 ;0fa8
 	ld a,(0c041h)		; 3a 41 c0 ;0fab
 	add a,a			; 87 ;0fae
 	add a,a			; 87 ;0faf
@@ -1092,7 +739,7 @@ l0fa5h:
 	ld e,(hl)			; 5e ;0fb8
 	inc hl			; 23 ;0fb9
 	ld d,(hl)			; 56 ;0fba
-	ld (0c508h),de		; ed 53 08 c5 ;0fbb
+	ld (ball.y_pos),de		; ed 53 08 c5 ;0fbb
 	inc hl			; 23 ;0fbf
 	ld c,(hl)			; 4e ;0fc0
 	inc hl			; 23 ;0fc1
@@ -1138,7 +785,7 @@ l0ff6h:
 	sbc hl,de		; ed 52 ;0ff7
 l0ff9h:
 	ld (0c50ah),hl		; 22 0a c5 ;0ff9
-	jp l1548h		; c3 48 15 ;0ffc
+	jp sub_1548h		; c3 48 15 ;0ffc
 l0fffh:
 	.DB $00		;0fff
 	.DB $d3		;1000
@@ -1273,7 +920,7 @@ l10a0h:
 	pop hl			; e1 ;10ac
 l10adh:
 	ld (ball.z_gravity),hl		; 22 02 c5 ;10ad
-	jp 01362h		; c3 62 13 ;10b0
+	jp sub_l1362h		; c3 62 13 ;10b0
 l10b3h:
 	.DB $90		;10b3
 	.DB $60		;10b4
@@ -1527,7 +1174,9 @@ l1171h:
 	.DB $00		;11ad
 	.DB $fd		;11ae
 	.DB $60		;11af
-	ld bc,08c3eh		; 01 3e 8c ;11b0
+	.DB $01		;11b0
+l11b1h:
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;11b1
 	ld (psg_engine.track_request_id),a		; 32 00 de ;11b3
 	ld a,(0c509h)		; 3a 09 c5 ;11b6
 	sub 080h		; d6 80 ;11b9
@@ -1574,7 +1223,7 @@ l11e7h:
 	ld (ball.z_gravity),de		; ed 53 02 c5 ;11fd
 	ld c,002h		; 0e 02 ;1201
 	call sub_compute_ball_x_velocity		; cd a8 13 ;1203
-	jp 01362h		; c3 62 13 ;1206
+	jp sub_l1362h		; c3 62 13 ;1206
 l1209h:
 	.DB $c0		;1209
 	.DB $fd		;120a
@@ -1638,7 +1287,7 @@ l124dh:
 	call sub_load_ball_z_gravity		; cd 8f 13 ;1255
 	ld c,003h		; 0e 03 ;1258
 	call sub_compute_ball_x_velocity		; cd a8 13 ;125a
-	jp 01362h		; c3 62 13 ;125d
+	jp sub_l1362h		; c3 62 13 ;125d
 l1260h:
 	.DB $00		;1260
 	.DB $ff		;1261
@@ -1701,7 +1350,7 @@ l12adh:
 	call sub_load_ball_z_gravity		; cd 8f 13 ;12b5
 	ld c,001h		; 0e 01 ;12b8
 	call sub_compute_ball_x_velocity		; cd a8 13 ;12ba
-	jp 01362h		; c3 62 13 ;12bd
+	jp sub_l1362h		; c3 62 13 ;12bd
 l12c0h:
 	.DB $c6		;12c0
 	.DB $12		;12c1
@@ -1733,8 +1382,8 @@ l12c0h:
 	.DB $fe		;12db
 	.DB $d0		;12dc
 	.DB $fd		;12dd
-	.DB $3e		;12de
-	.DB $8c		;12df
+l12deh:
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;12de
 	ld (psg_engine.track_request_id),a		; 32 00 de ;12e0
 	ld hl,l1338h		; 21 38 13 ;12e3
 	ld a,(0c046h)		; 3a 46 c0 ;12e6
@@ -1786,7 +1435,7 @@ l1325h:
 	call sub_load_ball_z_gravity		; cd 8f 13 ;132d
 	ld c,000h		; 0e 00 ;1330
 	call sub_compute_ball_x_velocity		; cd a8 13 ;1332
-	jp 01362h		; c3 62 13 ;1335
+	jp sub_l1362h		; c3 62 13 ;1335
 l1338h:
 	.DB $3e		;1338
 	.DB $13		;1339
@@ -1830,8 +1479,8 @@ l1338h:
 	.DB $fe		;135f
 	.DB $a0		;1360
 	.DB $fe		;1361
-	.DB $3e		;1362
-	dec d			; 15 ;1363
+sub_l1362h:
+	ld a,015h		;1362
 	ld (0c302h),a		; 32 02 c3 ;1364
 	xor a			; af ;1367
 	ld (0c303h),a		; 32 03 c3 ;1368
@@ -1844,236 +1493,21 @@ l1338h:
 	ld (0c312h),a		; 32 12 c3 ;1376
 	ld hl,0c040h		; 21 40 c0 ;1379
 	set 7,(hl)		; cb fe ;137c
-	ld a,(0c501h)		; 3a 01 c5 ;137e
+	ld a,(ball.z_pos + 1)		; 3a 01 c5 ;137e
 	cp 010h		; fe 10 ;1381
 	ret nc			; d0 ;1383
 	ld hl,01000h		; 21 00 10 ;1384
-	ld (0c500h),hl		; 22 00 c5 ;1387
+	ld (ball.z_pos),hl		; 22 00 c5 ;1387
 	ret			; c9 ;138a
 l138bh:
-	ld bc,00102h		; 01 02 01 ;138b
-	ld (bc),a			; 02 ;138e
-sub_load_ball_z_gravity:
-	ld a,(0c046h)		; 3a 46 c0 ;138f
-	add a,a			; 87 ;1392
-	ld e,a			; 5f ;1393
-	ld d,0		; 16 00 ;1394
-	ld hl,table_ball_gravities		; 21 a2 13 ;1396
-	add hl,de			; 19 ;1399
-	ld e,(hl)			; 5e ;139a
-	inc hl			; 23 ;139b
-	ld d,(hl)			; 56 ;139c
-	ld (ball.z_gravity),de		; ed 53 02 c5 ;139d
-	ret			; c9 ;13a1
-table_ball_gravities:
-	.DW $0003		;13a2
-	.DW $0005		;13a4
-	.DW $000b		;13a6
-sub_compute_ball_x_velocity:
-	ld a,c			; 79 ;13a8
-	add a,a			; 87 ;13a9
-	ld c,a			; 4f ;13aa
-	ld b,000h		; 06 00 ;13ab
-	ld hl,l13e6h		; 21 e6 13 ;13ad
-	add hl,bc			; 09 ;13b0
-	ld e,(hl)			; 5e ;13b1
-	inc hl			; 23 ;13b2
-	ld d,(hl)			; 56 ;13b3
-	ld a,(0c046h)		; 3a 46 c0 ;13b4
-	add a,a			; 87 ;13b7
-	ld c,a			; 4f ;13b8
-	add a,a			; 87 ;13b9
-	ld b,a			; 47 ;13ba
-	add a,a			; 87 ;13bb
-	add a,a			; 87 ;13bc
-	add a,c			; 81 ;13bd
-	add a,b			; 80 ;13be
-	ld c,a			; 4f ;13bf
-	ld a,(ix+020h)		; dd 7e 20 ;13c0
-	sub 00bh		; d6 0b ;13c3
-	jr nc,l13c9h		; 30 02 ;13c5
-	add a,00bh		; c6 0b ;13c7
-l13c9h:
-	add a,a			; 87 ;13c9
-	add a,c			; 81 ;13ca
-	ld c,a			; 4f ;13cb
-	ld b,000h		; 06 00 ;13cc
-	ex de,hl			; eb ;13ce
-	add hl,bc			; 09 ;13cf
-	ld e,(hl)			; 5e ;13d0
-	inc hl			; 23 ;13d1
-	ld d,(hl)			; 56 ;13d2
-	ld a,(0c042h)		; 3a 42 c0 ;13d3
-	and 001h		; e6 01 ;13d6
-	jr z,+		; 28 07 ;13d8
-	xor a			; af ;13da
-	ld hl,0		; 21 00 00 ;13db
-	sbc hl,de		; ed 52 ;13de
-	ex de,hl			; eb ;13e0
-+:
-	ld (ball.x_vel),de		; ed 53 0e c5 ;13e1
-	ret			; c9 ;13e5
-l13e6h:
-	.DW l13eeh		;13e6
-	.DW l1430h		;13e8
-	.DW l1472h		;13ea
-	.DW l13eeh		;13ec
-l13eeh:
-	.DW $0082		;13ee
-	.DW $0066		;13f0
-	.DW $004c		;13f2
-	.DW $0032		;13f4
-	.DW $0018		;13f6
-	.DW $0000		;13f8
-	.DW $ffe8		;13fa
-	.DW $ffce		;13fc
-	.DW $ffb4		;13fe
-l1400h:
-	.DW $ff9a		;1400
-	.DW $ff7e		;1402
-	.DW $00af		;1404
-	.DW $0089		;1406
-	.DW $0066		;1408
-	.DW $0043		;140a
-	.DW $0020		;140c
-	.DW $0000		;140e
-	.DW $ffe0		;1410
-	.DW $ffbd		;1412
-	.DW $ff9a		;1414
-	.DW $ff77		;1416
-	.DW $ff51		;1418
-	.DW $0104		;141a
-	.DW $00cc		;141c
-	.DW $0098		;141e
-	.DW $0064		;1420
-	.DW $0030		;1422
-	.DW $0000		;1424
-	.DW $ffd0		;1426
-	.DW $ff9c		;1428
-	.DW $ff68		;142a
-	.DW $ff34		;142c
-	.DW $fefc		;142e
-l1430h:
-	.DW $0051		;1430
-	.DW $003f		;1432
-	.DW $002f		;1434
-	.DW $001f		;1436
-	.DW $000f		;1438
-	.DW $0000		;143a
-	.DW $fff1		;143c
-	.DW $ffe1		;143e
-	.DW $ffd1		;1440
-	.DW $ffc1		;1442
-	.DW $ffaf		;1444
-	.DW $006e		;1446
-	.DW $0056		;1448
-	.DW $0040		;144a
-	.DW $002a		;144c
-	.DW $0014		;144e
-	.DW $0000		;1450
-	.DW $ffec		;1452
-	.DW $ffd6		;1454
-	.DW $ffc0		;1456
-	.DW $ffaa		;1458
-	.DW $ff92		;145a
-	.DW $00a2		;145c
-	.DW $007f		;145e
-	.DW $005f		;1460
-	.DW $003e		;1462
-	.DW $001e		;1464
-	.DW $0000		;1466
-	.DW $ffe2		;1468
-	.DW $ffc2		;146a
-	.DW $ffa1		;146c
-	.DW $ff81		;146e
-	.DW $ff5e		;1470
-l1472h:
-	.DW $00e5		;1472
-	.DW $0124		;1474
-	.DW $00ab		;1476
-	.DW $0070		;1478
-	.DW $0036		;147a
-	.DW $0000		;147c
-	.DW $ffca		;147e
-	.DW $ff90		;1480
-	.DW $ff55		;1482
-	.DW $ff1b		;1484
-	.DW $fedc		;1486
-	.DW $0132		;1488
-	.DW $0186		;148a
-	.DW $00e4		;148c
-	.DW $0096		;148e
-	.DW $0048		;1490
-	.DW $0000		;1492
-	.DW $ffb8		;1494
-	.DW $ff6a		;1496
-	.DW $ff1c		;1498
-	.DW $fece		;149a
-	.DW $fe7a		;149c
-	.DW $01cb		;149e
-	.DW $0249		;14a0
-	.DW $0156		;14a2
-	.DW $00e1		;14a4
-	.DW $006c		;14a6
-	.DW $0000		;14a8
-	.DW $ff94		;14aa
-	.DW $ff1f		;14ac
-	.DW $feaa		;14ae
-	.DW $fe35		;14b0
-	.DW $fdb7		;14b2
+	.DB $01		;138b
+	.DB $02		;138c
+	.DB $01		;138d
+	.DB $02		;138e
+	.INCLUDE "game/ball/load_ball_z_gravity.asm"
+	.INCLUDE "game/ball/compute_ball_x_velocity.asm"
 	.INCLUDE "game/ball/update_ball.asm"
-l1548h:
-	ld a,(0c509h)		; 3a 09 c5 ;1548
-	ld e,a			; 5f ;154b
-	ld d,000h		; 16 00 ;154c
-	ld hl,0cbe8h		; 21 e8 cb ;154e
-	add hl,de			; 19 ;1551
-	ld a,(hl)			; 7e ;1552
-	ld (ix+00bh),a		; dd 77 0b ;1553
-	ld (ix+014h),a		; dd 77 14 ;1556
-	ld l,a			; 6f ;1559
-	ld h,000h		; 26 00 ;155a
-	add hl,hl			; 29 ;155c
-	ld de,0cce8h		; 11 e8 cc ;155d
-	add hl,de			; 19 ;1560
-	ld e,(hl)			; 5e ;1561
-	inc hl			; 23 ;1562
-	ld d,(hl)			; 56 ;1563
-	exx			; d9 ;1564
-	ld de,(ball.x_pos)		; ed 5b 0a c5 ;1565
-	ld hl,08000h		; 21 00 80 ;1569
-	xor a			; af ;156c
-	sbc hl,de		; ed 52 ;156d
-	push af			; f5 ;156f
-	jr nc,l1579h		; 30 07 ;1570
-	xor a			; af ;1572
-	ex de,hl			; eb ;1573
-	ld hl,0		; 21 00 00 ;1574
-	sbc hl,de		; ed 52 ;1577
-l1579h:
-	push hl			; e5 ;1579
-	exx			; d9 ;157a
-	pop bc			; c1 ;157b
-	call sub_mul_de_bc		; cd f7 03 ;157c
-	pop af			; f1 ;157f
-	ld d,e			; 53 ;1580
-	ld e,h			; 5c ;1581
-	ld hl,08000h		; 21 00 80 ;1582
-	jr nc,l158eh		; 30 07 ;1585
-	xor a			; af ;1587
-	adc hl,de		; ed 5a ;1588
-	jr c,l1597h		; 38 0b ;158a
-	jr l1593h		; 18 05 ;158c
-l158eh:
-	xor a			; af ;158e
-	sbc hl,de		; ed 52 ;158f
-	jr c,l1597h		; 38 04 ;1591
-l1593h:
-	ld (ix+00dh),h		; dd 74 0d ;1593
-	ret			; c9 ;1596
-l1597h:
-	ld (ix+00bh),0d8h		; dd 36 0b d8 ;1597
-	ret			; c9 ;159b
+	.INCLUDE "game/ball/1548h.asm"
 	.INCLUDE "physics/ball_bounce.asm"
 	.INCLUDE "physics/compute_ball_deflection.asm"
 	.INCLUDE "physics/update_ball_state.asm"
@@ -2146,7 +1580,7 @@ l1800h:
 	.INCLUDE "physics/classify_zone.asm"
 	.INCLUDE "game/player/player_ball_collision.asm"
 	.INCLUDE "game/player/game_player_update_server_state.asm"
-l1af2h:
+sub_1af2h:
 	bit 7,(ix + player_t.type)		; dd cb 02 7e ;1af2
 	jr nz,l1b17h		; 20 1f ;1af6
 	set 7,(ix + player_t.type)		; dd cb 02 fe ;1af8
@@ -2199,7 +1633,7 @@ l1b5bh:
 	ld (ix + player_t.type),005h		; dd 36 02 05 ;1b61
 	set 6,(hl)		; cb f6 ;1b65
 	ret			; c9 ;1b67
-l1b68h:
+sub_1b68h:
 	bit 7,(ix + player_t.type)		; dd cb 02 7e ;1b68
 	jr nz,l1b7eh		; 20 10 ;1b6c
 	set 7,(ix + player_t.type)		; dd cb 02 fe ;1b6e
@@ -2231,23 +1665,9 @@ sub_1b9fh_decrement_timer:
 	ld a,l			; 7d ;1bac
 	or h			; b4 ;1bad
 	ret			; c9 ;1bae
-l1bafh_nop:
+sub_1bafh_nop:
 	ret			; c9 ;1baf
 	.INCLUDE "game/player/l1bb0.asm"
-l1c1eh:
-	.DB $70		;1c1e
-	.DB $00		;1c1f
-	.DB $28		;1c20
-	.DB $00		;1c21
-	.DB $a0		;1c22
-	.DB $00		;1c23
-	.DB $38		;1c24
-	.DB $00		;1c25
-	.DB $70		;1c26
-	.DB $00		;1c27
-	.DB $38		;1c28
-	.DB $00		;1c29
-	.DB $a0		;1c2a
 l1c2bh:
 	bit 7,(ix+002h)		; dd cb 02 7e ;1c2b
 	jr nz,l1c39h		; 20 08 ;1c2f
@@ -2261,7 +1681,7 @@ l1c39h:
 	ld hl,l1c4ah_jump_table		; 21 4a 1c ;1c44
 	jp l0807h_game_fsm		; c3 07 08 ;1c47
 	.INCLUDE "game/player/l1c4ah_jump_table.asm"
-l1d89h:
+sub_1d89h:
 	ld a,(ix+025h)		; dd 7e 25 ;1d89
 	bit 7,a		; cb 7f ;1d8c
 	jr nz,l1dffh		; 20 6f ;1d8e
@@ -2308,7 +1728,6 @@ l1dd3h:
 	and a			; a7 ;1dd8
 	jr z,l1defh		; 28 14 ;1dd9
 	ld b,003h		; 06 03 ;1ddb
-l1dddh:
 	ld c,01dh		; 0e 1d ;1ddd
 	cp 001h		; fe 01 ;1ddf
 	jr z,l1defh		; 28 0c ;1de1
@@ -2331,7 +1750,6 @@ l1dffh:
 	and a			; a7 ;1e08
 	jr z,l1e0fh		; 28 04 ;1e09
 	call sub_animate		; cd 69 2a ;1e0b
-l1e0eh:
 	ret			; c9 ;1e0e
 l1e0fh:
 	ld a,(ix+027h)		; dd 7e 27 ;1e0f
@@ -2344,581 +1762,20 @@ l1e19h:
 	ld (ix+019h),000h		; dd 36 19 00 ;1e1c
 	ld (ix+01dh),000h		; dd 36 1d 00 ;1e20
 	ret			; c9 ;1e24
-sub_1e25h_cpu:
-	ld a,(ix+001h)		; dd 7e 01 ;1e25
-	and 003h		; e6 03 ;1e28
-	ld e,a			; 5f ;1e2a
-	ld d,000h		; 16 00 ;1e2b
-	ld hl,l1e5ah		; 21 5a 1e ;1e2d
-	add hl,de			; 19 ;1e30
-	ld e,(hl)			; 5e ;1e31
-	ld hl,0c200h		; 21 00 c2 ;1e32
-	add hl,de			; 19 ;1e35
-	push hl			; e5 ;1e36
-	pop iy		; fd e1 ;1e37
-	ld a,(ix+030h)		; dd 7e 30 ;1e39
-	and 00fh		; e6 0f ;1e3c
-	ld hl,l1e44h		; 21 44 1e ;1e3e
-	jp l0807h_game_fsm		; c3 07 08 ;1e41
-l1e44h:
-	.DW l1e5eh		;1e44
-	.DW l1efeh		;1e46
-	.DW l1f6ch		;1e48
-	.DW l2000h		;1e4a
-	.DW l2055h		;1e4c
-	.DW l208eh		;1e4e
-	.DW l20cch		;1e50
-	.DW l21bbh		;1e52
-	.DW l21eeh		;1e54
-	.DW l2123h		;1e56
-	.DW l2183h		;1e58
-l1e5ah:
-	.DB $80		;1e5a
-	.DB $c0		;1e5b
-	.DB $00		;1e5c
-	.DB $40		;1e5d
-l1e5eh:
-	ld a,(ix+027h)		; dd 7e 27 ;1e5e
-	and a			; a7 ;1e61
-	jr nz,l1e83h		; 20 1f ;1e62
-	ld (ix+028h),a		; dd 77 28 ;1e64
-	ld (ix+015h),a		; dd 77 15 ;1e67
-	ld a,(iy+033h)		; fd 7e 33 ;1e6a
-	cp 004h		; fe 04 ;1e6d
-	jr nz,l1e75h		; 20 04 ;1e6f
-	ld (iy+033h),003h		; fd 36 33 03 ;1e71
-l1e75h:
-	ld a,(ix+031h)		; dd 7e 31 ;1e75
-	and 007h		; e6 07 ;1e78
-	cp 007h		; fe 07 ;1e7a
-	ret nz			; c0 ;1e7c
-	ld (ix+030h),004h		; dd 36 30 04 ;1e7d
-	jr l1ef0h		; 18 6d ;1e81
-l1e83h:
-	ld a,(0c401h)		; 3a 01 c4 ;1e83
-	cp 019h		; fe 19 ;1e86
-	jr z,l1ee8h		; 28 5e ;1e88
-	cp 01ch		; fe 1c ;1e8a
-	jr nz,l1e9bh		; 20 0d ;1e8c
-	ld a,(0c000h)		; 3a 00 c0 ;1e8e
-	bit 7,a		; cb 7f ;1e91
-	jr nz,l1edfh		; 20 4a ;1e93
-	ld (ix+030h),006h		; dd 36 30 06 ;1e95
-	jr l1ef0h		; 18 55 ;1e99
-l1e9bh:
-	bit 0,(ix+001h)		; dd cb 01 46 ;1e9b
-	jr nz,l1eb3h		; 20 12 ;1e9f
-	ld a,(0c30bh)		; 3a 0b c3 ;1ea1
-	add a,008h		; c6 08 ;1ea4
-	ld e,(ix+00bh)		; dd 5e 0b ;1ea6
-	sub e			; 93 ;1ea9
-	jr c,l1ec2h		; 38 16 ;1eaa
-	cp 006h		; fe 06 ;1eac
-	jr c,l1ee8h		; 38 38 ;1eae
-	jp l1ec2h		; c3 c2 1e ;1eb0
-l1eb3h:
-	ld a,(0c30bh)		; 3a 0b c3 ;1eb3
-	sub 008h		; d6 08 ;1eb6
-	ld e,(ix+00bh)		; dd 5e 0b ;1eb8
-	sub e			; 93 ;1ebb
-	jr nc,l1ec2h		; 30 04 ;1ebc
-	cp 0fah		; fe fa ;1ebe
-	jr c,l1ee8h		; 38 26 ;1ec0
-l1ec2h:
-	ld a,(0c401h)		; 3a 01 c4 ;1ec2
-	cp 01ch		; fe 1c ;1ec5
-	jr z,l1ef5h		; 28 2c ;1ec7
-	ld a,(0c000h)		; 3a 00 c0 ;1ec9
-	bit 7,a		; cb 7f ;1ecc
-	jr z,l1edfh		; 28 0f ;1ece
-	call sub_compute_ball_deflection		; cd 0a 16 ;1ed0
-	ld h,(ix+00dh)		; dd 66 0d ;1ed3
-	sub h			; 94 ;1ed6
-	jr nc,l1edbh		; 30 02 ;1ed7
-	neg		; ed 44 ;1ed9
-l1edbh:
-	cp 020h		; fe 20 ;1edb
-	jr nc,l1ef5h		; 30 16 ;1edd
-l1edfh:
-	ld (iy+033h),003h		; fd 36 33 03 ;1edf
-	ld (ix+030h),002h		; dd 36 30 02 ;1ee3
-	ret			; c9 ;1ee7
-l1ee8h:
-	xor a			; af ;1ee8
-	ld (ix+028h),a		; dd 77 28 ;1ee9
-	ld (ix+015h),a		; dd 77 15 ;1eec
-	ret			; c9 ;1eef
-l1ef0h:
-	ld (iy+033h),002h		; fd 36 33 02 ;1ef0
-	ret			; c9 ;1ef4
-l1ef5h:
-	ld (iy+033h),001h		; fd 36 33 01 ;1ef5
-	ld (ix+030h),00ah		; dd 36 30 0a ;1ef9
-	ret			; c9 ;1efd
-l1efeh:
-	ld a,(0c400h)		; 3a 00 c4 ;1efe
-	and a			; a7 ;1f01
-	ret nz			; c0 ;1f02
-	ld a,(ix+033h)		; dd 7e 33 ;1f03
-	cp 002h		; fe 02 ;1f06
-	jr z,l1f3ch		; 28 32 ;1f08
-	cp 005h		; fe 05 ;1f0a
-	jr z,l1f3ch		; 28 2e ;1f0c
-	cp 003h		; fe 03 ;1f0e
-	jr nz,l1f22h		; 20 10 ;1f10
-	ld a,(0c000h)		; 3a 00 c0 ;1f12
-	bit 7,a		; cb 7f ;1f15
-	jr z,l1f22h		; 28 09 ;1f17
-	ld (ix+030h),009h		; dd 36 30 09 ;1f19
-	ld (ix+033h),004h		; dd 36 33 04 ;1f1d
-	ret			; c9 ;1f21
-l1f22h:
-	ld a,(ix+027h)		; dd 7e 27 ;1f22
-	and a			; a7 ;1f25
-	jr nz,l1f41h		; 20 19 ;1f26
-	ld (ix+028h),a		; dd 77 28 ;1f28
-	ld (ix+015h),a		; dd 77 15 ;1f2b
-	ld a,(ix+031h)		; dd 7e 31 ;1f2e
-	and 003h		; e6 03 ;1f31
-	cp 003h		; fe 03 ;1f33
-	ret nz			; c0 ;1f35
-	ld a,(0c000h)		; 3a 00 c0 ;1f36
-	and 080h		; e6 80 ;1f39
-	ret nz			; c0 ;1f3b
-l1f3ch:
-	ld (ix+030h),005h		; dd 36 30 05 ;1f3c
-	ret			; c9 ;1f40
-l1f41h:
-	ld a,(0c000h)		; 3a 00 c0 ;1f41
-	ld b,003h		; 06 03 ;1f44
-	bit 7,a		; cb 7f ;1f46
-	jr z,l1f68h		; 28 1e ;1f48
-	ld a,(0c401h)		; 3a 01 c4 ;1f4a
-	cp 019h		; fe 19 ;1f4d
-	jr z,l1f68h		; 28 17 ;1f4f
-	ld a,(ix+033h)		; dd 7e 33 ;1f51
-	and a			; a7 ;1f54
-	ret z			; c8 ;1f55
-	ld b,003h		; 06 03 ;1f56
-	cp 001h		; fe 01 ;1f58
-	jr z,l1f68h		; 28 0c ;1f5a
-	ld b,005h		; 06 05 ;1f5c
-	cp 002h		; fe 02 ;1f5e
-	jr z,l1f68h		; 28 06 ;1f60
-	ld b,009h		; 06 09 ;1f62
-	cp 003h		; fe 03 ;1f64
-	jr z,l1f68h		; 28 00 ;1f66
-l1f68h:
-	ld (ix+030h),b		; dd 70 30 ;1f68
-	ret			; c9 ;1f6b
-l1f6ch:
-	ld a,(ix+027h)		; dd 7e 27 ;1f6c
-	and a			; a7 ;1f6f
-	jr nz,l1f7fh		; 20 0d ;1f70
-	ld (ix+030h),000h		; dd 36 30 00 ;1f72
-	ld (ix+033h),000h		; dd 36 33 00 ;1f76
-	ld (ix+028h),000h		; dd 36 28 00 ;1f7a
-	ret			; c9 ;1f7e
-l1f7fh:
-	bit 0,(ix+001h)		; dd cb 01 46 ;1f7f
-	jr nz,l1f97h		; 20 12 ;1f83
-	ld a,(0c30bh)		; 3a 0b c3 ;1f85
-	add a,008h		; c6 08 ;1f88
-	ld e,(ix+00bh)		; dd 5e 0b ;1f8a
-	sub e			; 93 ;1f8d
-	jr c,l1fe0h		; 38 50 ;1f8e
-	cp 006h		; fe 06 ;1f90
-	jr nc,l1fe0h		; 30 4c ;1f92
-	jp l1fa6h		; c3 a6 1f ;1f94
-l1f97h:
-	ld a,(0c30bh)		; 3a 0b c3 ;1f97
-	sub 008h		; d6 08 ;1f9a
-	ld e,(ix+00bh)		; dd 5e 0b ;1f9c
-	sub e			; 93 ;1f9f
-	jr nc,l1fc0h		; 30 1e ;1fa0
-	cp 0fah		; fe fa ;1fa2
-	jr nc,l1fc0h		; 30 1a ;1fa4
-l1fa6h:
-	ld a,(0c000h)		; 3a 00 c0 ;1fa6
-	bit 7,a		; cb 7f ;1fa9
-	ld a,004h		; 3e 04 ;1fab
-	ld b,002h		; 06 02 ;1fad
-	jr z,l1fb5h		; 28 04 ;1faf
-	ld a,00ah		; 3e 0a ;1fb1
-	ld b,001h		; 06 01 ;1fb3
-l1fb5h:
-	ld (ix+030h),a		; dd 77 30 ;1fb5
-	ld (iy+033h),b		; fd 70 33 ;1fb8
-	ld (ix+028h),000h		; dd 36 28 00 ;1fbb
-l1fbfh:
-	ret			; c9 ;1fbf
-l1fc0h:
-	ld e,04ch		; 1e 4c ;1fc0
-	call sub_compute_ball_deflection		; cd 0a 16 ;1fc2
-	ld l,000h		; 2e 00 ;1fc5
-	ld h,a			; 67 ;1fc7
-	ld de,04c00h		; 11 00 4c ;1fc8
-	call sub_221eh_collision_broad		; cd 1e 22 ;1fcb
-	ld (ix+015h),a		; dd 77 15 ;1fce
-	call sub_2320h_ball		; cd 20 23 ;1fd1
-	ld a,(ix+018h)		; dd 7e 18 ;1fd4
-	and a			; a7 ;1fd7
-	ld (ix+028h),a		; dd 77 28 ;1fd8
-	ret z			; c8 ;1fdb
-	inc (ix+031h)		; dd 34 31 ;1fdc
-	ret			; c9 ;1fdf
-l1fe0h:
-	ld e,080h		; 1e 80 ;1fe0
-	call sub_compute_ball_deflection		; cd 0a 16 ;1fe2
-	ld l,000h		; 2e 00 ;1fe5
-	ld h,a			; 67 ;1fe7
-	ld de,08000h		; 11 00 80 ;1fe8
-	call sub_2298h_collision		; cd 98 22 ;1feb
-	ld (ix+015h),a		; dd 77 15 ;1fee
-	call sub_23aah_ball		; cd aa 23 ;1ff1
-	ld a,(ix+018h)		; dd 7e 18 ;1ff4
-	and a			; a7 ;1ff7
-	ld (ix+028h),a		; dd 77 28 ;1ff8
-	ret z			; c8 ;1ffb
-l1ffch:
-	inc (ix+031h)		; dd 34 31 ;1ffc
-	ret			; c9 ;1fff
-l2000h:
-	ld a,(ix+027h)		; dd 7e 27 ;2000
-	and a			; a7 ;2003
-	jr nz,l2013h		; 20 0d ;2004
-	ld (ix+030h),009h		; dd 36 30 09 ;2006
-	ld (ix+033h),000h		; dd 36 33 00 ;200a
-	ld (ix+028h),000h		; dd 36 28 00 ;200e
-	ret			; c9 ;2012
-l2013h:
-	bit 0,(ix+001h)		; dd cb 01 46 ;2013
-	jr z,l2037h		; 28 1e ;2017
-	ld e,028h		; 1e 28 ;2019
-	call sub_compute_ball_deflection		; cd 0a 16 ;201b
-	ld l,000h		; 2e 00 ;201e
-	ld h,a			; 67 ;2020
-	ld de,02800h		; 11 00 28 ;2021
-	call sub_221eh_collision_broad		; cd 1e 22 ;2024
-	ld (ix+015h),a		; dd 77 15 ;2027
-	call sub_2320h_ball		; cd 20 23 ;202a
-	ld a,(ix+018h)		; dd 7e 18 ;202d
-	ld (ix+028h),a		; dd 77 28 ;2030
-	inc (ix+031h)		; dd 34 31 ;2033
-	ret			; c9 ;2036
-l2037h:
-	ld e,0b0h		; 1e b0 ;2037
-	call sub_compute_ball_deflection		; cd 0a 16 ;2039
-	ld l,000h		; 2e 00 ;203c
-	ld h,a			; 67 ;203e
-	ld de,0b000h		; 11 00 b0 ;203f
-	call sub_2298h_collision		; cd 98 22 ;2042
-	ld (ix+015h),a		; dd 77 15 ;2045
-	call sub_23aah_ball		; cd aa 23 ;2048
-	ld a,(ix+018h)		; dd 7e 18 ;204b
-	ld (ix+028h),a		; dd 77 28 ;204e
-	inc (ix+031h)		; dd 34 31 ;2051
-	ret			; c9 ;2054
-l2055h:
-	bit 0,(ix+027h)		; dd cb 27 46 ;2055
-	jr nz,l207eh		; 20 23 ;2059
-	ld a,(ix+02eh)		; dd 7e 2e ;205b
-	bit 0,(ix+001h)		; dd cb 01 46 ;205e
-	jr z,l2075h		; 28 11 ;2062
-	cp 002h		; fe 02 ;2064
-	jr c,l207eh		; 38 16 ;2066
-	ld (ix+015h),001h		; dd 36 15 01 ;2068
-	ld (ix+028h),000h		; dd 36 28 00 ;206c
-	ld (iy+033h),005h		; fd 36 33 05 ;2070
-	ret			; c9 ;2074
-l2075h:
-	cp 0b0h		; fe b0 ;2075
-	jr nc,l207eh		; 30 05 ;2077
-	ld (ix+015h),002h		; dd 36 15 02 ;2079
-	ret			; c9 ;207d
-l207eh:
-	xor a			; af ;207e
-	ld (ix+015h),a		; dd 77 15 ;207f
-	ld (ix+031h),a		; dd 77 31 ;2082
-	ld (ix+030h),003h		; dd 36 30 03 ;2085
-	ld (iy+033h),005h		; fd 36 33 05 ;2089
-	ret			; c9 ;208d
-l208eh:
-	ld a,(0c400h)		; 3a 00 c4 ;208e
-	and a			; a7 ;2091
-	ret nz			; c0 ;2092
-	bit 0,(ix+027h)		; dd cb 27 46 ;2093
-	jr nz,l20b2h		; 20 19 ;2097
-l2099h:
-	ld a,(0c000h)		; 3a 00 c0 ;2099
-	bit 7,a		; cb 7f ;209c
-	ld a,002h		; 3e 02 ;209e
-	jr z,l20a5h		; 28 03 ;20a0
-	call sub_238dh		; cd 8d 23 ;20a2
-l20a5h:
-	ld (ix+015h),a		; dd 77 15 ;20a5
-	ld a,(ix+02eh)		; dd 7e 2e ;20a8
-	cp 006h		; fe 06 ;20ab
-	ret c			; d8 ;20ad
-	ld (ix+033h),000h		; dd 36 33 00 ;20ae
-l20b2h:
-	ld a,(0c000h)		; 3a 00 c0 ;20b2
-	bit 7,a		; cb 7f ;20b5
-	jr z,l20c0h		; 28 07 ;20b7
-	ld a,(ix+033h)		; dd 7e 33 ;20b9
-	cp 005h		; fe 05 ;20bc
-	jr z,l2099h		; 28 d9 ;20be
-l20c0h:
-	xor a			; af ;20c0
-	ld (ix+015h),a		; dd 77 15 ;20c1
-	ld (ix+031h),a		; dd 77 31 ;20c4
-	ld (ix+030h),000h		; dd 36 30 00 ;20c7
-	ret			; c9 ;20cb
-l20cch:
-	ld a,(ix+027h)		; dd 7e 27 ;20cc
-	and a			; a7 ;20cf
-	jr nz,l20dfh		; 20 0d ;20d0
-	ld (ix+030h),004h		; dd 36 30 04 ;20d2
-	ld (ix+028h),000h		; dd 36 28 00 ;20d6
-	ld (iy+033h),005h		; fd 36 33 05 ;20da
-	ret			; c9 ;20de
-l20dfh:
-	bit 0,(ix+001h)		; dd cb 01 46 ;20df
-	jr z,l2106h		; 28 21 ;20e3
-	ld e,028h		; 1e 28 ;20e5
-	call sub_compute_ball_deflection		; cd 0a 16 ;20e7
-	ld l,000h		; 2e 00 ;20ea
-	ld h,a			; 67 ;20ec
-	ld de,02800h		; 11 00 28 ;20ed
-	call sub_221eh_collision_broad		; cd 1e 22 ;20f0
-	ld (ix+015h),a		; dd 77 15 ;20f3
-	call sub_2320h_ball		; cd 20 23 ;20f6
-	ld a,(ix+018h)		; dd 7e 18 ;20f9
-	and a			; a7 ;20fc
-	ret z			; c8 ;20fd
-	ld (ix+028h),a		; dd 77 28 ;20fe
-	ld (iy+033h),005h		; fd 36 33 05 ;2101
-	ret			; c9 ;2105
-l2106h:
-	ld e,0b0h		; 1e b0 ;2106
-	call sub_compute_ball_deflection		; cd 0a 16 ;2108
-	ld l,000h		; 2e 00 ;210b
-	ld h,a			; 67 ;210d
-	ld de,000b0h		; 11 b0 00 ;210e
-	call sub_2298h_collision		; cd 98 22 ;2111
-	ld (ix+015h),a		; dd 77 15 ;2114
-	call sub_23aah_ball		; cd aa 23 ;2117
-	ld a,(ix+018h)		; dd 7e 18 ;211a
-	and a			; a7 ;211d
-	ret z			; c8 ;211e
-	ld (ix+028h),a		; dd 77 28 ;211f
-	ret			; c9 ;2122
-l2123h:
-	bit 7,(ix+030h)		; dd cb 30 7e ;2123
-	jr nz,l2132h		; 20 09 ;2127
-	set 7,(ix+030h)		; dd cb 30 fe ;2129
-	ld (ix+028h),000h		; dd 36 28 00 ;212d
-	ret			; c9 ;2131
-l2132h:
-	ld a,(ix+033h)		; dd 7e 33 ;2132
-	cp 002h		; fe 02 ;2135
-	jr z,l2146h		; 28 0d ;2137
-	cp 005h		; fe 05 ;2139
-	jr z,l2146h		; 28 09 ;213b
-	cp 001h		; fe 01 ;213d
-	jr nz,l214bh		; 20 0a ;213f
-	ld (ix+030h),003h		; dd 36 30 03 ;2141
-	ret			; c9 ;2145
-l2146h:
-	ld (ix+030h),005h		; dd 36 30 05 ;2146
-	ret			; c9 ;214a
-l214bh:
-	ld b,(ix+02fh)		; dd 46 2f ;214b
-	ld a,(iy+015h)		; fd 7e 15 ;214e
-	and 00ch		; e6 0c ;2151
-	jr nz,l2162h		; 20 0d ;2153
-	ld a,(iy+02fh)		; fd 7e 2f ;2155
-	cp 004h		; fe 04 ;2158
-	ld b,008h		; 06 08 ;215a
-	jr c,l217ah		; 38 1c ;215c
-	ld b,004h		; 06 04 ;215e
-	jr l217ah		; 18 18 ;2160
-l2162h:
-	bit 3,a		; cb 5f ;2162
-	jr z,l216fh		; 28 09 ;2164
-	ld a,b			; 78 ;2166
-	cp 003h		; fe 03 ;2167
-	ld b,004h		; 06 04 ;2169
-	jr c,l217ah		; 38 0d ;216b
-	jr l2176h		; 18 07 ;216d
-l216fh:
-	ld a,b			; 78 ;216f
-	cp 005h		; fe 05 ;2170
-	jr nc,l217ah		; 30 06 ;2172
-	ld b,008h		; 06 08 ;2174
-l2176h:
-	ld (ix+015h),b		; dd 70 15 ;2176
-	ret			; c9 ;2179
-l217ah:
-	xor a			; af ;217a
-	ld (ix+015h),a		; dd 77 15 ;217b
-	ld (ix+030h),001h		; dd 36 30 01 ;217e
-	ret			; c9 ;2182
-l2183h:
-	ld b,(ix+02fh)		; dd 46 2f ;2183
-	ld a,(iy+015h)		; fd 7e 15 ;2186
-	and 00ch		; e6 0c ;2189
-	jr nz,l219ah		; 20 0d ;218b
-	ld a,(iy+02fh)		; fd 7e 2f ;218d
-	cp 004h		; fe 04 ;2190
-	ld b,008h		; 06 08 ;2192
-	jr c,l21b2h		; 38 1c ;2194
-	ld b,004h		; 06 04 ;2196
-	jr l21b2h		; 18 18 ;2198
-l219ah:
-	bit 3,a		; cb 5f ;219a
-	jr z,l21a7h		; 28 09 ;219c
-	ld a,b			; 78 ;219e
-	cp 003h		; fe 03 ;219f
-	ld b,004h		; 06 04 ;21a1
-	jr c,l21b2h		; 38 0d ;21a3
-	jr l21aeh		; 18 07 ;21a5
-l21a7h:
-	ld a,b			; 78 ;21a7
-	cp 005h		; fe 05 ;21a8
-	jr nc,l21b2h		; 30 06 ;21aa
-	ld b,008h		; 06 08 ;21ac
-l21aeh:
-	ld (ix+015h),b		; dd 70 15 ;21ae
-	ret			; c9 ;21b1
-l21b2h:
-	xor a			; af ;21b2
-	ld (ix+015h),a		; dd 77 15 ;21b3
-	ld (ix+030h),000h		; dd 36 30 00 ;21b6
-	ret			; c9 ;21ba
-l21bbh:
-	bit 7,(ix+030h)		; dd cb 30 7e ;21bb
-	jr nz,l21cdh		; 20 0c ;21bf
-	set 7,(ix+030h)		; dd cb 30 fe ;21c1
-	ld a,r		; ed 5f ;21c5
-	and 01fh		; e6 1f ;21c7
-	inc a			; 3c ;21c9
-	ld (ix+031h),a		; dd 77 31 ;21ca
-l21cdh:
-	dec (ix+031h)		; dd 35 31 ;21cd
-	ret nz			; c0 ;21d0
-	ld a,(0c000h)		; 3a 00 c0 ;21d1
-	bit 3,a		; cb 5f ;21d4
-	ld a,000h		; 3e 00 ;21d6
-	jr nz,l21e6h		; 20 0c ;21d8
-	ld a,r		; ed 5f ;21da
-	cp 03fh		; fe 3f ;21dc
-	jr nc,l21e4h		; 30 04 ;21de
-l21e0h:
-	and 008h		; e6 08 ;21e0
-	jr l21e6h		; 18 02 ;21e2
-l21e4h:
-	and 004h		; e6 04 ;21e4
-l21e6h:
-	ld (ix+015h),a		; dd 77 15 ;21e6
-	res 7,(ix+030h)		; dd cb 30 be ;21e9
-	ret			; c9 ;21ed
-l21eeh:
-	bit 7,(ix+030h)		; dd cb 30 7e ;21ee
-	jr nz,l21fch		; 20 08 ;21f2
-	set 7,(ix+030h)		; dd cb 30 fe ;21f4
-	ld (ix+031h),000h		; dd 36 31 00 ;21f8
-l21fch:
-	ld a,(0c501h)		; 3a 01 c5 ;21fc
-	cp 02ah		; fe 2a ;21ff
-	jr c,l2207h		; 38 04 ;2201
-	set 0,(ix+031h)		; dd cb 31 c6 ;2203
-l2207h:
-	bit 0,(ix+031h)		; dd cb 31 46 ;2207
-	ret z			; c8 ;220b
-	cp 028h		; fe 28 ;220c
-	ret nc			; d0 ;220e
-	cp 01ah		; fe 1a ;220f
-	ret c			; d8 ;2211
-	ld a,r		; ed 5f ;2212
-	ld a,r		; ed 5f ;2214
-	and 001h		; e6 01 ;2216
-	ret nz			; c0 ;2218
-	ld (ix+028h),001h		; dd 36 28 01 ;2219
-	ret			; c9 ;221d
+	.INCLUDE "game/1e25h_cpu.asm"
 	.INCLUDE "physics/221eh_collision_broad.asm"
 l2290h:
-	call pe,0f6eeh		; ec ee f6 ;2290
-	cp 002h		; fe 02 ;2293
-	ld a,(bc)			; 0a ;2295
-	ld (de),a			; 12 ;2296
-	inc d			; 14 ;2297
+	.DB $ec		;2290
+	.DB $ee		;2291
+	.DB $f6		;2292
+	.DB $fe		;2293
+	.DB $02		;2294
+	.DB $0a		;2295
+	.DB $12		;2296
+	.DB $14		;2297
 	.INCLUDE "physics/2298h_collision.asm"
 	.INCLUDE "math/neg_hl.asm"
-sub_2320h_ball:
-	ld a,(0c518h)		; 3a 18 c5 ;2320
-	and a			; a7 ;2323
-	ld b,000h		; 06 00 ;2324
-	jr nz,l2389h		; 20 61 ;2326
-	ld a,(0c519h)		; 3a 19 c5 ;2328
-	and a			; a7 ;232b
-	jr nz,l2334h		; 20 06 ;232c
-	ld a,(0c51dh)		; 3a 1d c5 ;232e
-	and a			; a7 ;2331
-	jr nz,l2389h		; 20 55 ;2332
-l2334h:
-	ld e,(ix+00bh)		; dd 5e 0b ;2334
-	ld a,(0c401h)		; 3a 01 c4 ;2337
-	cp 01ch		; fe 1c ;233a
-	jr nz,l2348h		; 20 0a ;233c
-	ld a,(0c04ah)		; 3a 4a c0 ;233e
-	rra			; 1f ;2341
-	and 003h		; e6 03 ;2342
-	sub 002h		; d6 02 ;2344
-	add a,e			; 83 ;2346
-	ld e,a			; 5f ;2347
-l2348h:
-	ld a,(0c30bh)		; 3a 0b c3 ;2348
-	sub e			; 93 ;234b
-	jr nc,l2350h		; 30 02 ;234c
-	neg		; ed 44 ;234e
-l2350h:
-	ld b,a			; 47 ;2350
-	ld a,(ix+02eh)		; dd 7e 2e ;2351
-	ld e,a			; 5f ;2354
-	ld c,00ch		; 0e 0c ;2355
-	cp 006h		; fe 06 ;2357
-	ld a,b			; 78 ;2359
-	ld b,000h		; 06 00 ;235a
-	jr nc,l2360h		; 30 02 ;235c
-	ld c,006h		; 0e 06 ;235e
-l2360h:
-	cp c			; b9 ;2360
-	jr nc,l2389h		; 30 26 ;2361
-	ld b,001h		; 06 01 ;2363
-	ld a,e			; 7b ;2365
-	cp 002h		; fe 02 ;2366
-	jr nc,l2389h		; 30 1f ;2368
-	ld a,(0c401h)		; 3a 01 c4 ;236a
-	cp 01ah		; fe 1a ;236d
-	jr nz,l237dh		; 20 0c ;236f
-	; Randomness
-	ld a,r		; ed 5f ;2371
-	cp 020h		; fe 20 ;2373
-	ld b,002h		; 06 02 ;2375
-	jr c,l2389h		; 38 10 ;2377
-	ld b,001h		; 06 01 ;2379
-	jr l2389h		; 18 0c ;237b
-l237dh:
-	ld a,r		; ed 5f ;237d
-	ld a,r		; ed 5f ;237f
-	ld b,001h		; 06 01 ;2381
-	cp 06fh		; fe 6f ;2383
-	jr c,l2389h		; 38 02 ;2385
-	ld b,002h		; 06 02 ;2387
-l2389h:
-	ld (ix+018h),b		; dd 70 18 ;2389
-	ret			; c9 ;238c
+	.INCLUDE "game/ball/2320h_ball.asm"
 sub_238dh:
 	ld a,(iy+02fh)		; fd 7e 2f ;238d
 	cp 004h		; fe 04 ;2390
@@ -2933,57 +1790,8 @@ l239ah:
 l23a6h:
 	call sub_221eh_collision_broad		; cd 1e 22 ;23a6
 	ret			; c9 ;23a9
-sub_23aah_ball:
-	ld a,(0c518h)		; 3a 18 c5 ;23aa
-	and a			; a7 ;23ad
-	ld b,000h		; 06 00 ;23ae
-	jr nz,l23fbh		; 20 49 ;23b0
-	ld a,(0c519h)		; 3a 19 c5 ;23b2
-	and a			; a7 ;23b5
-	jr nz,l23beh		; 20 06 ;23b6
-	ld a,(0c51dh)		; 3a 1d c5 ;23b8
-	and a			; a7 ;23bb
-	jr nz,l23fbh		; 20 3d ;23bc
-l23beh:
-	ld a,(0c30bh)		; 3a 0b c3 ;23be
-	ld e,a			; 5f ;23c1
-	ld a,(ix+00bh)		; dd 7e 0b ;23c2
-	sub e			; 93 ;23c5
-	jr nc,l23cah		; 30 02 ;23c6
-	neg		; ed 44 ;23c8
-l23cah:
-	ld b,a			; 47 ;23ca
-	ld a,(ix+02eh)		; dd 7e 2e ;23cb
-	ld e,a			; 5f ;23ce
-	ld c,010h		; 0e 10 ;23cf
-	cp 001h		; fe 01 ;23d1
-	ld a,b			; 78 ;23d3
-	ld b,000h		; 06 00 ;23d4
-	jr c,l23dah		; 38 02 ;23d6
-	ld c,018h		; 0e 18 ;23d8
-l23dah:
-	cp c			; b9 ;23da
-	jr nc,l23fbh		; 30 1e ;23db
-	ld b,001h		; 06 01 ;23dd
-	ld a,e			; 7b ;23df
-	cp 006h		; fe 06 ;23e0
-	jr c,l23fbh		; 38 17 ;23e2
-	ld a,(0c401h)		; 3a 01 c4 ;23e4
-	cp 01ah		; fe 1a ;23e7
-	jr nz,l23f3h		; 20 08 ;23e9
-	ld a,r		; ed 5f ;23eb
-	cp 03fh		; fe 3f ;23ed
-	ld b,002h		; 06 02 ;23ef
-	jr nc,l23fbh		; 30 08 ;23f1
-l23f3h:
-	ld a,r		; ed 5f ;23f3
-	cp 030h		; fe 30 ;23f5
-	jr c,l23fbh		; 38 02 ;23f7
-	ld b,001h		; 06 01 ;23f9
-l23fbh:
-	ld (ix+018h),b		; dd 70 18 ;23fb
-	ret			; c9 ;23fe
-l23ffh:
+	.INCLUDE "game/ball/23aah_ball.asm"
+sub_23ffh:
 	bit 1,(ix+001h)		; dd cb 01 4e ;23ff
 	ld hl,player.1.bottom.type		; 21 02 c2 ;2403
 	ld e,004h		; 1e 04 ;2406
@@ -3069,234 +1877,7 @@ l2458h:
 	.DB $b0		;2479
 	.DB $00		;247a
 	.DB $a0		;247b
-l247ch:
-	call sub_2e98h_2d_scale_clamp		; cd 98 2e ;247c
-	ld a,(0c000h)		; 3a 00 c0 ;247f
-	bit 3,a		; cb 5f ;2482
-	call nz,sub_1e25h_cpu		; c4 25 1e ;2484
-	bit 7,(ix+002h)		; dd cb 02 7e ;2487
-	jr nz,l2495h		; 20 08 ;248b
-	set 7,(ix+002h)		; dd cb 02 fe ;248d
-	ld (ix+025h),000h		; dd 36 25 00 ;2491
-l2495h:
-	ld a,(ix+025h)		; dd 7e 25 ;2495
-	and 00fh		; e6 0f ;2498
-	ld hl,l24a0h		; 21 a0 24 ;249a
-	jp l0807h_game_fsm		; c3 07 08 ;249d
-l24a0h:
-	xor h			; ac ;24a0
-	inc h			; 24 ;24a1
-	ld h,c			; 61 ;24a2
-	dec h			; 25 ;24a3
-	sub c			; 91 ;24a4
-	dec h			; 25 ;24a5
-	ret m			; f8 ;24a6
-	inc h			; 24 ;24a7
-	di			; f3 ;24a8
-	dec h			; 25 ;24a9
-	pop bc			; c1 ;24aa
-	dec h			; 25 ;24ab
-	call sub_265eh_collision		; cd 5e 26 ;24ac
-	jr nz,l24c8h		; 20 17 ;24af
-	ld a,c			; 79 ;24b1
-	rra			; 1f ;24b2
-	rra			; 1f ;24b3
-	rra			; 1f ;24b4
-	rra			; 1f ;24b5
-	and 003h		; e6 03 ;24b6
-	jr z,l24c8h		; 28 0e ;24b8
-	ld (ix+028h),a		; dd 77 28 ;24ba
-	ld a,c			; 79 ;24bd
-	and 00fh		; e6 0f ;24be
-	ld (ix+015h),a		; dd 77 15 ;24c0
-	ld (ix+025h),002h		; dd 36 25 02 ;24c3
-	ret			; c9 ;24c7
-l24c8h:
-	ld a,c			; 79 ;24c8
-	and 00fh		; e6 0f ;24c9
-	ld (ix+015h),a		; dd 77 15 ;24cb
-	jr nz,l24f3h		; 20 23 ;24ce
-	ld a,(ix+027h)		; dd 7e 27 ;24d0
-	and a			; a7 ;24d3
-	jr nz,l24f3h		; 20 1d ;24d4
-	ld a,(ix+023h)		; dd 7e 23 ;24d6
-	and a			; a7 ;24d9
-	jr nz,l24f0h		; 20 14 ;24da
-	ld (ix+022h),000h		; dd 36 22 00 ;24dc
-	ld (ix+023h),0ffh		; dd 36 23 ff ;24e0
-	call sub_ball_racket_hit		; cd bf 2b ;24e4
-	ld a,(ix+016h)		; dd 7e 16 ;24e7
-	ld (ix+017h),a		; dd 77 17 ;24ea
-	ld (ix+020h),a		; dd 77 20 ;24ed
-l24f0h:
-	jp sub_animate		; c3 69 2a ;24f0
-l24f3h:
-	ld (ix+025h),001h		; dd 36 25 01 ;24f3
-	ret			; c9 ;24f7
-	call sub_265eh_collision		; cd 5e 26 ;24f8
-	jr nz,l2514h		; 20 17 ;24fb
-	ld a,c			; 79 ;24fd
-	rra			; 1f ;24fe
-	rra			; 1f ;24ff
-	rra			; 1f ;2500
-	rra			; 1f ;2501
-	and 003h		; e6 03 ;2502
-	jr z,l2514h		; 28 0e ;2504
-	ld (ix+028h),a		; dd 77 28 ;2506
-	ld a,c			; 79 ;2509
-	and 00fh		; e6 0f ;250a
-	ld (ix+015h),a		; dd 77 15 ;250c
-	ld (ix+025h),004h		; dd 36 25 04 ;250f
-	ret			; c9 ;2513
-l2514h:
-	ld a,c			; 79 ;2514
-	and 00fh		; e6 0f ;2515
-	ld (ix+015h),a		; dd 77 15 ;2517
-	and 00ch		; e6 0c ;251a
-	jr nz,l2539h		; 20 1b ;251c
-	ld a,(ix+027h)		; dd 7e 27 ;251e
-	and a			; a7 ;2521
-	jr z,l2532h		; 28 0e ;2522
-	push bc			; c5 ;2524
-	call sub_ball_racket_hit		; cd bf 2b ;2525
-	pop bc			; c1 ;2528
-	ld a,(ix+016h)		; dd 7e 16 ;2529
-	ld b,(ix+017h)		; dd 46 17 ;252c
-	cp b			; b8 ;252f
-	jr nz,l255ch		; 20 2a ;2530
-l2532h:
-	ld a,c			; 79 ;2532
-	and 003h		; e6 03 ;2533
-	jr nz,l2548h		; 20 11 ;2535
-	jr l2556h		; 18 1d ;2537
-l2539h:
-	call sub_ball_racket_hit		; cd bf 2b ;2539
-	ld a,(ix+016h)		; dd 7e 16 ;253c
-	ld b,(ix+017h)		; dd 46 17 ;253f
-	cp b			; b8 ;2542
-	jr nz,l255ch		; 20 17 ;2543
-	ld (ix+020h),a		; dd 77 20 ;2545
-l2548h:
-	ld a,(ix+023h)		; dd 7e 23 ;2548
-	and a			; a7 ;254b
-	jr nz,l2556h		; 20 08 ;254c
-	ld (ix+022h),002h		; dd 36 22 02 ;254e
-	ld (ix+023h),0ffh		; dd 36 23 ff ;2552
-l2556h:
-	call sub_move_players		; cd a1 26 ;2556
-	jp sub_animate		; c3 69 2a ;2559
-l255ch:
-	ld (ix+025h),005h		; dd 36 25 05 ;255c
-	ret			; c9 ;2560
-	ld a,(ix+025h)		; dd 7e 25 ;2561
-	bit 7,a		; cb 7f ;2564
-	jr nz,l2581h		; 20 19 ;2566
-	set 7,a		; cb ff ;2568
-	ld (ix+025h),a		; dd 77 25 ;256a
-	ld (ix+022h),00ah		; dd 36 22 0a ;256d
-	ld (ix+023h),0ffh		; dd 36 23 ff ;2571
-	call sub_ball_racket_hit		; cd bf 2b ;2575
-	ld a,(ix+016h)		; dd 7e 16 ;2578
-	ld (ix+017h),a		; dd 77 17 ;257b
-	ld (ix+020h),a		; dd 77 20 ;257e
-l2581h:
-	call sub_move_players		; cd a1 26 ;2581
-	call sub_animate		; cd 69 2a ;2584
-	ld a,(ix+023h)		; dd 7e 23 ;2587
-	and a			; a7 ;258a
-	ret nz			; c0 ;258b
-	ld (ix+025h),003h		; dd 36 25 03 ;258c
-	ret			; c9 ;2590
-	ld a,(ix+025h)		; dd 7e 25 ;2591
-	bit 7,a		; cb 7f ;2594
-	jr nz,l25b1h		; 20 19 ;2596
-	set 7,a		; cb ff ;2598
-	ld (ix+025h),a		; dd 77 25 ;259a
-	ld (ix+022h),00ah		; dd 36 22 0a ;259d
-	ld (ix+023h),0ffh		; dd 36 23 ff ;25a1
-	call sub_ball_racket_hit		; cd bf 2b ;25a5
-	ld a,(ix+016h)		; dd 7e 16 ;25a8
-	ld (ix+017h),a		; dd 77 17 ;25ab
-	ld (ix+020h),a		; dd 77 20 ;25ae
-l25b1h:
-	call sub_move_players		; cd a1 26 ;25b1
-	call sub_animate		; cd 69 2a ;25b4
-	ld a,(ix+023h)		; dd 7e 23 ;25b7
-	and a			; a7 ;25ba
-	ret nz			; c0 ;25bb
-	ld (ix+025h),004h		; dd 36 25 04 ;25bc
-	ret			; c9 ;25c0
-	ld a,(ix+025h)		; dd 7e 25 ;25c1
-	bit 7,a		; cb 7f ;25c4
-	jr nz,l25ddh		; 20 15 ;25c6
-	set 7,(ix+025h)		; dd cb 25 fe ;25c8
-	call sub_ball_racket_hit		; cd bf 2b ;25cc
-	ld a,(ix+016h)		; dd 7e 16 ;25cf
-	ld (ix+020h),a		; dd 77 20 ;25d2
-	ld (ix+022h),00bh		; dd 36 22 0b ;25d5
-	ld (ix+023h),0ffh		; dd 36 23 ff ;25d9
-l25ddh:
-	call sub_move_players		; cd a1 26 ;25dd
-	call sub_animate		; cd 69 2a ;25e0
-	ld a,(ix+023h)		; dd 7e 23 ;25e3
-	and a			; a7 ;25e6
-	ret nz			; c0 ;25e7
-	ld a,(ix+016h)		; dd 7e 16 ;25e8
-	ld (ix+017h),a		; dd 77 17 ;25eb
-	ld (ix+025h),003h		; dd 36 25 03 ;25ee
-	ret			; c9 ;25f2
-	ld a,(ix+025h)		; dd 7e 25 ;25f3
-	bit 7,a		; cb 7f ;25f6
-	jr nz,l2638h		; 20 3e ;25f8
-	set 7,a		; cb ff ;25fa
-	ld (ix+025h),a		; dd 77 25 ;25fc
-	call sub_2c13h_ball_state		; cd 13 2c ;25ff
-	ld b,004h		; 06 04 ;2602
-	ld c,01ch		; 0e 1c ;2604
-	cp 003h		; fe 03 ;2606
-	jr z,l2628h		; 28 1e ;2608
-	ld b,a			; 47 ;260a
-	ld a,(ix+02eh)		; dd 7e 2e ;260b
-	cp 003h		; fe 03 ;260e
-	jr c,l2614h		; 38 02 ;2610
-	ld b,002h		; 06 02 ;2612
-l2614h:
-	ld a,b			; 78 ;2614
-	ld b,009h		; 06 09 ;2615
-	ld c,01ah		; 0e 1a ;2617
-	and a			; a7 ;2619
-	jr z,l2628h		; 28 0c ;261a
-	ld b,005h		; 06 05 ;261c
-	ld c,01bh		; 0e 1b ;261e
-	cp 001h		; fe 01 ;2620
-	jr z,l2628h		; 28 04 ;2622
-	ld b,003h		; 06 03 ;2624
-	ld c,01dh		; 0e 1d ;2626
-l2628h:
-	ld (ix+022h),b		; dd 70 22 ;2628
-	ld (ix+01fh),c		; dd 71 1f ;262b
-	ld (ix+023h),0ffh		; dd 36 23 ff ;262e
-	ld a,(ix+016h)		; dd 7e 16 ;2632
-	ld (ix+020h),a		; dd 77 20 ;2635
-l2638h:
-	call sub_move_players		; cd a1 26 ;2638
-	call sub_ball_trajectory		; cd 40 2c ;263b
-	ld a,(ix+023h)		; dd 7e 23 ;263e
-	and a			; a7 ;2641
-	jr z,l2648h		; 28 04 ;2642
-	call sub_animate		; cd 69 2a ;2644
-	ret			; c9 ;2647
-l2648h:
-	ld a,(ix+027h)		; dd 7e 27 ;2648
-	and a			; a7 ;264b
-	ld a,000h		; 3e 00 ;264c
-	jr z,l2652h		; 28 02 ;264e
-	ld a,001h		; 3e 01 ;2650
-l2652h:
-	ld (ix+025h),a		; dd 77 25 ;2652
-	ld (ix+019h),000h		; dd 36 19 00 ;2655
-	ld (ix+01dh),000h		; dd 36 1d 00 ;2659
-	ret			; c9 ;265d
+	.INCLUDE "game/247ch.asm"
 sub_265eh_collision:
 	ld a,(0c000h)		; 3a 00 c0 ;265e
 	bit 3,a		; cb 5f ;2661
@@ -3375,7 +1956,7 @@ sub_3457h_clean_vram:
 	call sub_vram_fill_word		; cd 50 04 ;3460
 	ei			; fb ;3463
 	pop hl			; e1 ;3464
-	ld de,l0040h		; 11 40 00 ;3465
+	ld de,040h		; 11 40 00 ;3465
 	add hl,de			; 19 ;3468
 	pop de			; d1 ;3469
 	pop bc			; c1 ;346a
@@ -3413,76 +1994,11 @@ l3560h:
 	.DW unknown_word_0		;3562
 	.DW unknown_word_2		;3564
 	.INCLUDE "game/update_announcement_timer.asm"
-l3578h:
-	ld a,004h		; 3e 04 ;3578
-	out (O_VDP_CTRL),a		; d3 bf ;357a
-	.IFDEF _UE
-		ld b,005h		; 06 05 ;357c
-		call sub_delay_loop		; cd ff 35 ;357e
-    .ENDIF
-	ld a,0c0h		; 3e c0 ;3581
-	out (O_VDP_CTRL),a		; d3 bf ;3583
-	ld a,(0c4a6h)		; 3a a6 c4 ;3585
-	cp 002h		; fe 02 ;3588
-	jr z,l3599h		; 28 0d ;358a
-	cp 000h		; fe 00 ;358c
-	jr nz,l35a1h		; 20 11 ;358e
-	ld a,001h		; 3e 01 ;3590
-	ld (0c4a6h),a		; 32 a6 c4 ;3592
-	ld a,003h		; 3e 03 ;3595
-	jr l35a8h		; 18 0f ;3597
-l3599h:
-	xor a			; af ;3599
-	ld (0c4a6h),a		; 32 a6 c4 ;359a
-	ld a,002h		; 3e 02 ;359d
-	jr l35a8h		; 18 07 ;359f
-l35a1h:
-	ld a,002h		; 3e 02 ;35a1
-	ld (0c4a6h),a		; 32 a6 c4 ;35a3
-	ld a,013h		; 3e 13 ;35a6
-l35a8h:
-	out (IO_VDP_DATA),a		; d3 be ;35a8
-	.DB $3e		;35aa
-	.DB $02		;35ab
-	ld (0c49dh),a		; 32 9d c4 ;35ac
-	ret			; c9 ;35af
 	.INCLUDE "graphics/load_vram_rect_dynamic.asm"
 	.INCLUDE "graphics/35c6h_palette_load.asm"
-l35dch:
-	dec hl			; 2b ;35dc
-	jr c,$+15		; 38 0f ;35dd
-	jr nc,l35e4h		; 30 03 ;35df
-	dec a			; 3d ;35e1
-	jr nz,$+15		; 20 0f ;35e2
-l35e4h:
-	djnz l35e8h		; 10 02 ;35e4
 	.INCLUDE "graphics/wait_a_frames.asm"
 	.INCLUDE "game/delay_loop.asm"
 	.INCLUDE "graphics/3607h.asm"
-l3706h:
-	.DB $36		;3706
-	.DB $01		;3707
-l3708h_palette:
-	.DB $3a		;3708
-	.DB $00		;3709
-	.DB $3f		;370a
-	.DB $2f		;370b
-	.DB $03		;370c
-	.DB $2a		;370d
-	.DB $0b		;370e
-	.DB $16		;370f
-	.DB $25		;3710
-	.DB $00		;3711
-	.DB $00		;3712
-	.DB $00		;3713
-	.DB $00		;3714
-	.DB $00		;3715
-	.DB $00		;3716
-	.DB $00		;3717
-	.DB $3a		;3718
-l3719h_palette:
-	.DB $06		;3719
-data_chunks_1:
 	.INCLUDE "data/chunks_1.asm"
 l3777h_palette:
 	.DB $58		;3777
@@ -3539,7 +2055,6 @@ data_planes_2_0:
 	.INCLUDE "tiles/planes_2_1.asm"
 	.INCLUDE "tiles/planes_2_2.asm"
 	.INCLUDE "tiles/planes_2_3.asm"
-data_chunks_0:
 	.INCLUDE "data/chunks_0.asm"
 l40f0h_name_table:
 	.DB $26		;40f0
@@ -3565,9 +2080,7 @@ l40f0h_name_table:
 	.DB $07		;4104
 	.DB $01		;4105
 	.INCLUDE "hardware/hardware_self_test.asm"
-unknown_table_0:
 	.INCLUDE "data/unknown_table_0.asm"
-	call m,0fefch		; fc fc fe ;4898
 l489bh_sprite_attributes:
 	.DB $00 $00 $f5		;489b
 	.DB $00 $08 $f6		;489e

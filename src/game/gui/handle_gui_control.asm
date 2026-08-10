@@ -71,3 +71,13 @@ l09e6h:
 	ld (hl),000h		; 36 00 ;09f4
 l09f6h:
 	ret			; c9 ;09f6
+l09f7h:
+	ld a,(game_settings.control_level)		; 3a 48 c0 ;09f7
+	ld (0c4b2h),a		; 32 b2 c4 ;09fa
+	add a,002h		; c6 02 ;09fd
+	ld (0c4b0h),a		; 32 b0 c4 ;09ff
+	ld a,(0c04ah)		; 3a 4a c0 ;0a02
+	ld (0c4b1h),a		; 32 b1 c4 ;0a05
+	srl a		; cb 3f ;0a08
+	ld (0c4b3h),a		; 32 b3 c4 ;0a0a
+	jp sub_draw_tennis_court		; c3 bd 0a ;0a0d

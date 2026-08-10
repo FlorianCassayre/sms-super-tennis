@@ -1,3 +1,6 @@
+l0821h:
+	ld hl,0c006h		;0821
+	bit 6,(hl)
 sub_init_splash_screen:
 	jp nz,l088dh		; c2 8d 08 ;0826
 	di			; f3 ;0829
@@ -38,3 +41,17 @@ sub_init_splash_screen:
 	call sub_enable_display		; cd a0 03 ;0888
 	ei			; fb ;088b
 	ret			; c9 ;088c
+l088dh:
+	ld a,(psg_engine._unknown)		; 3a 04 de ;088d
+	rlca			; 07 ;0890
+	ret nc			; d0 ;0891
+	ld a,083h		; 3e 83 ;0892
+	ld (0c006h),a		; 32 06 c0 ;0894
+	ret			; c9 ;0897
+l0898h:
+	ld hl,0c000h		; 21 00 c0 ;0898
+	set 3,(hl)		; cb de ;089b
+	set 7,(hl)		; cb fe ;089d
+	ld a,003h		; 3e 03 ;089f
+	ld (0c045h),a		; 32 45 c0 ;08a1
+	jp sub_draw_tennis_court		; c3 bd 0a ;08a4

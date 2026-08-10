@@ -11,9 +11,10 @@ sub_clear_ram:
 	inc hl			; 23 ;08bc
 	ld (hl),000h		; 36 00 ;08bd
 	ret			; c9 ;08bf
+l08c0h:
 	ld hl,0c006h		; 21 06 c0 ;08c0
 	bit 6,(hl)		; cb 76 ;08c3
-	jp nz,l096eh		; c2 6e 09 ;08c5
+	jp nz,+		; c2 6e 09 ;08c5
 	set 6,(hl)		; cb f6 ;08c8
 	di			; f3 ;08ca
 	call sub_disable_display		; cd a4 03 ;08cb
@@ -76,3 +77,18 @@ sub_clear_ram:
 	ld (0c49ah),a		; 32 9a c4 ;0969
 	ei			; fb ;096c
 	ret			; c9 ;096d
++:
+	call sub_vdp_build_sprite_buffer		; cd 10 0a ;096e
+	ld hl,gui.tick_counter		; 21 96 c4 ;0971
+	inc (hl)			; 34 ;0974
+	ld hl,gui.joystick_previous		; 21 94 c4 ;0975
+	call sub_get_joy_p1		; cd 0f 03 ;0978
+	cp (hl)			; be ;097b
+	ret z			; c8 ;097c
+	dec hl			; 2b ;097d
+	cp (hl)			; be ;097e
+	jp z,sub_handle_gui_control		; ca 88 09 ;097f
+	ld (hl),a			; 77 ;0982
+	xor a			; af ;0983
+	ld (0c49ch),a		; 32 9c c4 ;0984
+	ret			; c9 ;0987

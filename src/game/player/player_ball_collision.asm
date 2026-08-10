@@ -146,11 +146,11 @@ sub_racket_hit_trajectory:
 @trigger_body_foul:
 	ld a,003h		; 3e 03 ;19a5
 	ld (ball.foul),a		; 32 18 c5 ;19a7
-	ld c,090h		; 0e 90 ;19aa
+	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_90		; 0e 90 ;19aa
 	ld a,(ix + player_t.side_state)		; dd 7e 01 ;19ac
 	and 001h		; e6 01 ;19af
 	jr z,@_unknown_play_sound		; 28 02 ;19b1
-	ld c,091h		; 0e 91 ;19b3
+	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_91		; 0e 91 ;19b3
 @_unknown_play_sound:
 	ld a,c			; 79 ;19b5
 	ld (psg_engine.track_request_id),a		; 32 00 de ;19b6

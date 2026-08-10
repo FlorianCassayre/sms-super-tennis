@@ -18,7 +18,7 @@ sub_load_vram_rect:
 	ld a,c			; 79 ;0475
 	or b			; b0 ;0476
 	jr nz,-		; 20 f1 ;0477
-	ld bc,l0040h		; 01 40 00 ;0479
+	ld bc,040h		; 01 40 00 ;0479
 	add hl,bc			; 09 ;047c
 	pop bc			; c1 ;047d
 	djnz sub_load_vram_rect		; 10 e4 ;047e

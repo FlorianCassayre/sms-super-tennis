@@ -32,3 +32,48 @@ sub_menu_update_ball_out_of_bounds:
 	cp (hl)			; be ;0e36
 	jr c,l0e67h		; 38 2e ;0e37
 	jr l0e6fh		; 18 34 ;0e39
+l0e3bh:
+	ld a,(0c042h)		; 3a 42 c0 ;0e3b
+	add a,a			; 87 ;0e3e
+	ld e,a			; 5f ;0e3f
+	add a,a			; 87 ;0e40
+	add a,e			; 83 ;0e41
+	ld e,a			; 5f ;0e42
+	ld d,000h		; 16 00 ;0e43
+	ld hl,l0de8h		; 21 e8 0d ;0e45
+	add hl,de			; 19 ;0e48
+	ld a,(0c509h)		; 3a 09 c5 ;0e49
+	cp (hl)			; be ;0e4c
+	jr c,l0e6bh		; 38 1c ;0e4d
+	inc hl			; 23 ;0e4f
+	cp (hl)			; be ;0e50
+	jr nc,l0e6bh		; 30 18 ;0e51
+	inc hl			; 23 ;0e53
+	ld a,(0c000h)		; 3a 00 c0 ;0e54
+	bit 7,a		; cb 7f ;0e57
+	jr z,l0e5dh		; 28 02 ;0e59
+	inc hl			; 23 ;0e5b
+	inc hl			; 23 ;0e5c
+l0e5dh:
+	ld a,(0c50bh)		; 3a 0b c5 ;0e5d
+	cp (hl)			; be ;0e60
+	jr c,l0e6bh		; 38 08 ;0e61
+	inc hl			; 23 ;0e63
+	cp (hl)			; be ;0e64
+	jr nc,l0e6bh		; 30 04 ;0e65
+l0e67h:
+	ld a,002h		; 3e 02 ;0e67
+	jr l0e7bh		; 18 10 ;0e69
+l0e6bh:
+	ld a,001h		; 3e 01 ;0e6b
+	jr l0e71h		; 18 02 ;0e6d
+l0e6fh:
+	ld a,003h		; 3e 03 ;0e6f
+l0e71h:
+	ld hl,0c000h		; 21 00 c0 ;0e71
+	res 0,(hl)		; cb 86 ;0e74
+	ld hl,0c518h		; 21 18 c5 ;0e76
+	ld (hl),002h		; 36 02 ;0e79
+l0e7bh:
+	ld (0c519h),a		; 32 19 c5 ;0e7b
+	ret			; c9 ;0e7e

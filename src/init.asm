@@ -5,7 +5,7 @@ init:
 	; Clear RAM range 0xc000-0xc03f
 	ld hl,0c000h		; 21 00 c0 ;008b
 	ld de,0c001h		; 11 01 c0 ;008e
-	ld bc,l003fh		; 01 3f 00 ;0091
+	ld bc,03fh		; 01 3f 00 ;0091
 	ld (hl),000h		; 36 00 ;0094
 	ldir		; ed b0 ;0096
 	; Sound card detection
@@ -58,7 +58,7 @@ init:
 	in a,(I_VDP_STATUS)		; db bf ;00f1
 	ld b,016h		; 06 16 ;00f3
 	ld c,0bfh		; 0e bf ;00f5
-	ld hl,l003bh		; 21 3b 00 ;00f7
+	ld hl,hardware_vdp_initial_register_values		; 21 3b 00 ;00f7
 	otir		; ed b3 ;00fa
 	ld hl,0		; 21 00 00 ;00fc
 	ld de,l002dh_palette		; 11 2d 00 ;00ff
@@ -119,3 +119,16 @@ l0237h:
 	ld a,(0c011h)		; 3a 11 c0 ;0237
 	or a			; b7 ;023a
 	jr z,l025dh		; 28 20 ;023b
+	.REPT 19
+		nop
+	.ENDR
+	ld a,010h		; 3e 10 ;0250
+	out (O_VDP_CTRL),a		; d3 bf ;0252
+	ld a,0c0h		; 3e c0 ;0254
+	out (O_VDP_CTRL),a		; d3 bf ;0256
+	ld a,(0001bh)		; 3a 1b 00 ;0258
+	out (IO_VDP_DATA),a		; d3 be ;025b
+l025dh:
+	pop af			; f1 ;025d
+	ei			; fb ;025e
+	ret			; c9 ;025f

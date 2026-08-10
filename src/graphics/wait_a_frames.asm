@@ -1,7 +1,6 @@
 sub_wait_a_frames:
 	push af			; f5 ;35e6
 	push bc			; c5 ;35e7
-l35e8h:
 	push de			; d5 ;35e8
 	push hl			; e5 ;35e9
 	ld b,a			; 47 ;35ea

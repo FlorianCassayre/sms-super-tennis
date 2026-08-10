@@ -34,7 +34,7 @@ l3627h:
 	pop bc			; c1 ;364b
 	djnz -		; 10 ea ;364c
 	ld hl,(0c4a8h)		; 2a a8 c4 ;364e
-	ld de,l0040h		; 11 40 00 ;3651
+	ld de,040h		; 11 40 00 ;3651
 	add hl,de			; 19 ;3654
 	push hl			; e5 ;3655
 	ld de,03f00h		; 11 00 3f ;3656
@@ -108,3 +108,27 @@ l3627h:
 	ld a,060h		; 3e 60 ;3700
 	call sub_wait_a_frames		; cd e6 35 ;3702
 	ret			; c9 ;3705
+
+l3706h:
+	.DB $36		;3706
+	.DB $01		;3707
+l3708h_palette:
+	.DB $3a		;3708
+	.DB $00		;3709
+	.DB $3f		;370a
+	.DB $2f		;370b
+	.DB $03		;370c
+	.DB $2a		;370d
+	.DB $0b		;370e
+	.DB $16		;370f
+	.DB $25		;3710
+	.DB $00		;3711
+	.DB $00		;3712
+	.DB $00		;3713
+	.DB $00		;3714
+	.DB $00		;3715
+	.DB $00		;3716
+	.DB $00		;3717
+	.DB $3a		;3718
+l3719h_palette:
+	.DB $06		;3719
