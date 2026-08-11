@@ -1,4 +1,4 @@
-sub_2c13h_ball_state:
+sub_game_racket_evaluate_swing_type:
 	ld a,003h		; 3e 03 ;2c13
 	bit 0,(ix+028h)		; dd cb 28 46 ;2c15
 	ret z			; c8 ;2c19

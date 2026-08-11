@@ -1,6 +1,6 @@
 audio_command_routine_stop_alt:
 	ld a,080h		; 3e 80 ;7d0e
-	ld (psg_engine._unknown),a		; 32 04 de ;7d10
+	ld (psg_engine.maybe_end_track),a		; 32 04 de ;7d10
 	jp audio_command_routine_end_track		; c3 5e 7d ;7d13
 
 audio_command_routine_add_transpose:

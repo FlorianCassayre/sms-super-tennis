@@ -85,7 +85,7 @@ l3249h:
 	cp 5		; fe 05 ;325a
 	jr c,l3265h		; 38 07 ;325c
 l325eh:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_wonn		; 3e 82 ;325e
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_won		; 3e 82 ;325e
 	ld (psg_engine.track_request_id),a		; 32 00 de ;3260
 	jr l3276h		; 18 11 ;3263
 l3265h:
@@ -174,10 +174,10 @@ l3303h:
 	ld de,1		; 11 01 00 ;330c
 	jr l3318h_write_vdp_word		; 18 07 ;330f
 l3311h:
-	ld hl,(0c4a8h)		; 2a a8 c4 ;3311
+	ld hl,(score.winning_set_address)		; 2a a8 c4 ;3311
 	ld d,(hl)			; 56 ;3314
-	inc d			; 14 ;3315
-	ld e,001h		; 1e 01 ;3316
+	inc d			; 14 ;3315 ; Because ASCII_ZERO & $ff == $01
+	ld e,ASCII_ZERO >> 8		; 1e 01 ;3316
 l3318h_write_vdp_word:
 	ld hl,(score.blinking_set_vram_addr)		; 2a a0 c4 ;3318
 	ld a,l			; 7d ;331b

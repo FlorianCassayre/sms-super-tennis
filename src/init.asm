@@ -51,7 +51,7 @@ init:
 	ld (0c004h),a		; 32 04 c0 ;00e1
 	ld hl,0c040h		; 21 40 c0 ;00e4
 	ld de,0c041h		; 11 41 c0 ;00e7
-	ld bc,l1fbfh		; 01 bf 1f ;00ea
+	ld bc,01fbfh		; 01 bf 1f ;00ea
 	ld (hl),000h		; 36 00 ;00ed
 	ldir		; ed b0 ;00ef
 	; VDP initialization
@@ -68,7 +68,7 @@ init:
 	ld de,l002dh_palette		; 11 2d 00 ;010a
 	ld b,1		; 06 01 ;010d
 	call sub_graphics_palette_load		; cd 81 04 ;010f
-	ld de,l2000h		; 11 00 20 ;0112
+	ld de,02000h		; 11 00 20 ;0112
 	ld hl,data_planes_9_0		; 21 43 5b ;0115
 	call sub_rle_decompress_bitplanes_to_vram		; cd b5 04 ;0118
 	ld de,0		; 11 00 00 ;011b

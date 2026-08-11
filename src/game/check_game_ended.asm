@@ -7,5 +7,5 @@ sub_check_game_ended:
 	ld a,005h		; 3e 05 ;0d30
 	ld (0c007h),a		; 32 07 c0 ;0d32
 	ld hl,000b4h		; 21 b4 00 ;0d35
-	ld (0c08ah),hl		; 22 8a c0 ;0d38
+	ld (game.pause_counter),hl		; 22 8a c0 ;0d38
 	jp sub_draw_game_end		; c3 c4 33 ;0d3b

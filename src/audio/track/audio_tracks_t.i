@@ -1,6 +1,6 @@
 .STRUCT audio_tracks_t
 	track_theme_game_start DB	; 81
-	track_theme_game_wonn DB	; 82
+	track_theme_game_won DB	; 82
 	track_theme_game_lost DB	; 83
 	track_theme_set_won DB	; 84
 	track_theme_set_lost DB	; 85

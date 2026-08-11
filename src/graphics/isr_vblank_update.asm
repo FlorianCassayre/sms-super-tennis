@@ -39,12 +39,12 @@ isr_vblank_update:
 	ld a,(0c089h)		; 3a 89 c0 ;01a5
 	rlca			; 07 ;01a8
 	jp nc,l022fh		; d2 2f 02 ;01a9
-	ld hl,l1fc0h		; 21 c0 1f ;01ac
+	ld hl,01fc0h		; 21 c0 1f ;01ac
 	call sub_set_vdp_write_addr		; cd 26 04 ;01af
 	ld hl,(0c514h)		; 2a 14 c5 ;01b2
 	ld b,020h		; 06 20 ;01b5
 	otir		; ed b3 ;01b7
-	ld hl,l1fe0h		; 21 e0 1f ;01b9
+	ld hl,01fe0h		; 21 e0 1f ;01b9
 	call sub_set_vdp_write_addr		; cd 26 04 ;01bc
 	ld hl,(0c512h)		; 2a 12 c5 ;01bf
 	ld b,020h		; 06 20 ;01c2

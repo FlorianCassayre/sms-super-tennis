@@ -27,12 +27,12 @@ l1c78h:
 	jr nz,l1c92h		; 20 14 ;1c7c
 	ld (ix+022h),000h		; dd 36 22 00 ;1c7e
 	ld (ix+023h),0ffh		; dd 36 23 ff ;1c82
-	call sub_ball_racket_hit		; cd bf 2b ;1c86
+	call sub_game_racket_update_hitbox		; cd bf 2b ;1c86
 	ld a,(ix+016h)		; dd 7e 16 ;1c89
 	ld (ix+017h),a		; dd 77 17 ;1c8c
-	ld (ix + player_t._unknown_20),a		; dd 77 20 ;1c8f
+	ld (ix + player_t.render_facing_dir),a		; dd 77 20 ;1c8f
 l1c92h:
-	jp sub_animate		; c3 69 2a ;1c92
+	jp sub_game_player_update_animation		; c3 69 2a ;1c92
 l1c95h:
 	ld (ix+025h),001h		; dd 36 25 01 ;1c95
 	jp l1cf7h		; c3 f7 1c ;1c99
@@ -51,7 +51,7 @@ l1caah:
 	and a			; a7 ;1cb5
 	jr z,l1cc6h		; 28 0e ;1cb6
 	push bc			; c5 ;1cb8
-	call sub_ball_racket_hit		; cd bf 2b ;1cb9
+	call sub_game_racket_update_hitbox		; cd bf 2b ;1cb9
 	pop bc			; c1 ;1cbc
 	ld a,(ix+016h)		; dd 7e 16 ;1cbd
 	ld b,(ix+017h)		; dd 46 17 ;1cc0
@@ -63,7 +63,7 @@ l1cc6h:
 	jr z,l1ceah		; 28 1f ;1cc9
 	jr l1cdch		; 18 0f ;1ccb
 l1ccdh:
-	call sub_ball_racket_hit		; cd bf 2b ;1ccd
+	call sub_game_racket_update_hitbox		; cd bf 2b ;1ccd
 	ld a,(ix+016h)		; dd 7e 16 ;1cd0
 	ld b,(ix+017h)		; dd 46 17 ;1cd3
 	cp b			; b8 ;1cd6
@@ -76,8 +76,8 @@ l1cdch:
 	ld (ix+022h),002h		; dd 36 22 02 ;1ce2
 	ld (ix+023h),0ffh		; dd 36 23 ff ;1ce6
 l1ceah:
-	call sub_move_players		; cd a1 26 ;1cea
-	jp sub_animate		; c3 69 2a ;1ced
+	call sub_game_player_apply_movement		; cd a1 26 ;1cea
+	jp sub_game_player_update_animation		; c3 69 2a ;1ced
 l1cf0h:
 	ld (ix+025h),005h		; dd 36 25 05 ;1cf0
 	jp l1d57h		; c3 57 1d ;1cf4
@@ -90,13 +90,13 @@ l1d00h:
 	ld (ix+025h),a		; dd 77 25 ;1d00
 	ld (ix+022h),00ah		; dd 36 22 0a ;1d03
 	ld (ix+023h),0ffh		; dd 36 23 ff ;1d07
-	call sub_ball_racket_hit		; cd bf 2b ;1d0b
+	call sub_game_racket_update_hitbox		; cd bf 2b ;1d0b
 	ld a,(ix+016h)		; dd 7e 16 ;1d0e
 	ld (ix+017h),a		; dd 77 17 ;1d11
 	ld (ix+020h),a		; dd 77 20 ;1d14
 l1d17h:
-	call sub_move_players		; cd a1 26 ;1d17
-	call sub_animate		; cd 69 2a ;1d1a
+	call sub_game_player_apply_movement		; cd a1 26 ;1d17
+	call sub_game_player_update_animation		; cd 69 2a ;1d1a
 	ld a,(ix+023h)		; dd 7e 23 ;1d1d
 	and a			; a7 ;1d20
 	ret nz			; c0 ;1d21
@@ -110,13 +110,13 @@ l1d27h:
 	ld (ix+025h),a		; dd 77 25 ;1d30
 	ld (ix+022h),00ah		; dd 36 22 0a ;1d33
 	ld (ix+023h),0ffh		; dd 36 23 ff ;1d37
-	call sub_ball_racket_hit		; cd bf 2b ;1d3b
+	call sub_game_racket_update_hitbox		; cd bf 2b ;1d3b
 	ld a,(ix+016h)		; dd 7e 16 ;1d3e
 	ld (ix+017h),a		; dd 77 17 ;1d41
 	ld (ix+020h),a		; dd 77 20 ;1d44
 l1d47h:
-	call sub_move_players		; cd a1 26 ;1d47
-	call sub_animate		; cd 69 2a ;1d4a
+	call sub_game_player_apply_movement		; cd a1 26 ;1d47
+	call sub_game_player_update_animation		; cd 69 2a ;1d4a
 	ld a,(ix+023h)		; dd 7e 23 ;1d4d
 	and a			; a7 ;1d50
 	ret nz			; c0 ;1d51
@@ -127,14 +127,14 @@ l1d57h:
 	bit 7,a		; cb 7f ;1d5a
 	jr nz,l1d73h		; 20 15 ;1d5c
 	set 7,(ix+025h)		; dd cb 25 fe ;1d5e
-	call sub_ball_racket_hit		; cd bf 2b ;1d62
+	call sub_game_racket_update_hitbox		; cd bf 2b ;1d62
 	ld a,(ix+016h)		; dd 7e 16 ;1d65
 	ld (ix+020h),a		; dd 77 20 ;1d68
 	ld (ix+022h),00bh		; dd 36 22 0b ;1d6b
 	ld (ix+023h),0ffh		; dd 36 23 ff ;1d6f
 l1d73h:
-	call sub_move_players		; cd a1 26 ;1d73
-	call sub_animate		; cd 69 2a ;1d76
+	call sub_game_player_apply_movement		; cd a1 26 ;1d73
+	call sub_game_player_update_animation		; cd 69 2a ;1d76
 	ld a,(ix+023h)		; dd 7e 23 ;1d79
 	and a			; a7 ;1d7c
 	ret nz			; c0 ;1d7d

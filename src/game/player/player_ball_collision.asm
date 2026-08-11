@@ -104,13 +104,13 @@ sub_racket_hit_trajectory:
 	ld hl,0c000h		; 21 00 c0 ;194c
 	res 0,(hl)		; cb 86 ;194f
 @hit_success:
-	set 7,(ix + player_t.unknown_hit_flags)		; dd cb 1d fe ;1951
+	set 7,(ix + player_t.racket_contact_flag)		; dd cb 1d fe ;1951
 	xor a			; af ;1955
 	ld (players.ball_hit_flag),a		; 32 03 c3 ;1956
 	ld (ball.bounces_count),a		; 32 17 c5 ;1959
 	ld (ball.foul_triggered_flag),a		; 32 19 c5 ;195c
 	ld a,(ix + player_t.side_state)		; dd 7e 01 ;195f
-	ld (state.last_hit_player_id),a		; 32 42 c0 ;1962
+	ld (state.ball_x_dir_flag),a		; 32 42 c0 ;1962
 	scf			; 37 ;1965
 	ret			; c9 ;1966
 @miss:

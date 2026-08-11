@@ -10,7 +10,7 @@ l0b36h:
 	inc hl			; 23 ;0b37
 	ld (hl),000h		; 36 00 ;0b38
 	ret			; c9 ;0b3a
-l0b3bh:
+l0b3bh_prepare_serve:
 	ld hl,score.game_lost		; 21 95 c4 ;0b3b
 	ld a,0f8h		; 3e f8 ;0b3e
 	and (hl)			; a6 ;0b40

@@ -45,7 +45,7 @@ sub_update_ball:
 	ret nz			; c0 ;150c
 	ld (hl),002h		; 36 02 ;150d
 @update_horizontal_axes:
-	ld a,(ball.unknown_hit_flags)		; 3a 16 c5 ;150f
+	ld a,(ball.racket_contact_flag)		; 3a 16 c5 ;150f
 	bit 6,a		; cb 77 ;1512
 	ret nz			; c0 ;1514
 	call sub_update_ball_state		; cd af 16 ;1515

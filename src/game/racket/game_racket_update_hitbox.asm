@@ -1,4 +1,4 @@
-sub_ball_racket_hit:
+sub_game_racket_update_hitbox:
 	ld a,(ix+027h)		; dd 7e 27 ;2bbf
 	and a			; a7 ;2bc2
 	jr z,l2bf2h		; 28 2d ;2bc3

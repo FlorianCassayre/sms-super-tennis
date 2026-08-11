@@ -44,9 +44,9 @@ sub_game_player_update_server_state:
 	ld (0c400h),a		; 32 00 c4 ;1ab8
 @update_loop:
 	bit 0,(ix + player_t.side_state)		; dd cb 01 46 ;1abb
-	call nz,sub_1e25h_cpu		; c4 25 1e ;1abf
-	ld (ix + player_t._unknown_20),000h		; dd 36 20 00 ;1ac2
-	call sub_animate		; cd 69 2a ;1ac6
+	call nz,sub_game_cpu_update		; c4 25 1e ;1abf
+	ld (ix + player_t.render_facing_dir),000h		; dd 36 20 00 ;1ac2
+	call sub_game_player_update_animation		; cd 69 2a ;1ac6
 	ld a,(ix + player_t.animation_flags_or_frame)		; dd 7e 23 ;1ac9
 	and a			; a7 ;1acc
 	jr z,@check_timer		; 28 08 ;1acd
@@ -54,7 +54,7 @@ sub_game_player_update_server_state:
 	ld (ix + player_t.animation_flags_or_frame),0ffh		; dd 36 23 ff ;1ad3
 @check_timer:
 	call sub_1b9fh_decrement_timer		; cd 9f 1b ;1ad7
-	jp nz,sub_move_players		; c2 a1 26 ;1ada
+	jp nz,sub_game_player_apply_movement		; c2 a1 26 ;1ada
 	ld (ix + player_t.type),004h		; dd 36 02 04 ;1add
 	ret			; c9 ;1ae1
 

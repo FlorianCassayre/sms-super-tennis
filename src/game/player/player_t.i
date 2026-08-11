@@ -11,26 +11,36 @@
     _unknown_2 DB		; $13 ; ???
     y_pos_cache DB		; $14 ; Cached Y high-byte
     input_dirs DB		; $15 ; Input: requested movement bitmask (joypad/CPU)
-    _unknown_3 DSB 3		; $16 ; ???
+    facing_dir DB		; $16
+    prev_facing_dir DB		; $17
+    hit_readiness DB		; $18
     state_flags DB		; $19
     time_before_serve DB		; $1a
     _unknown_4 DSB 2		; $1b ; ???
-    unknown_hit_flags DB	; $1d
+    racket_contact_flag DB	; $1d
     animation_frame DB		; $1e
-    _unknown_5 DB		; $1f ; ???
-    _unknown_20 DB		; $20 ; ???
+    swing_type_id DB		; $1f ; ???
+    render_facing_dir DB		; $20 ; ???
     _unknown_6 DB		; $21 ; ???
     animation_id DB		; $22
     animation_flags_or_frame DB		; $23
-    _unknown_7 DSB 5		; $24 ; ???
+    _unknown_7 DB		; $24 ; ???
+    action_state DB		; $25
+    _unknown_8 DB		; $26 ; ???
+    ball_incoming DB		; $27
+    shot_button DB		; $28
     state_timer_low DB		; $29 ; ???
     state_timer_high DB		; $2a ; ???
     maybe_sprite_id DB		; $2b ; ???
-    _unknown_8 DB		; $2c ; ???
+    _unknown_9 DB		; $2c ; ???
     tile_collision DB		; $2d ; Background tilemap collision mask
     y_div_pos DB		; $2e ; Appears to be a "rough" position spanning only a few units
     x_div_pos DB		; $2f ; Same
-    _unknown_9 DSB 12		; $3a ; ???
+    cpu_state DB		; $30
+    cpu_state_timer DB		; $31
+    _unknown_10 DB		; $32 ; ???
+    cpu_sub_state DB		; $33
+    _unknown_11 DSB 8		; $34 ; ???
     cache_y_min DW		; $3c ; Cached Y boundary top (Low = $3C, High = $3D)
     cache_y_max DW		; $3e ; Cached Y boundary bottom (Low = $3E, High = $3F)
 .ENDST

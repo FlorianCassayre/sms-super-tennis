@@ -1,4 +1,4 @@
-sub_animate:
+sub_game_player_update_animation:
 	ld a,(ix+023h)		; dd 7e 23 ;2a69
 	and a			; a7 ;2a6c
 	ret z			; c8 ;2a6d
@@ -20,7 +20,7 @@ sub_animate:
 	jr z,++		; 28 02 ;2a8b
 	ld b,00ch		; 06 0c ;2a8d
 ++:
-	ld a,(ix + player_t._unknown_20)		; dd 7e 20 ;2a8f
+	ld a,(ix + player_t.render_facing_dir)		; dd 7e 20 ;2a8f
 	and 001h		; e6 01 ;2a92
 	jr z,+		; 28 02 ;2a94
 	ld a,024h		; 3e 24 ;2a96

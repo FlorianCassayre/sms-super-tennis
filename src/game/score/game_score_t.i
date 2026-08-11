@@ -26,6 +26,8 @@
 	_unknown_5 DSB 2		;c4a2
 	blinking_set_frame_counter DB		;c4a4
     announcement DB		;c4a5
+    _unknown_6 DSB 2
+    winning_set_address DB		;c4a8
 .ENDST
 
 .ENUM $c480

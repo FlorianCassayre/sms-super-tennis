@@ -3,12 +3,12 @@ sub_compute_ball_x_velocity:
 	add a,a			; 87 ;13a9
 	ld c,a			; 4f ;13aa
 	ld b,000h		; 06 00 ;13ab
-	ld hl,l13e6h		; 21 e6 13 ;13ad
+	ld hl,table_ball_x_vel_pointers		; 21 e6 13 ;13ad
 	add hl,bc			; 09 ;13b0
 	ld e,(hl)			; 5e ;13b1
 	inc hl			; 23 ;13b2
 	ld d,(hl)			; 56 ;13b3
-	ld a,(0c046h)		; 3a 46 c0 ;13b4
+	ld a,(state.ball_hit_type)		; 3a 46 c0 ;13b4
 	add a,a			; 87 ;13b7
 	ld c,a			; 4f ;13b8
 	add a,a			; 87 ;13b9
@@ -20,9 +20,9 @@ sub_compute_ball_x_velocity:
 	ld c,a			; 4f ;13bf
 	ld a,(ix+020h)		; dd 7e 20 ;13c0
 	sub 00bh		; d6 0b ;13c3
-	jr nc,l13c9h		; 30 02 ;13c5
+	jr nc,@skip_add		; 30 02 ;13c5
 	add a,00bh		; c6 0b ;13c7
-l13c9h:
+@skip_add:
 	add a,a			; 87 ;13c9
 	add a,c			; 81 ;13ca
 	ld c,a			; 4f ;13cb
@@ -34,21 +34,21 @@ l13c9h:
 	ld d,(hl)			; 56 ;13d2
 	ld a,(0c042h)		; 3a 42 c0 ;13d3
 	and 001h		; e6 01 ;13d6
-	jr z,+		; 28 07 ;13d8
+	jr z,@store_vel		; 28 07 ;13d8
 	xor a			; af ;13da
 	ld hl,0		; 21 00 00 ;13db
 	sbc hl,de		; ed 52 ;13de
 	ex de,hl			; eb ;13e0
-+:
+@store_vel:
 	ld (ball.x_vel),de		; ed 53 0e c5 ;13e1
 	ret			; c9 ;13e5
 
-l13e6h:
-	.DW l13eeh		;13e6
-	.DW l1430h		;13e8
-	.DW l1472h		;13ea
-	.DW l13eeh		;13ec
-l13eeh:
+table_ball_x_vel_pointers:
+	.DW table_ball_x_vel_pointers_0		;13e6
+	.DW table_ball_x_vel_pointers_1		;13e8
+	.DW table_ball_x_vel_pointers_2		;13ea
+	.DW table_ball_x_vel_pointers_0		;13ec
+table_ball_x_vel_pointers_0:
 	.DW $0082		;13ee
 	.DW $0066		;13f0
 	.DW $004c		;13f2
@@ -83,7 +83,7 @@ l1400h:
 	.DW $ff68		;142a
 	.DW $ff34		;142c
 	.DW $fefc		;142e
-l1430h:
+table_ball_x_vel_pointers_1:
 	.DW $0051		;1430
 	.DW $003f		;1432
 	.DW $002f		;1434
@@ -117,7 +117,7 @@ l1430h:
 	.DW $ffa1		;146c
 	.DW $ff81		;146e
 	.DW $ff5e		;1470
-l1472h:
+table_ball_x_vel_pointers_2:
 	.DW $00e5		;1472
 	.DW $0124		;1474
 	.DW $00ab		;1476

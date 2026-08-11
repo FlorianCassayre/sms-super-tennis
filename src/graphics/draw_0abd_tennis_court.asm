@@ -1,4 +1,4 @@
-sub_draw_tennis_court:
+sub_0abd_draw_tennis_court:
 	di			; f3 ;0abd
 	call sub_disable_display		; cd a4 03 ;0abe
 	ld hl,0		; 21 00 00 ;0ac1
@@ -23,7 +23,7 @@ sub_draw_tennis_court:
 	ld a,(0c04ah)		; 3a 4a c0 ;0af7
 	rrca			; 0f ;0afa
 	and 007h		; e6 07 ;0afb
-	ld (0c046h),a		; 32 46 c0 ;0afd
+	ld (state.ball_hit_type),a		; 32 46 c0 ;0afd
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_start		; 3e 81 ;0b00
 	ld (psg_engine.track_request_id),a		; 32 00 de ;0b02
 	ld a,005h		; 3e 05 ;0b05

@@ -1,4 +1,4 @@
-sub_1548h:
+sub_game_ball_sprite_perspective_x:
 	ld a,(0c509h)		; 3a 09 c5 ;1548
 	ld e,a			; 5f ;154b
 	ld d,000h		; 16 00 ;154c
@@ -21,12 +21,12 @@ sub_1548h:
 	xor a			; af ;156c
 	sbc hl,de		; ed 52 ;156d
 	push af			; f5 ;156f
-	jr nc,l1579h		; 30 07 ;1570
+	jr nc,@calc_x		; 30 07 ;1570
 	xor a			; af ;1572
 	ex de,hl			; eb ;1573
 	ld hl,0		; 21 00 00 ;1574
 	sbc hl,de		; ed 52 ;1577
-l1579h:
+@calc_x:
 	push hl			; e5 ;1579
 	exx			; d9 ;157a
 	pop bc			; c1 ;157b
@@ -35,18 +35,18 @@ l1579h:
 	ld d,e			; 53 ;1580
 	ld e,h			; 5c ;1581
 	ld hl,08000h		; 21 00 80 ;1582
-	jr nc,l158eh		; 30 07 ;1585
+	jr nc,@subtract_x		; 30 07 ;1585
 	xor a			; af ;1587
 	adc hl,de		; ed 5a ;1588
-	jr c,l1597h		; 38 0b ;158a
-	jr l1593h		; 18 05 ;158c
-l158eh:
+	jr c,@out_of_bounds		; 38 0b ;158a
+	jr @store_x		; 18 05 ;158c
+@subtract_x:
 	xor a			; af ;158e
 	sbc hl,de		; ed 52 ;158f
-	jr c,l1597h		; 38 04 ;1591
-l1593h:
+	jr c,@out_of_bounds		; 38 04 ;1591
+@store_x:
 	ld (ix+00dh),h		; dd 74 0d ;1593
 	ret			; c9 ;1596
-l1597h:
+@out_of_bounds:
 	ld (ix+00bh),0d8h		; dd 36 0b d8 ;1597
 	ret			; c9 ;159b

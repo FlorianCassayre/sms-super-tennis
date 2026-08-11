@@ -1,4 +1,4 @@
-sub_23aah_ball:
+sub_game_cpu_evaluate_y_dist_2:
 	ld a,(0c518h)		; 3a 18 c5 ;23aa
 	and a			; a7 ;23ad
 	ld b,000h		; 06 00 ;23ae

@@ -45,7 +45,7 @@ sub_update_ball_state:
 	ret c			; d8 ;16fb
 	cp 0c9h		; fe c9 ;16fc
 	ret nc			; d0 ;16fe
-	ld a,(ball.unknown_hit_flags)		; 3a 16 c5 ;16ff
+	ld a,(ball.racket_contact_flag)		; 3a 16 c5 ;16ff
 	bit 7,a		; cb 7f ;1702
 	ret nz			; c0 ;1704
 	ld a,(ball.z_pos + 1)		; 3a 01 c5 ;1705
@@ -53,7 +53,7 @@ sub_update_ball_state:
 	ret nc			; d0 ;170a
 	ld hl,08000h		; 21 00 80 ;170b
 	ld (ball.y_pos),hl		; 22 08 c5 ;170e
-	ld hl,ball.unknown_hit_flags		; 21 16 c5 ;1711
+	ld hl,ball.racket_contact_flag		; 21 16 c5 ;1711
 	set 7,(hl)		; cb fe ;1714
 	set 6,(hl)		; cb f6 ;1716
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_ball_net		; 3e 8e ;1718

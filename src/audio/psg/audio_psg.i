@@ -5,7 +5,7 @@
 	state DB		;de01
 	tempo_countdown DB		;de02
 	priority_flag DB		;de03
-	_unknown DB		;de04
+	maybe_end_track DB		;de04
 .ENDST
 
 .equ PSG_CHANNELS 7

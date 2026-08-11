@@ -334,7 +334,7 @@ sub_0711h_entity_action_dispatch:
 	ld hl,l0732h		; 21 32 07 ;0728
 	; Push return address before jumping
 	push hl			; e5 ;072b
-	ld hl,l0759h_table		; 21 59 07 ;072c
+	ld hl,l0759h_table - 2		; 21 59 07 ;072c
 	jp l0807h_game_fsm		; c3 07 08 ;072f
 l0732h:
 	call sub_0642h_animation_loop		; cd 42 06 ;0732
@@ -354,13 +354,13 @@ l0732h:
 	ld (de),a			; 12 ;074b
 	jp l051ah		; c3 1a 05 ;074c
 l074fh_memory_table:
-	.DW $c200		;074f
-	.DW $c240		;0751
-	.DW $c280		;0753
-	.DW $c2c0		;0755
-	.DW $c300		;0757
-l0759h_table:
+	.DW player.1.bottom		;074f
+	.DW player.1.top		;0751
+	.DW player.2.bottom		;0753
+	.DW player.2.top		;0755
+	.DW players		;0757
 	.DW $c340		;0759
+l0759h_table:
 	.DW sub_23ffh		;075b
 	.DW l1bb0h		;075d
 	.DW sub_game_player_update_server_state		;075f
@@ -379,7 +379,7 @@ l0759h_table:
 	.DW sub_1bafh_nop		;0779
 	.DW sub_1bafh_nop		;077b
 	.DW sub_1bafh_nop		;077d
-	.DW sub_247ch		;077f
+	.DW sub_game_player_update		;077f
 	.DW l1c2bh		;0781
 	.DW l0f1ah		;0783
 	.DW l0f1dh		;0785
@@ -393,30 +393,24 @@ l0759h_table:
 	.INCLUDE "io/joy_debounce.asm"
 	.INCLUDE "game/game_fsm.asm"
 l0811h:
-	.DW l0eb0h		;0811
-	.DW l0821h		;0813
-	.DW l08c0h		;0815
-	.DW l0898h		;0817
-	.DW l0b18h		;0819
-	.DW l0b3bh		;081b
+	.DW sub_init_splash_screen		;0811
+	.DW sub_draw_splash_screen		;0813
+	.DW sub_draw_settings_menu		;0815
+	.DW sub_init_tennis_court		;0817
+	.DW sub_draw_tennis_court		;0819
+	.DW l0b3bh_prepare_serve		;081b
 	.DW l0c6bh		;081d
-	.DW sub_clear_ram		;081f
-	.INCLUDE "game/init_splash_screen.asm"
+	.DW sub_reset_state		;081f
+	.INCLUDE "game/draw_splash_screen.asm"
+	.INCLUDE "game/init_tennis_court.asm"
 	.INCLUDE "game/reset_state.asm"
+	.INCLUDE "game/draw_settings_menu.asm"
 	.INCLUDE "game/gui/handle_gui_control.asm"
 	.INCLUDE "graphics/vdp_build_sprite_buffer.asm"
 	.INCLUDE "graphics/0a85h_sprite_offset.asm"
 	.INCLUDE "math/mul_a_c_add_b.asm"
-	.INCLUDE "graphics/draw_tennis_court.asm"
-l0b18h:
-	ld a,(0c518h)		; 3a 18 c5 ;0b18
-	or a			; b7 ;0b1b
-	jr nz,sub_0b28h		; 20 0a ;0b1c
-l0b1eh_update_ball:
-	call sub_check_player_location		; cd 87 17 ;0b1e
-	call sub_update_ball		; cd b4 14 ;0b21
-	call sub_0711h_entity_action_dispatch		; cd 11 07 ;0b24
-	ret			; c9 ;0b27
+	.INCLUDE "graphics/draw_0abd_tennis_court.asm"
+	.INCLUDE "game/draw_tennis_court.asm"
 	.INCLUDE "game/0b28h.asm"
 l0c67h:
 	ld (bc),a			; 02 ;0c67
@@ -436,7 +430,7 @@ l0c6bh:
 	jp z,l0d3eh		; ca 3e 0d ;0c7d
 	ld (hl),001h		; 36 01 ;0c80
 	ld hl,00078h		; 21 78 00 ;0c82
-	ld (0c08ah),hl		; 22 8a c0 ;0c85
+	ld (game.pause_counter),hl		; 22 8a c0 ;0c85
 	call sub_menu_highlight_cursor		; cd 84 0d ;0c88
 	jp l2ee1h_dispatch		; c3 e1 2e ;0c8b
 l0c8eh:
@@ -609,36 +603,7 @@ l0e00h:
 	.DB $80		;0e03
 	.INCLUDE "game/gui/sub_menu_button_press_test.asm"
 	.INCLUDE "game/ball/update_ball_out_of_bounds.asm"
-l0eb0h:
-	ld hl,0c006h		; 21 06 c0 ;0eb0
-	bit 6,(hl)		; cb 76 ;0eb3
-	jr nz,l0eefh		; 20 38 ;0eb5
-	set 6,(hl)		; cb f6 ;0eb7
-	ld a,(state.hardware_type)		; 3a 10 c0 ;0eb9
-	or a			; b7 ;0ebc
-	jr nz,l0ef3h_hardware_sms		; 20 34 ;0ebd
-	di			; f3 ;0ebf
-	call sub_disable_display		; cd a4 03 ;0ec0
-	call sub_init_background_name_table		; cd 88 03 ;0ec3
-	ld hl,l2c00h		; 21 00 2c ;0ec6
-	ld de,0c76ch		; 11 6c c7 ;0ec9
-	ld bc,224		; 01 e0 00 ;0ecc
-	ld a,001h		; 3e 01 ;0ecf
-	call sub_cp_1bit_ram_vram		; cd 92 04 ;0ed1
-	ld hl,03a8eh		; 21 8e 3a ;0ed4
-	ld de,0c720h		; 11 20 c7 ;0ed7
-	ld bc,(2 << 8) | 19		; 01 13 02 ;0eda
-	call sub_load_vram_rect		; cd 64 04 ;0edd
-	xor a			; af ;0ee0
-	ld (0c011h),a		; 32 11 c0 ;0ee1
-	call sub_enable_display		; cd a0 03 ;0ee4
-	ei			; fb ;0ee7
-	ld hl,000f0h		; 21 f0 00 ;0ee8
-	ld (0c08ah),hl		; 22 8a c0 ;0eeb
-	ret			; c9 ;0eee
-l0eefh:
-	call sub_decrement_pause_counter		; cd ad 03 ;0eef
-	ret nz			; c0 ;0ef2
+	.INCLUDE "game/init_splash_screen.asm"
 l0ef3h_hardware_sms:
 	ld hl,0c006h		; 21 06 c0 ;0ef3
 	ld (hl),081h		; 36 81 ;0ef6
@@ -660,7 +625,7 @@ l0f02h:
 	ld b,1		; 06 01 ;0f15
 	jp sub_graphics_palette_load		; c3 81 04 ;0f17
 l0f1ah:
-	jp sub_1548h		; c3 48 15 ;0f1a
+	jp sub_game_ball_sprite_perspective_x		; c3 48 15 ;0f1a
 l0f1dh:
 	ld a,(0c30dh)		; 3a 0d c3 ;0f1d
 	ld (ix+00dh),a		; dd 77 0d ;0f20
@@ -724,7 +689,7 @@ l0f99h:
 	ld hl,0c000h		; 21 00 c0 ;0f9d
 	res 0,(hl)		; cb 86 ;0fa0
 l0fa2h:
-	jp sub_1548h		; c3 48 15 ;0fa2
+	jp sub_game_ball_sprite_perspective_x		; c3 48 15 ;0fa2
 l0fa5h:
 	ld hl,l1300h		; 21 00 13 ;0fa5
 	ld (ball.z_pos),hl		; 22 00 c5 ;0fa8
@@ -785,7 +750,7 @@ l0ff6h:
 	sbc hl,de		; ed 52 ;0ff7
 l0ff9h:
 	ld (0c50ah),hl		; 22 0a c5 ;0ff9
-	jp sub_1548h		; c3 48 15 ;0ffc
+	jp sub_game_ball_sprite_perspective_x		; c3 48 15 ;0ffc
 l0fffh:
 	.DB $00		;0fff
 	.DB $d3		;1000
@@ -823,7 +788,7 @@ l101fh:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;101f
 	ld (psg_engine.track_request_id),a		; 32 00 de ;1021
 	ld hl,l10ebh		; 21 eb 10 ;1024
-	ld a,(0c046h)		; 3a 46 c0 ;1027
+	ld a,(state.ball_hit_type)		; 3a 46 c0 ;1027
 	add a,a			; 87 ;102a
 	ld e,a			; 5f ;102b
 	ld d,000h		; 16 00 ;102c
@@ -1188,7 +1153,7 @@ l11bfh:
 	jr c,l11c9h		; 38 03 ;11c4
 	ld hl,l1209h		; 21 09 12 ;11c6
 l11c9h:
-	ld a,(0c046h)		; 3a 46 c0 ;11c9
+	ld a,(state.ball_hit_type)		; 3a 46 c0 ;11c9
 	add a,a			; 87 ;11cc
 	add a,a			; 87 ;11cd
 	ld c,a			; 4f ;11ce
@@ -1212,7 +1177,7 @@ l11e7h:
 	ld (ball.y_vel),de		; ed 53 0c c5 ;11e7
 	ld (ball.z_vel),bc		; ed 43 06 c5 ;11eb
 	ld hl,l1221h		; 21 21 12 ;11ef
-	ld a,(0c046h)		; 3a 46 c0 ;11f2
+	ld a,(state.ball_hit_type)		; 3a 46 c0 ;11f2
 	add a,a			; 87 ;11f5
 	ld c,a			; 4f ;11f6
 	ld b,000h		; 06 00 ;11f7
@@ -1261,7 +1226,7 @@ l1227h:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_8a		; 3e 8a ;1227
 	ld (psg_engine.track_request_id),a		; 32 00 de ;1229
 	ld hl,l1260h		; 21 60 12 ;122c
-	ld a,(0c046h)		; 3a 46 c0 ;122f
+	ld a,(state.ball_hit_type)		; 3a 46 c0 ;122f
 	add a,a			; 87 ;1232
 	add a,a			; 87 ;1233
 	ld c,a			; 4f ;1234
@@ -1305,7 +1270,7 @@ l126ch:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_high		; 3e 8b ;126c
 	ld (psg_engine.track_request_id),a		; 32 00 de ;126e
 	ld hl,l12c0h		; 21 c0 12 ;1271
-	ld a,(0c046h)		; 3a 46 c0 ;1274
+	ld a,(state.ball_hit_type)		; 3a 46 c0 ;1274
 	add a,a			; 87 ;1277
 	ld c,a			; 4f ;1278
 	ld b,000h		; 06 00 ;1279
@@ -1386,7 +1351,7 @@ l12deh:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;12de
 	ld (psg_engine.track_request_id),a		; 32 00 de ;12e0
 	ld hl,l1338h		; 21 38 13 ;12e3
-	ld a,(0c046h)		; 3a 46 c0 ;12e6
+	ld a,(state.ball_hit_type)		; 3a 46 c0 ;12e6
 	add a,a			; 87 ;12e9
 	ld c,a			; 4f ;12ea
 	ld b,000h		; 06 00 ;12eb
@@ -1507,7 +1472,7 @@ l138bh:
 	.INCLUDE "game/ball/load_ball_z_gravity.asm"
 	.INCLUDE "game/ball/compute_ball_x_velocity.asm"
 	.INCLUDE "game/ball/update_ball.asm"
-	.INCLUDE "game/ball/1548h.asm"
+	.INCLUDE "game/ball/game_ball_sprite_perspective_x.asm"
 	.INCLUDE "physics/ball_bounce.asm"
 	.INCLUDE "physics/compute_ball_deflection.asm"
 	.INCLUDE "physics/update_ball_state.asm"
@@ -1595,7 +1560,7 @@ sub_1af2h:
 	ret			; c9 ;1b16
 l1b17h:
 	bit 0,(ix + player_t.side_state)		; dd cb 01 46 ;1b17
-	call nz,sub_1e25h_cpu		; c4 25 1e ;1b1b
+	call nz,sub_game_cpu_update		; c4 25 1e ;1b1b
 	ld a,(ix + player_t.side_state)		; dd 7e 01 ;1b1e
 	bit 0,a		; cb 47 ;1b21
 	ld b,(ix+028h)		; dd 46 28 ;1b23
@@ -1613,8 +1578,8 @@ l1b32h:
 l1b37h:
 	bit 0,b		; cb 40 ;1b37
 	jr nz,l1b5bh		; 20 20 ;1b39
-	ld (ix + player_t._unknown_20),000h		; dd 36 20 00 ;1b3b
-	call sub_animate		; cd 69 2a ;1b3f
+	ld (ix + player_t.render_facing_dir),000h		; dd 36 20 00 ;1b3b
+	call sub_game_player_update_animation		; cd 69 2a ;1b3f
 	ld a,(ix+023h)		; dd 7e 23 ;1b42
 	and a			; a7 ;1b45
 	jr nz,l1b50h		; 20 08 ;1b46
@@ -1641,8 +1606,8 @@ sub_1b68h:
 	ld (ix+023h),0ffh		; dd 36 23 ff ;1b76
 	ld (ix+020h),000h		; dd 36 20 00 ;1b7a
 l1b7eh:
-	call sub_animate		; cd 69 2a ;1b7e
-	call sub_ball_trajectory		; cd 40 2c ;1b81
+	call sub_game_player_update_animation		; cd 69 2a ;1b7e
+	call sub_game_racket_process_swing_contact		; cd 40 2c ;1b81
 	ld a,(ix+023h)		; dd 7e 23 ;1b84
 	and a			; a7 ;1b87
 	ret nz			; c0 ;1b88
@@ -1675,7 +1640,7 @@ l1c2bh:
 	ld (ix+025h),000h		; dd 36 25 00 ;1c35
 l1c39h:
 	call sub_2e98h_2d_scale_clamp		; cd 98 2e ;1c39
-	call sub_1e25h_cpu		; cd 25 1e ;1c3c
+	call sub_game_cpu_update		; cd 25 1e ;1c3c
 	ld a,(ix+025h)		; dd 7e 25 ;1c3f
 	and 00fh		; e6 0f ;1c42
 	ld hl,l1c4ah_jump_table		; 21 4a 1c ;1c44
@@ -1687,7 +1652,7 @@ sub_1d89h:
 	jr nz,l1dffh		; 20 6f ;1d8e
 	set 7,a		; cb ff ;1d90
 	ld (ix+025h),a		; dd 77 25 ;1d92
-	call sub_2c13h_ball_state		; cd 13 2c ;1d95
+	call sub_game_racket_evaluate_swing_type		; cd 13 2c ;1d95
 	ld e,a			; 5f ;1d98
 	ld d,a			; 57 ;1d99
 	ld a,(ix+02eh)		; dd 7e 2e ;1d9a
@@ -1744,12 +1709,12 @@ l1defh:
 	ld a,(ix+016h)		; dd 7e 16 ;1df9
 	ld (ix+020h),a		; dd 77 20 ;1dfc
 l1dffh:
-	call sub_move_players		; cd a1 26 ;1dff
-	call sub_ball_trajectory		; cd 40 2c ;1e02
+	call sub_game_player_apply_movement		; cd a1 26 ;1dff
+	call sub_game_racket_process_swing_contact		; cd 40 2c ;1e02
 	ld a,(ix+023h)		; dd 7e 23 ;1e05
 	and a			; a7 ;1e08
 	jr z,l1e0fh		; 28 04 ;1e09
-	call sub_animate		; cd 69 2a ;1e0b
+	call sub_game_player_update_animation		; cd 69 2a ;1e0b
 	ret			; c9 ;1e0e
 l1e0fh:
 	ld a,(ix+027h)		; dd 7e 27 ;1e0f
@@ -1762,7 +1727,7 @@ l1e19h:
 	ld (ix+019h),000h		; dd 36 19 00 ;1e1c
 	ld (ix+01dh),000h		; dd 36 1d 00 ;1e20
 	ret			; c9 ;1e24
-	.INCLUDE "game/1e25h_cpu.asm"
+	.INCLUDE "game/cpu/game_cpu_update.asm"
 	.INCLUDE "physics/221eh_collision_broad.asm"
 l2290h:
 	.DB $ec		;2290
@@ -1775,7 +1740,7 @@ l2290h:
 	.DB $14		;2297
 	.INCLUDE "physics/2298h_collision.asm"
 	.INCLUDE "math/neg_hl.asm"
-	.INCLUDE "game/ball/2320h_ball.asm"
+	.INCLUDE "game/cpu/game_cpu_evaluate_y_dist_1.asm"
 sub_238dh:
 	ld a,(iy+02fh)		; fd 7e 2f ;238d
 	cp 004h		; fe 04 ;2390
@@ -1790,7 +1755,7 @@ l239ah:
 l23a6h:
 	call sub_221eh_collision_broad		; cd 1e 22 ;23a6
 	ret			; c9 ;23a9
-	.INCLUDE "game/ball/23aah_ball.asm"
+	.INCLUDE "game/cpu/game_cpu_evaluate_y_dist_2.asm"
 sub_23ffh:
 	bit 1,(ix+001h)		; dd cb 01 4e ;23ff
 	ld hl,player.1.bottom.type		; 21 02 c2 ;2403
@@ -1877,8 +1842,8 @@ l2458h:
 	.DB $b0		;2479
 	.DB $00		;247a
 	.DB $a0		;247b
-	.INCLUDE "game/247ch.asm"
-sub_265eh_collision:
+	.INCLUDE "game/player/game_player_update.asm"
+sub_game_player_read_input:
 	ld a,(0c000h)		; 3a 00 c0 ;265e
 	bit 3,a		; cb 5f ;2661
 	jr z,l2678h		; 28 13 ;2663
@@ -1922,19 +1887,19 @@ l268fh:
 	and 010h		; e6 10 ;269d
 	and e			; a3 ;269f
 	ret			; c9 ;26a0
-	.INCLUDE "game/player/move_players.asm"
+	.INCLUDE "game/player/game_player_apply_movement.asm"
 	.INCLUDE "graphics/26ab_update.asm"
 	.INCLUDE "game/player/player_movement.asm"
 	.INCLUDE "game/player/apply_player_movement.asm"
 	.INCLUDE "physics/data/table_player_velocity_top_a.asm"
 	.INCLUDE "physics/data/table_player_velocity_top_b.asm"
 	.INCLUDE "physics/data/table_player_velocity_bottom.asm"
-	.INCLUDE "graphics/animate.asm"
+	.INCLUDE "game/player/game_player_update_animation.asm"
 data_animation_attributes:
 	.INCLUDE "data/animation_table.asm"
-	.INCLUDE "physics/ball_racket_hit.asm"
-	.INCLUDE "physics/2c13h_ball_state.asm"
-	.INCLUDE "physics/ball_trajectory.asm"
+	.INCLUDE "game/racket/game_racket_update_hitbox.asm"
+	.INCLUDE "game/racket/game_racket_evaluate_swing_type.asm"
+	.INCLUDE "game/racket/game_racket_process_swing_contact.asm"
 	.INCLUDE "math/abs10.asm"
 	.INCLUDE "game/ball/game_ball_trajectory_data.asm"
 	.INCLUDE "graphics/2e98h_2d_scale_clamp.asm"

@@ -1,4 +1,4 @@
-sub_ball_trajectory:
+sub_game_racket_process_swing_contact:
 	ld a,(ix + player_t.time_before_serve)		; dd 7e 1a ;2c40
 	and a			; a7 ;2c43
 	jr nz,+		; 20 09 ;2c44
@@ -61,12 +61,12 @@ sub_ball_trajectory:
 	ld a,(hl)			; 7e ;2cb5
 	bit 0,(ix + player_t.side_state)		; dd cb 01 46 ;2cb6
 	jr z,+		; 28 0b ;2cba
-	bit 0,(ix + player_t._unknown_20)		; dd cb 20 46 ;2cbc
+	bit 0,(ix + player_t.render_facing_dir)		; dd cb 20 46 ;2cbc
 	jr nz,++		; 20 0e ;2cc0
 	call sub_abs10		; cd 52 2d ;2cc2
 	jr ++		; 18 09 ;2cc5
 +:
-	bit 0,(ix + player_t._unknown_20)		; dd cb 20 46 ;2cc7
+	bit 0,(ix + player_t.render_facing_dir)		; dd cb 20 46 ;2cc7
 	jr z,++		; 28 03 ;2ccb
 	call sub_abs10		; cd 52 2d ;2ccd
 ++:
