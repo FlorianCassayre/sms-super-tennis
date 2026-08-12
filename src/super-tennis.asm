@@ -21,7 +21,7 @@
 	.INCLUDE "hardware/hardware_vdp_registers_t.i"
 	.INCLUDE "gui/gui_ascii_table.i"
 	.INCLUDE "state/state_t.i"
-	.INCLUDE "algorithm/rle_constants.asm"
+	.INCLUDE "algorithm/rle_constants.i"
 	.INCLUDE "game/score/game_score_t.i"
 	.INCLUDE "game/game_t.i"
 	.INCLUDE "game/ball/ball_t.i"
@@ -29,10 +29,10 @@
 	.INCLUDE "game/entity/entity_t.i"
 	.INCLUDE "game/player/game_player.i"
 	.INCLUDE "game/foul/game_foul_t.i"
-	.INCLUDE "io/constants.asm"
+	.INCLUDE "io/constants.i"
 	.INCLUDE "audio/psg/audio_psg.i"
-	.INCLUDE "physics/constants.asm"
-	.INCLUDE "game/gui/constants.asm"
+	.INCLUDE "physics/constants.i"
+	.INCLUDE "game/gui/constants.i"
 	.INCLUDE "audio/note/audio_note_t.i"
 	.INCLUDE "audio/command/audio_command_routines_t.i"
 	.INCLUDE "audio/track/audio_tracks_t.i"
@@ -99,70 +99,10 @@ l0385h:
 	.INCLUDE "graphics/palette/graphics_palette_load.asm"
 	.INCLUDE "graphics/cp_1bit_ram_vram.asm"
 	.INCLUDE "algorithm/rle_decompress_bitplanes.asm"
-l051ah:
-	call sub_z_ordering		; cd cc 05 ;051a
-	xor a			; af ;051d
-sub_051eh:
-	ld e,a			; 5f ;051e
-	ld d,000h		; 16 00 ;051f
-	push af			; f5 ;0521
-	ld hl,0c1c4h		; 21 c4 c1 ;0522
-	add hl,de			; 19 ;0525
-	ld a,(hl)			; 7e ;0526
-	add a,a			; 87 ;0527
-	ld e,a			; 5f ;0528
-l0529h:
-	ld d,000h		; 16 00 ;0529
-	ld hl,l074fh_memory_table		; 21 4f 07 ;052b
-	add hl,de			; 19 ;052e
-	ld e,(hl)			; 5e ;052f
-	inc hl			; 23 ;0530
-	ld d,(hl)			; 56 ;0531
-	push de			; d5 ;0532
-	pop ix		; dd e1 ;0533
-	ld a,(ix+002h)		; dd 7e 02 ;0535
-	or a			; b7 ;0538
-	jr z,l053eh		; 28 03 ;0539
-	call sub_render_sprites		; cd 47 05 ;053b
-l053eh:
-	pop af			; f1 ;053e
-	inc a			; 3c ;053f
-	cp 006h		; fe 06 ;0540
-	jr nz,sub_051eh		; 20 da ;0542
-	jp sub_05a1h		; c3 a1 05 ;0544
-	.INCLUDE "graphics/render_sprites.asm"
-sub_05a1h:
-	ld a,(0c080h)		; 3a 80 c0 ;05a1
-	ld hl,0c081h		; 21 81 c0 ;05a4
-	sub (hl)			; 96 ;05a7
-	jr nc,l05bch		; 30 12 ;05a8
-	neg		; ed 44 ;05aa
-	ld b,a			; 47 ;05ac
-	ld a,(0c080h)		; 3a 80 c0 ;05ad
-	ld e,a			; 5f ;05b0
-	ld d,000h		; 16 00 ;05b1
-	ld hl,0c100h		; 21 00 c1 ;05b3
-	add hl,de			; 19 ;05b6
-l05b7h:
-	ld (hl),0d0h		; 36 d0 ;05b7
-	inc hl			; 23 ;05b9
-	djnz l05b7h		; 10 fb ;05ba
-l05bch:
-	ld a,(0c080h)		; 3a 80 c0 ;05bc
-	ld (0c081h),a		; 32 81 c0 ;05bf
-	xor a			; af ;05c2
-	ld (0c080h),a		; 32 80 c0 ;05c3
-	ld hl,0c089h		; 21 89 c0 ;05c6
-	set 7,(hl)		; cb fe ;05c9
-	ret			; c9 ;05cb
-	.INCLUDE "graphics/z_ordering.asm"
-l0636h:
-	.DW $c214			; 14 ;0636
-	.DW $c254		; c2 54 c2 ;0637
-	.DW $c294			; 94 ;063a
-	.DW $c2d4		; c2 d4 c2 ;063b
-	.DW $c314			; 14 ;063e
-	.DW $c354		; c3 54 c3 ;063f
+	.INCLUDE "game/entity/game_entity_render_all.asm"
+	.INCLUDE "game/entity/game_entity_render_one.asm"
+	.INCLUDE "graphics/graphics_clean_unused_sprites.asm"
+	.INCLUDE "game/entity/game_entity_y_ordering.asm"
 sub_0642h_animation_loop:
 	ld a,(ix+004h)		; dd 7e 04 ;0642
 	add a,a			; 87 ;0645
@@ -179,143 +119,7 @@ sub_0642h_animation_loop:
 	ld (ix+006h),e		; dd 73 06 ;0655
 	ld (ix+007h),d		; dd 72 07 ;0658
 	ret			; c9 ;065b
-sub_065ch:
-	ld hl,l06bfh		; 21 bf 06 ;065c
-	ld a,(0c509h)		; 3a 09 c5 ;065f
-	cp 050h		; fe 50 ;0662
-	jr nc,l0669h		; 30 03 ;0664
-	ld hl,l06dfh		; 21 df 06 ;0666
-l0669h:
-	ld a,(0c501h)		; 3a 01 c5 ;0669
-	cp 050h		; fe 50 ;066c
-	jr c,l0672h		; 38 02 ;066e
-	ld a,04fh		; 3e 4f ;0670
-l0672h:
-	rrca			; 0f ;0672
-	rrca			; 0f ;0673
-	rrca			; 0f ;0674
-	and 00fh		; e6 0f ;0675
-	add a,a			; 87 ;0677
-	ld e,a			; 5f ;0678
-	ld d,000h		; 16 00 ;0679
-	add hl,de			; 19 ;067b
-	ld a,(0c089h)		; 3a 89 c0 ;067c
-	ld c,a			; 4f ;067f
-	ld a,(0c510h)		; 3a 10 c5 ;0680
-	cp (hl)			; be ;0683
-	jr z,l068ch		; 28 06 ;0684
-	ld a,(hl)			; 7e ;0686
-	ld (0c510h),a		; 32 10 c5 ;0687
-	set 5,c		; cb e9 ;068a
-l068ch:
-	inc hl			; 23 ;068c
-	ld a,(0c511h)		; 3a 11 c5 ;068d
-	cp (hl)			; be ;0690
-	jr z,l0699h		; 28 06 ;0691
-	ld a,(hl)			; 7e ;0693
-	ld (0c511h),a		; 32 11 c5 ;0694
-	set 6,c		; cb f1 ;0697
-l0699h:
-	ld a,c			; 79 ;0699
-	ld (0c089h),a		; 32 89 c0 ;069a
-	ld de,l06ffh		; 11 ff 06 ;069d
-	ld a,(0c510h)		; 3a 10 c5 ;06a0
-	add a,a			; 87 ;06a3
-	ld l,a			; 6f ;06a4
-	ld h,000h		; 26 00 ;06a5
-	add hl,de			; 19 ;06a7
-	ld a,(hl)			; 7e ;06a8
-	inc hl			; 23 ;06a9
-	ld h,(hl)			; 66 ;06aa
-	ld l,a			; 6f ;06ab
-	ld (0c512h),hl		; 22 12 c5 ;06ac
-	ld a,(0c511h)		; 3a 11 c5 ;06af
-	add a,a			; 87 ;06b2
-	ld l,a			; 6f ;06b3
-	ld h,000h		; 26 00 ;06b4
-	add hl,de			; 19 ;06b6
-	ld a,(hl)			; 7e ;06b7
-	inc hl			; 23 ;06b8
-	ld h,(hl)			; 66 ;06b9
-	ld l,a			; 6f ;06ba
-	ld (0c514h),hl		; 22 14 c5 ;06bb
-	ret			; c9 ;06be
-l06bfh:
-	.DB $01		;06bf
-	.DB $06		;06c0
-	.DB $02		;06c1
-	.DB $07		;06c2
-	.DB $02		;06c3
-	.DB $07		;06c4
-	.DB $02		;06c5
-	.DB $07		;06c6
-	.DB $03		;06c7
-	.DB $07		;06c8
-	.DB $03		;06c9
-	.DB $07		;06ca
-	.DB $03		;06cb
-	.DB $08		;06cc
-	.DB $03		;06cd
-	.DB $08		;06ce
-	.DB $04		;06cf
-	.DB $08		;06d0
-	.DB $04		;06d1
-	.DB $08		;06d2
-	.DB $04		;06d3
-	.DB $08		;06d4
-	.DB $04		;06d5
-	.DB $08		;06d6
-	.DB $04		;06d7
-	.DB $08		;06d8
-	.DB $04		;06d9
-	.DB $08		;06da
-	.DB $04		;06db
-	.DB $08		;06dc
-	.DB $04		;06dd
-	.DB $08		;06de
-l06dfh:
-	.DB $00		;06df
-	.DB $05		;06e0
-	.DB $01		;06e1
-	.DB $06		;06e2
-	.DB $01		;06e3
-	.DB $06		;06e4
-	.DB $01		;06e5
-	.DB $06		;06e6
-	.DB $02		;06e7
-	.DB $06		;06e8
-	.DB $02		;06e9
-	.DB $06		;06ea
-	.DB $02		;06eb
-	.DB $07		;06ec
-	.DB $02		;06ed
-	.DB $07		;06ee
-	.DB $03		;06ef
-	.DB $07		;06f0
-	.DB $03		;06f1
-	.DB $08		;06f2
-	.DB $04		;06f3
-	.DB $08		;06f4
-	.DB $04		;06f5
-	.DB $08		;06f6
-	.DB $04		;06f7
-	.DB $08		;06f8
-	.DB $04		;06f9
-	.DB $08		;06fa
-	.DB $04		;06fb
-	.DB $08		;06fc
-	.DB $04		;06fd
-	.DB $08		;06fe
-l06ffh:
-	.DW $c600		;06ff
-	.DW $c620		;0701
-	.DW $c640		;0703
-	.DW $c660		;0705
-	.DW $c680		;0707
-	.DW $c6a0		;0709
-	.DW $c6c0		;070b
-	.DW $c6e0		;070d
-	.DW $c700		;070f
+	.INCLUDE "game/065ch.asm"
 sub_0711h_entity_action_dispatch:
 	ld hl,l074fh_memory_table		; 21 4f 07 ;0711
 	ld a,(0c086h)		; 3a 86 c0 ;0714
@@ -334,7 +138,7 @@ sub_0711h_entity_action_dispatch:
 	ld hl,l0732h		; 21 32 07 ;0728
 	; Push return address before jumping
 	push hl			; e5 ;072b
-	ld hl,l0759h_table - 2		; 21 59 07 ;072c
+	ld hl,game_entity_state_jump_table - 2		; 21 59 07 ;072c
 	jp l0807h_game_fsm		; c3 07 08 ;072f
 l0732h:
 	call sub_0642h_animation_loop		; cd 42 06 ;0732
@@ -352,15 +156,15 @@ l0732h:
 	sub 006h		; d6 06 ;0747
 	jr nz,sub_0711h_entity_action_dispatch		; 20 c6 ;0749
 	ld (de),a			; 12 ;074b
-	jp l051ah		; c3 1a 05 ;074c
+	jp sub_game_entity_render_all		; c3 1a 05 ;074c
 l074fh_memory_table:
 	.DW entities.player.1.bottom		;074f
 	.DW entities.player.1.top		;0751
 	.DW entities.player.2.bottom		;0753
 	.DW entities.player.2.top		;0755
 	.DW entities.ball		;0757
-	.DW $c340		;0759
-l0759h_table:
+	.DW entities.ball_shadow		;0759
+game_entity_state_jump_table:
 	.DW sub_23ffh		;075b
 	.DW l1bb0h		;075d
 	.DW sub_game_player_update_server_state		;075f
@@ -385,11 +189,11 @@ l0759h_table:
 	.DW l0f1dh		;0785
 	.DW l0f4dh		;0787
 	.DW l0fa5h		;0789
-	.DW l101fh		;078b
-	.DW l11b1h		;078d
+	.DW l101fh_racket_hit		;078b
+	.DW l11b1h_racket_hit		;078d
 	.DW l1227h		;078f
-	.DW l126ch		;0791
-	.DW l12deh		;0793
+	.DW l126ch_ball_high		;0791
+	.DW l12deh_racket_hit		;0793
 	.INCLUDE "io/joy_debounce.asm"
 	.INCLUDE "game/game_fsm.asm"
 l0811h:
@@ -517,7 +321,7 @@ l0d47h:
 	ld (hl),a			; 77 ;0d51
 	ld hl,0c040h		; 21 40 c0 ;0d52
 	ld de,0c041h		; 11 41 c0 ;0d55
-	ld bc,l0529h		; 01 29 05 ;0d58
+	ld bc,00529h		; 01 29 05 ;0d58
 	ld (hl),a			; 77 ;0d5b
 	ldir		; ed b0 ;0d5c
 	ret			; c9 ;0d5e
@@ -784,444 +588,8 @@ l0fffh:
 	.DB $fa		;101c
 	.DB $cc		;101d
 	.DB $c2		;101e
-l101fh:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;101f
-	ld (psg_engine.track_request_id),a		; 32 00 de ;1021
-	ld hl,l10ebh		; 21 eb 10 ;1024
-	ld a,(state.ball_hit_type)		; 3a 46 c0 ;1027
-	add a,a			; 87 ;102a
-	ld e,a			; 5f ;102b
-	ld d,000h		; 16 00 ;102c
-	add hl,de			; 19 ;102e
-	ld c,(hl)			; 4e ;102f
-	inc hl			; 23 ;1030
-	ld b,(hl)			; 46 ;1031
-	push bc			; c5 ;1032
-	ld hl,l10bbh		; 21 bb 10 ;1033
-	ld a,(0c041h)		; 3a 41 c0 ;1036
-	add a,a			; 87 ;1039
-	add a,a			; 87 ;103a
-	ld e,a			; 5f ;103b
-	ld a,(0c044h)		; 3a 44 c0 ;103c
-	add a,a			; 87 ;103f
-	add a,e			; 83 ;1040
-	ld e,a			; 5f ;1041
-	add hl,de			; 19 ;1042
-	ld c,(hl)			; 4e ;1043
-	inc hl			; 23 ;1044
-	ld b,(hl)			; 46 ;1045
-	push bc			; c5 ;1046
-	ld a,(0c041h)		; 3a 41 c0 ;1047
-	add a,a			; 87 ;104a
-	ld e,a			; 5f ;104b
-	ld hl,l10b3h		; 21 b3 10 ;104c
-	add hl,de			; 19 ;104f
-	ld a,(0c044h)		; 3a 44 c0 ;1050
-	or a			; b7 ;1053
-	jr z,l1057h		; 28 01 ;1054
-	inc hl			; 23 ;1056
-l1057h:
-	ld a,(0c50bh)		; 3a 0b c5 ;1057
-	sub (hl)			; 96 ;105a
-	rrca			; 0f ;105b
-	rrca			; 0f ;105c
-	rrca			; 0f ;105d
-	and 007h		; e6 07 ;105e
-	cp 004h		; fe 04 ;1060
-	jr c,l1066h		; 38 02 ;1062
-	ld a,003h		; 3e 03 ;1064
-l1066h:
-	add a,a			; 87 ;1066
-	ld e,a			; 5f ;1067
-	pop hl			; e1 ;1068
-	add hl,de			; 19 ;1069
-	ld a,r		; ed 5f ;106a
-	and 001h		; e6 01 ;106c
-	jr z,l1071h		; 28 01 ;106e
-	inc hl			; 23 ;1070
-l1071h:
-	ld a,(hl)			; 7e ;1071
-	add a,a			; 87 ;1072
-	add a,a			; 87 ;1073
-	add a,a			; 87 ;1074
-	ld e,a			; 5f ;1075
-	pop hl			; e1 ;1076
-	add hl,de			; 19 ;1077
-	ld e,(hl)			; 5e ;1078
-	inc hl			; 23 ;1079
-	ld d,(hl)			; 56 ;107a
-	inc hl			; 23 ;107b
-	ld c,(hl)			; 4e ;107c
-	inc hl			; 23 ;107d
-	ld b,(hl)			; 46 ;107e
-	push de			; d5 ;107f
-	push bc			; c5 ;1080
-	inc hl			; 23 ;1081
-	ld e,(hl)			; 5e ;1082
-	inc hl			; 23 ;1083
-	ld d,(hl)			; 56 ;1084
-	inc hl			; 23 ;1085
-	ld c,(hl)			; 4e ;1086
-	inc hl			; 23 ;1087
-	ld b,(hl)			; 46 ;1088
-	ld a,(0c041h)		; 3a 41 c0 ;1089
-	and 001h		; e6 01 ;108c
-	jr z,l10a0h		; 28 10 ;108e
-	xor a			; af ;1090
-	ld hl,0		; 21 00 00 ;1091
-	sbc hl,de		; ed 52 ;1094
-	push hl			; e5 ;1096
-	xor a			; af ;1097
-	ld hl,0		; 21 00 00 ;1098
-	sbc hl,bc		; ed 42 ;109b
-	push hl			; e5 ;109d
-	pop bc			; c1 ;109e
-	pop de			; d1 ;109f
-l10a0h:
-	ld (ball.y_vel),de		; ed 53 0c c5 ;10a0
-	ld (ball.x_vel),bc		; ed 43 0e c5 ;10a4
-	pop hl			; e1 ;10a8
-	ld (ball.z_vel),hl		; 22 06 c5 ;10a9
-	pop hl			; e1 ;10ac
-l10adh:
-	ld (ball.z_gravity),hl		; 22 02 c5 ;10ad
-	jp sub_l1362h		; c3 62 13 ;10b0
-l10b3h:
-	.DB $90		;10b3
-	.DB $60		;10b4
-	.DB $50		;10b5
-	.DB $80		;10b6
-	.DB $90		;10b7
-	.DB $60		;10b8
-	.DB $50		;10b9
-	.DB $80		;10ba
-l10bbh:
-	.DW l10cbh		;10bb
-	.DW l10d3h		;10bd
-	.DW l10dbh		;10bf
-	.DW l10e3h		;10c1
-	.DW l10cbh		;10c3
-	.DW l10d3h		;10c5
-	.DW l10dbh		;10c7
-	.DW l10e3h		;10c9
-l10cbh:
-	.DB $00		;10cb
-	.DB $01		;10cc
-	.DB $00		;10cd
-	.DB $00		;10ce
-	.DB $03		;10cf
-	.DB $03		;10d0
-	.DB $02		;10d1
-	.DB $03		;10d2
-l10d3h:
-	.DB $07		;10d3
-	.DB $06		;10d4
-	.DB $07		;10d5
-	.DB $07		;10d6
-	.DB $04		;10d7
-	.DB $04		;10d8
-	.DB $05		;10d9
-	.DB $04		;10da
-l10dbh:
-	.DB $03		;10db
-	.DB $02		;10dc
-	.DB $02		;10dd
-	.DB $02		;10de
-	.DB $00		;10df
-	.DB $00		;10e0
-	.DB $01		;10e1
-	.DB $00		;10e2
-l10e3h:
-	.DB $04		;10e3
-	.DB $05		;10e4
-	.DB $04		;10e5
-	.DB $04		;10e6
-	.DB $07		;10e7
-	.DB $07		;10e8
-	.DB $06		;10e9
-	.DB $07		;10ea
-l10ebh:
-	.DB $f1		;10eb
-	.DB $10		;10ec
-	.DB $31		;10ed
-	.DB $11		;10ee
-	.DB $71		;10ef
-	.DB $11		;10f0
-	.DB $03		;10f1
-	.DB $00		;10f2
-	.DB $e0		;10f3
-	.DB $ff		;10f4
-	.DB $80		;10f5
-	.DB $fe		;10f6
-	.DB $78		;10f7
-	.DB $ff		;10f8
-	.DB $03		;10f9
-	.DB $00		;10fa
-	.DB $e0		;10fb
-	.DB $ff		;10fc
-	.DB $80		;10fd
-	.DB $fe		;10fe
-	.DB $bc		;10ff
-	.DB $ff		;1100
-	.DB $03		;1101
-	.DB $00		;1102
-	.DB $e0		;1103
-	.DB $ff		;1104
-	.DB $80		;1105
-	.DB $fe		;1106
-	.DB $10		;1107
-	.DB $ff		;1108
-	.DB $03		;1109
-	.DB $00		;110a
-	.DB $e0		;110b
-	.DB $ff		;110c
-	.DB $80		;110d
-	.DB $fe		;110e
-	.DB $50		;110f
-	.DB $ff		;1110
-	.DB $03		;1111
-	.DB $00		;1112
-	.DB $e0		;1113
-	.DB $ff		;1114
-	.DB $80		;1115
-	.DB $fe		;1116
-	.DB $88		;1117
-	.DB $00		;1118
-	.DB $03		;1119
-	.DB $00		;111a
-	.DB $e0		;111b
-	.DB $ff		;111c
-	.DB $80		;111d
-	.DB $fe		;111e
-	.DB $44		;111f
-	.DB $00		;1120
-	.DB $03		;1121
-	.DB $00		;1122
-	.DB $e0		;1123
-	.DB $ff		;1124
-	.DB $80		;1125
-	.DB $fe		;1126
-	.DB $f0		;1127
-	.DB $00		;1128
-	.DB $03		;1129
-	.DB $00		;112a
-	.DB $e0		;112b
-	.DB $ff		;112c
-	.DB $80		;112d
-	.DB $fe		;112e
-	.DB $b0		;112f
-	.DB $00		;1130
-	.DB $05		;1131
-	.DB $00		;1132
-	.DB $e0		;1133
-	.DB $ff		;1134
-	.DB $00		;1135
-	.DB $fe		;1136
-	.DB $48		;1137
-	.DB $ff		;1138
-	.DB $05		;1139
-	.DB $00		;113a
-	.DB $e0		;113b
-	.DB $ff		;113c
-	.DB $00		;113d
-	.DB $fe		;113e
-	.DB $ac		;113f
-	.DB $ff		;1140
-	.DB $05		;1141
-	.DB $00		;1142
-	.DB $e0		;1143
-	.DB $ff		;1144
-	.DB $00		;1145
-	.DB $fe		;1146
-	.DB $c0		;1147
-	.DB $fe		;1148
-	.DB $05		;1149
-	.DB $00		;114a
-	.DB $e0		;114b
-	.DB $ff		;114c
-	.DB $00		;114d
-	.DB $fe		;114e
-	.DB $16		;114f
-	.DB $ff		;1150
-	.DB $05		;1151
-	.DB $00		;1152
-	.DB $e0		;1153
-	.DB $ff		;1154
-	.DB $00		;1155
-	.DB $fe		;1156
-	.DB $b8		;1157
-	.DB $00		;1158
-	.DB $05		;1159
-	.DB $00		;115a
-	.DB $e0		;115b
-	.DB $ff		;115c
-	.DB $00		;115d
-	.DB $fe		;115e
-	.DB $5a		;115f
-	.DB $00		;1160
-	.DB $05		;1161
-	.DB $00		;1162
-	.DB $e0		;1163
-	.DB $ff		;1164
-	.DB $00		;1165
-	.DB $fe		;1166
-	.DB $40		;1167
-	.DB $01		;1168
-	.DB $05		;1169
-	.DB $00		;116a
-	.DB $e0		;116b
-	.DB $ff		;116c
-	.DB $00		;116d
-	.DB $fe		;116e
-	.DB $ea		;116f
-	.DB $00		;1170
-l1171h:
-	.DB $0b		;1171
-	.DB $00		;1172
-	.DB $e0		;1173
-	.DB $ff		;1174
-	.DB $00		;1175
-	.DB $fd		;1176
-	.DB $f0		;1177
-	.DB $fe		;1178
-	.DB $0b		;1179
-	.DB $00		;117a
-	.DB $e0		;117b
-	.DB $ff		;117c
-	.DB $00		;117d
-	.DB $fd		;117e
-	.DB $78		;117f
-	.DB $ff		;1180
-	.DB $0b		;1181
-	.DB $00		;1182
-	.DB $e0		;1183
-	.DB $ff		;1184
-	.DB $00		;1185
-	.DB $fd		;1186
-	.DB $20		;1187
-	.DB $fe		;1188
-	.DB $0b		;1189
-	.DB $00		;118a
-	.DB $e0		;118b
-	.DB $ff		;118c
-	.DB $00		;118d
-	.DB $fd		;118e
-	.DB $a0		;118f
-	.DB $fe		;1190
-	.DB $0b		;1191
-	.DB $00		;1192
-	.DB $e0		;1193
-	.DB $ff		;1194
-	.DB $00		;1195
-	.DB $fd		;1196
-	.DB $10		;1197
-	.DB $01		;1198
-	.DB $0b		;1199
-	.DB $00		;119a
-	.DB $e0		;119b
-	.DB $ff		;119c
-	.DB $00		;119d
-	.DB $fd		;119e
-	.DB $88		;119f
-	.DB $00		;11a0
-	.DB $0b		;11a1
-	.DB $00		;11a2
-	.DB $e0		;11a3
-	.DB $ff		;11a4
-	.DB $00		;11a5
-	.DB $fd		;11a6
-	.DB $e0		;11a7
-	.DB $01		;11a8
-	.DB $0b		;11a9
-	.DB $00		;11aa
-	.DB $e0		;11ab
-	.DB $ff		;11ac
-	.DB $00		;11ad
-	.DB $fd		;11ae
-	.DB $60		;11af
-	.DB $01		;11b0
-l11b1h:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;11b1
-	ld (psg_engine.track_request_id),a		; 32 00 de ;11b3
-	ld a,(0c509h)		; 3a 09 c5 ;11b6
-	sub 080h		; d6 80 ;11b9
-	jr nc,l11bfh		; 30 02 ;11bb
-	neg		; ed 44 ;11bd
-l11bfh:
-	ld hl,l1215h		; 21 15 12 ;11bf
-	cp 01ch		; fe 1c ;11c2
-	jr c,l11c9h		; 38 03 ;11c4
-	ld hl,l1209h		; 21 09 12 ;11c6
-l11c9h:
-	ld a,(state.ball_hit_type)		; 3a 46 c0 ;11c9
-	add a,a			; 87 ;11cc
-	add a,a			; 87 ;11cd
-	ld c,a			; 4f ;11ce
-	ld b,000h		; 06 00 ;11cf
-	add hl,bc			; 09 ;11d1
-	ld e,(hl)			; 5e ;11d2
-	inc hl			; 23 ;11d3
-	ld d,(hl)			; 56 ;11d4
-	inc hl			; 23 ;11d5
-	ld c,(hl)			; 4e ;11d6
-	inc hl			; 23 ;11d7
-	ld b,(hl)			; 46 ;11d8
-	ld a,(0c042h)		; 3a 42 c0 ;11d9
-	and 001h		; e6 01 ;11dc
-	jr z,l11e7h		; 28 07 ;11de
-	xor a			; af ;11e0
-	ld hl,0		; 21 00 00 ;11e1
-	sbc hl,de		; ed 52 ;11e4
-	ex de,hl			; eb ;11e6
-l11e7h:
-	ld (ball.y_vel),de		; ed 53 0c c5 ;11e7
-	ld (ball.z_vel),bc		; ed 43 06 c5 ;11eb
-	ld hl,l1221h		; 21 21 12 ;11ef
-	ld a,(state.ball_hit_type)		; 3a 46 c0 ;11f2
-	add a,a			; 87 ;11f5
-	ld c,a			; 4f ;11f6
-	ld b,000h		; 06 00 ;11f7
-	add hl,bc			; 09 ;11f9
-	ld e,(hl)			; 5e ;11fa
-	inc hl			; 23 ;11fb
-	ld d,(hl)			; 56 ;11fc
-	ld (ball.z_gravity),de		; ed 53 02 c5 ;11fd
-	ld c,002h		; 0e 02 ;1201
-	call sub_compute_ball_x_velocity		; cd a8 13 ;1203
-	jp sub_l1362h		; c3 62 13 ;1206
-l1209h:
-	.DB $c0		;1209
-	.DB $fd		;120a
-	.DB $e0		;120b
-	.DB $ff		;120c
-	.DB $00		;120d
-	.DB $fd		;120e
-	.DB $d6		;120f
-	.DB $ff		;1210
-	.DB $80		;1211
-	.DB $fb		;1212
-	.DB $c0		;1213
-	.DB $ff		;1214
-l1215h:
-	.DB $c0		;1215
-	.DB $fd		;1216
-	.DB $40		;1217
-	.DB $00		;1218
-	.DB $00		;1219
-	.DB $fd		;121a
-	.DB $54		;121b
-	.DB $00		;121c
-	.DB $80		;121d
-	.DB $fb		;121e
-	.DB $80		;121f
-	.DB $00		;1220
-l1221h:
-	.DB $09		;1221
-	.DB $00		;1222
-	.DB $0f		;1223
-	.DB $00		;1224
-	.DB $1c		;1225
-	.DB $00		;1226
+	.INCLUDE "game/l101h_racket_hit.asm"
+	.INCLUDE "game/l11b1h_racket_hit.asm"
 l1227h:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_8a		; 3e 8a ;1227
 	ld (psg_engine.track_request_id),a		; 32 00 de ;1229
@@ -1266,184 +634,8 @@ l1260h:
 	.DB $fe		;1269
 	.DB $50		;126a
 	.DB $ff		;126b
-l126ch:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_high		; 3e 8b ;126c
-	ld (psg_engine.track_request_id),a		; 32 00 de ;126e
-	ld hl,l12c0h		; 21 c0 12 ;1271
-	ld a,(state.ball_hit_type)		; 3a 46 c0 ;1274
-	add a,a			; 87 ;1277
-	ld c,a			; 4f ;1278
-	ld b,000h		; 06 00 ;1279
-	add hl,bc			; 09 ;127b
-	ld e,(hl)			; 5e ;127c
-	inc hl			; 23 ;127d
-	ld d,(hl)			; 56 ;127e
-	ld a,(0c509h)		; 3a 09 c5 ;127f
-	sub 080h		; d6 80 ;1282
-	jr nc,l1288h		; 30 02 ;1284
-	neg		; ed 44 ;1286
-l1288h:
-	ld c,000h		; 0e 00 ;1288
-	cp 030h		; fe 30 ;128a
-	jr c,l1290h		; 38 02 ;128c
-	ld c,001h		; 0e 01 ;128e
-l1290h:
-	ld a,c			; 79 ;1290
-	add a,a			; 87 ;1291
-	add a,a			; 87 ;1292
-	ld c,a			; 4f ;1293
-	ld b,000h		; 06 00 ;1294
-	ex de,hl			; eb ;1296
-	add hl,bc			; 09 ;1297
-	ld e,(hl)			; 5e ;1298
-	inc hl			; 23 ;1299
-	ld d,(hl)			; 56 ;129a
-	inc hl			; 23 ;129b
-	ld c,(hl)			; 4e ;129c
-	inc hl			; 23 ;129d
-	ld b,(hl)			; 46 ;129e
-	ld a,(0c042h)		; 3a 42 c0 ;129f
-	and 001h		; e6 01 ;12a2
-	jr z,l12adh		; 28 07 ;12a4
-	xor a			; af ;12a6
-	ld hl,0		; 21 00 00 ;12a7
-	sbc hl,de		; ed 52 ;12aa
-	ex de,hl			; eb ;12ac
-l12adh:
-	ld (ball.y_vel),de		; ed 53 0c c5 ;12ad
-	ld (ball.z_vel),bc		; ed 43 06 c5 ;12b1
-	call sub_load_ball_z_gravity		; cd 8f 13 ;12b5
-	ld c,001h		; 0e 01 ;12b8
-	call sub_compute_ball_x_velocity		; cd a8 13 ;12ba
-	jp sub_l1362h		; c3 62 13 ;12bd
-l12c0h:
-	.DB $c6		;12c0
-	.DB $12		;12c1
-	.DB $ce		;12c2
-	.DB $12		;12c3
-	.DB $d6		;12c4
-	.DB $12		;12c5
-	.DB $60		;12c6
-	.DB $ff		;12c7
-	.DB $10		;12c8
-	.DB $ff		;12c9
-	.DB $60		;12ca
-	.DB $ff		;12cb
-	.DB $d0		;12cc
-	.DB $fe		;12cd
-	.DB $2b		;12ce
-	.DB $ff		;12cf
-	.DB $d8		;12d0
-	.DB $fe		;12d1
-	.DB $2b		;12d2
-	.DB $ff		;12d3
-	.DB $80		;12d4
-	.DB $fe		;12d5
-	.DB $c0		;12d6
-	.DB $fe		;12d7
-	.DB $40		;12d8
-	.DB $fe		;12d9
-	.DB $c0		;12da
-	.DB $fe		;12db
-	.DB $d0		;12dc
-	.DB $fd		;12dd
-l12deh:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;12de
-	ld (psg_engine.track_request_id),a		; 32 00 de ;12e0
-	ld hl,l1338h		; 21 38 13 ;12e3
-	ld a,(state.ball_hit_type)		; 3a 46 c0 ;12e6
-	add a,a			; 87 ;12e9
-	ld c,a			; 4f ;12ea
-	ld b,000h		; 06 00 ;12eb
-	add hl,bc			; 09 ;12ed
-	ld e,(hl)			; 5e ;12ee
-	inc hl			; 23 ;12ef
-	ld d,(hl)			; 56 ;12f0
-	ld a,(0c509h)		; 3a 09 c5 ;12f1
-	sub 080h		; d6 80 ;12f4
-	jr nc,l12fah		; 30 02 ;12f6
-	neg		; ed 44 ;12f8
-l12fah:
-	ld c,000h		; 0e 00 ;12fa
-	cp 018h		; fe 18 ;12fc
-	jr c,l1308h		; 38 08 ;12fe
-l1300h:
-	ld c,001h		; 0e 01 ;1300
-	cp 040h		; fe 40 ;1302
-	jr c,l1308h		; 38 02 ;1304
-	ld c,002h		; 0e 02 ;1306
-l1308h:
-	ld a,c			; 79 ;1308
-	add a,a			; 87 ;1309
-	add a,a			; 87 ;130a
-	ld c,a			; 4f ;130b
-	ld b,000h		; 06 00 ;130c
-	ex de,hl			; eb ;130e
-	add hl,bc			; 09 ;130f
-	ld e,(hl)			; 5e ;1310
-	inc hl			; 23 ;1311
-	ld d,(hl)			; 56 ;1312
-	inc hl			; 23 ;1313
-	ld c,(hl)			; 4e ;1314
-	inc hl			; 23 ;1315
-	ld b,(hl)			; 46 ;1316
-	ld a,(0c042h)		; 3a 42 c0 ;1317
-	and 001h		; e6 01 ;131a
-	jr z,l1325h		; 28 07 ;131c
-	xor a			; af ;131e
-	ld hl,0		; 21 00 00 ;131f
-	sbc hl,de		; ed 52 ;1322
-	ex de,hl			; eb ;1324
-l1325h:
-	ld (ball.y_vel),de		; ed 53 0c c5 ;1325
-	ld (ball.z_vel),bc		; ed 43 06 c5 ;1329
-	call sub_load_ball_z_gravity		; cd 8f 13 ;132d
-	ld c,000h		; 0e 00 ;1330
-	call sub_compute_ball_x_velocity		; cd a8 13 ;1332
-	jp sub_l1362h		; c3 62 13 ;1335
-l1338h:
-	.DB $3e		;1338
-	.DB $13		;1339
-	.DB $4a		;133a
-	.DB $13		;133b
-	.DB $56		;133c
-	.DB $13		;133d
-	.DB $00		;133e
-	.DB $ff		;133f
-	.DB $c0		;1340
-	.DB $ff		;1341
-	.DB $00		;1342
-	.DB $ff		;1343
-	.DB $70		;1344
-	.DB $ff		;1345
-	.DB $00		;1346
-	.DB $ff		;1347
-	.DB $50		;1348
-	.DB $ff		;1349
-	.DB $ab		;134a
-	.DB $fe		;134b
-	.DB $ab		;134c
-	.DB $ff		;134d
-	.DB $ab		;134e
-	.DB $fe		;134f
-	.DB $40		;1350
-	.DB $ff		;1351
-	.DB $ab		;1352
-	.DB $fe		;1353
-	.DB $16		;1354
-	.DB $ff		;1355
-	.DB $00		;1356
-	.DB $fe		;1357
-	.DB $80		;1358
-	.DB $ff		;1359
-	.DB $00		;135a
-	.DB $fe		;135b
-	.DB $e0		;135c
-	.DB $fe		;135d
-	.DB $00		;135e
-	.DB $fe		;135f
-	.DB $a0		;1360
-	.DB $fe		;1361
+	.INCLUDE "game/l126ch_ball_high.asm"
+	.INCLUDE "game/l12deh_racket_hit.asm"
 sub_l1362h:
 	ld a,015h		;1362
 	ld (0c302h),a		; 32 02 c3 ;1364
@@ -1471,11 +663,11 @@ l138bh:
 	.DB $02		;138e
 	.INCLUDE "game/ball/load_ball_z_gravity.asm"
 	.INCLUDE "game/ball/compute_ball_x_velocity.asm"
-	.INCLUDE "game/ball/update_ball.asm"
+	.INCLUDE "game/ball/game_ball_update_physics.asm"
 	.INCLUDE "game/ball/game_ball_sprite_perspective_x.asm"
-	.INCLUDE "physics/ball_bounce.asm"
-	.INCLUDE "physics/compute_ball_deflection.asm"
-	.INCLUDE "physics/update_ball_state.asm"
+	.INCLUDE "game/ball/game_ball_update_velocity_bounce.asm"
+	.INCLUDE "game/ball/game_ball_compute_horizontal_deflection.asm"
+	.INCLUDE "game/ball/game_ball_update_velocity_collision.asm"
 l1769h:
 	.DB $00		;1769
 	.DB $00		;176a
@@ -1534,70 +726,17 @@ sub_17f1h_aabb:
 	add a,(hl)			; 86 ;17fd
 	ld e,a			; 5f ;17fe
 	inc hl			; 23 ;17ff
-l1800h:
-	.DB $86		;1800
-	.DB $30		;1801
-	.DB $01		;1802
-	.DB $7b		;1803
-	.DB $57		;1804
-	.DB $c9		;1805
+	add a,(hl)			; 86 ;1800
+	jr nc,l1804h		; 30 01 ;1801
+	ld a,e			; 7b ;1803
+l1804h:
+	ld d,a			; 57 ;1804
+	ret		;1805
 	.INCLUDE "physics/1806h_bound_check.asm"
 	.INCLUDE "physics/classify_zone.asm"
 	.INCLUDE "game/player/player_ball_collision.asm"
 	.INCLUDE "game/player/game_player_update_server_state.asm"
-sub_1af2h:
-	bit 7,(ix + entity_t.type)		; dd cb 02 7e ;1af2
-	jr nz,l1b17h		; 20 1f ;1af6
-	set 7,(ix + entity_t.type)		; dd cb 02 fe ;1af8
-	ld (ix+022h),007h		; dd 36 22 07 ;1afc
-	ld (ix+023h),0ffh		; dd 36 23 ff ;1b00
-	ld (ix+01fh),019h		; dd 36 1f 19 ;1b04
-	ld a,017h		; 3e 17 ;1b08
-	ld (0c302h),a		; 32 02 c3 ;1b0a
-	bit 0,(ix+001h)		; dd cb 01 46 ;1b0d
-	ret z			; c8 ;1b11
-	ld (ix+030h),008h		; dd 36 30 08 ;1b12
-	ret			; c9 ;1b16
-l1b17h:
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1b17
-	call nz,sub_game_cpu_update		; c4 25 1e ;1b1b
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;1b1e
-	bit 0,a		; cb 47 ;1b21
-	ld b,(ix+028h)		; dd 46 28 ;1b23
-	jr nz,l1b37h		; 20 0f ;1b26
-	and 002h		; e6 02 ;1b28
-	ld a,(0c1c0h)		; 3a c0 c1 ;1b2a
-	jr z,l1b32h		; 28 03 ;1b2d
-	ld a,(0c1c2h)		; 3a c2 c1 ;1b2f
-l1b32h:
-	rra			; 1f ;1b32
-	rra			; 1f ;1b33
-	rra			; 1f ;1b34
-	rra			; 1f ;1b35
-	ld b,a			; 47 ;1b36
-l1b37h:
-	bit 0,b		; cb 40 ;1b37
-	jr nz,l1b5bh		; 20 20 ;1b39
-	ld (ix + entity_t.render_facing_dir),000h		; dd 36 20 00 ;1b3b
-	call sub_game_player_update_animation		; cd 69 2a ;1b3f
-	ld a,(ix+023h)		; dd 7e 23 ;1b42
-	and a			; a7 ;1b45
-	jr nz,l1b50h		; 20 08 ;1b46
-	ld (ix+022h),007h		; dd 36 22 07 ;1b48
-	ld (ix+023h),0ffh		; dd 36 23 ff ;1b4c
-l1b50h:
-	ld a,(0c040h)		; 3a 40 c0 ;1b50
-	bit 7,a		; cb 7f ;1b53
-	ret nz			; c0 ;1b55
-	ld (ix + entity_t.type),009h		; dd 36 02 09 ;1b56
-	ret			; c9 ;1b5a
-l1b5bh:
-	ld hl,0c040h		; 21 40 c0 ;1b5b
-	bit 7,(hl)		; cb 7e ;1b5e
-	ret z			; c8 ;1b60
-	ld (ix + entity_t.type),005h		; dd 36 02 05 ;1b61
-	set 6,(hl)		; cb f6 ;1b65
-	ret			; c9 ;1b67
+	.INCLUDE "game/player/1af2.asm"
 sub_1b68h:
 	bit 7,(ix + entity_t.type)		; dd cb 02 7e ;1b68
 	jr nz,l1b7eh		; 20 10 ;1b6c
@@ -1646,87 +785,7 @@ l1c39h:
 	ld hl,l1c4ah_jump_table		; 21 4a 1c ;1c44
 	jp l0807h_game_fsm		; c3 07 08 ;1c47
 	.INCLUDE "game/player/l1c4ah_jump_table.asm"
-sub_1d89h:
-	ld a,(ix+025h)		; dd 7e 25 ;1d89
-	bit 7,a		; cb 7f ;1d8c
-	jr nz,l1dffh		; 20 6f ;1d8e
-	set 7,a		; cb ff ;1d90
-	ld (ix+025h),a		; dd 77 25 ;1d92
-	call sub_game_racket_evaluate_swing_type		; cd 13 2c ;1d95
-	ld e,a			; 5f ;1d98
-	ld d,a			; 57 ;1d99
-	ld a,(ix+02eh)		; dd 7e 2e ;1d9a
-	cp 003h		; fe 03 ;1d9d
-	jr nc,l1db0h		; 30 0f ;1d9f
-	ld a,e			; 7b ;1da1
-	cp 002h		; fe 02 ;1da2
-	jr c,l1dd3h		; 38 2d ;1da4
-	ld e,000h		; 1e 00 ;1da6
-	cp 003h		; fe 03 ;1da8
-	jr z,l1dd3h		; 28 27 ;1daa
-	ld e,001h		; 1e 01 ;1dac
-	jr l1dd3h		; 18 23 ;1dae
-l1db0h:
-	cp 004h		; fe 04 ;1db0
-	jr nc,l1db7h		; 30 03 ;1db2
-	inc e			; 1c ;1db4
-	jr l1dd3h		; 18 1c ;1db5
-l1db7h:
-	cp 005h		; fe 05 ;1db7
-	jr c,l1dd3h		; 38 18 ;1db9
-	ld a,(0c401h)		; 3a 01 c4 ;1dbb
-	and 07fh		; e6 7f ;1dbe
-	cp 01ah		; fe 1a ;1dc0
-	ld e,002h		; 1e 02 ;1dc2
-	jr z,l1dd3h		; 28 0d ;1dc4
-	ld e,003h		; 1e 03 ;1dc6
-	cp 01dh		; fe 1d ;1dc8
-	jr nz,l1dd3h		; 20 07 ;1dca
-	ld a,d			; 7a ;1dcc
-	cp 001h		; fe 01 ;1dcd
-	jr c,l1dd3h		; 38 02 ;1dcf
-	ld e,002h		; 1e 02 ;1dd1
-l1dd3h:
-	ld a,e			; 7b ;1dd3
-	ld b,004h		; 06 04 ;1dd4
-	ld c,01ch		; 0e 1c ;1dd6
-	and a			; a7 ;1dd8
-	jr z,l1defh		; 28 14 ;1dd9
-	ld b,003h		; 06 03 ;1ddb
-	ld c,01dh		; 0e 1d ;1ddd
-	cp 001h		; fe 01 ;1ddf
-	jr z,l1defh		; 28 0c ;1de1
-	ld b,005h		; 06 05 ;1de3
-	ld c,01bh		; 0e 1b ;1de5
-	cp 002h		; fe 02 ;1de7
-	jr z,l1defh		; 28 04 ;1de9
-	ld b,009h		; 06 09 ;1deb
-	ld c,01ah		; 0e 1a ;1ded
-l1defh:
-	ld (ix+022h),b		; dd 70 22 ;1def
-	ld (ix+01fh),c		; dd 71 1f ;1df2
-	ld (ix+023h),0ffh		; dd 36 23 ff ;1df5
-	ld a,(ix+016h)		; dd 7e 16 ;1df9
-	ld (ix+020h),a		; dd 77 20 ;1dfc
-l1dffh:
-	call sub_game_player_apply_movement		; cd a1 26 ;1dff
-	call sub_game_racket_process_swing_contact		; cd 40 2c ;1e02
-	ld a,(ix+023h)		; dd 7e 23 ;1e05
-	and a			; a7 ;1e08
-	jr z,l1e0fh		; 28 04 ;1e09
-	call sub_game_player_update_animation		; cd 69 2a ;1e0b
-	ret			; c9 ;1e0e
-l1e0fh:
-	ld a,(ix+027h)		; dd 7e 27 ;1e0f
-	and a			; a7 ;1e12
-	ld a,000h		; 3e 00 ;1e13
-	jr z,l1e19h		; 28 02 ;1e15
-	ld a,001h		; 3e 01 ;1e17
-l1e19h:
-	ld (ix+025h),a		; dd 77 25 ;1e19
-	ld (ix+019h),000h		; dd 36 19 00 ;1e1c
-	ld (ix+01dh),000h		; dd 36 1d 00 ;1e20
-	ret			; c9 ;1e24
+	.INCLUDE "game/player/1d89.asm"
 	.INCLUDE "game/cpu/game_cpu_update.asm"
 	.INCLUDE "physics/221eh_collision_broad.asm"
 l2290h:
@@ -1895,7 +954,6 @@ l268fh:
 	.INCLUDE "physics/data/table_player_velocity_top_b.asm"
 	.INCLUDE "physics/data/table_player_velocity_bottom.asm"
 	.INCLUDE "game/player/game_player_update_animation.asm"
-data_animation_attributes:
 	.INCLUDE "data/animation_table.asm"
 	.INCLUDE "game/racket/game_racket_update_hitbox.asm"
 	.INCLUDE "game/racket/game_racket_evaluate_swing_type.asm"

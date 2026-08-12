@@ -3,7 +3,10 @@
     side_state DB		; $01 ; Court side
     type DB		; $02 ; Entity type ID?
     ball_hit_flag DB		; $03
-    _unknown_1 DSB 6		; $04
+    _unknown_04 DB		; $04
+    sprite_count DB		; $05
+    sprite_data_ptr DW		; $06
+    _unknown_1 DSB 2		; $08
     y_pos DW		; $0a ; 16-bit Y coordinate (Low = $0C, High = $0D)
     x_pos DW		; $0c ; 16-bit X coordinate (Low = $0A, High = $0B)
     y_vel DW		; $0e ; 16-bit Y velocity

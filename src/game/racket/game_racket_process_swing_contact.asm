@@ -3,14 +3,14 @@ sub_game_racket_process_swing_contact:
 	and a			; a7 ;2c43
 	jr nz,+		; 20 09 ;2c44
 	res 7,(ix+019h)		; dd cb 19 be ;2c46
-	bit 7,(ix+01dh)		; dd cb 1d 7e ;2c4a
+	bit 7,(ix + entity_t.racket_contact_flag)		; dd cb 1d 7e ;2c4a
 	ret z			; c8 ;2c4e
 +:
 	ld b,a			; 47 ;2c4f
 	ld a,(0c519h)		; 3a 19 c5 ;2c50
 	cp 001h		; fe 01 ;2c53
 	ret z			; c8 ;2c55
-	bit 7,(ix+01dh)		; dd cb 1d 7e ;2c56
+	bit 7,(ix + entity_t.racket_contact_flag)		; dd cb 1d 7e ;2c56
 	ret z			; c8 ;2c5a
 	ld a,(ix + entity_t.type)		; dd 7e 02 ;2c5b
 	and 07fh		; e6 7f ;2c5e
@@ -26,8 +26,8 @@ sub_game_racket_process_swing_contact:
 	res 0,(hl)		; cb 86 ;2c76
 	ret			; c9 ;2c78
 +:
-	res 7,(ix+01dh)		; dd cb 1d be ;2c79
-	ld a,(ix+01fh)		; dd 7e 1f ;2c7d
+	res 7,(ix + entity_t.racket_contact_flag)		; dd cb 1d be ;2c79
+	ld a,(ix + entity_t.swing_type_id)		; dd 7e 1f ;2c7d
 	ld (0c302h),a		; 32 02 c3 ;2c80
 	ld (0c401h),a		; 32 01 c4 ;2c83
 	ld a,b			; 78 ;2c86

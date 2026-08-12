@@ -1,4 +1,4 @@
-sub_compute_ball_deflection:
+sub_game_ball_compute_horizontal_deflection:
 	ld a,e			; 7b ;160a
 l160bh:
 	sub 018h		; d6 18 ;160b

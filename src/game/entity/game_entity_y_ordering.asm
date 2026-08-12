@@ -1,4 +1,4 @@
-sub_z_ordering:
+sub_game_entity_y_ordering:
 	xor a			; af ;05cc
 	ld (0c1cah),a		; 32 ca c1 ;05cd
 	inc a			; 3c ;05d0
@@ -12,7 +12,7 @@ sub_z_ordering:
 	ld a,(hl)			; 7e ;05de
 	add a,a			; 87 ;05df
 	ld e,a			; 5f ;05e0
-	ld hl,l0636h		; 21 36 06 ;05e1
+	ld hl,entities_y_pos_cache		; 21 36 06 ;05e1
 	add hl,de			; 19 ;05e4
 	ld e,(hl)			; 5e ;05e5
 	inc hl			; 23 ;05e6
@@ -28,7 +28,7 @@ sub_z_ordering:
 	ld a,(hl)			; 7e ;05f4
 	add a,a			; 87 ;05f5
 	ld e,a			; 5f ;05f6
-	ld hl,l0636h		; 21 36 06 ;05f7
+	ld hl,entities_y_pos_cache		; 21 36 06 ;05f7
 	add hl,de			; 19 ;05fa
 	ld e,(hl)			; 5e ;05fb
 	inc hl			; 23 ;05fc
@@ -66,3 +66,11 @@ sub_z_ordering:
 	inc a			; 3c ;0630
 	ld (0c1cbh),a		; 32 cb c1 ;0631
 	jr @loop_outer		; 18 9e ;0634
+
+entities_y_pos_cache:
+	.DW entities.player.1.bottom.y_pos_cache			; 14 ;0636
+	.DW entities.player.1.top.y_pos_cache		; c2 54 c2 ;0637
+	.DW entities.player.2.bottom.y_pos_cache			; 94 ;063a
+	.DW entities.player.2.top.y_pos_cache		; c2 d4 c2 ;063b
+	.DW entities.ball.y_pos_cache			; 14 ;063e
+	.DW entities.ball_shadow.y_pos_cache		; c3 54 c3 ;063f

@@ -6,7 +6,7 @@ sub_game_cpu_update:
 	ld hl,partner_offset_table		; 21 5a 1e ;1e2d
 	add hl,de			; 19 ;1e30
 	ld e,(hl)			; 5e ;1e31
-	ld hl,0c200h		; 21 00 c2 ;1e32
+	ld hl,entities.player		; 21 00 c2 ;1e32
 	add hl,de			; 19 ;1e35
 	push hl			; e5 ;1e36
 	pop iy		; fd e1 ;1e37
@@ -88,7 +88,7 @@ sub_cpu_state_track_ball:
 	ld a,(0c000h)		; 3a 00 c0 ;1ec9
 	bit 7,a		; cb 7f ;1ecc
 	jr z,@l1edfh		; 28 0f ;1ece
-	call sub_compute_ball_deflection		; cd 0a 16 ;1ed0
+	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;1ed0
 	ld h,(ix + entity_t.x_pos + 1)		; dd 66 0d ;1ed3
 	sub h			; 94 ;1ed6
 	jr nc,@l1edbh		; 30 02 ;1ed7
@@ -210,7 +210,7 @@ sub_cpu_state_net:
 	ret			; c9 ;1fbf
 @l1fc0h:
 	ld e,04ch		; 1e 4c ;1fc0
-	call sub_compute_ball_deflection		; cd 0a 16 ;1fc2
+	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;1fc2
 	ld l,000h		; 2e 00 ;1fc5
 	ld h,a			; 67 ;1fc7
 	ld de,04c00h		; 11 00 4c ;1fc8
@@ -225,7 +225,7 @@ sub_cpu_state_net:
 	ret			; c9 ;1fdf
 @l1fe0h:
 	ld e,080h		; 1e 80 ;1fe0
-	call sub_compute_ball_deflection		; cd 0a 16 ;1fe2
+	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;1fe2
 	ld l,000h		; 2e 00 ;1fe5
 	ld h,a			; 67 ;1fe7
 	ld de,08000h		; 11 00 80 ;1fe8
@@ -251,7 +251,7 @@ sub_cpu_state_baseline_attack:
 	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2013
 	jr z,@l2037h		; 28 1e ;2017
 	ld e,028h		; 1e 28 ;2019
-	call sub_compute_ball_deflection		; cd 0a 16 ;201b
+	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;201b
 	ld l,000h		; 2e 00 ;201e
 	ld h,a			; 67 ;2020
 	ld de,02800h		; 11 00 28 ;2021
@@ -264,7 +264,7 @@ sub_cpu_state_baseline_attack:
 	ret			; c9 ;2036
 @l2037h:
 	ld e,0b0h		; 1e b0 ;2037
-	call sub_compute_ball_deflection		; cd 0a 16 ;2039
+	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;2039
 	ld l,000h		; 2e 00 ;203c
 	ld h,a			; 67 ;203e
 	ld de,0b000h		; 11 00 b0 ;203f
@@ -342,7 +342,7 @@ sub_cpu_state_baseline_defense:
 	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;20df
 	jr z,@l2106h		; 28 21 ;20e3
 	ld e,028h		; 1e 28 ;20e5
-	call sub_compute_ball_deflection		; cd 0a 16 ;20e7
+	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;20e7
 	ld l,000h		; 2e 00 ;20ea
 	ld h,a			; 67 ;20ec
 	ld de,02800h		; 11 00 28 ;20ed
@@ -357,7 +357,7 @@ sub_cpu_state_baseline_defense:
 	ret			; c9 ;2105
 @l2106h:
 	ld e,0b0h		; 1e b0 ;2106
-	call sub_compute_ball_deflection		; cd 0a 16 ;2108
+	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;2108
 	ld l,000h		; 2e 00 ;210b
 	ld h,a			; 67 ;210d
 	ld de,000b0h		; 11 b0 00 ;210e

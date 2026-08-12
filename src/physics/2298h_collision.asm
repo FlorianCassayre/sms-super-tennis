@@ -31,7 +31,7 @@ sub_2298h_collision:
 	ld de,01000h		; 11 00 10 ;22c7
 	cp 004h		; fe 04 ;22ca
 	jr z,+		; 28 03 ;22cc
-	ld de,l1800h		; 11 00 18 ;22ce
+	ld de,01800h		; 11 00 18 ;22ce
 +:
 	xor a			; af ;22d1
 	sbc hl,de		; ed 52 ;22d2

@@ -1,9 +1,9 @@
 l1bb0h:
 	bit 1,(ix + entity_t.side_state)		; dd cb 01 4e ;1bb0
-	ld hl,0c242h		; 21 42 c2 ;1bb4
+	ld hl,entities.player.1.top.type		; 21 42 c2 ;1bb4
 	ld e,004h		; 1e 04 ;1bb7
 	jr nz,l1bc0h		; 20 05 ;1bb9
-	ld hl,0c2c2h		; 21 c2 c2 ;1bbb
+	ld hl,entities.player.2.top.type		; 21 c2 c2 ;1bbb
 	ld e,000h		; 1e 00 ;1bbe
 l1bc0h:
 	ld a,(hl)			; 7e ;1bc0

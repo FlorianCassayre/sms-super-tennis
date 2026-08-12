@@ -1,3 +1,4 @@
+data_animation_attributes:
 	.DW data_animation_frame_1		;2b2e
 	.DW data_animation_frame_2		;2b30
 	.DW data_animation_frame_3		;2b32

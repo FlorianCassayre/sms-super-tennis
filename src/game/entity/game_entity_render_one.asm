@@ -1,24 +1,24 @@
-sub_render_sprites:
-	ld a,(0c080h)		; 3a 80 c0 ;0547
+sub_game_entity_render_one:
+	ld a,(state.current_sprite_index)		; 3a 80 c0 ;0547
 	ld e,a			; 5f ;054a
 	ld d,000h		; 16 00 ;054b
-	add a,(ix+005h)		; dd 86 05 ;054d
+	add a,(ix + entity_t.sprite_count)		; dd 86 05 ;054d
 	cp 040h		; fe 40 ;0550
 	ret nc			; d0 ;0552
-	ld hl,0c100h		; 21 00 c1 ;0553
+	ld hl,state.sat_y_buffer		; 21 00 c1 ;0553
 	add hl,de			; 19 ;0556
 	push hl			; e5 ;0557
-	ld hl,0c140h		; 21 40 c1 ;0558
+	ld hl,state.sat_xc_buffer		; 21 40 c1 ;0558
 	add hl,de			; 19 ;055b
 	add hl,de			; 19 ;055c
 	exx			; d9 ;055d
 	pop hl			; e1 ;055e
-	ld e,(ix+006h)		; dd 5e 06 ;055f
-	ld d,(ix+007h)		; dd 56 07 ;0562
-	ld b,(ix+005h)		; dd 46 05 ;0565
+	ld e,(ix + entity_t.sprite_data_ptr)		; dd 5e 06 ;055f
+	ld d,(ix + entity_t.sprite_data_ptr + 1)		; dd 56 07 ;0562
+	ld b,(ix + entity_t.sprite_count)		; dd 46 05 ;0565
 l0568h:
 	ld a,(de)			; 1a ;0568
-	add a,(ix+00bh)		; dd 86 0b ;0569
+	add a,(ix + entity_t.y_pos + 1)		; dd 86 0b ;0569
 	cp 0d0h		; fe d0 ;056c
 	jr nz,+		; 20 02 ;056e
 	ld a,0d8h		; 3e d8 ;0570
@@ -32,7 +32,7 @@ l0568h:
 	inc de			; 13 ;0578
 	exx			; d9 ;0579
 	ex af,af'			; 08 ;057a
-	ld c,(ix+00dh)		; dd 4e 0d ;057b
+	ld c,(ix + entity_t.x_pos + 1)		; dd 4e 0d ;057b
 	bit 7,a		; cb 7f ;057e
 	jr z,+		; 28 06 ;0580
 	add a,c			; 81 ;0582
@@ -55,7 +55,7 @@ l0568h:
 	exx			; d9 ;0594
 	inc hl			; 23 ;0595
 	djnz l0568h		; 10 d0 ;0596
-	ld a,(ix+005h)		; dd 7e 05 ;0598
+	ld a,(ix + entity_t.sprite_count)		; dd 7e 05 ;0598
 	ld hl,0c080h		; 21 80 c0 ;059b
 	add a,(hl)			; 86 ;059e
 	ld (hl),a			; 77 ;059f

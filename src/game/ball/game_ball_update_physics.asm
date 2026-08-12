@@ -1,4 +1,4 @@
-sub_update_ball:
+sub_game_ball_update_physics:
 	ld a,(state.hit_flags)		;14b4
 	rlca			; 07 ;14b7
 	ret nc			; d0 ;14b8
@@ -17,7 +17,7 @@ sub_update_ball:
 	ld (ball.z_pos),hl		; 22 00 c5 ;14d7
 	ld hl,0c516h		; 21 16 c5 ;14da
 	res 6,(hl)		; cb b6 ;14dd
-	call sub_ball_bounce		; cd 9c 15 ;14df
+	call sub_game_ball_update_velocity_bounce		; cd 9c 15 ;14df
 	ld hl,ball.bounces_count		; 21 17 c5 ;14e2
 	inc (hl)			; 34 ;14e5
 	ld a,BALL_MAX_BOUNCES		; 3e 05 ;14e6
@@ -48,7 +48,7 @@ sub_update_ball:
 	ld a,(ball.racket_contact_flag)		; 3a 16 c5 ;150f
 	bit 6,a		; cb 77 ;1512
 	ret nz			; c0 ;1514
-	call sub_update_ball_state		; cd af 16 ;1515
+	call sub_game_ball_update_velocity_collision		; cd af 16 ;1515
 	call sub_player_ball_collision		; cd 78 18 ;1518
 	call sub_update_ball_out_of_bounds		; cd 7f 0e ;151b
 	ld de,(ball.x_vel)		; ed 5b 0e c5 ;151e

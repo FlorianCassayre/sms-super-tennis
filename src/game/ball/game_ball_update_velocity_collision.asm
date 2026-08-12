@@ -1,4 +1,4 @@
-sub_update_ball_state:
+sub_game_ball_update_velocity_collision:
 	xor a			; af ;16af
 	ld de,(ball.x_vel)		; ed 5b 0e c5 ;16b0
 	ld hl,(ball.x_pos)		; 2a 0a c5 ;16b4
@@ -66,7 +66,7 @@ sub_update_ball_state:
 @calc_net_z_bounce:
 	ld hl,(ball.z_vel)		; 2a 06 c5 ;1728
 	push hl			; e5 ;172b
-	call sub_ball_bounce		; cd 9c 15 ;172c
+	call sub_game_ball_update_velocity_bounce		; cd 9c 15 ;172c
 	pop de			; d1 ;172f
 	bit 7,d		; cb 7a ;1730
 	jr z,@store_z_vel		; 28 07 ;1732

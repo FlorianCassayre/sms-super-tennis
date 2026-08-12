@@ -1,4 +1,4 @@
-sub_ball_bounce:
+sub_game_ball_update_velocity_bounce:
 	ld de,(ball.z_vel)		; ed 5b 06 c5 ;159c
 	ld bc,BOUNCE_COEF		; 01 a0 00 ;15a0
 	call sub_mul_de_bc		; cd f7 03 ;15a3

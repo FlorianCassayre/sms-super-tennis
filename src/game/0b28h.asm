@@ -100,21 +100,21 @@ l0bcdh:
 	ld (entities.player.1.bottom.type),a		; 32 02 c2 ;0bd7
 	inc hl			; 23 ;0bda
 	ld a,(hl)			; 7e ;0bdb
-	ld (0c242h),a		; 32 42 c2 ;0bdc
+	ld (entities.player.1.top.type),a		; 32 42 c2 ;0bdc
 	inc hl			; 23 ;0bdf
 	ld a,(hl)			; 7e ;0be0
 	ld (entities.player.2.bottom.type),a		; 32 82 c2 ;0be1
 	inc hl			; 23 ;0be4
 	ld a,(hl)			; 7e ;0be5
-	ld (0c2c2h),a		; 32 c2 c2 ;0be6
+	ld (entities.player.2.top.type),a		; 32 c2 c2 ;0be6
 	ld a,04fh		; 3e 4f ;0be9
 	ld (0c344h),a		; 32 44 c3 ;0beb
 	ld a,050h		; 3e 50 ;0bee
 	ld (0c304h),a		; 32 04 c3 ;0bf0
 	ld a,018h		; 3e 18 ;0bf3
-	ld (0c302h),a		; 32 02 c3 ;0bf5
+	ld (entities.ball.type),a		; 32 02 c3 ;0bf5
 	ld a,016h		; 3e 16 ;0bf8
-	ld (0c342h),a		; 32 42 c3 ;0bfa
+	ld (entities.ball_shadow.type),a		; 32 42 c3 ;0bfa
 	xor a			; af ;0bfd
 	ld (0c303h),a		; 32 03 c3 ;0bfe
 	ld (0c343h),a		; 32 43 c3 ;0c01
