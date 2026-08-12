@@ -1,5 +1,5 @@
 l1bb0h:
-	bit 1,(ix + player_t.side_state)		; dd cb 01 4e ;1bb0
+	bit 1,(ix + entity_t.side_state)		; dd cb 01 4e ;1bb0
 	ld hl,0c242h		; 21 42 c2 ;1bb4
 	ld e,004h		; 1e 04 ;1bb7
 	jr nz,l1bc0h		; 20 05 ;1bb9
@@ -33,18 +33,18 @@ l1bd4h:
 	ld hl,l1c1bh		; 21 1b 1c ;1be8
 	add hl,de			; 19 ;1beb
 	ld a,(hl)			; 7e ;1bec
-	ld (ix + player_t.y_pos),a		; dd 77 0a ;1bed
+	ld (ix + entity_t.y_pos),a		; dd 77 0a ;1bed
 	inc hl			; 23 ;1bf0
 	ld a,(hl)			; 7e ;1bf1
-	ld (ix + player_t.y_pos + 1),a		; dd 77 0b ;1bf2
-	ld (ix + player_t.y_pos_cache),a		; dd 77 14 ;1bf5
+	ld (ix + entity_t.y_pos + 1),a		; dd 77 0b ;1bf2
+	ld (ix + entity_t.y_pos_cache),a		; dd 77 14 ;1bf5
 	inc hl			; 23 ;1bf8
 	ld a,(hl)			; 7e ;1bf9
-	ld (ix + player_t.x_pos),a		; dd 77 0c ;1bfa
+	ld (ix + entity_t.x_pos),a		; dd 77 0c ;1bfa
 	inc hl			; 23 ;1bfd
 	ld a,(hl)			; 7e ;1bfe
-	ld (ix + player_t.x_pos + 1),a		; dd 77 0d ;1bff
-	ld (ix + player_t.type),014h		; dd 36 02 14 ;1c02
+	ld (ix + entity_t.x_pos + 1),a		; dd 77 0d ;1bff
+	ld (ix + entity_t.type),014h		; dd 36 02 14 ;1c02
 	ret			; c9 ;1c06
 l1c07h:
 	.DB $05		;1c07

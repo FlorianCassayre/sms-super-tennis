@@ -12,7 +12,7 @@ l1c56h:
 	ld (ix+025h),002h		; dd 36 25 02 ;1c5d
 	jp l1d27h		; c3 27 1d ;1c61
 l1c64h:
-	ld a,(ix + player_t.input_dirs)		; dd 7e 15 ;1c64
+	ld a,(ix + entity_t.input_dirs)		; dd 7e 15 ;1c64
 	and a			; a7 ;1c67
 	jr nz,l1c95h		; 20 2b ;1c68
 	ld a,(ix+027h)		; dd 7e 27 ;1c6a
@@ -30,7 +30,7 @@ l1c78h:
 	call sub_game_racket_update_hitbox		; cd bf 2b ;1c86
 	ld a,(ix+016h)		; dd 7e 16 ;1c89
 	ld (ix+017h),a		; dd 77 17 ;1c8c
-	ld (ix + player_t.render_facing_dir),a		; dd 77 20 ;1c8f
+	ld (ix + entity_t.render_facing_dir),a		; dd 77 20 ;1c8f
 l1c92h:
 	jp sub_game_player_update_animation		; c3 69 2a ;1c92
 l1c95h:

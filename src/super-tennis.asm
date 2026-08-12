@@ -26,7 +26,7 @@
 	.INCLUDE "game/game_t.i"
 	.INCLUDE "game/ball/ball_t.i"
 	.INCLUDE "game/ball/game_ball.i"
-	.INCLUDE "game/player/player_t.i"
+	.INCLUDE "game/entity/entity_t.i"
 	.INCLUDE "game/player/game_player.i"
 	.INCLUDE "game/foul/game_foul_t.i"
 	.INCLUDE "io/constants.asm"
@@ -354,11 +354,11 @@ l0732h:
 	ld (de),a			; 12 ;074b
 	jp l051ah		; c3 1a 05 ;074c
 l074fh_memory_table:
-	.DW player.1.bottom		;074f
-	.DW player.1.top		;0751
-	.DW player.2.bottom		;0753
-	.DW player.2.top		;0755
-	.DW players		;0757
+	.DW entities.player.1.bottom		;074f
+	.DW entities.player.1.top		;0751
+	.DW entities.player.2.bottom		;0753
+	.DW entities.player.2.top		;0755
+	.DW entities.ball		;0757
 	.DW $c340		;0759
 l0759h_table:
 	.DW sub_23ffh		;075b
@@ -469,10 +469,10 @@ l0cd1h:
 	ld a,080h		; 3e 80 ;0cd6
 	ld (0c089h),a		; 32 89 c0 ;0cd8
 	xor a			; af ;0cdb
-	ld (player.1.bottom.type),a		; 32 02 c2 ;0cdc
-	ld (player.1.top.type),a		; 32 42 c2 ;0cdf
-	ld (player.2.bottom.type),a		; 32 82 c2 ;0ce2
-	ld (player.2.top.type),a		; 32 c2 c2 ;0ce5
+	ld (entities.player.1.bottom.type),a		; 32 02 c2 ;0cdc
+	ld (entities.player.1.top.type),a		; 32 42 c2 ;0cdf
+	ld (entities.player.2.bottom.type),a		; 32 82 c2 ;0ce2
+	ld (entities.player.2.top.type),a		; 32 c2 c2 ;0ce5
 	ld (0c302h),a		; 32 02 c3 ;0ce8
 	ld (0c302h),a		; 32 02 c3 ;0ceb
 	ld a,004h		; 3e 04 ;0cee
@@ -1523,14 +1523,14 @@ l17e7h_bounding_box:
 	.DB $00		;17ef
 	.DB $19		;17f0
 sub_17f1h_aabb:
-	ld a,(ix + players_t.ball_logical_y + 1)		; dd 7e 0b ;17f1
+	ld a,(ix + entity_t.y_pos + 1)		; dd 7e 0b ;17f1
 	add a,(hl)			; 86 ;17f4
 	ld c,a			; 4f ;17f5
 	inc hl			; 23 ;17f6
 	add a,(hl)			; 86 ;17f7
 	ld b,a			; 47 ;17f8
 	inc hl			; 23 ;17f9
-	ld a,(ix + players_t.ball_logical_x + 1)		; dd 7e 0d ;17fa
+	ld a,(ix + entity_t.x_pos + 1)		; dd 7e 0d ;17fa
 	add a,(hl)			; 86 ;17fd
 	ld e,a			; 5f ;17fe
 	inc hl			; 23 ;17ff
@@ -1546,9 +1546,9 @@ l1800h:
 	.INCLUDE "game/player/player_ball_collision.asm"
 	.INCLUDE "game/player/game_player_update_server_state.asm"
 sub_1af2h:
-	bit 7,(ix + player_t.type)		; dd cb 02 7e ;1af2
+	bit 7,(ix + entity_t.type)		; dd cb 02 7e ;1af2
 	jr nz,l1b17h		; 20 1f ;1af6
-	set 7,(ix + player_t.type)		; dd cb 02 fe ;1af8
+	set 7,(ix + entity_t.type)		; dd cb 02 fe ;1af8
 	ld (ix+022h),007h		; dd 36 22 07 ;1afc
 	ld (ix+023h),0ffh		; dd 36 23 ff ;1b00
 	ld (ix+01fh),019h		; dd 36 1f 19 ;1b04
@@ -1559,9 +1559,9 @@ sub_1af2h:
 	ld (ix+030h),008h		; dd 36 30 08 ;1b12
 	ret			; c9 ;1b16
 l1b17h:
-	bit 0,(ix + player_t.side_state)		; dd cb 01 46 ;1b17
+	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1b17
 	call nz,sub_game_cpu_update		; c4 25 1e ;1b1b
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;1b1e
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;1b1e
 	bit 0,a		; cb 47 ;1b21
 	ld b,(ix+028h)		; dd 46 28 ;1b23
 	jr nz,l1b37h		; 20 0f ;1b26
@@ -1578,7 +1578,7 @@ l1b32h:
 l1b37h:
 	bit 0,b		; cb 40 ;1b37
 	jr nz,l1b5bh		; 20 20 ;1b39
-	ld (ix + player_t.render_facing_dir),000h		; dd 36 20 00 ;1b3b
+	ld (ix + entity_t.render_facing_dir),000h		; dd 36 20 00 ;1b3b
 	call sub_game_player_update_animation		; cd 69 2a ;1b3f
 	ld a,(ix+023h)		; dd 7e 23 ;1b42
 	and a			; a7 ;1b45
@@ -1589,19 +1589,19 @@ l1b50h:
 	ld a,(0c040h)		; 3a 40 c0 ;1b50
 	bit 7,a		; cb 7f ;1b53
 	ret nz			; c0 ;1b55
-	ld (ix + player_t.type),009h		; dd 36 02 09 ;1b56
+	ld (ix + entity_t.type),009h		; dd 36 02 09 ;1b56
 	ret			; c9 ;1b5a
 l1b5bh:
 	ld hl,0c040h		; 21 40 c0 ;1b5b
 	bit 7,(hl)		; cb 7e ;1b5e
 	ret z			; c8 ;1b60
-	ld (ix + player_t.type),005h		; dd 36 02 05 ;1b61
+	ld (ix + entity_t.type),005h		; dd 36 02 05 ;1b61
 	set 6,(hl)		; cb f6 ;1b65
 	ret			; c9 ;1b67
 sub_1b68h:
-	bit 7,(ix + player_t.type)		; dd cb 02 7e ;1b68
+	bit 7,(ix + entity_t.type)		; dd cb 02 7e ;1b68
 	jr nz,l1b7eh		; 20 10 ;1b6c
-	set 7,(ix + player_t.type)		; dd cb 02 fe ;1b6e
+	set 7,(ix + entity_t.type)		; dd cb 02 fe ;1b6e
 	ld (ix+022h),008h		; dd 36 22 08 ;1b72
 	ld (ix+023h),0ffh		; dd 36 23 ff ;1b76
 	ld (ix+020h),000h		; dd 36 20 00 ;1b7a
@@ -1612,12 +1612,12 @@ l1b7eh:
 	and a			; a7 ;1b87
 	ret nz			; c0 ;1b88
 	ld a,013h		; 3e 13 ;1b89
-	bit 0,(ix + player_t.side_state)		; dd cb 01 46 ;1b8b
+	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1b8b
 	jr z,l1b97h		; 28 06 ;1b8f
 	ld a,014h		; 3e 14 ;1b91
 	ld (ix+030h),001h		; dd 36 30 01 ;1b93
 l1b97h:
-	ld (ix + player_t.type),a		; dd 77 02 ;1b97
+	ld (ix + entity_t.type),a		; dd 77 02 ;1b97
 	xor a			; af ;1b9a
 	ld (0c400h),a		; 32 00 c4 ;1b9b
 	ret			; c9 ;1b9e
@@ -1758,10 +1758,10 @@ l23a6h:
 	.INCLUDE "game/cpu/game_cpu_evaluate_y_dist_2.asm"
 sub_23ffh:
 	bit 1,(ix+001h)		; dd cb 01 4e ;23ff
-	ld hl,player.1.bottom.type		; 21 02 c2 ;2403
+	ld hl,entities.player.1.bottom.type		; 21 02 c2 ;2403
 	ld e,004h		; 1e 04 ;2406
 	jr nz,l240fh		; 20 05 ;2408
-	ld hl,player.2.bottom.type		; 21 82 c2 ;240a
+	ld hl,entities.player.2.bottom.type		; 21 82 c2 ;240a
 	ld e,000h		; 1e 00 ;240d
 l240fh:
 	ld a,(hl)			; 7e ;240f

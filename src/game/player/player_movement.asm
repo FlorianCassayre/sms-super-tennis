@@ -4,7 +4,7 @@ sub_player_movement:
 	ld hl,BOUND_Y_MIN_VERT_OBJ		; 21 00 08 ;26cd
 	ld b,TYPE_VERT_ONLY_1		; 06 03 ;26d0
 	ld c,TYPE_VERT_ONLY_2		; 0e 09 ;26d2
-	ld a,(ix + player_t.type)		; dd 7e 02 ;26d4
+	ld a,(ix + entity_t.type)		; dd 7e 02 ;26d4
 	and ENT_TYPE_MASK		; e6 7f ;26d7
 	cp b			; b8 ;26d9
 	jr z,+		; 28 03 ;26da
@@ -12,7 +12,7 @@ sub_player_movement:
 	jr nz,l2704h		; 20 25 ;26dd
 +:
 	ld hl,BOUND_Y_MIN_QUAD_A1		; 21 00 41 ;26df
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;26e2
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;26e2
 	and 1		; e6 01 ;26e5
 	jr nz,+		; 20 0c ;26e7
 	ld a,(game.match_state_flag)		; 3a 44 c0 ;26e9
@@ -28,15 +28,15 @@ sub_player_movement:
 	ld hl,BOUND_Y_MIN_QUAD_B2		; 21 00 88 ;26ff
 	jr ++		; 18 0a ;2702
 l2704h:
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;2704
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;2704
 	and 1		; e6 01 ;2707
 	jr z,++		; 28 03 ;2709
 	ld hl,BOUND_Y_MIN_DEFAULT		; 21 80 36 ;270b
 ++:
-	ld (ix + player_t.cache_y_min),l		; dd 75 3c ;270e
-	ld (ix + player_t.cache_y_min + 1),h		; dd 74 3d ;2711
-	ld d,(ix + player_t.x_pos + 1)		; dd 56 0d ;2714
-	ld a,(ix + player_t.x_pos)		; dd 7e 0c ;2717
+	ld (ix + entity_t.cache_y_min),l		; dd 75 3c ;270e
+	ld (ix + entity_t.cache_y_min + 1),h		; dd 74 3d ;2711
+	ld d,(ix + entity_t.x_pos + 1)		; dd 56 0d ;2714
+	ld a,(ix + entity_t.x_pos)		; dd 7e 0c ;2717
 	ld b,DIR_UP		; 06 04 ;271a
 	sub l			; 95 ;271c
 	jr nc,+		; 30 06 ;271d
@@ -51,7 +51,7 @@ l2704h:
 	ld hl,BOUND_Y_MAX_VERT_OBJ		; 21 00 f8 ;2729
 	ld b,TYPE_VERT_ONLY_1		; 06 03 ;272c
 	ld c,TYPE_VERT_ONLY_2		; 0e 09 ;272e
-	ld a,(ix + player_t.type)		; dd 7e 02 ;2730
+	ld a,(ix + entity_t.type)		; dd 7e 02 ;2730
 	and ENT_TYPE_MASK		; e6 7f ;2733
 	cp b			; b8 ;2735
 	jr z,+		; 28 03 ;2736
@@ -59,7 +59,7 @@ l2704h:
 	jr nz,l2760h		; 20 25 ;2739
 +:
 	ld hl,BOUND_Y_MAX_QUAD_A1		; 21 00 c0 ;273b
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;273e
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;273e
 	and 1		; e6 01 ;2741
 	jr nz,+		; 20 0c ;2743
 	ld a,(game.match_state_flag)		; 3a 44 c0 ;2745
@@ -75,15 +75,15 @@ l2704h:
 	ld hl,BOUND_Y_MAX_QUAD_B2		; 21 00 76 ;275b
 	jr ++		; 18 0a ;275e
 l2760h:
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;2760
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;2760
 	and 1		; e6 01 ;2763
 	jr z,++		; 28 03 ;2765
 	ld hl,BOUND_Y_MAX_DEFAULT		; 21 ff c9 ;2767
 ++:
-	ld (ix + player_t.cache_y_max),l		; dd 75 3e ;276a
-	ld (ix + player_t.cache_y_max + 1),h		; dd 74 3f ;276d
-	ld d,(ix + player_t.x_pos + 1)		; dd 56 0d ;2770
-	ld a,(ix + player_t.x_pos)		; dd 7e 0c ;2773
+	ld (ix + entity_t.cache_y_max),l		; dd 75 3e ;276a
+	ld (ix + entity_t.cache_y_max + 1),h		; dd 74 3f ;276d
+	ld d,(ix + entity_t.x_pos + 1)		; dd 56 0d ;2770
+	ld a,(ix + entity_t.x_pos)		; dd 7e 0c ;2773
 	sub l			; 95 ;2776
 	; Bug ?! (should probably be `jr nc` instead)
 	jr c,+		; 38 06 ;2777
@@ -104,19 +104,19 @@ l2785h:
 	ld hl,BOUND_X_MIN_RIGHT_HALF		; 21 00 6c ;2788
 	ld b,TYPE_VERT_ONLY_1		; 06 03 ;278b
 	ld c,TYPE_VERT_ONLY_2		; 0e 09 ;278d
-	ld a,(ix + player_t.type)		; dd 7e 02 ;278f
+	ld a,(ix + entity_t.type)		; dd 7e 02 ;278f
 	and ENT_TYPE_MASK		; e6 7f ;2792
 	cp b			; b8 ;2794
 	jr z,l27e0h		; 28 49 ;2795
 	cp c			; b9 ;2797
 	jr z,l27e0h		; 28 46 ;2798
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;279a
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;279a
 	and 1		; e6 01 ;279d
 	jr z,+		; 28 03 ;279f
 	ld hl,BOUND_X_MIN_LEFT_HALF		; 21 00 1d ;27a1
 +:
-	ld d,(ix + player_t.y_pos + 1)		; dd 56 0b ;27a4
-	ld a,(ix + player_t.y_pos)		; dd 7e 0a ;27a7
+	ld d,(ix + entity_t.y_pos + 1)		; dd 56 0b ;27a4
+	ld a,(ix + entity_t.y_pos)		; dd 7e 0a ;27a7
 	ld b,DIR_LEFT		; 06 01 ;27aa
 	sub l			; 95 ;27ac
 	jr nc,+		; 30 06 ;27ad
@@ -129,13 +129,13 @@ l2785h:
 	sub h			; 94 ;27b6
 	jr c,l27dbh		; 38 22 ;27b7
 	ld hl,BOUND_X_MAX_RIGHT_HALF		; 21 00 cb ;27b9
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;27bc
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;27bc
 	and 1		; e6 01 ;27bf
 	jr z,+		; 28 03 ;27c1
 	ld hl,BOUND_X_MAX_LEFT_HALF		; 21 ff 4c ;27c3
 +:
-	ld d,(ix + player_t.y_pos + 1)		; dd 56 0b ;27c6
-	ld a,(ix + player_t.y_pos)		; dd 7e 0a ;27c9
+	ld d,(ix + entity_t.y_pos + 1)		; dd 56 0b ;27c6
+	ld a,(ix + entity_t.y_pos)		; dd 7e 0a ;27c9
 	sub l			; 95 ;27cc
 	jr nc,+		; 30 06 ;27cd
 	ld a,d			; 7a ;27cf
@@ -156,13 +156,13 @@ l27e0h:
 	ld b,DIR_LEFT | DIR_RIGHT		; 06 03 ;27e0
 	jr l27dbh		; 18 f7 ;27e2
 l27e4h:
-	ld a,(ix + player_t.tile_collision)		; dd 7e 2d ;27e4
+	ld a,(ix + entity_t.tile_collision)		; dd 7e 2d ;27e4
 	and DIR_MASK		; e6 0f ;27e7
 	ld b,a			; 47 ;27e9
 	ex af,af'			; 08 ;27ea
 	or b			; b0 ;27eb
 	cpl			; 2f ;27ec
-	ld b,(ix + player_t.input_dirs)		; dd 46 15 ;27ed
+	ld b,(ix + entity_t.input_dirs)		; dd 46 15 ;27ed
 	and b			; a0 ;27f0
-	ld (ix + player_t.allowed_dirs),a		; dd 77 12 ;27f1
+	ld (ix + entity_t.allowed_dirs),a		; dd 77 12 ;27f1
 	ret			; c9 ;27f4

@@ -7,7 +7,7 @@ sub_game_player_update_animation:
 	jr nz,+++		; 20 6a ;2a73
 	set 7,(ix+022h)		; dd cb 22 fe ;2a75
 	ld e,a			; 5f ;2a79
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;2a7a
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;2a7a
 	ld c,a			; 4f ;2a7d
 	and 001h		; e6 01 ;2a7e
 	ld b,000h		; 06 00 ;2a80
@@ -20,7 +20,7 @@ sub_game_player_update_animation:
 	jr z,++		; 28 02 ;2a8b
 	ld b,00ch		; 06 0c ;2a8d
 ++:
-	ld a,(ix + player_t.render_facing_dir)		; dd 7e 20 ;2a8f
+	ld a,(ix + entity_t.render_facing_dir)		; dd 7e 20 ;2a8f
 	and 001h		; e6 01 ;2a92
 	jr z,+		; 28 02 ;2a94
 	ld a,024h		; 3e 24 ;2a96

@@ -2,7 +2,7 @@ sub_26ab_update:
 	ld a,(0c000h)		; 3a 00 c0 ;26ab
 	bit 3,a		; cb 5f ;26ae
 	ret nz			; c0 ;26b0
-	ld a,(ix + player_t.side_state)		; dd 7e 01 ;26b1
+	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;26b1
 	ld b,a			; 47 ;26b4
 	and 001h		; e6 01 ;26b5
 	ret nz			; c0 ;26b7
@@ -15,5 +15,5 @@ sub_26ab_update:
 	ld a,(0c1c2h)		; 3a c2 c1 ;26c2
 ++:
 	and 00fh		; e6 0f ;26c5
-	ld (ix + player_t.input_dirs),a		; dd 77 15 ;26c7
+	ld (ix + entity_t.input_dirs),a		; dd 77 15 ;26c7
 	ret			; c9 ;26ca

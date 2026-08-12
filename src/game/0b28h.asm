@@ -16,7 +16,7 @@ l0b3bh_prepare_serve:
 	and (hl)			; a6 ;0b40
 	ld (hl),a			; 77 ;0b41
 	ld hl,0c200h		; 21 00 c2 ;0b42
-	ld de,player.1.bottom.side_state		; 11 01 c2 ;0b45
+	ld de,entities.player.1.bottom.side_state		; 11 01 c2 ;0b45
 	ld bc,0017fh		; 01 7f 01 ;0b48
 	ld (hl),000h		; 36 00 ;0b4b
 	ldir		; ed b0 ;0b4d
@@ -97,13 +97,13 @@ l0bcdh:
 	ld d,000h		; 16 00 ;0bd3
 	add hl,de			; 19 ;0bd5
 	ld a,(hl)			; 7e ;0bd6
-	ld (player.1.bottom.type),a		; 32 02 c2 ;0bd7
+	ld (entities.player.1.bottom.type),a		; 32 02 c2 ;0bd7
 	inc hl			; 23 ;0bda
 	ld a,(hl)			; 7e ;0bdb
 	ld (0c242h),a		; 32 42 c2 ;0bdc
 	inc hl			; 23 ;0bdf
 	ld a,(hl)			; 7e ;0be0
-	ld (player.2.bottom.type),a		; 32 82 c2 ;0be1
+	ld (entities.player.2.bottom.type),a		; 32 82 c2 ;0be1
 	inc hl			; 23 ;0be4
 	ld a,(hl)			; 7e ;0be5
 	ld (0c2c2h),a		; 32 c2 c2 ;0be6
@@ -124,7 +124,7 @@ l0bcdh:
 	ld hl,l0c67h		; 21 67 0c ;0c0a
 	add hl,de			; 19 ;0c0d
 	ld a,(hl)			; 7e ;0c0e
-	ld (players.player_pair_index),a		; 32 12 c3 ;0c0f
+	ld (entities.ball.allowed_dirs),a		; 32 12 c3 ;0c0f
 	ld hl,0c1c1h		; 21 c1 c1 ;0c12
 	ld de,040h		; 11 40 00 ;0c15
 	xor a			; af ;0c18

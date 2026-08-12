@@ -2,15 +2,15 @@ sub_check_player_location:
 	ld a,(0c000h)		; 3a 00 c0 ;1787
 	rlca			; 07 ;178a
 	ret nc			; d0 ;178b
-	ld ix,player.1.bottom		; dd 21 00 c2 ;178c
-	ld iy,player.2.bottom		; fd 21 80 c2 ;1790
+	ld ix,entities.player.1.bottom		; dd 21 00 c2 ;178c
+	ld iy,entities.player.2.bottom		; fd 21 80 c2 ;1790
 	call sub_179fh		; cd 9f 17 ;1794
-	ld ix,player.1.top		; dd 21 40 c2 ;1797
-	ld iy,player.2.top		; fd 21 c0 c2 ;179b
+	ld ix,entities.player.1.top		; dd 21 40 c2 ;1797
+	ld iy,entities.player.2.top		; fd 21 c0 c2 ;179b
 sub_179fh:
 	ld e,000h		; 1e 00 ;179f
-	ld a,(ix + player_t.y_pos_cache)		; dd 7e 14 ;17a1
-	sub (iy + player_t.y_pos_cache)		; fd 96 14 ;17a4
+	ld a,(ix + entity_t.y_pos_cache)		; dd 7e 14 ;17a1
+	sub (iy + entity_t.y_pos_cache)		; fd 96 14 ;17a4
 	jr nc,+		; 30 02 ;17a7
 	neg		; ed 44 ;17a9
 +:
@@ -37,6 +37,6 @@ sub_179fh:
 	ld c,(hl)			; 4e ;17dd
 	inc hl			; 23 ;17de
 	ld b,(hl)			; 46 ;17df
-	ld (ix + player_t.tile_collision),c		; dd 71 2d ;17e0
-	ld (iy + player_t.tile_collision),b		; fd 70 2d ;17e3
+	ld (ix + entity_t.tile_collision),c		; dd 71 2d ;17e0
+	ld (iy + entity_t.tile_collision),b		; fd 70 2d ;17e3
 	ret			; c9 ;17e6

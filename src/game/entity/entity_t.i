@@ -1,8 +1,9 @@
-.STRUCT player_t
+.STRUCT entity_t
     _unknown_0 DB		; $00 ; ???
     side_state DB		; $01 ; Court side
     type DB		; $02 ; Entity type ID?
-    _unknown_1 DSB 7		; $03
+    ball_hit_flag DB		; $03
+    _unknown_1 DSB 6		; $04
     y_pos DW		; $0a ; 16-bit Y coordinate (Low = $0C, High = $0D)
     x_pos DW		; $0c ; 16-bit X coordinate (Low = $0A, High = $0B)
     y_vel DW		; $0e ; 16-bit Y velocity
@@ -46,22 +47,16 @@
 .ENDST
 
 .STRUCT player_opponents_t
-	bottom INSTANCEOF player_t
-	top INSTANCEOF player_t
+	bottom INSTANCEOF entity_t
+	top INSTANCEOF entity_t
 .ENDST
 
-.STRUCT players_t
-	_unknown_0 DB	;c300
-	_unknown_1 DSB 2	;c301
-	ball_hit_flag DB	;c303
-	_unknown_2 DSB 6	;c304
-	ball_logical_y DW	;c30a
-	ball_logical_x DW	;c30c
-	_unknown_3 DSB 4	;c30d
-	player_pair_index DB	;c312
+.STRUCT entities_t
+	player INSTANCEOF player_opponents_t 2		; $c200 $c240 $c280 $c2c0
+	ball INSTANCEOF entity_t		; $c300
+	ball_shadow INSTANCEOF entity_t		; $c340
 .ENDST
 
 .ENUM $c200
-	player INSTANCEOF player_opponents_t 2		; $c200 $c240 $c280 $c2c0
-	players INSTANCEOF players_t		; $c300
+	entities INSTANCEOF entities_t		; $c200 $c240 $c280 $c2c0 $c300 $c340
 .ENDE

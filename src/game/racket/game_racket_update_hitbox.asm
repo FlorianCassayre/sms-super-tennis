@@ -14,7 +14,7 @@ sub_game_racket_update_hitbox:
 	ld e,a			; 5f ;2bd4
 	call sub_compute_ball_deflection		; cd 0a 16 ;2bd5
 	ld e,(ix+00dh)		; dd 5e 0d ;2bd8
-	bit 0,(ix + player_t.side_state)		; dd cb 01 46 ;2bdb
+	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2bdb
 	jr nz,+		; 20 06 ;2bdf
 	ld d,a			; 57 ;2be1
 	ld a,e			; 7b ;2be2
@@ -31,7 +31,7 @@ l2beeh:
 	ld (ix+016h),a		; dd 77 16 ;2bee
 	ret			; c9 ;2bf1
 l2bf2h:
-	ld a,(ix + player_t.input_dirs)		; dd 7e 15 ;2bf2
+	ld a,(ix + entity_t.input_dirs)		; dd 7e 15 ;2bf2
 	and a			; a7 ;2bf5
 	jr z,l2c04h		; 28 0c ;2bf6
 	and 00ch		; e6 0c ;2bf8
@@ -42,7 +42,7 @@ l2c00h:
 	jr nz,l2beeh		; 20 ec ;2c00
 	jr l2bech		; 18 e8 ;2c02
 l2c04h:
-	ld a,(ix + player_t.x_pos + 1)		; dd 7e 0d ;2c04
+	ld a,(ix + entity_t.x_pos + 1)		; dd 7e 0d ;2c04
 	cp 080h		; fe 80 ;2c07
 	ld a,000h		; 3e 00 ;2c09
 	jr c,l2c0fh		; 38 02 ;2c0b
