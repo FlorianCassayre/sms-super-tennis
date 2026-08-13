@@ -12,9 +12,9 @@ sub_1af2h:
 	ld (ix+030h),008h		; dd 36 30 08 ;1b12
 	ret			; c9 ;1b16
 l1b17h:
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1b17
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;1b17
 	call nz,sub_game_cpu_update		; c4 25 1e ;1b1b
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;1b1e
+	ld a,(ix + entity_t.id)		; dd 7e 01 ;1b1e
 	bit 0,a		; cb 47 ;1b21
 	ld b,(ix+028h)		; dd 46 28 ;1b23
 	jr nz,l1b37h		; 20 0f ;1b26

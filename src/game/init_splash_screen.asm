@@ -28,3 +28,7 @@ sub_init_splash_screen:
 l0eefh:
 	call sub_decrement_pause_counter		; cd ad 03 ;0eef
 	ret nz			; c0 ;0ef2
+l0ef3h_hardware_sms:
+	ld hl,0c006h		; 21 06 c0 ;0ef3
+	ld (hl),081h		; 36 81 ;0ef6
+	ret			; c9 ;0ef8

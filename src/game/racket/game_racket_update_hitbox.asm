@@ -14,7 +14,7 @@ sub_game_racket_update_hitbox:
 	ld e,a			; 5f ;2bd4
 	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;2bd5
 	ld e,(ix + entity_t.x_pos + 1)		; dd 5e 0d ;2bd8
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2bdb
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;2bdb
 	jr nz,+		; 20 06 ;2bdf
 	ld d,a			; 57 ;2be1
 	ld a,e			; 7b ;2be2

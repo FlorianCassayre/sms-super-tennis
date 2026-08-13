@@ -1,6 +1,6 @@
 .STRUCT entity_t
     _unknown_0 DB		; $00 ; ???
-    side_state DB		; $01 ; Court side
+    id DB		; $01 ; Court side
     type DB		; $02 ; Entity type ID?
     ball_hit_flag DB		; $03
     _unknown_04 DB		; $04
@@ -14,7 +14,7 @@
     allowed_dirs DB		; $12 ; Output: final allowed movement bitmask
     _unknown_2 DB		; $13 ; ???
     y_pos_cache DB		; $14 ; Cached Y high-byte
-    input_dirs DB		; $15 ; Input: requested movement bitmask (joypad/CPU)
+    input_dirs DB		; $15 ; Input: requested movement bitmask (joypad/CPU) (0: up, 1: down, 2: left, 4: right)
     facing_dir DB		; $16
     prev_facing_dir DB		; $17
     hit_readiness DB		; $18
@@ -45,8 +45,8 @@
     _unknown_10 DB		; $32 ; ???
     cpu_sub_state DB		; $33
     _unknown_11 DSB 8		; $34 ; ???
-    cache_y_min DW		; $3c ; Cached Y boundary top (Low = $3C, High = $3D)
-    cache_y_max DW		; $3e ; Cached Y boundary bottom (Low = $3E, High = $3F)
+    cache_x_min DW		; $3c ; Cached Y boundary top (Low = $3C, High = $3D)
+    cache_x_max DW		; $3e ; Cached Y boundary bottom (Low = $3E, High = $3F)
 .ENDST
 
 .STRUCT player_opponents_t

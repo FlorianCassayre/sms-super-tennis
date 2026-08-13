@@ -5,7 +5,7 @@ sub_game_player_update_server_state:
 	set 7,(ix + entity_t.type)		; dd cb 02 fe ;1a66
 	cp 003h		; fe 03 ;1a6a
 	jr nz,@skip_position_lookup		; 20 2d ;1a6c
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1a6e
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;1a6e
 	ld e,000h		; 1e 00 ;1a72
 	jr z,@read_serve_type		; 28 02 ;1a74
 	ld e,008h		; 1e 08 ;1a76
@@ -31,7 +31,7 @@ sub_game_player_update_server_state:
 	ld a,(hl)			; 7e ;1a97
 	ld (ix + entity_t.x_pos + 1),a		; dd 77 0d ;1a98
 @skip_position_lookup:
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1a9b
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;1a9b
 	jr z,@set_animation_timer		; 28 04 ;1a9f
 	ld (ix+030h),007h		; dd 36 30 07 ;1aa1
 @set_animation_timer:
@@ -43,7 +43,7 @@ sub_game_player_update_server_state:
 	ld a,001h		; 3e 01 ;1ab6
 	ld (0c400h),a		; 32 00 c4 ;1ab8
 @update_loop:
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1abb
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;1abb
 	call nz,sub_game_cpu_update		; c4 25 1e ;1abf
 	ld (ix + entity_t.render_facing_dir),000h		; dd 36 20 00 ;1ac2
 	call sub_game_player_update_animation		; cd 69 2a ;1ac6

@@ -2,7 +2,7 @@ sub_26ab_update:
 	ld a,(0c000h)		; 3a 00 c0 ;26ab
 	bit 3,a		; cb 5f ;26ae
 	ret nz			; c0 ;26b0
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;26b1
+	ld a,(ix + entity_t.id)		; dd 7e 01 ;26b1
 	ld b,a			; 47 ;26b4
 	and 001h		; e6 01 ;26b5
 	ret nz			; c0 ;26b7

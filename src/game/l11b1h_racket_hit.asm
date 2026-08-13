@@ -46,7 +46,7 @@ l11e7h:
 	ld (ball.z_gravity),de		; ed 53 02 c5 ;11fd
 	ld c,002h		; 0e 02 ;1201
 	call sub_compute_ball_x_velocity		; cd a8 13 ;1203
-	jp sub_l1362h		; c3 62 13 ;1206
+	jp sub_l1362h_ball		; c3 62 13 ;1206
 l1209h:
 	.DB $c0		;1209
 	.DB $fd		;120a

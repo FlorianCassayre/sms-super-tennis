@@ -1,5 +1,5 @@
 sub_game_cpu_update:
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;1e25
+	ld a,(ix + entity_t.id)		; dd 7e 01 ;1e25
 	and 003h		; e6 03 ;1e28
 	ld e,a			; 5f ;1e2a
 	ld d,000h		; 16 00 ;1e2b
@@ -63,7 +63,7 @@ sub_cpu_state_track_ball:
 	ld (ix + entity_t.cpu_state),006h		; dd 36 30 06 ;1e95
 	jr @l1ef0h		; 18 55 ;1e99
 @l1e9bh:
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1e9b
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;1e9b
 	jr nz,@l1eb3h		; 20 12 ;1e9f
 	ld a,(0c30bh)		; 3a 0b c3 ;1ea1
 	add a,008h		; c6 08 ;1ea4
@@ -177,7 +177,7 @@ sub_cpu_state_net:
 	ld (ix + entity_t.shot_button),000h		; dd 36 28 00 ;1f7a
 	ret			; c9 ;1f7e
 @l1f7fh:
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;1f7f
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;1f7f
 	jr nz,@l1f97h		; 20 12 ;1f83
 	ld a,(0c30bh)		; 3a 0b c3 ;1f85
 	add a,008h		; c6 08 ;1f88
@@ -248,7 +248,7 @@ sub_cpu_state_baseline_attack:
 	ld (ix + entity_t.shot_button),000h		; dd 36 28 00 ;200e
 	ret			; c9 ;2012
 @l2013h:
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2013
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;2013
 	jr z,@l2037h		; 28 1e ;2017
 	ld e,028h		; 1e 28 ;2019
 	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;201b
@@ -279,7 +279,7 @@ sub_cpu_state_return_center:
 	bit 0,(ix + entity_t.ball_incoming)		; dd cb 27 46 ;2055
 	jr nz,@l207eh		; 20 23 ;2059
 	ld a,(ix+02eh)		; dd 7e 2e ;205b
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;205e
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;205e
 	jr z,@l2075h		; 28 11 ;2062
 	cp 002h		; fe 02 ;2064
 	jr c,@l207eh		; 38 16 ;2066
@@ -339,7 +339,7 @@ sub_cpu_state_baseline_defense:
 	ld (iy+033h),005h		; fd 36 33 05 ;20da
 	ret			; c9 ;20de
 @l20dfh:
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;20df
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;20df
 	jr z,@l2106h		; 28 21 ;20e3
 	ld e,028h		; 1e 28 ;20e5
 	call sub_game_ball_compute_horizontal_deflection		; cd 0a 16 ;20e7

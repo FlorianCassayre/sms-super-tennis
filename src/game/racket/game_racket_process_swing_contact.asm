@@ -20,7 +20,7 @@ sub_game_racket_process_swing_contact:
 	bit 0,a		; cb 47 ;2c67
 	jr z,+		; 28 0e ;2c69
 	ld a,(0c041h)		; 3a 41 c0 ;2c6b
-	cp (ix + entity_t.side_state)		; dd be 01 ;2c6e
+	cp (ix + entity_t.id)		; dd be 01 ;2c6e
 	jr nz,+		; 20 06 ;2c71
 	ld hl,0c000h		; 21 00 c0 ;2c73
 	res 0,(hl)		; cb 86 ;2c76
@@ -38,7 +38,7 @@ sub_game_racket_process_swing_contact:
 	rrca			; 0f ;2c91
 	rrca			; 0f ;2c92
 	rrca			; 0f ;2c93
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2c94
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;2c94
 	jr z,+		; 28 01 ;2c98
 	cpl			; 2f ;2c9a
 +:
@@ -48,7 +48,7 @@ sub_game_racket_process_swing_contact:
 	ld a,(ix + entity_t.y_div_pos)		; dd 7e 2e ;2c9f
 	rla			; 17 ;2ca2
 	rla			; 17 ;2ca3
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2ca4
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;2ca4
 	jr z,+		; 28 01 ;2ca8
 	cpl			; 2f ;2caa
 +:
@@ -59,7 +59,7 @@ sub_game_racket_process_swing_contact:
 	ld hl,game_ball_trajectory_data_bounce_magnitude		; 21 98 2d ;2cb1
 	add hl,de			; 19 ;2cb4
 	ld a,(hl)			; 7e ;2cb5
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2cb6
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;2cb6
 	jr z,+		; 28 0b ;2cba
 	bit 0,(ix + entity_t.render_facing_dir)		; dd cb 20 46 ;2cbc
 	jr nz,++		; 20 0e ;2cc0
@@ -72,7 +72,7 @@ sub_game_racket_process_swing_contact:
 ++:
 	and 01fh		; e6 1f ;2cd0
 	ld de,0c320h		; 11 20 c3 ;2cd2
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2cd5
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;2cd5
 	jr z,+		; 28 03 ;2cd9
 	ld b,00bh		; 06 0b ;2cdb
 	add a,b			; 80 ;2cdd
@@ -80,7 +80,7 @@ sub_game_racket_process_swing_contact:
 	ld (de),a			; 12 ;2cde
 	ld a,(0c4b0h)		; 3a b0 c4 ;2cdf
 	ld e,000h		; 1e 00 ;2ce2
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2ce4
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;2ce4
 	jr z,+		; 28 05 ;2ce8
 	ld a,(0c4b1h)		; 3a b1 c4 ;2cea
 	ld e,010h		; 1e 10 ;2ced
@@ -89,7 +89,7 @@ sub_game_racket_process_swing_contact:
 	call sub_2d0eh_movement		; cd 0e 2d ;2cf2
 	ld a,(0c4b2h)		; 3a b2 c4 ;2cf5
 	ld e,000h		; 1e 00 ;2cf8
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;2cfa
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;2cfa
 	jr z,+		; 28 05 ;2cfe
 	ld a,(0c4b3h)		; 3a b3 c4 ;2d00
 	ld e,010h		; 1e 10 ;2d03
@@ -99,7 +99,7 @@ sub_game_racket_process_swing_contact:
 	jp l2d35h		; c3 35 2d ;2d0b
 	.INCLUDE "physics/2d0eh_movement.asm"
 l2d35h:
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;2d35
+	ld a,(ix + entity_t.id)		; dd 7e 01 ;2d35
 	and 001h		; e6 01 ;2d38
 	ld a,000h		; 3e 00 ;2d3a
 	ld b,001h		; 06 01 ;2d3c

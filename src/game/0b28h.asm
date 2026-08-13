@@ -16,7 +16,7 @@ l0b3bh_prepare_serve:
 	and (hl)			; a6 ;0b40
 	ld (hl),a			; 77 ;0b41
 	ld hl,0c200h		; 21 00 c2 ;0b42
-	ld de,entities.player.1.bottom.side_state		; 11 01 c2 ;0b45
+	ld de,entities.player.1.bottom.id		; 11 01 c2 ;0b45
 	ld bc,0017fh		; 01 7f 01 ;0b48
 	ld (hl),000h		; 36 00 ;0b4b
 	ldir		; ed b0 ;0b4d

@@ -2,7 +2,7 @@ sub_0abd_draw_tennis_court:
 	di			; f3 ;0abd
 	call sub_disable_display		; cd a4 03 ;0abe
 	ld hl,0		; 21 00 00 ;0ac1
-	ld de,data_palette_0		; 11 03 00 ;0ac4
+	ld de,game_court_palette		; 11 03 00 ;0ac4
 	ld b,32		; 06 20 ;0ac7
 	call sub_graphics_palette_load		; cd 81 04 ;0ac9
 	ld de,02600h		; 11 00 26 ;0acc

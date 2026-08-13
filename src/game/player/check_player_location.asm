@@ -40,3 +40,15 @@ sub_179fh:
 	ld (ix + entity_t.tile_collision),c		; dd 71 2d ;17e0
 	ld (iy + entity_t.tile_collision),b		; fd 70 2d ;17e3
 	ret			; c9 ;17e6
+
+l17e7h_bounding_box:
+	.DB $fc		;17e7
+	.DB $08		;17e8
+	.DB $f8		;17e9
+	.DB $10		;17ea
+	.DB $87		;17eb
+	.DB $87		;17ec
+	.DB $5f		;17ed
+	.DB $16		;17ee
+	.DB $00		;17ef
+	.DB $19		;17f0

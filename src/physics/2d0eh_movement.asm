@@ -1,10 +1,10 @@
 sub_2d0eh_movement:
 	ld c,a			; 4f ;2d0e
-	ld a,(ix+02fh)		; dd 7e 2f ;2d0f
+	ld a,(ix + entity_t.x_div_pos)		; dd 7e 2f ;2d0f
 	and 007h		; e6 07 ;2d12
 	or e			; b3 ;2d14
 	ld e,a			; 5f ;2d15
-	ld a,(ix+020h)		; dd 7e 20 ;2d16
+	ld a,(ix + entity_t.render_facing_dir)		; dd 7e 20 ;2d16
 	rla			; 17 ;2d19
 	rla			; 17 ;2d1a
 	rla			; 17 ;2d1b
@@ -22,7 +22,7 @@ sub_2d0eh_movement:
 	neg		; ed 44 ;2d2b
 +:
 	ld c,a			; 4f ;2d2d
-	ld de,0c320h		; 11 20 c3 ;2d2e
+	ld de,entities.ball.render_facing_dir		; 11 20 c3 ;2d2e
 	ld a,(de)			; 1a ;2d31
 	add a,c			; 81 ;2d32
 	ld (de),a			; 12 ;2d33

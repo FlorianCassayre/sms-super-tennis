@@ -51,7 +51,7 @@ l1325h:
 	call sub_load_ball_z_gravity		; cd 8f 13 ;132d
 	ld c,000h		; 0e 00 ;1330
 	call sub_compute_ball_x_velocity		; cd a8 13 ;1332
-	jp sub_l1362h		; c3 62 13 ;1335
+	jp sub_l1362h_ball		; c3 62 13 ;1335
 l1338h:
 	.DB $3e		;1338
 	.DB $13		;1339

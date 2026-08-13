@@ -1,5 +1,5 @@
 l1bb0h:
-	bit 1,(ix + entity_t.side_state)		; dd cb 01 4e ;1bb0
+	bit 1,(ix + entity_t.id)		; dd cb 01 4e ;1bb0
 	ld hl,entities.player.1.top.type		; 21 42 c2 ;1bb4
 	ld e,004h		; 1e 04 ;1bb7
 	jr nz,l1bc0h		; 20 05 ;1bb9

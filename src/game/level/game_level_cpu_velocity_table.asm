@@ -1,5 +1,5 @@
-table_player_velocity_bottom:
-	;   STAND        LEFT         RIGHT        L+R          UP           UP+L         UP+R         U+L+R        DOWN         DOWN+L       DOWN+R
+game_level_cpu_velocity_table:
+	;   X            U            D            U+D          L            L+U          L+D          L+U+D        R            R+U          R+D          (don't care)
 	.DW $0000 $0000  $FFD0 $0000  $0030 $0000  $0000 $0000  $0000 $FFC0  $FFD0 $FFC0  $0030 $FFC0  $0000 $0000  $0000 $0040  $FFD0 $0040  $0030 $0040
 	.DW $0000 $0000  $FFC0 $0000  $0040 $0000  $0000 $0000  $0000 $FFA0  $FFC0 $FFA0  $0040 $FFA0  $0000 $0000  $0000 $0060  $FFC0 $0060  $0040 $0060
 	.DW $0000 $0000  $FFB0 $0000  $0050 $0000  $0000 $0000  $0000 $FF80  $FFB0 $FF80  $0050 $FF80  $0000 $0000  $0000 $0080  $FFB0 $0080  $0050 $0080

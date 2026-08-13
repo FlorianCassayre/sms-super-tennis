@@ -1,5 +1,5 @@
-table_player_velocity_top_a:
-	;   STAND        LEFT         RIGHT        L+R          UP           UP+L         UP+R         U+L+R        DOWN         DOWN+L       DOWN+R
+game_level_speed_base_table.asm:
+	;   X            U            D            U+D          L            L+U          L+D          L+U+D        R            R+U          R+D          (don't care)
 	.DW $0000 $0000  $FF00 $0000  $0100 $0000  $0000 $0000  $0000 $FF00  $FF00 $FF00  $0100 $FF00  $0000 $0000  $0000 $0100  $FF00 $0100  $0100 $0100
 	.DW $0000 $0000  $FE80 $0000  $0180 $0000  $0000 $0000  $0000 $FE80  $FE80 $FE80  $0180 $FE80  $0000 $0000  $0000 $0180  $FE80 $0180  $0180 $0180
 	.DW $0000 $0000  $FE00 $0000  $0200 $0000  $0000 $0000  $0000 $FE00  $FE00 $FE00  $0200 $FE00  $0000 $0000  $0000 $0200  $FE00 $0200  $0200 $0200

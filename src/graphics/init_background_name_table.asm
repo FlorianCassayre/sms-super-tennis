@@ -1,9 +1,12 @@
 sub_init_background_name_table:
-	ld hl,03800h		; 21 00 38 ;0388
-	ld de,l0385h		; 11 85 03 ;038b
-	ld bc,00380h		; 01 80 03 ;038e
+	; Fill screen with blank tiles
+	ld hl,VDP_NAME_TABLE_ADDRESS_BASE		; 21 00 38 ;0388
+	ld de,blank_tile_data		; 11 85 03 ;038b
+	ld bc,VDP_NAME_TABLE_ROWS * VDP_NAME_TABLE_COLUMNS		; 01 80 03 ;038e
 	call sub_vram_fill_word		; cd 50 04 ;0391
-	ld hl,03f00h		; 21 00 3f ;0394
-	ld de,00386h+1		; 11 87 03 ;0397
-	ld bc,040h		; 01 40 00 ;039a
+
+	; Hide sprites
+	ld hl,VDP_SPRITE_ATTRIBUTE_ADDRESS_BASE		; 21 00 3f ;0394
+	ld de,sprite_y_position_hidden		; 11 87 03 ;0397
+	ld bc,VDP_SPRITES + VDP_SPRITES		; 01 40 00 ;039a
 	jp sub_vram_fill_byte		; c3 40 04 ;039d

@@ -99,7 +99,7 @@ l10a0h:
 	pop hl			; e1 ;10ac
 l10adh:
 	ld (ball.z_gravity),hl		; 22 02 c5 ;10ad
-	jp sub_l1362h		; c3 62 13 ;10b0
+	jp sub_l1362h_ball		; c3 62 13 ;10b0
 l10b3h:
 	.DB $90		;10b3
 	.DB $60		;10b4

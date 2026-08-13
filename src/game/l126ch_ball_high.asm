@@ -47,7 +47,7 @@ l12adh:
 	call sub_load_ball_z_gravity		; cd 8f 13 ;12b5
 	ld c,001h		; 0e 01 ;12b8
 	call sub_compute_ball_x_velocity		; cd a8 13 ;12ba
-	jp sub_l1362h		; c3 62 13 ;12bd
+	jp sub_l1362h_ball		; c3 62 13 ;12bd
 l12c0h:
 	.DB $c6		;12c0
 	.DB $12		;12c1

@@ -1,12 +1,12 @@
 sub_apply_player_movement:
 	xor a			; af ;27f5
 	ld (TEMP_VEL_SHIFT_MULT),a		; 32 02 c4 ;27f6
-	bit 0,(ix + entity_t.side_state)		; dd cb 01 46 ;27f9
+	bit 0,(ix + entity_t.id)		; dd cb 01 46 ;27f9
 	jr nz,l2819h		; 20 1a ;27fd
-	ld hl,table_player_velocity_top_a		; 21 b1 28 ;27ff
+	ld hl,game_level_speed_base_table.asm		; 21 b1 28 ;27ff
 	ld a,(game.p1_speed_state_a)		; 3a 47 c0 ;2802
 	call sub_lookup_player_velocity		; cd 21 28 ;2805
-	ld hl,table_player_velocity_top_b		; 21 35 29 ;2808
+	ld hl,game_level_control_boost_table		; 21 35 29 ;2808
 	ld a,(game.p1_speed_state_a)		; 3a 47 c0 ;280b
 	ld (TEMP_VEL_SHIFT_MULT),a		; 32 02 c4 ;280e
 	ld a,(game.p1_speed_state_b)		; 3a 49 c0 ;2811
@@ -15,7 +15,7 @@ sub_apply_player_movement:
 	dec a			; 3d ;2816
 	jr sub_lookup_player_velocity		; 18 08 ;2817
 l2819h:
-	ld hl,table_player_velocity_bottom		; 21 8d 29 ;2819
+	ld hl,game_level_cpu_velocity_table		; 21 8d 29 ;2819
 	ld a,(game.p2_speed_state)		; 3a 4a c0 ;281c
 	and $07		; e6 07 ;281f
 sub_lookup_player_velocity:
@@ -68,15 +68,15 @@ l2867h:
 	add hl,de			; 19 ;2867
 	ld (ix + entity_t.x_pos),l		; dd 75 0c ;2868
 	ld (ix + entity_t.x_pos + 1),h		; dd 74 0d ;286b
-	ld e,(ix + entity_t.cache_y_min)		; dd 5e 3c ;286e
-	ld d,(ix + entity_t.cache_y_min + 1)		; dd 56 3d ;2871
+	ld e,(ix + entity_t.cache_x_min)		; dd 5e 3c ;286e
+	ld d,(ix + entity_t.cache_x_min + 1)		; dd 56 3d ;2871
 	ld c,l			; 4d ;2874
 	ld b,h			; 44 ;2875
 	xor a			; af ;2876
 	sbc hl,de		; ed 52 ;2877
 	jr c,l2888h		; 38 0d ;2879
-	ld e,(ix + entity_t.cache_y_max)		; dd 5e 3e ;287b
-	ld d,(ix + entity_t.cache_y_max + 1)		; dd 56 3f ;287e
+	ld e,(ix + entity_t.cache_x_max)		; dd 5e 3e ;287b
+	ld d,(ix + entity_t.cache_x_max + 1)		; dd 56 3f ;287e
 	ld l,c			; 69 ;2881
 	ld h,b			; 60 ;2882
 	xor a			; af ;2883

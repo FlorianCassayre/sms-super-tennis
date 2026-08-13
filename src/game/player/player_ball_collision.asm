@@ -61,14 +61,14 @@ sub_racket_hit_trajectory:
 	ld hl,state.hit_flags		; 21 40 c0 ;18fb
 	bit 0,(hl)		; cb 46 ;18fe
 	jr z,@hit_success		; 28 4f ;1900
-	ld bc,l1a3fh_side_state_shot_type		; 01 3f 1a ;1902
+	ld bc,l1a3fh_id_shot_type		; 01 3f 1a ;1902
 	ld a,(0c000h)		; 3a 00 c0 ;1905
 	bit 7,a		; cb 7f ;1908
 	jr z,@check_serve_result		; 28 09 ;190a
 	ld a,(0c044h)		; 3a 44 c0 ;190c
 	or a			; b7 ;190f
 	jr z,@check_serve_result		; 28 03 ;1910
-	ld bc,l1a4fh_side_state_shot_type		; 01 4f 1a ;1912
+	ld bc,l1a4fh_id_shot_type		; 01 4f 1a ;1912
 @check_serve_result:
 	ld a,(state.shot_type)		; 3a 41 c0 ;1915
 	add a,a			; 87 ;1918
@@ -76,7 +76,7 @@ sub_racket_hit_trajectory:
 	ld e,a			; 5f ;191a
 	ld d,000h		; 16 00 ;191b
 	ld h,d			; 62 ;191d
-	ld l,(ix + entity_t.side_state)		; dd 6e 01 ;191e
+	ld l,(ix + entity_t.id)		; dd 6e 01 ;191e
 	add hl,de			; 19 ;1921
 	add hl,bc			; 09 ;1922
 	ld a,(hl)			; 7e ;1923
@@ -109,7 +109,7 @@ sub_racket_hit_trajectory:
 	ld (entities.ball.ball_hit_flag),a		; 32 03 c3 ;1956
 	ld (ball.bounces_count),a		; 32 17 c5 ;1959
 	ld (ball.foul_triggered_flag),a		; 32 19 c5 ;195c
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;195f
+	ld a,(ix + entity_t.id)		; dd 7e 01 ;195f
 	ld (state.ball_x_dir_flag),a		; 32 42 c0 ;1962
 	scf			; 37 ;1965
 	ret			; c9 ;1966
@@ -118,7 +118,7 @@ sub_racket_hit_trajectory:
 	cp 018h		; fe 18 ;196a
 	ret nc			; d0 ;196c
 	ld hl,l19cfh_bounding_boxes		; 21 cf 19 ;196d
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;1970
+	ld a,(ix + entity_t.id)		; dd 7e 01 ;1970
 	call 017ebh		; cd eb 17 ;1973
 	ld (0c08eh),bc		; ed 43 8e c0 ;1976
 	ld (0c090h),de		; ed 53 90 c0 ;197a
@@ -139,7 +139,7 @@ sub_racket_hit_trajectory:
 	ld a,(0c041h)		; 3a 41 c0 ;1999
 	and c			; a1 ;199c
 	ld e,a			; 5f ;199d
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;199e
+	ld a,(ix + entity_t.id)		; dd 7e 01 ;199e
 	and c			; a1 ;19a1
 	cp e			; bb ;19a2
 	jr z,@no_body_collision		; 28 24 ;19a3
@@ -147,7 +147,7 @@ sub_racket_hit_trajectory:
 	ld a,003h		; 3e 03 ;19a5
 	ld (ball.foul),a		; 32 18 c5 ;19a7
 	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_90		; 0e 90 ;19aa
-	ld a,(ix + entity_t.side_state)		; dd 7e 01 ;19ac
+	ld a,(ix + entity_t.id)		; dd 7e 01 ;19ac
 	and 001h		; e6 01 ;19af
 	jr z,@_unknown_play_sound		; 28 02 ;19b1
 	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_91		; 0e 91 ;19b3
@@ -214,13 +214,13 @@ l1a1dh_bounding_boxe_offsets:
 	.DB $f0, $f0
 	.DB $f4, $ec
 
-l1a3fh_side_state_shot_type:
+l1a3fh_id_shot_type:
 	.DB $00 $02 $01 $03
 	.DB $02 $00 $03 $01
 	.DB $01 $02 $00 $03
 	.DB $02 $01 $03 $00
 
-l1a4fh_side_state_shot_type:
+l1a4fh_id_shot_type:
 	.DB $00 $03 $01 $02
 	.DB $03 $00 $02 $01
 	.DB $01 $03 $00 $02
