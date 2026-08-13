@@ -1,64 +1,64 @@
 sub_065ch:
-	ld hl,l06bfh		; 21 bf 06 ;065c
-	ld a,(0c509h)		; 3a 09 c5 ;065f
-	cp 050h		; fe 50 ;0662
-	jr nc,l0669h		; 30 03 ;0664
-	ld hl,l06dfh		; 21 df 06 ;0666
+	ld hl,l06bfh		;065c
+	ld a,(0c509h)		;065f
+	cp 050h		;0662
+	jr nc,l0669h		;0664
+	ld hl,l06dfh		;0666
 l0669h:
-	ld a,(0c501h)		; 3a 01 c5 ;0669
-	cp 050h		; fe 50 ;066c
-	jr c,l0672h		; 38 02 ;066e
-	ld a,04fh		; 3e 4f ;0670
+	ld a,(0c501h)		;0669
+	cp 050h		;066c
+	jr c,l0672h		;066e
+	ld a,04fh		;0670
 l0672h:
-	rrca			; 0f ;0672
-	rrca			; 0f ;0673
-	rrca			; 0f ;0674
-	and 00fh		; e6 0f ;0675
-	add a,a			; 87 ;0677
-	ld e,a			; 5f ;0678
-	ld d,000h		; 16 00 ;0679
-	add hl,de			; 19 ;067b
-	ld a,(0c089h)		; 3a 89 c0 ;067c
-	ld c,a			; 4f ;067f
-	ld a,(0c510h)		; 3a 10 c5 ;0680
-	cp (hl)			; be ;0683
-	jr z,l068ch		; 28 06 ;0684
-	ld a,(hl)			; 7e ;0686
-	ld (0c510h),a		; 32 10 c5 ;0687
-	set 5,c		; cb e9 ;068a
+	rrca			;0672
+	rrca			;0673
+	rrca			;0674
+	and 00fh		;0675
+	add a,a			;0677
+	ld e,a			;0678
+	ld d,000h		;0679
+	add hl,de			;067b
+	ld a,(0c089h)		;067c
+	ld c,a			;067f
+	ld a,(0c510h)		;0680
+	cp (hl)			;0683
+	jr z,l068ch		;0684
+	ld a,(hl)			;0686
+	ld (0c510h),a		;0687
+	set 5,c		;068a
 l068ch:
-	inc hl			; 23 ;068c
-	ld a,(0c511h)		; 3a 11 c5 ;068d
-	cp (hl)			; be ;0690
-	jr z,l0699h		; 28 06 ;0691
-	ld a,(hl)			; 7e ;0693
-	ld (0c511h),a		; 32 11 c5 ;0694
-	set 6,c		; cb f1 ;0697
+	inc hl			;068c
+	ld a,(0c511h)		;068d
+	cp (hl)			;0690
+	jr z,l0699h		;0691
+	ld a,(hl)			;0693
+	ld (0c511h),a		;0694
+	set 6,c		;0697
 l0699h:
-	ld a,c			; 79 ;0699
-	ld (0c089h),a		; 32 89 c0 ;069a
-	ld de,l06ffh		; 11 ff 06 ;069d
-	ld a,(0c510h)		; 3a 10 c5 ;06a0
-	add a,a			; 87 ;06a3
-	ld l,a			; 6f ;06a4
-	ld h,000h		; 26 00 ;06a5
-	add hl,de			; 19 ;06a7
-	ld a,(hl)			; 7e ;06a8
-	inc hl			; 23 ;06a9
-	ld h,(hl)			; 66 ;06aa
-	ld l,a			; 6f ;06ab
-	ld (0c512h),hl		; 22 12 c5 ;06ac
-	ld a,(0c511h)		; 3a 11 c5 ;06af
-	add a,a			; 87 ;06b2
-	ld l,a			; 6f ;06b3
-	ld h,000h		; 26 00 ;06b4
-	add hl,de			; 19 ;06b6
-	ld a,(hl)			; 7e ;06b7
-	inc hl			; 23 ;06b8
-	ld h,(hl)			; 66 ;06b9
-	ld l,a			; 6f ;06ba
-	ld (0c514h),hl		; 22 14 c5 ;06bb
-	ret			; c9 ;06be
+	ld a,c			;0699
+	ld (0c089h),a		;069a
+	ld de,l06ffh		;069d
+	ld a,(0c510h)		;06a0
+	add a,a			;06a3
+	ld l,a			;06a4
+	ld h,000h		;06a5
+	add hl,de			;06a7
+	ld a,(hl)			;06a8
+	inc hl			;06a9
+	ld h,(hl)			;06aa
+	ld l,a			;06ab
+	ld (0c512h),hl		;06ac
+	ld a,(0c511h)		;06af
+	add a,a			;06b2
+	ld l,a			;06b3
+	ld h,000h		;06b4
+	add hl,de			;06b6
+	ld a,(hl)			;06b7
+	inc hl			;06b8
+	ld h,(hl)			;06b9
+	ld l,a			;06ba
+	ld (0c514h),hl		;06bb
+	ret			;06be
 l06bfh:
 	.DB $01		;06bf
 	.DB $06		;06c0

@@ -1,105 +1,105 @@
 l101fh_racket_hit:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;101f
-	ld (psg_engine.track_request_id),a		; 32 00 de ;1021
-	ld hl,l10ebh		; 21 eb 10 ;1024
-	ld a,(state.ball_hit_type)		; 3a 46 c0 ;1027
-	add a,a			; 87 ;102a
-	ld e,a			; 5f ;102b
-	ld d,000h		; 16 00 ;102c
-	add hl,de			; 19 ;102e
-	ld c,(hl)			; 4e ;102f
-	inc hl			; 23 ;1030
-	ld b,(hl)			; 46 ;1031
-	push bc			; c5 ;1032
-	ld hl,l10bbh		; 21 bb 10 ;1033
-	ld a,(0c041h)		; 3a 41 c0 ;1036
-	add a,a			; 87 ;1039
-	add a,a			; 87 ;103a
-	ld e,a			; 5f ;103b
-	ld a,(0c044h)		; 3a 44 c0 ;103c
-	add a,a			; 87 ;103f
-	add a,e			; 83 ;1040
-	ld e,a			; 5f ;1041
-	add hl,de			; 19 ;1042
-	ld c,(hl)			; 4e ;1043
-	inc hl			; 23 ;1044
-	ld b,(hl)			; 46 ;1045
-	push bc			; c5 ;1046
-	ld a,(0c041h)		; 3a 41 c0 ;1047
-	add a,a			; 87 ;104a
-	ld e,a			; 5f ;104b
-	ld hl,l10b3h		; 21 b3 10 ;104c
-	add hl,de			; 19 ;104f
-	ld a,(0c044h)		; 3a 44 c0 ;1050
-	or a			; b7 ;1053
-	jr z,l1057h		; 28 01 ;1054
-	inc hl			; 23 ;1056
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		;101f
+	ld (psg_engine.track_request_id),a		;1021
+	ld hl,l10ebh		;1024
+	ld a,(state.ball_hit_type)		;1027
+	add a,a			;102a
+	ld e,a			;102b
+	ld d,000h		;102c
+	add hl,de			;102e
+	ld c,(hl)			;102f
+	inc hl			;1030
+	ld b,(hl)			;1031
+	push bc			;1032
+	ld hl,l10bbh		;1033
+	ld a,(0c041h)		;1036
+	add a,a			;1039
+	add a,a			;103a
+	ld e,a			;103b
+	ld a,(0c044h)		;103c
+	add a,a			;103f
+	add a,e			;1040
+	ld e,a			;1041
+	add hl,de			;1042
+	ld c,(hl)			;1043
+	inc hl			;1044
+	ld b,(hl)			;1045
+	push bc			;1046
+	ld a,(0c041h)		;1047
+	add a,a			;104a
+	ld e,a			;104b
+	ld hl,l10b3h		;104c
+	add hl,de			;104f
+	ld a,(0c044h)		;1050
+	or a			;1053
+	jr z,l1057h		;1054
+	inc hl			;1056
 l1057h:
-	ld a,(0c50bh)		; 3a 0b c5 ;1057
-	sub (hl)			; 96 ;105a
-	rrca			; 0f ;105b
-	rrca			; 0f ;105c
-	rrca			; 0f ;105d
-	and 007h		; e6 07 ;105e
-	cp 004h		; fe 04 ;1060
-	jr c,l1066h		; 38 02 ;1062
-	ld a,003h		; 3e 03 ;1064
+	ld a,(0c50bh)		;1057
+	sub (hl)			;105a
+	rrca			;105b
+	rrca			;105c
+	rrca			;105d
+	and 007h		;105e
+	cp 004h		;1060
+	jr c,l1066h		;1062
+	ld a,003h		;1064
 l1066h:
-	add a,a			; 87 ;1066
-	ld e,a			; 5f ;1067
-	pop hl			; e1 ;1068
-	add hl,de			; 19 ;1069
-	ld a,r		; ed 5f ;106a
-	and 001h		; e6 01 ;106c
-	jr z,l1071h		; 28 01 ;106e
-	inc hl			; 23 ;1070
+	add a,a			;1066
+	ld e,a			;1067
+	pop hl			;1068
+	add hl,de			;1069
+	ld a,r		;106a
+	and 001h		;106c
+	jr z,l1071h		;106e
+	inc hl			;1070
 l1071h:
-	ld a,(hl)			; 7e ;1071
-	add a,a			; 87 ;1072
-	add a,a			; 87 ;1073
-	add a,a			; 87 ;1074
-	ld e,a			; 5f ;1075
-	pop hl			; e1 ;1076
-	add hl,de			; 19 ;1077
-	ld e,(hl)			; 5e ;1078
-	inc hl			; 23 ;1079
-	ld d,(hl)			; 56 ;107a
-	inc hl			; 23 ;107b
-	ld c,(hl)			; 4e ;107c
-	inc hl			; 23 ;107d
-	ld b,(hl)			; 46 ;107e
-	push de			; d5 ;107f
-	push bc			; c5 ;1080
-	inc hl			; 23 ;1081
-	ld e,(hl)			; 5e ;1082
-	inc hl			; 23 ;1083
-	ld d,(hl)			; 56 ;1084
-	inc hl			; 23 ;1085
-	ld c,(hl)			; 4e ;1086
-	inc hl			; 23 ;1087
-	ld b,(hl)			; 46 ;1088
-	ld a,(0c041h)		; 3a 41 c0 ;1089
-	and 001h		; e6 01 ;108c
-	jr z,l10a0h		; 28 10 ;108e
-	xor a			; af ;1090
-	ld hl,0		; 21 00 00 ;1091
-	sbc hl,de		; ed 52 ;1094
-	push hl			; e5 ;1096
-	xor a			; af ;1097
-	ld hl,0		; 21 00 00 ;1098
-	sbc hl,bc		; ed 42 ;109b
-	push hl			; e5 ;109d
-	pop bc			; c1 ;109e
-	pop de			; d1 ;109f
+	ld a,(hl)			;1071
+	add a,a			;1072
+	add a,a			;1073
+	add a,a			;1074
+	ld e,a			;1075
+	pop hl			;1076
+	add hl,de			;1077
+	ld e,(hl)			;1078
+	inc hl			;1079
+	ld d,(hl)			;107a
+	inc hl			;107b
+	ld c,(hl)			;107c
+	inc hl			;107d
+	ld b,(hl)			;107e
+	push de			;107f
+	push bc			;1080
+	inc hl			;1081
+	ld e,(hl)			;1082
+	inc hl			;1083
+	ld d,(hl)			;1084
+	inc hl			;1085
+	ld c,(hl)			;1086
+	inc hl			;1087
+	ld b,(hl)			;1088
+	ld a,(0c041h)		;1089
+	and 001h		;108c
+	jr z,l10a0h		;108e
+	xor a			;1090
+	ld hl,0		;1091
+	sbc hl,de		;1094
+	push hl			;1096
+	xor a			;1097
+	ld hl,0		;1098
+	sbc hl,bc		;109b
+	push hl			;109d
+	pop bc			;109e
+	pop de			;109f
 l10a0h:
-	ld (ball.y_vel),de		; ed 53 0c c5 ;10a0
-	ld (ball.x_vel),bc		; ed 43 0e c5 ;10a4
-	pop hl			; e1 ;10a8
-	ld (ball.z_vel),hl		; 22 06 c5 ;10a9
-	pop hl			; e1 ;10ac
+	ld (ball.y_vel),de		;10a0
+	ld (ball.x_vel),bc		;10a4
+	pop hl			;10a8
+	ld (ball.z_vel),hl		;10a9
+	pop hl			;10ac
 l10adh:
-	ld (ball.z_gravity),hl		; 22 02 c5 ;10ad
-	jp sub_l1362h_ball		; c3 62 13 ;10b0
+	ld (ball.z_gravity),hl		;10ad
+	jp sub_l1362h_ball		;10b0
 l10b3h:
 	.DB $90		;10b3
 	.DB $60		;10b4

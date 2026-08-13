@@ -1,34 +1,34 @@
 l1227h:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_8a		; 3e 8a ;1227
-	ld (psg_engine.track_request_id),a		; 32 00 de ;1229
-	ld hl,l1260h		; 21 60 12 ;122c
-	ld a,(state.ball_hit_type)		; 3a 46 c0 ;122f
-	add a,a			; 87 ;1232
-	add a,a			; 87 ;1233
-	ld c,a			; 4f ;1234
-	ld b,000h		; 06 00 ;1235
-	add hl,bc			; 09 ;1237
-	ld e,(hl)			; 5e ;1238
-	inc hl			; 23 ;1239
-	ld d,(hl)			; 56 ;123a
-	inc hl			; 23 ;123b
-	ld c,(hl)			; 4e ;123c
-	inc hl			; 23 ;123d
-	ld b,(hl)			; 46 ;123e
-	ld a,(0c042h)		; 3a 42 c0 ;123f
-	and 001h		; e6 01 ;1242
-	jr z,l124dh		; 28 07 ;1244
-	xor a			; af ;1246
-	ld hl,0		; 21 00 00 ;1247
-	sbc hl,de		; ed 52 ;124a
-	ex de,hl			; eb ;124c
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_8a		;1227
+	ld (psg_engine.track_request_id),a		;1229
+	ld hl,l1260h		;122c
+	ld a,(state.ball_hit_type)		;122f
+	add a,a			;1232
+	add a,a			;1233
+	ld c,a			;1234
+	ld b,000h		;1235
+	add hl,bc			;1237
+	ld e,(hl)			;1238
+	inc hl			;1239
+	ld d,(hl)			;123a
+	inc hl			;123b
+	ld c,(hl)			;123c
+	inc hl			;123d
+	ld b,(hl)			;123e
+	ld a,(0c042h)		;123f
+	and 001h		;1242
+	jr z,l124dh		;1244
+	xor a			;1246
+	ld hl,0		;1247
+	sbc hl,de		;124a
+	ex de,hl			;124c
 l124dh:
-	ld (ball.y_vel),de		; ed 53 0c c5 ;124d
-	ld (ball.z_vel),bc		; ed 43 06 c5 ;1251
-	call sub_load_ball_z_gravity		; cd 8f 13 ;1255
-	ld c,003h		; 0e 03 ;1258
-	call sub_compute_ball_x_velocity		; cd a8 13 ;125a
-	jp sub_l1362h_ball		; c3 62 13 ;125d
+	ld (ball.y_vel),de		;124d
+	ld (ball.z_vel),bc		;1251
+	call sub_load_ball_z_gravity		;1255
+	ld c,003h		;1258
+	call sub_compute_ball_x_velocity		;125a
+	jp sub_l1362h_ball		;125d
 
 l1260h:
 	.DB $00		;1260

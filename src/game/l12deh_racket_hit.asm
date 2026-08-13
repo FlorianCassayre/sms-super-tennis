@@ -1,57 +1,57 @@
 l12deh_racket_hit:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		; 3e 8c ;12de
-	ld (psg_engine.track_request_id),a		; 32 00 de ;12e0
-	ld hl,l1338h		; 21 38 13 ;12e3
-	ld a,(state.ball_hit_type)		; 3a 46 c0 ;12e6
-	add a,a			; 87 ;12e9
-	ld c,a			; 4f ;12ea
-	ld b,000h		; 06 00 ;12eb
-	add hl,bc			; 09 ;12ed
-	ld e,(hl)			; 5e ;12ee
-	inc hl			; 23 ;12ef
-	ld d,(hl)			; 56 ;12f0
-	ld a,(0c509h)		; 3a 09 c5 ;12f1
-	sub 080h		; d6 80 ;12f4
-	jr nc,l12fah		; 30 02 ;12f6
-	neg		; ed 44 ;12f8
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		;12de
+	ld (psg_engine.track_request_id),a		;12e0
+	ld hl,l1338h		;12e3
+	ld a,(state.ball_hit_type)		;12e6
+	add a,a			;12e9
+	ld c,a			;12ea
+	ld b,000h		;12eb
+	add hl,bc			;12ed
+	ld e,(hl)			;12ee
+	inc hl			;12ef
+	ld d,(hl)			;12f0
+	ld a,(0c509h)		;12f1
+	sub 080h		;12f4
+	jr nc,l12fah		;12f6
+	neg		;12f8
 l12fah:
-	ld c,000h		; 0e 00 ;12fa
-	cp 018h		; fe 18 ;12fc
-	jr c,l1308h		; 38 08 ;12fe
+	ld c,000h		;12fa
+	cp 018h		;12fc
+	jr c,l1308h		;12fe
 l1300h:
-	ld c,001h		; 0e 01 ;1300
-	cp 040h		; fe 40 ;1302
-	jr c,l1308h		; 38 02 ;1304
-	ld c,002h		; 0e 02 ;1306
+	ld c,001h		;1300
+	cp 040h		;1302
+	jr c,l1308h		;1304
+	ld c,002h		;1306
 l1308h:
-	ld a,c			; 79 ;1308
-	add a,a			; 87 ;1309
-	add a,a			; 87 ;130a
-	ld c,a			; 4f ;130b
-	ld b,000h		; 06 00 ;130c
-	ex de,hl			; eb ;130e
-	add hl,bc			; 09 ;130f
-	ld e,(hl)			; 5e ;1310
-	inc hl			; 23 ;1311
-	ld d,(hl)			; 56 ;1312
-	inc hl			; 23 ;1313
-	ld c,(hl)			; 4e ;1314
-	inc hl			; 23 ;1315
-	ld b,(hl)			; 46 ;1316
-	ld a,(0c042h)		; 3a 42 c0 ;1317
-	and 001h		; e6 01 ;131a
-	jr z,l1325h		; 28 07 ;131c
-	xor a			; af ;131e
-	ld hl,0		; 21 00 00 ;131f
-	sbc hl,de		; ed 52 ;1322
-	ex de,hl			; eb ;1324
+	ld a,c			;1308
+	add a,a			;1309
+	add a,a			;130a
+	ld c,a			;130b
+	ld b,000h		;130c
+	ex de,hl			;130e
+	add hl,bc			;130f
+	ld e,(hl)			;1310
+	inc hl			;1311
+	ld d,(hl)			;1312
+	inc hl			;1313
+	ld c,(hl)			;1314
+	inc hl			;1315
+	ld b,(hl)			;1316
+	ld a,(0c042h)		;1317
+	and 001h		;131a
+	jr z,l1325h		;131c
+	xor a			;131e
+	ld hl,0		;131f
+	sbc hl,de		;1322
+	ex de,hl			;1324
 l1325h:
-	ld (ball.y_vel),de		; ed 53 0c c5 ;1325
-	ld (ball.z_vel),bc		; ed 43 06 c5 ;1329
-	call sub_load_ball_z_gravity		; cd 8f 13 ;132d
-	ld c,000h		; 0e 00 ;1330
-	call sub_compute_ball_x_velocity		; cd a8 13 ;1332
-	jp sub_l1362h_ball		; c3 62 13 ;1335
+	ld (ball.y_vel),de		;1325
+	ld (ball.z_vel),bc		;1329
+	call sub_load_ball_z_gravity		;132d
+	ld c,000h		;1330
+	call sub_compute_ball_x_velocity		;1332
+	jp sub_l1362h_ball		;1335
 l1338h:
 	.DB $3e		;1338
 	.DB $13		;1339

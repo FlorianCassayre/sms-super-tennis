@@ -1,55 +1,55 @@
 sub_joy_debounce:
-	ld a,(0c006h)		; 3a 06 c0 ;0795
-	bit 7,a		; cb 7f ;0798
-	ret z			; c8 ;079a
-	and 00fh		; e6 0f ;079b
-	cp 000h		; fe 00 ;079d
-	call z,sub_0ef9h_palette_swap		; cc f9 0e ;079f
-	call sub_get_joy_p2		; cd a3 02 ;07a2
-	and 030h		; e6 30 ;07a5
-	jr nz,+		; 20 0b ;07a7
-	call sub_get_joy_p1		; cd 0f 03 ;07a9
-	and 030h		; e6 30 ;07ac
-	jr z,+++		; 28 3a ;07ae
-	ld c,000h		; 0e 00 ;07b0
-	jr ++		; 18 02 ;07b2
+	ld a,(0c006h)		;0795
+	bit 7,a		;0798
+	ret z			;079a
+	and 00fh		;079b
+	cp 000h		;079d
+	call z,sub_0ef9h_palette_swap		;079f
+	call sub_get_joy_p2		;07a2
+	and 030h		;07a5
+	jr nz,+		;07a7
+	call sub_get_joy_p1		;07a9
+	and 030h		;07ac
+	jr z,+++		;07ae
+	ld c,000h		;07b0
+	jr ++		;07b2
 +:
-	ld c,0d0h		; 0e d0 ;07b4
+	ld c,0d0h		;07b4
 ++:
-	ex af,af'			; 08 ;07b6
-	ld hl,0c006h		; 21 06 c0 ;07b7
-	ld a,04fh		; 3e 4f ;07ba
-	and (hl)			; a6 ;07bc
-	cp 041h		; fe 41 ;07bd
-	jr nz,+		; 20 15 ;07bf
-	ld hl,0c009h		; 21 09 c0 ;07c1
-	ex af,af'			; 08 ;07c4
-	cp (hl)			; be ;07c5
-	ret z			; c8 ;07c6
-	ld a,c			; 79 ;07c7
-	ld (0c000h),a		; 32 00 c0 ;07c8
-	ld a,000h		; 3e 00 ;07cb
-	ld (psg_engine.track_request_id),a		; 32 00 de ;07cd
-	ld a,002h		; 3e 02 ;07d0
-	ld (0c006h),a		; 32 06 c0 ;07d2
-	ret			; c9 ;07d5
+	ex af,af'			;07b6
+	ld hl,0c006h		;07b7
+	ld a,04fh		;07ba
+	and (hl)			;07bc
+	cp 041h		;07bd
+	jr nz,+		;07bf
+	ld hl,0c009h		;07c1
+	ex af,af'			;07c4
+	cp (hl)			;07c5
+	ret z			;07c6
+	ld a,c			;07c7
+	ld (0c000h),a		;07c8
+	ld a,000h		;07cb
+	ld (psg_engine.track_request_id),a		;07cd
+	ld a,002h		;07d0
+	ld (0c006h),a		;07d2
+	ret			;07d5
 +:
-	res 6,a		; cb b7 ;07d6
-	cp 001h		; fe 01 ;07d8
-	ret z			; c8 ;07da
-	ld a,087h		; 3e 87 ;07db
-	ld (0c006h),a		; 32 06 c0 ;07dd
-	ex af,af'			; 08 ;07e0
-	ld (0c009h),a		; 32 09 c0 ;07e1
-	ld a,000h		; 3e 00 ;07e4
-	ld (psg_engine.track_request_id),a		; 32 00 de ;07e6
-	ret			; c9 ;07e9
+	res 6,a		;07d6
+	cp 001h		;07d8
+	ret z			;07da
+	ld a,087h		;07db
+	ld (0c006h),a		;07dd
+	ex af,af'			;07e0
+	ld (0c009h),a		;07e1
+	ld a,000h		;07e4
+	ld (psg_engine.track_request_id),a		;07e6
+	ret			;07e9
 +++:
-	ex af,af'			; 08 ;07ea
-	ld a,(0c006h)		; 3a 06 c0 ;07eb
-	and 00fh		; e6 0f ;07ee
-	cp 001h		; fe 01 ;07f0
-	ret nz			; c0 ;07f2
-	ex af,af'			; 08 ;07f3
-	ld (0c009h),a		; 32 09 c0 ;07f4
-	ret			; c9 ;07f7
+	ex af,af'			;07ea
+	ld a,(0c006h)		;07eb
+	and 00fh		;07ee
+	cp 001h		;07f0
+	ret nz			;07f2
+	ex af,af'			;07f3
+	ld (0c009h),a		;07f4
+	ret			;07f7

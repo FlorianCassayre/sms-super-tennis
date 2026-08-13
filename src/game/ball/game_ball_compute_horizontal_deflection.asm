@@ -1,108 +1,108 @@
 sub_game_ball_compute_horizontal_deflection:
-	ld a,e			; 7b ;160a
+	ld a,e			;160a
 l160bh:
-	sub 018h		; d6 18 ;160b
-	jr nc,+		; 30 02 ;160d
-	ld a,000h		; 3e 00 ;160f
+	sub 018h		;160b
+	jr nc,+		;160d
+	ld a,000h		;160f
 +:
-	ld e,a			; 5f ;1611
-	ld d,000h		; 16 00 ;1612
-	ld hl,0d0e8h		; 21 e8 d0 ;1614
-	add hl,de			; 19 ;1617
-	ld a,(hl)			; 7e ;1618
-	ld (0c51ah),a		; 32 1a c5 ;1619
-	ld a,(ball.y_pos + 1)		; 3a 09 c5 ;161c
-	sub (hl)			; 96 ;161f
-	jr nc,+		; 30 02 ;1620
-	neg		; ed 44 ;1622
+	ld e,a			;1611
+	ld d,000h		;1612
+	ld hl,0d0e8h		;1614
+	add hl,de			;1617
+	ld a,(hl)			;1618
+	ld (0c51ah),a		;1619
+	ld a,(ball.y_pos + 1)		;161c
+	sub (hl)			;161f
+	jr nc,+		;1620
+	neg		;1622
 +:
-	ld d,a			; 57 ;1624
-	ld e,000h		; 1e 00 ;1625
-	ld bc,(ball.y_vel)		; ed 4b 0c c5 ;1627
-	bit 7,b		; cb 78 ;162b
-	jr z,+		; 28 08 ;162d
-	xor a			; af ;162f
-	ld hl,0		; 21 00 00 ;1630
-	sbc hl,bc		; ed 42 ;1633
-	push hl			; e5 ;1635
-	pop bc			; c1 ;1636
+	ld d,a			;1624
+	ld e,000h		;1625
+	ld bc,(ball.y_vel)		;1627
+	bit 7,b		;162b
+	jr z,+		;162d
+	xor a			;162f
+	ld hl,0		;1630
+	sbc hl,bc		;1633
+	push hl			;1635
+	pop bc			;1636
 +:
-	ld hl,0		; 21 00 00 ;1637
-	call sub_div_hl_de_bc		; cd 0b 04 ;163a
-	ld b,e			; 43 ;163d
-	ld c,h			; 4c ;163e
-	ld de,(ball.x_vel)		; ed 5b 0e c5 ;163f
-	push de			; d5 ;1643
-	bit 7,d		; cb 7a ;1644
-	jr z,+		; 28 07 ;1646
-	xor a			; af ;1648
-	ld hl,0		; 21 00 00 ;1649
-	sbc hl,de		; ed 52 ;164c
-	ex de,hl			; eb ;164e
+	ld hl,0		;1637
+	call sub_div_hl_de_bc		;163a
+	ld b,e			;163d
+	ld c,h			;163e
+	ld de,(ball.x_vel)		;163f
+	push de			;1643
+	bit 7,d		;1644
+	jr z,+		;1646
+	xor a			;1648
+	ld hl,0		;1649
+	sbc hl,de		;164c
+	ex de,hl			;164e
 +:
-	call sub_mul_de_bc		; cd f7 03 ;164f
-	ld d,e			; 53 ;1652
-	ld e,h			; 5c ;1653
-	pop hl			; e1 ;1654
-	bit 7,h		; cb 7c ;1655
-	jr z,+		; 28 07 ;1657
-	xor a			; af ;1659
-	ld hl,0		; 21 00 00 ;165a
-	sbc hl,de		; ed 52 ;165d
-	ex de,hl			; eb ;165f
+	call sub_mul_de_bc		;164f
+	ld d,e			;1652
+	ld e,h			;1653
+	pop hl			;1654
+	bit 7,h		;1655
+	jr z,+		;1657
+	xor a			;1659
+	ld hl,0		;165a
+	sbc hl,de		;165d
+	ex de,hl			;165f
 +:
-	ld hl,(ball.x_pos)		; 2a 0a c5 ;1660
-	add hl,de			; 19 ;1663
-	push hl			; e5 ;1664
-	ld a,(0c51ah)		; 3a 1a c5 ;1665
-	ld e,a			; 5f ;1668
-	ld d,000h		; 16 00 ;1669
-	ld hl,0cbe8h		; 21 e8 cb ;166b
-	add hl,de			; 19 ;166e
-	ld a,(hl)			; 7e ;166f
-	ld l,a			; 6f ;1670
-	ld h,000h		; 26 00 ;1671
-	add hl,hl			; 29 ;1673
-	ld de,0cce8h		; 11 e8 cc ;1674
-	add hl,de			; 19 ;1677
-	ld e,(hl)			; 5e ;1678
-	inc hl			; 23 ;1679
-	ld d,(hl)			; 56 ;167a
-	exx			; d9 ;167b
-	pop de			; d1 ;167c
-	ld hl,08000h		; 21 00 80 ;167d
-	xor a			; af ;1680
-	sbc hl,de		; ed 52 ;1681
-	push af			; f5 ;1683
-	jr nc,+		; 30 07 ;1684
-	xor a			; af ;1686
-	ex de,hl			; eb ;1687
-	ld hl,0		; 21 00 00 ;1688
-	sbc hl,de		; ed 52 ;168b
+	ld hl,(ball.x_pos)		;1660
+	add hl,de			;1663
+	push hl			;1664
+	ld a,(0c51ah)		;1665
+	ld e,a			;1668
+	ld d,000h		;1669
+	ld hl,0cbe8h		;166b
+	add hl,de			;166e
+	ld a,(hl)			;166f
+	ld l,a			;1670
+	ld h,000h		;1671
+	add hl,hl			;1673
+	ld de,0cce8h		;1674
+	add hl,de			;1677
+	ld e,(hl)			;1678
+	inc hl			;1679
+	ld d,(hl)			;167a
+	exx			;167b
+	pop de			;167c
+	ld hl,08000h		;167d
+	xor a			;1680
+	sbc hl,de		;1681
+	push af			;1683
+	jr nc,+		;1684
+	xor a			;1686
+	ex de,hl			;1687
+	ld hl,0		;1688
+	sbc hl,de		;168b
 +:
-	push hl			; e5 ;168d
-	exx			; d9 ;168e
-	pop bc			; c1 ;168f
-	call sub_mul_de_bc		; cd f7 03 ;1690
-	pop af			; f1 ;1693
-	ld d,e			; 53 ;1694
-	ld e,h			; 5c ;1695
-	ld hl,08000h		; 21 00 80 ;1696
-	jr nc,+		; 30 07 ;1699
-	xor a			; af ;169b
-	adc hl,de		; ed 5a ;169c
-	jr c,+++		; 38 09 ;169e
-	jr ++		; 18 05 ;16a0
+	push hl			;168d
+	exx			;168e
+	pop bc			;168f
+	call sub_mul_de_bc		;1690
+	pop af			;1693
+	ld d,e			;1694
+	ld e,h			;1695
+	ld hl,08000h		;1696
+	jr nc,+		;1699
+	xor a			;169b
+	adc hl,de		;169c
+	jr c,+++		;169e
+	jr ++		;16a0
 +:
-	xor a			; af ;16a2
-	sbc hl,de		; ed 52 ;16a3
-	jr c,++++		; 38 05 ;16a5
+	xor a			;16a2
+	sbc hl,de		;16a3
+	jr c,++++		;16a5
 ++:
-	ld a,h			; 7c ;16a7
-	ret			; c9 ;16a8
+	ld a,h			;16a7
+	ret			;16a8
 +++:
-	ld a,0ffh		; 3e ff ;16a9
-	ret			; c9 ;16ab
+	ld a,0ffh		;16a9
+	ret			;16ab
 ++++:
-	ld a,000h		; 3e 00 ;16ac
-	ret			; c9 ;16ae
+	ld a,000h		;16ac
+	ret			;16ae

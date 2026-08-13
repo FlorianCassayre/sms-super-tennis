@@ -40,7 +40,7 @@
 	.INCLUDE "audio/track/audio_tracks_t.i"
 	.INCLUDE "audio/track/audio_track_macros.i"
 start:
-	jp init		; c3 85 00 ;0000
+	jp init		;0000
 .INCLUDE "game/court/game_court_palette.asm"
 	.DB $30		;0023
 	.DB $0f		;0024
@@ -65,7 +65,7 @@ l002dh_palette:
 	.DB $ff		;0036
 	.DB $ff		;0037
 l0038h_interrupt:
-	jp isr_vblank_update		; c3 65 01 ;0038
+	jp isr_vblank_update		;0038
 .ASSERT l0038h_interrupt == $0038, LDERROR
 	.INCLUDE "hardware/hardware_vdp_initial_register_values.asm"
 	.DB $00		;0051
@@ -109,22 +109,22 @@ sprite_y_position_hidden:
 	.INCLUDE "game/065ch.asm"
 	.INCLUDE "game/0711h_entity_action_dispatch.asm"
 l0732h:
-	call sub_0642h_animation_loop		; cd 42 06 ;0732
-	ld de,0c086h		; 11 86 c0 ;0735
-	ld a,(de)			; 1a ;0738
-	ld c,a			; 4f ;0739
-	ld b,000h		; 06 00 ;073a
-	ld hl,0c1c4h		; 21 c4 c1 ;073c
-	add hl,bc			; 09 ;073f
-	ld a,(ix+001h)		; dd 7e 01 ;0740
-	ld (hl),a			; 77 ;0743
-	inc c			; 0c ;0744
-	ld a,c			; 79 ;0745
-	ld (de),a			; 12 ;0746
-	sub 006h		; d6 06 ;0747
-	jr nz,sub_0711h_entity_action_dispatch		; 20 c6 ;0749
-	ld (de),a			; 12 ;074b
-	jp sub_game_entity_render_all		; c3 1a 05 ;074c
+	call sub_0642h_animation_loop		;0732
+	ld de,0c086h		;0735
+	ld a,(de)			;0738
+	ld c,a			;0739
+	ld b,000h		;073a
+	ld hl,0c1c4h		;073c
+	add hl,bc			;073f
+	ld a,(ix+001h)		;0740
+	ld (hl),a			;0743
+	inc c			;0744
+	ld a,c			;0745
+	ld (de),a			;0746
+	sub 006h		;0747
+	jr nz,sub_0711h_entity_action_dispatch		;0749
+	ld (de),a			;074b
+	jp sub_game_entity_render_all		;074c
 l074fh_memory_table:
 	.DW entities.player.1.bottom		;074f
 	.DW entities.player.1.top		;0751
@@ -247,71 +247,71 @@ l0e00h:
 	.INCLUDE "graphics/0ef9h_palette_swap.asm"
 	.INCLUDE "graphics/l0f02h.asm"
 l0f1ah:
-	jp sub_game_ball_sprite_perspective_x		; c3 48 15 ;0f1a
+	jp sub_game_ball_sprite_perspective_x		;0f1a
 l0f1dh:
-	ld a,(0c30dh)		; 3a 0d c3 ;0f1d
-	ld (ix+00dh),a		; dd 77 0d ;0f20
-	ld a,(0c30bh)		; 3a 0b c3 ;0f23
-	inc a			; 3c ;0f26
-	ld (ix+014h),a		; dd 77 14 ;0f27
-	ld l,a			; 6f ;0f2a
-	ld h,000h		; 26 00 ;0f2b
-	add hl,hl			; 29 ;0f2d
-	ld de,0cee6h		; 11 e6 ce ;0f2e
-	add hl,de			; 19 ;0f31
-	ld c,(hl)			; 4e ;0f32
-	inc hl			; 23 ;0f33
-	ld b,(hl)			; 46 ;0f34
-	ld de,(0c500h)		; ed 5b 00 c5 ;0f35
-	call sub_mul_de_bc		; cd f7 03 ;0f39
-	ld d,e			; 53 ;0f3c
-	ld e,h			; 5c ;0f3d
-	xor a			; af ;0f3e
-	ld hl,(0c30ah)		; 2a 0a c3 ;0f3f
-	sbc hl,de		; ed 52 ;0f42
-	ld (ix+00ah),l		; dd 75 0a ;0f44
-	ld (ix+00bh),h		; dd 74 0b ;0f47
-	jp sub_065ch		; c3 5c 06 ;0f4a
+	ld a,(0c30dh)		;0f1d
+	ld (ix+00dh),a		;0f20
+	ld a,(0c30bh)		;0f23
+	inc a			;0f26
+	ld (ix+014h),a		;0f27
+	ld l,a			;0f2a
+	ld h,000h		;0f2b
+	add hl,hl			;0f2d
+	ld de,0cee6h		;0f2e
+	add hl,de			;0f31
+	ld c,(hl)			;0f32
+	inc hl			;0f33
+	ld b,(hl)			;0f34
+	ld de,(0c500h)		;0f35
+	call sub_mul_de_bc		;0f39
+	ld d,e			;0f3c
+	ld e,h			;0f3d
+	xor a			;0f3e
+	ld hl,(0c30ah)		;0f3f
+	sbc hl,de		;0f42
+	ld (ix+00ah),l		;0f44
+	ld (ix+00bh),h		;0f47
+	jp sub_065ch		;0f4a
 l0f4dh:
-	ld a,(ix+003h)		; dd 7e 03 ;0f4d
-	dec a			; 3d ;0f50
-	jr z,l0f79h		; 28 26 ;0f51
-	ld (ix+003h),001h		; dd 36 03 01 ;0f53
-	ld hl,0ff00h		; 21 00 ff ;0f57
-	ld (ball.z_vel),hl		; 22 06 c5 ;0f5a
-	ld hl,4		; 21 04 00 ;0f5d
-	ld (ball.z_gravity),hl		; 22 02 c5 ;0f60
-	ld hl,0		; 21 00 00 ;0f63
-	ld (ball.x_vel),hl		; 22 0e c5 ;0f66
-	ld (ball.y_vel),hl		; 22 0c c5 ;0f69
-	ld hl,0c040h		; 21 40 c0 ;0f6c
-	set 7,(hl)		; cb fe ;0f6f
-	set 0,(hl)		; cb c6 ;0f71
-	ld hl,0c000h		; 21 00 c0 ;0f73
-	set 0,(hl)		; cb c6 ;0f76
-	ret			; c9 ;0f78
+	ld a,(ix+003h)		;0f4d
+	dec a			;0f50
+	jr z,l0f79h		;0f51
+	ld (ix+003h),001h		;0f53
+	ld hl,0ff00h		;0f57
+	ld (ball.z_vel),hl		;0f5a
+	ld hl,4		;0f5d
+	ld (ball.z_gravity),hl		;0f60
+	ld hl,0		;0f63
+	ld (ball.x_vel),hl		;0f66
+	ld (ball.y_vel),hl		;0f69
+	ld hl,0c040h		;0f6c
+	set 7,(hl)		;0f6f
+	set 0,(hl)		;0f71
+	ld hl,0c000h		;0f73
+	set 0,(hl)		;0f76
+	ret			;0f78
 l0f79h:
-	xor a			; af ;0f79
-	ld de,l1300h		; 11 00 13 ;0f7a
-	ld hl,(ball.z_pos)		; 2a 00 c5 ;0f7d
-	sbc hl,de		; ed 52 ;0f80
-	jr z,l0f86h		; 28 02 ;0f82
-	jr nc,l0fa2h		; 30 1c ;0f84
+	xor a			;0f79
+	ld de,l1300h		;0f7a
+	ld hl,(ball.z_pos)		;0f7d
+	sbc hl,de		;0f80
+	jr z,l0f86h		;0f82
+	jr nc,l0fa2h		;0f84
 l0f86h:
-	ld hl,0c040h		; 21 40 c0 ;0f86
-	bit 6,(hl)		; cb 76 ;0f89
-	jr nz,l0f95h		; 20 08 ;0f8b
-	res 7,(hl)		; cb be ;0f8d
-	ld (ix+002h),018h		; dd 36 02 18 ;0f8f
-	jr l0f99h		; 18 04 ;0f93
+	ld hl,0c040h		;0f86
+	bit 6,(hl)		;0f89
+	jr nz,l0f95h		;0f8b
+	res 7,(hl)		;0f8d
+	ld (ix+002h),018h		;0f8f
+	jr l0f99h		;0f93
 l0f95h:
-	ld (ix+002h),015h		; dd 36 02 15 ;0f95
+	ld (ix+002h),015h		;0f95
 l0f99h:
-	ld (ix+003h),000h		; dd 36 03 00 ;0f99
-	ld hl,0c000h		; 21 00 c0 ;0f9d
-	res 0,(hl)		; cb 86 ;0fa0
+	ld (ix+003h),000h		;0f99
+	ld hl,0c000h		;0f9d
+	res 0,(hl)		;0fa0
 l0fa2h:
-	jp sub_game_ball_sprite_perspective_x		; c3 48 15 ;0fa2
+	jp sub_game_ball_sprite_perspective_x		;0fa2
 	.INCLUDE "game/l0fa5h.asm"
 	.INCLUDE "game/l101h_racket_hit.asm"
 	.INCLUDE "game/l11b1h_racket_hit.asm"
@@ -370,20 +370,20 @@ l1775h:
 	.INCLUDE "game/player/1b68h.asm"
 	.INCLUDE "game/1b9fh_decrement_timer.asm"
 sub_1bafh_nop:
-	ret			; c9 ;1baf
+	ret			;1baf
 	.INCLUDE "game/player/l1bb0.asm"
 l1c2bh:
-	bit 7,(ix+002h)		; dd cb 02 7e ;1c2b
-	jr nz,l1c39h		; 20 08 ;1c2f
-	set 7,(ix+002h)		; dd cb 02 fe ;1c31
-	ld (ix+025h),000h		; dd 36 25 00 ;1c35
+	bit 7,(ix+002h)		;1c2b
+	jr nz,l1c39h		;1c2f
+	set 7,(ix+002h)		;1c31
+	ld (ix+025h),000h		;1c35
 l1c39h:
-	call sub_2e98h_2d_scale_clamp		; cd 98 2e ;1c39
-	call sub_game_cpu_update		; cd 25 1e ;1c3c
-	ld a,(ix+025h)		; dd 7e 25 ;1c3f
-	and 00fh		; e6 0f ;1c42
-	ld hl,l1c4ah_jump_table		; 21 4a 1c ;1c44
-	jp l0807h_game_fsm		; c3 07 08 ;1c47
+	call sub_2e98h_2d_scale_clamp		;1c39
+	call sub_game_cpu_update		;1c3c
+	ld a,(ix+025h)		;1c3f
+	and 00fh		;1c42
+	ld hl,l1c4ah_jump_table		;1c44
+	jp l0807h_game_fsm		;1c47
 	.INCLUDE "game/player/l1c4ah_jump_table.asm"
 	.INCLUDE "game/player/1d89.asm"
 	.INCLUDE "game/cpu/game_cpu_update.asm"
@@ -428,22 +428,22 @@ l2290h:
 	.INCLUDE "game/score/update_set_scores.asm"
 	.INCLUDE "graphics/draw_game_end.asm"
 sub_3457h_clean_vram:
-	push bc			; c5 ;3457
-	push de			; d5 ;3458
-	push hl			; e5 ;3459
-	push de			; d5 ;345a
-	pop bc			; c1 ;345b
-	ld de,gui_text_game_set_match		; 11 a9 34 ;345c
-	di			; f3 ;345f
-	call sub_vram_fill_word		; cd 50 04 ;3460
-	ei			; fb ;3463
-	pop hl			; e1 ;3464
-	ld de,040h		; 11 40 00 ;3465
-	add hl,de			; 19 ;3468
-	pop de			; d1 ;3469
-	pop bc			; c1 ;346a
-	djnz sub_3457h_clean_vram		; 10 ea ;346b
-	ret			; c9 ;346d
+	push bc			;3457
+	push de			;3458
+	push hl			;3459
+	push de			;345a
+	pop bc			;345b
+	ld de,gui_text_game_set_match		;345c
+	di			;345f
+	call sub_vram_fill_word		;3460
+	ei			;3463
+	pop hl			;3464
+	ld de,040h		;3465
+	add hl,de			;3468
+	pop de			;3469
+	pop bc			;346a
+	djnz sub_3457h_clean_vram		;346b
+	ret			;346d
 	.INCLUDE "graphics/draw_game_end_line.asm"
 	.INCLUDE "graphics/draw_game_end_typewriter.asm"
 gui_text_game_set_match:
@@ -456,21 +456,21 @@ gui_text_lost:
 	.STRINGMAP ascii, "YOU LOSE"
 	.STRINGMAP ascii, "TRY AGAIN?"
 sub_3543h:
-	ld a,(0c000h)		; 3a 00 c0 ;3543
-	bit 2,a		; cb 57 ;3546
-	ret z			; c8 ;3548
-	ld a,(0c48ch)		; 3a 8c c4 ;3549
-	add a,a			; 87 ;354c
-	ld e,a			; 5f ;354d
-	ld d,000h		; 16 00 ;354e
-	ld hl,l3560h		; 21 60 35 ;3550
-	add hl,de			; 19 ;3553
-	ld e,(hl)			; 5e ;3554
-	inc hl			; 23 ;3555
-	ld d,(hl)			; 56 ;3556
-	ld hl,03a08h		; 21 08 3a ;3557
-	ld bc,2		; 01 02 00 ;355a
-	jp sub_cp_ram_vram		; c3 2f 04 ;355d
+	ld a,(0c000h)		;3543
+	bit 2,a		;3546
+	ret z			;3548
+	ld a,(0c48ch)		;3549
+	add a,a			;354c
+	ld e,a			;354d
+	ld d,000h		;354e
+	ld hl,l3560h		;3550
+	add hl,de			;3553
+	ld e,(hl)			;3554
+	inc hl			;3555
+	ld d,(hl)			;3556
+	ld hl,03a08h		;3557
+	ld bc,2		;355a
+	jp sub_cp_ram_vram		;355d
 l3560h:
 	.DW unknown_word_1		;3560
 	.DW unknown_word_0		;3562
