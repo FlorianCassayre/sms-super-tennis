@@ -8,12 +8,12 @@ sub_init_splash_screen:
 	jr nz,l0ef3h_hardware_sms		;0ebd
 	di			;0ebf
 	call sub_disable_display		;0ec0
-	call sub_init_background_name_table		;0ec3
+	call sub_graphics_name_fill_blank_tile		;0ec3
 	ld hl,l2c00h		;0ec6
 	ld de,0c76ch		;0ec9
 	ld bc,224		;0ecc
 	ld a,001h		;0ecf
-	call sub_cp_1bit_ram_vram		;0ed1
+	call sub_graphics_tile_expand_1bpp_ram_to_vdp		;0ed1
 	ld hl,03a8eh		;0ed4
 	ld de,0c720h		;0ed7
 	ld bc,(2 << 8) | 19		;0eda

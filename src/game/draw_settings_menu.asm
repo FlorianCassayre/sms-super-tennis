@@ -5,7 +5,7 @@ sub_draw_settings_menu:
 	set 6,(hl)		;08c8
 	di			;08ca
 	call sub_disable_display		;08cb
-	call sub_init_background_name_table		;08ce
+	call sub_graphics_name_fill_blank_tile		;08ce
 	ld de,0		;08d1
 	ld hl,data_planes_10_0		;08d4
 	call sub_rle_decompress_bitplanes_to_vram		;08d7

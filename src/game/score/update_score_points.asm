@@ -152,7 +152,7 @@ sub_update_score_points:
 	ld hl,039fah		;3117
 	ld b,001h		;311a
 @draw_bottom_score:
-	call sub_3192_draw		;311c
+	call sub_graphics_tile_draw_sequential_row		;311c
 	ld a,(score.point.top)		;311f
 	call sub_div10		;3122
 	ld a,d			;3125
@@ -165,7 +165,7 @@ sub_update_score_points:
 	ld hl,0393ah		;3131
 	ld b,001h		;3134
 @draw_top_score:
-	call sub_3192_draw		;3136
+	call sub_graphics_tile_draw_sequential_row		;3136
 	jp @finish_score_update		;3139
 @sub_313ch:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_9a		;313c

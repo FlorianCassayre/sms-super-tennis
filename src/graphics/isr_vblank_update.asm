@@ -65,7 +65,7 @@ l01e4h:
 	call sub_3543h		;01e4
 	ld c,00ch		;01e7
 	call sub_delay_vdp		;01e9
-	call sub_update_cond_color		;01ec
+	call sub_graphics_palette_secondary_update_conditionally_first		;01ec
 	call sub_load_vram_rect_dynamic		;01ef
 	call sub_update_announcement_timer		;01f2
 	call sub_027bh_joy		;01f5

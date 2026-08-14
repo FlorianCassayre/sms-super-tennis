@@ -77,7 +77,7 @@ l0038h_interrupt:
 .INCLUDE "io/pause_handler.asm"
 .INCLUDE "init.asm"
 	.INCLUDE "graphics/delay_vdp.asm"
-	.INCLUDE "graphics/update_cond_color.asm"
+	.INCLUDE "graphics/palette/graphics_palette_secondary_update_conditionally_first.asm"
 	.INCLUDE "io/027bh_joy.asm"
 	.INCLUDE "audio/event/audio_event_wait.asm"
 	.INCLUDE "audio/event/audio_idle_wait.asm"
@@ -85,7 +85,7 @@ blank_tile_data:
 	.DW $1100		;0385
 sprite_y_position_hidden:
 	.DB $e0		;0387
-	.INCLUDE "graphics/init_background_name_table.asm"
+	.INCLUDE "graphics/name/graphics_name_fill_blank_tile.asm"
 	.INCLUDE "graphics/display.asm"
 	.INCLUDE "graphics/decrement_pause_counter.asm"
 	.INCLUDE "graphics/upload_vram_chunks.asm"
@@ -99,17 +99,17 @@ sprite_y_position_hidden:
 	.INCLUDE "graphics/vram_fill_word.asm"
 	.INCLUDE "graphics/load_vram_rect.asm"
 	.INCLUDE "graphics/palette/graphics_palette_load.asm"
-	.INCLUDE "graphics/cp_1bit_ram_vram.asm"
+	.INCLUDE "graphics/tile/graphics_tile_expand_1bpp_ram_to_vdp.asm"
 	.INCLUDE "algorithm/rle_decompress_bitplanes.asm"
 	.INCLUDE "game/entity/game_entity_render_all.asm"
 	.INCLUDE "game/entity/game_entity_render_one.asm"
-	.INCLUDE "graphics/graphics_clean_unused_sprites.asm"
+	.INCLUDE "graphics/sprite/graphics_sprite_clean_unused.asm"
 	.INCLUDE "game/entity/game_entity_y_ordering.asm"
-	.INCLUDE "graphics/0642h_animation_loop.asm"
+	.INCLUDE "game/entity/game_entity_animation_update_frame.asm"
 	.INCLUDE "game/065ch.asm"
 	.INCLUDE "game/0711h_entity_action_dispatch.asm"
 l0732h:
-	call sub_0642h_animation_loop		;0732
+	call sub_game_entity_animation_update_frame		;0732
 	ld de,0c086h		;0735
 	ld a,(de)			;0738
 	ld c,a			;0739
@@ -179,13 +179,13 @@ l0811h:
 	.INCLUDE "game/draw_settings_menu.asm"
 	.INCLUDE "game/gui/handle_gui_control.asm"
 	.INCLUDE "graphics/vdp_build_sprite_buffer.asm"
-	.INCLUDE "graphics/0a85h_sprite_offset.asm"
+	.INCLUDE "graphics/sprite/graphics_sprite_apply_xy_offset.asm"
 	.INCLUDE "math/mul_a_c_add_b.asm"
 	.INCLUDE "graphics/draw_0abd_tennis_court.asm"
 	.INCLUDE "game/draw_tennis_court.asm"
 	.INCLUDE "game/0b28h.asm"
 	.INCLUDE "game/l0c67h.asm"
-	.INCLUDE "graphics/menu_highlight_cursor.asm"
+	.INCLUDE "game/umpire/game_umpire_announcement.asm"
 l0dd0h:
 	.DB $51		;0dd0
 	.DB $80		;0dd1
@@ -244,7 +244,7 @@ l0e00h:
 	.INCLUDE "game/gui/menu_button_press_test.asm"
 	.INCLUDE "game/ball/update_ball_out_of_bounds.asm"
 	.INCLUDE "game/init_splash_screen.asm"
-	.INCLUDE "graphics/0ef9h_palette_swap.asm"
+	.INCLUDE "graphics/palette/graphics_palette_swap_flags.asm"
 	.INCLUDE "graphics/l0f02h.asm"
 l0f1ah:
 	jp sub_game_ball_sprite_perspective_x		;0f1a
@@ -378,7 +378,7 @@ l1c2bh:
 	set 7,(ix+002h)		;1c31
 	ld (ix+025h),000h		;1c35
 l1c39h:
-	call sub_2e98h_2d_scale_clamp		;1c39
+	call sub_game_entity_calculate_court_perspective		;1c39
 	call sub_game_cpu_update		;1c3c
 	ld a,(ix+025h)		;1c3f
 	and 00fh		;1c42
@@ -406,7 +406,7 @@ l2290h:
 	.INCLUDE "game/player/game_player_update.asm"
 	.INCLUDE "game/player/game_player_read_input.asm"
 	.INCLUDE "game/player/game_player_apply_movement.asm"
-	.INCLUDE "graphics/26ab_update.asm"
+	.INCLUDE "game/player/game_player_joypad_poll.asm"
 	.INCLUDE "game/player/player_movement.asm"
 	.INCLUDE "game/player/apply_player_movement.asm"
 	.INCLUDE "game/level/game_level_speed_base_table.asm"
@@ -419,12 +419,12 @@ l2290h:
 	.INCLUDE "game/racket/game_racket_process_swing_contact.asm"
 	.INCLUDE "math/abs10.asm"
 	.INCLUDE "game/ball/game_ball_trajectory_data.asm"
-	.INCLUDE "graphics/2e98h_2d_scale_clamp.asm"
+	.INCLUDE "game/entity/game_entity_calculate_court_perspective.asm"
 	.INCLUDE "math/div_a_b_c.asm"
 	.INCLUDE "game/l2ee1h_dispatch.asm"
 	.INCLUDE "game/score/update_score_points.asm"
 	.INCLUDE "math/div10.asm"
-	.INCLUDE "graphics/3192_draw.asm"
+	.INCLUDE "graphics/tile/graphics_tile_draw_sequential_row.asm"
 	.INCLUDE "game/score/update_set_scores.asm"
 	.INCLUDE "graphics/draw_game_end.asm"
 sub_3457h_clean_vram:
@@ -445,16 +445,10 @@ sub_3457h_clean_vram:
 	djnz sub_3457h_clean_vram		;346b
 	ret			;346d
 	.INCLUDE "graphics/draw_game_end_line.asm"
-	.INCLUDE "graphics/draw_game_end_typewriter.asm"
-gui_text_game_set_match:
-	.STRINGMAP ascii, " GAME...  SET...  MATCH"
-gui_text_win:
-	.STRINGMAP ascii, "YOU WIN"
-	.STRINGMAP ascii, "HAVE YOU TRIED"
-	.STRINGMAP ascii, "A HARDER LEVEL?"
-gui_text_lost:
-	.STRINGMAP ascii, "YOU LOSE"
-	.STRINGMAP ascii, "TRY AGAIN?"
+	.INCLUDE "game/gui/game_gui_draw_typewriter_match_end.asm"
+	.INCLUDE "game/gui/text/gui_text_game_set_match.asm"
+	.INCLUDE "game/gui/text/gui_text_win.asm"
+	.INCLUDE "game/gui/text/gui_text_lost.asm"
 sub_3543h:
 	ld a,(0c000h)		;3543
 	bit 2,a		;3546
@@ -477,26 +471,12 @@ l3560h:
 	.DW unknown_word_2		;3564
 	.INCLUDE "game/update_announcement_timer.asm"
 	.INCLUDE "graphics/load_vram_rect_dynamic.asm"
-	.INCLUDE "graphics/35c6h_palette_load.asm"
+	.INCLUDE "game/player/game_player_palette_load_clothes.asm"
 	.INCLUDE "graphics/wait_a_frames.asm"
 	.INCLUDE "game/delay_loop.asm"
-	.INCLUDE "graphics/3607h.asm"
-	.INCLUDE "data/chunks_1.asm"
-l3777h_palette:
-	.DB $58		;3777
-	.DB $01		;3778
-	.DB $59		;3779
-	.DB $01		;377a
-l377bh_palette:
-	.DB $5a		;377b
-	.DB $01		;377c
-	.DB $5b		;377d
-	.DB $01		;377e
-l377fh_palette:
-	.DB $44		;377f
-	.DB $01		;3780
-	.DB $45		;3781
-	.DB $01		;3782
+	.INCLUDE "game/gui/game_gui_win_special.asm"
+	.INCLUDE "game/gui/text/gui_text_win_special.asm"
+	.INCLUDE "game/gui/game_gui_win_special_palette.asm"
 data_tiles_2:
 	.INCLUDE "tiles/tiles_2.asm"
 data_planes_0_0:
@@ -520,28 +500,17 @@ data_planes_2_0:
 	.INCLUDE "tiles/planes_2_3.asm"
 	.INCLUDE "data/chunks_0.asm"
 l40f0h_name_table:
-	.DB $26		;40f0
-	.DB $01		;40f1
-	.DB $00		;40f2
-	.DB $01		;40f3
-	.DB $27		;40f4
-	.DB $01		;40f5
-	.DB $28		;40f6
-	.DB $01		;40f7
-	.DB $29		;40f8
-	.DB $01		;40f9
-	.DB $2a		;40fa
-	.DB $01		;40fb
-	.DB $00		;40fc
-	.DB $01		;40fd
-	.DB $02		;40fe
-	.DB $01		;40ff
-	.DB $0a		;4100
-	.DB $01		;4101
-	.DB $09		;4102
-	.DB $01		;4103
-	.DB $07		;4104
-	.DB $01		;4105
+	.DW $0126		;40f0
+	.DW $0100		;40f2
+	.DW $0127		;40f4
+	.DW $0128		;40f6
+	.DW $0129		;40f8
+	.DW $012a		;40fa
+	.DW $0100		;40fc
+	.DW $0102		;40fe
+	.DW $010a		;4100
+	.DW $0109		;4102
+	.DW $0107		;4104
 	.INCLUDE "hardware/hardware_self_test.asm"
 	.INCLUDE "data/unknown_table_0.asm"
 l489bh_sprite_attributes:

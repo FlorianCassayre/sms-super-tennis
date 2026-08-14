@@ -17,7 +17,7 @@ l0c6bh:
 	ld (hl),001h		;0c80
 	ld hl,00078h		;0c82
 	ld (game.pause_counter),hl		;0c85
-	call sub_menu_highlight_cursor		;0c88
+	call sub_game_umpire_announcement		;0c88
 	jp l2ee1h_dispatch		;0c8b
 l0c8eh:
 	call sub_decrement_pause_counter		;0c8e

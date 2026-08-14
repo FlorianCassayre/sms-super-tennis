@@ -1,4 +1,4 @@
-sub_menu_highlight_cursor:
+sub_game_umpire_announcement:
 	ld a,(0c518h)		;0d84
 	dec a			;0d87
 	jr z,l0db5h		;0d88

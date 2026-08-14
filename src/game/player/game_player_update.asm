@@ -1,5 +1,5 @@
 sub_game_player_update:
-	call sub_2e98h_2d_scale_clamp		;247c
+	call sub_game_entity_calculate_court_perspective		;247c
 	ld a,(0c000h)		;247f
 	bit 3,a		;2482
 	call nz,sub_game_cpu_update		;2484

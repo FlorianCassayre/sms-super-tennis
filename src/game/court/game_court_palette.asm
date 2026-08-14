@@ -1,3 +1,4 @@
 game_court_palette:
 	.DB $3f $3f $37 $08 $03 $00 $2f $2a $25 $0f $0b $0a $05 $06 $30 $3f		;0003
+game_court_palette_secondary:
 	.DB $2a $00 $0b $3f $34 $38 $0f $1f $06 $00 $00 $00 $00 $00 $00 $00		;0013

@@ -89,7 +89,7 @@ init:
 	ld de,0cbe8h		;0148
 	ld hl,data_planes_5_0		;014b
 	call sub_rle_decompress_bitplanes_to_ram		;014e
-	call sub_init_background_name_table		;0151
+	call sub_graphics_name_fill_blank_tile		;0151
 	ld a,080h		;0154
 	ld (psg_engine.track_request_id),a		;0156
 	ld a,080h		;0159
@@ -104,12 +104,12 @@ l0213h:
 l0219h:
 	ld c,018h		;0219
 	call sub_delay_vdp		;021b
-	call sub_update_cond_color		;021e
+	call sub_graphics_palette_secondary_update_conditionally_first		;021e
 	jp l01feh		;0221
 l0224h:
 	ld c,018h		;0224
 	call sub_delay_vdp		;0226
-	call sub_update_cond_color		;0229
+	call sub_graphics_palette_secondary_update_conditionally_first		;0229
 	jp l01fbh		;022c
 l022fh:
 	ld c,00dh		;022f

@@ -25,7 +25,7 @@ sub_vdp_build_sprite_buffer:
 	ld b,084h		;0a3c
 	ld a,(de)			;0a3e
 	call sub_mul_a_c_add_b		;0a3f
-	call sub_0a85h_sprite_offset		;0a42
+	call sub_graphics_sprite_apply_xy_offset		;0a42
 ++:
 	exx			;0a45
 	ld a,c			;0a46
@@ -55,7 +55,7 @@ sub_vdp_build_sprite_buffer:
 	exx			;0a71
 	ld c,09bh		;0a72
 	exx			;0a74
-	call sub_0a85h_sprite_offset		;0a75
+	call sub_graphics_sprite_apply_xy_offset		;0a75
 ++:
 	ld a,0d0h		;0a78
 	ld (hl),a			;0a7a

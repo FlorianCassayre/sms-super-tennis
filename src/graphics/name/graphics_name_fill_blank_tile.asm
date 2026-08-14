@@ -1,4 +1,4 @@
-sub_init_background_name_table:
+sub_graphics_name_fill_blank_tile:
 	; Fill screen with blank tiles
 	ld hl,VDP_NAME_TABLE_ADDRESS_BASE		;0388
 	ld de,blank_tile_data		;038b

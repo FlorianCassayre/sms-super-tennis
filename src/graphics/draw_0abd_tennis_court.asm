@@ -19,7 +19,7 @@ sub_0abd_draw_tennis_court:
 	ld bc,63		;0aed
 	ld (hl),0d0h		;0af0
 	ldir		;0af2
-	call sub_35c6h_palette_load		;0af4
+	call sub_game_player_palette_load_clothes		;0af4
 	ld a,(0c04ah)		;0af7
 	rrca			;0afa
 	and 007h		;0afb

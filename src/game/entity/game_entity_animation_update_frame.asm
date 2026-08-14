@@ -1,4 +1,4 @@
-sub_0642h_animation_loop:
+sub_game_entity_animation_update_frame:
 	ld a,(ix+004h)		;0642
 	add a,a			;0645
 	ld e,a			;0646

@@ -1,4 +1,4 @@
-sub_draw_game_end_typewriter:
+sub_game_gui_draw_typewriter_match_end:
 	di			;347f
 	ld a,l			;3480
 	out (O_VDP_CTRL),a		;3481
@@ -24,5 +24,5 @@ sub_draw_game_end_typewriter:
 	ld a,5		;34a0
 	ei			;34a2
 	call sub_wait_a_frames		;34a3
-	djnz sub_draw_game_end_typewriter		;34a6
+	djnz sub_game_gui_draw_typewriter_match_end		;34a6
 	ret			;34a8

@@ -1,4 +1,4 @@
-sub_2e98h_2d_scale_clamp:
+sub_game_entity_calculate_court_perspective:
 	ld a,(ix + entity_t.x_pos + 1)		;2e98
 	bit 0,(ix + entity_t.id)		;2e9b
 	ld c,008h		;2e9f

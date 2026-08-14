@@ -14,7 +14,7 @@ sub_game_cpu_evaluate_y_dist_1:
 	ld a,(0c401h)		;2337
 	cp 01ch		;233a
 	jr nz,@check_y_dist		;233c
-	ld a,(state.cpu_randomness_timer)		;233e
+	ld a,(state.maybe_random_seed)		;233e
 	rra			;2341
 	and 003h		;2342
 	sub 002h		;2344

@@ -4,7 +4,7 @@ sub_joy_debounce:
 	ret z			;079a
 	and 00fh		;079b
 	cp 000h		;079d
-	call z,sub_0ef9h_palette_swap		;079f
+	call z,sub_graphics_palette_swap_flags		;079f
 	call sub_get_joy_p2		;07a2
 	and 030h		;07a5
 	jr nz,+		;07a7

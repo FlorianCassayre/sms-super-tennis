@@ -17,19 +17,19 @@ sub_draw_game_end:
 	ld hl,03c18h		;33ea
 	ld de,gui_text_lost		;33ed
 	ld b,008h		;33f0
-	call sub_draw_game_end_typewriter		;33f2
+	call sub_game_gui_draw_typewriter_match_end		;33f2
 	ld a,005h		;33f5
 	call sub_wait_a_frames		;33f7
 	ld hl,03cd6h		;33fa
 	ld b,00ah		;33fd
-	call sub_draw_game_end_typewriter		;33ff
+	call sub_game_gui_draw_typewriter_match_end		;33ff
 	ld a,005h		;3402
 	ld (0c49dh),a		;3404
 	jp @end		;3407
 @game_won:
 	ld a,(0c04ah)		;340a
 	cp 004h		;340d
-	jp z,sub_3607h		;340f
+	jp z,sub_game_gui_win_special		;340f
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_match_won		;3412
 	ld (psg_engine.track_request_id),a		;3414
 	ld hl,03b48h		;3417
@@ -40,17 +40,17 @@ sub_draw_game_end:
 	ld hl,03c18h		;3425
 	ld de,gui_text_win		;3428
 	ld b,007h		;342b
-	call sub_draw_game_end_typewriter		;342d
+	call sub_game_gui_draw_typewriter_match_end		;342d
 	ld a,005h		;3430
 	call sub_wait_a_frames		;3432
 	ld hl,03ccch		;3435
 	ld b,00eh		;3438
-	call sub_draw_game_end_typewriter		;343a
+	call sub_game_gui_draw_typewriter_match_end		;343a
 	ld a,005h		;343d
 	call sub_wait_a_frames		;343f
 	ld hl,03d16h		;3442
 	ld b,00fh		;3445
-	call sub_draw_game_end_typewriter		;3447
+	call sub_game_gui_draw_typewriter_match_end		;3447
 	ld a,005h		;344a
 	ld (0c49dh),a		;344c
 	jp @end		;344f

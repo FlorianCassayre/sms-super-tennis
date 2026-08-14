@@ -76,7 +76,7 @@ l09f7h:
 	ld (0c4b2h),a		;09fa
 	add a,002h		;09fd
 	ld (0c4b0h),a		;09ff
-	ld a,(state.cpu_randomness_timer)		;0a02
+	ld a,(state.maybe_random_seed)		;0a02
 	ld (0c4b1h),a		;0a05
 	srl a		;0a08
 	ld (0c4b3h),a		;0a0a

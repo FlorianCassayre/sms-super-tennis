@@ -1,4 +1,4 @@
-data_chunks_1:
+gui_text_win_special:
 	.DB 3			;371a
 
 	.DW VDP_NAME_TABLE_ADDRESS(12, 3)		;371b

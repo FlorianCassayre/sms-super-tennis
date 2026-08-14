@@ -1,4 +1,4 @@
-sub_graphics_clean_unused_sprites:
+sub_graphics_sprite_clean_unused:
 	ld a,(0c080h)		;05a1
 	ld hl,0c081h		;05a4
 	sub (hl)			;05a7

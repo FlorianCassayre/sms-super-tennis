@@ -9,7 +9,7 @@
 	_unknown_2 DSB 3
 	ball_hit_type DB	;c046
 	_unknown_3 DSB 3
-	cpu_randomness_timer DB	;c04a
+	maybe_random_seed DB	;c04a
 	_unknown_4 DSB 53
 	current_sprite_index DB	;c080
 	previous_sprite_index DB	;c081

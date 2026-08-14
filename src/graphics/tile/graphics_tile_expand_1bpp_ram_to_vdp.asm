@@ -1,4 +1,4 @@
-sub_cp_1bit_ram_vram:
+sub_graphics_tile_expand_1bpp_ram_to_vdp:
 	ld (0c088h),a		;0492
 	call sub_set_vdp_write_addr		;0495
 	ex de,hl			;0498

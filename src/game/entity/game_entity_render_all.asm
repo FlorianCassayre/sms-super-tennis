@@ -27,4 +27,4 @@ l053eh:
 	inc a			;053f
 	cp 006h		;0540
 	jr nz,l051eh		;0542
-	jp sub_graphics_clean_unused_sprites		;0544
+	jp sub_graphics_sprite_clean_unused		;0544

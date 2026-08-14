@@ -1,4 +1,4 @@
-sub_3607h:
+sub_game_gui_win_special:
 	ld a,0d0h		;3607
 	ld (0c140h),a		;3609
 	ld (0c100h),a		;360c
@@ -63,7 +63,7 @@ l3627h:
 	ld b,17		;3685
 	call sub_graphics_palette_load		;3687
 	call sub_disable_display		;368a
-	call sub_init_background_name_table		;368d
+	call sub_graphics_name_fill_blank_tile		;368d
 	ld a,000h		;3690
 	out (O_VDP_CTRL),a		;3692
 	ld a,089h		;3694
@@ -75,7 +75,7 @@ l3627h:
 	ld de,data_tiles_2		;36a4
 	ld bc,(8 << 8) | 6		;36a7
 	call sub_load_vram_rect		;36aa
-	ld hl,data_chunks_1		;36ad
+	ld hl,gui_text_win_special		;36ad
 	call sub_upload_vram_chunks		;36b0
 	ei			;36b3
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_match_won		;36b4
@@ -110,25 +110,9 @@ l3627h:
 	ret			;3705
 
 l3706h:
-	.DB $36		;3706
-	.DB $01		;3707
+	.DW $0136		;3706
 l3708h_palette:
-	.DB $3a		;3708
-	.DB $00		;3709
-	.DB $3f		;370a
-	.DB $2f		;370b
-	.DB $03		;370c
-	.DB $2a		;370d
-	.DB $0b		;370e
-	.DB $16		;370f
-	.DB $25		;3710
-	.DB $00		;3711
-	.DB $00		;3712
-	.DB $00		;3713
-	.DB $00		;3714
-	.DB $00		;3715
-	.DB $00		;3716
-	.DB $00		;3717
+	.DB $3a $00 $3f $2f $03 $2a $0b $16 $25 $00 $00 $00 $00 $00 $00 $00		;3708
 	.DB $3a		;3718
 l3719h_palette:
 	.DB $06		;3719

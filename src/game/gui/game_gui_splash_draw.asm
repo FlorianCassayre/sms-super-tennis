@@ -6,7 +6,7 @@ sub_game_gui_splash_draw:
 	call sub_disable_display		;082a
 
 	; Fill screen with blank tiles and hide sprites
-	call sub_init_background_name_table		;082d
+	call sub_graphics_name_fill_blank_tile		;082d
 
 	; Load primary palette (logo and font colors)
 	ld hl,0		;0830

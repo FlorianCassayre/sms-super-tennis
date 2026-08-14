@@ -1,4 +1,4 @@
-sub_0a85h_sprite_offset:
+sub_graphics_sprite_apply_xy_offset:
 	push bc			;0a85
 	push de			;0a86
 	ld b,004h		;0a87

@@ -1,4 +1,4 @@
-sub_3192_draw:
+sub_graphics_tile_draw_sequential_row:
 	di			;3192
 	ld a,l			;3193
 	out (O_VDP_CTRL),a		;3194

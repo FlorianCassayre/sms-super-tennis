@@ -106,7 +106,7 @@ l3276h:
 	ld b,001h		;3284
 	ld hl,03c1eh		;3286
 	ld (0c4a0h),hl		;3289
-	call sub_3192_draw		;328c
+	call sub_graphics_tile_draw_sequential_row		;328c
 	pop hl			;328f
 	inc hl			;3290
 	push hl			;3291
@@ -114,7 +114,7 @@ l3276h:
 	ld d,000h		;3293
 	ld b,001h		;3295
 	ld hl,03c9eh		;3297
-	call sub_3192_draw		;329a
+	call sub_graphics_tile_draw_sequential_row		;329a
 	pop hl			;329d
 	inc hl			;329e
 	ld e,(hl)			;329f
@@ -127,14 +127,14 @@ l3276h:
 	ld b,001h		;32ac
 	ld hl,03c22h		;32ae
 	ld (0c4a0h),hl		;32b1
-	call sub_3192_draw		;32b4
+	call sub_graphics_tile_draw_sequential_row		;32b4
 	pop hl			;32b7
 	push hl			;32b8
 	ld e,(hl)			;32b9
 	ld d,000h		;32ba
 	ld b,001h		;32bc
 	ld hl,03ca1h+1		;32be
-	call sub_3192_draw		;32c1
+	call sub_graphics_tile_draw_sequential_row		;32c1
 	pop hl			;32c4
 	inc hl			;32c5
 	ld e,(hl)			;32c6
@@ -147,14 +147,14 @@ l3276h:
 	ld b,001h		;32d3
 	ld hl,03c26h		;32d5
 	ld (score.blinking_set_vram_addr),hl		;32d8
-	call sub_3192_draw		;32db
+	call sub_graphics_tile_draw_sequential_row		;32db
 	pop hl			;32de
 	push hl			;32df
 	ld e,(hl)			;32e0
 	ld d,000h		;32e1
 	ld b,001h		;32e3
 	ld hl,03ca6h		;32e5
-	call sub_3192_draw		;32e8
+	call sub_graphics_tile_draw_sequential_row		;32e8
 l32ebh:
 	pop hl			;32eb
 	ld hl,(score.blinking_set_vram_addr)		;32ec
