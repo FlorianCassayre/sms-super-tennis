@@ -19,9 +19,9 @@ l1b17h:
 	ld b,(ix+028h)		;1b23
 	jr nz,l1b37h		;1b26
 	and 002h		;1b28
-	ld a,(0c1c0h)		;1b2a
+	ld a,(joy.1.current)		;1b2a
 	jr z,l1b32h		;1b2d
-	ld a,(0c1c2h)		;1b2f
+	ld a,(joy.2.current)		;1b2f
 l1b32h:
 	rra			;1b32
 	rra			;1b33

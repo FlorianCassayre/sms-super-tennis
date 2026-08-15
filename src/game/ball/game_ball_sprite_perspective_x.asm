@@ -2,7 +2,7 @@ sub_game_ball_sprite_perspective_x:
 	ld a,(0c509h)		;1548
 	ld e,a			;154b
 	ld d,000h		;154c
-	ld hl,0cbe8h		;154e
+	ld hl,data.planes_5		;154e
 	add hl,de			;1551
 	ld a,(hl)			;1552
 	ld (ix+00bh),a		;1553

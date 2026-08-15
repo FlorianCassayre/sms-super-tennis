@@ -22,7 +22,7 @@ l31d1h:
 l31e5h:
 	ld hl,03b54h		;31e5
 	ld (score.vram_dest),hl		;31e8
-	ld hl,0c84ch		;31eb
+	ld hl,data.umpire_settings		;31eb
 	ld (score.vram_src),hl		;31ee
 	ld h,7		;31f1
 	ld l,00bh		;31f3
@@ -214,7 +214,7 @@ l3342h:
 l3353h:
 	ld hl,03b54h		;3353
 	ld (score.vram_dest),hl		;3356
-	ld hl,0c8e6h		;3359
+	ld hl,data.umpire_settings + 154		;3359
 	ld (score.vram_src),hl		;335c
 	ld h,007h		;335f
 	ld l,00bh		;3361

@@ -68,7 +68,7 @@ l3627h:
 	out (O_VDP_CTRL),a		;3692
 	ld a,089h		;3694
 	out (O_VDP_CTRL),a		;3696
-	ld hl,data_planes_0_0		;3698
+	ld hl,data_planes_girl		;3698
 	ld de,02600h		;369b
 	call sub_rle_decompress_bitplanes_to_vram		;369e
 	ld hl,03a5ah		;36a1

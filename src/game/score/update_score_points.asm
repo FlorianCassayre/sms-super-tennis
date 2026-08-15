@@ -40,24 +40,24 @@ sub_update_score_points:
 	push bc			;303f
 	ld a,(hl)			;3040
 	cp 000h		;3041
-	jr nz,@bottom_score_digit_1		;3043
-	ld hl,0caech		;3045
-@bottom_score_digit_1:
+	jr nz,@bottom_score_digit_15		;3043
+	ld hl,data.umpire_settings.point_0		;3045
+@bottom_score_digit_15:
 	cp 001h		;3048
-	jr nz,@bottom_score_digit_2		;304a
-	ld hl,0caf0h		;304c
-@bottom_score_digit_2:
+	jr nz,@bottom_score_digit_30		;304a
+	ld hl,data.umpire_settings.point_15		;304c
+@bottom_score_digit_30:
 	cp 002h		;304f
-	jr nz,@bottom_score_digit_3		;3051
-	ld hl,0caf4h		;3053
-@bottom_score_digit_3:
+	jr nz,@bottom_score_digit_40		;3051
+	ld hl,data.umpire_settings.point_30		;3053
+@bottom_score_digit_40:
 	cp 003h		;3056
-	jr nz,@bottom_score_digit_4		;3058
-	ld hl,0caf8h		;305a
-@bottom_score_digit_4:
+	jr nz,@bottom_score_digit_a		;3058
+	ld hl,data.umpire_settings.point_40		;305a
+@bottom_score_digit_a:
 	cp 004h		;305d
 	jr nz,@draw_top_score_digit		;305f
-	ld hl,0cafch		;3061
+	ld hl,data.umpire_settings.point_a		;3061
 	push de			;3064
 	ex de,hl			;3065
 	ld bc,4		;3066
@@ -71,7 +71,7 @@ sub_update_score_points:
 	ld de,03938h		;3075
 	add hl,de			;3078
 	ex de,hl			;3079
-	ld hl,0cb00h		;307a
+	ld hl,data.umpire_settings.point_none		;307a
 	pop bc			;307d
 	ld b,001h		;307e
 	push bc			;3080
@@ -172,7 +172,7 @@ sub_update_score_points:
 	ld (psg_engine.track_request_id),a		;313e
 	ld hl,03904h		;3141
 	ld (score.vram_dest),hl		;3144
-	ld hl,0c9c6h		;3147
+	ld hl,data.umpire_settings.umpire_deuce		;3147
 	ld (score.vram_src),hl		;314a
 	ld h,004h		;314d
 	ld l,007h		;314f
@@ -185,7 +185,7 @@ sub_update_score_points:
 @sub_315eh:
 	ld hl,038c4h		;315e
 	ld (score.vram_dest),hl		;3161
-	ld hl,0caa6h		;3164
+	ld hl,data.umpire_settings.umpire_none		;3164
 	ld (score.vram_src),hl		;3167
 	ld h,005h		;316a
 	ld l,007h		;316c

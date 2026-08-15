@@ -16,6 +16,7 @@
 	.ORGA	00000h
 
 .INCLUDE "definitions.i"
+.INCLUDE "memory.i"
 
 start:
 	jp init		;0000
@@ -31,13 +32,13 @@ start:
 	.DB $00		;002b
 	.DB $3f		;002c
 	.INCLUDE "graphics/palette/l002dh_palette.asm"
-	.DSB 9 $ff		;002f
+	.INCLUDE "interrupt_padding.asm"
 l0038h_interrupt:
 	jp isr_vblank_update		;0038
 	.ASSERT l0038h_interrupt == $0038, LDERROR
 	.INCLUDE "hardware/hardware_vdp_initial_register_values.asm"
 	.DSB 5 $00		;0051
-	.DSB 16 $ff		;0056
+	.INCLUDE "pause_padding.asm"
 	.INCLUDE "io/pause_handler.asm"
 	.INCLUDE "init.asm"
 	.INCLUDE "graphics/delay_vdp.asm"
@@ -177,25 +178,13 @@ l0038h_interrupt:
 	.INCLUDE "game/gui/game_gui_win_special_tile_eye.asm"
 data_tiles_2:
 	.INCLUDE "tiles/tiles_2.asm"
-data_planes_0_0:
-	.INCLUDE "tiles/planes_0_0.asm"
-	.INCLUDE "tiles/planes_0_1.asm"
-	.INCLUDE "tiles/planes_0_2.asm"
-	.INCLUDE "tiles/planes_0_3.asm"
+	.INCLUDE "tiles/girl/planes_girl.asm"
 	.INCLUDE "game/gui/game_gui_splash_palette_primary.asm"
 	.INCLUDE "game/gui/game_gui_splash_palette_secondary.asm"
-data_planes_1_0:
-	.INCLUDE "tiles/planes_1_0.asm"
-	.INCLUDE "tiles/planes_1_1.asm"
-	.INCLUDE "tiles/planes_1_2.asm"
-	.INCLUDE "tiles/planes_1_3.asm"
+	.INCLUDE "tiles/splash/planes_splash.asm"
 data_tiles_1_super:
 	.INCLUDE "tiles/tiles_1_super.asm"
-data_planes_2_0:
-	.INCLUDE "tiles/planes_2_0.asm"
-	.INCLUDE "tiles/planes_2_1.asm"
-	.INCLUDE "tiles/planes_2_2.asm"
-	.INCLUDE "tiles/planes_2_3.asm"
+	.INCLUDE "tiles/tennis/planes_tennis.asm"
 	.INCLUDE "data/chunks_0.asm"
 	.INCLUDE "game/gui/l40f0h_name_table.asm"
 	.INCLUDE "hardware/hardware_self_test.asm"
@@ -217,39 +206,13 @@ data_planes_5_0:
 	.INCLUDE "tiles/planes_5_1.asm"
 	.INCLUDE "tiles/planes_5_2.asm"
 	.INCLUDE "tiles/planes_5_3.asm"
-data_planes_6_0:
-	.INCLUDE "tiles/planes_6_0.asm"
-	.INCLUDE "tiles/planes_6_1.asm"
-	.INCLUDE "tiles/planes_6_2.asm"
-data_planes_7_0:
-	.INCLUDE "tiles/planes_7_0.asm"
-	.INCLUDE "tiles/planes_7_1.asm"
-data_planes_7_2:
-	.INCLUDE "tiles/planes_7_2.asm"
-	.INCLUDE "tiles/planes_7_3.asm"
-	.INCLUDE "tiles/planes_7_4.asm"
-	.INCLUDE "tiles/planes_7_5.asm"
+	.INCLUDE "tiles/court/planes_court.asm"
+	.INCLUDE "tiles/court_name/planes_court_name.asm"
 	.INCLUDE "graphics/unknown_word.asm"
-data_planes_8_0:
-	.INCLUDE "tiles/planes_8_0.asm"
-	.INCLUDE "tiles/planes_8_1.asm"
-	.INCLUDE "tiles/planes_8_2.asm"
-	.INCLUDE "tiles/planes_8_3.asm"
-data_planes_9_0:
-	.INCLUDE "tiles/planes_9_0.asm"
-	.INCLUDE "tiles/planes_9_1.asm"
-	.INCLUDE "tiles/planes_9_2.asm"
-	.INCLUDE "tiles/planes_9_3.asm"
-data_planes_10_0:
-	.INCLUDE "tiles/planes_10_0.asm"
-	.INCLUDE "tiles/planes_10_1.asm"
-	.INCLUDE "tiles/planes_10_2.asm"
-	.INCLUDE "tiles/planes_10_3.asm"
-data_planes_11_0:
-	.INCLUDE "tiles/planes_11_0.asm"
-	.INCLUDE "tiles/planes_11_1.asm"
-	.INCLUDE "tiles/planes_11_2.asm"
-	.INCLUDE "tiles/planes_11_3.asm"
+	.INCLUDE "tiles/umpire_settings/planes_umpire_settings.asm"
+	.INCLUDE "tiles/font/planes_font.asm"
+	.INCLUDE "tiles/player/planes_player.asm"
+	.INCLUDE "tiles/ball/planes_ball.asm"
 	.IFDEF _J
 	    .INCLUDE "audio/audio.asm"
 	.ENDIF
@@ -257,5 +220,5 @@ data_planes_11_0:
 	.IFDEF _UE
 		.INCLUDE "audio/audio.asm"
 	.ENDIF
-	.INCLUDE "padding.asm"
+	.INCLUDE "header_padding.asm"
 	.INCLUDE "header.asm"

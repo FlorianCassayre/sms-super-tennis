@@ -6,7 +6,4 @@ l40f0h_name_table:
 	.DW $0129		;40f8
 	.DW $012a		;40fa
 	.DW $0100		;40fc
-	.DW $0102		;40fe
-	.DW $010a		;4100
-	.DW $0109		;4102
-	.DW $0107		;4104
+	.STRINGMAP ascii, "1986"

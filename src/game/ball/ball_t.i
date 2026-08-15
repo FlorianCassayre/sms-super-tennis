@@ -17,7 +17,3 @@
 	tie_break_saved_server DB	; $c51c
 	out_flag DB	; $c51d
 .ENDST
-
-.ENUM $c500
-	ball INSTANCEOF ball_t
-.ENDE

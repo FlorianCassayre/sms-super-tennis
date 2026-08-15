@@ -9,10 +9,10 @@ sub_game_player_joypad_poll:
 	ld a,b			;26b8
 	and 002h		;26b9
 	jr nz,+		;26bb
-	ld a,(0c1c0h)		;26bd
+	ld a,(joy.1.current)		;26bd
 	jr ++		;26c0
 +:
-	ld a,(0c1c2h)		;26c2
+	ld a,(joy.2.current)		;26c2
 ++:
 	and 00fh		;26c5
 	ld (ix + entity_t.input_dirs),a		;26c7

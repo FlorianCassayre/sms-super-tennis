@@ -39,7 +39,3 @@
     box_dimensions DW		;c4ac
     advance_set_flag DW		;c4ae
 .ENDST
-
-.ENUM $c480
-	score INSTANCEOF score_t
-.ENDE

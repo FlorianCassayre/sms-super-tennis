@@ -113,7 +113,7 @@ l0bcdh:
 	add hl,de			;0c0d
 	ld a,(hl)			;0c0e
 	ld (entities.ball.allowed_dirs),a		;0c0f
-	ld hl,0c1c1h		;0c12
+	ld hl,joy.1.pressed		;0c12
 	ld de,040h		;0c15
 	xor a			;0c18
 	ld b,006h		;0c19

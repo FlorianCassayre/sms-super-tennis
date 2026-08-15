@@ -57,7 +57,7 @@ l160bh:
 	ld a,(ball.deflection_temp)		;1665
 	ld e,a			;1668
 	ld d,000h		;1669
-	ld hl,0cbe8h		;166b
+	ld hl,data.planes_5		;166b
 	add hl,de			;166e
 	ld a,(hl)			;166f
 	ld l,a			;1670

@@ -16,16 +16,16 @@ sub_game_player_read_input:
 	xor a			;2676
 	ret			;2677
 l2678h:
-	ld a,(0c1c1h)		;2678
+	ld a,(joy.1.pressed)		;2678
 	ld b,a			;267b
-	ld a,(0c1c0h)		;267c
+	ld a,(joy.1.current)		;267c
 	ld c,a			;267f
 	ld a,(ix+001h)		;2680
 	and 002h		;2683
 	jr z,l268fh		;2685
-	ld a,(0c1c3h)		;2687
+	ld a,(joy.2.pressed)		;2687
 	ld b,a			;268a
-	ld a,(0c1c2h)		;268b
+	ld a,(joy.2.current)		;268b
 	ld c,a			;268e
 l268fh:
 	ld a,b			;268f

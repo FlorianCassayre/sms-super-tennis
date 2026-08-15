@@ -7,9 +7,9 @@ sub_draw_settings_menu:
 	call sub_disable_display		;08cb
 	call sub_graphics_name_fill_blank_tile		;08ce
 	ld de,0		;08d1
-	ld hl,data_planes_10_0		;08d4
+	ld hl,data_planes_player		;08d4
 	call sub_rle_decompress_bitplanes_to_vram		;08d7
-	ld hl,game_settings		;08da
+	ld hl,game.settings		;08da
 	ld b,_sizeof_game_settings_t		;08dd
 	xor a			;08df
 -:
@@ -22,39 +22,39 @@ sub_draw_settings_menu:
 	ld (gui.joystick),a		;08ed
 	ld (gui.joystick_previous),a		;08f0
 	ld hl,03886h		;08f3
-	ld de,0cb04h		;08f6
+	ld de,data.umpire_settings.player_level_select		;08f6
 	ld bc,38		;08f9
 	call sub_cp_ram_vram		;08fc
 	ld hl,0394ah		;08ff
-	ld de,0cb2ah		;0902
+	ld de,data.umpire_settings.speed_level		;0902
 	ld bc,32		;0905
 	call sub_cp_ram_vram		;0908
 	ld hl,039e2h		;090b
-	ld de,0cb4ah		;090e
+	ld de,data.umpire_settings.answer_abc		;090e
 	ld bc,22		;0911
 	call sub_cp_ram_vram		;0914
 	ld hl,03a4ah		;0917
-	ld de,0cb60h		;091a
+	ld de,data.umpire_settings.control_level		;091a
 	ld bc,32		;091d
 	call sub_cp_ram_vram		;0920
 	ld hl,03ae2h		;0923
-	ld de,0cb4ah		;0926
+	ld de,data.umpire_settings.answer_abc		;0926
 	ld bc,22		;0929
 	call sub_cp_ram_vram		;092c
 	ld hl,03b4ah		;092f
-	ld de,0cb80h		;0932
+	ld de,data.umpire_settings.player_type		;0932
 	ld bc,28		;0935
 	call sub_cp_ram_vram		;0938
 	ld hl,03be2h		;093b
-	ld de,0cb4ah		;093e
+	ld de,data.umpire_settings.answer_abc		;093e
 	ld bc,22		;0941
 	call sub_cp_ram_vram		;0944
 	ld hl,03c86h		;0947
-	ld de,0cb9ch		;094a
+	ld de,data.umpire_settings.computer_level_select		;094a
 	ld bc,42		;094d
 	call sub_cp_ram_vram		;0950
 	ld hl,03d10h		;0953
-	ld de,0cbc6h		;0956
+	ld de,data.umpire_settings.answer_12345		;0956
 	ld bc,34		;0959
 	call sub_cp_ram_vram		;095c
 	call sub_enable_display		;095f

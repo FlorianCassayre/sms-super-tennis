@@ -42,7 +42,7 @@ l09bah:
 l09c7h:
 	ld e,(hl)			;09c7
 	ld d,000h		;09c8
-	ld hl,game_settings		;09ca
+	ld hl,game.settings		;09ca
 	add hl,de			;09cd
 	ld a,e			;09ce
 	cp 003h		;09cf
@@ -72,7 +72,7 @@ l09e6h:
 l09f6h:
 	ret			;09f6
 l09f7h:
-	ld a,(game_settings.control_level)		;09f7
+	ld a,(game.settings.control_level)		;09f7
 	ld (0c4b2h),a		;09fa
 	add a,002h		;09fd
 	ld (0c4b0h),a		;09ff

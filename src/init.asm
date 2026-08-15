@@ -69,24 +69,24 @@ init:
 	ld b,1		;010d
 	call sub_graphics_palette_load		;010f
 	ld de,02000h		;0112
-	ld hl,data_planes_9_0		;0115
+	ld hl,data_planes_font		;0115
 	call sub_rle_decompress_bitplanes_to_vram		;0118
 	ld de,0		;011b
-	ld hl,data_planes_10_0		;011e
+	ld hl,data_planes_player		;011e
 	call sub_rle_decompress_bitplanes_to_vram		;0121
 	ld de,0c600h		;0124
-	ld hl,data_planes_11_0		;0127
+	ld hl,data_planes_ball		;0127
 	call sub_rle_decompress_bitplanes_to_ram		;012a
-	ld de,0c720h		;012d
+	ld de,data.planes_3		;012d
 	ld hl,data_planes_3_0		;0130
 	call sub_rle_decompress_bitplanes_to_ram		;0133
-	ld de,0c76ch		;0136
+	ld de,data.planes_4		;0136
 	ld hl,data_planes_4_0		;0139
 	call sub_rle_decompress_bitplanes_to_ram		;013c
-	ld de,0c84ch		;013f
-	ld hl,data_planes_8_0		;0142
+	ld de,data.umpire_settings		;013f
+	ld hl,data_planes_umpire_settings		;0142
 	call sub_rle_decompress_bitplanes_to_ram		;0145
-	ld de,0cbe8h		;0148
+	ld de,data.planes_5		;0148
 	ld hl,data_planes_5_0		;014b
 	call sub_rle_decompress_bitplanes_to_ram		;014e
 	call sub_graphics_name_fill_blank_tile		;0151

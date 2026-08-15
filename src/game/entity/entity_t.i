@@ -60,7 +60,3 @@
 	ball INSTANCEOF entity_t		; $c300
 	ball_shadow INSTANCEOF entity_t		; $c340
 .ENDST
-
-.ENUM $c200
-	entities INSTANCEOF entities_t		; $c200 $c240 $c280 $c2c0 $c300 $c340
-.ENDE

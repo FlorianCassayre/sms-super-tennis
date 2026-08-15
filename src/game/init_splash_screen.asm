@@ -10,12 +10,12 @@ sub_init_splash_screen:
 	call sub_disable_display		;0ec0
 	call sub_graphics_name_fill_blank_tile		;0ec3
 	ld hl,l2c00h		;0ec6
-	ld de,0c76ch		;0ec9
+	ld de,data.planes_4		;0ec9
 	ld bc,224		;0ecc
 	ld a,001h		;0ecf
 	call sub_graphics_tile_expand_1bpp_ram_to_vdp		;0ed1
 	ld hl,03a8eh		;0ed4
-	ld de,0c720h		;0ed7
+	ld de,data.planes_3		;0ed7
 	ld bc,(2 << 8) | 19		;0eda
 	call sub_load_vram_rect		;0edd
 	xor a			;0ee0

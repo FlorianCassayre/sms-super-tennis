@@ -32,8 +32,3 @@
 	loop_counters DS 4		;17
 	_padding DSB 5		;1b
 .ENDST
-
-.ENUM $de00
-	psg_engine INSTANCEOF audio_psg_engine_t		;de00
-	psg_channel INSTANCEOF audio_psg_channel_t PSG_CHANNELS		;de05 de25 de45 de65 de85 dea5 dec5
-.ENDE

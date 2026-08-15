@@ -21,7 +21,3 @@
 	_unknown_7 DSB 4
 	z_order_array DSB 6	;c1c4
 .ENDST
-
-.ENUM $c000
-	state INSTANCEOF state_t
-.ENDE

@@ -6,13 +6,13 @@ sub_0abd_draw_tennis_court:
 	ld b,32		;0ac7
 	call sub_graphics_palette_load		;0ac9
 	ld de,02600h		;0acc
-	ld hl,data_planes_6_0		;0acf
+	ld hl,data_planes_court		;0acf
 	call sub_rle_decompress_bitplanes_to_vram		;0ad2
-	ld de,03800h		;0ad5
-	ld hl,data_planes_7_2		;0ad8
+	ld de,VDP_NAME_TABLE_ADDRESS_BASE		;0ad5
+	ld hl,data_planes_court_name		;0ad8
 	call sub_rle_decompress_bitplanes_to_vram		;0adb
 	ld de,0		;0ade
-	ld hl,data_planes_10_0		;0ae1
+	ld hl,data_planes_player		;0ae1
 	call sub_rle_decompress_bitplanes_to_vram		;0ae4
 	ld hl,0c100h		;0ae7
 	ld de,0c101h		;0aea

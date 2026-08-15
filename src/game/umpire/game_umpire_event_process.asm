@@ -37,7 +37,7 @@ sub_game_umpire_event_process_0:
 	inc (hl)			;2f21
 	ld hl,03906h		;2f22
 	ld (score.vram_dest),hl		;2f25
-	ld hl,0ca86h		;2f28
+	ld hl,data.umpire_settings.umpire_in		;2f28
 	ld (score.vram_src),hl		;2f2b
 	ld h,004h		;2f2e
 	ld l,004h		;2f30
@@ -58,7 +58,7 @@ sub_game_umpire_event_process_1:
 	inc (hl)			;2f4f
 	ld hl,03906h		;2f50
 	ld (score.vram_dest),hl		;2f53
-	ld hl,0ca5eh		;2f56
+	ld hl,data.umpire_settings.umpire_out		;2f56
 	ld (score.vram_src),hl		;2f59
 	ld h,004h		;2f5c
 	ld l,005h		;2f5e
@@ -79,7 +79,7 @@ sub_game_umpire_event_process_3:
 	inc (hl)			;2f7d
 	ld hl,03906h		;2f7e
 	ld (score.vram_dest),hl		;2f81
-	ld hl,0ca36h		;2f84
+	ld hl,data.umpire_settings.umpire_net		;2f84
 	ld (score.vram_src),hl		;2f87
 	ld h,004h		;2f8a
 	ld l,005h		;2f8c
@@ -97,7 +97,7 @@ sub_game_umpire_event_process_2:
 	jp nc,l2fc3h		;2fa5
 	ld hl,03904h		;2fa8
 	ld (score.vram_dest),hl		;2fab
-	ld hl,0c9feh		;2fae
+	ld hl,data.umpire_settings.umpire_fault		;2fae
 	ld (score.vram_src),hl		;2fb1
 	ld h,004h		;2fb4
 	ld l,007h		;2fb6
@@ -116,7 +116,7 @@ l2fc3h:
 	inc (hl)			;2fce
 	ld hl,038c4h		;2fcf
 	ld (score.vram_dest),hl		;2fd2
-	ld hl,0c980h		;2fd5
+	ld hl,data.umpire_settings.umpire_double_fault		;2fd5
 	ld (score.vram_src),hl		;2fd8
 	ld h,005h		;2fdb
 	ld l,007h		;2fdd
