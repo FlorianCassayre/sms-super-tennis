@@ -10,7 +10,7 @@ l160bh:
 	ld hl,0d0e8h		;1614
 	add hl,de			;1617
 	ld a,(hl)			;1618
-	ld (0c51ah),a		;1619
+	ld (ball.deflection_temp),a		;1619
 	ld a,(ball.y_pos + 1)		;161c
 	sub (hl)			;161f
 	jr nc,+		;1620
@@ -54,7 +54,7 @@ l160bh:
 	ld hl,(ball.x_pos)		;1660
 	add hl,de			;1663
 	push hl			;1664
-	ld a,(0c51ah)		;1665
+	ld a,(ball.deflection_temp)		;1665
 	ld e,a			;1668
 	ld d,000h		;1669
 	ld hl,0cbe8h		;166b

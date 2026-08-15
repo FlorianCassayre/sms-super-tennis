@@ -12,14 +12,14 @@ sub_game_racket_process_swing_contact:
 	ret z			;2c55
 	bit 7,(ix + entity_t.racket_contact_flag)		;2c56
 	ret z			;2c5a
-	ld a,(ix + entity_t.type)		;2c5b
+	ld a,(ix + entity_t.state_index)		;2c5b
 	and 07fh		;2c5e
 	cp 005h		;2c60
 	jr z,+		;2c62
-	ld a,(0c040h)		;2c64
+	ld a,(game.match_flags)		;2c64
 	bit 0,a		;2c67
 	jr z,+		;2c69
-	ld a,(0c041h)		;2c6b
+	ld a,(game.current_player)		;2c6b
 	cp (ix + entity_t.id)		;2c6e
 	jr nz,+		;2c71
 	ld hl,0c000h		;2c73
@@ -28,10 +28,10 @@ sub_game_racket_process_swing_contact:
 +:
 	res 7,(ix + entity_t.racket_contact_flag)		;2c79
 	ld a,(ix + entity_t.swing_type_id)		;2c7d
-	ld (0c302h),a		;2c80
+	ld (entities.ball.state_index),a		;2c80
 	ld (0c401h),a		;2c83
 	ld a,b			;2c86
-	ld b,(ix+01bh)		;2c87
+	ld b,(ix + entity_t.swing_duration)		;2c87
 	call sub_div_a_b_c		;2c8a
 	ld e,c			;2c8d
 	ld a,(ix + entity_t.x_div_pos)		;2c8e

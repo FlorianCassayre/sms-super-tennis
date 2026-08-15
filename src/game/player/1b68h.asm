@@ -1,7 +1,7 @@
 sub_1b68h:
-	bit 7,(ix + entity_t.type)		;1b68
+	bit 7,(ix + entity_t.state_index)		;1b68
 	jr nz,l1b7eh		;1b6c
-	set 7,(ix + entity_t.type)		;1b6e
+	set 7,(ix + entity_t.state_index)		;1b6e
 	ld (ix+022h),008h		;1b72
 	ld (ix+023h),0ffh		;1b76
 	ld (ix+020h),000h		;1b7a
@@ -17,7 +17,7 @@ l1b7eh:
 	ld a,014h		;1b91
 	ld (ix+030h),001h		;1b93
 l1b97h:
-	ld (ix + entity_t.type),a		;1b97
+	ld (ix + entity_t.state_index),a		;1b97
 	xor a			;1b9a
 	ld (0c400h),a		;1b9b
 	ret			;1b9e

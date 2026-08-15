@@ -2,18 +2,18 @@ sub_game_gui_win_special:
 	ld a,0d0h		;3607
 	ld (0c140h),a		;3609
 	ld (0c100h),a		;360c
-	ld a,(0c089h)		;360f
+	ld a,(game.sound_wait_flag)		;360f
 	or 080h		;3612
-	ld (0c089h),a		;3614
+	ld (game.sound_wait_flag),a		;3614
 	call sub_audio_event_wait		;3617
 	ld hl,03e00h		;361a
-	ld (0c4a8h),hl		;361d
+	ld (score.vram_dest),hl		;361d
 	ld a,000h		;3620
-	ld (0c4ach),a		;3622
+	ld (score.box_dimensions),a		;3622
 	ld b,018h		;3625
 l3627h:
 	push bc			;3627
-	ld hl,(0c4a8h)		;3628
+	ld hl,(score.vram_dest)		;3628
 	ld de,l3706h		;362b
 	ld bc,32		;362e
 	di			;3631
@@ -22,10 +22,10 @@ l3627h:
 	ld b,008h		;3636
 -:
 	push bc			;3638
-	ld a,(0c4ach)		;3639
+	ld a,(score.box_dimensions)		;3639
 	inc a			;363c
 	di			;363d
-	ld (0c4ach),a		;363e
+	ld (score.box_dimensions),a		;363e
 	out (O_VDP_CTRL),a		;3641
 	ld a,089h		;3643
 	out (O_VDP_CTRL),a		;3645
@@ -33,7 +33,7 @@ l3627h:
 	call sub_audio_event_wait		;3648
 	pop bc			;364b
 	djnz -		;364c
-	ld hl,(0c4a8h)		;364e
+	ld hl,(score.vram_dest)		;364e
 	ld de,040h		;3651
 	add hl,de			;3654
 	push hl			;3655
@@ -46,7 +46,7 @@ l3627h:
 	push hl			;3662
 +:
 	pop hl			;3663
-	ld (0c4a8h),hl		;3664
+	ld (score.vram_dest),hl		;3664
 	pop bc			;3667
 	djnz l3627h		;3668
 	xor a			;366a
@@ -84,25 +84,25 @@ l3627h:
 	ld a,040h		;36bc
 	call sub_wait_a_frames		;36be
 	ld hl,03b60h		;36c1
-	ld de,l3777h_palette		;36c4
+	ld de,game_gui_win_special_tile_eye_1		;36c4
 	ld bc,4		;36c7
 	call sub_cp_ram_vram		;36ca
 	ld a,005h		;36cd
 	call sub_wait_a_frames		;36cf
 	ld hl,03b60h		;36d2
-	ld de,l377bh_palette		;36d5
+	ld de,game_gui_win_special_tile_eye_2		;36d5
 	ld bc,4		;36d8
 	call sub_cp_ram_vram		;36db
 	ld a,028h		;36de
 	call sub_wait_a_frames		;36e0
 	ld hl,03b60h		;36e3
-	ld de,l3777h_palette		;36e6
+	ld de,game_gui_win_special_tile_eye_1		;36e6
 	ld bc,4		;36e9
 	call sub_cp_ram_vram		;36ec
 	ld a,005h		;36ef
 	call sub_wait_a_frames		;36f1
 	ld hl,03b60h		;36f4
-	ld de,l377fh_palette		;36f7
+	ld de,game_gui_win_special_tile_eye_3		;36f7
 	ld bc,4		;36fa
 	call sub_cp_ram_vram		;36fd
 	ld a,060h		;3700

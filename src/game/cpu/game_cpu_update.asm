@@ -65,7 +65,7 @@ sub_cpu_state_track_ball:
 @l1e9bh:
 	bit 0,(ix + entity_t.id)		;1e9b
 	jr nz,@l1eb3h		;1e9f
-	ld a,(0c30bh)		;1ea1
+	ld a,(entities.ball.y_pos + 1)		;1ea1
 	add a,008h		;1ea4
 	ld e,(ix + entity_t.y_pos + 1)		;1ea6
 	sub e			;1ea9
@@ -74,7 +74,7 @@ sub_cpu_state_track_ball:
 	jr c,@l1ee8h		;1eae
 	jp @l1ec2h		;1eb0
 @l1eb3h:
-	ld a,(0c30bh)		;1eb3
+	ld a,(entities.ball.y_pos + 1)		;1eb3
 	sub 008h		;1eb6
 	ld e,(ix + entity_t.y_pos + 1)		;1eb8
 	sub e			;1ebb
@@ -179,7 +179,7 @@ sub_cpu_state_net:
 @l1f7fh:
 	bit 0,(ix + entity_t.id)		;1f7f
 	jr nz,@l1f97h		;1f83
-	ld a,(0c30bh)		;1f85
+	ld a,(entities.ball.y_pos + 1)		;1f85
 	add a,008h		;1f88
 	ld e,(ix + entity_t.y_pos + 1)		;1f8a
 	sub e			;1f8d
@@ -188,7 +188,7 @@ sub_cpu_state_net:
 	jr nc,@l1fe0h		;1f92
 	jp @l1fa6h		;1f94
 @l1f97h:
-	ld a,(0c30bh)		;1f97
+	ld a,(entities.ball.y_pos + 1)		;1f97
 	sub 008h		;1f9a
 	ld e,(ix + entity_t.y_pos + 1)		;1f9c
 	sub e			;1f9f

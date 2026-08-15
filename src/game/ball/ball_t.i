@@ -10,9 +10,11 @@
 	_unknown_1 DSB 6		; $c510
 	racket_contact_flag DB		; $c516
 	bounces_count DB		; $c517
-	foul DB		; $c518
+	foul_type DB		; $c518
 	foul_triggered_flag DB ; $c519
-	_unknown_2 DSB 3	; $c51a
+	deflection_temp DB	; $c51a
+	tie_break_switch_sides DB	; $c51b
+	tie_break_saved_server DB	; $c51c
 	out_flag DB	; $c51d
 .ENDST
 

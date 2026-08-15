@@ -1,5 +1,5 @@
 sub_221eh_collision_broad:
-	ld a,(ball.foul)		;221e
+	ld a,(ball.foul_type)		;221e
 	and a			;2221
 	ld a,0		;2222
 	ret nz			;2224

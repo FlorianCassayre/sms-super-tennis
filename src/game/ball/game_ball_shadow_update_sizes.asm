@@ -1,4 +1,4 @@
-sub_065ch:
+sub_game_ball_shadow_update_sizes:
 	ld hl,l06bfh		;065c
 	ld a,(0c509h)		;065f
 	cp 050h		;0662
@@ -18,7 +18,7 @@ l0672h:
 	ld e,a			;0678
 	ld d,000h		;0679
 	add hl,de			;067b
-	ld a,(0c089h)		;067c
+	ld a,(game.sound_wait_flag)		;067c
 	ld c,a			;067f
 	ld a,(0c510h)		;0680
 	cp (hl)			;0683
@@ -36,7 +36,7 @@ l068ch:
 	set 6,c		;0697
 l0699h:
 	ld a,c			;0699
-	ld (0c089h),a		;069a
+	ld (game.sound_wait_flag),a		;069a
 	ld de,l06ffh		;069d
 	ld a,(0c510h)		;06a0
 	add a,a			;06a3

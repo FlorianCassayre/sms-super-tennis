@@ -6,8 +6,8 @@ sub_game_umpire_announcement:
 	jr z,l0da4h		;0d8b
 	dec a			;0d8d
 	jr z,l0d9ah		;0d8e
-	ld a,(0c041h)		;0d90
-	ld (0c042h),a		;0d93
+	ld a,(game.current_player)		;0d90
+	ld (game.last_hitter),a		;0d93
 	ld c,000h		;0d96
 	jr l0dc0h		;0d98
 l0d9ah:
@@ -28,17 +28,17 @@ l0da4h:
 	jr l0dc0h		;0db3
 l0db5h:
 	ld c,002h		;0db5
-	ld a,(0c040h)		;0db7
+	ld a,(game.match_flags)		;0db7
 	bit 0,a		;0dba
 	jr nz,l0dc0h		;0dbc
 	ld c,003h		;0dbe
 l0dc0h:
-	ld a,(0c042h)		;0dc0
+	ld a,(game.last_hitter)		;0dc0
 	ld e,a			;0dc3
 	ld d,000h		;0dc4
 	ld hl,l0e00h		;0dc6
 	add hl,de			;0dc9
 	ld a,(hl)			;0dca
 	or c			;0dcb
-	ld (0c480h),a		;0dcc
+	ld (score.umpire_event),a		;0dcc
 	ret			;0dcf

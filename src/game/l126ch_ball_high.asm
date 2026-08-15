@@ -34,7 +34,7 @@ l1290h:
 	ld c,(hl)			;129c
 	inc hl			;129d
 	ld b,(hl)			;129e
-	ld a,(0c042h)		;129f
+	ld a,(game.last_hitter)		;129f
 	and 001h		;12a2
 	jr z,l12adh		;12a4
 	xor a			;12a6

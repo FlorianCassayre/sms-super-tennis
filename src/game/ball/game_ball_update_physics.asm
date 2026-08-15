@@ -30,7 +30,7 @@ sub_game_ball_update_physics:
 	ld a,(hl)			;14f1
 	dec a			;14f2
 	jr nz,@check_second_bounce		;14f3
-	call sub_menu_update_ball_out_of_bounds		;14f5
+	call sub_game_ball_check_out_of_bounds_bounce		;14f5
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_bounce		;14f8
 	ld (psg_engine.track_request_id),a		;14fa
 	jr @update_horizontal_axes		;14fd
@@ -39,7 +39,7 @@ sub_game_ball_update_physics:
 	jr nz,@update_horizontal_axes		;1500
 	ld hl,state.match_state_flags		;1502
 	res 0,(hl)		;1505
-	ld hl,ball.foul		;1507
+	ld hl,ball.foul_type		;1507
 	ld a,(hl)			;150a
 	or a			;150b
 	ret nz			;150c
@@ -69,5 +69,5 @@ sub_game_ball_update_physics:
 	ld c,002h		;1541
 @store_y_sector:
 	ld a,c			;1543
-	ld (0c48ch),a		;1544
+	ld (score.ball_y_sector),a		;1544
 	ret			;1547

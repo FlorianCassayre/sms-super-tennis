@@ -4,7 +4,7 @@ sub_player_movement:
 	ld hl,BOUND_X_MIN_NEAR_STD		;26cd
 	ld b,TYPE_HORIZ_ONLY_1		;26d0
 	ld c,TYPE_HORIZ_ONLY_2		;26d2
-	ld a,(ix + entity_t.type)		;26d4
+	ld a,(ix + entity_t.state_index)		;26d4
 	and ENT_TYPE_MASK		;26d7
 	cp b			;26d9
 	jr z,+		;26da
@@ -51,7 +51,7 @@ l2704h:
 	ld hl,BOUND_X_MAX_NEAR_STD		;2729
 	ld b,TYPE_HORIZ_ONLY_1		;272c
 	ld c,TYPE_HORIZ_ONLY_2		;272e
-	ld a,(ix + entity_t.type)		;2730
+	ld a,(ix + entity_t.state_index)		;2730
 	and ENT_TYPE_MASK		;2733
 	cp b			;2735
 	jr z,+		;2736
@@ -104,7 +104,7 @@ l2785h:
 	ld hl,BOUND_Y_MIN_NEAR		;2788
 	ld b,TYPE_HORIZ_ONLY_1		;278b
 	ld c,TYPE_HORIZ_ONLY_2		;278d
-	ld a,(ix + entity_t.type)		;278f
+	ld a,(ix + entity_t.state_index)		;278f
 	and ENT_TYPE_MASK		;2792
 	cp b			;2794
 	jr z,l27e0h		;2795

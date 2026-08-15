@@ -38,7 +38,7 @@ l1308h:
 	ld c,(hl)			;1314
 	inc hl			;1315
 	ld b,(hl)			;1316
-	ld a,(0c042h)		;1317
+	ld a,(game.last_hitter)		;1317
 	and 001h		;131a
 	jr z,l1325h		;131c
 	xor a			;131e

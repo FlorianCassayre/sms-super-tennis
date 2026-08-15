@@ -36,7 +36,7 @@ isr_vblank_update:
 	or a			;019f
 	jp nz,l0224h		;01a0
 	ld c,0beh		;01a3
-	ld a,(0c089h)		;01a5
+	ld a,(game.sound_wait_flag)		;01a5
 	rlca			;01a8
 	jp nc,l022fh		;01a9
 	ld hl,01fc0h		;01ac
@@ -60,7 +60,7 @@ isr_vblank_update:
 	ld b,080h		;01dc
 	otir		;01de
 	xor a			;01e0
-	ld (0c089h),a		;01e1
+	ld (game.sound_wait_flag),a		;01e1
 l01e4h:
 	call sub_3543h		;01e4
 	ld c,00ch		;01e7

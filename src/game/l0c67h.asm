@@ -18,14 +18,14 @@ l0c6bh:
 	ld hl,00078h		;0c82
 	ld (game.pause_counter),hl		;0c85
 	call sub_game_umpire_announcement		;0c88
-	jp l2ee1h_dispatch		;0c8b
+	jp sub_game_umpire_event_process		;0c8b
 l0c8eh:
 	call sub_decrement_pause_counter		;0c8e
 	jp nz,l0b1eh_update_ball		;0c91
 	ld a,002h		;0c94
 	ld (0c007h),a		;0c96
 l0c99h:
-	ld a,(0c040h)		;0c99
+	ld a,(game.match_flags)		;0c99
 	bit 7,a		;0c9c
 	jp nz,l0b1eh_update_ball		;0c9e
 	ld hl,0c000h		;0ca1
@@ -53,36 +53,36 @@ l0cd1h:
 	ld hl,0c100h		;0cd1
 	ld (hl),0d0h		;0cd4
 	ld a,080h		;0cd6
-	ld (0c089h),a		;0cd8
+	ld (game.sound_wait_flag),a		;0cd8
 	xor a			;0cdb
-	ld (entities.player.1.bottom.type),a		;0cdc
-	ld (entities.player.1.top.type),a		;0cdf
-	ld (entities.player.2.bottom.type),a		;0ce2
-	ld (entities.player.2.top.type),a		;0ce5
-	ld (0c302h),a		;0ce8
-	ld (0c302h),a		;0ceb
+	ld (entities.player.1.bottom.state_index),a		;0cdc
+	ld (entities.player.1.top.state_index),a		;0cdf
+	ld (entities.player.2.bottom.state_index),a		;0ce2
+	ld (entities.player.2.top.state_index),a		;0ce5
+	ld (entities.ball.state_index),a		;0ce8
+	ld (entities.ball.state_index),a		;0ceb
 	ld a,004h		;0cee
 	ld (0c007h),a		;0cf0
 	call sub_update_set_scores		;0cf3
 	ld a,(score.tie_break)		;0cf6
 	bit 0,a		;0cf9
 	ret z			;0cfb
-	ld a,(0c045h)		;0cfc
-	ld (0c51ch),a		;0cff
+	ld a,(game.current_server)		;0cfc
+	ld (ball.tie_break_saved_server),a		;0cff
 	xor a			;0d02
-	ld (0c51bh),a		;0d03
+	ld (ball.tie_break_switch_sides),a		;0d03
 	ret			;0d06
 l0d07h:
 	ld a,(score.game_lost)		;0d07
 	bit 0,a		;0d0a
 	jr z,l0d1ah		;0d0c
-	ld a,(0c51ch)		;0d0e
-	ld (0c045h),a		;0d11
+	ld a,(ball.tie_break_saved_server)		;0d0e
+	ld (game.current_server),a		;0d11
 	xor a			;0d14
 	ld (score.tie_break),a		;0d15
 	jr l0cd1h		;0d18
 l0d1ah:
-	ld hl,0c51bh		;0d1a
+	ld hl,ball.tie_break_switch_sides		;0d1a
 	ld a,(hl)			;0d1d
 	or a			;0d1e
 	jr nz,l0d6fh		;0d1f
@@ -100,7 +100,7 @@ check_game_ended:
 	ld (game.pause_counter),hl		;0d38
 	jp sub_draw_game_end		;0d3b
 l0d3eh:
-	ld hl,0c089h		;0d3e
+	ld hl,game.sound_wait_flag		;0d3e
 	set 7,(hl)		;0d41
 	call sub_decrement_pause_counter		;0d43
 	ret nz			;0d46
@@ -111,8 +111,8 @@ l0d47h:
 	ld (hl),080h		;0d4e
 	inc hl			;0d50
 	ld (hl),a			;0d51
-	ld hl,0c040h		;0d52
-	ld de,0c041h		;0d55
+	ld hl,game.match_flags		;0d52
+	ld de,game.current_player		;0d55
 	ld bc,00529h		;0d58
 	ld (hl),a			;0d5b
 	ldir		;0d5c
@@ -132,7 +132,7 @@ l0d6bh:
 l0d6fh:
 	ld a,004h		;0d6f
 l0d71h:
-	ld (0c043h),a		;0d71
+	ld (game.match_progression_state),a		;0d71
 	ld a,(0c000h)		;0d74
 	bit 3,a		;0d77
 	jr nz,l0d47h		;0d79

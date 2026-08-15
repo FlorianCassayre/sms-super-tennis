@@ -1,4 +1,4 @@
-sub_1d89h:
+player_top_action_state_swinging:
 	ld a,(ix+025h)		;1d89
 	bit 7,a		;1d8c
 	jr nz,l1dffh		;1d8e

@@ -1,9 +1,9 @@
-sub_23ffh:
+sub_game_player_init_bottom:
 	bit 1,(ix+001h)		;23ff
-	ld hl,entities.player.1.bottom.type		;2403
+	ld hl,entities.player.1.bottom.state_index		;2403
 	ld e,004h		;2406
 	jr nz,l240fh		;2408
-	ld hl,entities.player.2.bottom.type		;240a
+	ld hl,entities.player.2.bottom.state_index		;240a
 	ld e,000h		;240d
 l240fh:
 	ld a,(hl)			;240f

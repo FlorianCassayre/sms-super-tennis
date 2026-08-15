@@ -49,8 +49,8 @@ init:
 	ld (0c003h),a		;00db
 	ld (0c000h),a		;00de
 	ld (0c004h),a		;00e1
-	ld hl,0c040h		;00e4
-	ld de,0c041h		;00e7
+	ld hl,game.match_flags		;00e4
+	ld de,game.current_player		;00e7
 	ld bc,01fbfh		;00ea
 	ld (hl),000h		;00ed
 	ldir		;00ef

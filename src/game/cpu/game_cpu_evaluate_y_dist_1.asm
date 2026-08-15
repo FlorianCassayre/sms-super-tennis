@@ -21,7 +21,7 @@ sub_game_cpu_evaluate_y_dist_1:
 	add a,e			;2346
 	ld e,a			;2347
 @check_y_dist:
-	ld a,(0c30bh)		;2348
+	ld a,(entities.ball.y_pos + 1)		;2348
 	sub e			;234b
 	jr nc,@check_cpu_state		;234c
 	neg		;234e

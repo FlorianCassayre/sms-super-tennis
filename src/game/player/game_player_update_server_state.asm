@@ -1,8 +1,8 @@
 sub_game_player_update_server_state:
-	ld a,(ix + entity_t.type)		;1a5f
+	ld a,(ix + entity_t.state_index)		;1a5f
 	bit 7,a		;1a62
 	jr nz,@update_loop		;1a64
-	set 7,(ix + entity_t.type)		;1a66
+	set 7,(ix + entity_t.state_index)		;1a66
 	cp 003h		;1a6a
 	jr nz,@skip_position_lookup		;1a6c
 	bit 0,(ix + entity_t.id)		;1a6e
@@ -55,7 +55,7 @@ sub_game_player_update_server_state:
 @check_timer:
 	call sub_1b9fh_decrement_timer		;1ad7
 	jp nz,sub_game_player_apply_movement		;1ada
-	ld (ix + entity_t.type),004h		;1add
+	ld (ix + entity_t.state_index),004h		;1add
 	ret			;1ae1
 
 serve_start_coordinates:

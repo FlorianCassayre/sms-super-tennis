@@ -37,7 +37,7 @@ sub_game_player_update_animation:
 	ld d,(hl)			;2aa4
 	ex de,hl			;2aa5
 	ld a,(hl)			;2aa6
-	ld (ix+009h),a		;2aa7
+	ld (ix + entity_t.animation_frame_counter),a		;2aa7
 	inc hl			;2aaa
 	ld e,(hl)			;2aab
 	ld a,(0c04ah)		;2aac
@@ -52,15 +52,15 @@ sub_game_player_update_animation:
 	ld (ix + entity_t.time_before_serve),a		;2aba
 	inc hl			;2abd
 	ld a,(hl)			;2abe
-	ld (ix+01bh),a		;2abf
+	ld (ix + entity_t.swing_duration),a		;2abf
 	inc hl			;2ac2
 	ld a,(hl)			;2ac3
 	ld (ix+01eh),a		;2ac4
 	inc hl			;2ac7
-	ld (ix + entity_t.maybe_sprite_id),l		;2ac8
+	ld (ix + entity_t.animation_pointer),l		;2ac8
 	ld (ix+02ch),h		;2acb
 	ld a,(hl)			;2ace
-	ld (ix+004h),a		;2acf
+	ld (ix + entity_t.sprite_id),a		;2acf
 	inc hl			;2ad2
 	ld a,(hl)			;2ad3
 	sub d			;2ad4
@@ -69,7 +69,7 @@ sub_game_player_update_animation:
 +:
 	ld a,001h		;2ad9
 ++:
-	ld (ix+008h),a		;2adb
+	ld (ix + entity_t.animation_timer),a		;2adb
 	ret			;2ade
 +++:
 	bit 7,(ix + entity_t.state_flags)		;2adf
@@ -81,21 +81,21 @@ sub_game_player_update_animation:
 +:
 	dec (ix + entity_t.state_flags)		;2aef
 ++:
-	dec (ix+008h)		;2af2
+	dec (ix + entity_t.animation_timer)		;2af2
 	ret nz			;2af5
-	dec (ix+009h)		;2af6
+	dec (ix + entity_t.animation_frame_counter)		;2af6
 	jr nz,+		;2af9
 	ld (ix + entity_t.animation_flags_or_frame),000h		;2afb
 	ret			;2aff
 +:
-	ld l,(ix + entity_t.maybe_sprite_id)		;2b00
+	ld l,(ix + entity_t.animation_pointer)		;2b00
 	ld h,(ix+02ch)		;2b03
 	inc hl			;2b06
 	inc hl			;2b07
-	ld (ix + entity_t.maybe_sprite_id),l		;2b08
+	ld (ix + entity_t.animation_pointer),l		;2b08
 	ld (ix+02ch),h		;2b0b
 	ld a,(hl)			;2b0e
-	ld (ix+004h),a		;2b0f
+	ld (ix + entity_t.sprite_id),a		;2b0f
 	inc hl			;2b12
 	ld a,(hl)			;2b13
 	ld e,a			;2b14
@@ -110,7 +110,7 @@ sub_game_player_update_animation:
 +:
 	ld a,001h		;2b22
 ++:
-	ld (ix+008h),a		;2b24
+	ld (ix + entity_t.animation_timer),a		;2b24
 	ld a,(ix + entity_t.state_flags)		;2b27
 	sub d			;2b2a
 	ld (ix + entity_t.state_flags),a		;2b2b

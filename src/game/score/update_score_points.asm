@@ -103,17 +103,17 @@ sub_update_score_points:
 	call @sub_315eh		;30b3
 @finish_score_update:
 	xor a			;30b6
-	ld (0c4a6h),a		;30b7
+	ld (score.announcement_step),a		;30b7
 	ld (0c49dh),a		;30ba
 	call sub_update_announcement_timer		;30bd
 	xor a			;30c0
-	ld (score.announcement),a		;30c1
-	ld (0c49eh),a		;30c4
+	ld (score.announcement_type),a		;30c1
+	ld (score.set_update_state),a		;30c4
 	ld a,001h		;30c7
 	ld (0c49dh),a		;30c9
-	ld a,(0c089h)		;30cc
+	ld a,(game.sound_wait_flag)		;30cc
 	or 080h		;30cf
-	ld (0c089h),a		;30d1
+	ld (game.sound_wait_flag),a		;30d1
 	ret			;30d4
 @special_score_state:
 	ld hl,score.point.bottom		;30d5
@@ -171,27 +171,27 @@ sub_update_score_points:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_9a		;313c
 	ld (psg_engine.track_request_id),a		;313e
 	ld hl,03904h		;3141
-	ld (0c4a8h),hl		;3144
+	ld (score.vram_dest),hl		;3144
 	ld hl,0c9c6h		;3147
-	ld (0c4aah),hl		;314a
+	ld (score.vram_src),hl		;314a
 	ld h,004h		;314d
 	ld l,007h		;314f
-	ld (0c4ach),hl		;3151
+	ld (score.box_dimensions),hl		;3151
 	ld a,001h		;3154
-	ld (0c4a7h),a		;3156
+	ld (score.gui_update_flag),a		;3156
 	xor a			;3159
 	ld (0c4afh),a		;315a
 	ret			;315d
 @sub_315eh:
 	ld hl,038c4h		;315e
-	ld (0c4a8h),hl		;3161
+	ld (score.vram_dest),hl		;3161
 	ld hl,0caa6h		;3164
-	ld (0c4aah),hl		;3167
+	ld (score.vram_src),hl		;3167
 	ld h,005h		;316a
 	ld l,007h		;316c
-	ld (0c4ach),hl		;316e
+	ld (score.box_dimensions),hl		;316e
 	ld a,001h		;3171
-	ld (0c4a7h),a		;3173
+	ld (score.gui_update_flag),a		;3173
 	ret			;3176
 @set_winner:
 	ld (score.winner_player),a		;3177

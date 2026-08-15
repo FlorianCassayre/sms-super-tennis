@@ -5,13 +5,13 @@ sub_update_set_scores:
 	dec a			;31bf
 	ld (score.delay_timer),a		;31c0
 l31c3h:
-	ld a,(0c089h)		;31c3
+	ld a,(game.sound_wait_flag)		;31c3
 	or 080h		;31c6
-	ld (0c089h),a		;31c8
+	ld (game.sound_wait_flag),a		;31c8
 	call sub_audio_event_wait		;31cb
 	jp sub_update_set_scores		;31ce
 l31d1h:
-	ld a,(0c49eh)		;31d1
+	ld a,(score.set_update_state)		;31d1
 	cp 001h		;31d4
 	jr c,l31e5h		;31d6
 	jp z,l3205h		;31d8
@@ -21,16 +21,16 @@ l31d1h:
 	jr sub_update_set_scores		;31e3
 l31e5h:
 	ld hl,03b54h		;31e5
-	ld (0c4a8h),hl		;31e8
+	ld (score.vram_dest),hl		;31e8
 	ld hl,0c84ch		;31eb
-	ld (0c4aah),hl		;31ee
+	ld (score.vram_src),hl		;31ee
 	ld h,7		;31f1
 	ld l,00bh		;31f3
-	ld (0c4ach),hl		;31f5
+	ld (score.box_dimensions),hl		;31f5
 	ld a,001h		;31f8
-	ld (0c4a7h),a		;31fa
+	ld (score.gui_update_flag),a		;31fa
 	ld a,001h		;31fd
-	ld (0c49eh),a		;31ff
+	ld (score.set_update_state),a		;31ff
 	jp l31c3h		;3202
 l3205h:
 	ld a,(score.winner_player)		;3205
@@ -64,11 +64,11 @@ l322fh:
 l3236h:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_set_lost		;3236
 	ld (psg_engine.track_request_id),a		;3238
-	ld a,(0c499h)		;323b
+	ld a,(score.sets_won_top)		;323b
 	inc a			;323e
-	ld (0c499h),a		;323f
+	ld (score.sets_won_top),a		;323f
 	ld a,001h		;3242
-	ld (0c4aeh),a		;3244
+	ld (score.advance_set_flag),a		;3244
 	jr l3276h		;3247
 l3249h:
 	inc hl			;3249
@@ -91,14 +91,14 @@ l325eh:
 l3265h:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_set_won		;3265
 	ld (psg_engine.track_request_id),a		;3267
-	ld a,(0c49ah)		;326a
+	ld a,(score.sets_won_bottom)		;326a
 	inc a			;326d
-	ld (0c49ah),a		;326e
+	ld (score.sets_won_bottom),a		;326e
 	ld a,001h		;3271
-	ld (0c4aeh),a		;3273
+	ld (score.advance_set_flag),a		;3273
 l3276h:
-	ld (0c4a8h),hl		;3276
-	ld (0c4aah),de		;3279
+	ld (score.vram_dest),hl		;3276
+	ld (score.vram_src),de		;3279
 	ld hl,score.set		;327d
 	push hl			;3280
 	ld e,(hl)			;3281
@@ -158,13 +158,13 @@ l3276h:
 l32ebh:
 	pop hl			;32eb
 	ld hl,(score.blinking_set_vram_addr)		;32ec
-	ld de,(0c4aah)		;32ef
+	ld de,(score.vram_src)		;32ef
 	add hl,de			;32f3
 	ld (score.blinking_set_vram_addr),hl		;32f4
 	xor a			;32f7
 	ld (score.blinking_set_frame_counter),a		;32f8
 	ld a,002h		;32fb
-	ld (0c49eh),a		;32fd
+	ld (score.set_update_state),a		;32fd
 	jp l31c3h		;3300
 l3303h:
 	ld a,(score.blinking_set_frame_counter)		;3303
@@ -174,7 +174,7 @@ l3303h:
 	ld de,1		;330c
 	jr l3318h_write_vdp_word		;330f
 l3311h:
-	ld hl,(score.winning_set_address)		;3311
+	ld hl,(score.vram_dest)		;3311
 	ld d,(hl)			;3314
 	inc d			;3315 ; Because ASCII_ZERO & $ff == $01
 	ld e,ASCII_ZERO >> 8		;3316
@@ -207,20 +207,20 @@ l3342h:
 	xor a			;3342
 	ld (score.blinking_set_frame_counter),a		;3343
 	ld a,003h		;3346
-	ld (0c49eh),a		;3348
+	ld (score.set_update_state),a		;3348
 	ld a,080h		;334b
 	ld (score.delay_timer),a		;334d
 	jp l31c3h		;3350
 l3353h:
 	ld hl,03b54h		;3353
-	ld (0c4a8h),hl		;3356
+	ld (score.vram_dest),hl		;3356
 	ld hl,0c8e6h		;3359
-	ld (0c4aah),hl		;335c
+	ld (score.vram_src),hl		;335c
 	ld h,007h		;335f
 	ld l,00bh		;3361
-	ld (0c4ach),hl		;3363
+	ld (score.box_dimensions),hl		;3363
 	ld a,001h		;3366
-	ld (0c4a7h),a		;3368
+	ld (score.gui_update_flag),a		;3368
 	ld hl,score.set		;336b
 	xor a			;336e
 	ld a,(score.set_current_index)		;336f
@@ -236,17 +236,17 @@ l3353h:
 	cp 006h		;337e
 	jr z,l33a4h		;3380
 l3382h:
-	ld a,(0c4aeh)		;3382
+	ld a,(score.advance_set_flag)		;3382
 	cp 000h		;3385
 	jr z,l33b1h		;3387
 	xor a			;3389
-	ld (0c4aeh),a		;338a
+	ld (score.advance_set_flag),a		;338a
 	ld hl,score.set_current_index		;338d
 	inc (hl)			;3390
-	ld a,(0c499h)		;3391
+	ld a,(score.sets_won_top)		;3391
 	cp 002h		;3394
 	jp nc,l33ach		;3396
-	ld a,(0c49ah)		;3399
+	ld a,(score.sets_won_bottom)		;3399
 	cp 002h		;339c
 	jp nc,l33ach		;339e
 	jp l33b1h		;33a1

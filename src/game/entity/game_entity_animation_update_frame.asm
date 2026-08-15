@@ -1,5 +1,5 @@
 sub_game_entity_animation_update_frame:
-	ld a,(ix+004h)		;0642
+	ld a,(ix + entity_t.sprite_id)		;0642
 	add a,a			;0645
 	ld e,a			;0646
 	ld d,000h		;0647

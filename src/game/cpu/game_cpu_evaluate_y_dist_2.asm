@@ -10,7 +10,7 @@ sub_game_cpu_evaluate_y_dist_2:
 	and a			;23bb
 	jr nz,l23fbh		;23bc
 l23beh:
-	ld a,(0c30bh)		;23be
+	ld a,(entities.ball.y_pos + 1)		;23be
 	ld e,a			;23c1
 	ld a,(ix+00bh)		;23c2
 	sub e			;23c5

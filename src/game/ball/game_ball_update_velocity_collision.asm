@@ -62,7 +62,7 @@ sub_game_ball_update_velocity_collision:
 	or a			;1720
 	jr nz,@calc_net_z_bounce		;1721
 	ld a,001h		;1723
-	ld (ball.foul),a		;1725
+	ld (ball.foul_type),a		;1725
 @calc_net_z_bounce:
 	ld hl,(ball.z_vel)		;1728
 	push hl			;172b
@@ -85,7 +85,7 @@ sub_game_ball_update_velocity_collision:
 	or a			;1749
 	jr nz,@reverse_y_and_end_play		;174a
 	ld a,002h		;174c
-	ld (ball.foul),a		;174e
+	ld (ball.foul_type),a		;174e
 	ld a,001h		;1751
 	ld (ball.foul_triggered_flag),a		;1753
 @reverse_y_and_end_play:

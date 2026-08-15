@@ -100,7 +100,7 @@ sub_racket_hit_trajectory:
 	jr nz,@hit_success		;1945
 @fault_type_3_end:
 	ld a,004h		;1947
-	ld (ball.foul),a		;1949
+	ld (ball.foul_type),a		;1949
 	ld hl,0c000h		;194c
 	res 0,(hl)		;194f
 @hit_success:
@@ -132,11 +132,11 @@ sub_racket_hit_trajectory:
 	jr c,@no_body_collision		;198b
 	cp d			;198d
 	jr nc,@no_body_collision		;198e
-	ld a,(0c040h)		;1990
+	ld a,(game.match_flags)		;1990
 	bit 0,a		;1993
 	jr z,@trigger_body_foul		;1995
 	ld c,001h		;1997
-	ld a,(0c041h)		;1999
+	ld a,(game.current_player)		;1999
 	and c			;199c
 	ld e,a			;199d
 	ld a,(ix + entity_t.id)		;199e
@@ -145,7 +145,7 @@ sub_racket_hit_trajectory:
 	jr z,@no_body_collision		;19a3
 @trigger_body_foul:
 	ld a,003h		;19a5
-	ld (ball.foul),a		;19a7
+	ld (ball.foul_type),a		;19a7
 	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_90		;19aa
 	ld a,(ix + entity_t.id)		;19ac
 	and 001h		;19af

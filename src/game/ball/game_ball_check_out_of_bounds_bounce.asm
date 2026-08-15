@@ -1,11 +1,11 @@
-sub_menu_update_ball_out_of_bounds:
+sub_game_ball_check_out_of_bounds_bounce:
 	ld a,(0c518h)		;0e04
 	or a			;0e07
 	ret nz			;0e08
-	ld a,(0c040h)		;0e09
+	ld a,(game.match_flags)		;0e09
 	bit 0,a		;0e0c
 	jr z,l0e3bh		;0e0e
-	ld a,(0c041h)		;0e10
+	ld a,(game.current_player)		;0e10
 	add a,a			;0e13
 	ld e,a			;0e14
 	add a,a			;0e15
@@ -33,7 +33,7 @@ sub_menu_update_ball_out_of_bounds:
 	jr c,l0e67h		;0e37
 	jr l0e6fh		;0e39
 l0e3bh:
-	ld a,(0c042h)		;0e3b
+	ld a,(game.last_hitter)		;0e3b
 	add a,a			;0e3e
 	ld e,a			;0e3f
 	add a,a			;0e40

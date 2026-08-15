@@ -1,14 +1,15 @@
 .STRUCT entity_t
     _unknown_0 DB		; $00 ; ???
     id DB		; $01 ; Court side
-    type DB		; $02 ; Entity type ID?
+    state_index DB		; $02 ; Entity state_index ID?
     ball_hit_flag DB		; $03
-    _unknown_04 DB		; $04
+    sprite_id DB		; $04
     sprite_count DB		; $05
     sprite_data_ptr DW		; $06
-    _unknown_1 DSB 2		; $08
-    y_pos DW		; $0a ; 16-bit Y coordinate (Low = $0C, High = $0D)
-    x_pos DW		; $0c ; 16-bit X coordinate (Low = $0A, High = $0B)
+    animation_timer DB		; $08
+    animation_frame_counter DB		; $09
+    y_pos DW		; $0a ; 16-bit Y coordinate
+    x_pos DW		; $0c ; 16-bit X coordinate
     y_vel DW		; $0e ; 16-bit Y velocity
     x_vel DW		; $10 ; 16-bit X velocity
     allowed_dirs DB		; $12 ; Output: final allowed movement bitmask
@@ -20,7 +21,8 @@
     hit_readiness DB		; $18
     state_flags DB		; $19
     time_before_serve DB		; $1a
-    _unknown_4 DSB 2		; $1b ; ???
+    swing_duration DB		; $1b
+    _unknown_4 DB		; $1b ; ???
     racket_contact_flag DB	; $1d
     animation_frame DB		; $1e
     swing_type_id DB		; $1f ; ???
@@ -35,8 +37,7 @@
     shot_button DB		; $28
     state_timer_low DB		; $29 ; ???
     state_timer_high DB		; $2a ; ???
-    maybe_sprite_id DB		; $2b ; ???
-    _unknown_9 DB		; $2c ; ???
+    animation_pointer DW		; $2b
     tile_collision DB		; $2d ; Background tilemap collision mask
     y_div_pos DB		; $2e ; Appears to be a "rough" position spanning only a few units
     x_div_pos DB		; $2f ; Same

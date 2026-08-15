@@ -24,7 +24,7 @@ l11c9h:
 	ld c,(hl)			;11d6
 	inc hl			;11d7
 	ld b,(hl)			;11d8
-	ld a,(0c042h)		;11d9
+	ld a,(game.last_hitter)		;11d9
 	and 001h		;11dc
 	jr z,l11e7h		;11de
 	xor a			;11e0

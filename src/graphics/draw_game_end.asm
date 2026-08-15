@@ -1,8 +1,8 @@
 sub_draw_game_end:
-	ld a,(0c499h)		;33c4
+	ld a,(score.sets_won_top)		;33c4
 	cp 002h		;33c7
 	jp z,@game_lost		;33c9
-	ld a,(0c49ah)		;33cc
+	ld a,(score.sets_won_bottom)		;33cc
 	cp 002h		;33cf
 	jp z,@game_won		;33d1
 	jp @maybe_tie		;33d4

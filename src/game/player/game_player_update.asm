@@ -3,9 +3,9 @@ sub_game_player_update:
 	ld a,(0c000h)		;247f
 	bit 3,a		;2482
 	call nz,sub_game_cpu_update		;2484
-	bit 7,(ix + entity_t.type)		;2487
+	bit 7,(ix + entity_t.state_index)		;2487
 	jr nz,l2495h		;248b
-	set 7,(ix + entity_t.type)		;248d
+	set 7,(ix + entity_t.state_index)		;248d
 	ld (ix + entity_t.action_state),000h		;2491
 l2495h:
 	ld a,(ix + entity_t.action_state)		;2495

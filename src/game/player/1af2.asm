@@ -1,12 +1,12 @@
 sub_1af2h:
-	bit 7,(ix + entity_t.type)		;1af2
+	bit 7,(ix + entity_t.state_index)		;1af2
 	jr nz,l1b17h		;1af6
-	set 7,(ix + entity_t.type)		;1af8
+	set 7,(ix + entity_t.state_index)		;1af8
 	ld (ix+022h),007h		;1afc
 	ld (ix+023h),0ffh		;1b00
 	ld (ix+01fh),019h		;1b04
 	ld a,017h		;1b08
-	ld (0c302h),a		;1b0a
+	ld (entities.ball.state_index),a		;1b0a
 	bit 0,(ix+001h)		;1b0d
 	ret z			;1b11
 	ld (ix+030h),008h		;1b12
@@ -39,15 +39,15 @@ l1b37h:
 	ld (ix+022h),007h		;1b48
 	ld (ix+023h),0ffh		;1b4c
 l1b50h:
-	ld a,(0c040h)		;1b50
+	ld a,(game.match_flags)		;1b50
 	bit 7,a		;1b53
 	ret nz			;1b55
-	ld (ix + entity_t.type),009h		;1b56
+	ld (ix + entity_t.state_index),009h		;1b56
 	ret			;1b5a
 l1b5bh:
-	ld hl,0c040h		;1b5b
+	ld hl,game.match_flags		;1b5b
 	bit 7,(hl)		;1b5e
 	ret z			;1b60
-	ld (ix + entity_t.type),005h		;1b61
+	ld (ix + entity_t.state_index),005h		;1b61
 	set 6,(hl)		;1b65
 	ret			;1b67

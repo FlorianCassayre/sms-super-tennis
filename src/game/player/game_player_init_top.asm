@@ -1,9 +1,9 @@
-l1bb0h:
+sub_game_player_init_top:
 	bit 1,(ix + entity_t.id)		;1bb0
-	ld hl,entities.player.1.top.type		;1bb4
+	ld hl,entities.player.1.top.state_index		;1bb4
 	ld e,004h		;1bb7
 	jr nz,l1bc0h		;1bb9
-	ld hl,entities.player.2.top.type		;1bbb
+	ld hl,entities.player.2.top.state_index		;1bbb
 	ld e,000h		;1bbe
 l1bc0h:
 	ld a,(hl)			;1bc0
@@ -44,7 +44,7 @@ l1bd4h:
 	inc hl			;1bfd
 	ld a,(hl)			;1bfe
 	ld (ix + entity_t.x_pos + 1),a		;1bff
-	ld (ix + entity_t.type),014h		;1c02
+	ld (ix + entity_t.state_index),014h		;1c02
 	ret			;1c06
 l1c07h:
 	.DB $05		;1c07

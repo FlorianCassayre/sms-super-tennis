@@ -60,8 +60,8 @@ sub_draw_settings_menu:
 	call sub_enable_display		;095f
 	xor a			;0962
 	ld (score.set_current_index),a		;0963
-	ld (0c499h),a		;0966
-	ld (0c49ah),a		;0969
+	ld (score.sets_won_top),a		;0966
+	ld (score.sets_won_bottom),a		;0969
 	ei			;096c
 	ret			;096d
 +:

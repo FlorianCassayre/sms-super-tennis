@@ -62,7 +62,7 @@ sub_vdp_build_sprite_buffer:
 	exx			;0a7b
 	ld (hl),a			;0a7c
 	exx			;0a7d
-	ld hl,0c089h		;0a7e
+	ld hl,game.sound_wait_flag		;0a7e
 	set 7,(hl)		;0a81
 	ei			;0a83
 	ret			;0a84

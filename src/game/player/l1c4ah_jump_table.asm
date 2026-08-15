@@ -1,16 +1,17 @@
 l1c4ah_jump_table:
-	.DW l1c56h		;1c4a
-	.DW l1cf7h		;1c4c
-	.DW l1d27h		;1c4e
-	.DW l1c9ch		;1c50
-	.DW sub_1d89h		;1c52
-	.DW l1d57h		;1c54
-l1c56h:
+	.DW player_top_action_state_idle		;1c4a
+	.DW player_top_action_state_start_move		;1c4c
+	.DW player_top_action_state_moving		;1c4e
+	.DW player_top_action_state_start_swing		;1c50
+	.DW player_top_action_state_swinging		;1c52
+	.DW player_top_action_state_turn_around		;1c54
+
+player_top_action_state_idle:
 	ld a,(ix+028h)		;1c56
 	and 003h		;1c59
 	jr z,l1c64h		;1c5b
 	ld (ix+025h),002h		;1c5d
-	jp l1d27h		;1c61
+	jp player_top_action_state_moving		;1c61
 l1c64h:
 	ld a,(ix + entity_t.input_dirs)		;1c64
 	and a			;1c67
@@ -35,13 +36,13 @@ l1c92h:
 	jp sub_game_player_update_animation		;1c92
 l1c95h:
 	ld (ix+025h),001h		;1c95
-	jp l1cf7h		;1c99
-l1c9ch:
+	jp player_top_action_state_start_move		;1c99
+player_top_action_state_start_swing:
 	ld a,(ix+028h)		;1c9c
 	and 003h		;1c9f
 	jr z,l1caah		;1ca1
 	ld (ix+025h),004h		;1ca3
-	jp sub_1d89h		;1ca7
+	jp player_top_action_state_swinging		;1ca7
 l1caah:
 	ld a,(ix+015h)		;1caa
 	ld c,a			;1cad
@@ -80,8 +81,8 @@ l1ceah:
 	jp sub_game_player_update_animation		;1ced
 l1cf0h:
 	ld (ix+025h),005h		;1cf0
-	jp l1d57h		;1cf4
-l1cf7h:
+	jp player_top_action_state_turn_around		;1cf4
+player_top_action_state_start_move:
 	ld a,(ix+025h)		;1cf7
 	bit 7,a		;1cfa
 	jr nz,l1d17h		;1cfc
@@ -102,7 +103,7 @@ l1d17h:
 	ret nz			;1d21
 	ld (ix+025h),003h		;1d22
 	ret			;1d26
-l1d27h:
+player_top_action_state_moving:
 	ld a,(ix+025h)		;1d27
 	bit 7,a		;1d2a
 	jr nz,l1d47h		;1d2c
@@ -122,7 +123,7 @@ l1d47h:
 	ret nz			;1d51
 	ld (ix+025h),004h		;1d52
 	ret			;1d56
-l1d57h:
+player_top_action_state_turn_around:
 	ld a,(ix+025h)		;1d57
 	bit 7,a		;1d5a
 	jr nz,l1d73h		;1d5c
