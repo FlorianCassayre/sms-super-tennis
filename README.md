@@ -1,5 +1,23 @@
 # Super Tennis Disassembly
 
+This project aims to create a full matching disassembly of the **Sega Master System** game "**Super Tennis**", also known as "**グレートテニス**" ("Great Tennis").
+
+It focuses on the two revisions known to me:
+- **Revision 0**:
+  - SHA256: `459f1c453fb1e230f7ab67d607ef08bbfb630d53ef56192b5695a912b5f17c5f`
+  - SHA1: `e7f3529689cd29be3fa02f94266e4ee8e0795d7d`
+  - MD5: `be6eac7ce416c86a818ff13b228b39c5`
+  - CRC32: `19d57159`
+  - SMS sum: `6fa6`
+- **Revision 1**:
+  - SHA256: `5fb097b508a482c29f12c2203a0a98a0dd7ce9873e7ef12fb7e0aeea250a99e2`
+  - SHA1: `67787f3f29a5b5e74b5f6a636428da4517a0f992`
+  - MD5: `2db9404fe79593fd2379921ca822103a`
+  - CRC32: `35d08a9e`
+  - SMS sum: `88d4`
+
+The source is written in [WLA DX](https://github.com/vhelin/wla-dx) dialect, a multi-platform assembler.
+
 ## Environment
 
 You will need Docker to build the image:
@@ -7,77 +25,19 @@ You will need Docker to build the image:
 ./docker/run.sh
 ```
 
-## Compiling
+## Assembly
 
+After building the image, you may assemble the ROMs:
 ```shell
 ./docker/run.sh ./compile.sh
 ```
 
-## Disassembly
-
-The initial disassembly is done with this snippet:
-```shell
-./docker/run.sh z80dasm -g 0x0000 -a -l super-tennis-usa-europe.sms > src/super-tennis.asm
-
-sed -i -E \
-    -e 's/^([[:space:]]*)org([[:space:]]+)/\1.ORGA\2/' \
-    -e 's/\bdefb\b/.DB/g' \
-    -e 's/\bdefw\b/.DW/g' \
-    -e 's/\bdefs\b/.DSB/g' \
-    -e 's/\bdefm\b/.DB/g' \
-    -e 's/\bequ\b/.EQU/g' \
-    src/super-tennis.asm
-
-sed -i -E "s/(\.DB[[:space:]]+)'([^']*)'/\1\"\2\"/g" src/super-tennis.asm
-
-TMP=$(mktemp)
-{
-cat <<'EOF'
-; --- generated header ---
-.MEMORYMAP
-    SLOTSIZE $8000
-    SLOT 0 $0000
-    DEFAULTSLOT 0
-.ENDME
-.ROMBANKMAP
-    BANKSTOTAL 1
-    BANKSIZE $8000
-    BANKS 1
-.ENDRO
-; --- end generated header ---
-
-EOF
-cat src/super-tennis.asm
-} > "$TMP"
-mv "$TMP" src/super-tennis.asm
-
-python3 - <<'PY'
-import re
-
-with open('src/super-tennis.asm', 'r') as f:
-    text = f.read()
-
-def repl(m):
-    prefix, sign, num = m.groups()
-    val = int(sign + num) - 2
-    return f'{prefix}${val:+d}'
-
-text = re.sub(
-    r'(jr (?:nz,|nc,|z,|c,)?|djnz )\$([+-])(\d+)',
-    repl,
-    text
-)
-
-with open('src/super-tennis.asm', 'w') as f:
-    f.write(text)
-PY
-```
-
-You can then try to compile the disassembled file. In case of mismatch, you may inspect the differences:
-```shell
-cmp -l super-tennis-usa-europe.sms build/super-tennis-usa-europe.sms
-```
+The artifacts will be produced in `build/`. For each generated `.sms` file, you will also have a corresponding `.sym` file, which can be fed to debuggers such as [Gearsystem](https://github.com/drhelius/gearsystem).
 
 ## Acknowledgment
 
-This project takes a lot of inspiration from a similar disassembly effort: https://github.com/lhsazevedo/akmw
+This project takes inspiration from [a similar disassembly effort](https://github.com/lhsazevedo/akmw).
+
+## Disclaimer
+
+This project is an independent disassembly of a Sega Master System game, created for research, educational, and preservation purposes. It is not affiliated with or endorsed by Sega or the original developers. All original game assets, trademarks, and copyrights remain the property of their respective owners.
