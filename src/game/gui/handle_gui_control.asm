@@ -24,7 +24,7 @@ sub_handle_gui_control:
 	cp 000h		;09a8
 	ret z			;09aa
 	ld b,(hl)			;09ab
-	ld hl,gui.cursor_y		;09ac
+	ld hl,score.settings_cursor_y		;09ac
 	ld a,(hl)			;09af
 	srl b		;09b0
 	sbc a,000h		;09b2

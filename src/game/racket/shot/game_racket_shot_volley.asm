@@ -1,4 +1,4 @@
-l11b1h_racket_hit:
+sub_game_racket_shot_volley:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		;11b1
 	ld (psg_engine.track_request_id),a		;11b3
 	ld a,(0c509h)		;11b6

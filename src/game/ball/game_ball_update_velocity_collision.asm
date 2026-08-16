@@ -61,7 +61,7 @@ sub_game_ball_update_velocity_collision:
 	ld a,(ball.foul_triggered_flag)		;171d
 	or a			;1720
 	jr nz,@calc_net_z_bounce		;1721
-	ld a,001h		;1723
+	ld a,game_foul_t.net		;1723
 	ld (ball.foul_type),a		;1725
 @calc_net_z_bounce:
 	ld hl,(ball.z_vel)		;1728

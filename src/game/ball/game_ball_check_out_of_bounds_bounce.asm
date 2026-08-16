@@ -49,7 +49,7 @@ l0e3bh:
 	cp (hl)			;0e50
 	jr nc,l0e6bh		;0e51
 	inc hl			;0e53
-	ld a,(0c000h)		;0e54
+	ld a,(state.match_state_flags)		;0e54
 	bit 7,a		;0e57
 	jr z,l0e5dh		;0e59
 	inc hl			;0e5b

@@ -11,7 +11,7 @@ sub_vdp_build_sprite_buffer:
 	ld de,game.settings		;0a22
 -:
 	push bc			;0a25
-	ld a,(gui.cursor_y)		;0a26
+	ld a,(score.settings_cursor_y)		;0a26
 	ld b,a			;0a29
 	ld a,(0c492h)		;0a2a
 	cp b			;0a2d

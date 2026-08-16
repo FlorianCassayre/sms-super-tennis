@@ -18,7 +18,7 @@ sub_compute_ball_x_velocity:
 	add a,c			;13bd
 	add a,b			;13be
 	ld c,a			;13bf
-	ld a,(ix+020h)		;13c0
+	ld a,(ix + entity_t.render_facing_dir)		;13c0
 	sub 00bh		;13c3
 	jr nc,@skip_add		;13c5
 	add a,00bh		;13c7
@@ -58,7 +58,6 @@ table_ball_x_vel_pointers_0:
 	.DW $ffe8		;13fa
 	.DW $ffce		;13fc
 	.DW $ffb4		;13fe
-l1400h:
 	.DW $ff9a		;1400
 	.DW $ff7e		;1402
 	.DW $00af		;1404

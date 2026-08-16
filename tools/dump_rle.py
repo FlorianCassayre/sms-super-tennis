@@ -2,6 +2,7 @@ import sys
 
 
 FILE = 'super-tennis-usa-europe.sms'
+BINARY = False
 
 
 def dump_stream(data, addr):
@@ -19,11 +20,19 @@ def dump_stream(data, addr):
         if ctrl & 0x80:
             print(f'\t.DB RLE_LIT | {length}\t\t;{pos:04x}')
             for _ in range(length):
-                print(f'\t.DB %{data[addr]:08b}\t\t;{addr:04x}')
+                value = data[addr]
+                if BINARY:
+                    print(f'\t.DB %{value:08b}\t\t;{addr:04x}')
+                else:
+                    print(f'\t.DB ${value:02x}\t\t;{addr:04x}')
                 addr += 1
         else:
             print(f'\t.DB RLE_REP | {length}\t\t;{pos:04x}')
-            print(f'\t.DB %{data[addr]:08b}\t\t;{addr:04x}')
+            value = data[addr]
+            if BINARY:
+                print(f'\t.DB %{value:08b}\t\t;{addr:04x}')
+            else:
+                print(f'\t.DB ${value:02x}\t\t;{addr:04x}')
             addr += 1
 
 

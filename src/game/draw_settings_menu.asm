@@ -16,11 +16,11 @@ sub_draw_settings_menu:
 	ld (hl),a			;08e0
 	inc hl			;08e1
 	djnz -		;08e2
-	ld (gui.cursor_y),a		;08e4
-	ld (gui.tick_counter),a		;08e7
+	ld (score.settings_cursor_y),a		;08e4
+	ld (score.tick_counter),a		;08e7
 	call sub_get_joy_p1		;08ea
-	ld (gui.joystick),a		;08ed
-	ld (gui.joystick_previous),a		;08f0
+	ld (score.settings_joystick),a		;08ed
+	ld (score.settings_joystick_previous),a		;08f0
 	ld hl,03886h		;08f3
 	ld de,data.umpire_settings.player_level_select		;08f6
 	ld bc,38		;08f9
@@ -66,9 +66,9 @@ sub_draw_settings_menu:
 	ret			;096d
 +:
 	call sub_vdp_build_sprite_buffer		;096e
-	ld hl,gui.tick_counter		;0971
+	ld hl,score.tick_counter		;0971
 	inc (hl)			;0974
-	ld hl,gui.joystick_previous		;0975
+	ld hl,score.settings_joystick_previous		;0975
 	call sub_get_joy_p1		;0978
 	cp (hl)			;097b
 	ret z			;097c

@@ -2,7 +2,6 @@
 	.DB %00000000		;3ef2
 	.DB RLE_REP | 127		;3ef3
 	.DB %00000000		;3ef4
-l3ef5h:
 	.DB RLE_REP | 127		;3ef5
 	.DB %00000000		;3ef6
 	.DB RLE_REP | 35		;3ef7

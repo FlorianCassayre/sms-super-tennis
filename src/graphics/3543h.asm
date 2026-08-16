@@ -1,5 +1,5 @@
 sub_3543h:
-	ld a,(0c000h)		;3543
+	ld a,(state.match_state_flags)		;3543
 	bit 2,a		;3546
 	ret z			;3548
 	ld a,(score.ball_y_sector)		;3549

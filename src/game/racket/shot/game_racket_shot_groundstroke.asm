@@ -1,4 +1,4 @@
-l12deh_racket_hit:
+sub_game_racket_shot_groundstroke:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		;12de
 	ld (psg_engine.track_request_id),a		;12e0
 	ld hl,l1338h		;12e3

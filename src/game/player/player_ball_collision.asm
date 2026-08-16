@@ -2,11 +2,11 @@ sub_player_ball_collision:
 	ld a,(state.match_state_flags)		;1878
 	rrca			;187b
 	ret nc			;187c
-	ld hl,l19cbh_bounding_box		;187d
+	ld hl,game_ball_aabb_relative		;187d
 	ld ix,entities.ball		;1880
-	call sub_17f1h_aabb		;1884
-	ld (0c082h),bc		;1887
-	ld (0c084h),de		;188b
+	call sub_game_entity_aabb_intersection		;1884
+	ld (state.aabb_1.y_min),bc		;1887
+	ld (state.aabb_1.x_min),de		;188b
 	ld a,(entities.ball.allowed_dirs)		;188f
 	rrca			;1892
 	jr c,@check_partners		;1893
@@ -31,16 +31,16 @@ sub_racket_hit_trajectory:
 	ld a,(state.hit_flags)		;18bc
 	rlca			;18bf
 	jp nc,@miss		;18c0
-	ld hl,l19dbh_bounding_boxes		;18c3
+	ld hl,game_racket_aabb_relative		;18c3
 	ld a,(ix + entity_t.animation_frame)		;18c6
-	call 017ebh		;18c9
-	ld (0c08eh),bc		;18cc
-	ld (0c090h),de		;18d0
-	call sub_1806h_bound_check		;18d4
+	call sub_game_entity_aabb_intersection_index		;18c9
+	ld (state.aabb_2.y_min),bc		;18cc
+	ld (state.aabb_2.x_min),de		;18d0
+	call sub_aabb_intersection		;18d4
 	ld a,e			;18d7
 	or a			;18d8
 	jp z,@miss		;18d9
-	ld hl,l1a1dh_bounding_boxe_offsets		;18dc
+	ld hl,game_racket_z_heights		;18dc
 	ld a,(ix + entity_t.animation_frame)		;18df
 	add a,a			;18e2
 	ld e,a			;18e3
@@ -52,7 +52,7 @@ sub_racket_hit_trajectory:
 	inc hl			;18ec
 	add a,(hl)			;18ed
 	ld c,a			;18ee
-	ld a,(0c34bh)		;18ef
+	ld a,(entities.ball_shadow.y_pos + 1)		;18ef
 	cp c			;18f2
 	jp c,@miss		;18f3
 	inc hl			;18f6
@@ -61,14 +61,14 @@ sub_racket_hit_trajectory:
 	ld hl,state.hit_flags		;18fb
 	bit 0,(hl)		;18fe
 	jr z,@hit_success		;1900
-	ld bc,l1a3fh_id_shot_type		;1902
-	ld a,(0c000h)		;1905
+	ld bc,game_racket_shot_result_table_1		;1902
+	ld a,(state.match_state_flags)		;1905
 	bit 7,a		;1908
 	jr z,@check_serve_result		;190a
 	ld a,(0c044h)		;190c
 	or a			;190f
 	jr z,@check_serve_result		;1910
-	ld bc,l1a4fh_id_shot_type		;1912
+	ld bc,game_racket_shot_result_table_2		;1912
 @check_serve_result:
 	ld a,(state.shot_type)		;1915
 	add a,a			;1918
@@ -117,11 +117,11 @@ sub_racket_hit_trajectory:
 	ld a,(ball.z_pos + 1)		;1967
 	cp 018h		;196a
 	ret nc			;196c
-	ld hl,l19cfh_bounding_boxes		;196d
+	ld hl,game_player_aabb_relative		;196d
 	ld a,(ix + entity_t.id)		;1970
-	call 017ebh		;1973
-	ld (0c08eh),bc		;1976
-	ld (0c090h),de		;197a
+	call sub_game_entity_aabb_intersection_index		;1973
+	ld (state.aabb_2.y_min),bc		;1976
+	ld (state.aabb_2.x_min),de		;197a
 	ld a,(entities.ball.y_pos + 1)		;197e
 	cp c			;1981
 	jr c,@no_body_collision		;1982
@@ -144,7 +144,7 @@ sub_racket_hit_trajectory:
 	cp e			;19a2
 	jr z,@no_body_collision		;19a3
 @trigger_body_foul:
-	ld a,003h		;19a5
+	ld a,game_foul_t.body		;19a5
 	ld (ball.foul_type),a		;19a7
 	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_90		;19aa
 	ld a,(ix + entity_t.id)		;19ac
@@ -165,16 +165,16 @@ sub_racket_hit_trajectory:
 	and a			;19c9
 	ret			;19ca
 
-l19cbh_bounding_box:
+game_ball_aabb_relative:
 	; y_min, y_max, x_min, x_max
 	.DB $fc, $07, $fc, $07
 
-l19cfh_bounding_boxes:
+game_player_aabb_relative:
 	.DB $f8, $08, $fc, $08
 	.DB $fc, $04, $fe, $04
 	.DB $f8, $08, $fc, $08 ; Unreferenced?
 
-l19dbh_bounding_boxes:
+game_racket_aabb_relative:
 	.DB $fc, $04, $fe, $04
 	.DB $f9, $05, $0d, $0c
 	.DB $f9, $05, $ea, $0c
@@ -194,7 +194,7 @@ l19dbh_bounding_boxes:
 	.DB $fc, $0c, $f4, $08
 	.DB $fc, $08
 
-l1a1dh_bounding_boxe_offsets:
+game_racket_z_heights:
 	.DB $f4, $08
 	.DB $00, $e8
 	.DB $00, $e8
@@ -214,13 +214,13 @@ l1a1dh_bounding_boxe_offsets:
 	.DB $f0, $f0
 	.DB $f4, $ec
 
-l1a3fh_id_shot_type:
+game_racket_shot_result_table_1:
 	.DB $00 $02 $01 $03
 	.DB $02 $00 $03 $01
 	.DB $01 $02 $00 $03
 	.DB $02 $01 $03 $00
 
-l1a4fh_id_shot_type:
+game_racket_shot_result_table_2:
 	.DB $00 $03 $01 $02
 	.DB $03 $00 $02 $01
 	.DB $01 $03 $00 $02

@@ -1,4 +1,4 @@
-l126ch_ball_high:
+sub_game_racket_shot_lob:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_high		;126c
 	ld (psg_engine.track_request_id),a		;126e
 	ld hl,l12c0h		;1271

@@ -1,5 +1,5 @@
 sub_l1362h_ball:
-	ld a,015h		;1362
+	ld a,entity_state_t.ball_normal_update		;1362
 	ld (entities.ball.state_index),a		;1364
 	xor a			;1367
 	ld (entities.ball.ball_hit_flag),a		;1368

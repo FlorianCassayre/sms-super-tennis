@@ -18,7 +18,7 @@ l051eh:
 	ld d,(hl)			;0531
 	push de			;0532
 	pop ix		;0533
-	ld a,(ix+002h)		;0535
+	ld a,(ix + entity_t.state_index)		;0535
 	or a			;0538
 	jr z,l053eh		;0539
 	call sub_game_entity_render_one		;053b

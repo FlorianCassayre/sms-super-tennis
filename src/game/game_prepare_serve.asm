@@ -61,7 +61,7 @@ l0ba0h:
 	ld (hl),a			;0ba7
 l0ba8h:
 	ld hl,l0c43h		;0ba8
-	ld a,(0c000h)		;0bab
+	ld a,(state.match_state_flags)		;0bab
 	bit 7,a		;0bae
 	jr nz,l0bb5h		;0bb0
 	ld hl,l0c3fh		;0bb2
@@ -73,7 +73,7 @@ l0bb5h:
 	ld a,(hl)			;0bbc
 	ld (game.current_player),a		;0bbd
 	ld hl,l0c57h		;0bc0
-	ld a,(0c000h)		;0bc3
+	ld a,(state.match_state_flags)		;0bc3
 	bit 7,a		;0bc6
 	jr nz,l0bcdh		;0bc8
 	ld hl,l0c47h		;0bca
@@ -96,12 +96,12 @@ l0bcdh:
 	ld a,(hl)			;0be5
 	ld (entities.player.2.top.state_index),a		;0be6
 	ld a,04fh		;0be9
-	ld (0c344h),a		;0beb
+	ld (entities.ball_shadow.sprite_id),a		;0beb
 	ld a,050h		;0bee
-	ld (0c304h),a		;0bf0
-	ld a,018h		;0bf3
+	ld (entities.ball.sprite_id),a		;0bf0
+	ld a,entity_state_t.ball_serve_perspective_update		;0bf3
 	ld (entities.ball.state_index),a		;0bf5
-	ld a,016h		;0bf8
+	ld a,entity_state_t.ball_shadow_update		;0bf8
 	ld (entities.ball_shadow.state_index),a		;0bfa
 	xor a			;0bfd
 	ld (entities.ball.ball_hit_flag),a		;0bfe
@@ -181,3 +181,8 @@ l0c57h:
 	.DB $02		;0c64
 	.DB $01		;0c65
 	.DB $03		;0c66
+l0c67h:
+	.DB $02		;0c67
+	.DB $01		;0c68
+	.DB $02		;0c69
+	.DB $01		;0c6a

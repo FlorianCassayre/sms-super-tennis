@@ -3,7 +3,7 @@ sub_game_player_update_server_state:
 	bit 7,a		;1a62
 	jr nz,@update_loop		;1a64
 	set 7,(ix + entity_t.state_index)		;1a66
-	cp 003h		;1a6a
+	cp entity_state_t.player_update_server_state_075f		;1a6a
 	jr nz,@skip_position_lookup		;1a6c
 	bit 0,(ix + entity_t.id)		;1a6e
 	ld e,000h		;1a72
@@ -33,13 +33,13 @@ sub_game_player_update_server_state:
 @skip_position_lookup:
 	bit 0,(ix + entity_t.id)		;1a9b
 	jr z,@set_animation_timer		;1a9f
-	ld (ix+030h),007h		;1aa1
+	ld (ix + entity_t.cpu_state),007h		;1aa1
 @set_animation_timer:
 	ld (ix + entity_t.animation_id),006h		;1aa5
 	ld (ix + entity_t.animation_flags_or_frame),0ffh		;1aa9
 	ld hl,00096h		;1aad
-	ld (ix + entity_t.state_timer_low),l		;1ab0
-	ld (ix + entity_t.state_timer_high),h		;1ab3
+	ld (ix + entity_t.state_timer),l		;1ab0
+	ld (ix + entity_t.state_timer + 1),h		;1ab3
 	ld a,001h		;1ab6
 	ld (0c400h),a		;1ab8
 @update_loop:
@@ -55,7 +55,7 @@ sub_game_player_update_server_state:
 @check_timer:
 	call sub_1b9fh_decrement_timer		;1ad7
 	jp nz,sub_game_player_apply_movement		;1ada
-	ld (ix + entity_t.state_index),004h		;1add
+	ld (ix + entity_t.state_index),entity_state_t.l1af2h_0761		;1add
 	ret			;1ae1
 
 serve_start_coordinates:

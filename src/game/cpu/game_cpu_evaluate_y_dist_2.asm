@@ -12,13 +12,13 @@ sub_game_cpu_evaluate_y_dist_2:
 l23beh:
 	ld a,(entities.ball.y_pos + 1)		;23be
 	ld e,a			;23c1
-	ld a,(ix+00bh)		;23c2
+	ld a,(ix + entity_t.y_pos + 1)		;23c2
 	sub e			;23c5
 	jr nc,l23cah		;23c6
 	neg		;23c8
 l23cah:
 	ld b,a			;23ca
-	ld a,(ix+02eh)		;23cb
+	ld a,(ix + entity_t.y_div_pos)		;23cb
 	ld e,a			;23ce
 	ld c,010h		;23cf
 	cp 001h		;23d1
@@ -46,5 +46,5 @@ l23f3h:
 	jr c,l23fbh		;23f7
 	ld b,001h		;23f9
 l23fbh:
-	ld (ix+018h),b		;23fb
+	ld (ix + entity_t.hit_readiness),b		;23fb
 	ret			;23fe

@@ -1,7 +1,7 @@
 sub_0b28h:
 	ld hl,0c006h		;0b28
 	ld e,006h		;0b2b
-	ld a,(0c000h)		;0b2d
+	ld a,(state.match_state_flags)		;0b2d
 	bit 3,a		;0b30
 	jr z,l0b36h		;0b32
 	ld e,086h		;0b34

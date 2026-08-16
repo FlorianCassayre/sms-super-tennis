@@ -1,9 +1,9 @@
 sub_game_ball_shadow_update:
 	ld a,(entities.ball.x_pos + 1)		;0f1d
-	ld (ix+00dh),a		;0f20
+	ld (ix + entity_t.x_pos + 1),a		;0f20
 	ld a,(entities.ball.y_pos + 1)		;0f23
 	inc a			;0f26
-	ld (ix+014h),a		;0f27
+	ld (ix + entity_t.y_pos_cache),a		;0f27
 	ld l,a			;0f2a
 	ld h,000h		;0f2b
 	add hl,hl			;0f2d
@@ -19,6 +19,6 @@ sub_game_ball_shadow_update:
 	xor a			;0f3e
 	ld hl,(entities.ball.y_pos)		;0f3f
 	sbc hl,de		;0f42
-	ld (ix+00ah),l		;0f44
-	ld (ix+00bh),h		;0f47
+	ld (ix + entity_t.y_pos),l		;0f44
+	ld (ix + entity_t.y_pos + 1),h		;0f47
 	jp sub_game_ball_shadow_update_sizes		;0f4a

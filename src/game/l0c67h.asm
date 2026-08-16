@@ -1,6 +1,3 @@
-l0c67h:
-	ld (bc),a			;0c67
-	ld bc,00102h		;0c68
 l0c6bh:
 	ld hl,0c007h		;0c6b
 	ld a,(hl)			;0c6e
@@ -33,14 +30,14 @@ l0c99h:
 	ld a,003h		;0ca6
 	ld (0c007h),a		;0ca8
 	call sub_update_score_points		;0cab
-	ld a,(0c000h)		;0cae
+	ld a,(state.match_state_flags)		;0cae
 	bit 3,a		;0cb1
 	ret z			;0cb3
 	ld a,000h		;0cb4
 	ld (psg_engine.track_request_id),a		;0cb6
 	ret			;0cb9
 l0cbah:
-	ld a,(0c48bh)		;0cba
+	ld a,(score.point_fault_flag)		;0cba
 	bit 0,a		;0cbd
 	jp nz,l0d5fh		;0cbf
 	ld a,(score.tie_break)		;0cc2
@@ -133,7 +130,7 @@ l0d6fh:
 	ld a,004h		;0d6f
 l0d71h:
 	ld (game.match_progression_state),a		;0d71
-	ld a,(0c000h)		;0d74
+	ld a,(state.match_state_flags)		;0d74
 	bit 3,a		;0d77
 	jr nz,l0d47h		;0d79
 	ld hl,0c006h		;0d7b

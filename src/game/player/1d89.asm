@@ -1,13 +1,13 @@
 player_top_action_state_swinging:
-	ld a,(ix+025h)		;1d89
+	ld a,(ix + entity_t.action_state)		;1d89
 	bit 7,a		;1d8c
 	jr nz,l1dffh		;1d8e
 	set 7,a		;1d90
-	ld (ix+025h),a		;1d92
+	ld (ix + entity_t.action_state),a		;1d92
 	call sub_game_racket_evaluate_swing_type		;1d95
 	ld e,a			;1d98
 	ld d,a			;1d99
-	ld a,(ix+02eh)		;1d9a
+	ld a,(ix + entity_t.y_div_pos)		;1d9a
 	cp 003h		;1d9d
 	jr nc,l1db0h		;1d9f
 	ld a,e			;1da1
@@ -55,27 +55,27 @@ l1dd3h:
 	ld b,009h		;1deb
 	ld c,01ah		;1ded
 l1defh:
-	ld (ix+022h),b		;1def
-	ld (ix+01fh),c		;1df2
-	ld (ix+023h),0ffh		;1df5
-	ld a,(ix+016h)		;1df9
-	ld (ix+020h),a		;1dfc
+	ld (ix + entity_t.animation_id),b		;1def
+	ld (ix + entity_t.swing_type_id),c		;1df2
+	ld (ix + entity_t.animation_flags_or_frame),0ffh		;1df5
+	ld a,(ix + entity_t.facing_dir)		;1df9
+	ld (ix + entity_t.render_facing_dir),a		;1dfc
 l1dffh:
 	call sub_game_player_apply_movement		;1dff
 	call sub_game_racket_process_swing_contact		;1e02
-	ld a,(ix+023h)		;1e05
+	ld a,(ix + entity_t.animation_flags_or_frame)		;1e05
 	and a			;1e08
 	jr z,l1e0fh		;1e09
 	call sub_game_player_update_animation		;1e0b
 	ret			;1e0e
 l1e0fh:
-	ld a,(ix+027h)		;1e0f
+	ld a,(ix + entity_t.ball_incoming)		;1e0f
 	and a			;1e12
 	ld a,000h		;1e13
 	jr z,l1e19h		;1e15
 	ld a,001h		;1e17
 l1e19h:
-	ld (ix+025h),a		;1e19
-	ld (ix+019h),000h		;1e1c
-	ld (ix+01dh),000h		;1e20
+	ld (ix + entity_t.action_state),a		;1e19
+	ld (ix + entity_t.state_flags),000h		;1e1c
+	ld (ix + entity_t.racket_contact_flag),000h		;1e20
 	ret			;1e24

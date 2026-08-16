@@ -40,10 +40,10 @@ sub_cpu_state_track_ball:
 	jr nz,@l1e83h		;1e62
 	ld (ix + entity_t.shot_button),a		;1e64
 	ld (ix + entity_t.input_dirs),a		;1e67
-	ld a,(iy+033h)		;1e6a
+	ld a,(iy + entity_t.cpu_sub_state)		;1e6a
 	cp 004h		;1e6d
 	jr nz,@l1e75h		;1e6f
-	ld (iy+033h),003h		;1e71
+	ld (iy + entity_t.cpu_sub_state),003h		;1e71
 @l1e75h:
 	ld a,(ix + entity_t.cpu_state_timer)		;1e75
 	and 007h		;1e78
@@ -57,7 +57,7 @@ sub_cpu_state_track_ball:
 	jr z,@l1ee8h		;1e88
 	cp 01ch		;1e8a
 	jr nz,@l1e9bh		;1e8c
-	ld a,(0c000h)		;1e8e
+	ld a,(state.match_state_flags)		;1e8e
 	bit 7,a		;1e91
 	jr nz,@l1edfh		;1e93
 	ld (ix + entity_t.cpu_state),006h		;1e95
@@ -85,7 +85,7 @@ sub_cpu_state_track_ball:
 	ld a,(0c401h)		;1ec2
 	cp 01ch		;1ec5
 	jr z,@l1ef5h		;1ec7
-	ld a,(0c000h)		;1ec9
+	ld a,(state.match_state_flags)		;1ec9
 	bit 7,a		;1ecc
 	jr z,@l1edfh		;1ece
 	call sub_game_ball_compute_horizontal_deflection		;1ed0
@@ -97,7 +97,7 @@ sub_cpu_state_track_ball:
 	cp 020h		;1edb
 	jr nc,@l1ef5h		;1edd
 @l1edfh:
-	ld (iy+033h),003h		;1edf
+	ld (iy + entity_t.cpu_sub_state),003h		;1edf
 	ld (ix + entity_t.cpu_state),002h		;1ee3
 	ret			;1ee7
 @l1ee8h:
@@ -106,10 +106,10 @@ sub_cpu_state_track_ball:
 	ld (ix + entity_t.input_dirs),a		;1eec
 	ret			;1eef
 @l1ef0h:
-	ld (iy+033h),002h		;1ef0
+	ld (iy + entity_t.cpu_sub_state),002h		;1ef0
 	ret			;1ef4
 @l1ef5h:
-	ld (iy+033h),001h		;1ef5
+	ld (iy + entity_t.cpu_sub_state),001h		;1ef5
 	ld (ix + entity_t.cpu_state),00ah		;1ef9
 	ret			;1efd
 sub_cpu_state_serve_wait:
@@ -123,7 +123,7 @@ sub_cpu_state_serve_wait:
 	jr z,@l1f3ch		;1f0c
 	cp 003h		;1f0e
 	jr nz,@l1f22h		;1f10
-	ld a,(0c000h)		;1f12
+	ld a,(state.match_state_flags)		;1f12
 	bit 7,a		;1f15
 	jr z,@l1f22h		;1f17
 	ld (ix + entity_t.cpu_state),009h		;1f19
@@ -139,14 +139,14 @@ sub_cpu_state_serve_wait:
 	and 003h		;1f31
 	cp 003h		;1f33
 	ret nz			;1f35
-	ld a,(0c000h)		;1f36
+	ld a,(state.match_state_flags)		;1f36
 	and 080h		;1f39
 	ret nz			;1f3b
 @l1f3ch:
 	ld (ix + entity_t.cpu_state),005h		;1f3c
 	ret			;1f40
 @l1f41h:
-	ld a,(0c000h)		;1f41
+	ld a,(state.match_state_flags)		;1f41
 	ld b,003h		;1f44
 	bit 7,a		;1f46
 	jr z,@l1f68h		;1f48
@@ -196,7 +196,7 @@ sub_cpu_state_net:
 	cp 0fah		;1fa2
 	jr nc,@l1fc0h		;1fa4
 @l1fa6h:
-	ld a,(0c000h)		;1fa6
+	ld a,(state.match_state_flags)		;1fa6
 	bit 7,a		;1fa9
 	ld a,004h		;1fab
 	ld b,002h		;1fad
@@ -205,7 +205,7 @@ sub_cpu_state_net:
 	ld b,001h		;1fb3
 @l1fb5h:
 	ld (ix + entity_t.cpu_state),a		;1fb5
-	ld (iy+033h),b		;1fb8
+	ld (iy + entity_t.cpu_sub_state),b		;1fb8
 	ld (ix + entity_t.shot_button),000h		;1fbb
 	ret			;1fbf
 @l1fc0h:
@@ -214,7 +214,7 @@ sub_cpu_state_net:
 	ld l,000h		;1fc5
 	ld h,a			;1fc7
 	ld de,04c00h		;1fc8
-	call sub_221eh_collision_broad		;1fcb
+	call sub_game_cpu_calculate_intercept_direction_1		;1fcb
 	ld (ix + entity_t.input_dirs),a		;1fce
 	call sub_game_cpu_evaluate_y_dist_1		;1fd1
 	ld a,(ix + entity_t.hit_readiness)		;1fd4
@@ -229,7 +229,7 @@ sub_cpu_state_net:
 	ld l,000h		;1fe5
 	ld h,a			;1fe7
 	ld de,08000h		;1fe8
-	call sub_2298h_collision		;1feb
+	call sub_game_cpu_calculate_intercept_direction_2		;1feb
 	ld (ix + entity_t.input_dirs),a		;1fee
 	call sub_game_cpu_evaluate_y_dist_2		;1ff1
 	ld a,(ix + entity_t.hit_readiness)		;1ff4
@@ -255,7 +255,7 @@ sub_cpu_state_baseline_attack:
 	ld l,000h		;201e
 	ld h,a			;2020
 	ld de,02800h		;2021
-	call sub_221eh_collision_broad		;2024
+	call sub_game_cpu_calculate_intercept_direction_1		;2024
 	ld (ix + entity_t.input_dirs),a		;2027
 	call sub_game_cpu_evaluate_y_dist_1		;202a
 	ld a,(ix + entity_t.hit_readiness)		;202d
@@ -268,7 +268,7 @@ sub_cpu_state_baseline_attack:
 	ld l,000h		;203c
 	ld h,a			;203e
 	ld de,0b000h		;203f
-	call sub_2298h_collision		;2042
+	call sub_game_cpu_calculate_intercept_direction_2		;2042
 	ld (ix + entity_t.input_dirs),a		;2045
 	call sub_game_cpu_evaluate_y_dist_2		;2048
 	ld a,(ix + entity_t.hit_readiness)		;204b
@@ -278,14 +278,14 @@ sub_cpu_state_baseline_attack:
 sub_cpu_state_return_center:
 	bit 0,(ix + entity_t.ball_incoming)		;2055
 	jr nz,@l207eh		;2059
-	ld a,(ix+02eh)		;205b
+	ld a,(ix + entity_t.y_div_pos)		;205b
 	bit 0,(ix + entity_t.id)		;205e
 	jr z,@l2075h		;2062
 	cp 002h		;2064
 	jr c,@l207eh		;2066
 	ld (ix + entity_t.input_dirs),001h		;2068
 	ld (ix + entity_t.shot_button),000h		;206c
-	ld (iy+033h),005h		;2070
+	ld (iy + entity_t.cpu_sub_state),005h		;2070
 	ret			;2074
 @l2075h:
 	cp 0b0h		;2075
@@ -297,7 +297,7 @@ sub_cpu_state_return_center:
 	ld (ix + entity_t.input_dirs),a		;207f
 	ld (ix + entity_t.cpu_state_timer),a		;2082
 	ld (ix + entity_t.cpu_state),003h		;2085
-	ld (iy+033h),005h		;2089
+	ld (iy + entity_t.cpu_sub_state),005h		;2089
 	ret			;208d
 sub_cpu_state_wait:
 	ld a,(0c400h)		;208e
@@ -306,19 +306,19 @@ sub_cpu_state_wait:
 	bit 0,(ix + entity_t.ball_incoming)		;2093
 	jr nz,@l20b2h		;2097
 @l2099h:
-	ld a,(0c000h)		;2099
+	ld a,(state.match_state_flags)		;2099
 	bit 7,a		;209c
 	ld a,002h		;209e
 	jr z,@l20a5h		;20a0
 	call sub_238dh		;20a2
 @l20a5h:
 	ld (ix + entity_t.input_dirs),a		;20a5
-	ld a,(ix+02eh)		;20a8
+	ld a,(ix + entity_t.y_div_pos)		;20a8
 	cp 006h		;20ab
 	ret c			;20ad
 	ld (ix + entity_t.cpu_sub_state),000h		;20ae
 @l20b2h:
-	ld a,(0c000h)		;20b2
+	ld a,(state.match_state_flags)		;20b2
 	bit 7,a		;20b5
 	jr z,@l20c0h		;20b7
 	ld a,(ix + entity_t.cpu_sub_state)		;20b9
@@ -336,7 +336,7 @@ sub_cpu_state_baseline_defense:
 	jr nz,@l20dfh		;20d0
 	ld (ix + entity_t.cpu_state),004h		;20d2
 	ld (ix + entity_t.shot_button),000h		;20d6
-	ld (iy+033h),005h		;20da
+	ld (iy + entity_t.cpu_sub_state),005h		;20da
 	ret			;20de
 @l20dfh:
 	bit 0,(ix + entity_t.id)		;20df
@@ -346,14 +346,14 @@ sub_cpu_state_baseline_defense:
 	ld l,000h		;20ea
 	ld h,a			;20ec
 	ld de,02800h		;20ed
-	call sub_221eh_collision_broad		;20f0
+	call sub_game_cpu_calculate_intercept_direction_1		;20f0
 	ld (ix + entity_t.input_dirs),a		;20f3
 	call sub_game_cpu_evaluate_y_dist_1		;20f6
 	ld a,(ix + entity_t.hit_readiness)		;20f9
 	and a			;20fc
 	ret z			;20fd
 	ld (ix + entity_t.shot_button),a		;20fe
-	ld (iy+033h),005h		;2101
+	ld (iy + entity_t.cpu_sub_state),005h		;2101
 	ret			;2105
 @l2106h:
 	ld e,0b0h		;2106
@@ -361,7 +361,7 @@ sub_cpu_state_baseline_defense:
 	ld l,000h		;210b
 	ld h,a			;210d
 	ld de,000b0h		;210e
-	call sub_2298h_collision		;2111
+	call sub_game_cpu_calculate_intercept_direction_2		;2111
 	ld (ix + entity_t.input_dirs),a		;2114
 	call sub_game_cpu_evaluate_y_dist_2		;2117
 	ld a,(ix + entity_t.hit_readiness)		;211a
@@ -389,11 +389,11 @@ sub_cpu_state_doubles_cover_1:
 	ld (ix + entity_t.cpu_state),005h		;2146
 	ret			;214a
 @l214bh:
-	ld b,(ix+02fh)		;214b
-	ld a,(iy+015h)		;214e
+	ld b,(ix + entity_t.x_div_pos)		;214b
+	ld a,(iy + entity_t.input_dirs)		;214e
 	and 00ch		;2151
 	jr nz,@l2162h		;2153
-	ld a,(iy+02fh)		;2155
+	ld a,(iy + entity_t.x_div_pos)		;2155
 	cp 004h		;2158
 	ld b,008h		;215a
 	jr c,@l217ah		;215c
@@ -421,11 +421,11 @@ sub_cpu_state_doubles_cover_1:
 	ld (ix + entity_t.cpu_state),001h		;217e
 	ret			;2182
 sub_cpu_state_doubles_cover_2:
-	ld b,(ix+02fh)		;2183
-	ld a,(iy+015h)		;2186
+	ld b,(ix + entity_t.x_div_pos)		;2183
+	ld a,(iy + entity_t.input_dirs)		;2186
 	and 00ch		;2189
 	jr nz,@l219ah		;218b
-	ld a,(iy+02fh)		;218d
+	ld a,(iy + entity_t.x_div_pos)		;218d
 	cp 004h		;2190
 	ld b,008h		;2192
 	jr c,@l21b2h		;2194
@@ -463,7 +463,7 @@ sub_cpu_state_idle_wander:
 @l21cdh:
 	dec (ix + entity_t.cpu_state_timer)		;21cd
 	ret nz			;21d0
-	ld a,(0c000h)		;21d1
+	ld a,(state.match_state_flags)		;21d1
 	bit 3,a		;21d4
 	ld a,000h		;21d6
 	jr nz,@l21e6h		;21d8

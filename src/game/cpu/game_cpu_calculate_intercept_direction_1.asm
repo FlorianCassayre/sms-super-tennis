@@ -1,4 +1,4 @@
-sub_221eh_collision_broad:
+sub_game_cpu_calculate_intercept_direction_1:
 	ld a,(ball.foul_type)		;221e
 	and a			;2221
 	ld a,0		;2222

@@ -1,4 +1,4 @@
-l1227h:
+sub_game_racket_shot_unknown:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_8a		;1227
 	ld (psg_engine.track_request_id),a		;1229
 	ld hl,l1260h		;122c

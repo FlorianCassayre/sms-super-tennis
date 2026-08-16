@@ -1,5 +1,5 @@
 sub_027bh_joy:
-	ld a,(0c000h)		;027b
+	ld a,(state.match_state_flags)		;027b
 	bit 2,a		;027e
 	ret z			;0280
 	bit 3,a		;0281

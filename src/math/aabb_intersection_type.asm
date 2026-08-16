@@ -1,14 +1,14 @@
-l1769h:
+aabb_intersection_type_1:
 	.DB $00		;1769
 	.DB $00		;176a
 	.DB $04		;176b
 	.DB $03		;176c
-l176dh:
+aabb_intersection_type_2:
 	.DB $00		;176d
 	.DB $01		;176e
 	.DB $06		;176f
 	.DB $05		;1770
-l1771h:
+aabb_intersection_type_3:
 	.DB $00		;1771
 	.DB $02		;1772
 	.DB $08		;1773

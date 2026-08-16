@@ -1,4 +1,4 @@
-l101fh_racket_hit:
+sub_game_racket_shot_serve:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		;101f
 	ld (psg_engine.track_request_id),a		;1021
 	ld hl,l10ebh		;1024
@@ -97,7 +97,6 @@ l10a0h:
 	pop hl			;10a8
 	ld (ball.z_vel),hl		;10a9
 	pop hl			;10ac
-l10adh:
 	ld (ball.z_gravity),hl		;10ad
 	jp sub_l1362h_ball		;10b0
 l10b3h:

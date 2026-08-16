@@ -1,14 +1,14 @@
 sub_game_player_read_input:
-	ld a,(0c000h)		;265e
+	ld a,(state.match_state_flags)		;265e
 	bit 3,a		;2661
 	jr z,l2678h		;2663
-	ld a,(ix+028h)		;2665
+	ld a,(ix + entity_t.shot_button)		;2665
 	rla			;2668
 	rla			;2669
 	rla			;266a
 	rla			;266b
 	and 030h		;266c
-	ld e,(ix+015h)		;266e
+	ld e,(ix + entity_t.input_dirs)		;266e
 	or e			;2671
 	and 03fh		;2672
 	ld c,a			;2674
@@ -20,7 +20,7 @@ l2678h:
 	ld b,a			;267b
 	ld a,(joy.1.current)		;267c
 	ld c,a			;267f
-	ld a,(ix+001h)		;2680
+	ld a,(ix + entity_t.id)		;2680
 	and 002h		;2683
 	jr z,l268fh		;2685
 	ld a,(joy.2.pressed)		;2687

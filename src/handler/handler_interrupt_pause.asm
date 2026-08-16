@@ -1,4 +1,4 @@
-nmi_pause_handler:
+handler_interrupt_pause:
 	push af			;0066
 	ld a,(0c000h)		;0067
 	and 00ch		;006a
@@ -16,4 +16,4 @@ nmi_pause_handler:
 	pop af			;0082
 	retn		;0083
 
-.ASSERT nmi_pause_handler == $0066, LDERROR
+.ASSERT handler_interrupt_pause == $0066, LDERROR

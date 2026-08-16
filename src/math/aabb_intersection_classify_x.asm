@@ -1,5 +1,5 @@
-sub_classify_zone:
-	ld a,(0c084h)		;1854
+sub_aabb_intersection_classify_x:
+	ld a,(state.aabb_1.x_min)		;1854
 	cp e			;1857
 	jr z,l186fh		;1858
 	jr c,l1863h		;185a
@@ -8,7 +8,7 @@ sub_classify_zone:
 	jr c,l1875h		;185f
 	jr l186dh		;1861
 l1863h:
-	ld a,(0c085h)		;1863
+	ld a,(state.aabb_1.x_max)		;1863
 	cp e			;1866
 	jr z,l1872h		;1867
 	jr nc,l1872h		;1869

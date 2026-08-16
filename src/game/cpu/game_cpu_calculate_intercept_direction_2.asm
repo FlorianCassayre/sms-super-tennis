@@ -1,4 +1,4 @@
-sub_2298h_collision:
+sub_game_cpu_calculate_intercept_direction_2:
 	ld a,(ball.foul_type)		;2298
 	and a			;229b
 	ld a,000h		;229c

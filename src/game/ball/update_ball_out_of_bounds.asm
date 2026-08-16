@@ -7,7 +7,7 @@ sub_update_ball_out_of_bounds:
 	cp (hl)			;0e89
 	jr nc,@ball_is_out		;0e8a
 	inc hl			;0e8c
-	ld a,(0c000h)		;0e8d
+	ld a,(state.match_state_flags)		;0e8d
 	bit 7,a		;0e90
 	jr z,@check_x_bounds		;0e92
 	inc hl			;0e94

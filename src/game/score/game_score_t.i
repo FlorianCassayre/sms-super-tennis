@@ -16,9 +16,13 @@
 	set_current_index DB		;c48a
 	point_fault_flag DB		;c48b
 	ball_y_sector DB		;c48c
-	_unknown_1 DSB 8		;c48d
+	_unknown_1 DSB 4		;c48d
+	settings_cursor_y DB		;c491
+	_unknown_2 DB		;c492
+	settings_joystick DB		;c493
+	settings_joystick_previous DB		;c494
 	game_lost DB		;c495
-	_unknown_2 DB		;c496
+	tick_counter DB		;c496
 	winner_player DB		;c497
 	_unknown_3 DB		;c498
 	sets_won_top DB		;c499

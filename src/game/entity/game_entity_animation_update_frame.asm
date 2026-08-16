@@ -9,8 +9,8 @@ sub_game_entity_animation_update_frame:
 	inc hl			;064e
 	ld d,(hl)			;064f
 	ld a,(de)			;0650
-	ld (ix+005h),a		;0651
+	ld (ix + entity_t.sprite_count),a		;0651
 	inc de			;0654
-	ld (ix+006h),e		;0655
-	ld (ix+007h),d		;0658
+	ld (ix + entity_t.sprite_data_ptr),e		;0655
+	ld (ix + entity_t.sprite_data_ptr + 1),d		;0658
 	ret			;065b

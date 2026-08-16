@@ -2,7 +2,6 @@ sub_graphics_palette_load:
 	ld a,l			;0481
 	out (O_VDP_CTRL),a		;0482
 	ld a,0c0h		;0484
-l0486h:
 	or h			;0486
 	out (O_VDP_CTRL),a		;0487
 -:

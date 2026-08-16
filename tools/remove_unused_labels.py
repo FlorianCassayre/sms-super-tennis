@@ -1,30 +1,63 @@
 import re
+from pathlib import Path
 
-FILE = "src/super-tennis.asm"
+ROOT = Path('src')
 
-lines = open(FILE).readlines()
+files = [path for path in ROOT.rglob('*') if path.is_file()]
 
+# Collect every label declaration globally.
 labels = {}
-for i, line in enumerate(lines):
-    if line.rstrip().endswith(":"):
-        labels[line.rstrip()[:-1]] = i
 
-content = "".join(
-    line for i, line in enumerate(lines)
-    if i not in labels.values()
+for path in files:
+    lines = path.read_text().splitlines(keepends=True)
+
+    for i, line in enumerate(lines):
+        stripped = line.rstrip()
+        if stripped.endswith(':'):
+            label = stripped[:-1]
+            labels.setdefault(label, []).append((path, i))
+
+# Build one global content string without label declaration lines.
+declarations = {
+    (path, i)
+    for occurrences in labels.values()
+    for path, i in occurrences
+}
+
+content = ''.join(
+    line
+    for path in files
+    for i, line in enumerate(path.read_text().splitlines(keepends=True))
+    if (path, i) not in declarations
 )
 
-unused = []
+# Find labels which have no usage anywhere in the source tree.
+unused = [
+    label
+    for label in labels
+    if not re.search(
+        rf'(?<![A-Za-z0-9_]){re.escape(label)}(?![A-Za-z0-9_])',
+        content,
+    )
+]
 
-for label in labels:
-    if not re.search(rf"(?<![A-Za-z0-9_]){re.escape(label)}(?![A-Za-z0-9_])", content):
-        unused.append(label)
+# Remove only unused label declarations, and only from files containing them.
+unused_by_file = {}
 
-if len(unused) > 0:
-    with open(FILE, "w") as f:
+for label in unused:
+    for path, line_number in labels[label]:
+        unused_by_file.setdefault(path, set()).add(line_number)
+
+for path, line_numbers in unused_by_file.items():
+    lines = path.read_text().splitlines(keepends=True)
+
+    print(path)
+    with path.open('w') as f:
         f.writelines(
-            line for i, line in enumerate(lines)
-            if i not in [labels[label] for label in unused]
+            line
+            for i, line in enumerate(lines)
+            if i not in line_numbers
         )
 
-    print("\n".join(unused))
+print()
+print('\n'.join(unused))

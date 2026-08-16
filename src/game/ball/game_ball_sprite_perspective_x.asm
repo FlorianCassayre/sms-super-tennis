@@ -5,8 +5,8 @@ sub_game_ball_sprite_perspective_x:
 	ld hl,data.planes_5		;154e
 	add hl,de			;1551
 	ld a,(hl)			;1552
-	ld (ix+00bh),a		;1553
-	ld (ix+014h),a		;1556
+	ld (ix + entity_t.y_pos + 1),a		;1553
+	ld (ix + entity_t.y_pos_cache),a		;1556
 	ld l,a			;1559
 	ld h,000h		;155a
 	add hl,hl			;155c
@@ -45,8 +45,8 @@ sub_game_ball_sprite_perspective_x:
 	sbc hl,de		;158f
 	jr c,@out_of_bounds		;1591
 @store_x:
-	ld (ix+00dh),h		;1593
+	ld (ix + entity_t.x_pos + 1),h		;1593
 	ret			;1596
 @out_of_bounds:
-	ld (ix+00bh),0d8h		;1597
+	ld (ix + entity_t.y_pos + 1),0d8h		;1597
 	ret			;159b

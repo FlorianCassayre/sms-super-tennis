@@ -10,15 +10,15 @@ sub_game_entity_update_all:
 	ld d,(hl)			;071e
 	push de			;071f
 	pop ix		;0720
-	ld a,(ix+002h)		;0722
+	ld a,(ix + entity_t.state_index)		;0722
 	or a			;0725
-	jr z,l0732h		;0726
-	ld hl,l0732h		;0728
+	jr z,@no_action		;0726
+	ld hl,@no_action		;0728
 	; Push return address before jumping
 	push hl			;072b
 	ld hl,game_entity_state_jump_table - 2		;072c
 	jp l0807h_game_fsm		;072f
-l0732h:
+@no_action:
 	call sub_game_entity_animation_update_frame		;0732
 	ld de,game.entity_loop_index		;0735
 	ld a,(de)			;0738
@@ -26,7 +26,7 @@ l0732h:
 	ld b,000h		;073a
 	ld hl,0c1c4h		;073c
 	add hl,bc			;073f
-	ld a,(ix+001h)		;0740
+	ld a,(ix + entity_t.id)		;0740
 	ld (hl),a			;0743
 	inc c			;0744
 	ld a,c			;0745
@@ -68,8 +68,8 @@ game_entity_state_jump_table:
 	.DW sub_game_ball_shadow_update		;0785
 	.DW sub_game_ball_toss_update		;0787
 	.DW sub_game_ball_serve_perspective_update		;0789
-	.DW l101fh_racket_hit		;078b
-	.DW l11b1h_racket_hit		;078d
-	.DW l1227h		;078f
-	.DW l126ch_ball_high		;0791
-	.DW l12deh_racket_hit		;0793
+	.DW sub_game_racket_shot_serve		;078b
+	.DW sub_game_racket_shot_volley		;078d
+	.DW sub_game_racket_shot_unknown		;078f
+	.DW sub_game_racket_shot_lob		;0791
+	.DW sub_game_racket_shot_groundstroke		;0793

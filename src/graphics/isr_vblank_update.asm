@@ -89,3 +89,37 @@ l01feh:
 	pop af			;0210
 	ei			;0211
 	ret			;0212
+l0213h:
+	call sub_audio_silence		;0213
+	jp init@l00d6h		;0216
+l0219h:
+	ld c,018h		;0219
+	call sub_delay_vdp		;021b
+	call sub_graphics_palette_secondary_update_conditionally_first		;021e
+	jp l01feh		;0221
+l0224h:
+	ld c,018h		;0224
+	call sub_delay_vdp		;0226
+	call sub_graphics_palette_secondary_update_conditionally_first		;0229
+	jp l01fbh		;022c
+l022fh:
+	ld c,00dh		;022f
+	call sub_delay_vdp		;0231
+	jp l01e4h		;0234
+l0237h:
+	ld a,(0c011h)		;0237
+	or a			;023a
+	jr z,l025dh		;023b
+	.REPT 19
+		nop
+	.ENDR
+	ld a,010h		;0250
+	out (O_VDP_CTRL),a		;0252
+	ld a,0c0h		;0254
+	out (O_VDP_CTRL),a		;0256
+	ld a,(0001bh)		;0258
+	out (IO_VDP_DATA),a		;025b
+l025dh:
+	pop af			;025d
+	ei			;025e
+	ret			;025f

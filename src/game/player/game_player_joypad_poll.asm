@@ -1,5 +1,5 @@
 sub_game_player_joypad_poll:
-	ld a,(0c000h)		;26ab
+	ld a,(state.match_state_flags)		;26ab
 	bit 3,a		;26ae
 	ret nz			;26b0
 	ld a,(ix + entity_t.id)		;26b1

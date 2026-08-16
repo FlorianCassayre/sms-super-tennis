@@ -35,8 +35,7 @@
     _unknown_8 DB		; $26 ; ???
     ball_incoming DB		; $27
     shot_button DB		; $28
-    state_timer_low DB		; $29 ; ???
-    state_timer_high DB		; $2a ; ???
+    state_timer DW		; $29
     animation_pointer DW		; $2b
     tile_collision DB		; $2d ; Background tilemap collision mask
     y_div_pos DB		; $2e ; Appears to be a "rough" position spanning only a few units

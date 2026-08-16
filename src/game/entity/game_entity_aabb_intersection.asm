@@ -1,4 +1,10 @@
-sub_17f1h_aabb:
+sub_game_entity_aabb_intersection_index:
+	add a,a
+	add a,a
+	ld e,a
+	ld d,0
+	add hl,de
+sub_game_entity_aabb_intersection:
 	ld a,(ix + entity_t.y_pos + 1)		;17f1
 	add a,(hl)			;17f4
 	ld c,a			;17f5

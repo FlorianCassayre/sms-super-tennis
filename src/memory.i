@@ -18,10 +18,6 @@
 	score INSTANCEOF score_t
 .ENDE
 
-.ENUM $c491
-	gui INSTANCEOF gui_t
-.ENDE
-
 .ENUM $c500
 	ball INSTANCEOF ball_t
 .ENDE
@@ -33,4 +29,8 @@
 .ENUM $de00
 	psg_engine INSTANCEOF audio_psg_engine_t		;de00
 	psg_channel INSTANCEOF audio_psg_channel_t PSG_CHANNELS		;de05 de25 de45 de65 de85 dea5 dec5
+.ENDE
+
+.ENUM $dffe
+	stack_bottom DW	; Note: stack grows downwards
 .ENDE

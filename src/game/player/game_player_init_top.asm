@@ -8,10 +8,10 @@ sub_game_player_init_top:
 l1bc0h:
 	ld a,(hl)			;1bc0
 	and 03fh		;1bc1
-	cp 003h		;1bc3
+	cp entity_state_t.player_update_server_state_075f		;1bc3
 	ld a,000h		;1bc5
 	jr z,l1bd4h		;1bc7
-	ld a,(0c000h)		;1bc9
+	ld a,(state.match_state_flags)		;1bc9
 	bit 7,a		;1bcc
 	ld a,002h		;1bce
 	jr nz,l1bd4h		;1bd0
@@ -27,7 +27,7 @@ l1bd4h:
 	ld hl,l1c07h		;1bde
 	add hl,de			;1be1
 	ld a,(hl)			;1be2
-	ld (ix+030h),a		;1be3
+	ld (ix + entity_t.cpu_state),a		;1be3
 	inc hl			;1be6
 	ld e,(hl)			;1be7
 	ld hl,l1c1bh		;1be8
@@ -44,7 +44,7 @@ l1bd4h:
 	inc hl			;1bfd
 	ld a,(hl)			;1bfe
 	ld (ix + entity_t.x_pos + 1),a		;1bff
-	ld (ix + entity_t.state_index),014h		;1c02
+	ld (ix + entity_t.state_index),entity_state_t.player_action_update_top		;1c02
 	ret			;1c06
 l1c07h:
 	.DB $05		;1c07

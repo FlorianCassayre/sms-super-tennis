@@ -2,10 +2,10 @@ sub_game_player_update_animation:
 	ld a,(ix + entity_t.animation_flags_or_frame)		;2a69
 	and a			;2a6c
 	ret z			;2a6d
-	ld a,(ix+022h)		;2a6e
+	ld a,(ix + entity_t.animation_id)		;2a6e
 	bit 7,a		;2a71
 	jr nz,+++		;2a73
-	set 7,(ix+022h)		;2a75
+	set 7,(ix + entity_t.animation_id)		;2a75
 	ld e,a			;2a79
 	ld a,(ix + entity_t.id)		;2a7a
 	ld c,a			;2a7d
@@ -55,10 +55,10 @@ sub_game_player_update_animation:
 	ld (ix + entity_t.swing_duration),a		;2abf
 	inc hl			;2ac2
 	ld a,(hl)			;2ac3
-	ld (ix+01eh),a		;2ac4
+	ld (ix + entity_t.animation_frame),a		;2ac4
 	inc hl			;2ac7
 	ld (ix + entity_t.animation_pointer),l		;2ac8
-	ld (ix+02ch),h		;2acb
+	ld (ix + entity_t.animation_pointer + 1),h		;2acb
 	ld a,(hl)			;2ace
 	ld (ix + entity_t.sprite_id),a		;2acf
 	inc hl			;2ad2
@@ -89,11 +89,11 @@ sub_game_player_update_animation:
 	ret			;2aff
 +:
 	ld l,(ix + entity_t.animation_pointer)		;2b00
-	ld h,(ix+02ch)		;2b03
+	ld h,(ix + entity_t.animation_pointer + 1)		;2b03
 	inc hl			;2b06
 	inc hl			;2b07
 	ld (ix + entity_t.animation_pointer),l		;2b08
-	ld (ix+02ch),h		;2b0b
+	ld (ix + entity_t.animation_pointer + 1),h		;2b0b
 	ld a,(hl)			;2b0e
 	ld (ix + entity_t.sprite_id),a		;2b0f
 	inc hl			;2b12

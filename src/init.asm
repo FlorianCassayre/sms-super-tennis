@@ -1,18 +1,18 @@
 init:
 	di			;0085
-	ld sp,0dffeh		;0086
+	ld sp,stack_bottom		;0086
 	im 1		;0089
 	; Clear RAM range 0xc000-0xc03f
-	ld hl,0c000h		;008b
-	ld de,0c001h		;008e
+	ld hl,state		;008b
+	ld de,state + 1		;008e
 	ld bc,03fh		;0091
 	ld (hl),000h		;0094
 	ldir		;0096
 	; Sound card detection
 	call sub_audio_silence		;0098
-	ld a,092h		;009b
+	ld a,$92		;009b
 	out (0dfh),a		;009d
-	ld a,055h		;009f
+	ld a,$55		;009f
 	out (0deh),a		;00a1
 	in a,(0deh)		;00a3
 	cp 055h		;00a5
@@ -20,7 +20,7 @@ init:
 	jr z,+		;00a9
 	ld c,0ffh		;00ab
 +:
-	ld a,0aah		;00ad
+	ld a,$aa		;00ad
 	out (0deh),a		;00af
 	in a,(0deh)		;00b1
 	cp 0aah		;00b3
@@ -30,7 +30,7 @@ init:
 +:
 	or c			;00bb
 	ld (0c002h),a		;00bc
-	ld a,007h		;00bf
+	ld a,$07		;00bf
 	out (0deh),a		;00c1
 	ld b,00ah		;00c3
 	ld de,0ffffh		;00c5
@@ -42,7 +42,7 @@ init:
 	djnz --		;00ce
 	call sub_hardware_self_test		;00d0
 	ld (state.hardware_type),a		;00d3
--:
+@l00d6h:
 	di			;00d6
 	ld sp,0dffeh		;00d7
 	xor a			;00da
@@ -97,38 +97,3 @@ init:
 	call sub_enable_display		;015e
 	ei			;0161
 	jp game_fsm		;0162
-.INCLUDE "graphics/isr_vblank_update.asm"
-l0213h:
-	call sub_audio_silence		;0213
-	jp -		;0216
-l0219h:
-	ld c,018h		;0219
-	call sub_delay_vdp		;021b
-	call sub_graphics_palette_secondary_update_conditionally_first		;021e
-	jp l01feh		;0221
-l0224h:
-	ld c,018h		;0224
-	call sub_delay_vdp		;0226
-	call sub_graphics_palette_secondary_update_conditionally_first		;0229
-	jp l01fbh		;022c
-l022fh:
-	ld c,00dh		;022f
-	call sub_delay_vdp		;0231
-	jp l01e4h		;0234
-l0237h:
-	ld a,(0c011h)		;0237
-	or a			;023a
-	jr z,l025dh		;023b
-	.REPT 19
-		nop
-	.ENDR
-	ld a,010h		;0250
-	out (O_VDP_CTRL),a		;0252
-	ld a,0c0h		;0254
-	out (O_VDP_CTRL),a		;0256
-	ld a,(0001bh)		;0258
-	out (IO_VDP_DATA),a		;025b
-l025dh:
-	pop af			;025d
-	ei			;025e
-	ret			;025f

@@ -9,13 +9,13 @@ sub_game_umpire_event_process:
 	ld a,c			;2eeb
 	and 003h		;2eec
 	cp 000h		;2eee
-	jp z,sub_game_umpire_event_process_0		;2ef0
+	jp z,sub_game_umpire_event_process_in		;2ef0
 	cp 001h		;2ef3
-	jp z,sub_game_umpire_event_process_1		;2ef5
+	jp z,sub_game_umpire_event_process_out		;2ef5
 	cp 002h		;2ef8
-	jp z,sub_game_umpire_event_process_2		;2efa
+	jp z,sub_game_umpire_event_process_fault		;2efa
 	cp 003h		;2efd
-	jp z,sub_game_umpire_event_process_3		;2eff
+	jp z,sub_game_umpire_event_process_net		;2eff
 	jr sub_game_umpire_event_process_default		;2f02
 l2f04h:
 	ld a,1		;2f04
@@ -25,14 +25,14 @@ l2f04h:
 	ld (score.announcement_step),a		;2f0d
 sub_game_umpire_event_process_default:
 	ret			;2f10
-sub_game_umpire_event_process_0:
+sub_game_umpire_event_process_in:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_in		;2f11
 	ld (psg_engine.track_request_id),a		;2f13
 	xor a			;2f16
-	ld (0c48bh),a		;2f17
+	ld (score.point_fault_flag),a		;2f17
 	ld c,b			;2f1a
 	ld b,000h		;2f1b
-	ld hl,0c488h		;2f1d
+	ld hl,score.point		;2f1d
 	add hl,bc			;2f20
 	inc (hl)			;2f21
 	ld hl,03906h		;2f22
@@ -45,14 +45,14 @@ sub_game_umpire_event_process_0:
 	ld a,001h		;2f35
 	ld (score.gui_update_flag),a		;2f37
 	jp l2f04h		;2f3a
-sub_game_umpire_event_process_1:
+sub_game_umpire_event_process_out:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_out		;2f3d
 	ld (psg_engine.track_request_id),a		;2f3f
 	xor a			;2f42
-	ld (0c48bh),a		;2f43
+	ld (score.point_fault_flag),a		;2f43
 	ld c,b			;2f46
 	ld b,0		;2f47
-	ld hl,0c489h		;2f49
+	ld hl,score.point.top		;2f49
 	xor a			;2f4c
 	sbc hl,bc		;2f4d
 	inc (hl)			;2f4f
@@ -66,14 +66,14 @@ sub_game_umpire_event_process_1:
 	ld a,001h		;2f63
 	ld (score.gui_update_flag),a		;2f65
 	jp l2f04h		;2f68
-sub_game_umpire_event_process_3:
+sub_game_umpire_event_process_net:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_99		;2f6b
 	ld (psg_engine.track_request_id),a		;2f6d
 	xor a			;2f70
-	ld (0c48bh),a		;2f71
+	ld (score.point_fault_flag),a		;2f71
 	ld c,b			;2f74
 	ld b,000h		;2f75
-	ld hl,0c489h		;2f77
+	ld hl,score.point.top		;2f77
 	xor a			;2f7a
 	sbc hl,bc		;2f7b
 	inc (hl)			;2f7d
@@ -87,14 +87,14 @@ sub_game_umpire_event_process_3:
 	ld a,001h		;2f91
 	ld (score.gui_update_flag),a		;2f93
 	jp l2f04h		;2f96
-sub_game_umpire_event_process_2:
+sub_game_umpire_event_process_fault:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_fault		;2f99
 	ld (psg_engine.track_request_id),a		;2f9b
-	ld hl,0c48bh		;2f9e
+	ld hl,score.point_fault_flag		;2f9e
 	inc (hl)			;2fa1
 	ld a,(hl)			;2fa2
 	cp 002h		;2fa3
-	jp nc,l2fc3h		;2fa5
+	jp nc,sub_game_umpire_event_process_double_fault		;2fa5
 	ld hl,03904h		;2fa8
 	ld (score.vram_dest),hl		;2fab
 	ld hl,data.umpire_settings.umpire_fault		;2fae
@@ -105,12 +105,12 @@ sub_game_umpire_event_process_2:
 	ld a,001h		;2fbb
 	ld (score.gui_update_flag),a		;2fbd
 	jp sub_game_umpire_event_process_default		;2fc0
-l2fc3h:
+sub_game_umpire_event_process_double_fault:
 	xor a			;2fc3
 	ld (hl),a			;2fc4
 	ld c,b			;2fc5
 	ld b,000h		;2fc6
-	ld hl,0c489h		;2fc8
+	ld hl,score.point.top		;2fc8
 	xor a			;2fcb
 	sbc hl,bc		;2fcc
 	inc (hl)			;2fce

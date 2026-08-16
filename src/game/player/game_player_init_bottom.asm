@@ -1,5 +1,5 @@
 sub_game_player_init_bottom:
-	bit 1,(ix+001h)		;23ff
+	bit 1,(ix + entity_t.id)		;23ff
 	ld hl,entities.player.1.bottom.state_index		;2403
 	ld e,004h		;2406
 	jr nz,l240fh		;2408
@@ -8,10 +8,10 @@ sub_game_player_init_bottom:
 l240fh:
 	ld a,(hl)			;240f
 	and 03fh		;2410
-	cp 003h		;2412
+	cp entity_state_t.player_update_server_state_075f		;2412
 	ld a,002h		;2414
 	jr z,l2423h		;2416
-	ld a,(0c000h)		;2418
+	ld a,(state.match_state_flags)		;2418
 	bit 7,a		;241b
 	ld a,000h		;241d
 	jr nz,l2423h		;241f
@@ -28,24 +28,24 @@ l2423h:
 	ld hl,l2458h		;242f
 	add hl,de			;2432
 	ld a,(hl)			;2433
-	ld (ix+030h),a		;2434
+	ld (ix + entity_t.cpu_state),a		;2434
 	inc hl			;2437
 	ld e,(hl)			;2438
 	ld hl,0246ch		;2439
 	add hl,de			;243c
 	ld a,(hl)			;243d
-	ld (ix+00ah),a		;243e
+	ld (ix + entity_t.y_pos),a		;243e
 	inc hl			;2441
 	ld a,(hl)			;2442
-	ld (ix+00bh),a		;2443
-	ld (ix+014h),a		;2446
+	ld (ix + entity_t.y_pos + 1),a		;2443
+	ld (ix + entity_t.y_pos_cache),a		;2446
 	inc hl			;2449
 	ld a,(hl)			;244a
-	ld (ix+00ch),a		;244b
+	ld (ix + entity_t.x_pos),a		;244b
 	inc hl			;244e
 	ld a,(hl)			;244f
-	ld (ix+00dh),a		;2450
-	ld (ix+002h),013h		;2453
+	ld (ix + entity_t.x_pos + 1),a		;2450
+	ld (ix + entity_t.state_index),013h		;2453
 	ret			;2457
 
 l2458h:

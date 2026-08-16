@@ -2,7 +2,7 @@ sub_game_racket_process_swing_contact:
 	ld a,(ix + entity_t.time_before_serve)		;2c40
 	and a			;2c43
 	jr nz,+		;2c44
-	res 7,(ix+019h)		;2c46
+	res 7,(ix + entity_t.state_flags)		;2c46
 	bit 7,(ix + entity_t.racket_contact_flag)		;2c4a
 	ret z			;2c4e
 +:
@@ -97,7 +97,7 @@ sub_game_racket_process_swing_contact:
 	ld hl,game_ball_trajectory_data_axis_b		;2d05
 	call sub_2d0eh_movement		;2d08
 	jp l2d35h		;2d0b
-	.INCLUDE "physics/2d0eh_movement.asm"
+	.INCLUDE "game/racket/2d0eh_movement.asm"
 l2d35h:
 	ld a,(ix + entity_t.id)		;2d35
 	and 001h		;2d38
@@ -108,7 +108,7 @@ l2d35h:
 	ld b,000h		;2d42
 +:
 	ld de,040h		;2d44
-	ld hl,0c227h		;2d47
+	ld hl,entities.player.1.bottom.ball_incoming		;2d47
 	ld (hl),a			;2d4a
 	add hl,de			;2d4b
 	ld (hl),b			;2d4c

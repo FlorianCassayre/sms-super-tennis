@@ -5,7 +5,6 @@ mul_de_bc_loop:
 	add hl,hl			;03fc
 	ex de,hl			;03fd
 	adc hl,hl		;03fe
-l0400h:
 	ex de,hl			;0400
 	jr nc,+		;0401
 	add hl,bc			;0403
@@ -13,6 +12,5 @@ l0400h:
 	inc de			;0406
 +:
 	dec a			;0407
-sub_0408h:
 	jr nz,mul_de_bc_loop		;0408
 	ret			;040a

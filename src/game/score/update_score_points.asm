@@ -82,7 +82,7 @@ sub_update_score_points:
 	call sub_cp_ram_vram		;3086
 	ei			;3089
 	pop bc			;308a
-	ld hl,0c488h		;308b
+	ld hl,score.point		;308b
 	ld de,039f8h		;308e
 	djnz @draw_bottom_score_digit		;3091
 	ld a,(hl)			;3093
@@ -92,7 +92,7 @@ sub_update_score_points:
 	jp nz,@finish_score_update		;3098
 	sub b			;309b
 	jp nz,@finish_score_update		;309c
-	ld a,(0c48bh)		;309f
+	ld a,(score.point_fault_flag)		;309f
 	cp 000h		;30a2
 	jr nz,@finish_score_update		;30a4
 	ld a,001h		;30a6

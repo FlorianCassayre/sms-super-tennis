@@ -2,4 +2,5 @@
 	_unknown DB
 	net DB
 	wall DB
+	body DB
 .ENDST

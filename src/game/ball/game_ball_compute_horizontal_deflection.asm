@@ -1,6 +1,5 @@
 sub_game_ball_compute_horizontal_deflection:
 	ld a,e			;160a
-l160bh:
 	sub 018h		;160b
 	jr nc,+		;160d
 	ld a,000h		;160f

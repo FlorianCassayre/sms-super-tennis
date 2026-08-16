@@ -10,7 +10,7 @@ sub_game_cpu_evaluate_y_dist_1:
 	and a			;2331
 	jr nz,@store_dir		;2332
 @evaluate:
-	ld e,(ix+00bh)		;2334
+	ld e,(ix + entity_t.y_pos + 1)		;2334
 	ld a,(0c401h)		;2337
 	cp 01ch		;233a
 	jr nz,@check_y_dist		;233c
@@ -27,7 +27,7 @@ sub_game_cpu_evaluate_y_dist_1:
 	neg		;234e
 @check_cpu_state:
 	ld b,a			;2350
-	ld a,(ix+02eh)		;2351
+	ld a,(ix + entity_t.y_div_pos)		;2351
 	ld e,a			;2354
 	ld c,00ch		;2355
 	cp 006h		;2357
@@ -60,5 +60,5 @@ sub_game_cpu_evaluate_y_dist_1:
 	jr c,@store_dir		;2385
 	ld b,002h		;2387
 @store_dir:
-	ld (ix+018h),b		;2389
+	ld (ix + entity_t.hit_readiness),b		;2389
 	ret			;238c

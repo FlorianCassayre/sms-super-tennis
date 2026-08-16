@@ -1,0 +1,32 @@
+.STRUCT entity_state_t
+	none DB	; $00
+	player_init_bottom DB		;075b $01
+    player_init_top DB		;075d $02
+    player_update_server_state_075f DB		;075f $03
+    l1af2h_0761 DB		;0761 $04
+    l1b68h_0763 DB		;0763 $05
+    player_update_server_state_0765 DB		;0765 $06
+    l1af2h_0767 DB		;0767 $07
+    l1b68h_0769 DB		;0769 $08
+    player_update_server_state_076b DB		;076b $09
+    l1bafh_076d_nop DB		;076d $0a
+    l1bafh_076f_nop DB		;076f $0b
+    l1bafh_0771_nop DB		;0771 $0c
+    l1bafh_0773_nop DB		;0773 $0d
+    l1bafh_0775_nop DB		;0775 $0e
+    l1bafh_0777_nop DB		;0777 $0f
+    l1bafh_0779_nop DB		;0779 $10
+    l1bafh_077b_nop DB		;077b $11
+    l1bafh_077d_nop DB		;077d $12
+    player_update DB		;077f $13
+    player_action_update_top DB		;0781 $14
+    ball_normal_update DB		;0783 $15
+    ball_shadow_update DB		;0785 $16
+    ball_toss_update DB		;0787 $17
+    ball_serve_perspective_update DB		;0789 $18
+    racket_shot_serve DB		;078b $19
+    racket_shot_volley DB		;078d $1a
+    racket_shot_unknown DB		;078f $1b
+    racket_shot_lob DB		;0791 $1c
+    racket_shot_groundstroke DB		;0793 $1d
+.ENDST
