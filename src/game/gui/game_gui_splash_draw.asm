@@ -38,7 +38,7 @@ sub_game_gui_splash_draw:
 	call sub_rle_decompress_bitplanes_to_vram		;0862
 
 	; "Push [...] button" texts
-	ld hl,data_chunks_0		;0865
+	ld hl,gui_text_splash		;0865
 	call sub_upload_vram_chunks		;0868
 
 	; "(c) SEGA 1986" trademark

@@ -5,7 +5,7 @@ sub_audio_channel_update:
     	ret nz
     .ENDIF
 	call sub_audio_track_loader		;796f
-	call sub_798ch		;7972
+	call sub_audio_fade_out_update		;7972
 	ld ix,psg_channel		;7975
 	ld b,PSG_CHANNELS		;7979
 -:

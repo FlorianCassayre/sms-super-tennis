@@ -1,29 +1,16 @@
-	; Magic value
-	.DB "TMR SEGA"
+; ROM header
+.DB "TMR SEGA"
 
-	; Reserved
-	.DB $ff $ff
+; Reserved
+.DB $ff $ff
 
-	; Checksum
-	.IFDEF _J
-		.DB $a6
-		.DB $6f
-	.ENDIF
-	.IFDEF _UE
-		.DB $d4
-		.DB $88
-	.ENDIF
+; Checksum
+.DW HEADER_CHECKSUM
 
-	; Product code
-	.DB $07 $40
+; Product code + revision
+.DB (HEADER_PRODUCT_CODE >> 16) & $ff
+.DB (HEADER_PRODUCT_CODE >> 8) & $ff
+.DB (HEADER_PRODUCT_CODE & $ff) | HEADER_REVISION
 
-	; Version
-    .IFDEF _J
-    	.DB $00
-    .ENDIF
-    .IFDEF _UE
-    	.DB $01
-    .ENDIF
-
-	; Region code + ROM size
-	.DB $4c
+; Region code + ROM size
+.DB (HEADER_REGION << 4) | HEADER_ROM_SIZE

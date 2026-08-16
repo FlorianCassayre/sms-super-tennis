@@ -80,4 +80,4 @@ l09f7h:
 	ld (0c4b1h),a		;0a05
 	srl a		;0a08
 	ld (0c4b3h),a		;0a0a
-	jp sub_0abd_draw_tennis_court		;0a0d
+	jp sub_game_court_draw		;0a0d

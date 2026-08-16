@@ -1,3 +1,0 @@
-.equ RLE_END $00
-.equ RLE_LIT %10000000
-.equ RLE_REP %00000000

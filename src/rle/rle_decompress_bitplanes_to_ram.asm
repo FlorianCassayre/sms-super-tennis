@@ -1,0 +1,2 @@
+sub_rle_decompress_bitplanes_to_ram:
+	RLE_DECOMPRESS_BITPLANES sub_rle_decompress_stream_to_ram

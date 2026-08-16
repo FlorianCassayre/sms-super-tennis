@@ -65,7 +65,7 @@ audio_command_routine_end_track:
 	xor a			;7d5e
 	ld (psg_engine.priority_flag),a		;7d5f
 	ld (ix + audio_psg_channel_t.status_flags),a		;7d62
-	call sub_7db1h		;7d65
+	call sub_audio_channel_mute		;7d65
 	pop hl			;7d68
 	pop hl			;7d69
 	ret			;7d6a

@@ -1,0 +1,2 @@
+sub_rle_decompress_stream_to_ram:
+	RLE_DECOMPRESS_STREAM 0

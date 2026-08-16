@@ -682,7 +682,7 @@ audio_track_data_sound_ball_high:
 	.DB CMD_END_TRACK
 
 	.IFDEF _J
-	audio_track_japan_7b23:
+	audio_track_data_sound_racket_hit_legacy:
 		.DB 3
 		CHANNEL_HEADER $a8, $20, 1, @channel_1, $00, $00, $05, $0d
 		CHANNEL_HEADER $a8, $21, 1, @channel_2, $00, $00, $06, $0d

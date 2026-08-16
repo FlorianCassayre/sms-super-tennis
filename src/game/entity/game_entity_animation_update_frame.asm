@@ -3,7 +3,7 @@ sub_game_entity_animation_update_frame:
 	add a,a			;0645
 	ld e,a			;0646
 	ld d,000h		;0647
-	ld hl,unknown_table_0		;0649
+	ld hl,game_entity_animation_frame_data		;0649
 	add hl,de			;064c
 	ld e,(hl)			;064d
 	inc hl			;064e
