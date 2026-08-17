@@ -32,7 +32,7 @@ sub_compute_ball_x_velocity:
 	ld e,(hl)			;13d0
 	inc hl			;13d1
 	ld d,(hl)			;13d2
-	ld a,(game.last_hitter)		;13d3
+	ld a,(state.last_hitter)		;13d3
 	and 001h		;13d6
 	jr z,@store_vel		;13d8
 	xor a			;13da

@@ -2,10 +2,6 @@
 	state INSTANCEOF state_t
 .ENDE
 
-.ENUM $c040
-	game INSTANCEOF game_t
-.ENDE
-
 .ENUM $c1c0
 	joy INSTANCEOF joy_t 2	; c1c0 c1c1 c1c2 c1c3
 .ENDE

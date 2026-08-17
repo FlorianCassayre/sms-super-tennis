@@ -49,8 +49,8 @@ init:
 	ld (0c003h),a		;00db
 	ld (0c000h),a		;00de
 	ld (0c004h),a		;00e1
-	ld hl,game.match_flags		;00e4
-	ld de,game.current_player		;00e7
+	ld hl,state.match_flags		;00e4
+	ld de,state.current_player		;00e7
 	ld bc,01fbfh		;00ea
 	ld (hl),000h		;00ed
 	ldir		;00ef
@@ -77,23 +77,23 @@ init:
 	ld de,0c600h		;0124
 	ld hl,data_planes_ball		;0127
 	call sub_rle_decompress_bitplanes_to_ram		;012a
-	ld de,data.planes_3		;012d
-	ld hl,data_planes_3_0		;0130
+	ld de,data.mark3_name		;012d
+	ld hl,data_planes_mark3_name		;0130
 	call sub_rle_decompress_bitplanes_to_ram		;0133
-	ld de,data.planes_4		;0136
-	ld hl,data_planes_4_0		;0139
+	ld de,data.mark3		;0136
+	ld hl,data_planes_mark3		;0139
 	call sub_rle_decompress_bitplanes_to_ram		;013c
 	ld de,data.umpire_settings		;013f
 	ld hl,data_planes_umpire_settings		;0142
 	call sub_rle_decompress_bitplanes_to_ram		;0145
-	ld de,data.planes_5		;0148
-	ld hl,data_planes_5_0		;014b
+	ld de,data.projection		;0148
+	ld hl,data_planes_projection		;014b
 	call sub_rle_decompress_bitplanes_to_ram		;014e
 	call sub_graphics_name_fill_blank_tile		;0151
 	ld a,080h		;0154
 	ld (psg_engine.track_request_id),a		;0156
 	ld a,080h		;0159
-	ld (0c006h),a		;015b
+	ld (state.main_game_state),a		;015b
 	call sub_enable_display		;015e
 	ei			;0161
 	jp game_fsm		;0162

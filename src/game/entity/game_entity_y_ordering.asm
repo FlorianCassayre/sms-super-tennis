@@ -1,10 +1,10 @@
 sub_game_entity_y_ordering:
 	xor a			;05cc
-	ld (0c1cah),a		;05cd
+	ld (state.sort_outer_idx),a		;05cd
 	inc a			;05d0
-	ld (0c1cbh),a		;05d1
+	ld (state.sort_inner_idx),a		;05d1
 @loop_outer:
-	ld a,(0c1cah)		;05d4
+	ld a,(state.sort_outer_idx)		;05d4
 	ld e,a			;05d7
 	ld d,000h		;05d8
 	ld hl,0c1c4h		;05da
@@ -20,7 +20,7 @@ sub_game_entity_y_ordering:
 	ex de,hl			;05e8
 	ld c,(hl)			;05e9
 @loop_inner:
-	ld a,(0c1cbh)		;05ea
+	ld a,(state.sort_inner_idx)		;05ea
 	ld e,a			;05ed
 	ld d,000h		;05ee
 	ld hl,0c1c4h		;05f0
@@ -37,14 +37,14 @@ sub_game_entity_y_ordering:
 	cp c			;05ff
 	jr c,@no_swap		;0600
 	ld c,a			;0602
-	ld a,(0c1cah)		;0603
+	ld a,(state.sort_outer_idx)		;0603
 	ld e,a			;0606
 	ld d,000h		;0607
 	ld hl,0c1c4h		;0609
 	add hl,de			;060c
 	ld b,(hl)			;060d
 	push hl			;060e
-	ld a,(0c1cbh)		;060f
+	ld a,(state.sort_inner_idx)		;060f
 	ld e,a			;0612
 	ld hl,0c1c4h		;0613
 	add hl,de			;0616
@@ -53,18 +53,18 @@ sub_game_entity_y_ordering:
 	ld (de),a			;0619
 	ld (hl),b			;061a
 @no_swap:
-	ld a,(0c1cbh)		;061b
+	ld a,(state.sort_inner_idx)		;061b
 	inc a			;061e
-	ld (0c1cbh),a		;061f
+	ld (state.sort_inner_idx),a		;061f
 	cp 006h		;0622
 	jr nz,@loop_inner		;0624
-	ld a,(0c1cah)		;0626
+	ld a,(state.sort_outer_idx)		;0626
 	inc a			;0629
-	ld (0c1cah),a		;062a
+	ld (state.sort_outer_idx),a		;062a
 	cp 005h		;062d
 	ret z			;062f
 	inc a			;0630
-	ld (0c1cbh),a		;0631
+	ld (state.sort_inner_idx),a		;0631
 	jr @loop_outer		;0634
 
 entities_y_pos_cache:

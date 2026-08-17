@@ -6,9 +6,9 @@ sub_wait_a_frames:
 	ld b,a			;35ea
 -:
 	push bc			;35eb
-	ld a,(game.sound_wait_flag)		;35ec
+	ld a,(state.sound_wait_flag)		;35ec
 	or 080h		;35ef
-	ld (game.sound_wait_flag),a		;35f1
+	ld (state.sound_wait_flag),a		;35f1
 	call sub_audio_event_wait		;35f4
 	pop bc			;35f7
 	djnz -		;35f8

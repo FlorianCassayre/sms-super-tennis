@@ -7,7 +7,7 @@ sub_game_racket_process_swing_contact:
 	ret z			;2c4e
 +:
 	ld b,a			;2c4f
-	ld a,(0c519h)		;2c50
+	ld a,(ball.foul_triggered_flag)		;2c50
 	cp 001h		;2c53
 	ret z			;2c55
 	bit 7,(ix + entity_t.racket_contact_flag)		;2c56
@@ -16,10 +16,10 @@ sub_game_racket_process_swing_contact:
 	and 07fh		;2c5e
 	cp 005h		;2c60
 	jr z,+		;2c62
-	ld a,(game.match_flags)		;2c64
+	ld a,(state.match_flags)		;2c64
 	bit 0,a		;2c67
 	jr z,+		;2c69
-	ld a,(game.current_player)		;2c6b
+	ld a,(state.current_player)		;2c6b
 	cp (ix + entity_t.id)		;2c6e
 	jr nz,+		;2c71
 	ld hl,0c000h		;2c73

@@ -23,9 +23,15 @@
     answer_12345 DSW 17	; cbc6
 .ENDST
 
+.STRUCT projection_t
+	depth_to_screen_y DSB 256	;cbe8
+	screen_y_to_scale DSB VDP_NAME_TABLE_COLUMNS * VDP_TILE_SIZE * 4	;cce8
+	screen_y_to_depth DSB VDP_NAME_TABLE_ROWS_VISIBLE * VDP_TILE_SIZE	;d0e8
+.ENDST
+
 .STRUCT data_t
-	planes_3 DSB 76		;c720
-	planes_4 DSB 224		;c76c
+	mark3_name DSB 76		;c720
+	mark3 DSB 224		;c76c
 	umpire_settings INSTANCEOF umpire_settings_t		;c84c
-	planes_5 DSB 1472		;cbe8
+	projection INSTANCEOF projection_t		;cbe8
 .ENDST

@@ -1,3 +1,0 @@
-	.DB RLE_REP | 19		;4b71
-	.DB $01		;4b72
-	.DB RLE_END		;4b73

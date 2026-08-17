@@ -28,7 +28,7 @@ sub_player_ball_collision:
 sub_racket_hit_trajectory:
 	bit 7,(ix + entity_t.state_flags)		;18b5
 	jp z,@miss		;18b9
-	ld a,(state.hit_flags)		;18bc
+	ld a,(state.match_flags)		;18bc
 	rlca			;18bf
 	jp nc,@miss		;18c0
 	ld hl,game_racket_aabb_relative		;18c3
@@ -58,7 +58,7 @@ sub_racket_hit_trajectory:
 	inc hl			;18f6
 	cp b			;18f7
 	jp nc,@miss		;18f8
-	ld hl,state.hit_flags		;18fb
+	ld hl,state.match_flags		;18fb
 	bit 0,(hl)		;18fe
 	jr z,@hit_success		;1900
 	ld bc,game_racket_shot_result_table_1		;1902
@@ -70,7 +70,7 @@ sub_racket_hit_trajectory:
 	jr z,@check_serve_result		;1910
 	ld bc,game_racket_shot_result_table_2		;1912
 @check_serve_result:
-	ld a,(state.shot_type)		;1915
+	ld a,(state.current_player)		;1915
 	add a,a			;1918
 	add a,a			;1919
 	ld e,a			;191a
@@ -84,7 +84,7 @@ sub_racket_hit_trajectory:
 	jp z,@hit_success		;1925
 	dec a			;1928
 	jp z,@miss		;1929
-	ld hl,state.hit_flags		;192c
+	ld hl,state.match_flags		;192c
 	res 0,(hl)		;192f
 	dec a			;1931
 	jr z,@fault_type_2		;1932
@@ -110,7 +110,7 @@ sub_racket_hit_trajectory:
 	ld (ball.bounces_count),a		;1959
 	ld (ball.foul_triggered_flag),a		;195c
 	ld a,(ix + entity_t.id)		;195f
-	ld (state.ball_x_dir_flag),a		;1962
+	ld (state.last_hitter),a		;1962
 	scf			;1965
 	ret			;1966
 @miss:
@@ -132,11 +132,11 @@ sub_racket_hit_trajectory:
 	jr c,@no_body_collision		;198b
 	cp d			;198d
 	jr nc,@no_body_collision		;198e
-	ld a,(game.match_flags)		;1990
+	ld a,(state.match_flags)		;1990
 	bit 0,a		;1993
 	jr z,@trigger_body_foul		;1995
 	ld c,001h		;1997
-	ld a,(game.current_player)		;1999
+	ld a,(state.current_player)		;1999
 	and c			;199c
 	ld e,a			;199d
 	ld a,(ix + entity_t.id)		;199e

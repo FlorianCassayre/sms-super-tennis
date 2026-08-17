@@ -1,8 +1,8 @@
 sub_game_ball_sprite_perspective_x:
-	ld a,(0c509h)		;1548
+	ld a,(ball.y_pos + 1)		;1548
 	ld e,a			;154b
 	ld d,000h		;154c
-	ld hl,data.planes_5		;154e
+	ld hl,data.projection		;154e
 	add hl,de			;1551
 	ld a,(hl)			;1552
 	ld (ix + entity_t.y_pos + 1),a		;1553
@@ -10,7 +10,7 @@ sub_game_ball_sprite_perspective_x:
 	ld l,a			;1559
 	ld h,000h		;155a
 	add hl,hl			;155c
-	ld de,0cce8h		;155d
+	ld de,data.projection.screen_y_to_scale		;155d
 	add hl,de			;1560
 	ld e,(hl)			;1561
 	inc hl			;1562

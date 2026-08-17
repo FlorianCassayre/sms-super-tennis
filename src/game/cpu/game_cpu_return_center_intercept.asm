@@ -1,4 +1,4 @@
-sub_238dh:
+sub_game_cpu_return_center_intercept:
 	ld a,(iy + entity_t.x_div_pos)		;238d
 	cp 004h		;2390
 	ld hl,0a000h		;2392

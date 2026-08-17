@@ -1,5 +1,5 @@
 sub_game_ball_update_physics:
-	ld a,(state.hit_flags)		;14b4
+	ld a,(state.match_flags)		;14b4
 	rlca			;14b7
 	ret nc			;14b8
 	ld bc,(ball.z_gravity)		;14b9
@@ -23,7 +23,7 @@ sub_game_ball_update_physics:
 	ld a,BALL_MAX_BOUNCES		;14e6
 	cp (hl)			;14e8
 	jr nc,@evaluate_bounce_rules		;14e9
-	ld hl,state.hit_flags		;14eb
+	ld hl,state.match_flags		;14eb
 	res 7,(hl)		;14ee
 	ret			;14f0
 @evaluate_bounce_rules:

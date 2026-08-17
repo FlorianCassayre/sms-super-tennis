@@ -6,7 +6,7 @@
 sub_game_player_palette_load_clothes:
 	ld hl,l35dch		;35c6
 	xor a			;35c9
-	ld a,(state.maybe_random_seed)		;35ca
+	ld a,(state.settings.computer_level)		;35ca
 	rla			;35cd
 	ld e,a			;35ce
 	ld d,0		;35cf

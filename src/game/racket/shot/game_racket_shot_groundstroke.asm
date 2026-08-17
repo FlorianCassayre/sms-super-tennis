@@ -10,7 +10,7 @@ sub_game_racket_shot_groundstroke:
 	ld e,(hl)			;12ee
 	inc hl			;12ef
 	ld d,(hl)			;12f0
-	ld a,(0c509h)		;12f1
+	ld a,(ball.y_pos + 1)		;12f1
 	sub 080h		;12f4
 	jr nc,l12fah		;12f6
 	neg		;12f8
@@ -38,7 +38,7 @@ l1308h:
 	ld c,(hl)			;1314
 	inc hl			;1315
 	ld b,(hl)			;1316
-	ld a,(game.last_hitter)		;1317
+	ld a,(state.last_hitter)		;1317
 	and 001h		;131a
 	jr z,l1325h		;131c
 	xor a			;131e
@@ -52,6 +52,7 @@ l1325h:
 	ld c,000h		;1330
 	call sub_compute_ball_x_velocity		;1332
 	jp sub_l1362h_ball		;1335
+
 l1338h:
 	.DB $3e		;1338
 	.DB $13		;1339

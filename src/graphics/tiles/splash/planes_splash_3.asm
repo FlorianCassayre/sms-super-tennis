@@ -1,9 +1,9 @@
-	.DB RLE_REP | 127		;3ef1
-	.DB %00000000		;3ef2
-	.DB RLE_REP | 127		;3ef3
-	.DB %00000000		;3ef4
-	.DB RLE_REP | 127		;3ef5
-	.DB %00000000		;3ef6
-	.DB RLE_REP | 35		;3ef7
-	.DB %00000000		;3ef8
-	.DB RLE_END		;3ef9
+.DB RLE_REP | 127		;3ef1
+.DB %00000000		;3ef2
+.DB RLE_REP | 127		;3ef3
+.DB %00000000		;3ef4
+.DB RLE_REP | 127		;3ef5
+.DB %00000000		;3ef6
+.DB RLE_REP | 35		;3ef7
+.DB %00000000		;3ef8
+.DB RLE_END		;3ef9

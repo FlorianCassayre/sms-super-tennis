@@ -1,5 +1,5 @@
 sub_joy_debounce:
-	ld a,(0c006h)		;0795
+	ld a,(state.main_game_state)		;0795
 	bit 7,a		;0798
 	ret z			;079a
 	and 00fh		;079b
@@ -17,7 +17,7 @@ sub_joy_debounce:
 	ld c,0d0h		;07b4
 ++:
 	ex af,af'			;07b6
-	ld hl,0c006h		;07b7
+	ld hl,state.main_game_state		;07b7
 	ld a,04fh		;07ba
 	and (hl)			;07bc
 	cp 041h		;07bd
@@ -31,14 +31,14 @@ sub_joy_debounce:
 	ld a,000h		;07cb
 	ld (psg_engine.track_request_id),a		;07cd
 	ld a,002h		;07d0
-	ld (0c006h),a		;07d2
+	ld (state.main_game_state),a		;07d2
 	ret			;07d5
 +:
 	res 6,a		;07d6
 	cp 001h		;07d8
 	ret z			;07da
 	ld a,087h		;07db
-	ld (0c006h),a		;07dd
+	ld (state.main_game_state),a		;07dd
 	ex af,af'			;07e0
 	ld (0c009h),a		;07e1
 	ld a,000h		;07e4
@@ -46,7 +46,7 @@ sub_joy_debounce:
 	ret			;07e9
 +++:
 	ex af,af'			;07ea
-	ld a,(0c006h)		;07eb
+	ld a,(state.main_game_state)		;07eb
 	and 00fh		;07ee
 	cp 001h		;07f0
 	ret nz			;07f2

@@ -36,17 +36,17 @@ isr_vblank_update:
 	or a			;019f
 	jp nz,l0224h		;01a0
 	ld c,0beh		;01a3
-	ld a,(game.sound_wait_flag)		;01a5
+	ld a,(state.sound_wait_flag)		;01a5
 	rlca			;01a8
 	jp nc,l022fh		;01a9
 	ld hl,01fc0h		;01ac
 	call sub_set_vdp_write_addr		;01af
-	ld hl,(0c514h)		;01b2
+	ld hl,(ball.sprite_vram_pointer)		;01b2
 	ld b,020h		;01b5
 	otir		;01b7
 	ld hl,01fe0h		;01b9
 	call sub_set_vdp_write_addr		;01bc
-	ld hl,(0c512h)		;01bf
+	ld hl,(ball.shadow_vram_pointer)		;01bf
 	ld b,020h		;01c2
 	otir		;01c4
 	ld hl,03f00h		;01c6
@@ -60,9 +60,9 @@ isr_vblank_update:
 	ld b,080h		;01dc
 	otir		;01de
 	xor a			;01e0
-	ld (game.sound_wait_flag),a		;01e1
+	ld (state.sound_wait_flag),a		;01e1
 l01e4h:
-	call sub_3543h		;01e4
+	call sub_game_umpire_head_rotation		;01e4
 	ld c,00ch		;01e7
 	call sub_delay_vdp		;01e9
 	call sub_graphics_palette_secondary_update_conditionally_first		;01ec
@@ -107,7 +107,7 @@ l022fh:
 	call sub_delay_vdp		;0231
 	jp l01e4h		;0234
 l0237h:
-	ld a,(0c011h)		;0237
+	ld a,(state.unknown_flag)		;0237
 	or a			;023a
 	jr z,l025dh		;023b
 	.REPT 19

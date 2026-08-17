@@ -2,9 +2,9 @@ sub_game_gui_win_special:
 	ld a,0d0h		;3607
 	ld (0c140h),a		;3609
 	ld (0c100h),a		;360c
-	ld a,(game.sound_wait_flag)		;360f
+	ld a,(state.sound_wait_flag)		;360f
 	or 080h		;3612
-	ld (game.sound_wait_flag),a		;3614
+	ld (state.sound_wait_flag),a		;3614
 	call sub_audio_event_wait		;3617
 	ld hl,03e00h		;361a
 	ld (score.vram_dest),hl		;361d
@@ -50,7 +50,7 @@ l3627h:
 	pop bc			;3667
 	djnz l3627h		;3668
 	xor a			;366a
-	ld (0c011h),a		;366b
+	ld (state.unknown_flag),a		;366b
 	ld hl,00010h		;366e
 	ld de,l3719h_palette		;3671
 	ld b,1		;3674
@@ -72,7 +72,7 @@ l3627h:
 	ld de,02600h		;369b
 	call sub_rle_decompress_bitplanes_to_vram		;369e
 	ld hl,03a5ah		;36a1
-	ld de,data_tiles_2		;36a4
+	ld de,data_tiles_2_girl		;36a4
 	ld bc,(8 << 8) | 6		;36a7
 	call sub_load_vram_rect		;36aa
 	ld hl,gui_text_win_special		;36ad

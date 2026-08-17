@@ -1,6 +1,6 @@
 ; Conditionally set color palette $00 to $2a
 sub_graphics_palette_secondary_update_conditionally_first:
-	ld a,(0c011h)		;0268
+	ld a,(state.unknown_flag)		;0268
 	or a			;026b
 	ret z			;026c
 	ld a,010h		;026d

@@ -1,4 +1,4 @@
-player_top_action_state_swinging:
+sub_game_player_top_action_state_swinging:
 	ld a,(ix + entity_t.action_state)		;1d89
 	bit 7,a		;1d8c
 	jr nz,l1dffh		;1d8e

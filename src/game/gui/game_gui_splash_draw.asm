@@ -1,5 +1,5 @@
 sub_game_gui_splash_draw:
-	ld hl,0c006h		;0821
+	ld hl,state.main_game_state		;0821
 	bit 6,(hl)
 	jp nz,@audio_track_finished		;0826
 	di			;0829
@@ -43,14 +43,14 @@ sub_game_gui_splash_draw:
 
 	; "(c) SEGA 1986" trademark
 	ld hl,03d96h		;086b
-	ld de,l40f0h_name_table		;086e
+	ld de,game_gui_splash_copyright		;086e
 	ld bc,22		;0871
 	call sub_cp_ram_vram		;0874
 
 	xor a			;0877
 	ld (psg_engine.maybe_end_track),a		;0878
-	ld (0c011h),a		;087b
-	ld hl,0c006h		;087e
+	ld (state.unknown_flag),a		;087b
+	ld hl,state.main_game_state		;087e
 	set 6,(hl)		;0881
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_splash_screen		;0883
 	ld (psg_engine.track_request_id),a		;0885
@@ -62,5 +62,5 @@ sub_game_gui_splash_draw:
 	rlca			;0890
 	ret nc			;0891
 	ld a,083h		;0892
-	ld (0c006h),a		;0894
+	ld (state.main_game_state),a		;0894
 	ret			;0897

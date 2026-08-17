@@ -1,7 +1,7 @@
 sub_game_ball_serve_perspective_update:
 	ld hl,l1300h		;0fa5
 	ld (ball.z_pos),hl		;0fa8
-	ld a,(game.current_player)		;0fab
+	ld a,(state.current_player)		;0fab
 	add a,a			;0fae
 	add a,a			;0faf
 	add a,a			;0fb0

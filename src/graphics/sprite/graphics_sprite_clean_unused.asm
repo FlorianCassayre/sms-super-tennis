@@ -19,6 +19,6 @@ l05bch:
 	ld (0c081h),a		;05bf
 	xor a			;05c2
 	ld (state.current_sprite_index),a		;05c3
-	ld hl,state.sat_update_flag		;05c6
+	ld hl,state.sound_wait_flag		;05c6
 	set 7,(hl)		;05c9
 	ret			;05cb

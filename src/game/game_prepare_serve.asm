@@ -9,9 +9,9 @@ sub_game_prepare_serve:
 	ld (hl),000h		;0b4b
 	ldir		;0b4d
 	ld hl,0		;0b4f
-	ld (0c518h),hl		;0b52
+	ld (ball.foul_type),hl		;0b52
 	xor a			;0b55
-	ld (game.match_flags),a		;0b56
+	ld (state.match_flags),a		;0b56
 	ld (0c516h),a		;0b59
 	ld (ball.bounces_count),a		;0b5c
 	ld hl,0c100h		;0b5f
@@ -19,7 +19,7 @@ sub_game_prepare_serve:
 	ld bc,03fh		;0b65
 	ld (hl),0d0h		;0b68
 	ldir		;0b6a
-	ld a,(game.match_progression_state)		;0b6c
+	ld a,(state.match_progression_state)		;0b6c
 	or a			;0b6f
 	jr z,l0ba8h		;0b70
 	dec a			;0b72
@@ -32,7 +32,7 @@ sub_game_prepare_serve:
 	or a			;0b7e
 	jr nz,l0ba0h		;0b7f
 l0b81h:
-	ld hl,game.current_server		;0b81
+	ld hl,state.current_server		;0b81
 	ld a,(hl)			;0b84
 	inc a			;0b85
 	cp 004h		;0b86
@@ -66,19 +66,19 @@ l0ba8h:
 	jr nz,l0bb5h		;0bb0
 	ld hl,l0c3fh		;0bb2
 l0bb5h:
-	ld a,(game.current_server)		;0bb5
+	ld a,(state.current_server)		;0bb5
 	ld e,a			;0bb8
 	ld d,000h		;0bb9
 	add hl,de			;0bbb
 	ld a,(hl)			;0bbc
-	ld (game.current_player),a		;0bbd
+	ld (state.current_player),a		;0bbd
 	ld hl,l0c57h		;0bc0
 	ld a,(state.match_state_flags)		;0bc3
 	bit 7,a		;0bc6
 	jr nz,l0bcdh		;0bc8
 	ld hl,l0c47h		;0bca
 l0bcdh:
-	ld a,(game.current_player)		;0bcd
+	ld a,(state.current_player)		;0bcd
 	add a,a			;0bd0
 	add a,a			;0bd1
 	ld e,a			;0bd2
@@ -106,7 +106,7 @@ l0bcdh:
 	xor a			;0bfd
 	ld (entities.ball.ball_hit_flag),a		;0bfe
 	ld (entities.ball_shadow.ball_hit_flag),a		;0c01
-	ld a,(game.current_player)		;0c04
+	ld a,(state.current_player)		;0c04
 	ld e,a			;0c07
 	ld d,000h		;0c08
 	ld hl,l0c67h		;0c0a
@@ -122,19 +122,19 @@ l0c1bh:
 	ld (hl),a			;0c1c
 	inc a			;0c1d
 	djnz l0c1bh		;0c1e
-	ld a,(game.current_player)		;0c20
-	ld (game.last_hitter),a		;0c23
+	ld a,(state.current_player)		;0c20
+	ld (state.last_hitter),a		;0c23
 	ld hl,0c000h		;0c26
 	set 2,(hl)		;0c29
 	ld a,001h		;0c2b
-	ld (0c011h),a		;0c2d
+	ld (state.unknown_flag),a		;0c2d
 	ld (score.ball_y_sector),a		;0c30
 	ld a,004h		;0c33
 	bit 3,(hl)		;0c35
 	jr z,l0c3bh		;0c37
 	or 080h		;0c39
 l0c3bh:
-	ld (0c006h),a		;0c3b
+	ld (state.main_game_state),a		;0c3b
 	ret			;0c3e
 
 l0c3fh:

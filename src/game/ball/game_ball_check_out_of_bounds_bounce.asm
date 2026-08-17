@@ -1,11 +1,11 @@
 sub_game_ball_check_out_of_bounds_bounce:
-	ld a,(0c518h)		;0e04
+	ld a,(ball.foul_type)		;0e04
 	or a			;0e07
 	ret nz			;0e08
-	ld a,(game.match_flags)		;0e09
+	ld a,(state.match_flags)		;0e09
 	bit 0,a		;0e0c
 	jr z,l0e3bh		;0e0e
-	ld a,(game.current_player)		;0e10
+	ld a,(state.current_player)		;0e10
 	add a,a			;0e13
 	ld e,a			;0e14
 	add a,a			;0e15
@@ -14,7 +14,7 @@ sub_game_ball_check_out_of_bounds_bounce:
 	ld d,000h		;0e18
 	ld hl,l0dd0h		;0e1a
 	add hl,de			;0e1d
-	ld a,(0c509h)		;0e1e
+	ld a,(ball.y_pos + 1)		;0e1e
 	cp (hl)			;0e21
 	jr c,l0e6fh		;0e22
 	inc hl			;0e24
@@ -25,7 +25,7 @@ sub_game_ball_check_out_of_bounds_bounce:
 	add a,a			;0e2c
 	ld e,a			;0e2d
 	add hl,de			;0e2e
-	ld a,(0c50bh)		;0e2f
+	ld a,(ball.x_pos + 1)		;0e2f
 	cp (hl)			;0e32
 	jr c,l0e6fh		;0e33
 	inc hl			;0e35
@@ -33,7 +33,7 @@ sub_game_ball_check_out_of_bounds_bounce:
 	jr c,l0e67h		;0e37
 	jr l0e6fh		;0e39
 l0e3bh:
-	ld a,(game.last_hitter)		;0e3b
+	ld a,(state.last_hitter)		;0e3b
 	add a,a			;0e3e
 	ld e,a			;0e3f
 	add a,a			;0e40
@@ -42,7 +42,7 @@ l0e3bh:
 	ld d,000h		;0e43
 	ld hl,l0de8h		;0e45
 	add hl,de			;0e48
-	ld a,(0c509h)		;0e49
+	ld a,(ball.y_pos + 1)		;0e49
 	cp (hl)			;0e4c
 	jr c,l0e6bh		;0e4d
 	inc hl			;0e4f
@@ -55,7 +55,7 @@ l0e3bh:
 	inc hl			;0e5b
 	inc hl			;0e5c
 l0e5dh:
-	ld a,(0c50bh)		;0e5d
+	ld a,(ball.x_pos + 1)		;0e5d
 	cp (hl)			;0e60
 	jr c,l0e6bh		;0e61
 	inc hl			;0e63
@@ -72,8 +72,8 @@ l0e6fh:
 l0e71h:
 	ld hl,0c000h		;0e71
 	res 0,(hl)		;0e74
-	ld hl,0c518h		;0e76
+	ld hl,ball.foul_type		;0e76
 	ld (hl),002h		;0e79
 l0e7bh:
-	ld (0c519h),a		;0e7b
+	ld (ball.foul_triggered_flag),a		;0e7b
 	ret			;0e7e

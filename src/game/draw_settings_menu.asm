@@ -1,5 +1,5 @@
 sub_draw_settings_menu:
-	ld hl,0c006h		;08c0
+	ld hl,state.main_game_state		;08c0
 	bit 6,(hl)		;08c3
 	jp nz,+		;08c5
 	set 6,(hl)		;08c8
@@ -9,7 +9,7 @@ sub_draw_settings_menu:
 	ld de,0		;08d1
 	ld hl,data_planes_player		;08d4
 	call sub_rle_decompress_bitplanes_to_vram		;08d7
-	ld hl,game.settings		;08da
+	ld hl,state.settings		;08da
 	ld b,_sizeof_game_settings_t		;08dd
 	xor a			;08df
 -:
@@ -74,7 +74,7 @@ sub_draw_settings_menu:
 	ret z			;097c
 	dec hl			;097d
 	cp (hl)			;097e
-	jp z,sub_handle_gui_control		;097f
+	jp z,sub_game_gui_settings_handle_control		;097f
 	ld (hl),a			;0982
 	xor a			;0983
 	ld (0c49ch),a		;0984

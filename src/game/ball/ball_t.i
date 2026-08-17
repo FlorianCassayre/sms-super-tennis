@@ -7,7 +7,10 @@
 	x_pos DW		; $c50a
 	y_vel DW		; $c50c
 	x_vel DW		; $c50e
-	_unknown_1 DSB 6		; $c510
+	shadow_size_index DB		; $c510
+	sprite_size_index DB		; $c511
+	shadow_vram_pointer DW		; $c512
+	sprite_vram_pointer DW		; $c514
 	racket_contact_flag DB		; $c516
 	bounces_count DB		; $c517
 	foul_type DB		; $c518

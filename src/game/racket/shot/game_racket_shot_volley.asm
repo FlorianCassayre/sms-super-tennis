@@ -1,15 +1,15 @@
 sub_game_racket_shot_volley:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		;11b1
 	ld (psg_engine.track_request_id),a		;11b3
-	ld a,(0c509h)		;11b6
+	ld a,(ball.y_pos + 1)		;11b6
 	sub 080h		;11b9
 	jr nc,l11bfh		;11bb
 	neg		;11bd
 l11bfh:
-	ld hl,l1215h		;11bf
+	ld hl,l1215h_slow		;11bf
 	cp 01ch		;11c2
 	jr c,l11c9h		;11c4
-	ld hl,l1209h		;11c6
+	ld hl,l1209h_fast		;11c6
 l11c9h:
 	ld a,(state.ball_hit_type)		;11c9
 	add a,a			;11cc
@@ -24,7 +24,7 @@ l11c9h:
 	ld c,(hl)			;11d6
 	inc hl			;11d7
 	ld b,(hl)			;11d8
-	ld a,(game.last_hitter)		;11d9
+	ld a,(state.last_hitter)		;11d9
 	and 001h		;11dc
 	jr z,l11e7h		;11de
 	xor a			;11e0
@@ -34,7 +34,7 @@ l11c9h:
 l11e7h:
 	ld (ball.y_vel),de		;11e7
 	ld (ball.z_vel),bc		;11eb
-	ld hl,l1221h		;11ef
+	ld hl,l1221h_gravity_modifier		;11ef
 	ld a,(state.ball_hit_type)		;11f2
 	add a,a			;11f5
 	ld c,a			;11f6
@@ -47,7 +47,8 @@ l11e7h:
 	ld c,002h		;1201
 	call sub_compute_ball_x_velocity		;1203
 	jp sub_l1362h_ball		;1206
-l1209h:
+
+l1209h_fast:
 	.DB $c0		;1209
 	.DB $fd		;120a
 	.DB $e0		;120b
@@ -60,7 +61,7 @@ l1209h:
 	.DB $fb		;1212
 	.DB $c0		;1213
 	.DB $ff		;1214
-l1215h:
+l1215h_slow:
 	.DB $c0		;1215
 	.DB $fd		;1216
 	.DB $40		;1217
@@ -73,7 +74,7 @@ l1215h:
 	.DB $fb		;121e
 	.DB $80		;121f
 	.DB $00		;1220
-l1221h:
+l1221h_gravity_modifier:
 	.DB $09		;1221
 	.DB $00		;1222
 	.DB $0f		;1223

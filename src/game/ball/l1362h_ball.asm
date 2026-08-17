@@ -3,14 +3,14 @@ sub_l1362h_ball:
 	ld (entities.ball.state_index),a		;1364
 	xor a			;1367
 	ld (entities.ball.ball_hit_flag),a		;1368
-	ld a,(game.last_hitter)		;136b
+	ld a,(state.last_hitter)		;136b
 	ld e,a			;136e
 	ld d,000h		;136f
 	ld hl,l138bh		;1371
 	add hl,de			;1374
 	ld a,(hl)			;1375
 	ld (0c312h),a		;1376
-	ld hl,game.match_flags		;1379
+	ld hl,state.match_flags		;1379
 	set 7,(hl)		;137c
 	ld a,(ball.z_pos + 1)		;137e
 	cp 010h		;1381

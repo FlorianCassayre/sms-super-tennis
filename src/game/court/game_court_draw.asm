@@ -32,7 +32,7 @@ sub_game_court_draw:
 	jr z,+		;0b0c
 	or 080h		;0b0e
 +:
-	ld (0c006h),a		;0b10
+	ld (state.main_game_state),a		;0b10
 	call sub_enable_display		;0b13
 	ei			;0b16
 	ret			;0b17

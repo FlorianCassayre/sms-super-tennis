@@ -39,13 +39,13 @@ l1b37h:
 	ld (ix + entity_t.animation_id),007h		;1b48
 	ld (ix + entity_t.animation_flags_or_frame),0ffh		;1b4c
 l1b50h:
-	ld a,(game.match_flags)		;1b50
+	ld a,(state.match_flags)		;1b50
 	bit 7,a		;1b53
 	ret nz			;1b55
 	ld (ix + entity_t.state_index),entity_state_t.player_update_server_state_076b		;1b56
 	ret			;1b5a
 l1b5bh:
-	ld hl,game.match_flags		;1b5b
+	ld hl,state.match_flags		;1b5b
 	bit 7,(hl)		;1b5e
 	ret z			;1b60
 	ld (ix + entity_t.state_index),entity_state_t.l1b68h_0763		;1b61

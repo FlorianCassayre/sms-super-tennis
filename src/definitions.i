@@ -1,4 +1,4 @@
-.INCLUDE "header.i"
+.INCLUDE "hardware/header/header.i"
 .INCLUDE "hardware/hardware_io.i"
 .INCLUDE "hardware/hardware_type.i"
 .INCLUDE "hardware/hardware_vdp.i"
@@ -13,7 +13,6 @@
 .INCLUDE "rle/rle_decompress_stream.i"
 .INCLUDE "rle/rle_decompress_bitplanes.i"
 .INCLUDE "game/score/game_score_t.i"
-.INCLUDE "game/game_t.i"
 .INCLUDE "game/ball/ball_t.i"
 .INCLUDE "game/ball/game_ball.i"
 .INCLUDE "game/entity/entity_t.i"

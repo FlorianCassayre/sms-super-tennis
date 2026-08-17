@@ -111,9 +111,9 @@ sub_update_score_points:
 	ld (score.set_update_state),a		;30c4
 	ld a,001h		;30c7
 	ld (0c49dh),a		;30c9
-	ld a,(game.sound_wait_flag)		;30cc
+	ld a,(state.sound_wait_flag)		;30cc
 	or 080h		;30cf
-	ld (game.sound_wait_flag),a		;30d1
+	ld (state.sound_wait_flag),a		;30d1
 	ret			;30d4
 @special_score_state:
 	ld hl,score.point.bottom		;30d5

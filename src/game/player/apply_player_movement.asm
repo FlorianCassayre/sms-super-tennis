@@ -4,19 +4,19 @@ sub_apply_player_movement:
 	bit 0,(ix + entity_t.id)		;27f9
 	jr nz,l2819h		;27fd
 	ld hl,game_level_speed_base_table.asm		;27ff
-	ld a,(game.settings.speed_level)		;2802
+	ld a,(state.settings.speed_level)		;2802
 	call sub_lookup_player_velocity		;2805
 	ld hl,game_level_control_boost_table		;2808
-	ld a,(game.settings.speed_level)		;280b
+	ld a,(state.settings.speed_level)		;280b
 	ld (TEMP_VEL_SHIFT_MULT),a		;280e
-	ld a,(game.settings.player_type)		;2811
+	ld a,(state.settings.player_type)		;2811
 	and a			;2814
 	ret z			;2815
 	dec a			;2816
 	jr sub_lookup_player_velocity		;2817
 l2819h:
 	ld hl,game_level_cpu_velocity_table		;2819
-	ld a,(game.settings.computer_level)		;281c
+	ld a,(state.settings.computer_level)		;281c
 	and $07		;281f
 sub_lookup_player_velocity:
 	ld e,a			;2821

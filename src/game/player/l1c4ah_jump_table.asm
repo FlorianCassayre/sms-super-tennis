@@ -3,7 +3,7 @@ l1c4ah_jump_table:
 	.DW player_top_action_state_start_move		;1c4c
 	.DW player_top_action_state_moving		;1c4e
 	.DW player_top_action_state_start_swing		;1c50
-	.DW player_top_action_state_swinging		;1c52
+	.DW sub_game_player_top_action_state_swinging		;1c52
 	.DW player_top_action_state_turn_around		;1c54
 
 player_top_action_state_idle:
@@ -42,7 +42,7 @@ player_top_action_state_start_swing:
 	and 003h		;1c9f
 	jr z,l1caah		;1ca1
 	ld (ix + entity_t.action_state),004h		;1ca3
-	jp player_top_action_state_swinging		;1ca7
+	jp sub_game_player_top_action_state_swinging		;1ca7
 l1caah:
 	ld a,(ix + entity_t.input_dirs)		;1caa
 	ld c,a			;1cad

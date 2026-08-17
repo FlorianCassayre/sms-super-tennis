@@ -1,9 +1,9 @@
 sub_game_cpu_evaluate_y_dist_2:
-	ld a,(0c518h)		;23aa
+	ld a,(ball.foul_type)		;23aa
 	and a			;23ad
 	ld b,000h		;23ae
 	jr nz,l23fbh		;23b0
-	ld a,(0c519h)		;23b2
+	ld a,(ball.foul_triggered_flag)		;23b2
 	and a			;23b5
 	jr nz,l23beh		;23b6
 	ld a,(0c51dh)		;23b8

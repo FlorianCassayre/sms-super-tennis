@@ -56,13 +56,13 @@ sub_game_ball_compute_horizontal_deflection:
 	ld a,(ball.deflection_temp)		;1665
 	ld e,a			;1668
 	ld d,000h		;1669
-	ld hl,data.planes_5		;166b
+	ld hl,data.projection		;166b
 	add hl,de			;166e
 	ld a,(hl)			;166f
 	ld l,a			;1670
 	ld h,000h		;1671
 	add hl,hl			;1673
-	ld de,0cce8h		;1674
+	ld de,data.projection.screen_y_to_scale		;1674
 	add hl,de			;1677
 	ld e,(hl)			;1678
 	inc hl			;1679

@@ -15,7 +15,7 @@ sub_game_racket_shot_unknown:
 	ld c,(hl)			;123c
 	inc hl			;123d
 	ld b,(hl)			;123e
-	ld a,(game.last_hitter)		;123f
+	ld a,(state.last_hitter)		;123f
 	and 001h		;1242
 	jr z,l124dh		;1244
 	xor a			;1246

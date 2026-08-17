@@ -5,9 +5,9 @@ sub_update_set_scores:
 	dec a			;31bf
 	ld (score.delay_timer),a		;31c0
 l31c3h:
-	ld a,(game.sound_wait_flag)		;31c3
+	ld a,(state.sound_wait_flag)		;31c3
 	or 080h		;31c6
-	ld (game.sound_wait_flag),a		;31c8
+	ld (state.sound_wait_flag),a		;31c8
 	call sub_audio_event_wait		;31cb
 	jp sub_update_set_scores		;31ce
 l31d1h:

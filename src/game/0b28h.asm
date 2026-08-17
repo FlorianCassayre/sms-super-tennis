@@ -1,5 +1,5 @@
 sub_0b28h:
-	ld hl,0c006h		;0b28
+	ld hl,state.main_game_state		;0b28
 	ld e,006h		;0b2b
 	ld a,(state.match_state_flags)		;0b2d
 	bit 3,a		;0b30

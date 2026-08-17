@@ -1,4 +1,4 @@
-sub_handle_gui_control:
+sub_game_gui_settings_handle_control:
 	ld hl,0c49ch		;0988
 	inc (hl)			;098b
 	ld a,(hl)			;098c
@@ -42,7 +42,7 @@ l09bah:
 l09c7h:
 	ld e,(hl)			;09c7
 	ld d,000h		;09c8
-	ld hl,game.settings		;09ca
+	ld hl,state.settings		;09ca
 	add hl,de			;09cd
 	ld a,e			;09ce
 	cp 003h		;09cf
@@ -72,11 +72,11 @@ l09e6h:
 l09f6h:
 	ret			;09f6
 l09f7h:
-	ld a,(game.settings.control_level)		;09f7
+	ld a,(state.settings.control_level)		;09f7
 	ld (0c4b2h),a		;09fa
 	add a,002h		;09fd
 	ld (0c4b0h),a		;09ff
-	ld a,(state.maybe_random_seed)		;0a02
+	ld a,(state.settings.computer_level)		;0a02
 	ld (0c4b1h),a		;0a05
 	srl a		;0a08
 	ld (0c4b3h),a		;0a0a

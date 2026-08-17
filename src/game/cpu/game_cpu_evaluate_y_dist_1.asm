@@ -1,9 +1,9 @@
 sub_game_cpu_evaluate_y_dist_1:
-	ld a,(0c518h)		;2320
+	ld a,(ball.foul_type)		;2320
 	and a			;2323
 	ld b,000h		;2324
 	jr nz,@store_dir		;2326
-	ld a,(0c519h)		;2328
+	ld a,(ball.foul_triggered_flag)		;2328
 	and a			;232b
 	jr nz,@evaluate		;232c
 	ld a,(0c51dh)		;232e
@@ -14,7 +14,7 @@ sub_game_cpu_evaluate_y_dist_1:
 	ld a,(0c401h)		;2337
 	cp 01ch		;233a
 	jr nz,@check_y_dist		;233c
-	ld a,(state.maybe_random_seed)		;233e
+	ld a,(state.settings.computer_level)		;233e
 	rra			;2341
 	and 003h		;2342
 	sub 002h		;2344

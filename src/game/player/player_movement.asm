@@ -15,14 +15,14 @@ sub_player_movement:
 	ld a,(ix + entity_t.id)		;26e2
 	and 1		;26e5
 	jr nz,+		;26e7
-	ld a,(game.match_state_flag)		;26e9
+	ld a,(state.match_state_flag)		;26e9
 	and 1		;26ec
 	jr nz,++		;26ee
 	ld hl,BOUND_X_MIN_NEAR_RIGHT		;26f0
 	jr ++		;26f3
 +:
 	ld hl,BOUND_X_MIN_FAR_LEFT		;26f5
-	ld a,(game.match_state_flag)		;26f8
+	ld a,(state.match_state_flag)		;26f8
 	and 1		;26fb
 	jr z,++		;26fd
 	ld hl,BOUND_X_MIN_FAR_RIGHT		;26ff
@@ -62,14 +62,14 @@ l2704h:
 	ld a,(ix + entity_t.id)		;273e
 	and 1		;2741
 	jr nz,+		;2743
-	ld a,(game.match_state_flag)		;2745
+	ld a,(state.match_state_flag)		;2745
 	and 1		;2748
 	jr z,++		;274a
 	ld hl,BOUND_X_MAX_NEAR_LEFT		;274c
 	jr ++		;274f
 +:
 	ld hl,BOUND_X_MAX_FAR_RIGHT		;2751
-	ld a,(game.match_state_flag)		;2754
+	ld a,(state.match_state_flag)		;2754
 	and 1		;2757
 	jr nz,++		;2759
 	ld hl,BOUND_X_MAX_FAR_LEFT		;275b

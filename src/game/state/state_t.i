@@ -1,3 +1,10 @@
+.STRUCT game_settings_t
+	speed_level DB		;c047
+	control_level DB		;c048
+	player_type DB		;c049
+	computer_level DB		;c04a
+.ENDST
+
 .STRUCT aabb_t
 	y_min DB
     y_max DB
@@ -7,27 +14,35 @@
 
 .STRUCT state_t
 	match_state_flags DB	;c000
-	_unknown_0 DSB 15
+	_unknown_01 DSB 5
+	main_game_state DB	;c006
+	_unknown_0 DSB 9
 	hardware_type DB	;c010
-	_unknown_1 DSB 47
-	hit_flags DB	;c040
-	shot_type DB	;c041
-	ball_x_dir_flag DB	;c042
-	_unknown_2 DSB 3
+	unknown_flag DB	;c011
+	_unknown_1 DSB 46
+	match_flags DB	;c040
+	current_player DB	;c041
+	last_hitter DB	;c042
+	match_progression_state DB		;c043
+	match_state_flag DB		;c044 ; Global state (serve quadrant?)
+	current_server DB		;c045
 	ball_hit_type DB	;c046
-	_unknown_3 DSB 3
-	maybe_random_seed DB	;c04a
+	settings INSTANCEOF game_settings_t		;c047
 	_unknown_4 DSB 53
 	current_sprite_index DB	;c080
 	previous_sprite_index DB	;c081
 	aabb_1 INSTANCEOF aabb_t	;c082
-	_unknown_5 DSB 3
-	sat_update_flag DB	;c089
-	_unknown_c08a DSB 4
+	entity_loop_index DB 	;c086
+	_unknown_5 DSB 2
+	sound_wait_flag DB	;c089
+	pause_counter DW	;c08a ; It seems that one tick lasts 16.67ms
+	_unknown_c08a DSB 2
 	aabb_2 INSTANCEOF aabb_t	;c08e
 	_unknown_6 DSB 110
 	sat_y_buffer DSB 64	;c100
 	sat_xc_buffer DSB 128	;c140
 	_unknown_7 DSB 4
 	z_order_array DSB 6	;c1c4
+	sort_outer_idx DB	;c1ca
+	sort_inner_idx DB	;c1cb
 .ENDST

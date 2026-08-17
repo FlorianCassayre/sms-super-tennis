@@ -12,7 +12,7 @@ sub_game_racket_shot_serve:
 	ld b,(hl)			;1031
 	push bc			;1032
 	ld hl,l10bbh		;1033
-	ld a,(game.current_player)		;1036
+	ld a,(state.current_player)		;1036
 	add a,a			;1039
 	add a,a			;103a
 	ld e,a			;103b
@@ -25,7 +25,7 @@ sub_game_racket_shot_serve:
 	inc hl			;1044
 	ld b,(hl)			;1045
 	push bc			;1046
-	ld a,(game.current_player)		;1047
+	ld a,(state.current_player)		;1047
 	add a,a			;104a
 	ld e,a			;104b
 	ld hl,l10b3h		;104c
@@ -35,7 +35,7 @@ sub_game_racket_shot_serve:
 	jr z,l1057h		;1054
 	inc hl			;1056
 l1057h:
-	ld a,(0c50bh)		;1057
+	ld a,(ball.x_pos + 1)		;1057
 	sub (hl)			;105a
 	rrca			;105b
 	rrca			;105c
@@ -78,7 +78,7 @@ l1071h:
 	ld c,(hl)			;1086
 	inc hl			;1087
 	ld b,(hl)			;1088
-	ld a,(game.current_player)		;1089
+	ld a,(state.current_player)		;1089
 	and 001h		;108c
 	jr z,l10a0h		;108e
 	xor a			;1090

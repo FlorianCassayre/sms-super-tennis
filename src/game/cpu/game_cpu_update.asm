@@ -310,7 +310,7 @@ sub_cpu_state_wait:
 	bit 7,a		;209c
 	ld a,002h		;209e
 	jr z,@l20a5h		;20a0
-	call sub_238dh		;20a2
+	call sub_game_cpu_return_center_intercept		;20a2
 @l20a5h:
 	ld (ix + entity_t.input_dirs),a		;20a5
 	ld a,(ix + entity_t.y_div_pos)		;20a8
@@ -484,7 +484,7 @@ sub_cpu_state_smash:
 	set 7,(ix + entity_t.cpu_state)		;21f4
 	ld (ix + entity_t.cpu_state_timer),000h		;21f8
 @l21fch:
-	ld a,(0c501h)		;21fc
+	ld a,(ball.z_pos + 1)		;21fc
 	cp 02ah		;21ff
 	jr c,@l2207h		;2201
 	set 0,(ix + entity_t.cpu_state_timer)		;2203

@@ -8,7 +8,7 @@ sub_vdp_build_sprite_buffer:
 	xor a			;0a1c
 	ld (0c492h),a		;0a1d
 	ld b,003h		;0a20
-	ld de,game.settings		;0a22
+	ld de,state.settings		;0a22
 -:
 	push bc			;0a25
 	ld a,(score.settings_cursor_y)		;0a26
@@ -62,7 +62,7 @@ sub_vdp_build_sprite_buffer:
 	exx			;0a7b
 	ld (hl),a			;0a7c
 	exx			;0a7d
-	ld hl,game.sound_wait_flag		;0a7e
+	ld hl,state.sound_wait_flag		;0a7e
 	set 7,(hl)		;0a81
 	ei			;0a83
 	ret			;0a84

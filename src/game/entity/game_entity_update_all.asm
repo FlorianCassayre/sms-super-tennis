@@ -1,6 +1,6 @@
 sub_game_entity_update_all:
 	ld hl,l074fh_memory_table		;0711
-	ld a,(game.entity_loop_index)		;0714
+	ld a,(state.entity_loop_index)		;0714
 	add a,a			;0717
 	ld e,a			;0718
 	ld d,000h		;0719
@@ -20,7 +20,7 @@ sub_game_entity_update_all:
 	jp l0807h_game_fsm		;072f
 @no_action:
 	call sub_game_entity_animation_update_frame		;0732
-	ld de,game.entity_loop_index		;0735
+	ld de,state.entity_loop_index		;0735
 	ld a,(de)			;0738
 	ld c,a			;0739
 	ld b,000h		;073a

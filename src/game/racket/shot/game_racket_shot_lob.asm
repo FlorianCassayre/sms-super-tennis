@@ -10,7 +10,7 @@ sub_game_racket_shot_lob:
 	ld e,(hl)			;127c
 	inc hl			;127d
 	ld d,(hl)			;127e
-	ld a,(0c509h)		;127f
+	ld a,(ball.y_pos + 1)		;127f
 	sub 080h		;1282
 	jr nc,l1288h		;1284
 	neg		;1286
@@ -34,7 +34,7 @@ l1290h:
 	ld c,(hl)			;129c
 	inc hl			;129d
 	ld b,(hl)			;129e
-	ld a,(game.last_hitter)		;129f
+	ld a,(state.last_hitter)		;129f
 	and 001h		;12a2
 	jr z,l12adh		;12a4
 	xor a			;12a6

@@ -1,4 +1,4 @@
-l0f02h:	; Not used?
+l0f02h_palette:	; Not used?
 	set 5,(hl)		;0f02
 	ld hl,0		;0f04
 	ld de,l002dh_palette		;0f07

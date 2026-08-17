@@ -10,7 +10,7 @@ sub_game_ball_toss_update:
 	ld hl,0		;0f63
 	ld (ball.x_vel),hl		;0f66
 	ld (ball.y_vel),hl		;0f69
-	ld hl,game.match_flags		;0f6c
+	ld hl,state.match_flags		;0f6c
 	set 7,(hl)		;0f6f
 	set 0,(hl)		;0f71
 	ld hl,0c000h		;0f73
@@ -24,7 +24,7 @@ l0f79h:
 	jr z,l0f86h		;0f82
 	jr nc,l0fa2h		;0f84
 l0f86h:
-	ld hl,game.match_flags		;0f86
+	ld hl,state.match_flags		;0f86
 	bit 6,(hl)		;0f89
 	jr nz,l0f95h		;0f8b
 	res 7,(hl)		;0f8d
