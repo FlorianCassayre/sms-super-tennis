@@ -7,19 +7,19 @@ sub_game_cpu_calculate_intercept_direction_2:
 	exx			;22a0
 	ld e,(ix + entity_t.y_div_pos)		;22a1
 	ld d,000h		;22a4
-	ld hl,l2290h		;22a6
+	ld hl,game_cpu_player_x		;22a6
 	add hl,de			;22a9
 	ld a,(hl)			;22aa
 	pop hl			;22ab
 	ld e,(ix + entity_t.x_pos)		;22ac
 	ld d,(ix + entity_t.x_pos + 1)		;22af
 	push hl			;22b2
-	xor a			;22b3
+	xor a			;22b3 	; Bug?!
 	sbc hl,de		;22b4
 	ld c,h			;22b6
 	pop hl			;22b7
 	add a,d			;22b8
-	ld d,a			;22b9
+	ld d,a			;22b9	; `game_cpu_player_x + de` stored in `a` is gone, `d` equates `(ix + entity_t.x_pos + 1)`
 	xor a			;22ba
 	sbc hl,de		;22bb
 	ld b,008h		;22bd
@@ -41,7 +41,7 @@ sub_game_cpu_calculate_intercept_direction_2:
 	ld a,h			;22db
 	cp 004h		;22dc
 	jr c,++		;22de
-	ld a,c			;22e0
+	ld a,c			;22e0	; Bug?! Should be `ld a,d`
 	bit 2,b		;22e1
 	jr nz,+		;22e3
 	neg		;22e5

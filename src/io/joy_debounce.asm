@@ -27,7 +27,7 @@ sub_joy_debounce:
 	cp (hl)			;07c5
 	ret z			;07c6
 	ld a,c			;07c7
-	ld (0c000h),a		;07c8
+	ld (state.match_state_flags),a		;07c8
 	ld a,000h		;07cb
 	ld (psg_engine.track_request_id),a		;07cd
 	ld a,002h		;07d0

@@ -16,7 +16,7 @@ sub_vdp_build_sprite_buffer:
 	ld a,(0c492h)		;0a2a
 	cp b			;0a2d
 	jr nz,+		;0a2e
-	ld a,(0c496h)		;0a30
+	ld a,(score.tick_counter)		;0a30
 	and 01fh		;0a33
 	cp 00fh		;0a35
 	jp c,++		;0a37
@@ -38,12 +38,12 @@ sub_vdp_build_sprite_buffer:
 	ld (0c492h),a		;0a4f
 	pop bc			;0a52
 	djnz -		;0a53
-	ld a,(0c491h)		;0a55
+	ld a,(score.settings_cursor_y)		;0a55
 	ld b,a			;0a58
 	ld a,(0c492h)		;0a59
 	cp b			;0a5c
 	jr nz,+		;0a5d
-	ld a,(0c496h)		;0a5f
+	ld a,(score.tick_counter)		;0a5f
 	and 01fh		;0a62
 	cp 00fh		;0a64
 	jp c,++		;0a66

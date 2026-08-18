@@ -22,19 +22,19 @@ sub_game_gui_splash_draw:
 
 	; Load "Super" and "TENNIS" tiles (+ junk)
 	ld de,02600h		;0846
-	ld hl,data_planes_splash		;0849
+	ld hl,gui_splash_patterns		;0849
 	call sub_rle_decompress_bitplanes_to_vram		;084c
 
 	; "Super" logo
 	ld hl,03854h		;084f
-	ld de,data_tiles_1_super		;0852
+	ld de,gui_splash_super_names		;0852
 	ld b,5		;0855
 	ld c,10		;0857
 	call sub_load_vram_rect		;0859
 
 	; "TENNIS" logo
 	ld de,039c0h		;085c
-	ld hl,data_planes_tennis		;085f
+	ld hl,gui_splash_tennis_names		;085f
 	call sub_rle_decompress_bitplanes_to_vram		;0862
 
 	; "Push [...] button" texts

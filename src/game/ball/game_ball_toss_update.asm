@@ -13,7 +13,7 @@ sub_game_ball_toss_update:
 	ld hl,state.match_flags		;0f6c
 	set 7,(hl)		;0f6f
 	set 0,(hl)		;0f71
-	ld hl,0c000h		;0f73
+	ld hl,state.match_state_flags		;0f73
 	set 0,(hl)		;0f76
 	ret			;0f78
 l0f79h:
@@ -34,7 +34,7 @@ l0f95h:
 	ld (ix + entity_t.state_index),015h		;0f95
 l0f99h:
 	ld (ix + entity_t.ball_hit_flag),000h		;0f99
-	ld hl,0c000h		;0f9d
+	ld hl,state.match_state_flags		;0f9d
 	res 0,(hl)		;0fa0
 l0fa2h:
 	jp sub_game_ball_sprite_perspective_x		;0fa2

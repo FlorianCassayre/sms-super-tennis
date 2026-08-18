@@ -1,3 +1,0 @@
-l002dh_palette:
-	.DB VDP_PALETTE_BLACK		;002d
-	.DB VDP_PALETTE_YELLOW		;002e

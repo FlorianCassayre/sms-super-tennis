@@ -1,6 +1,6 @@
 sub_graphics_sprite_clean_unused:
 	ld a,(state.current_sprite_index)		;05a1
-	ld hl,0c081h		;05a4
+	ld hl,state.previous_sprite_index		;05a4
 	sub (hl)			;05a7
 	jr nc,l05bch		;05a8
 	neg		;05aa
@@ -16,7 +16,7 @@ l05b7h:
 	djnz l05b7h		;05ba
 l05bch:
 	ld a,(state.current_sprite_index)		;05bc
-	ld (0c081h),a		;05bf
+	ld (state.previous_sprite_index),a		;05bf
 	xor a			;05c2
 	ld (state.current_sprite_index),a		;05c3
 	ld hl,state.sound_wait_flag		;05c6

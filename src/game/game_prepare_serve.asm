@@ -124,7 +124,7 @@ l0c1bh:
 	djnz l0c1bh		;0c1e
 	ld a,(state.current_player)		;0c20
 	ld (state.last_hitter),a		;0c23
-	ld hl,0c000h		;0c26
+	ld hl,state.match_state_flags		;0c26
 	set 2,(hl)		;0c29
 	ld a,001h		;0c2b
 	ld (state.unknown_flag),a		;0c2d

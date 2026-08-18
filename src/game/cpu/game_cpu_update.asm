@@ -80,7 +80,7 @@ sub_cpu_state_track_ball:
 	sub e			;1ebb
 	jr nc,@l1ec2h		;1ebc
 	cp 0fah		;1ebe
-	jr c,@l1ee8h		;1ec0
+	jr c,@l1ee8h		;1ec0	; Bug?!
 @l1ec2h:
 	ld a,(0c401h)		;1ec2
 	cp 01ch		;1ec5

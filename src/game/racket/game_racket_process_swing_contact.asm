@@ -22,7 +22,7 @@ sub_game_racket_process_swing_contact:
 	ld a,(state.current_player)		;2c6b
 	cp (ix + entity_t.id)		;2c6e
 	jr nz,+		;2c71
-	ld hl,0c000h		;2c73
+	ld hl,state.match_state_flags		;2c73
 	res 0,(hl)		;2c76
 	ret			;2c78
 +:

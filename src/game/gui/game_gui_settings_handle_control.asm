@@ -1,5 +1,5 @@
 sub_game_gui_settings_handle_control:
-	ld hl,0c49ch		;0988
+	ld hl,score.menu_key_repeat_timer		;0988
 	inc (hl)			;098b
 	ld a,(hl)			;098c
 	cp 003h		;098d

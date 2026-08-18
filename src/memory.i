@@ -18,7 +18,7 @@
 	ball INSTANCEOF ball_t
 .ENDE
 
-.ENUM $c720
+.ENUM $c600
 	data INSTANCEOF data_t
 .ENDE
 

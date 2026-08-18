@@ -30,7 +30,7 @@ sub_game_cpu_calculate_intercept_direction_1:
 	ld a,h			;2252
 	cp 003h		;2253
 	jr c,++		;2255
-	ld a,c			;2257
+	ld a,c			;2257	; Bug?! Should be `ld a,d`
 	bit 2,b		;2258
 	jr nz,+		;225a
 	neg		;225c

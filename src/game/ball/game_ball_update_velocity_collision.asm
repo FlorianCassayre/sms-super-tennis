@@ -89,7 +89,7 @@ sub_game_ball_update_velocity_collision:
 	ld a,001h		;1751
 	ld (ball.foul_triggered_flag),a		;1753
 @reverse_y_and_end_play:
-	ld hl,0c000h		;1756
+	ld hl,state.match_state_flags		;1756
 	res 0,(hl)		;1759
 	xor a			;175b
 	ld hl,0		;175c

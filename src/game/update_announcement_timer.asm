@@ -2,11 +2,11 @@ sub_update_announcement_timer:
 	ld a,(score.announcement_type)		;3566
 	cp 000h		;3569
 	ret z			;356b
-	ld a,(0c49dh)		;356c
+	ld a,(score.delay_timer)		;356c
 	cp 000h		;356f
 	jr z,l3578h		;3571
 	dec a			;3573
-	ld (0c49dh),a		;3574
+	ld (score.delay_timer),a		;3574
 	ret			;3577
 l3578h:
 	ld a,004h		;3578
@@ -39,5 +39,5 @@ l35a8h:
 	out (IO_VDP_DATA),a		;35a8
 	.DB $3e		;35aa
 	.DB $02		;35ab
-	ld (0c49dh),a		;35ac
+	ld (score.delay_timer),a		;35ac
 	ret			;35af

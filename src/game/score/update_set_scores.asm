@@ -105,7 +105,7 @@ l3276h:
 	ld d,000h		;3282
 	ld b,001h		;3284
 	ld hl,03c1eh		;3286
-	ld (0c4a0h),hl		;3289
+	ld (score.blinking_set_vram_addr),hl		;3289
 	call sub_graphics_tile_draw_sequential_row		;328c
 	pop hl			;328f
 	inc hl			;3290
@@ -126,7 +126,7 @@ l3276h:
 	ld d,000h		;32aa
 	ld b,001h		;32ac
 	ld hl,03c22h		;32ae
-	ld (0c4a0h),hl		;32b1
+	ld (score.blinking_set_vram_addr),hl		;32b1
 	call sub_graphics_tile_draw_sequential_row		;32b4
 	pop hl			;32b7
 	push hl			;32b8

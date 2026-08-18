@@ -56,7 +56,7 @@ l0568h:
 	inc hl			;0595
 	djnz l0568h		;0596
 	ld a,(ix + entity_t.sprite_count)		;0598
-	ld hl,0c080h		;059b
+	ld hl,state.current_sprite_index		;059b
 	add a,(hl)			;059e
 	ld (hl),a			;059f
 	ret			;05a0

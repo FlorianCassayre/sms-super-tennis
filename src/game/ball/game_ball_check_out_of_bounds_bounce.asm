@@ -70,7 +70,7 @@ l0e6bh:
 l0e6fh:
 	ld a,003h		;0e6f
 l0e71h:
-	ld hl,0c000h		;0e71
+	ld hl,state.match_state_flags		;0e71
 	res 0,(hl)		;0e74
 	ld hl,ball.foul_type		;0e76
 	ld (hl),002h		;0e79

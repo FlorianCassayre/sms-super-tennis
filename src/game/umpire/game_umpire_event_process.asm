@@ -21,7 +21,7 @@ sub_game_umpire_trigger_announcement:
 	ld a,1		;2f04
 	ld (score.announcement_type),a		;2f06
 	xor a			;2f09
-	ld (0c49dh),a		;2f0a
+	ld (score.delay_timer),a		;2f0a
 	ld (score.announcement_step),a		;2f0d
 sub_game_umpire_event_process_default:
 	ret			;2f10

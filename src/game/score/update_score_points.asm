@@ -104,13 +104,13 @@ sub_update_score_points:
 @finish_score_update:
 	xor a			;30b6
 	ld (score.announcement_step),a		;30b7
-	ld (0c49dh),a		;30ba
+	ld (score.delay_timer),a		;30ba
 	call sub_update_announcement_timer		;30bd
 	xor a			;30c0
 	ld (score.announcement_type),a		;30c1
 	ld (score.set_update_state),a		;30c4
 	ld a,001h		;30c7
-	ld (0c49dh),a		;30c9
+	ld (score.delay_timer),a		;30c9
 	ld a,(state.sound_wait_flag)		;30cc
 	or 080h		;30cf
 	ld (state.sound_wait_flag),a		;30d1

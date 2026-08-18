@@ -101,7 +101,7 @@ sub_racket_hit_trajectory:
 @fault_type_3_end:
 	ld a,004h		;1947
 	ld (ball.foul_type),a		;1949
-	ld hl,0c000h		;194c
+	ld hl,state.match_state_flags		;194c
 	res 0,(hl)		;194f
 @hit_success:
 	set 7,(ix + entity_t.racket_contact_flag)		;1951
@@ -154,7 +154,7 @@ sub_racket_hit_trajectory:
 @_unknown_play_sound:
 	ld a,c			;19b5
 	ld (psg_engine.track_request_id),a		;19b6
-	ld hl,0c000h		;19b9
+	ld hl,state.match_state_flags		;19b9
 	res 0,(hl)		;19bc
 	ld hl,0		;19be
 	ld (ball.y_vel),hl		;19c1

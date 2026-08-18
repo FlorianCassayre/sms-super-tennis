@@ -1,5 +1,5 @@
 sub_check_player_location:
-	ld a,(0c000h)		;1787
+	ld a,(state.match_state_flags)		;1787
 	rlca			;178a
 	ret nc			;178b
 	ld ix,entities.player.1.bottom		;178c

@@ -1,6 +1,6 @@
 handler_interrupt_pause:
 	push af			;0066
-	ld a,(0c000h)		;0067
+	ld a,(state.match_state_flags)		;0067
 	and 00ch		;006a
 	cp 004h		;006c
 	jr nz,+		;006e

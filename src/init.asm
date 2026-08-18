@@ -47,7 +47,7 @@ init:
 	ld sp,0dffeh		;00d7
 	xor a			;00da
 	ld (0c003h),a		;00db
-	ld (0c000h),a		;00de
+	ld (state.match_state_flags),a		;00de
 	ld (0c004h),a		;00e1
 	ld hl,state.match_flags		;00e4
 	ld de,state.current_player		;00e7
@@ -61,33 +61,33 @@ init:
 	ld hl,hardware_vdp_initial_register_values		;00f7
 	otir		;00fa
 	ld hl,0		;00fc
-	ld de,l002dh_palette		;00ff
+	ld de,graphics_palette_black_yellow		;00ff
 	ld b,1		;0102
 	call sub_graphics_palette_load		;0104
 	ld hl,00010h		;0107
-	ld de,l002dh_palette		;010a
+	ld de,graphics_palette_black_yellow		;010a
 	ld b,1		;010d
 	call sub_graphics_palette_load		;010f
 	ld de,02000h		;0112
-	ld hl,data_planes_font		;0115
+	ld hl,gui_ascii_patterns		;0115
 	call sub_rle_decompress_bitplanes_to_vram		;0118
 	ld de,0		;011b
-	ld hl,data_planes_player		;011e
+	ld hl,game_player_patterns		;011e
 	call sub_rle_decompress_bitplanes_to_vram		;0121
-	ld de,0c600h		;0124
-	ld hl,data_planes_ball		;0127
+	ld de,data.ball		;0124
+	ld hl,game_ball_patterns		;0127
 	call sub_rle_decompress_bitplanes_to_ram		;012a
 	ld de,data.mark3_name		;012d
-	ld hl,data_planes_mark3_name		;0130
+	ld hl,gui_mark3_names		;0130
 	call sub_rle_decompress_bitplanes_to_ram		;0133
 	ld de,data.mark3		;0136
-	ld hl,data_planes_mark3		;0139
+	ld hl,gui_mark3_patterns		;0139
 	call sub_rle_decompress_bitplanes_to_ram		;013c
 	ld de,data.umpire_settings		;013f
-	ld hl,data_planes_umpire_settings		;0142
+	ld hl,game_umpire_names		;0142
 	call sub_rle_decompress_bitplanes_to_ram		;0145
 	ld de,data.projection		;0148
-	ld hl,data_planes_projection		;014b
+	ld hl,game_ball_projection		;014b
 	call sub_rle_decompress_bitplanes_to_ram		;014e
 	call sub_graphics_name_fill_blank_tile		;0151
 	ld a,080h		;0154

@@ -7,7 +7,7 @@ sub_draw_settings_menu:
 	call sub_disable_display		;08cb
 	call sub_graphics_name_fill_blank_tile		;08ce
 	ld de,0		;08d1
-	ld hl,data_planes_player		;08d4
+	ld hl,game_player_patterns		;08d4
 	call sub_rle_decompress_bitplanes_to_vram		;08d7
 	ld hl,state.settings		;08da
 	ld b,_sizeof_game_settings_t		;08dd
@@ -77,5 +77,5 @@ sub_draw_settings_menu:
 	jp z,sub_game_gui_settings_handle_control		;097f
 	ld (hl),a			;0982
 	xor a			;0983
-	ld (0c49ch),a		;0984
+	ld (score.menu_key_repeat_timer),a		;0984
 	ret			;0987

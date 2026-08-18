@@ -25,7 +25,7 @@ l0c99h:
 	ld a,(state.match_flags)		;0c99
 	bit 7,a		;0c9c
 	jp nz,sub_game_frame_update		;0c9e
-	ld hl,0c000h		;0ca1
+	ld hl,state.match_state_flags		;0ca1
 	res 2,(hl)		;0ca4
 	ld a,003h		;0ca6
 	ld (0c007h),a		;0ca8
@@ -103,7 +103,7 @@ l0d3eh:
 	ret nz			;0d46
 l0d47h:
 	xor a			;0d47
-	ld (0c000h),a		;0d48
+	ld (state.match_state_flags),a		;0d48
 	ld hl,state.main_game_state		;0d4b
 	ld (hl),080h		;0d4e
 	inc hl			;0d50

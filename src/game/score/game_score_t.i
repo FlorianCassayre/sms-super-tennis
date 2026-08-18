@@ -28,7 +28,7 @@
 	sets_won_top DB		;c499
 	sets_won_bottom DB		;c49a
 	_unknown_3b DB		;c49b
-	menu_key_repeat_timer DB		;c49b
+	menu_key_repeat_timer DB		;c49c
 	delay_timer DB		;c49d
 	set_update_state DB		;c49e
 	_unknown_4 DB		;c49f

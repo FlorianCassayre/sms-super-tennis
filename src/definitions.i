@@ -26,4 +26,4 @@
 .INCLUDE "audio/command/audio_command_routines_t.i"
 .INCLUDE "audio/track/audio_tracks_t.i"
 .INCLUDE "audio/track/audio_track_macros.i"
-.INCLUDE "graphics/tiles/data_t.i"
+.INCLUDE "graphics/data_t.i"
