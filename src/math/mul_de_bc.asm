@@ -1,16 +1,16 @@
 sub_mul_de_bc:
-	ld hl,0		;03f7
-	ld a,010h		;03fa
+	ld hl,0
+	ld a,010h
 mul_de_bc_loop:
-	add hl,hl			;03fc
-	ex de,hl			;03fd
-	adc hl,hl		;03fe
-	ex de,hl			;0400
-	jr nc,+		;0401
-	add hl,bc			;0403
-	jr nc,+		;0404
-	inc de			;0406
+	add hl,hl
+	ex de,hl
+	adc hl,hl
+	ex de,hl
+	jr nc,+
+	add hl,bc
+	jr nc,+
+	inc de
 +:
-	dec a			;0407
-	jr nz,mul_de_bc_loop		;0408
-	ret			;040a
+	dec a
+	jr nz,mul_de_bc_loop
+	ret

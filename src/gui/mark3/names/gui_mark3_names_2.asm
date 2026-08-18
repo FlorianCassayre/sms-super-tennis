@@ -1,20 +1,20 @@
-.DB RLE_REP | 3		;4b5d
-.DB $61		;4b5e
-.DB RLE_LIT | 16		;4b5f
-.DB $63		;4b60
-.DB $64		;4b61
-.DB $62		;4b62
-.DB $66		;4b63
-.DB $68		;4b64
-.DB $6a		;4b65
-.DB $6c		;4b66
-.DB $6e		;4b67
-.DB $70		;4b68
-.DB $72		;4b69
-.DB $00		;4b6a
-.DB $75		;4b6b
-.DB $73		;4b6c
-.DB $77		;4b6d
-.DB $79		;4b6e
-.DB $7b		;4b6f
-.DB RLE_END		;4b70
+.DB RLE_REP | 3
+.DB $61
+.DB RLE_LIT | 16
+.DB $63
+.DB $64
+.DB $62
+.DB $66
+.DB $68
+.DB $6a
+.DB $6c
+.DB $6e
+.DB $70
+.DB $72
+.DB $00
+.DB $75
+.DB $73
+.DB $77
+.DB $79
+.DB $7b
+.DB RLE_END

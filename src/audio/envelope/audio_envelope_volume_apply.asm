@@ -1,40 +1,40 @@
 -:
-	ld (ix + audio_psg_channel_t.volume_envelope_index),a		;7bd0
+	ld (ix + audio_psg_channel_t.volume_envelope_index),a
 sub_audio_envelope_volume_apply:
-	push hl			;7bd3
-	ld a,(ix + audio_psg_channel_t.volume_envelope_index)		;7bd4
-	srl a		;7bd7
-	push af			;7bd9
-	ld c,a			;7bda
-	ld b,000h		;7bdb
-	add hl,bc			;7bdd
-	pop af			;7bde
-	ld a,(hl)			;7bdf
-	pop hl			;7be0
-	jr c,l7bf7h		;7be1
-	rrca			;7be3
-	rrca			;7be4
-	rrca			;7be5
-	rrca			;7be6
-	or a			;7be7
-	jr z,-		;7be8
-	cp 010h		;7bea
-	jr nz,l7bf3h		;7bec
-	dec (ix + audio_psg_channel_t.volume_envelope_index)		;7bee
-	jr sub_audio_envelope_volume_apply		;7bf1
+	push hl
+	ld a,(ix + audio_psg_channel_t.volume_envelope_index)
+	srl a
+	push af
+	ld c,a
+	ld b,000h
+	add hl,bc
+	pop af
+	ld a,(hl)
+	pop hl
+	jr c,l7bf7h
+	rrca
+	rrca
+	rrca
+	rrca
+	or a
+	jr z,-
+	cp 010h
+	jr nz,l7bf3h
+	dec (ix + audio_psg_channel_t.volume_envelope_index)
+	jr sub_audio_envelope_volume_apply
 l7bf3h:
-	cp 020h		;7bf3
-	jr z,l7c02h		;7bf5
+	cp 020h
+	jr z,l7c02h
 l7bf7h:
-	inc (ix + audio_psg_channel_t.volume_envelope_index)		;7bf7
-	or 0f0h		;7bfa
-	add a,(ix + audio_psg_channel_t.base_volume)		;7bfc
-	inc a			;7bff
-	jr c,l7c03h		;7c00
+	inc (ix + audio_psg_channel_t.volume_envelope_index)
+	or 0f0h
+	add a,(ix + audio_psg_channel_t.base_volume)
+	inc a
+	jr c,l7c03h
 l7c02h:
-	xor a			;7c02
+	xor a
 l7c03h:
-	cpl			;7c03
-	and 00fh		;7c04
-	ld (ix + audio_psg_channel_t.current_volume),a		;7c06
-	ret			;7c09
+	cpl
+	and 00fh
+	ld (ix + audio_psg_channel_t.current_volume),a
+	ret

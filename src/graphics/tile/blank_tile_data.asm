@@ -1,2 +1,2 @@
 blank_tile_data:
-	.DW $1100		;0385
+	.DW $1100

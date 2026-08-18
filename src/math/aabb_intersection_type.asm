@@ -1,15 +1,15 @@
 aabb_intersection_type_1:
-	.DB $00		;1769
-	.DB $00		;176a
-	.DB $04		;176b
-	.DB $03		;176c
+	.DB $00
+	.DB $00
+	.DB $04
+	.DB $03
 aabb_intersection_type_2:
-	.DB $00		;176d
-	.DB $01		;176e
-	.DB $06		;176f
-	.DB $05		;1770
+	.DB $00
+	.DB $01
+	.DB $06
+	.DB $05
 aabb_intersection_type_3:
-	.DB $00		;1771
-	.DB $02		;1772
-	.DB $08		;1773
-	.DB $07		;1774
+	.DB $00
+	.DB $02
+	.DB $08
+	.DB $07

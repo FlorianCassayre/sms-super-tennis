@@ -1,37 +1,37 @@
-.DB RLE_REP | 5		;5a14
-.DB $01		;5a15
-.DB RLE_LIT | 1		;5a16
-.DB $03		;5a17
-.DB RLE_REP | 10		;5a18
-.DB $01		;5a19
-.DB RLE_LIT | 1		;5a1a
-.DB $03		;5a1b
-.DB RLE_REP | 10		;5a1c
-.DB $01		;5a1d
-.DB RLE_LIT | 1		;5a1e
-.DB $03		;5a1f
-.DB RLE_REP | 5		;5a20
-.DB $01		;5a21
-.DB RLE_REP | 5		;5a22
-.DB $05		;5a23
-.DB RLE_LIT | 1		;5a24
-.DB $07		;5a25
-.DB RLE_REP | 8		;5a26
-.DB $01		;5a27
-.DB RLE_LIT | 1		;5a28
-.DB $03		;5a29
-.DB RLE_REP | 32		;5a2a
-.DB $01		;5a2b
-.DB RLE_LIT | 1		;5a2c
-.DB $07		;5a2d
-.DB RLE_REP | 63		;5a2e
-.DB $01		;5a2f
-.DB RLE_LIT | 1		;5a30
-.DB $07		;5a31
-.DB RLE_REP | 3		;5a32
-.DB $01		;5a33
-.DB RLE_LIT | 1		;5a34
-.DB $03		;5a35
-.DB RLE_REP | 82		;5a36
-.DB $01		;5a37
-.DB RLE_END		;5a38
+.DB RLE_REP | 5
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 10
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 10
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 5
+.DB $01
+.DB RLE_REP | 5
+.DB $05
+.DB RLE_LIT | 1
+.DB $07
+.DB RLE_REP | 8
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 32
+.DB $01
+.DB RLE_LIT | 1
+.DB $07
+.DB RLE_REP | 63
+.DB $01
+.DB RLE_LIT | 1
+.DB $07
+.DB RLE_REP | 3
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 82
+.DB $01
+.DB RLE_END

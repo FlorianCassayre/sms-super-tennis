@@ -1,137 +1,137 @@
 sub_game_ball_shadow_update_sizes:
-	ld hl,l06bfh		;065c
-	ld a,(ball.y_pos + 1)		;065f
-	cp 050h		;0662
-	jr nc,l0669h		;0664
-	ld hl,l06dfh		;0666
+	ld hl,l06bfh
+	ld a,(ball.y_pos + 1)
+	cp 050h
+	jr nc,l0669h
+	ld hl,l06dfh
 l0669h:
-	ld a,(ball.z_pos + 1)		;0669
-	cp 050h		;066c
-	jr c,l0672h		;066e
-	ld a,04fh		;0670
+	ld a,(ball.z_pos + 1)
+	cp 050h
+	jr c,l0672h
+	ld a,04fh
 l0672h:
-	rrca			;0672
-	rrca			;0673
-	rrca			;0674
-	and 00fh		;0675
-	add a,a			;0677
-	ld e,a			;0678
-	ld d,000h		;0679
-	add hl,de			;067b
-	ld a,(state.sound_wait_flag)		;067c
-	ld c,a			;067f
-	ld a,(ball.shadow_size_index)		;0680
-	cp (hl)			;0683
-	jr z,l068ch		;0684
-	ld a,(hl)			;0686
-	ld (ball.shadow_size_index),a		;0687
-	set 5,c		;068a
+	rrca
+	rrca
+	rrca
+	and 00fh
+	add a,a
+	ld e,a
+	ld d,000h
+	add hl,de
+	ld a,(state.sound_wait_flag)
+	ld c,a
+	ld a,(ball.shadow_size_index)
+	cp (hl)
+	jr z,l068ch
+	ld a,(hl)
+	ld (ball.shadow_size_index),a
+	set 5,c
 l068ch:
-	inc hl			;068c
-	ld a,(ball.sprite_size_index)		;068d
-	cp (hl)			;0690
-	jr z,l0699h		;0691
-	ld a,(hl)			;0693
-	ld (ball.sprite_size_index),a		;0694
-	set 6,c		;0697
+	inc hl
+	ld a,(ball.sprite_size_index)
+	cp (hl)
+	jr z,l0699h
+	ld a,(hl)
+	ld (ball.sprite_size_index),a
+	set 6,c
 l0699h:
-	ld a,c			;0699
-	ld (state.sound_wait_flag),a		;069a
-	ld de,l06ffh		;069d
-	ld a,(ball.shadow_size_index)		;06a0
-	add a,a			;06a3
-	ld l,a			;06a4
-	ld h,000h		;06a5
-	add hl,de			;06a7
-	ld a,(hl)			;06a8
-	inc hl			;06a9
-	ld h,(hl)			;06aa
-	ld l,a			;06ab
-	ld (ball.shadow_vram_pointer),hl		;06ac
-	ld a,(ball.sprite_size_index)		;06af
-	add a,a			;06b2
-	ld l,a			;06b3
-	ld h,000h		;06b4
-	add hl,de			;06b6
-	ld a,(hl)			;06b7
-	inc hl			;06b8
-	ld h,(hl)			;06b9
-	ld l,a			;06ba
-	ld (ball.sprite_vram_pointer),hl		;06bb
-	ret			;06be
+	ld a,c
+	ld (state.sound_wait_flag),a
+	ld de,l06ffh
+	ld a,(ball.shadow_size_index)
+	add a,a
+	ld l,a
+	ld h,000h
+	add hl,de
+	ld a,(hl)
+	inc hl
+	ld h,(hl)
+	ld l,a
+	ld (ball.shadow_vram_pointer),hl
+	ld a,(ball.sprite_size_index)
+	add a,a
+	ld l,a
+	ld h,000h
+	add hl,de
+	ld a,(hl)
+	inc hl
+	ld h,(hl)
+	ld l,a
+	ld (ball.sprite_vram_pointer),hl
+	ret
 l06bfh:
-	.DB $01		;06bf
-	.DB $06		;06c0
-	.DB $02		;06c1
-	.DB $07		;06c2
-	.DB $02		;06c3
-	.DB $07		;06c4
-	.DB $02		;06c5
-	.DB $07		;06c6
-	.DB $03		;06c7
-	.DB $07		;06c8
-	.DB $03		;06c9
-	.DB $07		;06ca
-	.DB $03		;06cb
-	.DB $08		;06cc
-	.DB $03		;06cd
-	.DB $08		;06ce
-	.DB $04		;06cf
-	.DB $08		;06d0
-	.DB $04		;06d1
-	.DB $08		;06d2
-	.DB $04		;06d3
-	.DB $08		;06d4
-	.DB $04		;06d5
-	.DB $08		;06d6
-	.DB $04		;06d7
-	.DB $08		;06d8
-	.DB $04		;06d9
-	.DB $08		;06da
-	.DB $04		;06db
-	.DB $08		;06dc
-	.DB $04		;06dd
-	.DB $08		;06de
+	.DB $01
+	.DB $06
+	.DB $02
+	.DB $07
+	.DB $02
+	.DB $07
+	.DB $02
+	.DB $07
+	.DB $03
+	.DB $07
+	.DB $03
+	.DB $07
+	.DB $03
+	.DB $08
+	.DB $03
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
 l06dfh:
-	.DB $00		;06df
-	.DB $05		;06e0
-	.DB $01		;06e1
-	.DB $06		;06e2
-	.DB $01		;06e3
-	.DB $06		;06e4
-	.DB $01		;06e5
-	.DB $06		;06e6
-	.DB $02		;06e7
-	.DB $06		;06e8
-	.DB $02		;06e9
-	.DB $06		;06ea
-	.DB $02		;06eb
-	.DB $07		;06ec
-	.DB $02		;06ed
-	.DB $07		;06ee
-	.DB $03		;06ef
-	.DB $07		;06f0
-	.DB $03		;06f1
-	.DB $08		;06f2
-	.DB $04		;06f3
-	.DB $08		;06f4
-	.DB $04		;06f5
-	.DB $08		;06f6
-	.DB $04		;06f7
-	.DB $08		;06f8
-	.DB $04		;06f9
-	.DB $08		;06fa
-	.DB $04		;06fb
-	.DB $08		;06fc
-	.DB $04		;06fd
-	.DB $08		;06fe
+	.DB $00
+	.DB $05
+	.DB $01
+	.DB $06
+	.DB $01
+	.DB $06
+	.DB $01
+	.DB $06
+	.DB $02
+	.DB $06
+	.DB $02
+	.DB $06
+	.DB $02
+	.DB $07
+	.DB $02
+	.DB $07
+	.DB $03
+	.DB $07
+	.DB $03
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
+	.DB $04
+	.DB $08
 l06ffh:
-	.DW $c600		;06ff
-	.DW $c620		;0701
-	.DW $c640		;0703
-	.DW $c660		;0705
-	.DW $c680		;0707
-	.DW $c6a0		;0709
-	.DW $c6c0		;070b
-	.DW $c6e0		;070d
-	.DW $c700		;070f
+	.DW $c600
+	.DW $c620
+	.DW $c640
+	.DW $c660
+	.DW $c680
+	.DW $c6a0
+	.DW $c6c0
+	.DW $c6e0
+	.DW $c700

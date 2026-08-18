@@ -1,123 +1,123 @@
-.DB RLE_LIT | 64		;4d83
-.DB $18		;4d84
-.DB $1a		;4d85
-.DB $1b		;4d86
-.DB $1d		;4d87
-.DB $1e		;4d88
-.DB $1f		;4d89
-.DB $21		;4d8a
-.DB $22		;4d8b
-.DB $24		;4d8c
-.DB $25		;4d8d
-.DB $27		;4d8e
-.DB $28		;4d8f
-.DB $2b		;4d90
-.DB $2d		;4d91
-.DB $30		;4d92
-.DB $32		;4d93
-.DB $35		;4d94
-.DB $37		;4d95
-.DB $3a		;4d96
-.DB $3c		;4d97
-.DB $3f		;4d98
-.DB $42		;4d99
-.DB $45		;4d9a
-.DB $47		;4d9b
-.DB $4a		;4d9c
-.DB $4d		;4d9d
-.DB $50		;4d9e
-.DB $53		;4d9f
-.DB $55		;4da0
-.DB $58		;4da1
-.DB $5b		;4da2
-.DB $5e		;4da3
-.DB $61		;4da4
-.DB $64		;4da5
-.DB $67		;4da6
-.DB $6a		;4da7
-.DB $6e		;4da8
-.DB $71		;4da9
-.DB $74		;4daa
-.DB $77		;4dab
-.DB $7a		;4dac
-.DB $7d		;4dad
-.DB $81		;4dae
-.DB $84		;4daf
-.DB $89		;4db0
-.DB $8f		;4db1
-.DB $94		;4db2
-.DB $9a		;4db3
-.DB $9f		;4db4
-.DB $a5		;4db5
-.DB $aa		;4db6
-.DB $b0		;4db7
-.DB $b5		;4db8
-.DB $bb		;4db9
-.DB $c0		;4dba
-.DB $c6		;4dbb
-.DB $cb		;4dbc
-.DB $d1		;4dbd
-.DB $d6		;4dbe
-.DB $dc		;4dbf
-.DB $e1		;4dc0
-.DB $e7		;4dc1
-.DB $ec		;4dc2
-.DB $f1		;4dc3
-.DB RLE_REP | 36		;4dc4
-.DB $00		;4dc5
-.DB RLE_REP | 92		;4dc6
-.DB $01		;4dc7
-.DB RLE_REP | 48		;4dc8
-.DB $00		;4dc9
-.DB RLE_REP | 80		;4dca
-.DB $01		;4dcb
-.DB RLE_LIT | 48		;4dcc
-.DB $02		;4dcd
-.DB $0d		;4dce
-.DB $18		;4dcf
-.DB $24		;4dd0
-.DB $2e		;4dd1
-.DB $34		;4dd2
-.DB $3b		;4dd3
-.DB $41		;4dd4
-.DB $47		;4dd5
-.DB $4e		;4dd6
-.DB $54		;4dd7
-.DB $59		;4dd8
-.DB $5f		;4dd9
-.DB $65		;4dda
-.DB $6a		;4ddb
-.DB $70		;4ddc
-.DB $76		;4ddd
-.DB $7c		;4dde
-.DB $81		;4ddf
-.DB $86		;4de0
-.DB $8b		;4de1
-.DB $90		;4de2
-.DB $95		;4de3
-.DB $9a		;4de4
-.DB $9f		;4de5
-.DB $a4		;4de6
-.DB $a9		;4de7
-.DB $ae		;4de8
-.DB $b2		;4de9
-.DB $b6		;4dea
-.DB $ba		;4deb
-.DB $be		;4dec
-.DB $c2		;4ded
-.DB $c6		;4dee
-.DB $ca		;4def
-.DB $ce		;4df0
-.DB $d2		;4df1
-.DB $d6		;4df2
-.DB $da		;4df3
-.DB $de		;4df4
-.DB $e2		;4df5
-.DB $e6		;4df6
-.DB $ea		;4df7
-.DB $ee		;4df8
-.DB $f2		;4df9
-.DB $f6		;4dfa
-.DB $fa		;4dfb
-.DB $fe		;4dfc
-.DB RLE_END		;4dfd
+.DB RLE_LIT | 64
+.DB $18
+.DB $1a
+.DB $1b
+.DB $1d
+.DB $1e
+.DB $1f
+.DB $21
+.DB $22
+.DB $24
+.DB $25
+.DB $27
+.DB $28
+.DB $2b
+.DB $2d
+.DB $30
+.DB $32
+.DB $35
+.DB $37
+.DB $3a
+.DB $3c
+.DB $3f
+.DB $42
+.DB $45
+.DB $47
+.DB $4a
+.DB $4d
+.DB $50
+.DB $53
+.DB $55
+.DB $58
+.DB $5b
+.DB $5e
+.DB $61
+.DB $64
+.DB $67
+.DB $6a
+.DB $6e
+.DB $71
+.DB $74
+.DB $77
+.DB $7a
+.DB $7d
+.DB $81
+.DB $84
+.DB $89
+.DB $8f
+.DB $94
+.DB $9a
+.DB $9f
+.DB $a5
+.DB $aa
+.DB $b0
+.DB $b5
+.DB $bb
+.DB $c0
+.DB $c6
+.DB $cb
+.DB $d1
+.DB $d6
+.DB $dc
+.DB $e1
+.DB $e7
+.DB $ec
+.DB $f1
+.DB RLE_REP | 36
+.DB $00
+.DB RLE_REP | 92
+.DB $01
+.DB RLE_REP | 48
+.DB $00
+.DB RLE_REP | 80
+.DB $01
+.DB RLE_LIT | 48
+.DB $02
+.DB $0d
+.DB $18
+.DB $24
+.DB $2e
+.DB $34
+.DB $3b
+.DB $41
+.DB $47
+.DB $4e
+.DB $54
+.DB $59
+.DB $5f
+.DB $65
+.DB $6a
+.DB $70
+.DB $76
+.DB $7c
+.DB $81
+.DB $86
+.DB $8b
+.DB $90
+.DB $95
+.DB $9a
+.DB $9f
+.DB $a4
+.DB $a9
+.DB $ae
+.DB $b2
+.DB $b6
+.DB $ba
+.DB $be
+.DB $c2
+.DB $c6
+.DB $ca
+.DB $ce
+.DB $d2
+.DB $d6
+.DB $da
+.DB $de
+.DB $e2
+.DB $e6
+.DB $ea
+.DB $ee
+.DB $f2
+.DB $f6
+.DB $fa
+.DB $fe
+.DB RLE_END

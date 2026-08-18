@@ -1,38 +1,38 @@
 sub_game_court_draw:
-	di			;0abd
-	call sub_disable_display		;0abe
-	ld hl,0		;0ac1
-	ld de,game_court_palette		;0ac4
-	ld b,32		;0ac7
-	call sub_graphics_palette_load		;0ac9
-	ld de,02600h		;0acc
-	ld hl,game_court_patterns		;0acf
-	call sub_rle_decompress_bitplanes_to_vram		;0ad2
-	ld de,VDP_NAME_TABLE_ADDRESS_BASE		;0ad5
-	ld hl,game_court_names		;0ad8
-	call sub_rle_decompress_bitplanes_to_vram		;0adb
-	ld de,0		;0ade
-	ld hl,game_player_patterns		;0ae1
-	call sub_rle_decompress_bitplanes_to_vram		;0ae4
-	ld hl,0c100h		;0ae7
-	ld de,0c101h		;0aea
-	ld bc,63		;0aed
-	ld (hl),0d0h		;0af0
-	ldir		;0af2
-	call sub_game_player_palette_load_clothes		;0af4
-	ld a,(0c04ah)		;0af7
-	rrca			;0afa
-	and 007h		;0afb
-	ld (state.ball_hit_type),a		;0afd
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_start		;0b00
-	ld (psg_engine.track_request_id),a		;0b02
-	ld a,005h		;0b05
-	ld hl,state.match_state_flags		;0b07
-	bit 3,(hl)		;0b0a
-	jr z,+		;0b0c
-	or 080h		;0b0e
+	di
+	call sub_disable_display
+	ld hl,0
+	ld de,game_court_palette
+	ld b,32
+	call sub_graphics_palette_load
+	ld de,02600h
+	ld hl,game_court_patterns
+	call sub_rle_decompress_bitplanes_to_vram
+	ld de,VDP_NAME_TABLE_ADDRESS_BASE
+	ld hl,game_court_names
+	call sub_rle_decompress_bitplanes_to_vram
+	ld de,0
+	ld hl,game_player_patterns
+	call sub_rle_decompress_bitplanes_to_vram
+	ld hl,0c100h
+	ld de,0c101h
+	ld bc,63
+	ld (hl),0d0h
+	ldir
+	call sub_game_player_palette_load_clothes
+	ld a,(0c04ah)
+	rrca
+	and 007h
+	ld (state.ball_hit_type),a
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_start
+	ld (psg_engine.track_request_id),a
+	ld a,005h
+	ld hl,state.match_state_flags
+	bit 3,(hl)
+	jr z,+
+	or 080h
 +:
-	ld (state.main_game_state),a		;0b10
-	call sub_enable_display		;0b13
-	ei			;0b16
-	ret			;0b17
+	ld (state.main_game_state),a
+	call sub_enable_display
+	ei
+	ret

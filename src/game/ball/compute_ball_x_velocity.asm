@@ -1,152 +1,152 @@
 sub_compute_ball_x_velocity:
-	ld a,c			;13a8
-	add a,a			;13a9
-	ld c,a			;13aa
-	ld b,000h		;13ab
-	ld hl,table_ball_x_vel_pointers		;13ad
-	add hl,bc			;13b0
-	ld e,(hl)			;13b1
-	inc hl			;13b2
-	ld d,(hl)			;13b3
-	ld a,(state.ball_hit_type)		;13b4
-	add a,a			;13b7
-	ld c,a			;13b8
-	add a,a			;13b9
-	ld b,a			;13ba
-	add a,a			;13bb
-	add a,a			;13bc
-	add a,c			;13bd
-	add a,b			;13be
-	ld c,a			;13bf
-	ld a,(ix + entity_t.render_facing_dir)		;13c0
-	sub 00bh		;13c3
-	jr nc,@skip_add		;13c5
-	add a,00bh		;13c7
+	ld a,c
+	add a,a
+	ld c,a
+	ld b,000h
+	ld hl,table_ball_x_vel_pointers
+	add hl,bc
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	ld a,(state.ball_hit_type)
+	add a,a
+	ld c,a
+	add a,a
+	ld b,a
+	add a,a
+	add a,a
+	add a,c
+	add a,b
+	ld c,a
+	ld a,(ix + entity_t.render_facing_dir)
+	sub 00bh
+	jr nc,@skip_add
+	add a,00bh
 @skip_add:
-	add a,a			;13c9
-	add a,c			;13ca
-	ld c,a			;13cb
-	ld b,000h		;13cc
-	ex de,hl			;13ce
-	add hl,bc			;13cf
-	ld e,(hl)			;13d0
-	inc hl			;13d1
-	ld d,(hl)			;13d2
-	ld a,(state.last_hitter)		;13d3
-	and 001h		;13d6
-	jr z,@store_vel		;13d8
-	xor a			;13da
-	ld hl,0		;13db
-	sbc hl,de		;13de
-	ex de,hl			;13e0
+	add a,a
+	add a,c
+	ld c,a
+	ld b,000h
+	ex de,hl
+	add hl,bc
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	ld a,(state.last_hitter)
+	and 001h
+	jr z,@store_vel
+	xor a
+	ld hl,0
+	sbc hl,de
+	ex de,hl
 @store_vel:
-	ld (ball.x_vel),de		;13e1
-	ret			;13e5
+	ld (ball.x_vel),de
+	ret
 
 table_ball_x_vel_pointers:
-	.DW table_ball_x_vel_pointers_0		;13e6
-	.DW table_ball_x_vel_pointers_1		;13e8
-	.DW table_ball_x_vel_pointers_2		;13ea
-	.DW table_ball_x_vel_pointers_0		;13ec
+	.DW table_ball_x_vel_pointers_0
+	.DW table_ball_x_vel_pointers_1
+	.DW table_ball_x_vel_pointers_2
+	.DW table_ball_x_vel_pointers_0
 table_ball_x_vel_pointers_0:
-	.DW $0082		;13ee
-	.DW $0066		;13f0
-	.DW $004c		;13f2
-	.DW $0032		;13f4
-	.DW $0018		;13f6
-	.DW $0000		;13f8
-	.DW $ffe8		;13fa
-	.DW $ffce		;13fc
-	.DW $ffb4		;13fe
-	.DW $ff9a		;1400
-	.DW $ff7e		;1402
-	.DW $00af		;1404
-	.DW $0089		;1406
-	.DW $0066		;1408
-	.DW $0043		;140a
-	.DW $0020		;140c
-	.DW $0000		;140e
-	.DW $ffe0		;1410
-	.DW $ffbd		;1412
-	.DW $ff9a		;1414
-	.DW $ff77		;1416
-	.DW $ff51		;1418
-	.DW $0104		;141a
-	.DW $00cc		;141c
-	.DW $0098		;141e
-	.DW $0064		;1420
-	.DW $0030		;1422
-	.DW $0000		;1424
-	.DW $ffd0		;1426
-	.DW $ff9c		;1428
-	.DW $ff68		;142a
-	.DW $ff34		;142c
-	.DW $fefc		;142e
+	.DW $0082
+	.DW $0066
+	.DW $004c
+	.DW $0032
+	.DW $0018
+	.DW $0000
+	.DW $ffe8
+	.DW $ffce
+	.DW $ffb4
+	.DW $ff9a
+	.DW $ff7e
+	.DW $00af
+	.DW $0089
+	.DW $0066
+	.DW $0043
+	.DW $0020
+	.DW $0000
+	.DW $ffe0
+	.DW $ffbd
+	.DW $ff9a
+	.DW $ff77
+	.DW $ff51
+	.DW $0104
+	.DW $00cc
+	.DW $0098
+	.DW $0064
+	.DW $0030
+	.DW $0000
+	.DW $ffd0
+	.DW $ff9c
+	.DW $ff68
+	.DW $ff34
+	.DW $fefc
 table_ball_x_vel_pointers_1:
-	.DW $0051		;1430
-	.DW $003f		;1432
-	.DW $002f		;1434
-	.DW $001f		;1436
-	.DW $000f		;1438
-	.DW $0000		;143a
-	.DW $fff1		;143c
-	.DW $ffe1		;143e
-	.DW $ffd1		;1440
-	.DW $ffc1		;1442
-	.DW $ffaf		;1444
-	.DW $006e		;1446
-	.DW $0056		;1448
-	.DW $0040		;144a
-	.DW $002a		;144c
-	.DW $0014		;144e
-	.DW $0000		;1450
-	.DW $ffec		;1452
-	.DW $ffd6		;1454
-	.DW $ffc0		;1456
-	.DW $ffaa		;1458
-	.DW $ff92		;145a
-	.DW $00a2		;145c
-	.DW $007f		;145e
-	.DW $005f		;1460
-	.DW $003e		;1462
-	.DW $001e		;1464
-	.DW $0000		;1466
-	.DW $ffe2		;1468
-	.DW $ffc2		;146a
-	.DW $ffa1		;146c
-	.DW $ff81		;146e
-	.DW $ff5e		;1470
+	.DW $0051
+	.DW $003f
+	.DW $002f
+	.DW $001f
+	.DW $000f
+	.DW $0000
+	.DW $fff1
+	.DW $ffe1
+	.DW $ffd1
+	.DW $ffc1
+	.DW $ffaf
+	.DW $006e
+	.DW $0056
+	.DW $0040
+	.DW $002a
+	.DW $0014
+	.DW $0000
+	.DW $ffec
+	.DW $ffd6
+	.DW $ffc0
+	.DW $ffaa
+	.DW $ff92
+	.DW $00a2
+	.DW $007f
+	.DW $005f
+	.DW $003e
+	.DW $001e
+	.DW $0000
+	.DW $ffe2
+	.DW $ffc2
+	.DW $ffa1
+	.DW $ff81
+	.DW $ff5e
 table_ball_x_vel_pointers_2:
-	.DW $00e5		;1472
-	.DW $0124		;1474
-	.DW $00ab		;1476
-	.DW $0070		;1478
-	.DW $0036		;147a
-	.DW $0000		;147c
-	.DW $ffca		;147e
-	.DW $ff90		;1480
-	.DW $ff55		;1482
-	.DW $ff1b		;1484
-	.DW $fedc		;1486
-	.DW $0132		;1488
-	.DW $0186		;148a
-	.DW $00e4		;148c
-	.DW $0096		;148e
-	.DW $0048		;1490
-	.DW $0000		;1492
-	.DW $ffb8		;1494
-	.DW $ff6a		;1496
-	.DW $ff1c		;1498
-	.DW $fece		;149a
-	.DW $fe7a		;149c
-	.DW $01cb		;149e
-	.DW $0249		;14a0
-	.DW $0156		;14a2
-	.DW $00e1		;14a4
-	.DW $006c		;14a6
-	.DW $0000		;14a8
-	.DW $ff94		;14aa
-	.DW $ff1f		;14ac
-	.DW $feaa		;14ae
-	.DW $fe35		;14b0
-	.DW $fdb7		;14b2
+	.DW $00e5
+	.DW $0124
+	.DW $00ab
+	.DW $0070
+	.DW $0036
+	.DW $0000
+	.DW $ffca
+	.DW $ff90
+	.DW $ff55
+	.DW $ff1b
+	.DW $fedc
+	.DW $0132
+	.DW $0186
+	.DW $00e4
+	.DW $0096
+	.DW $0048
+	.DW $0000
+	.DW $ffb8
+	.DW $ff6a
+	.DW $ff1c
+	.DW $fece
+	.DW $fe7a
+	.DW $01cb
+	.DW $0249
+	.DW $0156
+	.DW $00e1
+	.DW $006c
+	.DW $0000
+	.DW $ff94
+	.DW $ff1f
+	.DW $feaa
+	.DW $fe35
+	.DW $fdb7

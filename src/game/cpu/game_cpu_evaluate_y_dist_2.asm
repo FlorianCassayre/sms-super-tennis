@@ -1,50 +1,50 @@
 sub_game_cpu_evaluate_y_dist_2:
-	ld a,(ball.foul_type)		;23aa
-	and a			;23ad
-	ld b,000h		;23ae
-	jr nz,l23fbh		;23b0
-	ld a,(ball.foul_triggered_flag)		;23b2
-	and a			;23b5
-	jr nz,l23beh		;23b6
-	ld a,(0c51dh)		;23b8
-	and a			;23bb
-	jr nz,l23fbh		;23bc
+	ld a,(ball.foul_type)
+	and a
+	ld b,000h
+	jr nz,l23fbh
+	ld a,(ball.foul_triggered_flag)
+	and a
+	jr nz,l23beh
+	ld a,(0c51dh)
+	and a
+	jr nz,l23fbh
 l23beh:
-	ld a,(entities.ball.y_pos + 1)		;23be
-	ld e,a			;23c1
-	ld a,(ix + entity_t.y_pos + 1)		;23c2
-	sub e			;23c5
-	jr nc,l23cah		;23c6
-	neg		;23c8
+	ld a,(entities.ball.y_pos + 1)
+	ld e,a
+	ld a,(ix + entity_t.y_pos + 1)
+	sub e
+	jr nc,l23cah
+	neg
 l23cah:
-	ld b,a			;23ca
-	ld a,(ix + entity_t.y_div_pos)		;23cb
-	ld e,a			;23ce
-	ld c,010h		;23cf
-	cp 001h		;23d1
-	ld a,b			;23d3
-	ld b,000h		;23d4
-	jr c,l23dah		;23d6
-	ld c,018h		;23d8
+	ld b,a
+	ld a,(ix + entity_t.y_div_pos)
+	ld e,a
+	ld c,010h
+	cp 001h
+	ld a,b
+	ld b,000h
+	jr c,l23dah
+	ld c,018h
 l23dah:
-	cp c			;23da
-	jr nc,l23fbh		;23db
-	ld b,001h		;23dd
-	ld a,e			;23df
-	cp 006h		;23e0
-	jr c,l23fbh		;23e2
-	ld a,(0c401h)		;23e4
-	cp 01ah		;23e7
-	jr nz,l23f3h		;23e9
-	ld a,r		;23eb
-	cp 03fh		;23ed
-	ld b,002h		;23ef
-	jr nc,l23fbh		;23f1
+	cp c
+	jr nc,l23fbh
+	ld b,001h
+	ld a,e
+	cp 006h
+	jr c,l23fbh
+	ld a,(0c401h)
+	cp 01ah
+	jr nz,l23f3h
+	ld a,r
+	cp 03fh
+	ld b,002h
+	jr nc,l23fbh
 l23f3h:
-	ld a,r		;23f3
-	cp 030h		;23f5
-	jr c,l23fbh		;23f7
-	ld b,001h		;23f9
+	ld a,r
+	cp 030h
+	jr c,l23fbh
+	ld b,001h
 l23fbh:
-	ld (ix + entity_t.hit_readiness),b		;23fb
-	ret			;23fe
+	ld (ix + entity_t.hit_readiness),b
+	ret

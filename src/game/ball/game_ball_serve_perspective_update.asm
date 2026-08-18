@@ -1,95 +1,95 @@
 sub_game_ball_serve_perspective_update:
-	ld hl,l1300h		;0fa5
-	ld (ball.z_pos),hl		;0fa8
-	ld a,(state.current_player)		;0fab
-	add a,a			;0fae
-	add a,a			;0faf
-	add a,a			;0fb0
-	ld e,a			;0fb1
-	ld d,000h		;0fb2
-	ld hl,l0fffh		;0fb4
-	add hl,de			;0fb7
-	ld e,(hl)			;0fb8
-	inc hl			;0fb9
-	ld d,(hl)			;0fba
-	ld (ball.y_pos),de		;0fbb
-	inc hl			;0fbf
-	ld c,(hl)			;0fc0
-	inc hl			;0fc1
-	ld b,(hl)			;0fc2
-	inc hl			;0fc3
-	ld e,(hl)			;0fc4
-	inc hl			;0fc5
-	ld d,(hl)			;0fc6
-	inc hl			;0fc7
-	ld a,(hl)			;0fc8
-	inc hl			;0fc9
-	ld h,(hl)			;0fca
-	ld l,a			;0fcb
-	ld a,(hl)			;0fcc
-	inc hl			;0fcd
-	ld h,(hl)			;0fce
-	ld l,a			;0fcf
-	add hl,de			;0fd0
-	ld de,08000h		;0fd1
-	xor a			;0fd4
-	ex de,hl			;0fd5
-	sbc hl,de		;0fd6
-	push af			;0fd8
-	jr nc,l0fe2h		;0fd9
-	xor a			;0fdb
-	ld de,0		;0fdc
-	ex de,hl			;0fdf
-	sbc hl,de		;0fe0
+	ld hl,l1300h
+	ld (ball.z_pos),hl
+	ld a,(state.current_player)
+	add a,a
+	add a,a
+	add a,a
+	ld e,a
+	ld d,000h
+	ld hl,l0fffh
+	add hl,de
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	ld (ball.y_pos),de
+	inc hl
+	ld c,(hl)
+	inc hl
+	ld b,(hl)
+	inc hl
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	inc hl
+	ld a,(hl)
+	inc hl
+	ld h,(hl)
+	ld l,a
+	ld a,(hl)
+	inc hl
+	ld h,(hl)
+	ld l,a
+	add hl,de
+	ld de,08000h
+	xor a
+	ex de,hl
+	sbc hl,de
+	push af
+	jr nc,l0fe2h
+	xor a
+	ld de,0
+	ex de,hl
+	sbc hl,de
 l0fe2h:
-	ld de,0		;0fe2
-	ex de,hl			;0fe5
-	call sub_div_hl_de_bc		;0fe6
-	ld d,e			;0fe9
-	ld e,h			;0fea
-	ld hl,08000h		;0feb
-	pop af			;0fee
-	jr nc,l0ff6h		;0fef
-	xor a			;0ff1
-	adc hl,de		;0ff2
-	jr l0ff9h		;0ff4
+	ld de,0
+	ex de,hl
+	call sub_div_hl_de_bc
+	ld d,e
+	ld e,h
+	ld hl,08000h
+	pop af
+	jr nc,l0ff6h
+	xor a
+	adc hl,de
+	jr l0ff9h
 l0ff6h:
-	xor a			;0ff6
-	sbc hl,de		;0ff7
+	xor a
+	sbc hl,de
 l0ff9h:
-	ld (0c50ah),hl		;0ff9
-	jp sub_game_ball_sprite_perspective_x		;0ffc
+	ld (0c50ah),hl
+	jp sub_game_ball_sprite_perspective_x
 
 l0fffh:
-	.DB $00		;0fff
-	.DB $d3		;1000
-	.DB $95		;1001
-	.DB $01		;1002
-	.DB $00		;1003
-	.DB $0c		;1004
-	.DB $0c		;1005
-	.DB $c2		;1006
-	.DB $00		;1007
-	.DB $27		;1008
-	.DB $d3		;1009
-	.DB $00		;100a
-	.DB $00		;100b
-	.DB $fa		;100c
-	.DB $4c		;100d
-	.DB $c2		;100e
-	.DB $00		;100f
-	.DB $d3		;1010
-	.DB $95		;1011
-	.DB $01		;1012
-	.DB $00		;1013
-	.DB $0c		;1014
-	.DB $8c		;1015
-	.DB $c2		;1016
-	.DB $00		;1017
-	.DB $27		;1018
-	.DB $d3		;1019
-	.DB $00		;101a
-	.DB $00		;101b
-	.DB $fa		;101c
-	.DB $cc		;101d
-	.DB $c2		;101e
+	.DB $00
+	.DB $d3
+	.DB $95
+	.DB $01
+	.DB $00
+	.DB $0c
+	.DB $0c
+	.DB $c2
+	.DB $00
+	.DB $27
+	.DB $d3
+	.DB $00
+	.DB $00
+	.DB $fa
+	.DB $4c
+	.DB $c2
+	.DB $00
+	.DB $d3
+	.DB $95
+	.DB $01
+	.DB $00
+	.DB $0c
+	.DB $8c
+	.DB $c2
+	.DB $00
+	.DB $27
+	.DB $d3
+	.DB $00
+	.DB $00
+	.DB $fa
+	.DB $cc
+	.DB $c2

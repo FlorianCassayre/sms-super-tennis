@@ -1,43 +1,43 @@
 sub_update_announcement_timer:
-	ld a,(score.announcement_type)		;3566
-	cp 000h		;3569
-	ret z			;356b
-	ld a,(score.delay_timer)		;356c
-	cp 000h		;356f
-	jr z,l3578h		;3571
-	dec a			;3573
-	ld (score.delay_timer),a		;3574
-	ret			;3577
+	ld a,(score.announcement_type)
+	cp 000h
+	ret z
+	ld a,(score.delay_timer)
+	cp 000h
+	jr z,l3578h
+	dec a
+	ld (score.delay_timer),a
+	ret
 l3578h:
-	ld a,004h		;3578
-	out (O_VDP_CTRL),a		;357a
+	ld a,004h
+	out (O_VDP_CTRL),a
 	.IFDEF _UE
-		ld b,005h		;357c
-		call sub_delay_loop		;357e
+		ld b,005h
+		call sub_delay_loop
     .ENDIF
-	ld a,0c0h		;3581
-	out (O_VDP_CTRL),a		;3583
-	ld a,(score.announcement_step)		;3585
-	cp 002h		;3588
-	jr z,l3599h		;358a
-	cp 000h		;358c
-	jr nz,l35a1h		;358e
-	ld a,001h		;3590
-	ld (score.announcement_step),a		;3592
-	ld a,003h		;3595
-	jr l35a8h		;3597
+	ld a,0c0h
+	out (O_VDP_CTRL),a
+	ld a,(score.announcement_step)
+	cp 002h
+	jr z,l3599h
+	cp 000h
+	jr nz,l35a1h
+	ld a,001h
+	ld (score.announcement_step),a
+	ld a,003h
+	jr l35a8h
 l3599h:
-	xor a			;3599
-	ld (score.announcement_step),a		;359a
-	ld a,002h		;359d
-	jr l35a8h		;359f
+	xor a
+	ld (score.announcement_step),a
+	ld a,002h
+	jr l35a8h
 l35a1h:
-	ld a,002h		;35a1
-	ld (score.announcement_step),a		;35a3
-	ld a,013h		;35a6
+	ld a,002h
+	ld (score.announcement_step),a
+	ld a,013h
 l35a8h:
-	out (IO_VDP_DATA),a		;35a8
-	.DB $3e		;35aa
-	.DB $02		;35ab
-	ld (score.delay_timer),a		;35ac
-	ret			;35af
+	out (IO_VDP_DATA),a
+	.DB $3e
+	.DB $02
+	ld (score.delay_timer),a
+	ret

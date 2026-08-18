@@ -1,26 +1,26 @@
 sub_l1362h_ball:
-	ld a,entity_state_t.ball_normal_update		;1362
-	ld (entities.ball.state_index),a		;1364
-	xor a			;1367
-	ld (entities.ball.ball_hit_flag),a		;1368
-	ld a,(state.last_hitter)		;136b
-	ld e,a			;136e
-	ld d,000h		;136f
-	ld hl,l138bh		;1371
-	add hl,de			;1374
-	ld a,(hl)			;1375
-	ld (0c312h),a		;1376
-	ld hl,state.match_flags		;1379
-	set 7,(hl)		;137c
-	ld a,(ball.z_pos + 1)		;137e
-	cp 010h		;1381
-	ret nc			;1383
-	ld hl,01000h		;1384
-	ld (ball.z_pos),hl		;1387
-	ret			;138a
+	ld a,entity_state_t.ball_normal_update
+	ld (entities.ball.state_index),a
+	xor a
+	ld (entities.ball.ball_hit_flag),a
+	ld a,(state.last_hitter)
+	ld e,a
+	ld d,000h
+	ld hl,l138bh
+	add hl,de
+	ld a,(hl)
+	ld (0c312h),a
+	ld hl,state.match_flags
+	set 7,(hl)
+	ld a,(ball.z_pos + 1)
+	cp 010h
+	ret nc
+	ld hl,01000h
+	ld (ball.z_pos),hl
+	ret
 
 l138bh:
-	.DB $01		;138b
-	.DB $02		;138c
-	.DB $01		;138d
-	.DB $02		;138e
+	.DB $01
+	.DB $02
+	.DB $01
+	.DB $02

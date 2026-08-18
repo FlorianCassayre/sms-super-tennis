@@ -1,81 +1,81 @@
 sub_draw_settings_menu:
-	ld hl,state.main_game_state		;08c0
-	bit 6,(hl)		;08c3
-	jp nz,+		;08c5
-	set 6,(hl)		;08c8
-	di			;08ca
-	call sub_disable_display		;08cb
-	call sub_graphics_name_fill_blank_tile		;08ce
-	ld de,0		;08d1
-	ld hl,game_player_patterns		;08d4
-	call sub_rle_decompress_bitplanes_to_vram		;08d7
-	ld hl,state.settings		;08da
-	ld b,_sizeof_game_settings_t		;08dd
-	xor a			;08df
+	ld hl,state.main_game_state
+	bit 6,(hl)
+	jp nz,+
+	set 6,(hl)
+	di
+	call sub_disable_display
+	call sub_graphics_name_fill_blank_tile
+	ld de,0
+	ld hl,game_player_patterns
+	call sub_rle_decompress_bitplanes_to_vram
+	ld hl,state.settings
+	ld b,_sizeof_game_settings_t
+	xor a
 -:
-	ld (hl),a			;08e0
-	inc hl			;08e1
-	djnz -		;08e2
-	ld (score.settings_cursor_y),a		;08e4
-	ld (score.tick_counter),a		;08e7
-	call sub_get_joy_p1		;08ea
-	ld (score.settings_joystick),a		;08ed
-	ld (score.settings_joystick_previous),a		;08f0
-	ld hl,03886h		;08f3
-	ld de,data.umpire_settings.player_level_select		;08f6
-	ld bc,38		;08f9
-	call sub_cp_ram_vram		;08fc
-	ld hl,0394ah		;08ff
-	ld de,data.umpire_settings.speed_level		;0902
-	ld bc,32		;0905
-	call sub_cp_ram_vram		;0908
-	ld hl,039e2h		;090b
-	ld de,data.umpire_settings.answer_abc		;090e
-	ld bc,22		;0911
-	call sub_cp_ram_vram		;0914
-	ld hl,03a4ah		;0917
-	ld de,data.umpire_settings.control_level		;091a
-	ld bc,32		;091d
-	call sub_cp_ram_vram		;0920
-	ld hl,03ae2h		;0923
-	ld de,data.umpire_settings.answer_abc		;0926
-	ld bc,22		;0929
-	call sub_cp_ram_vram		;092c
-	ld hl,03b4ah		;092f
-	ld de,data.umpire_settings.player_type		;0932
-	ld bc,28		;0935
-	call sub_cp_ram_vram		;0938
-	ld hl,03be2h		;093b
-	ld de,data.umpire_settings.answer_abc		;093e
-	ld bc,22		;0941
-	call sub_cp_ram_vram		;0944
-	ld hl,03c86h		;0947
-	ld de,data.umpire_settings.computer_level_select		;094a
-	ld bc,42		;094d
-	call sub_cp_ram_vram		;0950
-	ld hl,03d10h		;0953
-	ld de,data.umpire_settings.answer_12345		;0956
-	ld bc,34		;0959
-	call sub_cp_ram_vram		;095c
-	call sub_enable_display		;095f
-	xor a			;0962
-	ld (score.set_current_index),a		;0963
-	ld (score.sets_won_top),a		;0966
-	ld (score.sets_won_bottom),a		;0969
-	ei			;096c
-	ret			;096d
+	ld (hl),a
+	inc hl
+	djnz -
+	ld (score.settings_cursor_y),a
+	ld (score.tick_counter),a
+	call sub_get_joy_p1
+	ld (score.settings_joystick),a
+	ld (score.settings_joystick_previous),a
+	ld hl,03886h
+	ld de,data.umpire_settings.player_level_select
+	ld bc,38
+	call sub_cp_ram_vram
+	ld hl,0394ah
+	ld de,data.umpire_settings.speed_level
+	ld bc,32
+	call sub_cp_ram_vram
+	ld hl,039e2h
+	ld de,data.umpire_settings.answer_abc
+	ld bc,22
+	call sub_cp_ram_vram
+	ld hl,03a4ah
+	ld de,data.umpire_settings.control_level
+	ld bc,32
+	call sub_cp_ram_vram
+	ld hl,03ae2h
+	ld de,data.umpire_settings.answer_abc
+	ld bc,22
+	call sub_cp_ram_vram
+	ld hl,03b4ah
+	ld de,data.umpire_settings.player_type
+	ld bc,28
+	call sub_cp_ram_vram
+	ld hl,03be2h
+	ld de,data.umpire_settings.answer_abc
+	ld bc,22
+	call sub_cp_ram_vram
+	ld hl,03c86h
+	ld de,data.umpire_settings.computer_level_select
+	ld bc,42
+	call sub_cp_ram_vram
+	ld hl,03d10h
+	ld de,data.umpire_settings.answer_12345
+	ld bc,34
+	call sub_cp_ram_vram
+	call sub_enable_display
+	xor a
+	ld (score.set_current_index),a
+	ld (score.sets_won_top),a
+	ld (score.sets_won_bottom),a
+	ei
+	ret
 +:
-	call sub_vdp_build_sprite_buffer		;096e
-	ld hl,score.tick_counter		;0971
-	inc (hl)			;0974
-	ld hl,score.settings_joystick_previous		;0975
-	call sub_get_joy_p1		;0978
-	cp (hl)			;097b
-	ret z			;097c
-	dec hl			;097d
-	cp (hl)			;097e
-	jp z,sub_game_gui_settings_handle_control		;097f
-	ld (hl),a			;0982
-	xor a			;0983
-	ld (score.menu_key_repeat_timer),a		;0984
-	ret			;0987
+	call sub_vdp_build_sprite_buffer
+	ld hl,score.tick_counter
+	inc (hl)
+	ld hl,score.settings_joystick_previous
+	call sub_get_joy_p1
+	cp (hl)
+	ret z
+	dec hl
+	cp (hl)
+	jp z,sub_game_gui_settings_handle_control
+	ld (hl),a
+	xor a
+	ld (score.menu_key_repeat_timer),a
+	ret

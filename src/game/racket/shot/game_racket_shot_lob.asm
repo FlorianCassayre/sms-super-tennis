@@ -1,81 +1,81 @@
 sub_game_racket_shot_lob:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_high		;126c
-	ld (psg_engine.track_request_id),a		;126e
-	ld hl,l12c0h		;1271
-	ld a,(state.ball_hit_type)		;1274
-	add a,a			;1277
-	ld c,a			;1278
-	ld b,000h		;1279
-	add hl,bc			;127b
-	ld e,(hl)			;127c
-	inc hl			;127d
-	ld d,(hl)			;127e
-	ld a,(ball.y_pos + 1)		;127f
-	sub 080h		;1282
-	jr nc,l1288h		;1284
-	neg		;1286
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_high
+	ld (psg_engine.track_request_id),a
+	ld hl,l12c0h
+	ld a,(state.ball_hit_type)
+	add a,a
+	ld c,a
+	ld b,000h
+	add hl,bc
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	ld a,(ball.y_pos + 1)
+	sub 080h
+	jr nc,l1288h
+	neg
 l1288h:
-	ld c,000h		;1288
-	cp 030h		;128a
-	jr c,l1290h		;128c
-	ld c,001h		;128e
+	ld c,000h
+	cp 030h
+	jr c,l1290h
+	ld c,001h
 l1290h:
-	ld a,c			;1290
-	add a,a			;1291
-	add a,a			;1292
-	ld c,a			;1293
-	ld b,000h		;1294
-	ex de,hl			;1296
-	add hl,bc			;1297
-	ld e,(hl)			;1298
-	inc hl			;1299
-	ld d,(hl)			;129a
-	inc hl			;129b
-	ld c,(hl)			;129c
-	inc hl			;129d
-	ld b,(hl)			;129e
-	ld a,(state.last_hitter)		;129f
-	and 001h		;12a2
-	jr z,l12adh		;12a4
-	xor a			;12a6
-	ld hl,0		;12a7
-	sbc hl,de		;12aa
-	ex de,hl			;12ac
+	ld a,c
+	add a,a
+	add a,a
+	ld c,a
+	ld b,000h
+	ex de,hl
+	add hl,bc
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	inc hl
+	ld c,(hl)
+	inc hl
+	ld b,(hl)
+	ld a,(state.last_hitter)
+	and 001h
+	jr z,l12adh
+	xor a
+	ld hl,0
+	sbc hl,de
+	ex de,hl
 l12adh:
-	ld (ball.y_vel),de		;12ad
-	ld (ball.z_vel),bc		;12b1
-	call sub_load_ball_z_gravity		;12b5
-	ld c,001h		;12b8
-	call sub_compute_ball_x_velocity		;12ba
-	jp sub_l1362h_ball		;12bd
+	ld (ball.y_vel),de
+	ld (ball.z_vel),bc
+	call sub_load_ball_z_gravity
+	ld c,001h
+	call sub_compute_ball_x_velocity
+	jp sub_l1362h_ball
 l12c0h:
-	.DB $c6		;12c0
-	.DB $12		;12c1
-	.DB $ce		;12c2
-	.DB $12		;12c3
-	.DB $d6		;12c4
-	.DB $12		;12c5
-	.DB $60		;12c6
-	.DB $ff		;12c7
-	.DB $10		;12c8
-	.DB $ff		;12c9
-	.DB $60		;12ca
-	.DB $ff		;12cb
-	.DB $d0		;12cc
-	.DB $fe		;12cd
-	.DB $2b		;12ce
-	.DB $ff		;12cf
-	.DB $d8		;12d0
-	.DB $fe		;12d1
-	.DB $2b		;12d2
-	.DB $ff		;12d3
-	.DB $80		;12d4
-	.DB $fe		;12d5
-	.DB $c0		;12d6
-	.DB $fe		;12d7
-	.DB $40		;12d8
-	.DB $fe		;12d9
-	.DB $c0		;12da
-	.DB $fe		;12db
-	.DB $d0		;12dc
-	.DB $fd		;12dd
+	.DB $c6
+	.DB $12
+	.DB $ce
+	.DB $12
+	.DB $d6
+	.DB $12
+	.DB $60
+	.DB $ff
+	.DB $10
+	.DB $ff
+	.DB $60
+	.DB $ff
+	.DB $d0
+	.DB $fe
+	.DB $2b
+	.DB $ff
+	.DB $d8
+	.DB $fe
+	.DB $2b
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $c0
+	.DB $fe
+	.DB $40
+	.DB $fe
+	.DB $c0
+	.DB $fe
+	.DB $d0
+	.DB $fd

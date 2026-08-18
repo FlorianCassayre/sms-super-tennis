@@ -1,4 +1,4 @@
 start:
-	jp init		;0000
+	jp init
 
 .ASSERT start == $0000, LDERROR

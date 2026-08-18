@@ -1,5 +1,5 @@
 sub_game_tick:
-	ld a,(ball.foul_type)		;0b18
-	or a			;0b1b
-	jr nz,sub_0b28h		;0b1c
+	ld a,(ball.foul_type)
+	or a
+	jr nz,sub_0b28h
 .INCLUDE "game/game_frame_update.asm"

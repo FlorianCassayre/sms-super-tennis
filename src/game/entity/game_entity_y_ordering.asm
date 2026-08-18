@@ -1,76 +1,76 @@
 sub_game_entity_y_ordering:
-	xor a			;05cc
-	ld (state.sort_outer_idx),a		;05cd
-	inc a			;05d0
-	ld (state.sort_inner_idx),a		;05d1
+	xor a
+	ld (state.sort_outer_idx),a
+	inc a
+	ld (state.sort_inner_idx),a
 @loop_outer:
-	ld a,(state.sort_outer_idx)		;05d4
-	ld e,a			;05d7
-	ld d,000h		;05d8
-	ld hl,0c1c4h		;05da
-	add hl,de			;05dd
-	ld a,(hl)			;05de
-	add a,a			;05df
-	ld e,a			;05e0
-	ld hl,entities_y_pos_cache		;05e1
-	add hl,de			;05e4
-	ld e,(hl)			;05e5
-	inc hl			;05e6
-	ld d,(hl)			;05e7
-	ex de,hl			;05e8
-	ld c,(hl)			;05e9
+	ld a,(state.sort_outer_idx)
+	ld e,a
+	ld d,000h
+	ld hl,0c1c4h
+	add hl,de
+	ld a,(hl)
+	add a,a
+	ld e,a
+	ld hl,entities_y_pos_cache
+	add hl,de
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	ex de,hl
+	ld c,(hl)
 @loop_inner:
-	ld a,(state.sort_inner_idx)		;05ea
-	ld e,a			;05ed
-	ld d,000h		;05ee
-	ld hl,0c1c4h		;05f0
-	add hl,de			;05f3
-	ld a,(hl)			;05f4
-	add a,a			;05f5
-	ld e,a			;05f6
-	ld hl,entities_y_pos_cache		;05f7
-	add hl,de			;05fa
-	ld e,(hl)			;05fb
-	inc hl			;05fc
-	ld d,(hl)			;05fd
-	ld a,(de)			;05fe
-	cp c			;05ff
-	jr c,@no_swap		;0600
-	ld c,a			;0602
-	ld a,(state.sort_outer_idx)		;0603
-	ld e,a			;0606
-	ld d,000h		;0607
-	ld hl,0c1c4h		;0609
-	add hl,de			;060c
-	ld b,(hl)			;060d
-	push hl			;060e
-	ld a,(state.sort_inner_idx)		;060f
-	ld e,a			;0612
-	ld hl,0c1c4h		;0613
-	add hl,de			;0616
-	ld a,(hl)			;0617
-	pop de			;0618
-	ld (de),a			;0619
-	ld (hl),b			;061a
+	ld a,(state.sort_inner_idx)
+	ld e,a
+	ld d,000h
+	ld hl,0c1c4h
+	add hl,de
+	ld a,(hl)
+	add a,a
+	ld e,a
+	ld hl,entities_y_pos_cache
+	add hl,de
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	ld a,(de)
+	cp c
+	jr c,@no_swap
+	ld c,a
+	ld a,(state.sort_outer_idx)
+	ld e,a
+	ld d,000h
+	ld hl,0c1c4h
+	add hl,de
+	ld b,(hl)
+	push hl
+	ld a,(state.sort_inner_idx)
+	ld e,a
+	ld hl,0c1c4h
+	add hl,de
+	ld a,(hl)
+	pop de
+	ld (de),a
+	ld (hl),b
 @no_swap:
-	ld a,(state.sort_inner_idx)		;061b
-	inc a			;061e
-	ld (state.sort_inner_idx),a		;061f
-	cp 006h		;0622
-	jr nz,@loop_inner		;0624
-	ld a,(state.sort_outer_idx)		;0626
-	inc a			;0629
-	ld (state.sort_outer_idx),a		;062a
-	cp 005h		;062d
-	ret z			;062f
-	inc a			;0630
-	ld (state.sort_inner_idx),a		;0631
-	jr @loop_outer		;0634
+	ld a,(state.sort_inner_idx)
+	inc a
+	ld (state.sort_inner_idx),a
+	cp 006h
+	jr nz,@loop_inner
+	ld a,(state.sort_outer_idx)
+	inc a
+	ld (state.sort_outer_idx),a
+	cp 005h
+	ret z
+	inc a
+	ld (state.sort_inner_idx),a
+	jr @loop_outer
 
 entities_y_pos_cache:
-	.DW entities.player.1.bottom.y_pos_cache			;0636
-	.DW entities.player.1.top.y_pos_cache		;0637
-	.DW entities.player.2.bottom.y_pos_cache			;063a
-	.DW entities.player.2.top.y_pos_cache		;063b
-	.DW entities.ball.y_pos_cache			;063e
-	.DW entities.ball_shadow.y_pos_cache		;063f
+	.DW entities.player.1.bottom.y_pos_cache
+	.DW entities.player.1.top.y_pos_cache
+	.DW entities.player.2.bottom.y_pos_cache
+	.DW entities.player.2.top.y_pos_cache
+	.DW entities.ball.y_pos_cache
+	.DW entities.ball_shadow.y_pos_cache

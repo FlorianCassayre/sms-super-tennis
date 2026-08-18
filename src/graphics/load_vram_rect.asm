@@ -1,25 +1,25 @@
 sub_load_vram_rect:
-	push bc			;0464
-	ld b,000h		;0465
-	call sub_set_vdp_write_addr		;0467
+	push bc
+	ld b,000h
+	call sub_set_vdp_write_addr
 -:
-	ld a,(de)			;046a
-	out (IO_VDP_DATA),a		;046b
-	inc de			;046d
+	ld a,(de)
+	out (IO_VDP_DATA),a
+	inc de
 
 	; Waste some cycles
-	ex (sp),hl			;046e
-	ex (sp),hl			;046f
+	ex (sp),hl
+	ex (sp),hl
 
-	ld a,(de)			;0470
-	out (IO_VDP_DATA),a		;0471
-	inc de			;0473
-	dec bc			;0474
-	ld a,c			;0475
-	or b			;0476
-	jr nz,-		;0477
-	ld bc,040h		;0479
-	add hl,bc			;047c
-	pop bc			;047d
-	djnz sub_load_vram_rect		;047e
-	ret			;0480
+	ld a,(de)
+	out (IO_VDP_DATA),a
+	inc de
+	dec bc
+	ld a,c
+	or b
+	jr nz,-
+	ld bc,040h
+	add hl,bc
+	pop bc
+	djnz sub_load_vram_rect
+	ret

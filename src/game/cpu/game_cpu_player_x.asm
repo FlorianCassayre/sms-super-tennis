@@ -1,9 +1,9 @@
 game_cpu_player_x:
-	.DB $ec		;2290
-	.DB $ee		;2291
-	.DB $f6		;2292
-	.DB $fe		;2293
-	.DB $02		;2294
-	.DB $0a		;2295
-	.DB $12		;2296
-	.DB $14		;2297
+	.DB $ec
+	.DB $ee
+	.DB $f6
+	.DB $fe
+	.DB $02
+	.DB $0a
+	.DB $12
+	.DB $14

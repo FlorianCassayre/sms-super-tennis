@@ -1,34 +1,34 @@
 sub_init_splash_screen:
-	ld hl,state.main_game_state		;0eb0
-	bit 6,(hl)		;0eb3
-	jr nz,l0eefh		;0eb5
-	set 6,(hl)		;0eb7
-	ld a,(state.hardware_type)		;0eb9
-	or a			;0ebc
-	jr nz,l0ef3h_hardware_sms		;0ebd
-	di			;0ebf
-	call sub_disable_display		;0ec0
-	call sub_graphics_name_fill_blank_tile		;0ec3
-	ld hl,l2c00h		;0ec6
-	ld de,data.mark3		;0ec9
-	ld bc,224		;0ecc
-	ld a,001h		;0ecf
-	call sub_graphics_tile_expand_1bpp_ram_to_vdp		;0ed1
-	ld hl,03a8eh		;0ed4
-	ld de,data.mark3_name		;0ed7
-	ld bc,(2 << 8) | 19		;0eda
-	call sub_load_vram_rect		;0edd
-	xor a			;0ee0
-	ld (state.unknown_flag),a		;0ee1
-	call sub_enable_display		;0ee4
-	ei			;0ee7
-	ld hl,000f0h		;0ee8
-	ld (state.pause_counter),hl		;0eeb
-	ret			;0eee
+	ld hl,state.main_game_state
+	bit 6,(hl)
+	jr nz,l0eefh
+	set 6,(hl)
+	ld a,(state.hardware_type)
+	or a
+	jr nz,l0ef3h_hardware_sms
+	di
+	call sub_disable_display
+	call sub_graphics_name_fill_blank_tile
+	ld hl,l2c00h
+	ld de,data.mark3
+	ld bc,224
+	ld a,001h
+	call sub_graphics_tile_expand_1bpp_ram_to_vdp
+	ld hl,03a8eh
+	ld de,data.mark3_name
+	ld bc,(2 << 8) | 19
+	call sub_load_vram_rect
+	xor a
+	ld (state.unknown_flag),a
+	call sub_enable_display
+	ei
+	ld hl,000f0h
+	ld (state.pause_counter),hl
+	ret
 l0eefh:
-	call sub_decrement_pause_counter		;0eef
-	ret nz			;0ef2
+	call sub_decrement_pause_counter
+	ret nz
 l0ef3h_hardware_sms:
-	ld hl,state.main_game_state		;0ef3
-	ld (hl),081h		;0ef6
-	ret			;0ef8
+	ld hl,state.main_game_state
+	ld (hl),081h
+	ret

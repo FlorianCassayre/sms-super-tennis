@@ -1,6 +1,6 @@
 game_umpire_head_rotation_direction_middle:
-	.DW $0152		;5952
+	.DW $0152
 game_umpire_head_rotation_direction_top:
-	.DW $018a		;5954
+	.DW $018a
 game_umpire_head_rotation_direction_bottom:
-	.DW $018b		;5956
+	.DW $018b

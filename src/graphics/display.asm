@@ -1,10 +1,10 @@
 sub_enable_display:
-	ld a,0e0h		;03a0
-	jr +		;03a2
+	ld a,0e0h
+	jr +
 sub_disable_display:
-	ld a,0a0h		;03a4
+	ld a,0a0h
 +:
-	out (O_VDP_CTRL),a		;03a6
-	ld a,081h		;03a8
-	out (O_VDP_CTRL),a		;03aa
-	ret			;03ac
+	out (O_VDP_CTRL),a
+	ld a,081h
+	out (O_VDP_CTRL),a
+	ret

@@ -1,79 +1,79 @@
 sub_game_ball_check_out_of_bounds_bounce:
-	ld a,(ball.foul_type)		;0e04
-	or a			;0e07
-	ret nz			;0e08
-	ld a,(state.match_flags)		;0e09
-	bit 0,a		;0e0c
-	jr z,l0e3bh		;0e0e
-	ld a,(state.current_player)		;0e10
-	add a,a			;0e13
-	ld e,a			;0e14
-	add a,a			;0e15
-	add a,e			;0e16
-	ld e,a			;0e17
-	ld d,000h		;0e18
-	ld hl,l0dd0h		;0e1a
-	add hl,de			;0e1d
-	ld a,(ball.y_pos + 1)		;0e1e
-	cp (hl)			;0e21
-	jr c,l0e6fh		;0e22
-	inc hl			;0e24
-	cp (hl)			;0e25
-	jr nc,l0e6fh		;0e26
-	inc hl			;0e28
-	ld a,(0c044h)		;0e29
-	add a,a			;0e2c
-	ld e,a			;0e2d
-	add hl,de			;0e2e
-	ld a,(ball.x_pos + 1)		;0e2f
-	cp (hl)			;0e32
-	jr c,l0e6fh		;0e33
-	inc hl			;0e35
-	cp (hl)			;0e36
-	jr c,l0e67h		;0e37
-	jr l0e6fh		;0e39
+	ld a,(ball.foul_type)
+	or a
+	ret nz
+	ld a,(state.match_flags)
+	bit 0,a
+	jr z,l0e3bh
+	ld a,(state.current_player)
+	add a,a
+	ld e,a
+	add a,a
+	add a,e
+	ld e,a
+	ld d,000h
+	ld hl,l0dd0h
+	add hl,de
+	ld a,(ball.y_pos + 1)
+	cp (hl)
+	jr c,l0e6fh
+	inc hl
+	cp (hl)
+	jr nc,l0e6fh
+	inc hl
+	ld a,(0c044h)
+	add a,a
+	ld e,a
+	add hl,de
+	ld a,(ball.x_pos + 1)
+	cp (hl)
+	jr c,l0e6fh
+	inc hl
+	cp (hl)
+	jr c,l0e67h
+	jr l0e6fh
 l0e3bh:
-	ld a,(state.last_hitter)		;0e3b
-	add a,a			;0e3e
-	ld e,a			;0e3f
-	add a,a			;0e40
-	add a,e			;0e41
-	ld e,a			;0e42
-	ld d,000h		;0e43
-	ld hl,l0de8h		;0e45
-	add hl,de			;0e48
-	ld a,(ball.y_pos + 1)		;0e49
-	cp (hl)			;0e4c
-	jr c,l0e6bh		;0e4d
-	inc hl			;0e4f
-	cp (hl)			;0e50
-	jr nc,l0e6bh		;0e51
-	inc hl			;0e53
-	ld a,(state.match_state_flags)		;0e54
-	bit 7,a		;0e57
-	jr z,l0e5dh		;0e59
-	inc hl			;0e5b
-	inc hl			;0e5c
+	ld a,(state.last_hitter)
+	add a,a
+	ld e,a
+	add a,a
+	add a,e
+	ld e,a
+	ld d,000h
+	ld hl,l0de8h
+	add hl,de
+	ld a,(ball.y_pos + 1)
+	cp (hl)
+	jr c,l0e6bh
+	inc hl
+	cp (hl)
+	jr nc,l0e6bh
+	inc hl
+	ld a,(state.match_state_flags)
+	bit 7,a
+	jr z,l0e5dh
+	inc hl
+	inc hl
 l0e5dh:
-	ld a,(ball.x_pos + 1)		;0e5d
-	cp (hl)			;0e60
-	jr c,l0e6bh		;0e61
-	inc hl			;0e63
-	cp (hl)			;0e64
-	jr nc,l0e6bh		;0e65
+	ld a,(ball.x_pos + 1)
+	cp (hl)
+	jr c,l0e6bh
+	inc hl
+	cp (hl)
+	jr nc,l0e6bh
 l0e67h:
-	ld a,002h		;0e67
-	jr l0e7bh		;0e69
+	ld a,002h
+	jr l0e7bh
 l0e6bh:
-	ld a,001h		;0e6b
-	jr l0e71h		;0e6d
+	ld a,001h
+	jr l0e71h
 l0e6fh:
-	ld a,003h		;0e6f
+	ld a,003h
 l0e71h:
-	ld hl,state.match_state_flags		;0e71
-	res 0,(hl)		;0e74
-	ld hl,ball.foul_type		;0e76
-	ld (hl),002h		;0e79
+	ld hl,state.match_state_flags
+	res 0,(hl)
+	ld hl,ball.foul_type
+	ld (hl),002h
 l0e7bh:
-	ld (ball.foul_triggered_flag),a		;0e7b
-	ret			;0e7e
+	ld (ball.foul_triggered_flag),a
+	ret

@@ -1,355 +1,355 @@
 sub_game_racket_shot_serve:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit		;101f
-	ld (psg_engine.track_request_id),a		;1021
-	ld hl,l10ebh		;1024
-	ld a,(state.ball_hit_type)		;1027
-	add a,a			;102a
-	ld e,a			;102b
-	ld d,000h		;102c
-	add hl,de			;102e
-	ld c,(hl)			;102f
-	inc hl			;1030
-	ld b,(hl)			;1031
-	push bc			;1032
-	ld hl,l10bbh		;1033
-	ld a,(state.current_player)		;1036
-	add a,a			;1039
-	add a,a			;103a
-	ld e,a			;103b
-	ld a,(0c044h)		;103c
-	add a,a			;103f
-	add a,e			;1040
-	ld e,a			;1041
-	add hl,de			;1042
-	ld c,(hl)			;1043
-	inc hl			;1044
-	ld b,(hl)			;1045
-	push bc			;1046
-	ld a,(state.current_player)		;1047
-	add a,a			;104a
-	ld e,a			;104b
-	ld hl,l10b3h		;104c
-	add hl,de			;104f
-	ld a,(0c044h)		;1050
-	or a			;1053
-	jr z,l1057h		;1054
-	inc hl			;1056
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit
+	ld (psg_engine.track_request_id),a
+	ld hl,l10ebh
+	ld a,(state.ball_hit_type)
+	add a,a
+	ld e,a
+	ld d,000h
+	add hl,de
+	ld c,(hl)
+	inc hl
+	ld b,(hl)
+	push bc
+	ld hl,l10bbh
+	ld a,(state.current_player)
+	add a,a
+	add a,a
+	ld e,a
+	ld a,(0c044h)
+	add a,a
+	add a,e
+	ld e,a
+	add hl,de
+	ld c,(hl)
+	inc hl
+	ld b,(hl)
+	push bc
+	ld a,(state.current_player)
+	add a,a
+	ld e,a
+	ld hl,l10b3h
+	add hl,de
+	ld a,(0c044h)
+	or a
+	jr z,l1057h
+	inc hl
 l1057h:
-	ld a,(ball.x_pos + 1)		;1057
-	sub (hl)			;105a
-	rrca			;105b
-	rrca			;105c
-	rrca			;105d
-	and 007h		;105e
-	cp 004h		;1060
-	jr c,l1066h		;1062
-	ld a,003h		;1064
+	ld a,(ball.x_pos + 1)
+	sub (hl)
+	rrca
+	rrca
+	rrca
+	and 007h
+	cp 004h
+	jr c,l1066h
+	ld a,003h
 l1066h:
-	add a,a			;1066
-	ld e,a			;1067
-	pop hl			;1068
-	add hl,de			;1069
-	ld a,r		;106a
-	and 001h		;106c
-	jr z,l1071h		;106e
-	inc hl			;1070
+	add a,a
+	ld e,a
+	pop hl
+	add hl,de
+	ld a,r
+	and 001h
+	jr z,l1071h
+	inc hl
 l1071h:
-	ld a,(hl)			;1071
-	add a,a			;1072
-	add a,a			;1073
-	add a,a			;1074
-	ld e,a			;1075
-	pop hl			;1076
-	add hl,de			;1077
-	ld e,(hl)			;1078
-	inc hl			;1079
-	ld d,(hl)			;107a
-	inc hl			;107b
-	ld c,(hl)			;107c
-	inc hl			;107d
-	ld b,(hl)			;107e
-	push de			;107f
-	push bc			;1080
-	inc hl			;1081
-	ld e,(hl)			;1082
-	inc hl			;1083
-	ld d,(hl)			;1084
-	inc hl			;1085
-	ld c,(hl)			;1086
-	inc hl			;1087
-	ld b,(hl)			;1088
-	ld a,(state.current_player)		;1089
-	and 001h		;108c
-	jr z,l10a0h		;108e
-	xor a			;1090
-	ld hl,0		;1091
-	sbc hl,de		;1094
-	push hl			;1096
-	xor a			;1097
-	ld hl,0		;1098
-	sbc hl,bc		;109b
-	push hl			;109d
-	pop bc			;109e
-	pop de			;109f
+	ld a,(hl)
+	add a,a
+	add a,a
+	add a,a
+	ld e,a
+	pop hl
+	add hl,de
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	inc hl
+	ld c,(hl)
+	inc hl
+	ld b,(hl)
+	push de
+	push bc
+	inc hl
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	inc hl
+	ld c,(hl)
+	inc hl
+	ld b,(hl)
+	ld a,(state.current_player)
+	and 001h
+	jr z,l10a0h
+	xor a
+	ld hl,0
+	sbc hl,de
+	push hl
+	xor a
+	ld hl,0
+	sbc hl,bc
+	push hl
+	pop bc
+	pop de
 l10a0h:
-	ld (ball.y_vel),de		;10a0
-	ld (ball.x_vel),bc		;10a4
-	pop hl			;10a8
-	ld (ball.z_vel),hl		;10a9
-	pop hl			;10ac
-	ld (ball.z_gravity),hl		;10ad
-	jp sub_l1362h_ball		;10b0
+	ld (ball.y_vel),de
+	ld (ball.x_vel),bc
+	pop hl
+	ld (ball.z_vel),hl
+	pop hl
+	ld (ball.z_gravity),hl
+	jp sub_l1362h_ball
 l10b3h:
-	.DB $90		;10b3
-	.DB $60		;10b4
-	.DB $50		;10b5
-	.DB $80		;10b6
-	.DB $90		;10b7
-	.DB $60		;10b8
-	.DB $50		;10b9
-	.DB $80		;10ba
+	.DB $90
+	.DB $60
+	.DB $50
+	.DB $80
+	.DB $90
+	.DB $60
+	.DB $50
+	.DB $80
 l10bbh:
-	.DW l10cbh		;10bb
-	.DW l10d3h		;10bd
-	.DW l10dbh		;10bf
-	.DW l10e3h		;10c1
-	.DW l10cbh		;10c3
-	.DW l10d3h		;10c5
-	.DW l10dbh		;10c7
-	.DW l10e3h		;10c9
+	.DW l10cbh
+	.DW l10d3h
+	.DW l10dbh
+	.DW l10e3h
+	.DW l10cbh
+	.DW l10d3h
+	.DW l10dbh
+	.DW l10e3h
 l10cbh:
-	.DB $00		;10cb
-	.DB $01		;10cc
-	.DB $00		;10cd
-	.DB $00		;10ce
-	.DB $03		;10cf
-	.DB $03		;10d0
-	.DB $02		;10d1
-	.DB $03		;10d2
+	.DB $00
+	.DB $01
+	.DB $00
+	.DB $00
+	.DB $03
+	.DB $03
+	.DB $02
+	.DB $03
 l10d3h:
-	.DB $07		;10d3
-	.DB $06		;10d4
-	.DB $07		;10d5
-	.DB $07		;10d6
-	.DB $04		;10d7
-	.DB $04		;10d8
-	.DB $05		;10d9
-	.DB $04		;10da
+	.DB $07
+	.DB $06
+	.DB $07
+	.DB $07
+	.DB $04
+	.DB $04
+	.DB $05
+	.DB $04
 l10dbh:
-	.DB $03		;10db
-	.DB $02		;10dc
-	.DB $02		;10dd
-	.DB $02		;10de
-	.DB $00		;10df
-	.DB $00		;10e0
-	.DB $01		;10e1
-	.DB $00		;10e2
+	.DB $03
+	.DB $02
+	.DB $02
+	.DB $02
+	.DB $00
+	.DB $00
+	.DB $01
+	.DB $00
 l10e3h:
-	.DB $04		;10e3
-	.DB $05		;10e4
-	.DB $04		;10e5
-	.DB $04		;10e6
-	.DB $07		;10e7
-	.DB $07		;10e8
-	.DB $06		;10e9
-	.DB $07		;10ea
+	.DB $04
+	.DB $05
+	.DB $04
+	.DB $04
+	.DB $07
+	.DB $07
+	.DB $06
+	.DB $07
 l10ebh:
-	.DB $f1		;10eb
-	.DB $10		;10ec
-	.DB $31		;10ed
-	.DB $11		;10ee
-	.DB $71		;10ef
-	.DB $11		;10f0
-	.DB $03		;10f1
-	.DB $00		;10f2
-	.DB $e0		;10f3
-	.DB $ff		;10f4
-	.DB $80		;10f5
-	.DB $fe		;10f6
-	.DB $78		;10f7
-	.DB $ff		;10f8
-	.DB $03		;10f9
-	.DB $00		;10fa
-	.DB $e0		;10fb
-	.DB $ff		;10fc
-	.DB $80		;10fd
-	.DB $fe		;10fe
-	.DB $bc		;10ff
-	.DB $ff		;1100
-	.DB $03		;1101
-	.DB $00		;1102
-	.DB $e0		;1103
-	.DB $ff		;1104
-	.DB $80		;1105
-	.DB $fe		;1106
-	.DB $10		;1107
-	.DB $ff		;1108
-	.DB $03		;1109
-	.DB $00		;110a
-	.DB $e0		;110b
-	.DB $ff		;110c
-	.DB $80		;110d
-	.DB $fe		;110e
-	.DB $50		;110f
-	.DB $ff		;1110
-	.DB $03		;1111
-	.DB $00		;1112
-	.DB $e0		;1113
-	.DB $ff		;1114
-	.DB $80		;1115
-	.DB $fe		;1116
-	.DB $88		;1117
-	.DB $00		;1118
-	.DB $03		;1119
-	.DB $00		;111a
-	.DB $e0		;111b
-	.DB $ff		;111c
-	.DB $80		;111d
-	.DB $fe		;111e
-	.DB $44		;111f
-	.DB $00		;1120
-	.DB $03		;1121
-	.DB $00		;1122
-	.DB $e0		;1123
-	.DB $ff		;1124
-	.DB $80		;1125
-	.DB $fe		;1126
-	.DB $f0		;1127
-	.DB $00		;1128
-	.DB $03		;1129
-	.DB $00		;112a
-	.DB $e0		;112b
-	.DB $ff		;112c
-	.DB $80		;112d
-	.DB $fe		;112e
-	.DB $b0		;112f
-	.DB $00		;1130
-	.DB $05		;1131
-	.DB $00		;1132
-	.DB $e0		;1133
-	.DB $ff		;1134
-	.DB $00		;1135
-	.DB $fe		;1136
-	.DB $48		;1137
-	.DB $ff		;1138
-	.DB $05		;1139
-	.DB $00		;113a
-	.DB $e0		;113b
-	.DB $ff		;113c
-	.DB $00		;113d
-	.DB $fe		;113e
-	.DB $ac		;113f
-	.DB $ff		;1140
-	.DB $05		;1141
-	.DB $00		;1142
-	.DB $e0		;1143
-	.DB $ff		;1144
-	.DB $00		;1145
-	.DB $fe		;1146
-	.DB $c0		;1147
-	.DB $fe		;1148
-	.DB $05		;1149
-	.DB $00		;114a
-	.DB $e0		;114b
-	.DB $ff		;114c
-	.DB $00		;114d
-	.DB $fe		;114e
-	.DB $16		;114f
-	.DB $ff		;1150
-	.DB $05		;1151
-	.DB $00		;1152
-	.DB $e0		;1153
-	.DB $ff		;1154
-	.DB $00		;1155
-	.DB $fe		;1156
-	.DB $b8		;1157
-	.DB $00		;1158
-	.DB $05		;1159
-	.DB $00		;115a
-	.DB $e0		;115b
-	.DB $ff		;115c
-	.DB $00		;115d
-	.DB $fe		;115e
-	.DB $5a		;115f
-	.DB $00		;1160
-	.DB $05		;1161
-	.DB $00		;1162
-	.DB $e0		;1163
-	.DB $ff		;1164
-	.DB $00		;1165
-	.DB $fe		;1166
-	.DB $40		;1167
-	.DB $01		;1168
-	.DB $05		;1169
-	.DB $00		;116a
-	.DB $e0		;116b
-	.DB $ff		;116c
-	.DB $00		;116d
-	.DB $fe		;116e
-	.DB $ea		;116f
-	.DB $00		;1170
+	.DB $f1
+	.DB $10
+	.DB $31
+	.DB $11
+	.DB $71
+	.DB $11
+	.DB $03
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $78
+	.DB $ff
+	.DB $03
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $bc
+	.DB $ff
+	.DB $03
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $10
+	.DB $ff
+	.DB $03
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $50
+	.DB $ff
+	.DB $03
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $88
+	.DB $00
+	.DB $03
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $44
+	.DB $00
+	.DB $03
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $f0
+	.DB $00
+	.DB $03
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $80
+	.DB $fe
+	.DB $b0
+	.DB $00
+	.DB $05
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fe
+	.DB $48
+	.DB $ff
+	.DB $05
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fe
+	.DB $ac
+	.DB $ff
+	.DB $05
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fe
+	.DB $c0
+	.DB $fe
+	.DB $05
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fe
+	.DB $16
+	.DB $ff
+	.DB $05
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fe
+	.DB $b8
+	.DB $00
+	.DB $05
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fe
+	.DB $5a
+	.DB $00
+	.DB $05
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fe
+	.DB $40
+	.DB $01
+	.DB $05
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fe
+	.DB $ea
+	.DB $00
 l1171h:
-	.DB $0b		;1171
-	.DB $00		;1172
-	.DB $e0		;1173
-	.DB $ff		;1174
-	.DB $00		;1175
-	.DB $fd		;1176
-	.DB $f0		;1177
-	.DB $fe		;1178
-	.DB $0b		;1179
-	.DB $00		;117a
-	.DB $e0		;117b
-	.DB $ff		;117c
-	.DB $00		;117d
-	.DB $fd		;117e
-	.DB $78		;117f
-	.DB $ff		;1180
-	.DB $0b		;1181
-	.DB $00		;1182
-	.DB $e0		;1183
-	.DB $ff		;1184
-	.DB $00		;1185
-	.DB $fd		;1186
-	.DB $20		;1187
-	.DB $fe		;1188
-	.DB $0b		;1189
-	.DB $00		;118a
-	.DB $e0		;118b
-	.DB $ff		;118c
-	.DB $00		;118d
-	.DB $fd		;118e
-	.DB $a0		;118f
-	.DB $fe		;1190
-	.DB $0b		;1191
-	.DB $00		;1192
-	.DB $e0		;1193
-	.DB $ff		;1194
-	.DB $00		;1195
-	.DB $fd		;1196
-	.DB $10		;1197
-	.DB $01		;1198
-	.DB $0b		;1199
-	.DB $00		;119a
-	.DB $e0		;119b
-	.DB $ff		;119c
-	.DB $00		;119d
-	.DB $fd		;119e
-	.DB $88		;119f
-	.DB $00		;11a0
-	.DB $0b		;11a1
-	.DB $00		;11a2
-	.DB $e0		;11a3
-	.DB $ff		;11a4
-	.DB $00		;11a5
-	.DB $fd		;11a6
-	.DB $e0		;11a7
-	.DB $01		;11a8
-	.DB $0b		;11a9
-	.DB $00		;11aa
-	.DB $e0		;11ab
-	.DB $ff		;11ac
-	.DB $00		;11ad
-	.DB $fd		;11ae
-	.DB $60		;11af
-	.DB $01		;11b0
+	.DB $0b
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fd
+	.DB $f0
+	.DB $fe
+	.DB $0b
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fd
+	.DB $78
+	.DB $ff
+	.DB $0b
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fd
+	.DB $20
+	.DB $fe
+	.DB $0b
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fd
+	.DB $a0
+	.DB $fe
+	.DB $0b
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fd
+	.DB $10
+	.DB $01
+	.DB $0b
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fd
+	.DB $88
+	.DB $00
+	.DB $0b
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fd
+	.DB $e0
+	.DB $01
+	.DB $0b
+	.DB $00
+	.DB $e0
+	.DB $ff
+	.DB $00
+	.DB $fd
+	.DB $60
+	.DB $01

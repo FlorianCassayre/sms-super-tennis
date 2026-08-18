@@ -1,18 +1,18 @@
 sub_div_hl_e:
-	ld b,008h		;7e90
+	ld b,008h
 -:
-	adc hl,hl		;7e92
-	ld a,h			;7e94
-	jr c,+		;7e95
-	cp e			;7e97
-	jr c,++		;7e98
+	adc hl,hl
+	ld a,h
+	jr c,+
+	cp e
+	jr c,++
 +:
-	sub e			;7e9a
-	ld h,a			;7e9b
-	or a			;7e9c
+	sub e
+	ld h,a
+	or a
 ++:
-	djnz -		;7e9d
-	ld a,l			;7e9f
-	rla			;7ea0
-	cpl			;7ea1
-	ret			;7ea2
+	djnz -
+	ld a,l
+	rla
+	cpl
+	ret

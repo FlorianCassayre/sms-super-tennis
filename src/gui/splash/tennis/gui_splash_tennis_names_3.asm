@@ -1,60 +1,60 @@
-.DB RLE_REP | 2		;4043
-.DB $01		;4044
-.DB RLE_LIT | 1		;4045
-.DB $03		;4046
-.DB RLE_REP | 7		;4047
-.DB $01		;4048
-.DB RLE_LIT | 1		;4049
-.DB $03		;404a
-.DB RLE_REP | 7		;404b
-.DB $01		;404c
-.DB RLE_LIT | 1		;404d
-.DB $03		;404e
-.DB RLE_REP | 7		;404f
-.DB $01		;4050
-.DB RLE_LIT | 1		;4051
-.DB $03		;4052
-.DB RLE_REP | 7		;4053
-.DB $01		;4054
-.DB RLE_LIT | 1		;4055
-.DB $03		;4056
-.DB RLE_REP | 7		;4057
-.DB $01		;4058
-.DB RLE_LIT | 1		;4059
-.DB $03		;405a
-.DB RLE_REP | 3		;405b
-.DB $01		;405c
-.DB RLE_LIT | 1		;405d
-.DB $07		;405e
-.DB RLE_REP | 3		;405f
-.DB $01		;4060
-.DB RLE_LIT | 1		;4061
-.DB $03		;4062
-.DB RLE_REP | 7		;4063
-.DB $01		;4064
-.DB RLE_LIT | 1		;4065
-.DB $03		;4066
-.DB RLE_REP | 2		;4067
-.DB $01		;4068
-.DB RLE_REP | 2		;4069
-.DB $07		;406a
-.DB RLE_REP | 2		;406b
-.DB $01		;406c
-.DB RLE_LIT | 6		;406d
-.DB $05		;406e
-.DB $07		;406f
-.DB $01		;4070
-.DB $05		;4071
-.DB $01		;4072
-.DB $05		;4073
-.DB RLE_REP | 2		;4074
-.DB $01		;4075
-.DB RLE_REP | 2		;4076
-.DB $07		;4077
-.DB RLE_LIT | 5		;4078
-.DB $05		;4079
-.DB $01		;407a
-.DB $07		;407b
-.DB $07		;407c
-.DB $01		;407d
-.DB RLE_END		;407e
+.DB RLE_REP | 2
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 7
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 7
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 7
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 7
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 7
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 3
+.DB $01
+.DB RLE_LIT | 1
+.DB $07
+.DB RLE_REP | 3
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 7
+.DB $01
+.DB RLE_LIT | 1
+.DB $03
+.DB RLE_REP | 2
+.DB $01
+.DB RLE_REP | 2
+.DB $07
+.DB RLE_REP | 2
+.DB $01
+.DB RLE_LIT | 6
+.DB $05
+.DB $07
+.DB $01
+.DB $05
+.DB $01
+.DB $05
+.DB RLE_REP | 2
+.DB $01
+.DB RLE_REP | 2
+.DB $07
+.DB RLE_LIT | 5
+.DB $05
+.DB $01
+.DB $07
+.DB $07
+.DB $01
+.DB RLE_END

@@ -1,87 +1,87 @@
 sub_game_player_init_bottom:
-	bit 1,(ix + entity_t.id)		;23ff
-	ld hl,entities.player.1.bottom.state_index		;2403
-	ld e,004h		;2406
-	jr nz,l240fh		;2408
-	ld hl,entities.player.2.bottom.state_index		;240a
-	ld e,000h		;240d
+	bit 1,(ix + entity_t.id)
+	ld hl,entities.player.1.bottom.state_index
+	ld e,004h
+	jr nz,l240fh
+	ld hl,entities.player.2.bottom.state_index
+	ld e,000h
 l240fh:
-	ld a,(hl)			;240f
-	and 03fh		;2410
-	cp entity_state_t.player_update_server_state_075f		;2412
-	ld a,002h		;2414
-	jr z,l2423h		;2416
-	ld a,(state.match_state_flags)		;2418
-	bit 7,a		;241b
-	ld a,000h		;241d
-	jr nz,l2423h		;241f
-	ld a,008h		;2421
+	ld a,(hl)
+	and 03fh
+	cp entity_state_t.player_update_server_state_075f
+	ld a,002h
+	jr z,l2423h
+	ld a,(state.match_state_flags)
+	bit 7,a
+	ld a,000h
+	jr nz,l2423h
+	ld a,008h
 l2423h:
-	or e			;2423
-	ld e,a			;2424
-	ld a,(0c044h)		;2425
-	and 001h		;2428
-	or e			;242a
-	add a,a			;242b
-	ld e,a			;242c
-	ld d,000h		;242d
-	ld hl,l2458h		;242f
-	add hl,de			;2432
-	ld a,(hl)			;2433
-	ld (ix + entity_t.cpu_state),a		;2434
-	inc hl			;2437
-	ld e,(hl)			;2438
-	ld hl,0246ch		;2439
-	add hl,de			;243c
-	ld a,(hl)			;243d
-	ld (ix + entity_t.y_pos),a		;243e
-	inc hl			;2441
-	ld a,(hl)			;2442
-	ld (ix + entity_t.y_pos + 1),a		;2443
-	ld (ix + entity_t.y_pos_cache),a		;2446
-	inc hl			;2449
-	ld a,(hl)			;244a
-	ld (ix + entity_t.x_pos),a		;244b
-	inc hl			;244e
-	ld a,(hl)			;244f
-	ld (ix + entity_t.x_pos + 1),a		;2450
-	ld (ix + entity_t.state_index),013h		;2453
-	ret			;2457
+	or e
+	ld e,a
+	ld a,(0c044h)
+	and 001h
+	or e
+	add a,a
+	ld e,a
+	ld d,000h
+	ld hl,l2458h
+	add hl,de
+	ld a,(hl)
+	ld (ix + entity_t.cpu_state),a
+	inc hl
+	ld e,(hl)
+	ld hl,0246ch
+	add hl,de
+	ld a,(hl)
+	ld (ix + entity_t.y_pos),a
+	inc hl
+	ld a,(hl)
+	ld (ix + entity_t.y_pos + 1),a
+	ld (ix + entity_t.y_pos_cache),a
+	inc hl
+	ld a,(hl)
+	ld (ix + entity_t.x_pos),a
+	inc hl
+	ld a,(hl)
+	ld (ix + entity_t.x_pos + 1),a
+	ld (ix + entity_t.state_index),013h
+	ret
 
 l2458h:
-	.DB $01		;2458
-	.DB $0c		;2459
-	.DB $05		;245a
-	.DB $04		;245b
-	.DB $05		;245c
-	.DB $00		;245d
-	.DB $05		;245e
-	.DB $04		;245f
-	.DB $05		;2460
-	.DB $00		;2461
-	.DB $01		;2462
-	.DB $08		;2463
-	.DB $05		;2464
-	.DB $00		;2465
-	.DB $01		;2466
-	.DB $04		;2467
-	.DB $01		;2468
-	.DB $0c		;2469
-	.DB $01		;246a
-	.DB $08		;246b
-	.DB $00		;246c
-	.DB $88		;246d
-	.DB $00		;246e
-	.DB $60		;246f
-	.DB $00		;2470
-	.DB $88		;2471
-	.DB $00		;2472
-	.DB $a0		;2473
-	.DB $00		;2474
-	.DB $b0		;2475
-	.DB $00		;2476
-	.DB $60		;2477
-	.DB $00		;2478
-	.DB $b0		;2479
-	.DB $00		;247a
-	.DB $a0		;247b
+	.DB $01
+	.DB $0c
+	.DB $05
+	.DB $04
+	.DB $05
+	.DB $00
+	.DB $05
+	.DB $04
+	.DB $05
+	.DB $00
+	.DB $01
+	.DB $08
+	.DB $05
+	.DB $00
+	.DB $01
+	.DB $04
+	.DB $01
+	.DB $0c
+	.DB $01
+	.DB $08
+	.DB $00
+	.DB $88
+	.DB $00
+	.DB $60
+	.DB $00
+	.DB $88
+	.DB $00
+	.DB $a0
+	.DB $00
+	.DB $b0
+	.DB $00
+	.DB $60
+	.DB $00
+	.DB $b0
+	.DB $00
+	.DB $a0

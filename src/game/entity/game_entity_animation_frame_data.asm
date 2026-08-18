@@ -1,85 +1,85 @@
 game_entity_animation_frame_data:
-	.DW game_entity_animation_frame_data_0		;4124
-	.DW game_entity_animation_frame_data_1		;4126
-	.DW game_entity_animation_frame_data_2		;4128
-	.DW game_entity_animation_frame_data_3		;412a
-	.DW game_entity_animation_frame_data_4		;412c
-	.DW game_entity_animation_frame_data_5		;412e
-	.DW game_entity_animation_frame_data_6		;4130
-	.DW game_entity_animation_frame_data_7		;4132
-	.DW game_entity_animation_frame_data_8		;4134
-	.DW game_entity_animation_frame_data_9		;4136
-	.DW game_entity_animation_frame_data_10		;4138
-	.DW game_entity_animation_frame_data_11		;413a
-	.DW game_entity_animation_frame_data_12		;413c
-	.DW game_entity_animation_frame_data_13		;413e
-	.DW game_entity_animation_frame_data_14		;4140
-	.DW game_entity_animation_frame_data_15		;4142
-	.DW game_entity_animation_frame_data_16		;4144
-	.DW game_entity_animation_frame_data_17		;4146
-	.DW game_entity_animation_frame_data_18		;4148
-	.DW game_entity_animation_frame_data_19		;414a
-	.DW game_entity_animation_frame_data_20		;414c
-	.DW game_entity_animation_frame_data_21		;414e
-	.DW game_entity_animation_frame_data_22		;4150
-	.DW game_entity_animation_frame_data_23		;4152
-	.DW game_entity_animation_frame_data_24		;4154
-	.DW game_entity_animation_frame_data_25		;4156
-	.DW game_entity_animation_frame_data_26		;4158
-	.DW game_entity_animation_frame_data_27		;415a
-	.DW game_entity_animation_frame_data_28		;415c
-	.DW game_entity_animation_frame_data_29		;415e
-	.DW game_entity_animation_frame_data_30		;4160
-	.DW game_entity_animation_frame_data_31		;4162
-	.DW game_entity_animation_frame_data_32		;4164
-	.DW game_entity_animation_frame_data_33		;4166
-	.DW game_entity_animation_frame_data_34		;4168
-	.DW game_entity_animation_frame_data_35		;416a
-	.DW game_entity_animation_frame_data_36		;416c
-	.DW game_entity_animation_frame_data_37		;416e
-	.DW game_entity_animation_frame_data_38		;4170
-	.DW game_entity_animation_frame_data_39		;4172
-	.DW game_entity_animation_frame_data_40		;4174
-	.DW game_entity_animation_frame_data_41		;4176
-	.DW game_entity_animation_frame_data_42		;4178
-	.DW game_entity_animation_frame_data_43		;417a
-	.DW game_entity_animation_frame_data_44		;417c
-	.DW game_entity_animation_frame_data_45		;417e
-	.DW game_entity_animation_frame_data_46		;4180
-	.DW game_entity_animation_frame_data_47		;4182
-	.DW game_entity_animation_frame_data_48		;4184
-	.DW game_entity_animation_frame_data_49		;4186
-	.DW game_entity_animation_frame_data_50		;4188
-	.DW game_entity_animation_frame_data_51		;418a
-	.DW game_entity_animation_frame_data_52		;418c
-	.DW game_entity_animation_frame_data_53		;418e
-	.DW game_entity_animation_frame_data_54		;4190
-	.DW game_entity_animation_frame_data_55		;4192
-	.DW game_entity_animation_frame_data_56		;4194
-	.DW game_entity_animation_frame_data_57		;4196
-	.DW game_entity_animation_frame_data_58		;4198
-	.DW game_entity_animation_frame_data_59		;419a
-	.DW game_entity_animation_frame_data_60		;419c
-	.DW game_entity_animation_frame_data_61		;419e
-	.DW game_entity_animation_frame_data_62		;41a0
-	.DW game_entity_animation_frame_data_63		;41a2
-	.DW game_entity_animation_frame_data_64		;41a4
-	.DW game_entity_animation_frame_data_65		;41a6
-	.DW game_entity_animation_frame_data_66		;41a8
-	.DW game_entity_animation_frame_data_67		;41aa
-	.DW game_entity_animation_frame_data_68		;41ac
-	.DW game_entity_animation_frame_data_69		;41ae
-	.DW game_entity_animation_frame_data_70		;41b0
-	.DW game_entity_animation_frame_data_71		;41b2
-	.DW game_entity_animation_frame_data_72		;41b4
-	.DW game_entity_animation_frame_data_73		;41b6
-	.DW game_entity_animation_frame_data_74		;41b8
-	.DW game_entity_animation_frame_data_75		;41ba
-	.DW game_entity_animation_frame_data_76		;41bc
-	.DW game_entity_animation_frame_data_77		;41be
-	.DW game_entity_animation_frame_data_78		;41c0
-	.DW game_entity_animation_frame_data_79		;41c2
-	.DW game_entity_animation_frame_data_80		;41c4
+	.DW game_entity_animation_frame_data_0
+	.DW game_entity_animation_frame_data_1
+	.DW game_entity_animation_frame_data_2
+	.DW game_entity_animation_frame_data_3
+	.DW game_entity_animation_frame_data_4
+	.DW game_entity_animation_frame_data_5
+	.DW game_entity_animation_frame_data_6
+	.DW game_entity_animation_frame_data_7
+	.DW game_entity_animation_frame_data_8
+	.DW game_entity_animation_frame_data_9
+	.DW game_entity_animation_frame_data_10
+	.DW game_entity_animation_frame_data_11
+	.DW game_entity_animation_frame_data_12
+	.DW game_entity_animation_frame_data_13
+	.DW game_entity_animation_frame_data_14
+	.DW game_entity_animation_frame_data_15
+	.DW game_entity_animation_frame_data_16
+	.DW game_entity_animation_frame_data_17
+	.DW game_entity_animation_frame_data_18
+	.DW game_entity_animation_frame_data_19
+	.DW game_entity_animation_frame_data_20
+	.DW game_entity_animation_frame_data_21
+	.DW game_entity_animation_frame_data_22
+	.DW game_entity_animation_frame_data_23
+	.DW game_entity_animation_frame_data_24
+	.DW game_entity_animation_frame_data_25
+	.DW game_entity_animation_frame_data_26
+	.DW game_entity_animation_frame_data_27
+	.DW game_entity_animation_frame_data_28
+	.DW game_entity_animation_frame_data_29
+	.DW game_entity_animation_frame_data_30
+	.DW game_entity_animation_frame_data_31
+	.DW game_entity_animation_frame_data_32
+	.DW game_entity_animation_frame_data_33
+	.DW game_entity_animation_frame_data_34
+	.DW game_entity_animation_frame_data_35
+	.DW game_entity_animation_frame_data_36
+	.DW game_entity_animation_frame_data_37
+	.DW game_entity_animation_frame_data_38
+	.DW game_entity_animation_frame_data_39
+	.DW game_entity_animation_frame_data_40
+	.DW game_entity_animation_frame_data_41
+	.DW game_entity_animation_frame_data_42
+	.DW game_entity_animation_frame_data_43
+	.DW game_entity_animation_frame_data_44
+	.DW game_entity_animation_frame_data_45
+	.DW game_entity_animation_frame_data_46
+	.DW game_entity_animation_frame_data_47
+	.DW game_entity_animation_frame_data_48
+	.DW game_entity_animation_frame_data_49
+	.DW game_entity_animation_frame_data_50
+	.DW game_entity_animation_frame_data_51
+	.DW game_entity_animation_frame_data_52
+	.DW game_entity_animation_frame_data_53
+	.DW game_entity_animation_frame_data_54
+	.DW game_entity_animation_frame_data_55
+	.DW game_entity_animation_frame_data_56
+	.DW game_entity_animation_frame_data_57
+	.DW game_entity_animation_frame_data_58
+	.DW game_entity_animation_frame_data_59
+	.DW game_entity_animation_frame_data_60
+	.DW game_entity_animation_frame_data_61
+	.DW game_entity_animation_frame_data_62
+	.DW game_entity_animation_frame_data_63
+	.DW game_entity_animation_frame_data_64
+	.DW game_entity_animation_frame_data_65
+	.DW game_entity_animation_frame_data_66
+	.DW game_entity_animation_frame_data_67
+	.DW game_entity_animation_frame_data_68
+	.DW game_entity_animation_frame_data_69
+	.DW game_entity_animation_frame_data_70
+	.DW game_entity_animation_frame_data_71
+	.DW game_entity_animation_frame_data_72
+	.DW game_entity_animation_frame_data_73
+	.DW game_entity_animation_frame_data_74
+	.DW game_entity_animation_frame_data_75
+	.DW game_entity_animation_frame_data_76
+	.DW game_entity_animation_frame_data_77
+	.DW game_entity_animation_frame_data_78
+	.DW game_entity_animation_frame_data_79
+	.DW game_entity_animation_frame_data_80
 
 	; Each record starts with a count
 	; For each entry:
@@ -88,1832 +88,1832 @@ game_entity_animation_frame_data:
 	; - Parameter 2
 
 game_entity_animation_frame_data_0:
-	.DB 8		;41c6
-	.DB $e0		;41c7
-	.DB $f2		;41c8
-	.DB $00		;41c9
-	.DB $e1		;41ca
-	.DB $fe		;41cb
-	.DB $17		;41cc
-	.DB $e8		;41cd
-	.DB $f3		;41ce
-	.DB $21		;41cf
-	.DB $e8		;41d0
-	.DB $fb		;41d1
-	.DB $29		;41d2
-	.DB $ea		;41d3
-	.DB $02		;41d4
-	.DB $2a		;41d5
-	.DB $f0		;41d6
-	.DB $fc		;41d7
-	.DB $7a		;41d8
-	.DB $f8		;41d9
-	.DB $fa		;41da
-	.DB $7c		;41db
-	.DB $f5		;41dc
-	.DB $02		;41dd
-	.DB $7b		;41de
+	.DB 8
+	.DB $e0
+	.DB $f2
+	.DB $00
+	.DB $e1
+	.DB $fe
+	.DB $17
+	.DB $e8
+	.DB $f3
+	.DB $21
+	.DB $e8
+	.DB $fb
+	.DB $29
+	.DB $ea
+	.DB $02
+	.DB $2a
+	.DB $f0
+	.DB $fc
+	.DB $7a
+	.DB $f8
+	.DB $fa
+	.DB $7c
+	.DB $f5
+	.DB $02
+	.DB $7b
 game_entity_animation_frame_data_1:
-	.DB 7		;41df
-	.DB $e0		;41e0
-	.DB $f2		;41e1
-	.DB $00		;41e2
-	.DB $e1		;41e3
-	.DB $fe		;41e4
-	.DB $17		;41e5
-	.DB $e8		;41e6
-	.DB $f3		;41e7
-	.DB $21		;41e8
-	.DB $e8		;41e9
-	.DB $fb		;41ea
-	.DB $29		;41eb
-	.DB $ea		;41ec
-	.DB $02		;41ed
-	.DB $2a		;41ee
-	.DB $f0		;41ef
-	.DB $fc		;41f0
-	.DB $7d		;41f1
-	.DB $f8		;41f2
-	.DB $fc		;41f3
-	.DB $7e		;41f4
+	.DB 7
+	.DB $e0
+	.DB $f2
+	.DB $00
+	.DB $e1
+	.DB $fe
+	.DB $17
+	.DB $e8
+	.DB $f3
+	.DB $21
+	.DB $e8
+	.DB $fb
+	.DB $29
+	.DB $ea
+	.DB $02
+	.DB $2a
+	.DB $f0
+	.DB $fc
+	.DB $7d
+	.DB $f8
+	.DB $fc
+	.DB $7e
 game_entity_animation_frame_data_2:
-	.DB 7		;41f5
-	.DB $e1		;41f6
-	.DB $fa		;41f7
-	.DB $1b		;41f8
-	.DB $e8		;41f9
-	.DB $fb		;41fa
-	.DB $31		;41fb
-	.DB $e8		;41fc
-	.DB $03		;41fd
-	.DB $04		;41fe
-	.DB $f0		;41ff
-	.DB $f6		;4200
-	.DB $7f		;4201
-	.DB $f0		;4202
-	.DB $fe		;4203
-	.DB $5a		;4204
-	.DB $f8		;4205
-	.DB $f6		;4206
-	.DB $80		;4207
-	.DB $f8		;4208
-	.DB $fe		;4209
-	.DB $81		;420a
+	.DB 7
+	.DB $e1
+	.DB $fa
+	.DB $1b
+	.DB $e8
+	.DB $fb
+	.DB $31
+	.DB $e8
+	.DB $03
+	.DB $04
+	.DB $f0
+	.DB $f6
+	.DB $7f
+	.DB $f0
+	.DB $fe
+	.DB $5a
+	.DB $f8
+	.DB $f6
+	.DB $80
+	.DB $f8
+	.DB $fe
+	.DB $81
 game_entity_animation_frame_data_3:
-	.DB 5		;420b
-	.DB $e1		;420c
-	.DB $fa		;420d
-	.DB $1b		;420e
-	.DB $e8		;420f
-	.DB $fb		;4210
-	.DB $31		;4211
-	.DB $e8		;4212
-	.DB $03		;4213
-	.DB $04		;4214
-	.DB $f0		;4215
-	.DB $fc		;4216
-	.DB $82		;4217
-	.DB $f8		;4218
-	.DB $fb		;4219
-	.DB $83		;421a
+	.DB 5
+	.DB $e1
+	.DB $fa
+	.DB $1b
+	.DB $e8
+	.DB $fb
+	.DB $31
+	.DB $e8
+	.DB $03
+	.DB $04
+	.DB $f0
+	.DB $fc
+	.DB $82
+	.DB $f8
+	.DB $fb
+	.DB $83
 game_entity_animation_frame_data_4:
-	.DB 8		;421b
-	.DB $e1		;421c
-	.DB $fe		;421d
-	.DB $17		;421e
-	.DB $e8		;421f
-	.DB $fa		;4220
-	.DB $45		;4221
-	.DB $e8		;4222
-	.DB $02		;4223
-	.DB $46		;4224
-	.DB $f0		;4225
-	.DB $f8		;4226
-	.DB $84		;4227
-	.DB $f0		;4228
-	.DB $00		;4229
-	.DB $86		;422a
-	.DB $f5		;422b
-	.DB $f2		;422c
-	.DB $14		;422d
-	.DB $f8		;422e
-	.DB $fa		;422f
-	.DB $85		;4230
-	.DB $f8		;4231
-	.DB $02		;4232
-	.DB $87		;4233
+	.DB 8
+	.DB $e1
+	.DB $fe
+	.DB $17
+	.DB $e8
+	.DB $fa
+	.DB $45
+	.DB $e8
+	.DB $02
+	.DB $46
+	.DB $f0
+	.DB $f8
+	.DB $84
+	.DB $f0
+	.DB $00
+	.DB $86
+	.DB $f5
+	.DB $f2
+	.DB $14
+	.DB $f8
+	.DB $fa
+	.DB $85
+	.DB $f8
+	.DB $02
+	.DB $87
 game_entity_animation_frame_data_5:
-	.DB 8		;4234
-	.DB $e1		;4235
-	.DB $fa		;4236
-	.DB $1b		;4237
-	.DB $e8		;4238
-	.DB $f6		;4239
-	.DB $47		;423a
-	.DB $e8		;423b
-	.DB $fe		;423c
-	.DB $48		;423d
-	.DB $f0		;423e
-	.DB $f6		;423f
-	.DB $88		;4240
-	.DB $f0		;4241
-	.DB $fe		;4242
-	.DB $89		;4243
-	.DB $f2		;4244
-	.DB $04		;4245
-	.DB $01		;4246
-	.DB $f8		;4247
-	.DB $f6		;4248
-	.DB $5b		;4249
-	.DB $f8		;424a
-	.DB $fd		;424b
-	.DB $5c		;424c
+	.DB 8
+	.DB $e1
+	.DB $fa
+	.DB $1b
+	.DB $e8
+	.DB $f6
+	.DB $47
+	.DB $e8
+	.DB $fe
+	.DB $48
+	.DB $f0
+	.DB $f6
+	.DB $88
+	.DB $f0
+	.DB $fe
+	.DB $89
+	.DB $f2
+	.DB $04
+	.DB $01
+	.DB $f8
+	.DB $f6
+	.DB $5b
+	.DB $f8
+	.DB $fd
+	.DB $5c
 game_entity_animation_frame_data_6:
-	.DB 7		;424d
-	.DB $e2		;424e
-	.DB $fb		;424f
-	.DB $1c		;4250
-	.DB $e8		;4251
-	.DB $fa		;4252
-	.DB $49		;4253
-	.DB $e8		;4254
-	.DB $02		;4255
-	.DB $4a		;4256
-	.DB $f0		;4257
-	.DB $f8		;4258
-	.DB $8a		;4259
-	.DB $f0		;425a
-	.DB $00		;425b
-	.DB $61		;425c
-	.DB $f8		;425d
-	.DB $f8		;425e
-	.DB $62		;425f
-	.DB $f8		;4260
-	.DB $00		;4261
-	.DB $63		;4262
+	.DB 7
+	.DB $e2
+	.DB $fb
+	.DB $1c
+	.DB $e8
+	.DB $fa
+	.DB $49
+	.DB $e8
+	.DB $02
+	.DB $4a
+	.DB $f0
+	.DB $f8
+	.DB $8a
+	.DB $f0
+	.DB $00
+	.DB $61
+	.DB $f8
+	.DB $f8
+	.DB $62
+	.DB $f8
+	.DB $00
+	.DB $63
 game_entity_animation_frame_data_7:
-	.DB 7		;4263
-	.DB $e3		;4264
-	.DB $fc		;4265
-	.DB $1d		;4266
-	.DB $e8		;4267
-	.DB $f7		;4268
-	.DB $15		;4269
-	.DB $e8		;426a
-	.DB $ff		;426b
-	.DB $4b		;426c
-	.DB $f0		;426d
-	.DB $f7		;426e
-	.DB $8e		;426f
-	.DB $f0		;4270
-	.DB $ff		;4271
-	.DB $8b		;4272
-	.DB $f8		;4273
-	.DB $f7		;4274
-	.DB $8c		;4275
-	.DB $f8		;4276
-	.DB $ff		;4277
-	.DB $8d		;4278
+	.DB 7
+	.DB $e3
+	.DB $fc
+	.DB $1d
+	.DB $e8
+	.DB $f7
+	.DB $15
+	.DB $e8
+	.DB $ff
+	.DB $4b
+	.DB $f0
+	.DB $f7
+	.DB $8e
+	.DB $f0
+	.DB $ff
+	.DB $8b
+	.DB $f8
+	.DB $f7
+	.DB $8c
+	.DB $f8
+	.DB $ff
+	.DB $8d
 game_entity_animation_frame_data_8:
-	.DB 7		;4279
-	.DB $e3		;427a
-	.DB $fb		;427b
-	.DB $1d		;427c
-	.DB $e8		;427d
-	.DB $f6		;427e
-	.DB $16		;427f
-	.DB $e8		;4280
-	.DB $fe		;4281
-	.DB $4b		;4282
-	.DB $f0		;4283
-	.DB $f6		;4284
-	.DB $8e		;4285
-	.DB $f0		;4286
-	.DB $fe		;4287
-	.DB $8b		;4288
-	.DB $f8		;4289
-	.DB $f7		;428a
-	.DB $8c		;428b
-	.DB $f8		;428c
-	.DB $ff		;428d
-	.DB $8f		;428e
+	.DB 7
+	.DB $e3
+	.DB $fb
+	.DB $1d
+	.DB $e8
+	.DB $f6
+	.DB $16
+	.DB $e8
+	.DB $fe
+	.DB $4b
+	.DB $f0
+	.DB $f6
+	.DB $8e
+	.DB $f0
+	.DB $fe
+	.DB $8b
+	.DB $f8
+	.DB $f7
+	.DB $8c
+	.DB $f8
+	.DB $ff
+	.DB $8f
 game_entity_animation_frame_data_9:
-	.DB 8		;428f
-	.DB $e0		;4290
-	.DB $f2		;4291
-	.DB $00		;4292
-	.DB $e1		;4293
-	.DB $fe		;4294
-	.DB $17		;4295
-	.DB $e8		;4296
-	.DB $f3		;4297
-	.DB $21		;4298
-	.DB $e8		;4299
-	.DB $fb		;429a
-	.DB $29		;429b
-	.DB $ea		;429c
-	.DB $02		;429d
-	.DB $2a		;429e
-	.DB $f0		;429f
-	.DB $fa		;42a0
-	.DB $4c		;42a1
-	.DB $f0		;42a2
-	.DB $02		;42a3
-	.DB $4d		;42a4
-	.DB $f8		;42a5
-	.DB $fd		;42a6
-	.DB $4e		;42a7
+	.DB 8
+	.DB $e0
+	.DB $f2
+	.DB $00
+	.DB $e1
+	.DB $fe
+	.DB $17
+	.DB $e8
+	.DB $f3
+	.DB $21
+	.DB $e8
+	.DB $fb
+	.DB $29
+	.DB $ea
+	.DB $02
+	.DB $2a
+	.DB $f0
+	.DB $fa
+	.DB $4c
+	.DB $f0
+	.DB $02
+	.DB $4d
+	.DB $f8
+	.DB $fd
+	.DB $4e
 game_entity_animation_frame_data_10:
-	.DB 8		;42a8
-	.DB $e2		;42a9
-	.DB $02		;42aa
-	.DB $18		;42ab
-	.DB $e8		;42ac
-	.DB $fd		;42ad
-	.DB $2b		;42ae
-	.DB $e8		;42af
-	.DB $05		;42b0
-	.DB $2c		;42b1
-	.DB $f0		;42b2
-	.DB $fd		;42b3
-	.DB $4f		;42b4
-	.DB $f0		;42b5
-	.DB $05		;42b6
-	.DB $50		;42b7
-	.DB $f3		;42b8
-	.DB $0d		;42b9
-	.DB $01		;42ba
-	.DB $f8		;42bb
-	.DB $fd		;42bc
-	.DB $51		;42bd
-	.DB $f8		;42be
-	.DB $05		;42bf
-	.DB $52		;42c0
+	.DB 8
+	.DB $e2
+	.DB $02
+	.DB $18
+	.DB $e8
+	.DB $fd
+	.DB $2b
+	.DB $e8
+	.DB $05
+	.DB $2c
+	.DB $f0
+	.DB $fd
+	.DB $4f
+	.DB $f0
+	.DB $05
+	.DB $50
+	.DB $f3
+	.DB $0d
+	.DB $01
+	.DB $f8
+	.DB $fd
+	.DB $51
+	.DB $f8
+	.DB $05
+	.DB $52
 game_entity_animation_frame_data_11:
-	.DB 8		;42c1
-	.DB $e1		;42c2
-	.DB $01		;42c3
-	.DB $19		;42c4
-	.DB $e2		;42c5
-	.DB $0c		;42c6
-	.DB $02		;42c7
-	.DB $e8		;42c8
-	.DB $fd		;42c9
-	.DB $2d		;42ca
-	.DB $e8		;42cb
-	.DB $05		;42cc
-	.DB $2e		;42cd
-	.DB $f0		;42ce
-	.DB $fc		;42cf
-	.DB $53		;42d0
-	.DB $f0		;42d1
-	.DB $04		;42d2
-	.DB $54		;42d3
-	.DB $f8		;42d4
-	.DB $fd		;42d5
-	.DB $51		;42d6
-	.DB $f8		;42d7
-	.DB $04		;42d8
-	.DB $55		;42d9
+	.DB 8
+	.DB $e1
+	.DB $01
+	.DB $19
+	.DB $e2
+	.DB $0c
+	.DB $02
+	.DB $e8
+	.DB $fd
+	.DB $2d
+	.DB $e8
+	.DB $05
+	.DB $2e
+	.DB $f0
+	.DB $fc
+	.DB $53
+	.DB $f0
+	.DB $04
+	.DB $54
+	.DB $f8
+	.DB $fd
+	.DB $51
+	.DB $f8
+	.DB $04
+	.DB $55
 game_entity_animation_frame_data_12:
-	.DB 8		;42da
-	.DB $e0		;42db
-	.DB $fc		;42dc
-	.DB $03		;42dd
-	.DB $e1		;42de
-	.DB $02		;42df
-	.DB $1a		;42e0
-	.DB $e8		;42e1
-	.DB $fc		;42e2
-	.DB $2f		;42e3
-	.DB $e8		;42e4
-	.DB $04		;42e5
-	.DB $30		;42e6
-	.DB $f0		;42e7
-	.DB $fc		;42e8
-	.DB $56		;42e9
-	.DB $f0		;42ea
-	.DB $04		;42eb
-	.DB $57		;42ec
-	.DB $f8		;42ed
-	.DB $fc		;42ee
-	.DB $58		;42ef
-	.DB $f8		;42f0
-	.DB $04		;42f1
-	.DB $55		;42f2
+	.DB 8
+	.DB $e0
+	.DB $fc
+	.DB $03
+	.DB $e1
+	.DB $02
+	.DB $1a
+	.DB $e8
+	.DB $fc
+	.DB $2f
+	.DB $e8
+	.DB $04
+	.DB $30
+	.DB $f0
+	.DB $fc
+	.DB $56
+	.DB $f0
+	.DB $04
+	.DB $57
+	.DB $f8
+	.DB $fc
+	.DB $58
+	.DB $f8
+	.DB $04
+	.DB $55
 game_entity_animation_frame_data_13:
-	.DB 7		;42f3
-	.DB $e1		;42f4
-	.DB $fa		;42f5
-	.DB $1b		;42f6
-	.DB $e8		;42f7
-	.DB $fb		;42f8
-	.DB $31		;42f9
-	.DB $e8		;42fa
-	.DB $03		;42fb
-	.DB $04		;42fc
-	.DB $f0		;42fd
-	.DB $f6		;42fe
-	.DB $59		;42ff
-	.DB $f0		;4300
-	.DB $fe		;4301
-	.DB $5a		;4302
-	.DB $f8		;4303
-	.DB $f6		;4304
-	.DB $5b		;4305
-	.DB $f8		;4306
-	.DB $fe		;4307
-	.DB $5c		;4308
+	.DB 7
+	.DB $e1
+	.DB $fa
+	.DB $1b
+	.DB $e8
+	.DB $fb
+	.DB $31
+	.DB $e8
+	.DB $03
+	.DB $04
+	.DB $f0
+	.DB $f6
+	.DB $59
+	.DB $f0
+	.DB $fe
+	.DB $5a
+	.DB $f8
+	.DB $f6
+	.DB $5b
+	.DB $f8
+	.DB $fe
+	.DB $5c
 game_entity_animation_frame_data_14:
-	.DB 7		;4309
-	.DB $e2		;430a
-	.DB $f9		;430b
-	.DB $1c		;430c
-	.DB $e8		;430d
-	.DB $fa		;430e
-	.DB $32		;430f
-	.DB $f2		;4310
-	.DB $ee		;4311
-	.DB $05		;4312
-	.DB $ef		;4313
-	.DB $f6		;4314
-	.DB $5e		;4315
-	.DB $f0		;4316
-	.DB $fe		;4317
-	.DB $5d		;4318
-	.DB $f7		;4319
-	.DB $f6		;431a
-	.DB $5f		;431b
-	.DB $f8		;431c
-	.DB $fe		;431d
-	.DB $63		;431e
+	.DB 7
+	.DB $e2
+	.DB $f9
+	.DB $1c
+	.DB $e8
+	.DB $fa
+	.DB $32
+	.DB $f2
+	.DB $ee
+	.DB $05
+	.DB $ef
+	.DB $f6
+	.DB $5e
+	.DB $f0
+	.DB $fe
+	.DB $5d
+	.DB $f7
+	.DB $f6
+	.DB $5f
+	.DB $f8
+	.DB $fe
+	.DB $63
 game_entity_animation_frame_data_15:
-	.DB 8		;431f
-	.DB $e0		;4320
-	.DB $ef		;4321
-	.DB $06		;4322
-	.DB $e1		;4323
-	.DB $fa		;4324
-	.DB $1d		;4325
-	.DB $e8		;4326
-	.DB $f7		;4327
-	.DB $33		;4328
-	.DB $e8		;4329
-	.DB $ff		;432a
-	.DB $34		;432b
-	.DB $f0		;432c
-	.DB $f7		;432d
-	.DB $60		;432e
-	.DB $f0		;432f
-	.DB $ff		;4330
-	.DB $61		;4331
-	.DB $f8		;4332
-	.DB $f7		;4333
-	.DB $62		;4334
-	.DB $f8		;4335
-	.DB $ff		;4336
-	.DB $63		;4337
+	.DB 8
+	.DB $e0
+	.DB $ef
+	.DB $06
+	.DB $e1
+	.DB $fa
+	.DB $1d
+	.DB $e8
+	.DB $f7
+	.DB $33
+	.DB $e8
+	.DB $ff
+	.DB $34
+	.DB $f0
+	.DB $f7
+	.DB $60
+	.DB $f0
+	.DB $ff
+	.DB $61
+	.DB $f8
+	.DB $f7
+	.DB $62
+	.DB $f8
+	.DB $ff
+	.DB $63
 game_entity_animation_frame_data_16:
-	.DB 8		;4338
-	.DB $e1		;4339
-	.DB $f9		;433a
-	.DB $1e		;433b
-	.DB $e0		;433c
-	.DB $ff		;433d
-	.DB $07		;433e
-	.DB $e8		;433f
-	.DB $f7		;4340
-	.DB $35		;4341
-	.DB $e8		;4342
-	.DB $ff		;4343
-	.DB $36		;4344
-	.DB $f0		;4345
-	.DB $f7		;4346
-	.DB $64		;4347
-	.DB $f0		;4348
-	.DB $ff		;4349
-	.DB $65		;434a
-	.DB $f8		;434b
-	.DB $f7		;434c
-	.DB $62		;434d
-	.DB $f8		;434e
-	.DB $ff		;434f
-	.DB $63		;4350
+	.DB 8
+	.DB $e1
+	.DB $f9
+	.DB $1e
+	.DB $e0
+	.DB $ff
+	.DB $07
+	.DB $e8
+	.DB $f7
+	.DB $35
+	.DB $e8
+	.DB $ff
+	.DB $36
+	.DB $f0
+	.DB $f7
+	.DB $64
+	.DB $f0
+	.DB $ff
+	.DB $65
+	.DB $f8
+	.DB $f7
+	.DB $62
+	.DB $f8
+	.DB $ff
+	.DB $63
 game_entity_animation_frame_data_17:
-	.DB 7		;4351
-	.DB $e3		;4352
-	.DB $fd		;4353
-	.DB $19		;4354
-	.DB $e8		;4355
-	.DB $f9		;4356
-	.DB $37		;4357
-	.DB $e8		;4358
-	.DB $01		;4359
-	.DB $08		;435a
-	.DB $f0		;435b
-	.DB $f9		;435c
-	.DB $66		;435d
-	.DB $f0		;435e
-	.DB $01		;435f
-	.DB $67		;4360
-	.DB $f8		;4361
-	.DB $f9		;4362
-	.DB $68		;4363
-	.DB $f8		;4364
-	.DB $01		;4365
-	.DB $69		;4366
+	.DB 7
+	.DB $e3
+	.DB $fd
+	.DB $19
+	.DB $e8
+	.DB $f9
+	.DB $37
+	.DB $e8
+	.DB $01
+	.DB $08
+	.DB $f0
+	.DB $f9
+	.DB $66
+	.DB $f0
+	.DB $01
+	.DB $67
+	.DB $f8
+	.DB $f9
+	.DB $68
+	.DB $f8
+	.DB $01
+	.DB $69
 game_entity_animation_frame_data_18:
-	.DB 7		;4367
-	.DB $e3		;4368
-	.DB $fc		;4369
-	.DB $19		;436a
-	.DB $e8		;436b
-	.DB $f8		;436c
-	.DB $37		;436d
-	.DB $e8		;436e
-	.DB $00		;436f
-	.DB $09		;4370
-	.DB $f0		;4371
-	.DB $f8		;4372
-	.DB $66		;4373
-	.DB $f0		;4374
-	.DB $00		;4375
-	.DB $67		;4376
-	.DB $f8		;4377
-	.DB $f9		;4378
-	.DB $6a		;4379
-	.DB $f8		;437a
-	.DB $01		;437b
-	.DB $69		;437c
+	.DB 7
+	.DB $e3
+	.DB $fc
+	.DB $19
+	.DB $e8
+	.DB $f8
+	.DB $37
+	.DB $e8
+	.DB $00
+	.DB $09
+	.DB $f0
+	.DB $f8
+	.DB $66
+	.DB $f0
+	.DB $00
+	.DB $67
+	.DB $f8
+	.DB $f9
+	.DB $6a
+	.DB $f8
+	.DB $01
+	.DB $69
 game_entity_animation_frame_data_19:
-	.DB 8		;437d
-	.DB $e2		;437e
-	.DB $fc		;437f
-	.DB $18		;4380
-	.DB $e9		;4381
-	.DB $f4		;4382
-	.DB $38		;4383
-	.DB $e9		;4384
-	.DB $fc		;4385
-	.DB $39		;4386
-	.DB $e8		;4387
-	.DB $04		;4388
-	.DB $3a		;4389
-	.DB $f1		;438a
-	.DB $f4		;438b
-	.DB $0a		;438c
-	.DB $f1		;438d
-	.DB $fc		;438e
-	.DB $6b		;438f
-	.DB $f9		;4390
-	.DB $f4		;4391
-	.DB $0b		;4392
-	.DB $f9		;4393
-	.DB $fc		;4394
-	.DB $6c		;4395
+	.DB 8
+	.DB $e2
+	.DB $fc
+	.DB $18
+	.DB $e9
+	.DB $f4
+	.DB $38
+	.DB $e9
+	.DB $fc
+	.DB $39
+	.DB $e8
+	.DB $04
+	.DB $3a
+	.DB $f1
+	.DB $f4
+	.DB $0a
+	.DB $f1
+	.DB $fc
+	.DB $6b
+	.DB $f9
+	.DB $f4
+	.DB $0b
+	.DB $f9
+	.DB $fc
+	.DB $6c
 game_entity_animation_frame_data_20:
-	.DB 9		;4396
-	.DB $e2		;4397
-	.DB $fc		;4398
-	.DB $1f		;4399
-	.DB $e1		;439a
-	.DB $00		;439b
-	.DB $22		;439c
-	.DB $e9		;439d
-	.DB $f0		;439e
-	.DB $0c		;439f
-	.DB $e9		;43a0
-	.DB $f8		;43a1
-	.DB $3b		;43a2
-	.DB $e9		;43a3
-	.DB $00		;43a4
-	.DB $3c		;43a5
-	.DB $f1		;43a6
-	.DB $f0		;43a7
-	.DB $0d		;43a8
-	.DB $f1		;43a9
-	.DB $f9		;43aa
-	.DB $6d		;43ab
-	.DB $f4		;43ac
-	.DB $01		;43ad
-	.DB $6e		;43ae
-	.DB $f9		;43af
-	.DB $f8		;43b0
-	.DB $6f		;43b1
+	.DB 9
+	.DB $e2
+	.DB $fc
+	.DB $1f
+	.DB $e1
+	.DB $00
+	.DB $22
+	.DB $e9
+	.DB $f0
+	.DB $0c
+	.DB $e9
+	.DB $f8
+	.DB $3b
+	.DB $e9
+	.DB $00
+	.DB $3c
+	.DB $f1
+	.DB $f0
+	.DB $0d
+	.DB $f1
+	.DB $f9
+	.DB $6d
+	.DB $f4
+	.DB $01
+	.DB $6e
+	.DB $f9
+	.DB $f8
+	.DB $6f
 game_entity_animation_frame_data_21:
-	.DB 7		;43b2
-	.DB $e0		;43b3
-	.DB $f1		;43b4
-	.DB $01		;43b5
-	.DB $e0		;43b6
-	.DB $f6		;43b7
-	.DB $23		;43b8
-	.DB $e0		;43b9
-	.DB $fe		;43ba
-	.DB $20		;43bb
-	.DB $e8		;43bc
-	.DB $ff		;43bd
-	.DB $3d		;43be
-	.DB $f0		;43bf
-	.DB $fd		;43c0
-	.DB $70		;43c1
-	.DB $f8		;43c2
-	.DB $f9		;43c3
-	.DB $71		;43c4
-	.DB $f8		;43c5
-	.DB $01		;43c6
-	.DB $72		;43c7
+	.DB 7
+	.DB $e0
+	.DB $f1
+	.DB $01
+	.DB $e0
+	.DB $f6
+	.DB $23
+	.DB $e0
+	.DB $fe
+	.DB $20
+	.DB $e8
+	.DB $ff
+	.DB $3d
+	.DB $f0
+	.DB $fd
+	.DB $70
+	.DB $f8
+	.DB $f9
+	.DB $71
+	.DB $f8
+	.DB $01
+	.DB $72
 game_entity_animation_frame_data_22:
-	.DB 8		;43c8
-	.DB $d8		;43c9
-	.DB $05		;43ca
-	.DB $0e		;43cb
-	.DB $e0		;43cc
-	.DB $03		;43cd
-	.DB $24		;43ce
-	.DB $e8		;43cf
-	.DB $fb		;43d0
-	.DB $3f		;43d1
-	.DB $e8		;43d2
-	.DB $03		;43d3
-	.DB $3e		;43d4
-	.DB $e4		;43d5
-	.DB $00		;43d6
-	.DB $19		;43d7
-	.DB $f0		;43d8
-	.DB $fd		;43d9
-	.DB $73		;43da
-	.DB $f5		;43db
-	.DB $f5		;43dc
-	.DB $74		;43dd
-	.DB $f8		;43de
-	.DB $fd		;43df
-	.DB $75		;43e0
+	.DB 8
+	.DB $d8
+	.DB $05
+	.DB $0e
+	.DB $e0
+	.DB $03
+	.DB $24
+	.DB $e8
+	.DB $fb
+	.DB $3f
+	.DB $e8
+	.DB $03
+	.DB $3e
+	.DB $e4
+	.DB $00
+	.DB $19
+	.DB $f0
+	.DB $fd
+	.DB $73
+	.DB $f5
+	.DB $f5
+	.DB $74
+	.DB $f8
+	.DB $fd
+	.DB $75
 game_entity_animation_frame_data_23:
-	.DB 6		;43e1
-	.DB $e2		;43e2
-	.DB $03		;43e3
-	.DB $25		;43e4
-	.DB $e8		;43e5
-	.DB $fb		;43e6
-	.DB $40		;43e7
-	.DB $ea		;43e8
-	.DB $03		;43e9
-	.DB $0f		;43ea
-	.DB $e5		;43eb
-	.DB $00		;43ec
-	.DB $19		;43ed
-	.DB $f0		;43ee
-	.DB $fb		;43ef
-	.DB $76		;43f0
-	.DB $f8		;43f1
-	.DB $fb		;43f2
-	.DB $77		;43f3
+	.DB 6
+	.DB $e2
+	.DB $03
+	.DB $25
+	.DB $e8
+	.DB $fb
+	.DB $40
+	.DB $ea
+	.DB $03
+	.DB $0f
+	.DB $e5
+	.DB $00
+	.DB $19
+	.DB $f0
+	.DB $fb
+	.DB $76
+	.DB $f8
+	.DB $fb
+	.DB $77
 game_entity_animation_frame_data_24:
-	.DB 6		;43f4
-	.DB $ea		;43f5
-	.DB $f8		;43f6
-	.DB $10		;43f7
-	.DB $ea		;43f8
-	.DB $00		;43f9
-	.DB $41		;43fa
-	.DB $e7		;43fb
-	.DB $fe		;43fc
-	.DB $1e		;43fd
-	.DB $f2		;43fe
-	.DB $f8		;43ff
-	.DB $11		;4400
-	.DB $f2		;4401
-	.DB $00		;4402
-	.DB $78		;4403
-	.DB $fa		;4404
-	.DB $fc		;4405
-	.DB $79		;4406
+	.DB 6
+	.DB $ea
+	.DB $f8
+	.DB $10
+	.DB $ea
+	.DB $00
+	.DB $41
+	.DB $e7
+	.DB $fe
+	.DB $1e
+	.DB $f2
+	.DB $f8
+	.DB $11
+	.DB $f2
+	.DB $00
+	.DB $78
+	.DB $fa
+	.DB $fc
+	.DB $79
 game_entity_animation_frame_data_25:
-	.DB 9		;4407
-	.DB $d8		;4408
-	.DB $00		;4409
-	.DB $0e		;440a
-	.DB $e1		;440b
-	.DB $fd		;440c
-	.DB $1a		;440d
-	.DB $e0		;440e
-	.DB $00		;440f
-	.DB $26		;4410
-	.DB $e8		;4411
-	.DB $f8		;4412
-	.DB $2f		;4413
-	.DB $e8		;4414
-	.DB $00		;4415
-	.DB $30		;4416
-	.DB $f0		;4417
-	.DB $f8		;4418
-	.DB $56		;4419
-	.DB $f0		;441a
-	.DB $00		;441b
-	.DB $57		;441c
-	.DB $f8		;441d
-	.DB $f8		;441e
-	.DB $58		;441f
-	.DB $f8		;4420
-	.DB $00		;4421
-	.DB $55		;4422
+	.DB 9
+	.DB $d8
+	.DB $00
+	.DB $0e
+	.DB $e1
+	.DB $fd
+	.DB $1a
+	.DB $e0
+	.DB $00
+	.DB $26
+	.DB $e8
+	.DB $f8
+	.DB $2f
+	.DB $e8
+	.DB $00
+	.DB $30
+	.DB $f0
+	.DB $f8
+	.DB $56
+	.DB $f0
+	.DB $00
+	.DB $57
+	.DB $f8
+	.DB $f8
+	.DB $58
+	.DB $f8
+	.DB $00
+	.DB $55
 game_entity_animation_frame_data_26:
-	.DB 9		;4423
-	.DB $d8		;4424
-	.DB $f6		;4425
-	.DB $0e		;4426
-	.DB $e1		;4427
-	.DB $fc		;4428
-	.DB $1a		;4429
-	.DB $e0		;442a
-	.DB $f8		;442b
-	.DB $27		;442c
-	.DB $e8		;442d
-	.DB $f8		;442e
-	.DB $35		;442f
-	.DB $e8		;4430
-	.DB $00		;4431
-	.DB $36		;4432
-	.DB $f0		;4433
-	.DB $f8		;4434
-	.DB $64		;4435
-	.DB $f0		;4436
-	.DB $00		;4437
-	.DB $65		;4438
-	.DB $f8		;4439
-	.DB $f8		;443a
-	.DB $62		;443b
-	.DB $f8		;443c
-	.DB $00		;443d
-	.DB $63		;443e
+	.DB 9
+	.DB $d8
+	.DB $f6
+	.DB $0e
+	.DB $e1
+	.DB $fc
+	.DB $1a
+	.DB $e0
+	.DB $f8
+	.DB $27
+	.DB $e8
+	.DB $f8
+	.DB $35
+	.DB $e8
+	.DB $00
+	.DB $36
+	.DB $f0
+	.DB $f8
+	.DB $64
+	.DB $f0
+	.DB $00
+	.DB $65
+	.DB $f8
+	.DB $f8
+	.DB $62
+	.DB $f8
+	.DB $00
+	.DB $63
 game_entity_animation_frame_data_27:
-	.DB 8		;443f
-	.DB $e2		;4440
-	.DB $fb		;4441
-	.DB $1c		;4442
-	.DB $e8		;4443
-	.DB $f0		;4444
-	.DB $12		;4445
-	.DB $e8		;4446
-	.DB $f8		;4447
-	.DB $42		;4448
-	.DB $e8		;4449
-	.DB $00		;444a
-	.DB $43		;444b
-	.DB $f0		;444c
-	.DB $f8		;444d
-	.DB $60		;444e
-	.DB $f0		;444f
-	.DB $00		;4450
-	.DB $61		;4451
-	.DB $f8		;4452
-	.DB $f8		;4453
-	.DB $62		;4454
-	.DB $f8		;4455
-	.DB $00		;4456
-	.DB $63		;4457
+	.DB 8
+	.DB $e2
+	.DB $fb
+	.DB $1c
+	.DB $e8
+	.DB $f0
+	.DB $12
+	.DB $e8
+	.DB $f8
+	.DB $42
+	.DB $e8
+	.DB $00
+	.DB $43
+	.DB $f0
+	.DB $f8
+	.DB $60
+	.DB $f0
+	.DB $00
+	.DB $61
+	.DB $f8
+	.DB $f8
+	.DB $62
+	.DB $f8
+	.DB $00
+	.DB $63
 game_entity_animation_frame_data_28:
-	.DB 9		;4458
-	.DB $da		;4459
-	.DB $f0		;445a
-	.DB $13		;445b
-	.DB $e0		;445c
-	.DB $f8		;445d
-	.DB $28		;445e
-	.DB $e1		;445f
-	.DB $fc		;4460
-	.DB $1d		;4461
-	.DB $e8		;4462
-	.DB $f8		;4463
-	.DB $44		;4464
-	.DB $e8		;4465
-	.DB $00		;4466
-	.DB $34		;4467
-	.DB $f0		;4468
-	.DB $f8		;4469
-	.DB $60		;446a
-	.DB $f0		;446b
-	.DB $00		;446c
-	.DB $61		;446d
-	.DB $f8		;446e
-	.DB $f8		;446f
-	.DB $62		;4470
-	.DB $f8		;4471
-	.DB $00		;4472
-	.DB $63		;4473
+	.DB 9
+	.DB $da
+	.DB $f0
+	.DB $13
+	.DB $e0
+	.DB $f8
+	.DB $28
+	.DB $e1
+	.DB $fc
+	.DB $1d
+	.DB $e8
+	.DB $f8
+	.DB $44
+	.DB $e8
+	.DB $00
+	.DB $34
+	.DB $f0
+	.DB $f8
+	.DB $60
+	.DB $f0
+	.DB $00
+	.DB $61
+	.DB $f8
+	.DB $f8
+	.DB $62
+	.DB $f8
+	.DB $00
+	.DB $63
 game_entity_animation_frame_data_29:
-	.DB 8		;4474
-	.DB $e0		;4475
-	.DB $f2		;4476
-	.DB $00		;4477
-	.DB $e1		;4478
-	.DB $fe		;4479
-	.DB $90		;447a
-	.DB $e8		;447b
-	.DB $f3		;447c
-	.DB $21		;447d
-	.DB $e8		;447e
-	.DB $fb		;447f
-	.DB $29		;4480
-	.DB $ea		;4481
-	.DB $02		;4482
-	.DB $2a		;4483
-	.DB $f0		;4484
-	.DB $fc		;4485
-	.DB $7a		;4486
-	.DB $f8		;4487
-	.DB $fa		;4488
-	.DB $7c		;4489
-	.DB $f5		;448a
-	.DB $02		;448b
-	.DB $7b		;448c
+	.DB 8
+	.DB $e0
+	.DB $f2
+	.DB $00
+	.DB $e1
+	.DB $fe
+	.DB $90
+	.DB $e8
+	.DB $f3
+	.DB $21
+	.DB $e8
+	.DB $fb
+	.DB $29
+	.DB $ea
+	.DB $02
+	.DB $2a
+	.DB $f0
+	.DB $fc
+	.DB $7a
+	.DB $f8
+	.DB $fa
+	.DB $7c
+	.DB $f5
+	.DB $02
+	.DB $7b
 game_entity_animation_frame_data_30:
-	.DB 7		;448d
-	.DB $e0		;448e
-	.DB $f2		;448f
-	.DB $00		;4490
-	.DB $e1		;4491
-	.DB $fe		;4492
-	.DB $90		;4493
-	.DB $e8		;4494
-	.DB $f3		;4495
-	.DB $21		;4496
-	.DB $e8		;4497
-	.DB $fb		;4498
-	.DB $29		;4499
-	.DB $ea		;449a
-	.DB $02		;449b
-	.DB $2a		;449c
-	.DB $f0		;449d
-	.DB $fc		;449e
-	.DB $7d		;449f
-	.DB $f8		;44a0
-	.DB $fc		;44a1
-	.DB $7e		;44a2
+	.DB 7
+	.DB $e0
+	.DB $f2
+	.DB $00
+	.DB $e1
+	.DB $fe
+	.DB $90
+	.DB $e8
+	.DB $f3
+	.DB $21
+	.DB $e8
+	.DB $fb
+	.DB $29
+	.DB $ea
+	.DB $02
+	.DB $2a
+	.DB $f0
+	.DB $fc
+	.DB $7d
+	.DB $f8
+	.DB $fc
+	.DB $7e
 game_entity_animation_frame_data_31:
-	.DB 7		;44a3
-	.DB $e1		;44a4
-	.DB $fa		;44a5
-	.DB $94		;44a6
-	.DB $e8		;44a7
-	.DB $fb		;44a8
-	.DB $31		;44a9
-	.DB $e8		;44aa
-	.DB $03		;44ab
-	.DB $04		;44ac
-	.DB $f0		;44ad
-	.DB $f6		;44ae
-	.DB $7f		;44af
-	.DB $f0		;44b0
-	.DB $fe		;44b1
-	.DB $5a		;44b2
-	.DB $f8		;44b3
-	.DB $f6		;44b4
-	.DB $80		;44b5
-	.DB $f8		;44b6
-	.DB $fe		;44b7
-	.DB $81		;44b8
+	.DB 7
+	.DB $e1
+	.DB $fa
+	.DB $94
+	.DB $e8
+	.DB $fb
+	.DB $31
+	.DB $e8
+	.DB $03
+	.DB $04
+	.DB $f0
+	.DB $f6
+	.DB $7f
+	.DB $f0
+	.DB $fe
+	.DB $5a
+	.DB $f8
+	.DB $f6
+	.DB $80
+	.DB $f8
+	.DB $fe
+	.DB $81
 game_entity_animation_frame_data_32:
-	.DB 5		;44b9
-	.DB $e1		;44ba
-	.DB $fa		;44bb
-	.DB $94		;44bc
-	.DB $e8		;44bd
-	.DB $fb		;44be
-	.DB $31		;44bf
-	.DB $e8		;44c0
-	.DB $03		;44c1
-	.DB $04		;44c2
-	.DB $f0		;44c3
-	.DB $fc		;44c4
-	.DB $82		;44c5
-	.DB $f8		;44c6
-	.DB $fb		;44c7
-	.DB $83		;44c8
+	.DB 5
+	.DB $e1
+	.DB $fa
+	.DB $94
+	.DB $e8
+	.DB $fb
+	.DB $31
+	.DB $e8
+	.DB $03
+	.DB $04
+	.DB $f0
+	.DB $fc
+	.DB $82
+	.DB $f8
+	.DB $fb
+	.DB $83
 game_entity_animation_frame_data_33:
-	.DB 8		;44c9
-	.DB $e1		;44ca
-	.DB $fe		;44cb
-	.DB $90		;44cc
-	.DB $e8		;44cd
-	.DB $fa		;44ce
-	.DB $45		;44cf
-	.DB $e8		;44d0
-	.DB $02		;44d1
-	.DB $46		;44d2
-	.DB $f0		;44d3
-	.DB $f8		;44d4
-	.DB $84		;44d5
-	.DB $f0		;44d6
-	.DB $00		;44d7
-	.DB $86		;44d8
-	.DB $f5		;44d9
-	.DB $f2		;44da
-	.DB $14		;44db
-	.DB $f8		;44dc
-	.DB $fa		;44dd
-	.DB $85		;44de
-	.DB $f8		;44df
-	.DB $02		;44e0
-	.DB $87		;44e1
+	.DB 8
+	.DB $e1
+	.DB $fe
+	.DB $90
+	.DB $e8
+	.DB $fa
+	.DB $45
+	.DB $e8
+	.DB $02
+	.DB $46
+	.DB $f0
+	.DB $f8
+	.DB $84
+	.DB $f0
+	.DB $00
+	.DB $86
+	.DB $f5
+	.DB $f2
+	.DB $14
+	.DB $f8
+	.DB $fa
+	.DB $85
+	.DB $f8
+	.DB $02
+	.DB $87
 game_entity_animation_frame_data_34:
-	.DB 8		;44e2
-	.DB $e1		;44e3
-	.DB $fa		;44e4
-	.DB $94		;44e5
-	.DB $e8		;44e6
-	.DB $f6		;44e7
-	.DB $47		;44e8
-	.DB $e8		;44e9
-	.DB $fe		;44ea
-	.DB $48		;44eb
-	.DB $f0		;44ec
-	.DB $f6		;44ed
-	.DB $88		;44ee
-	.DB $f0		;44ef
-	.DB $fe		;44f0
-	.DB $89		;44f1
-	.DB $f2		;44f2
-	.DB $04		;44f3
-	.DB $01		;44f4
-	.DB $f8		;44f5
-	.DB $f6		;44f6
-	.DB $5b		;44f7
-	.DB $f8		;44f8
-	.DB $fd		;44f9
-	.DB $5c		;44fa
+	.DB 8
+	.DB $e1
+	.DB $fa
+	.DB $94
+	.DB $e8
+	.DB $f6
+	.DB $47
+	.DB $e8
+	.DB $fe
+	.DB $48
+	.DB $f0
+	.DB $f6
+	.DB $88
+	.DB $f0
+	.DB $fe
+	.DB $89
+	.DB $f2
+	.DB $04
+	.DB $01
+	.DB $f8
+	.DB $f6
+	.DB $5b
+	.DB $f8
+	.DB $fd
+	.DB $5c
 game_entity_animation_frame_data_35:
-	.DB 7		;44fb
-	.DB $e2		;44fc
-	.DB $fb		;44fd
-	.DB $95		;44fe
-	.DB $e8		;44ff
-	.DB $fa		;4500
-	.DB $49		;4501
-	.DB $e8		;4502
-	.DB $02		;4503
-	.DB $4a		;4504
-	.DB $f0		;4505
-	.DB $f8		;4506
-	.DB $8a		;4507
-	.DB $f0		;4508
-	.DB $00		;4509
-	.DB $61		;450a
-	.DB $f8		;450b
-	.DB $f8		;450c
-	.DB $62		;450d
-	.DB $f8		;450e
-	.DB $00		;450f
-	.DB $63		;4510
+	.DB 7
+	.DB $e2
+	.DB $fb
+	.DB $95
+	.DB $e8
+	.DB $fa
+	.DB $49
+	.DB $e8
+	.DB $02
+	.DB $4a
+	.DB $f0
+	.DB $f8
+	.DB $8a
+	.DB $f0
+	.DB $00
+	.DB $61
+	.DB $f8
+	.DB $f8
+	.DB $62
+	.DB $f8
+	.DB $00
+	.DB $63
 game_entity_animation_frame_data_36:
-	.DB 7		;4511
-	.DB $e3		;4512
-	.DB $fc		;4513
-	.DB $96		;4514
-	.DB $e8		;4515
-	.DB $f7		;4516
-	.DB $15		;4517
-	.DB $e8		;4518
-	.DB $ff		;4519
-	.DB $4b		;451a
-	.DB $f0		;451b
-	.DB $f7		;451c
-	.DB $8e		;451d
-	.DB $f0		;451e
-	.DB $ff		;451f
-	.DB $8b		;4520
-	.DB $f8		;4521
-	.DB $f7		;4522
-	.DB $8c		;4523
-	.DB $f8		;4524
-	.DB $ff		;4525
-	.DB $8d		;4526
+	.DB 7
+	.DB $e3
+	.DB $fc
+	.DB $96
+	.DB $e8
+	.DB $f7
+	.DB $15
+	.DB $e8
+	.DB $ff
+	.DB $4b
+	.DB $f0
+	.DB $f7
+	.DB $8e
+	.DB $f0
+	.DB $ff
+	.DB $8b
+	.DB $f8
+	.DB $f7
+	.DB $8c
+	.DB $f8
+	.DB $ff
+	.DB $8d
 game_entity_animation_frame_data_37:
-	.DB 7		;4527
-	.DB $e3		;4528
-	.DB $fb		;4529
-	.DB $96		;452a
-	.DB $e8		;452b
-	.DB $f6		;452c
-	.DB $16		;452d
-	.DB $e8		;452e
-	.DB $fe		;452f
-	.DB $4b		;4530
-	.DB $f0		;4531
-	.DB $f6		;4532
-	.DB $8e		;4533
-	.DB $f0		;4534
-	.DB $fe		;4535
-	.DB $8b		;4536
-	.DB $f8		;4537
-	.DB $f7		;4538
-	.DB $8c		;4539
-	.DB $f8		;453a
-	.DB $ff		;453b
-	.DB $8f		;453c
+	.DB 7
+	.DB $e3
+	.DB $fb
+	.DB $96
+	.DB $e8
+	.DB $f6
+	.DB $16
+	.DB $e8
+	.DB $fe
+	.DB $4b
+	.DB $f0
+	.DB $f6
+	.DB $8e
+	.DB $f0
+	.DB $fe
+	.DB $8b
+	.DB $f8
+	.DB $f7
+	.DB $8c
+	.DB $f8
+	.DB $ff
+	.DB $8f
 game_entity_animation_frame_data_38:
-	.DB 8		;453d
-	.DB $e0		;453e
-	.DB $f2		;453f
-	.DB $00		;4540
-	.DB $e1		;4541
-	.DB $fe		;4542
-	.DB $90		;4543
-	.DB $e8		;4544
-	.DB $f3		;4545
-	.DB $21		;4546
-	.DB $e8		;4547
-	.DB $fb		;4548
-	.DB $29		;4549
-	.DB $ea		;454a
-	.DB $02		;454b
-	.DB $2a		;454c
-	.DB $f0		;454d
-	.DB $fa		;454e
-	.DB $4c		;454f
-	.DB $f0		;4550
-	.DB $02		;4551
-	.DB $4d		;4552
-	.DB $f8		;4553
-	.DB $fd		;4554
-	.DB $4e		;4555
+	.DB 8
+	.DB $e0
+	.DB $f2
+	.DB $00
+	.DB $e1
+	.DB $fe
+	.DB $90
+	.DB $e8
+	.DB $f3
+	.DB $21
+	.DB $e8
+	.DB $fb
+	.DB $29
+	.DB $ea
+	.DB $02
+	.DB $2a
+	.DB $f0
+	.DB $fa
+	.DB $4c
+	.DB $f0
+	.DB $02
+	.DB $4d
+	.DB $f8
+	.DB $fd
+	.DB $4e
 game_entity_animation_frame_data_39:
-	.DB 8		;4556
-	.DB $e2		;4557
-	.DB $02		;4558
-	.DB $91		;4559
-	.DB $e8		;455a
-	.DB $fd		;455b
-	.DB $2b		;455c
-	.DB $e8		;455d
-	.DB $05		;455e
-	.DB $2c		;455f
-	.DB $f0		;4560
-	.DB $fd		;4561
-	.DB $4f		;4562
-	.DB $f0		;4563
-	.DB $05		;4564
-	.DB $50		;4565
-	.DB $f3		;4566
-	.DB $0d		;4567
-	.DB $01		;4568
-	.DB $f8		;4569
-	.DB $fd		;456a
-	.DB $51		;456b
-	.DB $f8		;456c
-	.DB $05		;456d
-	.DB $52		;456e
+	.DB 8
+	.DB $e2
+	.DB $02
+	.DB $91
+	.DB $e8
+	.DB $fd
+	.DB $2b
+	.DB $e8
+	.DB $05
+	.DB $2c
+	.DB $f0
+	.DB $fd
+	.DB $4f
+	.DB $f0
+	.DB $05
+	.DB $50
+	.DB $f3
+	.DB $0d
+	.DB $01
+	.DB $f8
+	.DB $fd
+	.DB $51
+	.DB $f8
+	.DB $05
+	.DB $52
 game_entity_animation_frame_data_40:
-	.DB 8		;456f
-	.DB $e1		;4570
-	.DB $01		;4571
-	.DB $92		;4572
-	.DB $e2		;4573
-	.DB $0c		;4574
-	.DB $02		;4575
-	.DB $e8		;4576
-	.DB $fd		;4577
-	.DB $2d		;4578
-	.DB $e8		;4579
-	.DB $05		;457a
-	.DB $2e		;457b
-	.DB $f0		;457c
-	.DB $fc		;457d
-	.DB $53		;457e
-	.DB $f0		;457f
-	.DB $04		;4580
-	.DB $54		;4581
-	.DB $f8		;4582
-	.DB $fd		;4583
-	.DB $51		;4584
-	.DB $f8		;4585
-	.DB $04		;4586
-	.DB $55		;4587
+	.DB 8
+	.DB $e1
+	.DB $01
+	.DB $92
+	.DB $e2
+	.DB $0c
+	.DB $02
+	.DB $e8
+	.DB $fd
+	.DB $2d
+	.DB $e8
+	.DB $05
+	.DB $2e
+	.DB $f0
+	.DB $fc
+	.DB $53
+	.DB $f0
+	.DB $04
+	.DB $54
+	.DB $f8
+	.DB $fd
+	.DB $51
+	.DB $f8
+	.DB $04
+	.DB $55
 game_entity_animation_frame_data_41:
-	.DB 8		;4588
-	.DB $e0		;4589
-	.DB $fc		;458a
-	.DB $03		;458b
-	.DB $e1		;458c
-	.DB $02		;458d
-	.DB $93		;458e
-	.DB $e8		;458f
-	.DB $fc		;4590
-	.DB $2f		;4591
-	.DB $e8		;4592
-	.DB $04		;4593
-	.DB $30		;4594
-	.DB $f0		;4595
-	.DB $fc		;4596
-	.DB $56		;4597
-	.DB $f0		;4598
-	.DB $04		;4599
-	.DB $57		;459a
-	.DB $f8		;459b
-	.DB $fc		;459c
-	.DB $58		;459d
-	.DB $f8		;459e
-	.DB $04		;459f
-	.DB $55		;45a0
+	.DB 8
+	.DB $e0
+	.DB $fc
+	.DB $03
+	.DB $e1
+	.DB $02
+	.DB $93
+	.DB $e8
+	.DB $fc
+	.DB $2f
+	.DB $e8
+	.DB $04
+	.DB $30
+	.DB $f0
+	.DB $fc
+	.DB $56
+	.DB $f0
+	.DB $04
+	.DB $57
+	.DB $f8
+	.DB $fc
+	.DB $58
+	.DB $f8
+	.DB $04
+	.DB $55
 game_entity_animation_frame_data_42:
-	.DB 7		;45a1
-	.DB $e1		;45a2
-	.DB $fa		;45a3
-	.DB $94		;45a4
-	.DB $e8		;45a5
-	.DB $fb		;45a6
-	.DB $31		;45a7
-	.DB $e8		;45a8
-	.DB $03		;45a9
-	.DB $04		;45aa
-	.DB $f0		;45ab
-	.DB $f6		;45ac
-	.DB $59		;45ad
-	.DB $f0		;45ae
-	.DB $fe		;45af
-	.DB $5a		;45b0
-	.DB $f8		;45b1
-	.DB $f6		;45b2
-	.DB $5b		;45b3
-	.DB $f8		;45b4
-	.DB $fe		;45b5
-	.DB $5c		;45b6
+	.DB 7
+	.DB $e1
+	.DB $fa
+	.DB $94
+	.DB $e8
+	.DB $fb
+	.DB $31
+	.DB $e8
+	.DB $03
+	.DB $04
+	.DB $f0
+	.DB $f6
+	.DB $59
+	.DB $f0
+	.DB $fe
+	.DB $5a
+	.DB $f8
+	.DB $f6
+	.DB $5b
+	.DB $f8
+	.DB $fe
+	.DB $5c
 game_entity_animation_frame_data_43:
-	.DB 7		;45b7
-	.DB $e2		;45b8
-	.DB $f9		;45b9
-	.DB $95		;45ba
-	.DB $e8		;45bb
-	.DB $fa		;45bc
-	.DB $32		;45bd
-	.DB $f2		;45be
-	.DB $ee		;45bf
-	.DB $05		;45c0
-	.DB $ef		;45c1
-	.DB $f6		;45c2
-	.DB $5e		;45c3
-	.DB $f0		;45c4
-	.DB $fe		;45c5
-	.DB $5d		;45c6
-	.DB $f7		;45c7
-	.DB $f6		;45c8
-	.DB $5f		;45c9
-	.DB $f8		;45ca
-	.DB $fe		;45cb
-	.DB $63		;45cc
+	.DB 7
+	.DB $e2
+	.DB $f9
+	.DB $95
+	.DB $e8
+	.DB $fa
+	.DB $32
+	.DB $f2
+	.DB $ee
+	.DB $05
+	.DB $ef
+	.DB $f6
+	.DB $5e
+	.DB $f0
+	.DB $fe
+	.DB $5d
+	.DB $f7
+	.DB $f6
+	.DB $5f
+	.DB $f8
+	.DB $fe
+	.DB $63
 game_entity_animation_frame_data_44:
-	.DB 8		;45cd
-	.DB $e0		;45ce
-	.DB $ef		;45cf
-	.DB $06		;45d0
-	.DB $e1		;45d1
-	.DB $fa		;45d2
-	.DB $96		;45d3
-	.DB $e8		;45d4
-	.DB $f7		;45d5
-	.DB $33		;45d6
-	.DB $e8		;45d7
-	.DB $ff		;45d8
-	.DB $34		;45d9
-	.DB $f0		;45da
-	.DB $f7		;45db
-	.DB $60		;45dc
-	.DB $f0		;45dd
-	.DB $ff		;45de
-	.DB $61		;45df
-	.DB $f8		;45e0
-	.DB $f7		;45e1
-	.DB $62		;45e2
-	.DB $f8		;45e3
-	.DB $ff		;45e4
-	.DB $63		;45e5
+	.DB 8
+	.DB $e0
+	.DB $ef
+	.DB $06
+	.DB $e1
+	.DB $fa
+	.DB $96
+	.DB $e8
+	.DB $f7
+	.DB $33
+	.DB $e8
+	.DB $ff
+	.DB $34
+	.DB $f0
+	.DB $f7
+	.DB $60
+	.DB $f0
+	.DB $ff
+	.DB $61
+	.DB $f8
+	.DB $f7
+	.DB $62
+	.DB $f8
+	.DB $ff
+	.DB $63
 game_entity_animation_frame_data_45:
-	.DB 8		;45e6
-	.DB $e1		;45e7
-	.DB $f9		;45e8
-	.DB $97		;45e9
-	.DB $e0		;45ea
-	.DB $ff		;45eb
-	.DB $07		;45ec
-	.DB $e8		;45ed
-	.DB $f7		;45ee
-	.DB $35		;45ef
-	.DB $e8		;45f0
-	.DB $ff		;45f1
-	.DB $36		;45f2
-	.DB $f0		;45f3
-	.DB $f7		;45f4
-	.DB $64		;45f5
-	.DB $f0		;45f6
-	.DB $ff		;45f7
-	.DB $65		;45f8
-	.DB $f8		;45f9
-	.DB $f7		;45fa
-	.DB $62		;45fb
-	.DB $f8		;45fc
-	.DB $ff		;45fd
-	.DB $63		;45fe
+	.DB 8
+	.DB $e1
+	.DB $f9
+	.DB $97
+	.DB $e0
+	.DB $ff
+	.DB $07
+	.DB $e8
+	.DB $f7
+	.DB $35
+	.DB $e8
+	.DB $ff
+	.DB $36
+	.DB $f0
+	.DB $f7
+	.DB $64
+	.DB $f0
+	.DB $ff
+	.DB $65
+	.DB $f8
+	.DB $f7
+	.DB $62
+	.DB $f8
+	.DB $ff
+	.DB $63
 game_entity_animation_frame_data_46:
-	.DB 7		;45ff
-	.DB $e3		;4600
-	.DB $fd		;4601
-	.DB $92		;4602
-	.DB $e8		;4603
-	.DB $f9		;4604
-	.DB $37		;4605
-	.DB $e8		;4606
-	.DB $01		;4607
-	.DB $08		;4608
-	.DB $f0		;4609
-	.DB $f9		;460a
-	.DB $66		;460b
-	.DB $f0		;460c
-	.DB $01		;460d
-	.DB $67		;460e
-	.DB $f8		;460f
-	.DB $f9		;4610
-	.DB $68		;4611
-	.DB $f8		;4612
-	.DB $01		;4613
-	.DB $69		;4614
+	.DB 7
+	.DB $e3
+	.DB $fd
+	.DB $92
+	.DB $e8
+	.DB $f9
+	.DB $37
+	.DB $e8
+	.DB $01
+	.DB $08
+	.DB $f0
+	.DB $f9
+	.DB $66
+	.DB $f0
+	.DB $01
+	.DB $67
+	.DB $f8
+	.DB $f9
+	.DB $68
+	.DB $f8
+	.DB $01
+	.DB $69
 game_entity_animation_frame_data_47:
-	.DB 7		;4615
-	.DB $e3		;4616
-	.DB $fc		;4617
-	.DB $92		;4618
-	.DB $e8		;4619
-	.DB $f8		;461a
-	.DB $37		;461b
-	.DB $e8		;461c
-	.DB $00		;461d
-	.DB $09		;461e
-	.DB $f0		;461f
-	.DB $f8		;4620
-	.DB $66		;4621
-	.DB $f0		;4622
-	.DB $00		;4623
-	.DB $67		;4624
-	.DB $f8		;4625
-	.DB $f9		;4626
-	.DB $6a		;4627
-	.DB $f8		;4628
-	.DB $01		;4629
-	.DB $69		;462a
+	.DB 7
+	.DB $e3
+	.DB $fc
+	.DB $92
+	.DB $e8
+	.DB $f8
+	.DB $37
+	.DB $e8
+	.DB $00
+	.DB $09
+	.DB $f0
+	.DB $f8
+	.DB $66
+	.DB $f0
+	.DB $00
+	.DB $67
+	.DB $f8
+	.DB $f9
+	.DB $6a
+	.DB $f8
+	.DB $01
+	.DB $69
 game_entity_animation_frame_data_48:
-	.DB 8		;462b
-	.DB $e2		;462c
-	.DB $fc		;462d
-	.DB $91		;462e
-	.DB $e9		;462f
-	.DB $f4		;4630
-	.DB $38		;4631
-	.DB $e9		;4632
-	.DB $fc		;4633
-	.DB $39		;4634
-	.DB $e8		;4635
-	.DB $04		;4636
-	.DB $3a		;4637
-	.DB $f1		;4638
-	.DB $f4		;4639
-	.DB $0a		;463a
-	.DB $f1		;463b
-	.DB $fc		;463c
-	.DB $6b		;463d
-	.DB $f9		;463e
-	.DB $f4		;463f
-	.DB $0b		;4640
-	.DB $f9		;4641
-	.DB $fc		;4642
-	.DB $6c		;4643
+	.DB 8
+	.DB $e2
+	.DB $fc
+	.DB $91
+	.DB $e9
+	.DB $f4
+	.DB $38
+	.DB $e9
+	.DB $fc
+	.DB $39
+	.DB $e8
+	.DB $04
+	.DB $3a
+	.DB $f1
+	.DB $f4
+	.DB $0a
+	.DB $f1
+	.DB $fc
+	.DB $6b
+	.DB $f9
+	.DB $f4
+	.DB $0b
+	.DB $f9
+	.DB $fc
+	.DB $6c
 game_entity_animation_frame_data_49:
-	.DB 9		;4644
-	.DB $e2		;4645
-	.DB $fc		;4646
-	.DB $98		;4647
-	.DB $e1		;4648
-	.DB $00		;4649
-	.DB $22		;464a
-	.DB $e9		;464b
-	.DB $f0		;464c
-	.DB $0c		;464d
-	.DB $e9		;464e
-	.DB $f8		;464f
-	.DB $3b		;4650
-	.DB $e9		;4651
-	.DB $00		;4652
-	.DB $3c		;4653
-	.DB $f1		;4654
-	.DB $f0		;4655
-	.DB $0d		;4656
-	.DB $f1		;4657
-	.DB $f9		;4658
-	.DB $6d		;4659
-	.DB $f4		;465a
-	.DB $01		;465b
-	.DB $6e		;465c
-	.DB $f9		;465d
-	.DB $f8		;465e
-	.DB $6f		;465f
+	.DB 9
+	.DB $e2
+	.DB $fc
+	.DB $98
+	.DB $e1
+	.DB $00
+	.DB $22
+	.DB $e9
+	.DB $f0
+	.DB $0c
+	.DB $e9
+	.DB $f8
+	.DB $3b
+	.DB $e9
+	.DB $00
+	.DB $3c
+	.DB $f1
+	.DB $f0
+	.DB $0d
+	.DB $f1
+	.DB $f9
+	.DB $6d
+	.DB $f4
+	.DB $01
+	.DB $6e
+	.DB $f9
+	.DB $f8
+	.DB $6f
 game_entity_animation_frame_data_50:
-	.DB 7		;4660
-	.DB $e0		;4661
-	.DB $f1		;4662
-	.DB $01		;4663
-	.DB $e0		;4664
-	.DB $f6		;4665
-	.DB $23		;4666
-	.DB $e0		;4667
-	.DB $fe		;4668
-	.DB $99		;4669
-	.DB $e8		;466a
-	.DB $ff		;466b
-	.DB $3d		;466c
-	.DB $f0		;466d
-	.DB $fd		;466e
-	.DB $70		;466f
-	.DB $f8		;4670
-	.DB $f9		;4671
-	.DB $71		;4672
-	.DB $f8		;4673
-	.DB $01		;4674
-	.DB $72		;4675
+	.DB 7
+	.DB $e0
+	.DB $f1
+	.DB $01
+	.DB $e0
+	.DB $f6
+	.DB $23
+	.DB $e0
+	.DB $fe
+	.DB $99
+	.DB $e8
+	.DB $ff
+	.DB $3d
+	.DB $f0
+	.DB $fd
+	.DB $70
+	.DB $f8
+	.DB $f9
+	.DB $71
+	.DB $f8
+	.DB $01
+	.DB $72
 game_entity_animation_frame_data_51:
-	.DB 8		;4676
-	.DB $d8		;4677
-	.DB $05		;4678
-	.DB $0e		;4679
-	.DB $e0		;467a
-	.DB $03		;467b
-	.DB $24		;467c
-	.DB $e8		;467d
-	.DB $fb		;467e
-	.DB $3f		;467f
-	.DB $e8		;4680
-	.DB $03		;4681
-	.DB $3e		;4682
-	.DB $e4		;4683
-	.DB $00		;4684
-	.DB $92		;4685
-	.DB $f0		;4686
-	.DB $fd		;4687
-	.DB $73		;4688
-	.DB $f5		;4689
-	.DB $f5		;468a
-	.DB $74		;468b
-	.DB $f8		;468c
-	.DB $f5		;468d
-	.DB $75		;468e
+	.DB 8
+	.DB $d8
+	.DB $05
+	.DB $0e
+	.DB $e0
+	.DB $03
+	.DB $24
+	.DB $e8
+	.DB $fb
+	.DB $3f
+	.DB $e8
+	.DB $03
+	.DB $3e
+	.DB $e4
+	.DB $00
+	.DB $92
+	.DB $f0
+	.DB $fd
+	.DB $73
+	.DB $f5
+	.DB $f5
+	.DB $74
+	.DB $f8
+	.DB $f5
+	.DB $75
 game_entity_animation_frame_data_52:
-	.DB 6		;468f
-	.DB $e2		;4690
-	.DB $03		;4691
-	.DB $25		;4692
-	.DB $e8		;4693
-	.DB $fb		;4694
-	.DB $40		;4695
-	.DB $ea		;4696
-	.DB $03		;4697
-	.DB $0f		;4698
-	.DB $e5		;4699
-	.DB $00		;469a
-	.DB $92		;469b
-	.DB $f0		;469c
-	.DB $fb		;469d
-	.DB $76		;469e
-	.DB $f8		;469f
-	.DB $fb		;46a0
-	.DB $77		;46a1
+	.DB 6
+	.DB $e2
+	.DB $03
+	.DB $25
+	.DB $e8
+	.DB $fb
+	.DB $40
+	.DB $ea
+	.DB $03
+	.DB $0f
+	.DB $e5
+	.DB $00
+	.DB $92
+	.DB $f0
+	.DB $fb
+	.DB $76
+	.DB $f8
+	.DB $fb
+	.DB $77
 game_entity_animation_frame_data_53:
-	.DB 6		;46a2
-	.DB $ea		;46a3
-	.DB $f8		;46a4
-	.DB $10		;46a5
-	.DB $ea		;46a6
-	.DB $00		;46a7
-	.DB $41		;46a8
-	.DB $e7		;46a9
-	.DB $fe		;46aa
-	.DB $97		;46ab
-	.DB $f2		;46ac
-	.DB $f8		;46ad
-	.DB $11		;46ae
-	.DB $f2		;46af
-	.DB $00		;46b0
-	.DB $78		;46b1
-	.DB $fa		;46b2
-	.DB $fc		;46b3
-	.DB $79		;46b4
+	.DB 6
+	.DB $ea
+	.DB $f8
+	.DB $10
+	.DB $ea
+	.DB $00
+	.DB $41
+	.DB $e7
+	.DB $fe
+	.DB $97
+	.DB $f2
+	.DB $f8
+	.DB $11
+	.DB $f2
+	.DB $00
+	.DB $78
+	.DB $fa
+	.DB $fc
+	.DB $79
 game_entity_animation_frame_data_54:
-	.DB 9		;46b5
-	.DB $d8		;46b6
-	.DB $00		;46b7
-	.DB $0e		;46b8
-	.DB $e1		;46b9
-	.DB $fd		;46ba
-	.DB $93		;46bb
-	.DB $e0		;46bc
-	.DB $00		;46bd
-	.DB $26		;46be
-	.DB $e8		;46bf
-	.DB $f8		;46c0
-	.DB $2f		;46c1
-	.DB $e8		;46c2
-	.DB $00		;46c3
-	.DB $30		;46c4
-	.DB $f0		;46c5
-	.DB $f8		;46c6
-	.DB $56		;46c7
-	.DB $f0		;46c8
-	.DB $00		;46c9
-	.DB $57		;46ca
-	.DB $f8		;46cb
-	.DB $f8		;46cc
-	.DB $58		;46cd
-	.DB $f8		;46ce
-	.DB $00		;46cf
-	.DB $55		;46d0
+	.DB 9
+	.DB $d8
+	.DB $00
+	.DB $0e
+	.DB $e1
+	.DB $fd
+	.DB $93
+	.DB $e0
+	.DB $00
+	.DB $26
+	.DB $e8
+	.DB $f8
+	.DB $2f
+	.DB $e8
+	.DB $00
+	.DB $30
+	.DB $f0
+	.DB $f8
+	.DB $56
+	.DB $f0
+	.DB $00
+	.DB $57
+	.DB $f8
+	.DB $f8
+	.DB $58
+	.DB $f8
+	.DB $00
+	.DB $55
 game_entity_animation_frame_data_55:
-	.DB 9		;46d1
-	.DB $d8		;46d2
-	.DB $f6		;46d3
-	.DB $0e		;46d4
-	.DB $e1		;46d5
-	.DB $fc		;46d6
-	.DB $93		;46d7
-	.DB $e0		;46d8
-	.DB $f8		;46d9
-	.DB $27		;46da
-	.DB $e8		;46db
-	.DB $f8		;46dc
-	.DB $35		;46dd
-	.DB $e8		;46de
-	.DB $00		;46df
-	.DB $36		;46e0
-	.DB $f0		;46e1
-	.DB $f8		;46e2
-	.DB $64		;46e3
-	.DB $f0		;46e4
-	.DB $00		;46e5
-	.DB $65		;46e6
-	.DB $f8		;46e7
-	.DB $f8		;46e8
-	.DB $62		;46e9
-	.DB $f8		;46ea
-	.DB $00		;46eb
-	.DB $63		;46ec
+	.DB 9
+	.DB $d8
+	.DB $f6
+	.DB $0e
+	.DB $e1
+	.DB $fc
+	.DB $93
+	.DB $e0
+	.DB $f8
+	.DB $27
+	.DB $e8
+	.DB $f8
+	.DB $35
+	.DB $e8
+	.DB $00
+	.DB $36
+	.DB $f0
+	.DB $f8
+	.DB $64
+	.DB $f0
+	.DB $00
+	.DB $65
+	.DB $f8
+	.DB $f8
+	.DB $62
+	.DB $f8
+	.DB $00
+	.DB $63
 game_entity_animation_frame_data_56:
-	.DB 8		;46ed
-	.DB $e2		;46ee
-	.DB $fb		;46ef
-	.DB $95		;46f0
-	.DB $e8		;46f1
-	.DB $f0		;46f2
-	.DB $12		;46f3
-	.DB $e8		;46f4
-	.DB $f8		;46f5
-	.DB $42		;46f6
-	.DB $e8		;46f7
-	.DB $00		;46f8
-	.DB $43		;46f9
-	.DB $f0		;46fa
-	.DB $f8		;46fb
-	.DB $60		;46fc
-	.DB $f0		;46fd
-	.DB $00		;46fe
-	.DB $61		;46ff
-	.DB $f8		;4700
-	.DB $f8		;4701
-	.DB $62		;4702
-	.DB $f8		;4703
-	.DB $00		;4704
-	.DB $63		;4705
+	.DB 8
+	.DB $e2
+	.DB $fb
+	.DB $95
+	.DB $e8
+	.DB $f0
+	.DB $12
+	.DB $e8
+	.DB $f8
+	.DB $42
+	.DB $e8
+	.DB $00
+	.DB $43
+	.DB $f0
+	.DB $f8
+	.DB $60
+	.DB $f0
+	.DB $00
+	.DB $61
+	.DB $f8
+	.DB $f8
+	.DB $62
+	.DB $f8
+	.DB $00
+	.DB $63
 game_entity_animation_frame_data_57:
-	.DB 9		;4706
-	.DB $da		;4707
-	.DB $f0		;4708
-	.DB $13		;4709
-	.DB $e0		;470a
-	.DB $f8		;470b
-	.DB $28		;470c
-	.DB $e1		;470d
-	.DB $fc		;470e
-	.DB $96		;470f
-	.DB $e8		;4710
-	.DB $f8		;4711
-	.DB $44		;4712
-	.DB $e8		;4713
-	.DB $00		;4714
-	.DB $34		;4715
-	.DB $f0		;4716
-	.DB $f8		;4717
-	.DB $60		;4718
-	.DB $f0		;4719
-	.DB $00		;471a
-	.DB $61		;471b
-	.DB $f8		;471c
-	.DB $f8		;471d
-	.DB $62		;471e
-	.DB $f8		;471f
-	.DB $00		;4720
-	.DB $63		;4721
+	.DB 9
+	.DB $da
+	.DB $f0
+	.DB $13
+	.DB $e0
+	.DB $f8
+	.DB $28
+	.DB $e1
+	.DB $fc
+	.DB $96
+	.DB $e8
+	.DB $f8
+	.DB $44
+	.DB $e8
+	.DB $00
+	.DB $34
+	.DB $f0
+	.DB $f8
+	.DB $60
+	.DB $f0
+	.DB $00
+	.DB $61
+	.DB $f8
+	.DB $f8
+	.DB $62
+	.DB $f8
+	.DB $00
+	.DB $63
 game_entity_animation_frame_data_58:
-	.DB 7		;4722
-	.DB $e1		;4723
-	.DB $f8		;4724
-	.DB $9a		;4725
-	.DB $e9		;4726
-	.DB $f8		;4727
-	.DB $af		;4728
-	.DB $e9		;4729
-	.DB $fc		;472a
-	.DB $a5		;472b
-	.DB $f1		;472c
-	.DB $f8		;472d
-	.DB $d3		;472e
-	.DB $f1		;472f
-	.DB $00		;4730
-	.DB $d4		;4731
-	.DB $f9		;4732
-	.DB $f8		;4733
-	.DB $b0		;4734
-	.DB $f9		;4735
-	.DB $00		;4736
-	.DB $b1		;4737
+	.DB 7
+	.DB $e1
+	.DB $f8
+	.DB $9a
+	.DB $e9
+	.DB $f8
+	.DB $af
+	.DB $e9
+	.DB $fc
+	.DB $a5
+	.DB $f1
+	.DB $f8
+	.DB $d3
+	.DB $f1
+	.DB $00
+	.DB $d4
+	.DB $f9
+	.DB $f8
+	.DB $b0
+	.DB $f9
+	.DB $00
+	.DB $b1
 game_entity_animation_frame_data_59:
-	.DB 6		;4738
-	.DB $e8		;4739
-	.DB $fc		;473a
-	.DB $a5		;473b
-	.DB $ea		;473c
-	.DB $f1		;473d
-	.DB $9b		;473e
-	.DB $f0		;473f
-	.DB $f5		;4740
-	.DB $b2		;4741
-	.DB $f0		;4742
-	.DB $fd		;4743
-	.DB $d5		;4744
-	.DB $f8		;4745
-	.DB $f9		;4746
-	.DB $b3		;4747
-	.DB $f8		;4748
-	.DB $01		;4749
-	.DB $b4		;474a
+	.DB 6
+	.DB $e8
+	.DB $fc
+	.DB $a5
+	.DB $ea
+	.DB $f1
+	.DB $9b
+	.DB $f0
+	.DB $f5
+	.DB $b2
+	.DB $f0
+	.DB $fd
+	.DB $d5
+	.DB $f8
+	.DB $f9
+	.DB $b3
+	.DB $f8
+	.DB $01
+	.DB $b4
 game_entity_animation_frame_data_60:
-	.DB 6		;474b
-	.DB $e8		;474c
-	.DB $fc		;474d
-	.DB $a5		;474e
-	.DB $f3		;474f
-	.DB $f2		;4750
-	.DB $9b		;4751
-	.DB $f0		;4752
-	.DB $f8		;4753
-	.DB $b5		;4754
-	.DB $f0		;4755
-	.DB $00		;4756
-	.DB $d6		;4757
-	.DB $f8		;4758
-	.DB $f8		;4759
-	.DB $b6		;475a
-	.DB $f8		;475b
-	.DB $00		;475c
-	.DB $b7		;475d
+	.DB 6
+	.DB $e8
+	.DB $fc
+	.DB $a5
+	.DB $f3
+	.DB $f2
+	.DB $9b
+	.DB $f0
+	.DB $f8
+	.DB $b5
+	.DB $f0
+	.DB $00
+	.DB $d6
+	.DB $f8
+	.DB $f8
+	.DB $b6
+	.DB $f8
+	.DB $00
+	.DB $b7
 game_entity_animation_frame_data_61:
-	.DB 5		;475e
-	.DB $e8		;475f
-	.DB $fd		;4760
-	.DB $a6		;4761
-	.DB $e8		;4762
-	.DB $03		;4763
-	.DB $9c		;4764
-	.DB $f0		;4765
-	.DB $f8		;4766
-	.DB $d7		;4767
-	.DB $f0		;4768
-	.DB $00		;4769
-	.DB $d8		;476a
-	.DB $f8		;476b
-	.DB $fc		;476c
-	.DB $b8		;476d
+	.DB 5
+	.DB $e8
+	.DB $fd
+	.DB $a6
+	.DB $e8
+	.DB $03
+	.DB $9c
+	.DB $f0
+	.DB $f8
+	.DB $d7
+	.DB $f0
+	.DB $00
+	.DB $d8
+	.DB $f8
+	.DB $fc
+	.DB $b8
 game_entity_animation_frame_data_62:
-	.DB 6		;476e
-	.DB $e8		;476f
-	.DB $f6		;4770
-	.DB $9d		;4771
-	.DB $e8		;4772
-	.DB $fe		;4773
-	.DB $a7		;4774
-	.DB $f0		;4775
-	.DB $f8		;4776
-	.DB $d9		;4777
-	.DB $f0		;4778
-	.DB $00		;4779
-	.DB $da		;477a
-	.DB $f8		;477b
-	.DB $f8		;477c
-	.DB $b9		;477d
-	.DB $f8		;477e
-	.DB $00		;477f
-	.DB $ba		;4780
+	.DB 6
+	.DB $e8
+	.DB $f6
+	.DB $9d
+	.DB $e8
+	.DB $fe
+	.DB $a7
+	.DB $f0
+	.DB $f8
+	.DB $d9
+	.DB $f0
+	.DB $00
+	.DB $da
+	.DB $f8
+	.DB $f8
+	.DB $b9
+	.DB $f8
+	.DB $00
+	.DB $ba
 game_entity_animation_frame_data_63:
-	.DB 6		;4781
-	.DB $e8		;4782
-	.DB $fc		;4783
-	.DB $a7		;4784
-	.DB $ea		;4785
-	.DB $01		;4786
-	.DB $9a		;4787
-	.DB $f0		;4788
-	.DB $f7		;4789
-	.DB $db		;478a
-	.DB $f0		;478b
-	.DB $ff		;478c
-	.DB $dc		;478d
-	.DB $f8		;478e
-	.DB $f7		;478f
-	.DB $bb		;4790
-	.DB $f8		;4791
-	.DB $ff		;4792
-	.DB $bc		;4793
+	.DB 6
+	.DB $e8
+	.DB $fc
+	.DB $a7
+	.DB $ea
+	.DB $01
+	.DB $9a
+	.DB $f0
+	.DB $f7
+	.DB $db
+	.DB $f0
+	.DB $ff
+	.DB $dc
+	.DB $f8
+	.DB $f7
+	.DB $bb
+	.DB $f8
+	.DB $ff
+	.DB $bc
 game_entity_animation_frame_data_64:
-	.DB 4		;4794
-	.DB $e9		;4795
-	.DB $fc		;4796
-	.DB $a7		;4797
-	.DB $f0		;4798
-	.DB $fb		;4799
-	.DB $dd		;479a
-	.DB $f8		;479b
-	.DB $f8		;479c
-	.DB $bd		;479d
-	.DB $f5		;479e
-	.DB $00		;479f
-	.DB $9e		;47a0
+	.DB 4
+	.DB $e9
+	.DB $fc
+	.DB $a7
+	.DB $f0
+	.DB $fb
+	.DB $dd
+	.DB $f8
+	.DB $f8
+	.DB $bd
+	.DB $f5
+	.DB $00
+	.DB $9e
 game_entity_animation_frame_data_65:
-	.DB 5		;47a1
-	.DB $e8		;47a2
-	.DB $f4		;47a3
-	.DB $9f		;47a4
-	.DB $e8		;47a5
-	.DB $fb		;47a6
-	.DB $a8		;47a7
-	.DB $f0		;47a8
-	.DB $f8		;47a9
-	.DB $de		;47aa
-	.DB $f0		;47ab
-	.DB $00		;47ac
-	.DB $df		;47ad
-	.DB $f8		;47ae
-	.DB $fc		;47af
-	.DB $be		;47b0
+	.DB 5
+	.DB $e8
+	.DB $f4
+	.DB $9f
+	.DB $e8
+	.DB $fb
+	.DB $a8
+	.DB $f0
+	.DB $f8
+	.DB $de
+	.DB $f0
+	.DB $00
+	.DB $df
+	.DB $f8
+	.DB $fc
+	.DB $be
 game_entity_animation_frame_data_66:
-	.DB 4		;47b1
-	.DB $e8		;47b2
-	.DB $fb		;47b3
-	.DB $a9		;47b4
-	.DB $f0		;47b5
-	.DB $f8		;47b6
-	.DB $e0		;47b7
-	.DB $f0		;47b8
-	.DB $00		;47b9
-	.DB $e1		;47ba
-	.DB $f8		;47bb
-	.DB $fc		;47bc
-	.DB $bf		;47bd
+	.DB 4
+	.DB $e8
+	.DB $fb
+	.DB $a9
+	.DB $f0
+	.DB $f8
+	.DB $e0
+	.DB $f0
+	.DB $00
+	.DB $e1
+	.DB $f8
+	.DB $fc
+	.DB $bf
 game_entity_animation_frame_data_67:
-	.DB 5		;47be
-	.DB $e8		;47bf
-	.DB $fa		;47c0
-	.DB $a9		;47c1
-	.DB $f0		;47c2
-	.DB $f8		;47c3
-	.DB $e2		;47c4
-	.DB $f0		;47c5
-	.DB $00		;47c6
-	.DB $e3		;47c7
-	.DB $f8		;47c8
-	.DB $f8		;47c9
-	.DB $c0		;47ca
-	.DB $f8		;47cb
-	.DB $00		;47cc
-	.DB $c1		;47cd
+	.DB 5
+	.DB $e8
+	.DB $fa
+	.DB $a9
+	.DB $f0
+	.DB $f8
+	.DB $e2
+	.DB $f0
+	.DB $00
+	.DB $e3
+	.DB $f8
+	.DB $f8
+	.DB $c0
+	.DB $f8
+	.DB $00
+	.DB $c1
 game_entity_animation_frame_data_68:
-	.DB 5		;47ce
-	.DB $e8		;47cf
-	.DB $fc		;47d0
-	.DB $aa		;47d1
-	.DB $f0		;47d2
-	.DB $f8		;47d3
-	.DB $a0		;47d4
-	.DB $f0		;47d5
-	.DB $00		;47d6
-	.DB $e4		;47d7
-	.DB $f8		;47d8
-	.DB $f8		;47d9
-	.DB $c2		;47da
-	.DB $f8		;47db
-	.DB $00		;47dc
-	.DB $c3		;47dd
+	.DB 5
+	.DB $e8
+	.DB $fc
+	.DB $aa
+	.DB $f0
+	.DB $f8
+	.DB $a0
+	.DB $f0
+	.DB $00
+	.DB $e4
+	.DB $f8
+	.DB $f8
+	.DB $c2
+	.DB $f8
+	.DB $00
+	.DB $c3
 game_entity_animation_frame_data_69:
-	.DB 6		;47de
-	.DB $e8		;47df
-	.DB $f8		;47e0
-	.DB $c4		;47e1
-	.DB $e8		;47e2
-	.DB $00		;47e3
-	.DB $ab		;47e4
-	.DB $f0		;47e5
-	.DB $f8		;47e6
-	.DB $e5		;47e7
-	.DB $f0		;47e8
-	.DB $00		;47e9
-	.DB $e6		;47ea
-	.DB $f0		;47eb
-	.DB $07		;47ec
-	.DB $9b		;47ed
-	.DB $f8		;47ee
-	.DB $fc		;47ef
-	.DB $c5		;47f0
+	.DB 6
+	.DB $e8
+	.DB $f8
+	.DB $c4
+	.DB $e8
+	.DB $00
+	.DB $ab
+	.DB $f0
+	.DB $f8
+	.DB $e5
+	.DB $f0
+	.DB $00
+	.DB $e6
+	.DB $f0
+	.DB $07
+	.DB $9b
+	.DB $f8
+	.DB $fc
+	.DB $c5
 game_entity_animation_frame_data_70:
-	.DB 5		;47f1
-	.DB $e0		;47f2
-	.DB $00		;47f3
-	.DB $e7		;47f4
-	.DB $e0		;47f5
-	.DB $07		;47f6
-	.DB $9b		;47f7
-	.DB $e8		;47f8
-	.DB $fd		;47f9
-	.DB $ac		;47fa
-	.DB $f0		;47fb
-	.DB $fd		;47fc
-	.DB $e8		;47fd
-	.DB $f8		;47fe
-	.DB $fd		;47ff
-	.DB $c6		;4800
+	.DB 5
+	.DB $e0
+	.DB $00
+	.DB $e7
+	.DB $e0
+	.DB $07
+	.DB $9b
+	.DB $e8
+	.DB $fd
+	.DB $ac
+	.DB $f0
+	.DB $fd
+	.DB $e8
+	.DB $f8
+	.DB $fd
+	.DB $c6
 game_entity_animation_frame_data_71:
-	.DB 6		;4801
-	.DB $e0		;4802
-	.DB $fa		;4803
-	.DB $a1		;4804
-	.DB $e8		;4805
-	.DB $fa		;4806
-	.DB $c7		;4807
-	.DB $e8		;4808
-	.DB $02		;4809
-	.DB $ad		;480a
-	.DB $f0		;480b
-	.DB $fa		;480c
-	.DB $e9		;480d
-	.DB $f0		;480e
-	.DB $02		;480f
-	.DB $ea		;4810
-	.DB $f8		;4811
-	.DB $fc		;4812
-	.DB $c8		;4813
+	.DB 6
+	.DB $e0
+	.DB $fa
+	.DB $a1
+	.DB $e8
+	.DB $fa
+	.DB $c7
+	.DB $e8
+	.DB $02
+	.DB $ad
+	.DB $f0
+	.DB $fa
+	.DB $e9
+	.DB $f0
+	.DB $02
+	.DB $ea
+	.DB $f8
+	.DB $fc
+	.DB $c8
 game_entity_animation_frame_data_72:
-	.DB 5		;4814
-	.DB $e8		;4815
-	.DB $ff		;4816
-	.DB $ae		;4817
-	.DB $f0		;4818
-	.DB $fa		;4819
-	.DB $eb		;481a
-	.DB $f0		;481b
-	.DB $02		;481c
-	.DB $c9		;481d
-	.DB $f8		;481e
-	.DB $fa		;481f
-	.DB $ca		;4820
-	.DB $f8		;4821
-	.DB $02		;4822
-	.DB $a2		;4823
+	.DB 5
+	.DB $e8
+	.DB $ff
+	.DB $ae
+	.DB $f0
+	.DB $fa
+	.DB $eb
+	.DB $f0
+	.DB $02
+	.DB $c9
+	.DB $f8
+	.DB $fa
+	.DB $ca
+	.DB $f8
+	.DB $02
+	.DB $a2
 game_entity_animation_frame_data_73:
-	.DB 5		;4824
-	.DB $e8		;4825
-	.DB $fd		;4826
-	.DB $a7		;4827
-	.DB $e7		;4828
-	.DB $05		;4829
-	.DB $9a		;482a
-	.DB $f0		;482b
-	.DB $fc		;482c
-	.DB $ec		;482d
-	.DB $ef		;482e
-	.DB $04		;482f
-	.DB $cb		;4830
-	.DB $f8		;4831
-	.DB $fc		;4832
-	.DB $cc		;4833
+	.DB 5
+	.DB $e8
+	.DB $fd
+	.DB $a7
+	.DB $e7
+	.DB $05
+	.DB $9a
+	.DB $f0
+	.DB $fc
+	.DB $ec
+	.DB $ef
+	.DB $04
+	.DB $cb
+	.DB $f8
+	.DB $fc
+	.DB $cc
 game_entity_animation_frame_data_74:
-	.DB 6		;4834
-	.DB $e0		;4835
-	.DB $f2		;4836
-	.DB $a3		;4837
-	.DB $e8		;4838
-	.DB $f2		;4839
-	.DB $a4		;483a
-	.DB $e8		;483b
-	.DB $fc		;483c
-	.DB $a6		;483d
-	.DB $f0		;483e
-	.DB $f7		;483f
-	.DB $ed		;4840
-	.DB $f0		;4841
-	.DB $ff		;4842
-	.DB $ee		;4843
-	.DB $f8		;4844
-	.DB $fc		;4845
-	.DB $be		;4846
+	.DB 6
+	.DB $e0
+	.DB $f2
+	.DB $a3
+	.DB $e8
+	.DB $f2
+	.DB $a4
+	.DB $e8
+	.DB $fc
+	.DB $a6
+	.DB $f0
+	.DB $f7
+	.DB $ed
+	.DB $f0
+	.DB $ff
+	.DB $ee
+	.DB $f8
+	.DB $fc
+	.DB $be
 game_entity_animation_frame_data_75:
-	.DB 7		;4847
-	.DB $e1		;4848
-	.DB $f8		;4849
-	.DB $9a		;484a
-	.DB $e9		;484b
-	.DB $f8		;484c
-	.DB $af		;484d
-	.DB $e8		;484e
-	.DB $fc		;484f
-	.DB $a5		;4850
-	.DB $f0		;4851
-	.DB $f8		;4852
-	.DB $ef		;4853
-	.DB $f0		;4854
-	.DB $00		;4855
-	.DB $f0		;4856
-	.DB $f8		;4857
-	.DB $f8		;4858
-	.DB $cd		;4859
-	.DB $f8		;485a
-	.DB $00		;485b
-	.DB $ce		;485c
+	.DB 7
+	.DB $e1
+	.DB $f8
+	.DB $9a
+	.DB $e9
+	.DB $f8
+	.DB $af
+	.DB $e8
+	.DB $fc
+	.DB $a5
+	.DB $f0
+	.DB $f8
+	.DB $ef
+	.DB $f0
+	.DB $00
+	.DB $f0
+	.DB $f8
+	.DB $f8
+	.DB $cd
+	.DB $f8
+	.DB $00
+	.DB $ce
 game_entity_animation_frame_data_76:
-	.DB 6		;485d
-	.DB $e1		;485e
-	.DB $f8		;485f
-	.DB $9a		;4860
-	.DB $e9		;4861
-	.DB $f8		;4862
-	.DB $af		;4863
-	.DB $e8		;4864
-	.DB $fc		;4865
-	.DB $a5		;4866
-	.DB $f0		;4867
-	.DB $f8		;4868
-	.DB $ef		;4869
-	.DB $f0		;486a
-	.DB $00		;486b
-	.DB $f1		;486c
-	.DB $f8		;486d
-	.DB $fd		;486e
-	.DB $cf		;486f
+	.DB 6
+	.DB $e1
+	.DB $f8
+	.DB $9a
+	.DB $e9
+	.DB $f8
+	.DB $af
+	.DB $e8
+	.DB $fc
+	.DB $a5
+	.DB $f0
+	.DB $f8
+	.DB $ef
+	.DB $f0
+	.DB $00
+	.DB $f1
+	.DB $f8
+	.DB $fd
+	.DB $cf
 game_entity_animation_frame_data_77:
-	.DB 6		;4870
-	.DB $e9		;4871
-	.DB $f6		;4872
-	.DB $9d		;4873
-	.DB $e9		;4874
-	.DB $fe		;4875
-	.DB $a7		;4876
-	.DB $f1		;4877
-	.DB $f8		;4878
-	.DB $f2		;4879
-	.DB $f1		;487a
-	.DB $00		;487b
-	.DB $f3		;487c
-	.DB $f9		;487d
-	.DB $f8		;487e
-	.DB $d0		;487f
-	.DB $f9		;4880
-	.DB $00		;4881
-	.DB $d1		;4882
+	.DB 6
+	.DB $e9
+	.DB $f6
+	.DB $9d
+	.DB $e9
+	.DB $fe
+	.DB $a7
+	.DB $f1
+	.DB $f8
+	.DB $f2
+	.DB $f1
+	.DB $00
+	.DB $f3
+	.DB $f9
+	.DB $f8
+	.DB $d0
+	.DB $f9
+	.DB $00
+	.DB $d1
 game_entity_animation_frame_data_78:
-	.DB 5		;4883
-	.DB $e9		;4884
-	.DB $f6		;4885
-	.DB $9d		;4886
-	.DB $e9		;4887
-	.DB $fe		;4888
-	.DB $a7		;4889
-	.DB $f1		;488a
-	.DB $f8		;488b
-	.DB $d9		;488c
-	.DB $f1		;488d
-	.DB $00		;488e
-	.DB $f4		;488f
-	.DB $f9		;4890
-	.DB $fb		;4891
-	.DB $d2		;4892
+	.DB 5
+	.DB $e9
+	.DB $f6
+	.DB $9d
+	.DB $e9
+	.DB $fe
+	.DB $a7
+	.DB $f1
+	.DB $f8
+	.DB $d9
+	.DB $f1
+	.DB $00
+	.DB $f4
+	.DB $f9
+	.DB $fb
+	.DB $d2
 game_entity_animation_frame_data_79:
-	.DB 1		;4893
-	.DB $fc		;4894
-	.DB $fc		;4895
-	.DB $ff		;4896
+	.DB 1
+	.DB $fc
+	.DB $fc
+	.DB $ff
 game_entity_animation_frame_data_80:
-	.DB 1		;4897
-	.DB $fc		;4898
-	.DB $fc		;4899
-	.DB $fe		;489a
+	.DB 1
+	.DB $fc
+	.DB $fc
+	.DB $fe
