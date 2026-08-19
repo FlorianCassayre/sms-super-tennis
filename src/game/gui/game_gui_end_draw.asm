@@ -1,4 +1,4 @@
-sub_draw_game_end:
+sub_game_gui_end_draw:
 	ld a,(score.sets_won_top)
 	cp 002h
 	jp z,@game_lost
@@ -13,7 +13,7 @@ sub_draw_game_end:
 	ld b,008h
 	ld de,00018h
 	call sub_3457h_clean_vram
-	call sub_draw_game_end_line
+	call sub_game_gui_end_draw_line
 	ld hl,03c18h
 	ld de,gui_text_lost
 	ld b,008h
@@ -36,7 +36,7 @@ sub_draw_game_end:
 	ld de,00018h
 	ld b,009h
 	call sub_3457h_clean_vram
-	call sub_draw_game_end_line
+	call sub_game_gui_end_draw_line
 	ld hl,03c18h
 	ld de,gui_text_win
 	ld b,007h

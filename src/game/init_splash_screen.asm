@@ -30,5 +30,5 @@ l0eefh:
 	ret nz
 l0ef3h_hardware_sms:
 	ld hl,state.main_game_state
-	ld (hl),081h
+	ld (hl),GAME_FSM_BASE | game_fsm_state_t.gui_splash_draw
 	ret

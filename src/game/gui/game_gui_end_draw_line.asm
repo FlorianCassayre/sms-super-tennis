@@ -1,4 +1,4 @@
-sub_draw_game_end_line:
+sub_game_gui_end_draw_line:
 	ld hl,03b8ah
 	ld de,034abh
 	ld b,016h

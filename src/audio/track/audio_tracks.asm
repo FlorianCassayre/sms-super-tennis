@@ -19,8 +19,8 @@ audio_track_data:
 	.DW l75ech	; 8d
 	.DW audio_track_data_sound_ball_net	; 8e
 	.DW audio_track_data_sound_ball_bounce	; 8f
-	.DW l7668h	; 90
-	.DW l7689h	; 91
+	.DW audio_track_data_sound_ball_player	; 90
+	.DW audio_track_data_sound_ball_player_alt	; 91
 	.DW l76bch	; 92
 	.DW l76c9h	; 93
 	.DW l76d7h	; 94
@@ -28,8 +28,8 @@ audio_track_data:
 	.DW audio_track_data_sound_ball_in	; 96
 	.DW audio_track_data_ball_out	; 97
 	.DW audio_track_data_sound_fault	; 98
-	.DW l785dh	; 99
-	.DW l78a9h	; 9a
+	.DW audio_track_data_net	; 99
+	.DW audio_track_data_deuce	; 9a
 	.DW l7ad7h	; 9b
 	.DW 0200bh	; 9c
 

@@ -61,6 +61,6 @@ sub_game_gui_splash_draw:
 	ld a,(psg_engine.maybe_end_track)
 	rlca
 	ret nc
-	ld a,083h
+	ld a,GAME_FSM_BASE | game_fsm_state_t.init_tennis_court
 	ld (state.main_game_state),a
 	ret

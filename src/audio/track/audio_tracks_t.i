@@ -8,14 +8,14 @@
 	track_theme_match_lost DB	; 87
 	track_theme_splash_screen DB	; 88
 	track_sound_ball_wall DB	; 89
-	track_8a DB	; 8a
+	track_sound_racket_hit_alt DB	; 8a
 	track_sound_ball_high DB	; 8b
 	track_sound_racket_hit DB	; 8c
 	track_8d DB	; 8d
 	track_ball_net DB	; 8e
 	track_sound_ball_bounce DB	; 8f
-	track_90 DB	; 90
-	track_91 DB	; 91
+	track_sound_ball_player DB	; 90
+	track_sound_ball_player_alt DB	; 91
 	track_92 DB	; 92
 	track_93 DB	; 93
 	track_94 DB	; 94
@@ -23,8 +23,8 @@
 	track_sound_ball_in DB	; 96
 	track_sound_ball_out DB	; 97
 	track_sound_fault DB	; 98
-	track_99 DB	; 99
-	track_9a DB	; 9a
+	track_sound_net DB	; 99
+	track_sound_deuce DB	; 9a
 	track_9b DB	; 9b
 	track_9c DB	; 9c
 .ENDST

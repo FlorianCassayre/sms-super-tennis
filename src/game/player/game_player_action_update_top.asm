@@ -9,4 +9,4 @@ l1c39h:
 	ld a,(ix + entity_t.action_state)
 	and 00fh
 	ld hl,l1c4ah_jump_table
-	jp l0807h_game_fsm
+	jp game_fsm

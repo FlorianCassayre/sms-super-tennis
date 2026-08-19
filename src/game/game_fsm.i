@@ -1,0 +1,1 @@
+.equ GAME_FSM_BASE $80

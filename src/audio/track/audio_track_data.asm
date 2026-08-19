@@ -760,7 +760,7 @@ audio_track_data_sound_ball_bounce:
 		.DB CMD_END_TRACK
 	.ENDIF
 
-l7668h:
+audio_track_data_sound_ball_player:
 	.DB 2
 	CHANNEL_HEADER $88, $21, 2, @channel_1, $03, $01, $03, $0e
 	CHANNEL_HEADER $80, $23, 2, @channel_2, $03, $00, $03, $0d
@@ -774,7 +774,7 @@ l7668h:
 	.DB note.a5, 6
 	.DB CMD_END_TRACK
 
-l7689h:
+audio_track_data_sound_ball_player_alt:
 	.DB 2
 	CHANNEL_HEADER $a8, $21, 2, @channel_1, $03, $01, $01, $0e
 	CHANNEL_HEADER $a8, $22, 2, @channel_2, $03, $00, $01, $0d
@@ -935,7 +935,7 @@ audio_track_data_sound_fault:
 	AUDIO_RAW_FREQ_SLIDE $00, $90, $00, $c0, 7
 	.DB CMD_END_TRACK
 
-l785dh:
+audio_track_data_net:
 	.DB 3
 	CHANNEL_HEADER $a8, $20, 2, @channel_1, $03, $00, $05, $0b
 	CHANNEL_HEADER $a8, $21, 2, @channel_2, $03, $01, $03, $0e
@@ -956,7 +956,7 @@ l785dh:
 	AUDIO_RAW_FREQ_SLIDE $00, $70, $00, $40, 3
 	.DB CMD_END_TRACK
 
-l78a9h:
+audio_track_data_deuce:
 	.DB 3
 	CHANNEL_HEADER $a8, $20, 2, @channel_1, $03, $00, $05, $0f
 	CHANNEL_HEADER $a8, $21, 2, @channel_2, $03, $01, $04, $08

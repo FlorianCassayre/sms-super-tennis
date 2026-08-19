@@ -129,10 +129,10 @@ l0c1bh:
 	ld a,001h
 	ld (state.unknown_flag),a
 	ld (score.ball_y_sector),a
-	ld a,004h
+	ld a,game_fsm_state_t.tick
 	bit 3,(hl)
 	jr z,l0c3bh
-	or 080h
+	or GAME_FSM_BASE
 l0c3bh:
 	ld (state.main_game_state),a
 	ret

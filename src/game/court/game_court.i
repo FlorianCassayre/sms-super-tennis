@@ -1,37 +1,41 @@
 ; (low X)   (low Y)  (high X)
-;            (top)
 ; +-------------------------+
 ; |            |            |
-; |  Far left  | Far right  |
+; |  Top left  | Top right  |
 ; |            |            |
 ; +=========================+ (net)
 ; |            |            |
-; | Near left  | Near right |
+; | Bot. left  | Bot. right |
 ; |            |            |
 ; +-------------------------+
-;          (bottom)
 ;          (high Y)
 
-; Center of court is ~$8000
+; Center of court is ~($8000, $5c00)
 
-.equ BOUND_X_MIN_FAR_STD      $3680
-.equ BOUND_X_MIN_FAR_LEFT     $6000
-.equ BOUND_X_MAX_FAR_LEFT     $7600
-.equ BOUND_X_MIN_FAR_RIGHT    $8800
-.equ BOUND_X_MAX_FAR_RIGHT    $9d00
-.equ BOUND_X_MAX_FAR_STD      $c9ff
+; Top player
+.equ BOUND_X_MIN_TOP      $3680
+.equ BOUND_X_MAX_TOP      $c9ff
+.equ BOUND_Y_MIN_TOP  $1d00
+.equ BOUND_Y_MAX_TOP  $4cff
 
-.equ BOUND_X_MIN_NEAR_STD     $0800
-.equ BOUND_X_MIN_NEAR_LEFT    $4100
-.equ BOUND_X_MAX_NEAR_LEFT    $7400
-.equ BOUND_X_MIN_NEAR_RIGHT   $8d00
-.equ BOUND_X_MAX_NEAR_RIGHT   $c000
-.equ BOUND_X_MAX_NEAR_STD     $f800
+.equ BOUND_X_MIN_TOP_SERVE_LEFT     $6000
+.equ BOUND_X_MAX_TOP_SERVE_LEFT     $7600
 
-.equ BOUND_Y_MIN_FAR  $1d00
-.equ BOUND_Y_MAX_FAR  $4cff
-.equ BOUND_Y_MIN_NEAR $6c00
-.equ BOUND_Y_MAX_NEAR $cb00
+.equ BOUND_X_MIN_TOP_SERVE_RIGHT    $8800
+.equ BOUND_X_MAX_TOP_SERVE_RIGHT    $9d00
+
+; Bottom player
+.equ BOUND_X_MIN_BOTTOM     $0800
+.equ BOUND_X_MAX_BOTTOM     $f800
+.equ BOUND_Y_MIN_BOTTOM $6c00
+.equ BOUND_Y_MAX_BOTTOM $cb00
+
+.equ BOUND_X_MIN_BOTTOM_SERVE_LEFT    $4100
+.equ BOUND_X_MAX_BOTTOM_SERVE_LEFT    $7400
+
+.equ BOUND_X_MIN_BOTTOM_SERVE_RIGHT   $8d00
+.equ BOUND_X_MAX_BOTTOM_SERVE_RIGHT   $c000
+
 
 .equ TYPE_HORIZ_ONLY_1  $03
 .equ TYPE_HORIZ_ONLY_2  $09

@@ -30,14 +30,14 @@ sub_joy_debounce:
 	ld (state.match_state_flags),a
 	ld a,000h
 	ld (psg_engine.track_request_id),a
-	ld a,002h
+	ld a,game_fsm_state_t.gui_settings_draw_menu
 	ld (state.main_game_state),a
 	ret
 +:
 	res 6,a
 	cp 001h
 	ret z
-	ld a,087h
+	ld a,GAME_FSM_BASE | game_fsm_state_t.reset_state
 	ld (state.main_game_state),a
 	ex af,af'
 	ld (0c009h),a

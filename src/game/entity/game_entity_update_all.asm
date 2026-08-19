@@ -17,7 +17,7 @@ sub_game_entity_update_all:
 	; Push return address before jumping
 	push hl
 	ld hl,game_entity_state_jump_table - 2
-	jp l0807h_game_fsm
+	jp game_fsm
 @no_action:
 	call sub_game_entity_animation_update_frame
 	ld de,state.entity_loop_index

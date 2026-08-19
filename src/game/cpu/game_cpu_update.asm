@@ -13,7 +13,7 @@ sub_game_cpu_update:
 	ld a,(ix + entity_t.cpu_state)
 	and 00fh
 	ld hl,cpu_state_table
-	jp l0807h_game_fsm
+	jp game_fsm
 
 cpu_state_table:
 	.DW sub_cpu_state_track_ball

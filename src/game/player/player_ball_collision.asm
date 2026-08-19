@@ -146,11 +146,11 @@ sub_racket_hit_trajectory:
 @trigger_body_foul:
 	ld a,game_foul_t.body
 	ld (ball.foul_type),a
-	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_90
+	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_player
 	ld a,(ix + entity_t.id)
 	and 001h
 	jr z,@_unknown_play_sound
-	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_91
+	ld c,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_ball_player_alt
 @_unknown_play_sound:
 	ld a,c
 	ld (psg_engine.track_request_id),a

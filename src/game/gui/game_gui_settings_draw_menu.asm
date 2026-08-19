@@ -1,4 +1,4 @@
-sub_draw_settings_menu:
+sub_game_gui_settings_draw_menu:
 	ld hl,state.main_game_state
 	bit 6,(hl)
 	jp nz,+

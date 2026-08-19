@@ -8,6 +8,8 @@
 .INCLUDE "gui/gui_ascii_low_table.i"
 .INCLUDE "game/state/state_t.i"
 .INCLUDE "game/state/state_match_flags.i"
+.INCLUDE "game/game_fsm.i"
+.INCLUDE "game/game_fsm_state_t.i"
 .INCLUDE "game/court/game_court.i"
 .INCLUDE "rle/rle_constants.i"
 .INCLUDE "rle/rle_decompress_stream.i"

@@ -168,7 +168,7 @@ sub_update_score_points:
 	call sub_graphics_tile_draw_sequential_row
 	jp @finish_score_update
 @sub_313ch:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_9a
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_deuce
 	ld (psg_engine.track_request_id),a
 	ld hl,03904h
 	ld (score.vram_dest),hl

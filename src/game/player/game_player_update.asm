@@ -11,7 +11,7 @@ l2495h:
 	ld a,(ix + entity_t.action_state)
 	and 00fh
 	ld hl,player_action_state_table
-	jp l0807h_game_fsm
+	jp game_fsm
 player_action_state_table:
 	.DW player_action_state_idle
 	.DW player_action_state_start_move

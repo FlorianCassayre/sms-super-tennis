@@ -92,8 +92,8 @@ init:
 	call sub_graphics_name_fill_blank_tile
 	ld a,080h
 	ld (psg_engine.track_request_id),a
-	ld a,080h
+	ld a,GAME_FSM_BASE
 	ld (state.main_game_state),a
 	call sub_enable_display
 	ei
-	jp game_fsm
+	jp game_fsm_loop

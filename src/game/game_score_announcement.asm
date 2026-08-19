@@ -1,4 +1,4 @@
-l0c6bh_announcement:
+sub_game_score_announcement:
 	ld hl,0c007h
 	ld a,(hl)
 	dec a
@@ -95,7 +95,7 @@ check_game_ended:
 	ld (0c007h),a
 	ld hl,000b4h
 	ld (state.pause_counter),hl
-	jp sub_draw_game_end
+	jp sub_game_gui_end_draw
 l0d3eh:
 	ld hl,state.sound_wait_flag
 	set 7,(hl)
@@ -105,7 +105,7 @@ l0d47h:
 	xor a
 	ld (state.match_state_flags),a
 	ld hl,state.main_game_state
-	ld (hl),080h
+	ld (hl),GAME_FSM_BASE
 	inc hl
 	ld (hl),a
 	ld hl,state.match_flags
@@ -134,7 +134,7 @@ l0d71h:
 	bit 3,a
 	jr nz,l0d47h
 	ld hl,state.main_game_state
-	ld (hl),005h
+	ld (hl),game_fsm_state_t.prepare_serve
 	inc hl
 	ld (hl),000h
 	ret

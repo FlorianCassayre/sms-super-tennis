@@ -26,11 +26,11 @@ sub_game_court_draw:
 	ld (state.ball_hit_type),a
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_theme_game_start
 	ld (psg_engine.track_request_id),a
-	ld a,005h
+	ld a,game_fsm_state_t.prepare_serve
 	ld hl,state.match_state_flags
 	bit 3,(hl)
 	jr z,+
-	or 080h
+	or GAME_FSM_BASE
 +:
 	ld (state.main_game_state),a
 	call sub_enable_display

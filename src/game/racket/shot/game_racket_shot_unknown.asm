@@ -1,5 +1,5 @@
 sub_game_racket_shot_unknown:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_8a
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_racket_hit_alt
 	ld (psg_engine.track_request_id),a
 	ld hl,l1260h
 	ld a,(state.ball_hit_type)

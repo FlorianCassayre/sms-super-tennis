@@ -67,7 +67,7 @@ sub_game_umpire_event_process_out:
 	ld (score.gui_update_flag),a
 	jp sub_game_umpire_trigger_announcement
 sub_game_umpire_event_process_net:
-	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_99
+	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_net
 	ld (psg_engine.track_request_id),a
 	xor a
 	ld (score.point_fault_flag),a

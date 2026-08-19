@@ -7,7 +7,7 @@ sub_reset_state:
 	ld (hl),a
 	ldir
 	ld hl,state.main_game_state
-	ld (hl),081h
+	ld (hl),GAME_FSM_BASE | game_fsm_state_t.gui_splash_draw
 	inc hl
 	ld (hl),000h
 	ret
