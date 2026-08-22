@@ -95,9 +95,9 @@ l0bcdh:
 	inc hl
 	ld a,(hl)
 	ld (entities.player.2.top.state_index),a
-	ld a,04fh
+	ld a,entity_animation_frame_t.frame_ball_shadow
 	ld (entities.ball_shadow.sprite_id),a
-	ld a,050h
+	ld a,entity_animation_frame_t.frame_ball
 	ld (entities.ball.sprite_id),a
 	ld a,entity_state_t.ball_serve_perspective_update
 	ld (entities.ball.state_index),a

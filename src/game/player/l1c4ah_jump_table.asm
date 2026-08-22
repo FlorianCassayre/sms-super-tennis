@@ -26,7 +26,7 @@ l1c78h:
 	ld a,(ix + entity_t.animation_flags_or_frame)
 	and a
 	jr nz,l1c92h
-	ld (ix + entity_t.animation_id),000h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.await
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	call sub_game_racket_update_hitbox
 	ld a,(ix + entity_t.facing_dir)
@@ -74,7 +74,7 @@ l1cdch:
 	ld a,(ix + entity_t.animation_flags_or_frame)
 	and a
 	jr nz,l1ceah
-	ld (ix + entity_t.animation_id),002h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.walk
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 l1ceah:
 	call sub_game_player_apply_movement
@@ -88,7 +88,7 @@ player_top_action_state_start_move:
 	jr nz,l1d17h
 	set 7,a
 	ld (ix + entity_t.action_state),a
-	ld (ix + entity_t.animation_id),00ah
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.unknown_0a
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	call sub_game_racket_update_hitbox
 	ld a,(ix + entity_t.facing_dir)
@@ -108,7 +108,7 @@ player_top_action_state_moving:
 	jr nz,l1d47h
 	set 7,a
 	ld (ix + entity_t.action_state),a
-	ld (ix + entity_t.animation_id),00ah
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.unknown_0a
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	call sub_game_racket_update_hitbox
 	ld a,(ix + entity_t.facing_dir)
@@ -130,7 +130,7 @@ player_top_action_state_turn_around:
 	call sub_game_racket_update_hitbox
 	ld a,(ix + entity_t.facing_dir)
 	ld (ix + entity_t.render_facing_dir),a
-	ld (ix + entity_t.animation_id),00bh
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.turn
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 l1d73h:
 	call sub_game_player_apply_movement

@@ -32,5 +32,3 @@
 .equ KBD_P2_B2_BIT    3
 .equ KBD_P2_B1_ROW    $06
 .equ KBD_P2_B1_BIT    2
-
-.equ RAM_INPUT_ENABLE $c002

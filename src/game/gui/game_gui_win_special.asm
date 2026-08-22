@@ -6,7 +6,7 @@ sub_game_gui_win_special:
 	or 080h
 	ld (state.sound_wait_flag),a
 	call sub_audio_event_wait
-	ld hl,03e00h
+	ld hl,VDP_NAME_TABLE_ADDRESS(0, 24)
 	ld (score.vram_dest),hl
 	ld a,000h
 	ld (score.box_dimensions),a
@@ -37,12 +37,12 @@ l3627h:
 	ld de,040h
 	add hl,de
 	push hl
-	ld de,03f00h
+	ld de,VDP_SPRITE_ATTRIBUTE_ADDRESS_BASE
 	xor a
 	sbc hl,de
 	jr c,+
 	pop hl
-	ld hl,03800h
+	ld hl,VDP_NAME_TABLE_ADDRESS_BASE
 	push hl
 +:
 	pop hl
@@ -71,7 +71,7 @@ l3627h:
 	ld hl,game_gui_girl_patterns
 	ld de,02600h
 	call sub_rle_decompress_bitplanes_to_vram
-	ld hl,03a5ah
+	ld hl,VDP_NAME_TABLE_ADDRESS(13, 9)
 	ld de,game_gui_girl_names
 	ld bc,(8 << 8) | 6
 	call sub_load_vram_rect
@@ -83,25 +83,25 @@ l3627h:
 	call sub_enable_display
 	ld a,040h
 	call sub_wait_a_frames
-	ld hl,03b60h
+	ld hl,VDP_NAME_TABLE_ADDRESS(16, 13)
 	ld de,game_gui_win_special_tile_eye_1
 	ld bc,4
 	call sub_cp_ram_vram
 	ld a,005h
 	call sub_wait_a_frames
-	ld hl,03b60h
+	ld hl,VDP_NAME_TABLE_ADDRESS(16, 13)
 	ld de,game_gui_win_special_tile_eye_2
 	ld bc,4
 	call sub_cp_ram_vram
 	ld a,028h
 	call sub_wait_a_frames
-	ld hl,03b60h
+	ld hl,VDP_NAME_TABLE_ADDRESS(16, 13)
 	ld de,game_gui_win_special_tile_eye_1
 	ld bc,4
 	call sub_cp_ram_vram
 	ld a,005h
 	call sub_wait_a_frames
-	ld hl,03b60h
+	ld hl,VDP_NAME_TABLE_ADDRESS(16, 13)
 	ld de,game_gui_win_special_tile_eye_3
 	ld bc,4
 	call sub_cp_ram_vram

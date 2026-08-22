@@ -1,13 +1,17 @@
+.STRUCT umpire_bubble_t
+	double_fault DSW 7 * 5 ;c980 308
+	deuce DSW 7 * 4 ;c9c6 378
+	fault DSW 7 * 4 ;c9fe 434
+	net DSW 5 * 4 ;ca36 490
+	out DSW 5 * 4 ;ca5e 530
+	in DSW 4 * 4 ;ca86 570
+	none DSW 7 * 5 ;caa6 602
+.ENDST
+
 .STRUCT umpire_settings_t
 	sets DSW 77 ;c84c 0
 	_unknown_1 DSW 77 ;c8e6 154
-	umpire_double_fault DSW 35 ;c980 308
-	umpire_deuce DSW 28 ;c9c6 378
-	umpire_fault DSW 28 ;c9fe 434
-	umpire_net DSW 20 ;ca36 490
-	umpire_out DSW 20 ;ca5e 530
-	umpire_in DSW 16 ;ca86 570
-	umpire_none DSW 35 ;caa6 602
+	umpire INSTANCEOF umpire_bubble_t	;c980
 	point_0 DSW 2 ;caec 672
 	point_15 DSW 2 ;caf0 676
 	point_30 DSW 2 ;caf4 680
@@ -30,9 +34,9 @@
 .ENDST
 
 .STRUCT data_t
-	ball DSB 288	;c600
+	ball DSB VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 9	;c600
 	mark3_name DSB 76		;c720
-	mark3 DSB 224		;c76c
+	mark3 DSB VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 7		;c76c
 	umpire_settings INSTANCEOF umpire_settings_t		;c84c
 	projection INSTANCEOF projection_t		;cbe8
 .ENDST

@@ -20,7 +20,7 @@ sub_game_court_draw:
 	ld (hl),0d0h
 	ldir
 	call sub_game_player_palette_load_clothes
-	ld a,(0c04ah)
+	ld a,(state.settings.computer_level)
 	rrca
 	and 007h
 	ld (state.ball_hit_type),a

@@ -49,7 +49,7 @@ isr_vblank_update:
 	ld hl,(ball.shadow_vram_pointer)
 	ld b,020h
 	otir
-	ld hl,03f00h
+	ld hl,VDP_SPRITE_ATTRIBUTE_ADDRESS_BASE
 	call sub_set_vdp_write_addr
 	ld hl,0c100h
 	ld b,040h

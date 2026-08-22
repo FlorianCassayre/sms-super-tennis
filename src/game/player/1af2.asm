@@ -2,7 +2,7 @@ sub_1af2h:
 	bit 7,(ix + entity_t.state_index)
 	jr nz,l1b17h
 	set 7,(ix + entity_t.state_index)
-	ld (ix + entity_t.animation_id),007h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.serve_tossed
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	ld (ix + entity_t.swing_type_id),019h
 	ld a,entity_state_t.ball_toss_update
@@ -36,7 +36,7 @@ l1b37h:
 	ld a,(ix + entity_t.animation_flags_or_frame)
 	and a
 	jr nz,l1b50h
-	ld (ix + entity_t.animation_id),007h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.serve_tossed
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 l1b50h:
 	ld a,(state.match_flags)

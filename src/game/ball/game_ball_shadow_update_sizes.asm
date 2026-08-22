@@ -126,12 +126,12 @@ l06dfh:
 	.DB $04
 	.DB $08
 l06ffh:
-	.DW $c600
-	.DW $c620
-	.DW $c640
-	.DW $c660
-	.DW $c680
-	.DW $c6a0
-	.DW $c6c0
-	.DW $c6e0
-	.DW $c700
+	.DW data.ball
+	.DW data.ball + VDP_TILE_SIZE * VDP_PALETTE_DEPTH
+	.DW data.ball + VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 2
+	.DW data.ball + VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 3
+	.DW data.ball + VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 4
+	.DW data.ball + VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 5
+	.DW data.ball + VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 6
+	.DW data.ball + VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 7
+	.DW data.ball + VDP_TILE_SIZE * VDP_PALETTE_DEPTH * 8

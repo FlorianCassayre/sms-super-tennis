@@ -17,8 +17,8 @@ sub_prng:
 	rra
 	adc hl,hl
 	jr nz,+
-	ld hl,PRNG_SEED
-+:
+		ld hl,PRNG_SEED
+	+:
 	ld a,r
 	xor l
 	ld (0c08ch),hl

@@ -20,7 +20,7 @@ l31d1h:
 	jp z,l3353h
 	jr sub_update_set_scores
 l31e5h:
-	ld hl,03b54h
+	ld hl,VDP_NAME_TABLE_ADDRESS(10, 13)
 	ld (score.vram_dest),hl
 	ld hl,data.umpire_settings
 	ld (score.vram_src),hl
@@ -104,7 +104,7 @@ l3276h:
 	ld e,(hl)
 	ld d,000h
 	ld b,001h
-	ld hl,03c1eh
+	ld hl,VDP_NAME_TABLE_ADDRESS(15, 16)
 	ld (score.blinking_set_vram_addr),hl
 	call sub_graphics_tile_draw_sequential_row
 	pop hl
@@ -113,7 +113,7 @@ l3276h:
 	ld e,(hl)
 	ld d,000h
 	ld b,001h
-	ld hl,03c9eh
+	ld hl,VDP_NAME_TABLE_ADDRESS(15, 18)
 	call sub_graphics_tile_draw_sequential_row
 	pop hl
 	inc hl
@@ -125,7 +125,7 @@ l3276h:
 	jp c,l32ebh
 	ld d,000h
 	ld b,001h
-	ld hl,03c22h
+	ld hl,VDP_NAME_TABLE_ADDRESS(17, 16)
 	ld (score.blinking_set_vram_addr),hl
 	call sub_graphics_tile_draw_sequential_row
 	pop hl
@@ -133,7 +133,7 @@ l3276h:
 	ld e,(hl)
 	ld d,000h
 	ld b,001h
-	ld hl,03ca1h+1
+	ld hl,VDP_NAME_TABLE_ADDRESS(17, 18)
 	call sub_graphics_tile_draw_sequential_row
 	pop hl
 	inc hl
@@ -145,7 +145,7 @@ l3276h:
 	jp c,l32ebh
 	ld d,000h
 	ld b,001h
-	ld hl,03c26h
+	ld hl,VDP_NAME_TABLE_ADDRESS(19, 16)
 	ld (score.blinking_set_vram_addr),hl
 	call sub_graphics_tile_draw_sequential_row
 	pop hl
@@ -153,7 +153,7 @@ l3276h:
 	ld e,(hl)
 	ld d,000h
 	ld b,001h
-	ld hl,03ca6h
+	ld hl,VDP_NAME_TABLE_ADDRESS(19, 18)
 	call sub_graphics_tile_draw_sequential_row
 l32ebh:
 	pop hl
@@ -212,7 +212,7 @@ l3342h:
 	ld (score.delay_timer),a
 	jp l31c3h
 l3353h:
-	ld hl,03b54h
+	ld hl,VDP_NAME_TABLE_ADDRESS(10, 13)
 	ld (score.vram_dest),hl
 	ld hl,data.umpire_settings + 154
 	ld (score.vram_src),hl

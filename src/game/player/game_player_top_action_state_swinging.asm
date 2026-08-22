@@ -40,19 +40,19 @@ l1db7h:
 	ld e,002h
 l1dd3h:
 	ld a,e
-	ld b,004h
+	ld b,game_player_animation_type_t.lob
 	ld c,01ch
 	and a
 	jr z,l1defh
-	ld b,003h
+	ld b,game_player_animation_type_t.stroke
 	ld c,01dh
 	cp 001h
 	jr z,l1defh
-	ld b,005h
+	ld b,game_player_animation_type_t.unknown_05
 	ld c,01bh
 	cp 002h
 	jr z,l1defh
-	ld b,009h
+	ld b,game_player_animation_type_t.volley
 	ld c,01ah
 l1defh:
 	ld (ix + entity_t.animation_id),b

@@ -46,7 +46,7 @@ l24c8h:
 	ld a,(ix + entity_t.animation_flags_or_frame)
 	and a
 	jr nz,l24f0h
-	ld (ix + entity_t.animation_id),000h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.await
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	call sub_game_racket_update_hitbox
 	ld a,(ix + entity_t.facing_dir)
@@ -105,7 +105,7 @@ l2548h:
 	ld a,(ix + entity_t.animation_flags_or_frame)
 	and a
 	jr nz,l2556h
-	ld (ix + entity_t.animation_id),002h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.walk
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 l2556h:
 	call sub_game_player_apply_movement
@@ -119,7 +119,7 @@ player_action_state_start_move:
 	jr nz,l2581h
 	set 7,a
 	ld (ix + entity_t.action_state),a
-	ld (ix + entity_t.animation_id),00ah
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.unknown_0a
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	call sub_game_racket_update_hitbox
 	ld a,(ix + entity_t.facing_dir)
@@ -139,7 +139,7 @@ player_action_state_start_swing:
 	jr nz,l25b1h
 	set 7,a
 	ld (ix + entity_t.action_state),a
-	ld (ix + entity_t.animation_id),00ah
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.unknown_0a
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	call sub_game_racket_update_hitbox
 	ld a,(ix + entity_t.facing_dir)
@@ -161,7 +161,7 @@ player_action_state_turn_around:
 	call sub_game_racket_update_hitbox
 	ld a,(ix + entity_t.facing_dir)
 	ld (ix + entity_t.render_facing_dir),a
-	ld (ix + entity_t.animation_id),00bh
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.turn
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 l25ddh:
 	call sub_game_player_apply_movement
@@ -191,15 +191,15 @@ player_action_state_swinging:
 	ld b,002h
 l2614h:
 	ld a,b
-	ld b,009h
+	ld b,game_player_animation_type_t.volley
 	ld c,01ah
 	and a
 	jr z,l2628h
-	ld b,005h
+	ld b,game_player_animation_type_t.unknown_05
 	ld c,01bh
 	cp 001h
 	jr z,l2628h
-	ld b,003h
+	ld b,game_player_animation_type_t.stroke
 	ld c,01dh
 l2628h:
 	ld (ix + entity_t.animation_id),b

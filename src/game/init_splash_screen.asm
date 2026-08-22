@@ -14,7 +14,7 @@ sub_init_splash_screen:
 	ld bc,224
 	ld a,001h
 	call sub_graphics_tile_expand_1bpp_ram_to_vdp
-	ld hl,03a8eh
+	ld hl,VDP_NAME_TABLE_ADDRESS(7, 10)
 	ld de,data.mark3_name
 	ld bc,(2 << 8) | 19
 	call sub_load_vram_rect

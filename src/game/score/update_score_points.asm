@@ -34,7 +34,7 @@ sub_update_score_points:
 	ld (score.point.top),a
 @l3037h:
 	ld b,002h
-	ld de,03938h
+	ld de,VDP_NAME_TABLE_ADDRESS(28, 4)
 	ld hl,score.point.top
 @draw_bottom_score_digit:
 	push bc
@@ -65,10 +65,10 @@ sub_update_score_points:
 	call sub_cp_ram_vram
 	ei
 	pop de
-	ld hl,039f8h
+	ld hl,VDP_NAME_TABLE_ADDRESS(28, 7)
 	xor a
 	sbc hl,de
-	ld de,03938h
+	ld de,VDP_NAME_TABLE_ADDRESS(28, 4)
 	add hl,de
 	ex de,hl
 	ld hl,data.umpire_settings.point_none
@@ -83,7 +83,7 @@ sub_update_score_points:
 	ei
 	pop bc
 	ld hl,score.point
-	ld de,039f8h
+	ld de,VDP_NAME_TABLE_ADDRESS(28, 7)
 	djnz @draw_bottom_score_digit
 	ld a,(hl)
 	inc hl
@@ -145,11 +145,11 @@ sub_update_score_points:
 	ld a,d
 	cp 000h
 	jr z,@draw_bottom_tens_digit
-	ld hl,039f8h
+	ld hl,VDP_NAME_TABLE_ADDRESS(28, 7)
 	ld b,002h
 	jr @draw_bottom_score
 @draw_bottom_tens_digit:
-	ld hl,039fah
+	ld hl,VDP_NAME_TABLE_ADDRESS(29, 7)
 	ld b,001h
 @draw_bottom_score:
 	call sub_graphics_tile_draw_sequential_row
@@ -158,11 +158,11 @@ sub_update_score_points:
 	ld a,d
 	cp 000h
 	jr z,@draw_top_tens_digit
-	ld hl,03938h
+	ld hl,VDP_NAME_TABLE_ADDRESS(28, 4)
 	ld b,002h
 	jr @draw_top_score
 @draw_top_tens_digit:
-	ld hl,0393ah
+	ld hl,VDP_NAME_TABLE_ADDRESS(29, 4)
 	ld b,001h
 @draw_top_score:
 	call sub_graphics_tile_draw_sequential_row
@@ -170,9 +170,9 @@ sub_update_score_points:
 @sub_313ch:
 	ld a,AUDIO_TRACK_BASE + audio_tracks_t.track_sound_deuce
 	ld (psg_engine.track_request_id),a
-	ld hl,03904h
+	ld hl,VDP_NAME_TABLE_ADDRESS(2, 4)
 	ld (score.vram_dest),hl
-	ld hl,data.umpire_settings.umpire_deuce
+	ld hl,data.umpire_settings.umpire.deuce
 	ld (score.vram_src),hl
 	ld h,004h
 	ld l,007h
@@ -183,9 +183,9 @@ sub_update_score_points:
 	ld (0c4afh),a
 	ret
 @sub_315eh:
-	ld hl,038c4h
+	ld hl,VDP_NAME_TABLE_ADDRESS(2, 3)
 	ld (score.vram_dest),hl
-	ld hl,data.umpire_settings.umpire_none
+	ld hl,data.umpire_settings.umpire.none
 	ld (score.vram_src),hl
 	ld h,005h
 	ld l,007h

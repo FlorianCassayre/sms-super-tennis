@@ -1,5 +1,5 @@
 sub_get_joy_p2:
-	ld a,(RAM_INPUT_ENABLE)
+	ld a,(state.joy_not_mark3)
 	and a
 	jr z,+
 	in a,(I_JOYPAD_1)

@@ -29,8 +29,8 @@ sub_game_player_update_animation:
 	add a,b
 	add a,a
 	ld e,a
-	ld d,000h
-	ld hl,data_animation_attributes
+	ld d,0
+	ld hl,game_player_animation_sequence
 	add hl,de
 	ld e,(hl)
 	inc hl
@@ -40,7 +40,7 @@ sub_game_player_update_animation:
 	ld (ix + entity_t.animation_frame_counter),a
 	inc hl
 	ld e,(hl)
-	ld a,(0c04ah)
+	ld a,(state.settings.computer_level)
 	rra
 	and 003h
 	ld d,a
@@ -99,7 +99,7 @@ sub_game_player_update_animation:
 	inc hl
 	ld a,(hl)
 	ld e,a
-	ld a,(0c04ah)
+	ld a,(state.settings.computer_level)
 	rra
 	and 003h
 	ld d,a

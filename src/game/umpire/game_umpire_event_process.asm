@@ -35,9 +35,9 @@ sub_game_umpire_event_process_in:
 	ld hl,score.point
 	add hl,bc
 	inc (hl)
-	ld hl,03906h
+	ld hl,VDP_NAME_TABLE_ADDRESS(3, 4)
 	ld (score.vram_dest),hl
-	ld hl,data.umpire_settings.umpire_in
+	ld hl,data.umpire_settings.umpire.in
 	ld (score.vram_src),hl
 	ld h,004h
 	ld l,004h
@@ -56,9 +56,9 @@ sub_game_umpire_event_process_out:
 	xor a
 	sbc hl,bc
 	inc (hl)
-	ld hl,03906h
+	ld hl,VDP_NAME_TABLE_ADDRESS(3, 4)
 	ld (score.vram_dest),hl
-	ld hl,data.umpire_settings.umpire_out
+	ld hl,data.umpire_settings.umpire.out
 	ld (score.vram_src),hl
 	ld h,004h
 	ld l,005h
@@ -77,9 +77,9 @@ sub_game_umpire_event_process_net:
 	xor a
 	sbc hl,bc
 	inc (hl)
-	ld hl,03906h
+	ld hl,VDP_NAME_TABLE_ADDRESS(3, 4)
 	ld (score.vram_dest),hl
-	ld hl,data.umpire_settings.umpire_net
+	ld hl,data.umpire_settings.umpire.net
 	ld (score.vram_src),hl
 	ld h,004h
 	ld l,005h
@@ -95,9 +95,9 @@ sub_game_umpire_event_process_fault:
 	ld a,(hl)
 	cp 002h
 	jp nc,sub_game_umpire_event_process_double_fault
-	ld hl,03904h
+	ld hl,VDP_NAME_TABLE_ADDRESS(2, 4)
 	ld (score.vram_dest),hl
-	ld hl,data.umpire_settings.umpire_fault
+	ld hl,data.umpire_settings.umpire.fault
 	ld (score.vram_src),hl
 	ld h,004h
 	ld l,007h
@@ -114,9 +114,9 @@ sub_game_umpire_event_process_double_fault:
 	xor a
 	sbc hl,bc
 	inc (hl)
-	ld hl,038c4h
+	ld hl,VDP_NAME_TABLE_ADDRESS(2, 3)
 	ld (score.vram_dest),hl
-	ld hl,data.umpire_settings.umpire_double_fault
+	ld hl,data.umpire_settings.umpire.double_fault
 	ld (score.vram_src),hl
 	ld h,005h
 	ld l,007h

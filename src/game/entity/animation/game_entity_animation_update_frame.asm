@@ -2,8 +2,8 @@ sub_game_entity_animation_update_frame:
 	ld a,(ix + entity_t.sprite_id)
 	add a,a
 	ld e,a
-	ld d,000h
-	ld hl,game_entity_animation_frame_data
+	ld d,0
+	ld hl,game_entity_animation_frame
 	add hl,de
 	ld e,(hl)
 	inc hl

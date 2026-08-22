@@ -8,38 +8,38 @@ init:
 	ld bc,03fh
 	ld (hl),000h
 	ldir
-	; Sound card detection
+	; SMS / Mark 3 hardware detection
 	call sub_audio_silence
 	ld a,$92
-	out (0dfh),a
-	ld a,$55
-	out (0deh),a
-	in a,(0deh)
-	cp 055h
+	out ($df),a
+	ld a,%01010101
+	out ($de),a
+	in a,($de)
+	cp %01010101
 	ld c,000h
 	jr z,+
-	ld c,0ffh
-+:
+		ld c,$ff
+	+:
 	ld a,$aa
-	out (0deh),a
-	in a,(0deh)
-	cp 0aah
+	out ($de),a
+	in a,($de)
+	cp %10101010
 	ld a,000h
 	jr z,+
-	ld a,0ffh
-+:
+		ld a,$ff
+	+:
 	or c
-	ld (0c002h),a
+	ld (state.joy_not_mark3),a
 	ld a,$07
-	out (0deh),a
-	ld b,00ah
-	ld de,0ffffh
---:
-	ld hl,039deh
--:
-	add hl,de
-	jr c,-
-	djnz --
+	out ($de),a
+	ld b,$0a
+	ld de,$ffff
+	--:
+		ld hl,039deh
+		-:
+			add hl,de
+			jr c,-
+		djnz --
 	call sub_hardware_self_test
 	ld (state.hardware_type),a
 @l00d6h:

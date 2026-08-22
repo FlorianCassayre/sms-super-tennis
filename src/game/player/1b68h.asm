@@ -2,7 +2,7 @@ sub_1b68h:
 	bit 7,(ix + entity_t.state_index)
 	jr nz,l1b7eh
 	set 7,(ix + entity_t.state_index)
-	ld (ix + entity_t.animation_id),008h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.serve_hit
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	ld (ix + entity_t.render_facing_dir),000h
 l1b7eh:

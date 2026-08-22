@@ -14,7 +14,9 @@
 
 .STRUCT state_t
 	match_state_flags DB	;c000
-	_unknown_01 DSB 5
+	_unknown_01 DB	;c001
+	joy_not_mark3 DB	;c002
+	_unknown_03 DSB 3	;c003
 	main_game_state DB	;c006
 	_unknown_0 DSB 9
 	hardware_type DB	;c010

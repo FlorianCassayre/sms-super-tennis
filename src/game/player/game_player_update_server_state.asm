@@ -35,7 +35,7 @@ sub_game_player_update_server_state:
 	jr z,@set_animation_timer
 	ld (ix + entity_t.cpu_state),007h
 @set_animation_timer:
-	ld (ix + entity_t.animation_id),006h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.serve_ready
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 	ld hl,00096h
 	ld (ix + entity_t.state_timer),l
@@ -50,7 +50,7 @@ sub_game_player_update_server_state:
 	ld a,(ix + entity_t.animation_flags_or_frame)
 	and a
 	jr z,@check_timer
-	ld (ix + entity_t.animation_id),006h
+	ld (ix + entity_t.animation_id),game_player_animation_type_t.serve_ready
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 @check_timer:
 	call sub_1b9fh_decrement_timer

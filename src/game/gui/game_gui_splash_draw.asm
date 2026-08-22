@@ -26,14 +26,14 @@ sub_game_gui_splash_draw:
 	call sub_rle_decompress_bitplanes_to_vram
 
 	; "Super" logo
-	ld hl,03854h
+	ld hl,VDP_NAME_TABLE_ADDRESS(10, 1)
 	ld de,gui_splash_super_names
 	ld b,5
 	ld c,10
 	call sub_load_vram_rect
 
 	; "TENNIS" logo
-	ld de,039c0h
+	ld de,VDP_NAME_TABLE_ADDRESS(0, 7)
 	ld hl,gui_splash_tennis_names
 	call sub_rle_decompress_bitplanes_to_vram
 
@@ -42,7 +42,7 @@ sub_game_gui_splash_draw:
 	call sub_upload_vram_chunks
 
 	; "(c) SEGA 1986" trademark
-	ld hl,03d96h
+	ld hl,VDP_NAME_TABLE_ADDRESS(11, 22)
 	ld de,game_gui_splash_copyright
 	ld bc,22
 	call sub_cp_ram_vram

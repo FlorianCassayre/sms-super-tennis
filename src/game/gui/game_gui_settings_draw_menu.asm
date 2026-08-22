@@ -21,39 +21,39 @@ sub_game_gui_settings_draw_menu:
 	call sub_get_joy_p1
 	ld (score.settings_joystick),a
 	ld (score.settings_joystick_previous),a
-	ld hl,03886h
+	ld hl,VDP_NAME_TABLE_ADDRESS(3, 2)
 	ld de,data.umpire_settings.player_level_select
 	ld bc,38
 	call sub_cp_ram_vram
-	ld hl,0394ah
+	ld hl,VDP_NAME_TABLE_ADDRESS(5, 5)
 	ld de,data.umpire_settings.speed_level
 	ld bc,32
 	call sub_cp_ram_vram
-	ld hl,039e2h
+	ld hl,VDP_NAME_TABLE_ADDRESS(17, 7)
 	ld de,data.umpire_settings.answer_abc
 	ld bc,22
 	call sub_cp_ram_vram
-	ld hl,03a4ah
+	ld hl,VDP_NAME_TABLE_ADDRESS(5, 9)
 	ld de,data.umpire_settings.control_level
 	ld bc,32
 	call sub_cp_ram_vram
-	ld hl,03ae2h
+	ld hl,VDP_NAME_TABLE_ADDRESS(17, 11)
 	ld de,data.umpire_settings.answer_abc
 	ld bc,22
 	call sub_cp_ram_vram
-	ld hl,03b4ah
+	ld hl,VDP_NAME_TABLE_ADDRESS(5, 13)
 	ld de,data.umpire_settings.player_type
 	ld bc,28
 	call sub_cp_ram_vram
-	ld hl,03be2h
+	ld hl,VDP_NAME_TABLE_ADDRESS(17, 15)
 	ld de,data.umpire_settings.answer_abc
 	ld bc,22
 	call sub_cp_ram_vram
-	ld hl,03c86h
+	ld hl,VDP_NAME_TABLE_ADDRESS(3, 18)
 	ld de,data.umpire_settings.computer_level_select
 	ld bc,42
 	call sub_cp_ram_vram
-	ld hl,03d10h
+	ld hl,VDP_NAME_TABLE_ADDRESS(8, 20)
 	ld de,data.umpire_settings.answer_12345
 	ld bc,34
 	call sub_cp_ram_vram
