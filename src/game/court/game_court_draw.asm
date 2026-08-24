@@ -14,9 +14,9 @@ sub_game_court_draw:
 	ld de,0
 	ld hl,game_player_patterns
 	call sub_rle_decompress_bitplanes_to_vram
-	ld hl,0c100h
-	ld de,0c101h
-	ld bc,63
+	ld hl,state.sat_y_buffer
+	ld de,state.sat_y_buffer + 1
+	ld bc,64 - 1
 	ld (hl),0d0h
 	ldir
 	call sub_game_player_palette_load_clothes

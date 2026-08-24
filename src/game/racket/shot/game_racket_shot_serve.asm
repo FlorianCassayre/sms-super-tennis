@@ -16,7 +16,7 @@ sub_game_racket_shot_serve:
 	add a,a
 	add a,a
 	ld e,a
-	ld a,(0c044h)
+	ld a,(state.match_state_flag)
 	add a,a
 	add a,e
 	ld e,a
@@ -30,7 +30,7 @@ sub_game_racket_shot_serve:
 	ld e,a
 	ld hl,l10b3h
 	add hl,de
-	ld a,(0c044h)
+	ld a,(state.match_state_flag)
 	or a
 	jr z,l1057h
 	inc hl
@@ -98,7 +98,7 @@ l10a0h:
 	ld (ball.z_vel),hl
 	pop hl
 	ld (ball.z_gravity),hl
-	jp sub_l1362h_ball
+	jp sub_game_ball_update_after_hit
 l10b3h:
 	.DB $90
 	.DB $60

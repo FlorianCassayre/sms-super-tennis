@@ -8,7 +8,7 @@ sub_graphics_sprite_clean_unused:
 	ld a,(state.current_sprite_index)
 	ld e,a
 	ld d,000h
-	ld hl,0c100h
+	ld hl,state.sat_y_buffer
 	add hl,de
 l05b7h:
 	ld (hl),0d0h

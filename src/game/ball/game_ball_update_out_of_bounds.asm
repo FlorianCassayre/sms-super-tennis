@@ -1,4 +1,4 @@
-sub_update_ball_out_of_bounds:
+sub_game_ball_update_out_of_bounds:
 	ld hl,court_bounds_table
 	ld a,(ball.y_pos + 1)
 	cp (hl)

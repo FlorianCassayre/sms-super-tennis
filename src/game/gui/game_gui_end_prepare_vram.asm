@@ -1,4 +1,4 @@
-sub_3457h_clean_vram:
+sub_game_gui_end_prepare_vram:
 	push bc
 	push de
 	push hl
@@ -13,5 +13,5 @@ sub_3457h_clean_vram:
 	add hl,de
 	pop de
 	pop bc
-	djnz sub_3457h_clean_vram
+	djnz sub_game_gui_end_prepare_vram
 	ret

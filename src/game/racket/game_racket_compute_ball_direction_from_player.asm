@@ -1,4 +1,4 @@
-sub_2d0eh_movement:
+sub_game_racket_compute_ball_direction_from_player:
 	ld c,a
 	ld a,(ix + entity_t.x_div_pos)
 	and 007h

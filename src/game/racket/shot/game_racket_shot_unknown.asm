@@ -25,10 +25,10 @@ sub_game_racket_shot_unknown:
 l124dh:
 	ld (ball.y_vel),de
 	ld (ball.z_vel),bc
-	call sub_load_ball_z_gravity
-	ld c,003h
-	call sub_compute_ball_x_velocity
-	jp sub_l1362h_ball
+	call sub_game_ball_load_z_gravity
+	ld c,game_ball_shot_type_t.unknown
+	call sub_game_ball_compute_x_velocity
+	jp sub_game_ball_update_after_hit
 
 l1260h:
 	.DB $00

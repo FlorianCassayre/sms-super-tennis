@@ -47,7 +47,7 @@ l0cbah:
 	bit 0,a
 	jp z,l0d63h
 l0cd1h:
-	ld hl,0c100h
+	ld hl,state.sat_y_buffer
 	ld (hl),0d0h
 	ld a,080h
 	ld (state.sound_wait_flag),a

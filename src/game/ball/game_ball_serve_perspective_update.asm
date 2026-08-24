@@ -57,7 +57,7 @@ l0ff6h:
 	xor a
 	sbc hl,de
 l0ff9h:
-	ld (0c50ah),hl
+	ld (ball.x_pos),hl
 	jp sub_game_ball_sprite_perspective_x
 
 l0fffh:

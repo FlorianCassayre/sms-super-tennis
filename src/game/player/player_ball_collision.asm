@@ -65,7 +65,7 @@ sub_racket_hit_trajectory:
 	ld a,(state.match_state_flags)
 	bit 7,a
 	jr z,@check_serve_result
-	ld a,(0c044h)
+	ld a,(state.match_state_flag)
 	or a
 	jr z,@check_serve_result
 	ld bc,game_racket_shot_result_table_2

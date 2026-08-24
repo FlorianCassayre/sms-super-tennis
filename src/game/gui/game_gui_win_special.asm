@@ -1,7 +1,7 @@
 sub_game_gui_win_special:
 	ld a,0d0h
-	ld (0c140h),a
-	ld (0c100h),a
+	ld (state.sat_xc_buffer),a
+	ld (state.sat_y_buffer),a
 	ld a,(state.sound_wait_flag)
 	or 080h
 	ld (state.sound_wait_flag),a

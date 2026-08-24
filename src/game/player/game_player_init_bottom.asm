@@ -19,7 +19,7 @@ l240fh:
 l2423h:
 	or e
 	ld e,a
-	ld a,(0c044h)
+	ld a,(state.match_state_flag)
 	and 001h
 	or e
 	add a,a

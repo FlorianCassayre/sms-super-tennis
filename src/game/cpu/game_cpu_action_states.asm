@@ -1,17 +1,17 @@
-l1c4ah_jump_table:
-	.DW player_top_action_state_idle
-	.DW player_top_action_state_start_move
-	.DW player_top_action_state_moving
-	.DW player_top_action_state_start_swing
-	.DW sub_game_player_top_action_state_swinging
-	.DW player_top_action_state_turn_around
+game_cpu_action_state:
+	.DW sub_game_cpu_action_state_top_idle
+	.DW sub_game_cpu_action_state_top_start_move
+	.DW sub_game_cpu_action_state_top_moving
+	.DW sub_game_cpu_action_state_top_start_swing
+	.DW sub_game_cpu_action_state_top_swinging
+	.DW sub_game_cpu_action_state_top_turn_around
 
-player_top_action_state_idle:
+sub_game_cpu_action_state_top_idle:
 	ld a,(ix + entity_t.shot_button)
 	and 003h
 	jr z,l1c64h
 	ld (ix + entity_t.action_state),002h
-	jp player_top_action_state_moving
+	jp sub_game_cpu_action_state_top_moving
 l1c64h:
 	ld a,(ix + entity_t.input_dirs)
 	and a
@@ -36,13 +36,13 @@ l1c92h:
 	jp sub_game_player_update_animation
 l1c95h:
 	ld (ix + entity_t.action_state),001h
-	jp player_top_action_state_start_move
-player_top_action_state_start_swing:
+	jp sub_game_cpu_action_state_top_start_move
+sub_game_cpu_action_state_top_start_swing:
 	ld a,(ix + entity_t.shot_button)
 	and 003h
 	jr z,l1caah
 	ld (ix + entity_t.action_state),004h
-	jp sub_game_player_top_action_state_swinging
+	jp sub_game_cpu_action_state_top_swinging
 l1caah:
 	ld a,(ix + entity_t.input_dirs)
 	ld c,a
@@ -81,8 +81,8 @@ l1ceah:
 	jp sub_game_player_update_animation
 l1cf0h:
 	ld (ix + entity_t.action_state),005h
-	jp player_top_action_state_turn_around
-player_top_action_state_start_move:
+	jp sub_game_cpu_action_state_top_turn_around
+sub_game_cpu_action_state_top_start_move:
 	ld a,(ix + entity_t.action_state)
 	bit 7,a
 	jr nz,l1d17h
@@ -102,7 +102,7 @@ l1d17h:
 	ret nz
 	ld (ix + entity_t.action_state),003h
 	ret
-player_top_action_state_moving:
+sub_game_cpu_action_state_top_moving:
 	ld a,(ix + entity_t.action_state)
 	bit 7,a
 	jr nz,l1d47h
@@ -122,7 +122,7 @@ l1d47h:
 	ret nz
 	ld (ix + entity_t.action_state),004h
 	ret
-player_top_action_state_turn_around:
+sub_game_cpu_action_state_top_turn_around:
 	ld a,(ix + entity_t.action_state)
 	bit 7,a
 	jr nz,l1d73h
@@ -141,4 +141,85 @@ l1d73h:
 	ld a,(ix + entity_t.facing_dir)
 	ld (ix + entity_t.prev_facing_dir),a
 	ld (ix + entity_t.action_state),003h
+	ret
+sub_game_cpu_action_state_top_swinging:
+	ld a,(ix + entity_t.action_state)
+	bit 7,a
+	jr nz,l1dffh
+	set 7,a
+	ld (ix + entity_t.action_state),a
+	call sub_game_racket_evaluate_swing_type
+	ld e,a
+	ld d,a
+	ld a,(ix + entity_t.y_div_pos)
+	cp 003h
+	jr nc,l1db0h
+	ld a,e
+	cp 002h
+	jr c,l1dd3h
+	ld e,000h
+	cp 003h
+	jr z,l1dd3h
+	ld e,001h
+	jr l1dd3h
+l1db0h:
+	cp 004h
+	jr nc,l1db7h
+	inc e
+	jr l1dd3h
+l1db7h:
+	cp 005h
+	jr c,l1dd3h
+	ld a,(0c401h)
+	and 07fh
+	cp 01ah
+	ld e,002h
+	jr z,l1dd3h
+	ld e,003h
+	cp 01dh
+	jr nz,l1dd3h
+	ld a,d
+	cp 001h
+	jr c,l1dd3h
+	ld e,002h
+l1dd3h:
+	ld a,e
+	ld b,game_player_animation_type_t.lob
+	ld c,01ch
+	and a
+	jr z,l1defh
+	ld b,game_player_animation_type_t.stroke
+	ld c,01dh
+	cp 001h
+	jr z,l1defh
+	ld b,game_player_animation_type_t.unknown_05
+	ld c,01bh
+	cp 002h
+	jr z,l1defh
+	ld b,game_player_animation_type_t.volley
+	ld c,01ah
+l1defh:
+	ld (ix + entity_t.animation_id),b
+	ld (ix + entity_t.swing_type_id),c
+	ld (ix + entity_t.animation_flags_or_frame),0ffh
+	ld a,(ix + entity_t.facing_dir)
+	ld (ix + entity_t.render_facing_dir),a
+l1dffh:
+	call sub_game_player_apply_movement
+	call sub_game_racket_process_swing_contact
+	ld a,(ix + entity_t.animation_flags_or_frame)
+	and a
+	jr z,l1e0fh
+	call sub_game_player_update_animation
+	ret
+l1e0fh:
+	ld a,(ix + entity_t.ball_incoming)
+	and a
+	ld a,000h
+	jr z,l1e19h
+	ld a,001h
+l1e19h:
+	ld (ix + entity_t.action_state),a
+	ld (ix + entity_t.state_flags),000h
+	ld (ix + entity_t.racket_contact_flag),000h
 	ret

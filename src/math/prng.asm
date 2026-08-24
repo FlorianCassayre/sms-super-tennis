@@ -2,7 +2,7 @@
 
 sub_prng:
 	push hl
-	ld hl,(0c08ch)
+	ld hl,(state.prng_value)
 	ld a,h
 	rrca
 	rrca
@@ -21,6 +21,6 @@ sub_prng:
 	+:
 	ld a,r
 	xor l
-	ld (0c08ch),hl
+	ld (state.prng_value),hl
 	pop hl
 	ret

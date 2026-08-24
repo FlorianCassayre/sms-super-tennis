@@ -12,7 +12,7 @@ sub_game_ball_shadow_update:
 	ld c,(hl)
 	inc hl
 	ld b,(hl)
-	ld de,(0c500h)
+	ld de,(ball.z_pos)
 	call sub_mul_de_bc
 	ld d,e
 	ld e,h

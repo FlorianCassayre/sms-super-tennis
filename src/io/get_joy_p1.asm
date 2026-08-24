@@ -2,54 +2,31 @@ sub_get_joy_p1:
 	ld a,(state.joy_not_mark3)
 	and a
 	jr z,+
-	in a,(I_JOYPAD_1)
-	cpl
-	and JOY_MASK_ALL
-	ret
-+:
-	ld a,KBD_ROW_JOY_SELECT
-	out (O_DE),a
-	in a,(I_JOYPAD_1)
+		in a,(I_JOYPAD_1)
+		cpl
+		and JOY_MASK_ALL
+		ret
+	+:
+
+	JOY_READ_ROW JOY_ROW_JOY_SELECT, I_JOYPAD_1
 	ld c,a
-	ld a,KBD_P1_B1_ROW
-	out (O_DE),a
-	in a,(I_JOYPAD_1)
-	bit KBD_P1_B1_BIT,a
-	jr nz,+
-	res JOY_BIT_B1,c
-+:
-	ld a,KBD_P1_B2_ROW
-	out (O_DE),a
-	in a,(I_JOYPAD_1)
-	bit KBD_P1_B2_BIT,a
-	jr nz,+
-	res JOY_BIT_B2,c
-+:
-	ld a,KBD_P1_DOWN_ROW
-	out (O_DE),a
-	in a,(I_JOYPAD_1)
-	bit KBD_P1_DOWN_BIT,a
-	jr nz,+
-	res JOY_BIT_DOWN,c
-+:
-	ld a,KBD_P1_LEFT_ROW
-	out (O_DE),a
-	in a,(I_JOYPAD_1)
-	bit KBD_P1_LEFT_BIT,a
-	jr nz,+
-	res JOY_BIT_LEFT,c
-+:
-	ld a,KBD_P1_RIGHT_ROW
-	out (O_DE),a
-	in a,(I_JOYPAD_1)
-	bit KBD_P1_RIGHT_BIT,a
-	jr nz,+
-	res JOY_BIT_RIGHT,c
-+:
-	bit KBD_P1_UP_BIT,a
-	jr nz,+
-	res JOY_BIT_UP,c
-+:
+
+	JOY_READ_ROW JOY_P1_B1_ROW, I_JOYPAD_1
+	JOY_CHECK_KEY JOY_P1_B1_BIT, JOY_BIT_B1
+
+	JOY_READ_ROW JOY_P1_B2_ROW, I_JOYPAD_1
+	JOY_CHECK_KEY JOY_P1_B2_BIT, JOY_BIT_B2
+
+	JOY_READ_ROW JOY_P1_DOWN_ROW, I_JOYPAD_1
+	JOY_CHECK_KEY JOY_P1_DOWN_BIT, JOY_BIT_DOWN
+
+	JOY_READ_ROW JOY_P1_LEFT_ROW, I_JOYPAD_1
+	JOY_CHECK_KEY JOY_P1_LEFT_BIT, JOY_BIT_LEFT
+
+	JOY_READ_ROW JOY_P1_RIGHT_ROW, I_JOYPAD_1
+	JOY_CHECK_KEY JOY_P1_RIGHT_BIT, JOY_BIT_RIGHT
+	JOY_CHECK_KEY JOY_P1_UP_BIT, JOY_BIT_UP
+
 	ld a,c
 	cpl
 	and JOY_MASK_ALL

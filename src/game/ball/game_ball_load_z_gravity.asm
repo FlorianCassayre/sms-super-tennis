@@ -1,4 +1,4 @@
-sub_load_ball_z_gravity:
+sub_game_ball_load_z_gravity:
 	ld a,(state.ball_hit_type)
 	add a,a
 	ld e,a

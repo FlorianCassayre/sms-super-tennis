@@ -6,7 +6,7 @@ sub_game_cpu_evaluate_y_dist_2:
 	ld a,(ball.foul_triggered_flag)
 	and a
 	jr nz,l23beh
-	ld a,(0c51dh)
+	ld a,(ball.out_flag)
 	and a
 	jr nz,l23fbh
 l23beh:

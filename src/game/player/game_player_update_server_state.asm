@@ -10,7 +10,7 @@ sub_game_player_update_server_state:
 	jr z,@read_serve_type
 	ld e,008h
 @read_serve_type:
-	ld a,(0c044h)
+	ld a,(state.match_state_flag)
 	add a,a
 	add a,a
 	or e
@@ -33,7 +33,7 @@ sub_game_player_update_server_state:
 @skip_position_lookup:
 	bit 0,(ix + entity_t.id)
 	jr z,@set_animation_timer
-	ld (ix + entity_t.cpu_state),007h
+	ld (ix + entity_t.cpu_state),game_cpu_state_t.idle_wander
 @set_animation_timer:
 	ld (ix + entity_t.animation_id),game_player_animation_type_t.serve_ready
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
@@ -53,9 +53,9 @@ sub_game_player_update_server_state:
 	ld (ix + entity_t.animation_id),game_player_animation_type_t.serve_ready
 	ld (ix + entity_t.animation_flags_or_frame),0ffh
 @check_timer:
-	call sub_1b9fh_decrement_timer
+	call sub_game_player_decrement_state_timer
 	jp nz,sub_game_player_apply_movement
-	ld (ix + entity_t.state_index),entity_state_t.l1af2h_0761
+	ld (ix + entity_t.state_index),entity_state_t.lgame_player_serve_0761
 	ret
 
 serve_start_coordinates:

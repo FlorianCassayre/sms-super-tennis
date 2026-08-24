@@ -12,16 +12,16 @@ sub_game_gui_end_draw:
 	ld hl,VDP_NAME_TABLE_ADDRESS(4, 13)
 	ld b,008h
 	ld de,00018h
-	call sub_3457h_clean_vram
+	call sub_game_gui_end_prepare_vram
 	call sub_game_gui_end_draw_line
 	ld hl,VDP_NAME_TABLE_ADDRESS(12, 16)
 	ld de,gui_text_lost
-	ld b,008h
+	ld b,_sizeof_gui_text_lost_0 >> 1
 	call sub_game_gui_draw_typewriter_match_end
 	ld a,005h
 	call sub_wait_a_frames
 	ld hl,VDP_NAME_TABLE_ADDRESS(11, 19)
-	ld b,00ah
+	ld b,_sizeof_gui_text_lost_1 >> 1
 	call sub_game_gui_draw_typewriter_match_end
 	ld a,005h
 	ld (score.delay_timer),a
@@ -35,7 +35,7 @@ sub_game_gui_end_draw:
 	ld hl,VDP_NAME_TABLE_ADDRESS(4, 13)
 	ld de,00018h
 	ld b,009h
-	call sub_3457h_clean_vram
+	call sub_game_gui_end_prepare_vram
 	call sub_game_gui_end_draw_line
 	ld hl,VDP_NAME_TABLE_ADDRESS(12, 16)
 	ld de,gui_text_win

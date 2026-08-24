@@ -3,11 +3,11 @@
 	player_init_bottom DB		;075b $01
     player_init_top DB		;075d $02
     player_update_server_state_075f DB		;075f $03
-    l1af2h_0761 DB		;0761 $04
-    l1b68h_0763 DB		;0763 $05
+    lgame_player_serve_0761 DB		;0761 $04
+    serve_swing_0763 DB		;0763 $05
     player_update_server_state_0765 DB		;0765 $06
-    l1af2h_0767 DB		;0767 $07
-    l1b68h_0769 DB		;0769 $08
+    lgame_player_serve_0767 DB		;0767 $07
+    serve_swing_0769 DB		;0769 $08
     player_update_server_state_076b DB		;076b $09
     l1bafh_076d_nop DB		;076d $0a
     l1bafh_076f_nop DB		;076f $0b

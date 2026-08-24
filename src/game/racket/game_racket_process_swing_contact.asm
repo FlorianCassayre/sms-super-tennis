@@ -71,7 +71,7 @@ sub_game_racket_process_swing_contact:
 	call sub_abs10
 ++:
 	and 01fh
-	ld de,0c320h
+	ld de,entities.ball.render_facing_dir
 	bit 0,(ix + entity_t.id)
 	jr z,+
 	ld b,00bh
@@ -86,7 +86,7 @@ sub_game_racket_process_swing_contact:
 	ld e,010h
 +:
 	ld hl,game_ball_trajectory_data_axis_a
-	call sub_2d0eh_movement
+	call sub_game_racket_compute_ball_direction_from_player
 	ld a,(0c4b2h)
 	ld e,000h
 	bit 0,(ix + entity_t.id)
@@ -95,9 +95,9 @@ sub_game_racket_process_swing_contact:
 	ld e,010h
 +:
 	ld hl,game_ball_trajectory_data_axis_b
-	call sub_2d0eh_movement
+	call sub_game_racket_compute_ball_direction_from_player
 	jp l2d35h
-	.INCLUDE "game/racket/2d0eh_movement.asm"
+	.INCLUDE "game/racket/game_racket_compute_ball_direction_from_player.asm"
 l2d35h:
 	ld a,(ix + entity_t.id)
 	and 001h

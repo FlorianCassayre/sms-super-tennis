@@ -31,7 +31,7 @@ sub_check_player_location:
 	call sub_aabb_intersection
 +:
 	ld d,000h
-	ld hl,l1775h
+	ld hl,game_player_collision_pushback
 	add hl,de
 	add hl,de
 	ld c,(hl)

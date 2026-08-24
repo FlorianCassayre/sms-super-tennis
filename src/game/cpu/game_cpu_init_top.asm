@@ -1,4 +1,4 @@
-sub_game_player_init_top:
+sub_game_cpu_init_top:
 	bit 1,(ix + entity_t.id)
 	ld hl,entities.player.1.top.state_index
 	ld e,004h
@@ -19,7 +19,7 @@ l1bc0h:
 l1bd4h:
 	or e
 	ld e,a
-	ld a,(0c044h)
+	ld a,(state.match_state_flag)
 	or e
 	add a,a
 	ld e,a

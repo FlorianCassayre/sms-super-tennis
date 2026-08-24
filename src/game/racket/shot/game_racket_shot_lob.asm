@@ -44,10 +44,10 @@ l1290h:
 l12adh:
 	ld (ball.y_vel),de
 	ld (ball.z_vel),bc
-	call sub_load_ball_z_gravity
-	ld c,001h
-	call sub_compute_ball_x_velocity
-	jp sub_l1362h_ball
+	call sub_game_ball_load_z_gravity
+	ld c,game_ball_shot_type_t.lob
+	call sub_game_ball_compute_x_velocity
+	jp sub_game_ball_update_after_hit
 l12c0h:
 	.DB $c6
 	.DB $12

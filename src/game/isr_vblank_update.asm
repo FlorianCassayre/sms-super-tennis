@@ -51,12 +51,12 @@ isr_vblank_update:
 	otir
 	ld hl,VDP_SPRITE_ATTRIBUTE_ADDRESS_BASE
 	call sub_set_vdp_write_addr
-	ld hl,0c100h
+	ld hl,state.sat_y_buffer
 	ld b,040h
 	otir
 	ld hl,03f80h
 	call sub_set_vdp_write_addr
-	ld hl,0c140h
+	ld hl,state.sat_xc_buffer
 	ld b,080h
 	otir
 	xor a

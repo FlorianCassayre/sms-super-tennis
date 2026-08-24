@@ -2,7 +2,7 @@ sub_reset_state:
 	xor a
 	ld (state.match_state_flags),a
 	ld hl,state.match_flags
-	ld de,state.current_player
+	ld de,state.match_flags + 1
 	ld bc,00541h
 	ld (hl),a
 	ldir

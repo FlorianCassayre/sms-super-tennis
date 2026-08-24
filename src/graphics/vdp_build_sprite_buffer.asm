@@ -1,7 +1,7 @@
 sub_vdp_build_sprite_buffer:
-	ld hl,0c140h
+	ld hl,state.sat_xc_buffer
 	exx
-	ld hl,0c100h
+	ld hl,state.sat_y_buffer
 	ld c,033h
 	ld b,020h
 	exx

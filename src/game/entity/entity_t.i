@@ -26,7 +26,7 @@
     racket_contact_flag DB	; $1d
     animation_frame DB		; $1e
     swing_type_id DB		; $1f ; ???
-    render_facing_dir DB		; $20 ; ???
+    render_facing_dir DB		; $20 ; For players, appears to be a flag set after hitting the ball
     _unknown_6 DB		; $21 ; ???
     animation_id DB		; $22
     animation_flags_or_frame DB		; $23

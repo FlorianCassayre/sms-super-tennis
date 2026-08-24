@@ -1,4 +1,4 @@
-sub_0b28h:
+sub_game_umpire_check_announcement:
 	ld hl,state.main_game_state
 	ld e,006h
 	ld a,(state.match_state_flags)

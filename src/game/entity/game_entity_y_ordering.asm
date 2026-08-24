@@ -7,7 +7,7 @@ sub_game_entity_y_ordering:
 	ld a,(state.sort_outer_idx)
 	ld e,a
 	ld d,000h
-	ld hl,0c1c4h
+	ld hl,state.z_order_array
 	add hl,de
 	ld a,(hl)
 	add a,a
@@ -23,7 +23,7 @@ sub_game_entity_y_ordering:
 	ld a,(state.sort_inner_idx)
 	ld e,a
 	ld d,000h
-	ld hl,0c1c4h
+	ld hl,state.z_order_array
 	add hl,de
 	ld a,(hl)
 	add a,a
@@ -40,13 +40,13 @@ sub_game_entity_y_ordering:
 	ld a,(state.sort_outer_idx)
 	ld e,a
 	ld d,000h
-	ld hl,0c1c4h
+	ld hl,state.z_order_array
 	add hl,de
 	ld b,(hl)
 	push hl
 	ld a,(state.sort_inner_idx)
 	ld e,a
-	ld hl,0c1c4h
+	ld hl,state.z_order_array
 	add hl,de
 	ld a,(hl)
 	pop de

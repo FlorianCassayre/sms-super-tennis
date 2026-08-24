@@ -24,7 +24,7 @@ sub_game_entity_update_all:
 	ld a,(de)
 	ld c,a
 	ld b,000h
-	ld hl,0c1c4h
+	ld hl,state.z_order_array
 	add hl,bc
 	ld a,(ix + entity_t.id)
 	ld (hl),a
@@ -45,25 +45,25 @@ l074fh_memory_table:
 	.DW entities.ball_shadow
 game_entity_state_jump_table:
 	.DW sub_game_player_init_bottom
-	.DW sub_game_player_init_top
+	.DW sub_game_cpu_init_top
 	.DW sub_game_player_update_server_state
-	.DW sub_1af2h
-	.DW sub_1b68h
+	.DW sub_game_player_serve
+	.DW sub_game_player_serve_swing
 	.DW sub_game_player_update_server_state
-	.DW sub_1af2h
-	.DW sub_1b68h
+	.DW sub_game_player_serve
+	.DW sub_game_player_serve_swing
 	.DW sub_game_player_update_server_state
-	.DW sub_1bafh_nop
-	.DW sub_1bafh_nop
-	.DW sub_1bafh_nop
-	.DW sub_1bafh_nop
-	.DW sub_1bafh_nop
-	.DW sub_1bafh_nop
-	.DW sub_1bafh_nop
-	.DW sub_1bafh_nop
-	.DW sub_1bafh_nop
+	.DW sub_game_player_action_nop
+	.DW sub_game_player_action_nop
+	.DW sub_game_player_action_nop
+	.DW sub_game_player_action_nop
+	.DW sub_game_player_action_nop
+	.DW sub_game_player_action_nop
+	.DW sub_game_player_action_nop
+	.DW sub_game_player_action_nop
+	.DW sub_game_player_action_nop
 	.DW sub_game_player_update
-	.DW sub_game_player_action_update_top
+	.DW sub_game_cpu_action_update_top
 	.DW sub_game_ball_normal_update
 	.DW sub_game_ball_shadow_update
 	.DW sub_game_ball_toss_update

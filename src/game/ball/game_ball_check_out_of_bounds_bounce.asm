@@ -12,7 +12,7 @@ sub_game_ball_check_out_of_bounds_bounce:
 	add a,e
 	ld e,a
 	ld d,000h
-	ld hl,l0dd0h
+	ld hl,game_court_dimensions_two_players
 	add hl,de
 	ld a,(ball.y_pos + 1)
 	cp (hl)
@@ -21,7 +21,7 @@ sub_game_ball_check_out_of_bounds_bounce:
 	cp (hl)
 	jr nc,l0e6fh
 	inc hl
-	ld a,(0c044h)
+	ld a,(state.match_state_flag)
 	add a,a
 	ld e,a
 	add hl,de
@@ -40,7 +40,7 @@ l0e3bh:
 	add a,e
 	ld e,a
 	ld d,000h
-	ld hl,l0de8h
+	ld hl,game_court_dimensions_four_players
 	add hl,de
 	ld a,(ball.y_pos + 1)
 	cp (hl)

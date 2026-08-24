@@ -44,9 +44,9 @@ l11e7h:
 	inc hl
 	ld d,(hl)
 	ld (ball.z_gravity),de
-	ld c,002h
-	call sub_compute_ball_x_velocity
-	jp sub_l1362h_ball
+	ld c,game_ball_shot_type_t.volley
+	call sub_game_ball_compute_x_velocity
+	jp sub_game_ball_update_after_hit
 
 l1209h_fast:
 	.DB $c0

@@ -15,7 +15,7 @@ sub_game_ball_update_physics:
 	jp z,@update_horizontal_axes
 	ld hl,0
 	ld (ball.z_pos),hl
-	ld hl,0c516h
+	ld hl,ball.racket_contact_flag
 	res 6,(hl)
 	call sub_game_ball_update_velocity_bounce
 	ld hl,ball.bounces_count
@@ -50,7 +50,7 @@ sub_game_ball_update_physics:
 	ret nz
 	call sub_game_ball_update_velocity_collision
 	call sub_player_ball_collision
-	call sub_update_ball_out_of_bounds
+	call sub_game_ball_update_out_of_bounds
 	ld de,(ball.x_vel)
 	ld hl,(ball.x_pos)
 	add hl,de

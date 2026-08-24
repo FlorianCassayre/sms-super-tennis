@@ -3,21 +3,21 @@ sub_game_prepare_serve:
 	ld a,0f8h
 	and (hl)
 	ld (hl),a
-	ld hl,0c200h
-	ld de,entities.player.1.bottom.id
-	ld bc,0017fh
-	ld (hl),000h
+	ld hl,entities
+	ld de,entities + 1
+	ld bc,_sizeof_entities_t - 1
+	ld (hl),$00
 	ldir
 	ld hl,0
 	ld (ball.foul_type),hl
 	xor a
 	ld (state.match_flags),a
-	ld (0c516h),a
+	ld (ball.racket_contact_flag),a
 	ld (ball.bounces_count),a
-	ld hl,0c100h
-	ld de,0c101h
-	ld bc,03fh
-	ld (hl),0d0h
+	ld hl,state.sat_y_buffer
+	ld de,state.sat_y_buffer + 1
+	ld bc,$40 - 1
+	ld (hl),$d0
 	ldir
 	ld a,(state.match_progression_state)
 	or a
@@ -28,7 +28,7 @@ sub_game_prepare_serve:
 	jr z,l0b8fh
 	dec a
 	jr z,l0b81h
-	ld a,(0c044h)
+	ld a,(state.match_state_flag)
 	or a
 	jr nz,l0ba0h
 l0b81h:
@@ -42,7 +42,7 @@ l0b8ch:
 	ld (hl),a
 	jr l0ba0h
 l0b8fh:
-	ld hl,0c044h
+	ld hl,state.match_state_flag
 	ld (hl),000h
 	inc hl
 	ld a,(hl)
@@ -54,7 +54,7 @@ l0b9dh:
 	ld (hl),a
 	jr l0ba8h
 l0ba0h:
-	ld hl,0c044h
+	ld hl,state.match_state_flag
 	ld a,(hl)
 	inc a
 	and 001h

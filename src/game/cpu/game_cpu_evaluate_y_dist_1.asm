@@ -6,7 +6,7 @@ sub_game_cpu_evaluate_y_dist_1:
 	ld a,(ball.foul_triggered_flag)
 	and a
 	jr nz,@evaluate
-	ld a,(0c51dh)
+	ld a,(ball.out_flag)
 	and a
 	jr nz,@store_dir
 @evaluate:

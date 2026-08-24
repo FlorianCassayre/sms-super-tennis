@@ -1,4 +1,4 @@
-sub_1b9fh_decrement_timer:
+sub_game_player_decrement_state_timer:
 	ld l,(ix + entity_t.state_timer)
 	ld h,(ix + entity_t.state_timer + 1)
 	dec hl

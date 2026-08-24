@@ -38,7 +38,8 @@
 	_unknown_5 DSB 2
 	sound_wait_flag DB	;c089
 	pause_counter DW	;c08a ; It seems that one tick lasts 16.67ms
-	_unknown_c08a DSB 2
+	prng_value DB	;c08c
+	_unknown_c08d DB	;c08d
 	aabb_2 INSTANCEOF aabb_t	;c08e
 	_unknown_6 DSB 110
 	sat_y_buffer DSB 64	;c100
